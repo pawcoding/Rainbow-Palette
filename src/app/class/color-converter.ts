@@ -2,7 +2,7 @@ export class ColorConverter {
 
   static rgbToHsl(color: string) {
     if (!color.startsWith('#') || color.length !== 7)
-      throw `Color '${color}' is not in form 'RRGGBB.`
+      throw `Color '${color}' is not in form #RRGGBB.`
 
     const r = parseInt(color.substring(1, 3), 16) / 255
     const g = parseInt(color.substring(3, 5), 16) / 255
@@ -68,7 +68,7 @@ export class ColorConverter {
     const G = Math.round((g + m) * 255)
     const B = Math.round((b + m) * 255)
 
-    return `#${R.toString(16)}${G.toString(16)}${B.toString(16)}`
+    return `#${(R < 16 ? 0 : '') + R.toString(16)}${(G < 16 ? 0 : '') + G.toString(16)}${(B < 16 ? 0 : '') + B.toString(16)}`
   }
 
 }

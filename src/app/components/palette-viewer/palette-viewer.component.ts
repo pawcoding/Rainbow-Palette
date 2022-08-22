@@ -10,14 +10,19 @@ import {ColorConverter} from "../../class/color-converter";
 export class PaletteViewerComponent implements OnInit {
 
   @Input()
-  palette : Palette = new Palette()
+  palette : Palette = new Palette('#4472c4')
+
+  colors: any[] = []
 
   constructor() { }
 
   ngOnInit(): void {
-    const hsl = ColorConverter.rgbToHsl(this.palette.colors["500"])
-    console.info(hsl)
-    console.info(ColorConverter.hslToRgb(hsl.h, hsl.s, hsl.l))
+    for (const colorsKey in this.palette.colors) {
+      // @ts-ignore
+      this.colors.push({step: colorsKey, value: this.palette.colors[colorsKey]})
+    }
+
+    this.colors = this.colors.sort((a, b) => a.step - b.step).map(c => c.value)
   }
 
   backgroundIsLight(color: string): boolean {
