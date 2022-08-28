@@ -1,69 +1,55 @@
 import {ColorConverter} from "./color-converter";
+import {Shade} from "../models/shade.model";
 
 export class ColorInterpolater {
 
-  static generatePalette(color: string) {
+  static interpolateShades(color: string) {
     if (!color.startsWith('#') || color.length !== 7)
       throw `Color '${color}' is not in form #RRGGBB.`
 
+    const shades: Shade[] = []
     const hsl = ColorConverter.rgbToHsl(color)
 
-    const colors = {
-      50: '#000000',
-      100: '#000000',
-      200: '#000000',
-      300: '#000000',
-      400: '#000000',
-      500: '#000000',
-      600: '#000000',
-      700: '#000000',
-      800: '#000000',
-      900: '#000000'
-    }
-
-    if (100 - hsl.l < 7.5) {
-      colors[50] = color
-      this.generateDarkerColors(hsl, 0, colors)
-    } else if (100 - hsl.l >= 85) {
-      colors[900] = color
-      this.generateLighterColors(hsl, 900, colors)
+    if (100 - hsl.luminosity < 7.5) {
+      shades.push(new Shade(50, color))
+      this.generateDarkerColors(hsl, 0, shades)
+    } else if (100 - hsl.luminosity >= 85) {
+      shades.push(new Shade(900, color))
+      this.generateLighterColors(hsl, 900, shades)
     } else {
       let index = 100
-      while (100 - hsl.l > (index / 10) + 5)
+      while (100 - hsl.luminosity > (index / 10) + 5)
         index += 100
-      // @ts-ignore
-      colors[index] = color
-      this.generateLighterColors(hsl, index, colors)
-      this.generateDarkerColors(hsl, index, colors)
+      shades.push(new Shade(index, color))
+      this.generateLighterColors(hsl, index, shades)
+      this.generateDarkerColors(hsl, index, shades)
     }
 
-    return colors
+    return shades
   }
 
-  private static generateLighterColors(hslColor: { s: number; h: number; l: number }, step: number, colors: { "100": string; "200": string; "300": string; "400": string; "500": string; "600": string; "700": string; "800": string; "900": string; "50": string }) {
-    let i = step / 100
-    let index = 1
+  private static generateLighterColors(hslColor: { saturation: number; hue: number; luminosity: number }, step: number, shades: Shade[]) {
+    const index = step / 100
+    let i = 1
 
-    while (index < i) {
-      let interpolate = hslColor.l + (index / i) * (100 - hslColor.l)
-      // @ts-ignore
-      colors[step - index * 100] = ColorConverter.hslToRgb(hslColor.h, hslColor.s, interpolate)
-      index++
+    for (; i < index; i++) {
+      const interpolatedLuminosity = hslColor.luminosity + (i / index) * (100 - hslColor.luminosity)
+      const newIndex = step - i * 100
+      shades.push(new Shade(newIndex, hslColor.hue, hslColor.saturation, interpolatedLuminosity))
     }
 
-    let interpolate = hslColor.l + ((2*index - 1) / (2 * i)) * (100 - hslColor.l)
-    colors[50] = ColorConverter.hslToRgb(hslColor.h, hslColor.s, interpolate)
+    const interpolatedLuminosity = hslColor.luminosity + ((2 * i - 1) / (2 * index)) * (100 - hslColor.luminosity)
+    shades.push(new Shade(50, hslColor.hue, hslColor.saturation, interpolatedLuminosity))
   }
 
-  private static generateDarkerColors(hslColor: { s: number; h: number; l: number }, step: number, colors: { "100": string; "200": string; "300": string; "400": string; "500": string; "600": string; "700": string; "800": string; "900": string; "50": string }) {
-    let i = (1000 - step) / 100
-    let index = 1
+  private static generateDarkerColors(hslColor: { saturation: number; hue: number; luminosity: number }, step: number, shades: Shade[]) {
+    const index = (1000 - step) / 100
+    let i = 1
 
-    while (index < i) {
-      let interpolate = hslColor.l - (index / i) * (hslColor.l)
-      // @ts-ignore
-      colors[step + index * 100] = ColorConverter.hslToRgb(hslColor.h, hslColor.s, interpolate)
-      index++
+    for (; i < index; i++) {
+      const interpolatedLuminosity = hslColor.luminosity - (i / index) * hslColor.luminosity
+      const newIndex = step + i * 100
+      shades.push(new Shade(newIndex, hslColor.hue, hslColor.saturation, interpolatedLuminosity))
     }
   }
 

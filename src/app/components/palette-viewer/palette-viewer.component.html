@@ -1,9 +1,0 @@
-<article class="w-full flex">
-  <span
-    *ngFor="let color of colors"
-    [ngStyle]="{'background-color': color, 'color': backgroundIsLight(color) ? '#000000' : '#ffffff'}"
-    class="block w-full text-center text-xl py-8"
-  >
-    {{color}}
-  </span>
-</article>

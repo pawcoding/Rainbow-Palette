@@ -1,0 +1,29 @@
+<article
+  *ngIf="color"
+  [ngStyle]="{
+    'border-color': color.shades[7].hex
+  }"
+  class="overflow-auto my-4 rounded-xl shadow-lg border"
+>
+  <h2
+    [ngStyle]="{
+      'background-color': color.shades[0].hex
+    }"
+    class="text-xl lg:text-2xl font-bold py-2 pl-2 lg:py-4 lg:pl-4"
+  >
+    {{color.name}}
+  </h2>
+
+  <section class="flex">
+    <span
+      *ngFor="let shade of color.shades"
+      [ngStyle]="{
+        'background-color': shade.hex,
+        'color': shade.luminosity > 50 ? '#000000' : '#ffffff'
+      }"
+      class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-8"
+    >
+      {{shade.hex}}
+    </span>
+  </section>
+</article>

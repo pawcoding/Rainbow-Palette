@@ -19,9 +19,9 @@ export class ColorConverter {
       h += 360
 
     return {
-      h: Math.round(h),
-      s: Math.round(s),
-      l: Math.round(l)
+      hue: Math.round(h),
+      saturation: Math.round(s),
+      luminosity: Math.round(l)
     }
   }
 

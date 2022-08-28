@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PaletteViewerComponent } from './palette-viewer.component';
+import { ColorViewerComponent } from './color-viewer.component';
 
-describe('PaletteViewerComponent', () => {
-  let component: PaletteViewerComponent;
-  let fixture: ComponentFixture<PaletteViewerComponent>;
+describe('ColorViewerComponent', () => {
+  let component: ColorViewerComponent;
+  let fixture: ComponentFixture<ColorViewerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaletteViewerComponent ]
+      declarations: [ ColorViewerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PaletteViewerComponent);
+    fixture = TestBed.createComponent(ColorViewerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
