@@ -1,0 +1,12 @@
+<section
+  *ngIf="palette"
+  class="max-w-7xl mx-auto"
+>
+  <h2>{{palette.title}}</h2>
+
+  <app-color-viewer
+    *ngFor="let color of palette.colors"
+    [color]="color"
+    [dark]="dark"
+  ></app-color-viewer>
+</section>

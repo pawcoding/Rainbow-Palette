@@ -4,14 +4,19 @@ import {Color} from "../../models/color.model";
 @Component({
   selector: 'app-color-viewer',
   templateUrl: './color-viewer.component.html',
-  styleUrls: ['./color-viewer.component.css']
 })
 export class ColorViewerComponent implements OnInit {
 
   @Input()
   color: Color | undefined
 
-  constructor() { }
+  @Input()
+  dark = false
+
+  constructor() {
+    if (document.getElementById('body')?.classList.contains('dark'))
+      this.dark = true
+  }
 
   ngOnInit(): void {
   }

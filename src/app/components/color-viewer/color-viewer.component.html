@@ -1,27 +1,28 @@
 <article
   *ngIf="color"
   [ngStyle]="{
-    'border-color': color.shades[7].hex
+    'border-color': color.shades[dark ? 2 : 7].hex
   }"
   class="overflow-auto my-4 rounded-xl shadow-lg border"
 >
-  <h2
+  <h3
     [ngStyle]="{
-      'background-color': color.shades[0].hex
+      'background-color': color.shades[dark ? 8 : 1].hex,
+      'color': color.shades[dark ? 1 : 8].hex,
+      'text-align': dark ? 'right' : 'left'
     }"
-    class="text-xl lg:text-2xl font-bold py-2 pl-2 lg:py-4 lg:pl-4"
   >
     {{color.name}}
-  </h2>
+  </h3>
 
   <section class="flex">
     <span
       *ngFor="let shade of color.shades"
       [ngStyle]="{
         'background-color': shade.hex,
-        'color': shade.luminosity > 50 ? '#000000' : '#ffffff'
+        'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
       }"
-      class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-8"
+      class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6"
     >
       {{shade.hex}}
     </span>

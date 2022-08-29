@@ -11,7 +11,7 @@ export class Palette {
     this.id = 'sfhaislfhasbfshgf'
   }
 
-  addColor(name: string, hex: string) {
+  public addColor(name: string, hex: string) {
     this.colors.push(new Color(name, hex))
   }
 

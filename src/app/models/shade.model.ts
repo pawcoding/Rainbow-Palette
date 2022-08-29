@@ -12,7 +12,7 @@ export class Shade {
   public constructor(index: number, hue: number, saturation: number, luminosity: number);
   public constructor(index: number, hex: string, hue: number, saturation: number, luminosity: number);
 
-  public constructor(...args: any[]) {
+  constructor(...args: any[]) {
     this.index = args[0]
 
     if (args.length === 2) {
