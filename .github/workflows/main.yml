@@ -27,7 +27,7 @@ jobs:
         npm run build
 
     - name: 📂 Sync files
-      uses: marcodallasanta/ssh-scp-deploy@v1.2.0
+      uses: wlixcc/SFTP-Deploy-Action@v1.2.4
       with:
         host: ${{ secrets.ftp_host }}
         user: ${{ secrets.ftp_user }}
