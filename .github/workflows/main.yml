@@ -31,7 +31,7 @@ jobs:
       with:
         host: ${{ secrets.ftp_host }}
         user: ${{ secrets.ftp_user }}
-        password: ${{ secrets.ftp_password }}
+        key: ${{ secrets.ssh_private_key }}
         local: './dist/'
         remote: '~/color-generator'
         scp_options: -v
