@@ -1,0 +1,13 @@
+<label for="light-switch" class="inline-flex relative items-center cursor-pointer">
+  <input type="checkbox" [checked]="dark" (change)="toggleTheme()" id="light-switch" class="sr-only peer">
+
+  <div class="
+    w-14 h-7 rounded-full
+    bg-neutral-200 peer-checked:bg-neutral-700 shadow
+    peer-focus:outline-none peer peer-checked:after:translate-x-full
+    after:content-[url('/assets/sun.svg')] peer-checked:after:content-[url('/assets/moon.svg')]
+    after:absolute after:top-0.5 after:left-[4px]
+    after:rounded-full after:h-6 after:w-6
+    after:bg-white after:transition-all"
+  ></div>
+</label>

@@ -1,12 +1,15 @@
 # Color Palette Generator
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)
+[![Live Demo](https://img.shields.io/badge/live--demo-online-blue)](https://colors.apps.pawcode.de)
+![Version](https://img.shields.io/badge/version-0.0.3.1-orange)
 
 This little web app lets you create you own custom color palette and export it in plain CSS or Tailwind CSS.
 
-## Current state `0.0.3`
+## Current state `0.0.3.1`
 - Pick custom shade / generate color with 10 shades
 - Display random color palette
+- Mobile view and light / dark mode
 
 
 ## Roadmap
@@ -19,7 +22,6 @@ This little web app lets you create you own custom color palette and export it i
 | `0.0.5` | Export palette for plain CSS, Tailwind                  |
 
 ## Other upcoming features
-- Switch for light / dark mode
 - Save palette for further usage in local storage
 - Database storage for sharing palettes
 - Providing prefabricated pallets
