@@ -9,7 +9,7 @@ export default {
   subcomponents: {ColorViewerComponent},
   decorators: [
     moduleMetadata({
-      declarations: [PaletteViewerComponent, ColorViewerComponent]
+      declarations: [ColorViewerComponent]
     })
   ]
 } as Meta

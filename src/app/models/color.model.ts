@@ -20,8 +20,16 @@ export class Color {
     this.shades.sort((a, b) => a.index - b.index)
   }
 
-  getShade(index: number) {
-    return this.shades.find(s => s.index === index)
+  public getShade(index: number): Shade {
+    return this.shades.find(s => s.index === index) || this.shades[0]
+  }
+
+  public static generateRandomColor(): Color {
+    const shade = Shade.generateRandomShade()
+    return new Color(
+      shade.hex,
+      shade.hex
+    )
   }
 
 }

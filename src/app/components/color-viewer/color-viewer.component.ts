@@ -13,12 +13,9 @@ export class ColorViewerComponent implements OnInit {
   @Input()
   dark = false
 
-  constructor() {
+  ngOnInit(): void {
     if (document.getElementById('body')?.classList.contains('dark'))
       this.dark = true
-  }
-
-  ngOnInit(): void {
   }
 
 }

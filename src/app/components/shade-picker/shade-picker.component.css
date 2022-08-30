@@ -1,0 +1,64 @@
+input {
+  @apply block w-full;
+}
+
+input[type=range], input[type=color] {
+  @apply w-full outline-none appearance-none;
+  -webkit-appearance: none;
+}
+
+input[type=range] {
+  @apply h-1/2;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  @apply w-6 h-10 cursor-pointer appearance-none;
+  background-color: var(--selected-hex);
+  -webkit-appearance: none;
+}
+
+input[type=range]::-moz-range-thumb {
+  @apply w-6 h-6 cursor-pointer;
+  background-color: var(--selected-hex);
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+  @apply p-0;
+}
+
+input[type=color]::-webkit-color-swatch {
+  @apply border-none;
+}
+
+#hexInput {
+  @apply h-full;
+  background-color: var(--selected-hex);
+}
+
+#hueInput {
+  background: linear-gradient(90deg,
+    hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,
+    hsl(36, var(--selected-saturation), var(--selected-luminosity)) 10%,
+    hsl(72, var(--selected-saturation), var(--selected-luminosity)) 20%,
+    hsl(108, var(--selected-saturation), var(--selected-luminosity)) 30%,
+    hsl(144, var(--selected-saturation), var(--selected-luminosity)) 40%,
+    hsl(180, var(--selected-saturation), var(--selected-luminosity)) 50%,
+    hsl(216, var(--selected-saturation), var(--selected-luminosity)) 60%,
+    hsl(252, var(--selected-saturation), var(--selected-luminosity)) 70%,
+    hsl(288, var(--selected-saturation), var(--selected-luminosity)) 80%,
+    hsl(324, var(--selected-saturation), var(--selected-luminosity)) 90%,
+    hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%);
+}
+
+#saturationInput {
+  background: linear-gradient(90deg,
+  hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,
+  hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%);
+}
+
+#luminosityInput {
+  background: linear-gradient(90deg,
+  hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,
+  hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,
+  hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%);
+}

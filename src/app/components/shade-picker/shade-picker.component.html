@@ -1,0 +1,48 @@
+<article
+  class="grid grid-cols-2 grid-rows-5 gap-x-4 gap-y-2
+    max-w-3xl mx-auto items-center p-4 rounded-xl border shadow-lg"
+  [ngClass]="dark ? 'border-neutral-300 bg-neutral-700' : 'border-neutral-600 bg-neutral-200'"
+  *ngIf="shade"
+>
+  <input
+    class="row-span-2"
+    id="hexInput" type="color"
+    [value]="shade.hex" #hexInput
+    (input)="updateShade('HEX', hexInput.value)">
+
+  <input
+    class="text-black"
+    id="nameInput" type="text"
+    [value]="name" #nameInput placeholder="Color Name"
+    (input)="updateName(nameInput.value)">
+
+  <section
+    [ngStyle]="{
+      'background-color': shade.hex,
+      'color': shade.luminosity > 48 ? '#000000' : '#ffffff'
+    }"
+    (click)="generateColor()"
+    class="block w-full text-lg flex items-center justify-center row-span-4 h-full cursor-pointer"
+  >
+    <h2 class="text-center">
+      Click to generate shades for
+      <br>
+      {{name ? (name + ' (' + shade.hex + ')') : shade.hex}}
+    </h2>
+  </section>
+
+  <input
+    id="hueInput" type="range"
+    [value]="shade.hue" #hueInput min="0" max="360"
+    (input)="updateShade('HUE', hueInput.value)">
+
+  <input
+    id="saturationInput" type="range"
+    [value]="shade.saturation" #saturationInput min="0" max="100"
+    (input)="updateShade('SATURATION', saturationInput.value)">
+
+  <input
+    id="luminosityInput" type="range"
+    [value]="100 - shade.luminosity" #luminosityInput min="0" max="100"
+    (input)="updateShade('LUMINOSITY', luminosityInput.value)">
+</article>

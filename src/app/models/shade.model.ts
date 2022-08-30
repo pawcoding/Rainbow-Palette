@@ -34,4 +34,13 @@ export class Shade {
     }
   }
 
+  public static generateRandomShade(): Shade {
+    return new Shade(
+      0,
+      Math.floor(Math.random() * 360),
+      Math.floor(Math.random() * 100),
+      25 + Math.floor(Math.random() * 50)
+    )
+  }
+
 }

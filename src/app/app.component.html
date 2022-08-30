@@ -2,4 +2,12 @@
   Color Palette Generator
 </h1>
 
-<app-palette-viewer [palette]="palette"></app-palette-viewer>
+<main class="px-4">
+  <shade-picker [shade]="shade" (colorEmitter)="color = $event"></shade-picker>
+
+  <section class="max-w-7xl mx-auto pt-4">
+    <app-color-viewer [color]="color"></app-color-viewer>
+  </section>
+
+  <app-palette-viewer [palette]="palette"></app-palette-viewer>
+</main>
