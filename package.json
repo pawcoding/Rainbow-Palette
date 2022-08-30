@@ -1,6 +1,6 @@
 {
   "name": "tailwind-color-generator",
-  "version": "0.0.0",
+  "version": "0.0.3",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -31,6 +31,7 @@
     "@angular/compiler-cli": "^14.0.0",
     "@babel/core": "^7.18.13",
     "@compodoc/compodoc": "^1.1.19",
+    "@savvywombat/tailwindcss-grid-areas": "^2.1.0",
     "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.10",
     "@storybook/addon-interactions": "^6.5.10",

@@ -12,13 +12,14 @@ input[type=range] {
 }
 
 input[type=range]::-webkit-slider-thumb {
-  @apply w-6 h-10 cursor-pointer appearance-none;
+  @apply w-6 h-10 cursor-pointer appearance-none outline-none rounded;
   background-color: var(--selected-hex);
   -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 input[type=range]::-moz-range-thumb {
-  @apply w-6 h-6 cursor-pointer;
+  @apply w-6 h-10 cursor-pointer rounded;
   background-color: var(--selected-hex);
 }
 
@@ -31,7 +32,7 @@ input[type=color]::-webkit-color-swatch {
 }
 
 #hexInput {
-  @apply h-full;
+  @apply h-full max-h-8 sm:max-h-full;
   background-color: var(--selected-hex);
 }
 

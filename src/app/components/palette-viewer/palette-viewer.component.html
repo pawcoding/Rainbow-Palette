@@ -4,9 +4,9 @@
 >
   <h2>{{palette.title}}</h2>
 
-  <app-color-viewer
+  <color-viewer
     *ngFor="let color of palette.colors"
     [color]="color"
     [dark]="dark"
-  ></app-color-viewer>
+  ></color-viewer>
 </section>

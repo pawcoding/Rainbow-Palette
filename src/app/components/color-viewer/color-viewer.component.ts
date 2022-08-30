@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Color} from "../../models/color.model";
 
 @Component({
-  selector: 'app-color-viewer',
+  selector: 'color-viewer',
   templateUrl: './color-viewer.component.html',
 })
 export class ColorViewerComponent implements OnInit {

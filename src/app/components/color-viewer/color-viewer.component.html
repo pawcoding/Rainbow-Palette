@@ -3,7 +3,7 @@
   [ngStyle]="{
     'border-color': color.shades[dark ? 2 : 7].hex
   }"
-  class="overflow-auto my-4 rounded-xl shadow-lg border"
+  class="overflow-clip my-4 rounded-xl shadow-lg border-2 grid grid-areas-color-square sm:grid-areas-color-wide"
 >
   <h3
     [ngStyle]="{
@@ -11,20 +11,19 @@
       'color': color.shades[dark ? 1 : 8].hex,
       'text-align': dark ? 'right' : 'left'
     }"
+    class="grid-in-name"
   >
     {{color.name}}
   </h3>
 
-  <section class="flex">
-    <span
-      *ngFor="let shade of color.shades"
-      [ngStyle]="{
-        'background-color': shade.hex,
-        'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
-      }"
-      class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6"
-    >
-      {{shade.hex}}
-    </span>
-  </section>
+  <span
+    *ngFor="let shade of color.shades"
+    [ngStyle]="{
+      'background-color': shade.hex,
+      'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
+    }"
+    class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6"
+  >
+    {{shade.hex}}
+  </span>
 </article>

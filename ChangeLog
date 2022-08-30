@@ -1,0 +1,25 @@
+2022.08.30, v0.0.3
+
+feature:
+- (storybook) setup v6.5.10
+- (colors) random generator
+- (picker) create shade picker
+
+improvement:
+- (colors) data structure
+- (tailwind) forms v0.5.2
+- (tailwind) grid-areas v2.1.0
+
+
+2022.08.22, v0.0.2
+
+feature:
+- (colors) color interpolater
+
+
+2022.08.21, v0.0.1
+
+feature:
+- (angular) setup v14.0.0
+- (tailwind) setup v3.1.8
+- (colors) color converter
