@@ -1,12 +1,22 @@
 <section
   *ngIf="palette"
-  class="max-w-7xl mx-auto"
+  class="max-w-5xl mx-auto px-4 rounded-xl
+    border-2 border-neutral-600 dark:bord-neutral-300
+    bg-neutral-200 dark:bg-neutral-700 shadow-lg"
 >
-  <h2>{{palette.title}}</h2>
+  <div class="flex items-center justify-between">
+    <h2 (click)="savePalette()">{{palette.title}}</h2>
+
+    <span title="Remove palette" class="px-4 cursor-pointer dark:invert" (click)="removePalette($event)">
+      <img src="/assets/delete.svg" alt="Remove palette" class="h-8">
+    </span>
+  </div>
 
   <color-viewer
     *ngFor="let color of palette.colors"
     [color]="color"
     [dark]="dark"
+    [inPalette]="true"
+    (onAction)="removeColor(color)"
   ></color-viewer>
 </section>

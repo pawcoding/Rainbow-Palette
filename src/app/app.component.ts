@@ -16,13 +16,31 @@ export class AppComponent {
 
   shade = Shade.generateRandomShade()
   color: Color | undefined
-  palette = Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))
+  palette: Palette | undefined
 
   constructor(
     private storage: StorageService
   ) {
     this.dark = storage.loadTheme()
     storage.darkEmitter.subscribe(d => this.dark = d.valueOf())
+    this.palette = storage.loadPalette()
+  }
+
+  randomPalette() {
+    this.palette = Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))
+  }
+
+  removePalette() {
+    this.palette = undefined
+  }
+
+  addColor(color: Color | undefined) {
+    if (color) {
+      if (!this.palette)
+        this.palette = new Palette('Palette')
+      this.palette.addColor(color)
+      this.color = undefined
+    }
   }
 
 }

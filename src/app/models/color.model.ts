@@ -32,4 +32,20 @@ export class Color {
     )
   }
 
+  public toString() {
+    return JSON.stringify({
+      name: this.name,
+      shades: this.shades
+    })
+  }
+
+  public static parseColor(json: any): Color {
+    if (!json.name)
+      throw 'Color has no name'
+    if (!json.shades || json.shades.length < 6)
+      throw 'Color has not enough shades'
+
+    return new Color(json.name, json.shades[5].hex)
+  }
+
 }

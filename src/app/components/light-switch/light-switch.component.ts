@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {StorageService} from "../../services/storage.service";
 
 @Component({
-  selector: 'app-light-switch',
+  selector: 'light-switch',
   templateUrl: './light-switch.component.html',
 })
 export class LightSwitchComponent implements OnInit {

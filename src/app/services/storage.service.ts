@@ -1,4 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
+import {Palette} from "../models/palette.model";
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,22 @@ export class StorageService {
     this.darkEmitter.emit(dark)
 
     return dark
+  }
+
+  loadPalette(): Palette {
+    const stored = localStorage.getItem('palette')
+    if (stored) {
+      try {
+        return Palette.parsePalette(JSON.parse(stored))
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    return Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))
+  }
+
+  savePalette(palette: Palette) {
+    localStorage.setItem('palette', palette.toString())
   }
 
 }

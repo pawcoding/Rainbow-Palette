@@ -1,18 +1,18 @@
 <article
   class="grid sm:grid-cols-2 grid-rows-7 sm:grid-rows-5 gap-x-4 gap-y-2
-    max-w-3xl mx-auto items-center p-4 rounded-xl border-2 shadow-lg"
+    max-w-5xl mx-auto items-center p-4 rounded-xl border-2 shadow-lg"
   [ngClass]="dark ? 'border-neutral-300 bg-neutral-700' : 'border-neutral-600 bg-neutral-200'"
   *ngIf="shade"
 >
   <input
     class="sm:row-span-2"
-    id="hexInput" type="color"
+    id="hexInput" type="color" title="Select a color"
     [value]="shade.hex" #hexInput
     (input)="updateShade('HEX', hexInput.value)">
 
   <input
     class="row-start-1 sm:row-auto text-black"
-    id="nameInput" type="text"
+    id="nameInput" type="text" title="Give your color a name"
     [value]="name" #nameInput placeholder="Color Name"
     (input)="updateName(nameInput.value)">
 
@@ -23,7 +23,8 @@
     }"
     (click)="generateColor()"
     class="block w-full text-lg flex items-center justify-center
-      row-span-2 sm:row-span-4 row-start-6 h-full cursor-pointer"
+      row-span-2 sm:row-span-4 row-start-6 h-full cursor-pointer p-4"
+    title="Click to generate all 10 shades for your color"
   >
     <h2 class="text-center">
       Click to generate color
@@ -32,17 +33,17 @@
   </section>
 
   <input
-    id="hueInput" type="range"
+    id="hueInput" type="range" title="Adjust the hue"
     [value]="shade.hue" #hueInput min="0" max="360"
     (input)="updateShade('HUE', hueInput.value)">
 
   <input
-    id="saturationInput" type="range"
+    id="saturationInput" type="range" title="Adjust the saturation"
     [value]="shade.saturation" #saturationInput min="0" max="100"
     (input)="updateShade('SATURATION', saturationInput.value)">
 
   <input
-    id="luminosityInput" type="range"
+    id="luminosityInput" type="range" title="Adjust the luminosity"
     [value]="100 - shade.luminosity" #luminosityInput min="0" max="100"
     (input)="updateShade('LUMINOSITY', luminosityInput.value)">
 </article>
