@@ -5,11 +5,28 @@
     bg-neutral-200 dark:bg-neutral-700 shadow-lg"
 >
   <div class="flex items-center justify-between">
-    <h2 (click)="savePalette()">{{palette.title}}</h2>
+    <h2 *ngIf="!editingState" (click)="savePalette()">{{palette.title}}</h2>
 
-    <span title="Remove palette" class="px-4 cursor-pointer dark:invert" (click)="removePalette($event)">
-      <img src="/assets/delete.svg" alt="Remove palette" class="h-8">
-    </span>
+    <input *ngIf="editingState" type="text"
+           [value]="palette.title" #editTitle
+           placeholder="Palette title"
+           (focusout)="closeEditor()" (keydown.enter)="closeEditor()"
+           class="bg-transparent p-0 text-xl font-bold my-4
+            border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0">
+
+    <div class="flex">
+      <span title="Edit palette" class="px-4 cursor-pointer dark:invert" (click)="openEditor()">
+        <img src="/assets/icons/edit.svg" alt="Edit" class="h-8">
+      </span>
+
+      <span title="Sort palette by hue" class="px-4 cursor-pointer dark:invert" (click)="sortPalette()">
+        <img src="/assets/icons/sort.svg" alt="Sort" class="h-8">
+      </span>
+
+      <span title="Remove palette" class="px-4 cursor-pointer dark:invert" (click)="removePalette($event)">
+        <img src="/assets/icons/delete.svg" alt="Remove" class="h-8">
+      </span>
+    </div>
   </div>
 
   <color-viewer

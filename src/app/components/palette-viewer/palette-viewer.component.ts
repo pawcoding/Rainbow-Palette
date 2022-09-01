@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Palette} from "../../models/palette.model";
 import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
 import {Color} from "../../models/color.model";
@@ -19,6 +19,11 @@ export class PaletteViewerComponent implements OnInit {
   @Output()
   onRemove = new EventEmitter<Event>()
 
+  editingState = false
+
+  @ViewChild('editTitle')
+  editTitle: ElementRef<HTMLInputElement> | undefined
+
   constructor(
     private storage: StorageService
   ) { }
@@ -33,11 +38,31 @@ export class PaletteViewerComponent implements OnInit {
 
   removeColor(color: Color) {
     this.palette?.removeColor(color)
+    this.savePalette()
   }
 
   savePalette() {
     if (this.palette)
       this.storage.savePalette(this.palette)
+  }
+
+  openEditor() {
+    this.editingState = true
+    setTimeout(() => {
+      console.info(this.editTitle)
+      this.editTitle?.nativeElement.focus()
+    }, 0)
+  }
+
+  closeEditor() {
+    this.editingState = false
+    if (this.palette)
+      this.palette.title = this.editTitle?.nativeElement.value || 'Random'
+    this.savePalette()
+  }
+
+  sortPalette() {
+    this.palette?.sortColors()
   }
 
 }

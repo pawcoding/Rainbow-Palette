@@ -27,6 +27,10 @@ This little web app lets you create you own custom color palette and export it i
 - [x] Mobile view
 - [x] Save palette in local storage
 - [ ] GitHub Action for automatic release update
+- [ ] Support other color models
+  - [ ] RGB
+  - [ ] CMYK
+  - [ ] HSB
 - [ ] Provide exemplary components for preview
 - [ ] Database storage for sharing palettes
   - [ ] Provide prefabricated palettes
