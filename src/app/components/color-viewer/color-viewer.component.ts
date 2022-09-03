@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Color} from "../../models/color.model";
 
 @Component({
@@ -12,6 +12,12 @@ export class ColorViewerComponent implements OnInit {
 
   @Input()
   dark = false
+
+  @Input()
+  inPalette = false
+
+  @Output()
+  onAction = new EventEmitter<Color>()
 
   ngOnInit(): void {
     if (document.getElementById('body')?.classList.contains('dark'))

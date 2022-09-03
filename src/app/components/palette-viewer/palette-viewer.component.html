@@ -1,12 +1,39 @@
 <section
   *ngIf="palette"
-  class="max-w-7xl mx-auto"
+  class="max-w-5xl mx-auto px-4 rounded-xl
+    border-2 border-neutral-600 dark:bord-neutral-300
+    bg-neutral-200 dark:bg-neutral-700 shadow-lg"
 >
-  <h2>{{palette.title}}</h2>
+  <div class="flex items-center justify-between">
+    <h2 *ngIf="!editingState" (click)="openEditor()">{{palette.title}}</h2>
+
+    <input *ngIf="editingState" type="text"
+           [value]="palette.title" #editTitle
+           placeholder="Palette title"
+           (focusout)="closeEditor()" (keydown.enter)="closeEditor()"
+           class="bg-transparent p-0 text-xl font-bold my-4
+            border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0">
+
+    <div class="flex">
+      <span title="Edit palette" class="px-4 cursor-pointer dark:invert" (click)="openEditor()">
+        <img src="/assets/icons/edit.svg" alt="Edit" class="h-8">
+      </span>
+
+      <span title="Sort palette by hue" class="px-4 cursor-pointer dark:invert" (click)="sortPalette()">
+        <img src="/assets/icons/sort.svg" alt="Sort" class="h-8">
+      </span>
+
+      <span title="Remove palette" class="px-4 cursor-pointer dark:invert" (click)="removePalette($event)">
+        <img src="/assets/icons/delete.svg" alt="Remove" class="h-8">
+      </span>
+    </div>
+  </div>
 
   <color-viewer
     *ngFor="let color of palette.colors"
     [color]="color"
     [dark]="dark"
+    [inPalette]="true"
+    (onAction)="removeColor(color)"
   ></color-viewer>
 </section>

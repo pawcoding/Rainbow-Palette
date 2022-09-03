@@ -3,7 +3,7 @@
   [ngStyle]="{
     'border-color': color.shades[dark ? 2 : 7].hex
   }"
-  class="overflow-clip my-4 rounded-xl shadow-lg border-2 grid grid-areas-color-square sm:grid-areas-color-wide"
+  class="overflow-clip my-4 rounded-xl shadow-lg border-2 grid grid-areas-color-square sm:grid-areas-color-wide items-center"
 >
   <h3
     [ngStyle]="{
@@ -11,10 +11,29 @@
       'color': color.shades[dark ? 1 : 8].hex,
       'text-align': dark ? 'right' : 'left'
     }"
-    class="grid-in-name"
+    class="grid-in-name px-4"
   >
     {{color.name}}
   </h3>
+
+  <span
+    [ngStyle]="{
+      'background-color': color.shades[dark ? 8 : 1].hex,
+      'color': color.shades[dark ? 1 : 8].hex,
+      'text-align': dark ? 'right' : 'left'
+    }"
+    (click)="onAction.emit(color)"
+    class="grid-in-button flex h-full justify-center items-center cursor-pointer"
+  >
+    <img
+      class="h-8 dark:invert" *ngIf="inPalette"
+      src="/assets/icons/close.svg" alt="Remove from palette"
+    >
+    <img
+      class="h-8 dark:invert" *ngIf="!inPalette"
+      src="/assets/icons/add.svg" alt="Add to palette"
+    >
+  </span>
 
   <span
     *ngFor="let shade of color.shades"
@@ -23,6 +42,7 @@
       'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
     }"
     class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6"
+    [title]="shade.index + '&#10;' + shade.hex"
   >
     {{shade.hex}}
   </span>

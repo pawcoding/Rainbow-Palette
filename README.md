@@ -2,15 +2,11 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)
 [![Live Demo](https://img.shields.io/badge/live--demo-online-blue)](https://colors.apps.pawcode.de)
-![Version](https://img.shields.io/badge/version-0.0.3.1-orange)
+![Version](https://img.shields.io/badge/version-0.0.4-orange)
 
 This little web app lets you create you own custom color palette and export it in plain CSS or Tailwind CSS.
 
-## Current state `0.0.3.1`
-- Pick custom shade / generate color with 10 shades
-- Display random color palette
-- Mobile view and light / dark mode
-
+![Screenshot](/assets/screenshot.png)
 
 ## Roadmap
 | Version | Features                                                |
@@ -19,12 +15,26 @@ This little web app lets you create you own custom color palette and export it i
 | `0.0.2` | Generate shades for every color                         |
 | `0.0.3` | Pick custom shade and generate other shades for color   |
 | `0.0.4` | Add custom color to palette / remove color from palette |
-| `0.0.5` | Export palette for plain CSS, Tailwind                  |
+| `0.0.5` | Adjust colors from palette                              |
+| `0.1.0` | Export palette for plain CSS, Tailwind                  |
+| `0.1.1` | Adjust every shade                                      |
+| `0.1.2` | Improved algorithm for color generation                 |
+| `0.2.0` | Redesign                                                |
 
-## Other upcoming features
-- Save palette for further usage in local storage
-- Database storage for sharing palettes
-- Providing prefabricated pallets
+### Side features
+- [x] Random color palette
+- [x] Light & dark mode
+- [x] Mobile view
+- [x] Save palette in local storage
+- [x] Sort colors by hue
+- [ ] GitHub Action for automatic release update
+- [ ] Support other color models
+  - [x] RGB
+  - [ ] CMYK
+  - [ ] HSB
+- [ ] Provide exemplary components for preview
+- [ ] Database storage for sharing palettes
+  - [ ] Provide prefabricated palettes
 
 ## License
 [MIT](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)

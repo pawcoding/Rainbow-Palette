@@ -17,12 +17,12 @@ export class Shade {
 
     if (args.length === 2) {
       this.hex = args[1]
-      const hsl = ColorConverter.rgbToHsl(this.hex)
+      const hsl = ColorConverter.HEXtoHSL(this.hex)
       this.hue = hsl.hue
       this.saturation = hsl.saturation
       this.luminosity = hsl.luminosity
     } else if (args.length === 4) {
-      this.hex = ColorConverter.hslToRgb(args[1], args[2], args[3])
+      this.hex = ColorConverter.HSLtoHEX(args[1], args[2], args[3])
       this.hue = args[1]
       this.saturation = args[2]
       this.luminosity = args[3]
@@ -34,6 +34,9 @@ export class Shade {
     }
   }
 
+  /**
+   * Generate a random shade.
+   */
   public static generateRandomShade(): Shade {
     return new Shade(
       0,
