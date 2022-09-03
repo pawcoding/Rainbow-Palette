@@ -5,7 +5,7 @@
     bg-neutral-200 dark:bg-neutral-700 shadow-lg"
 >
   <div class="flex items-center justify-between">
-    <h2 *ngIf="!editingState" (click)="savePalette()">{{palette.title}}</h2>
+    <h2 *ngIf="!editingState" (click)="openEditor()">{{palette.title}}</h2>
 
     <input *ngIf="editingState" type="text"
            [value]="palette.title" #editTitle

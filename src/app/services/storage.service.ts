@@ -10,6 +10,10 @@ export class StorageService {
 
   constructor() { }
 
+  /**
+   * Load the theme if it is stored in local storage.
+   * If no theme was saved, the browser default theme is used.
+   */
   loadTheme() {
     if (!localStorage.getItem('theme')) {
       if (window.matchMedia('(prefers-color-scheme: dark)'))
@@ -23,6 +27,11 @@ export class StorageService {
     }
   }
 
+  /**
+   * Toggle between dark and light theme.
+   * Force dark or light mode with parameter.
+   * @param dark
+   */
   toggleTheme(dark: boolean | undefined) {
     document.body.classList.toggle('dark', dark)
 
@@ -34,6 +43,9 @@ export class StorageService {
     return dark
   }
 
+  /**
+   * Load the palette saved in local storage.
+   */
   loadPalette(): Palette {
     const stored = localStorage.getItem('palette')
     if (stored) {
@@ -46,6 +58,10 @@ export class StorageService {
     return Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))
   }
 
+  /**
+   * Save palette in local storage.
+   * @param palette
+   */
   savePalette(palette: Palette) {
     localStorage.setItem('palette', palette.toString())
   }

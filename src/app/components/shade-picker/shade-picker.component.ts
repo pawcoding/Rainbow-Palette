@@ -28,17 +28,22 @@ export class ShadePickerComponent implements OnInit {
     this.updateProperties()
   }
 
-  updateShade(type: string, value: string | number): void {
-    if (type === 'HEX' && isNaN(+value))
+  /**
+   * Update current shade. The property with type is changed to the new value.
+   * @param type Property to change
+   * @param value Value to change to
+   */
+  updateShade(type: ChangeType, value: string | number): void {
+    if (type === ChangeType.HEX && isNaN(+value))
       this.shade = new Shade(0, `${value}`)
     else if (!isNaN(+value)) {
-      if (type === 'HUE') {
+      if (type === ChangeType.HUE) {
         // @ts-ignore
         this.shade = new Shade(0, value, this.shade?.saturation, this.shade?.luminosity)
-      } else if (type === 'SATURATION') {
+      } else if (type === ChangeType.SATURATION) {
         // @ts-ignore
         this.shade = new Shade(0, this.shade?.hue, value, this.shade?.luminosity)
-      } else if (type === 'LUMINOSITY') {
+      } else if (type === ChangeType.LUMINOSITY) {
         // @ts-ignore
         this.shade = new Shade(0, this.shade?.hue, this.shade?.saturation, 100 - value)
       }
@@ -47,6 +52,9 @@ export class ShadePickerComponent implements OnInit {
     this.updateProperties()
   }
 
+  /**
+   * Update all css properties to the values of the current selected shade
+   */
   updateProperties() {
     if (this.shade) {
       document.documentElement.style.setProperty('--selected-hex', this.shade.hex)
@@ -56,13 +64,25 @@ export class ShadePickerComponent implements OnInit {
     }
   }
 
+  /**
+   * Update the name of the current color / shade
+   * @param name
+   */
   updateName(name: string) {
     this.name = name
   }
 
+  /**
+   * Generate all shades for the current color.
+   */
   generateColor() {
     if (this.shade)
       this.colorEmitter.emit(new Color(this.name || this.shade.hex, this.shade.hex))
   }
 
+}
+
+
+export enum ChangeType {
+  HEX, HUE, SATURATION, LUMINOSITY
 }

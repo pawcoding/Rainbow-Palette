@@ -2,7 +2,7 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)
 [![Live Demo](https://img.shields.io/badge/live--demo-online-blue)](https://colors.apps.pawcode.de)
-![Version](https://img.shields.io/badge/version-0.0.3.2-orange)
+![Version](https://img.shields.io/badge/version-0.0.4-orange)
 
 This little web app lets you create you own custom color palette and export it in plain CSS or Tailwind CSS.
 
@@ -26,9 +26,10 @@ This little web app lets you create you own custom color palette and export it i
 - [x] Light & dark mode
 - [x] Mobile view
 - [x] Save palette in local storage
+- [x] Sort colors by hue
 - [ ] GitHub Action for automatic release update
 - [ ] Support other color models
-  - [ ] RGB
+  - [x] RGB
   - [ ] CMYK
   - [ ] HSB
 - [ ] Provide exemplary components for preview

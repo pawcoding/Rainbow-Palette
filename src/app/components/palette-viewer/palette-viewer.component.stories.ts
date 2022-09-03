@@ -2,6 +2,9 @@ import {PaletteViewerComponent} from "./palette-viewer.component";
 import {Meta, Story, moduleMetadata} from "@storybook/angular";
 import {Palette} from "../../models/palette.model";
 import {ColorViewerComponent} from "../color-viewer/color-viewer.component";
+// @ts-ignore
+import {v4 as uuidv4} from "uuid";
+import {Color} from "../../models/color.model";
 
 export default {
   title: 'Components/Palette',
@@ -21,29 +24,29 @@ const Template: Story = (args) => ({
 
 export const Rainbow = Template.bind({})
 
-const rainbowPalette = new Palette('Rainbow')
-rainbowPalette.addColor('Slate', '#64748b')
-rainbowPalette.addColor('Gray', '#6b7280')
-rainbowPalette.addColor('Zinc', '#71717a')
-rainbowPalette.addColor('Neutral', '#737373')
-rainbowPalette.addColor('Stone', '#78716c')
-rainbowPalette.addColor('Red', '#ef4444')
-rainbowPalette.addColor('Orange', '#f97316')
-rainbowPalette.addColor('Amber', '#f59c0b')
-rainbowPalette.addColor('Yellow', '#eab308')
-rainbowPalette.addColor('Lime', '#84cc16')
-rainbowPalette.addColor('Green', '#22c55e')
-rainbowPalette.addColor('Emerald', '#10b981')
-rainbowPalette.addColor('Teal', '#14b8a6')
-rainbowPalette.addColor('Cyan', '#06b6d4')
-rainbowPalette.addColor('Sky', '#0ea5e9')
-rainbowPalette.addColor('Blue', '#3b82f6')
-rainbowPalette.addColor('Indigo', '#6366f1')
-rainbowPalette.addColor('Violet', '#8b5cf6')
-rainbowPalette.addColor('Purple', '#a855f7')
-rainbowPalette.addColor('Fuchsia', '#d946ef')
-rainbowPalette.addColor('Pink', '#ec4899')
-rainbowPalette.addColor('Rose', '#f43f5e')
+const rainbowPalette = new Palette('Rainbow', uuidv4())
+rainbowPalette.addColor(new Color('Slate', '#64748b'))
+rainbowPalette.addColor(new Color('Gray', '#6b7280'))
+rainbowPalette.addColor(new Color('Zinc', '#71717a'))
+rainbowPalette.addColor(new Color('Neutral', '#737373'))
+rainbowPalette.addColor(new Color('Stone', '#78716c'))
+rainbowPalette.addColor(new Color('Red', '#ef4444'))
+rainbowPalette.addColor(new Color('Orange', '#f97316'))
+rainbowPalette.addColor(new Color('Amber', '#f59c0b'))
+rainbowPalette.addColor(new Color('Yellow', '#eab308'))
+rainbowPalette.addColor(new Color('Lime', '#84cc16'))
+rainbowPalette.addColor(new Color('Green', '#22c55e'))
+rainbowPalette.addColor(new Color('Emerald', '#10b981'))
+rainbowPalette.addColor(new Color('Teal', '#14b8a6'))
+rainbowPalette.addColor(new Color('Cyan', '#06b6d4'))
+rainbowPalette.addColor(new Color('Sky', '#0ea5e9'))
+rainbowPalette.addColor(new Color('Blue', '#3b82f6'))
+rainbowPalette.addColor(new Color('Indigo', '#6366f1'))
+rainbowPalette.addColor(new Color('Violet', '#8b5cf6'))
+rainbowPalette.addColor(new Color('Purple', '#a855f7'))
+rainbowPalette.addColor(new Color('Fuchsia', '#d946ef'))
+rainbowPalette.addColor(new Color('Pink', '#ec4899'))
+rainbowPalette.addColor(new Color('Rose', '#f43f5e'))
 
 Rainbow.args = {
   dark: false,
@@ -53,9 +56,9 @@ Rainbow.args = {
 
 export const Pawcode = Template.bind({})
 
-const pawcodePalette = new Palette('pawcode')
-pawcodePalette.addColor('Blue', '#4472c4')
-pawcodePalette.addColor('Gray', '#262626')
+const pawcodePalette = new Palette('pawcode', uuidv4())
+pawcodePalette.addColor(new Color('Blue', '#4472c4'))
+pawcodePalette.addColor(new Color('Gray', '#262626'))
 
 Pawcode.args = {
   dark: false,
@@ -65,13 +68,21 @@ Pawcode.args = {
 
 export const MediaScope = Template.bind({})
 
-const mediaScopePalette = new Palette('media-scope')
-mediaScopePalette.addColor('Blue', '#2faafa')
-mediaScopePalette.addColor('Orange', '#f79e36')
-mediaScopePalette.addColor('Red', '#bb2b47')
-mediaScopePalette.addColor('Gray', '#444444')
+const mediaScopePalette = new Palette('media-scope', uuidv4())
+mediaScopePalette.addColor(new Color('Blue', '#2faafa'))
+mediaScopePalette.addColor(new Color('Orange', '#f79e36'))
+mediaScopePalette.addColor(new Color('Red', '#bb2b47'))
+mediaScopePalette.addColor(new Color('Gray', '#444444'))
 
 MediaScope.args = {
   dark: false,
   palette: mediaScopePalette
+}
+
+
+export const Random = Template.bind({})
+
+Random.args = {
+  dark: false,
+  palette: Palette.generateRandomPalette(5)
 }

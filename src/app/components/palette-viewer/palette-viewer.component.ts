@@ -31,29 +31,46 @@ export class PaletteViewerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Ask user for confirmation an trigger onRemove event handler.
+   * @param $event MouseEvent
+   */
   removePalette($event: MouseEvent) {
     if (confirm(`Are you sure you want to delete the palette?\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`))
       this.onRemove.emit($event)
   }
 
+  /**
+   * Remove color from palette and save the current palette to local storage.
+   * If color is not present in palette nothing happens.
+   * @param color Color to remove from palette
+   */
   removeColor(color: Color) {
-    this.palette?.removeColor(color)
-    this.savePalette()
+    if (this.palette?.removeColor(color))
+      this.savePalette()
   }
 
+  /**
+   * Save current palette to local storage.
+   */
   savePalette() {
     if (this.palette)
       this.storage.savePalette(this.palette)
   }
 
+  /**
+   * Open editor for palette name.
+   */
   openEditor() {
     this.editingState = true
     setTimeout(() => {
-      console.info(this.editTitle)
       this.editTitle?.nativeElement.focus()
     }, 0)
   }
 
+  /**
+   * Close editor for palette name and save the palette to local storage.
+   */
   closeEditor() {
     this.editingState = false
     if (this.palette)
@@ -61,6 +78,9 @@ export class PaletteViewerComponent implements OnInit {
     this.savePalette()
   }
 
+  /**
+   * Trigger palette sorting.
+   */
   sortPalette() {
     this.palette?.sortColors()
   }

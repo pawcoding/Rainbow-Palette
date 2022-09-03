@@ -8,7 +8,7 @@
     class="sm:row-span-2"
     id="hexInput" type="color" title="Select a color"
     [value]="shade.hex" #hexInput
-    (input)="updateShade('HEX', hexInput.value)">
+    (input)="updateShade(0, hexInput.value)">
 
   <input
     class="row-start-1 sm:row-auto text-black"
@@ -35,15 +35,15 @@
   <input
     id="hueInput" type="range" title="Adjust the hue"
     [value]="shade.hue" #hueInput min="0" max="360"
-    (input)="updateShade('HUE', hueInput.value)">
+    (input)="updateShade(1, hueInput.value)">
 
   <input
     id="saturationInput" type="range" title="Adjust the saturation"
     [value]="shade.saturation" #saturationInput min="0" max="100"
-    (input)="updateShade('SATURATION', saturationInput.value)">
+    (input)="updateShade(2, saturationInput.value)">
 
   <input
     id="luminosityInput" type="range" title="Adjust the luminosity"
     [value]="100 - shade.luminosity" #luminosityInput min="0" max="100"
-    (input)="updateShade('LUMINOSITY', luminosityInput.value)">
+    (input)="updateShade(3, luminosityInput.value)">
 </article>

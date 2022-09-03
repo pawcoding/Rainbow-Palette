@@ -20,10 +20,17 @@ export class Color {
     this.shades.sort((a, b) => a.index - b.index)
   }
 
+  /**
+   * Get shade by index (50, 100, 200, ..., 900)
+   * @param index
+   */
   public getShade(index: number): Shade {
     return this.shades.find(s => s.index === index) || this.shades[0]
   }
 
+  /**
+   * Generate a random color with all shades.
+   */
   public static generateRandomColor(): Color {
     const shade = Shade.generateRandomShade()
     return new Color(
@@ -32,6 +39,9 @@ export class Color {
     )
   }
 
+  /**
+   * Stringify the color.
+   */
   public toString() {
     return JSON.stringify({
       name: this.name,
@@ -39,6 +49,11 @@ export class Color {
     })
   }
 
+  /**
+   * Parse the json object to a color.
+   * Throws exception if json object is no valid color object.
+   * @param json
+   */
   public static parseColor(json: any): Color {
     if (!json.name)
       throw 'Color has no name'

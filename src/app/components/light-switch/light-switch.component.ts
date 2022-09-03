@@ -17,6 +17,9 @@ export class LightSwitchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Toggle between light and dark theme
+   */
   toggleTheme(): void {
     this.dark = this.storage.toggleTheme(!this.dark)
   }
