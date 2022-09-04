@@ -14,7 +14,7 @@ export class Color {
     if (!hex.startsWith('#') || hex.length !== 7)
       throw `Color '${hex}' is not in form #RRGGBB.`
 
-    this.name = name
+    this.name = name.startsWith('#') ? name.substring(1) : name
     this.shades = ColorInterpolater.interpolateShades(hex)
 
     this.shades.sort((a, b) => a.index - b.index)

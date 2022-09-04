@@ -3,6 +3,7 @@ import {Palette} from "../../models/palette.model";
 import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
 import {Color} from "../../models/color.model";
 import {StorageService} from "../../services/storage.service";
+import {PaletteExporter} from "../../class/palette-exporter";
 
 @Component({
   selector: 'palette-viewer',
@@ -83,6 +84,23 @@ export class PaletteViewerComponent implements OnInit {
    */
   sortPalette() {
     this.palette?.sortColors()
+  }
+
+  /**
+   * Export a palette for download and usage as plain CSS or Tailwind config.
+   */
+  exportPalette() {
+    if (this.palette) {
+      // TODO: Switch between css and tailwind export
+      // TODO: Switch between clipboard and file export when using css
+      const css = PaletteExporter.exportPaletteToCSS(this.palette)
+      navigator.clipboard.writeText(css).then(() => {
+        alert(`${ToUnicodeVariantUtil.toUnicodeVariant('CSS copied to clipboard', 'bs')}\nOpen your main .css file and paste the palette at the top.`)
+      }).catch(e => {
+        console.error('Error while copying to clipboard', e)
+      })
+      //console.info(PaletteExporter.exportPaletteToTailwind(this.palette))
+    }
   }
 
 }
