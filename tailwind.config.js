@@ -26,6 +26,12 @@ module.exports = {
       },
       gridTemplateColumns: {
         'site': 'auto 1fr auto'
+      },
+      flexGrow: {
+        2: 2
+      },
+      minHeight: {
+        10: '2.5rem'
       }
     },
   },

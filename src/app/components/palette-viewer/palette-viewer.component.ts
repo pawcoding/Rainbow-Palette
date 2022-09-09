@@ -19,6 +19,9 @@ export class PaletteViewerComponent implements OnInit {
   @Output()
   onRemove = new EventEmitter<Event>()
 
+  @Output()
+  onEdit = new EventEmitter<Color>()
+
   editingState = false
 
   @ViewChild('editTitle')

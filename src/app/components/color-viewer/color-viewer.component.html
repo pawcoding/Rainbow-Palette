@@ -22,16 +22,19 @@
       'color': color.shades[dark ? 1 : 8].hex,
       'text-align': dark ? 'right' : 'left'
     }"
-    (click)="onAction.emit(color)"
+
     class="grid-in-button flex h-full justify-center items-center cursor-pointer"
   >
     <img
       class="h-8 dark:invert" *ngIf="inPalette"
-      src="/assets/icons/close.svg" alt="Remove from palette"
+      src="/assets/icons/edit.svg" alt="Edit color"
+      (click)="onEdit.emit(color)"
     >
+
     <img
-      class="h-8 dark:invert" *ngIf="!inPalette"
-      src="/assets/icons/add.svg" alt="Add to palette"
+      class="h-8 dark:invert" *ngIf="inPalette"
+      src="/assets/icons/close.svg" alt="Remove from palette"
+      (click)="onRemove.emit(color)"
     >
   </span>
 

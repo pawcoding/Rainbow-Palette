@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 import {Palette} from "./models/palette.model";
 import {Shade} from "./models/shade.model";
 import {Color} from "./models/color.model";
@@ -19,6 +19,8 @@ export class AppComponent {
   shade = Shade.generateRandomShade()
   color: Color | undefined
   palette: Palette | undefined
+
+  editColor = new EventEmitter<Color>()
 
   constructor(
     private storage: StorageService

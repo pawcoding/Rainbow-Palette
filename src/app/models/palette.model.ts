@@ -19,7 +19,11 @@ export class Palette {
    * @param color
    */
   public addColor(color: Color) {
-    this.colors.unshift(color)
+    if (this.colors.find(c => c.name === color.name))
+      this.colors[this.colors.findIndex(c => c.name === color.name)] = color
+    else
+      this.colors.unshift(color)
+
     this.order = false
   }
 

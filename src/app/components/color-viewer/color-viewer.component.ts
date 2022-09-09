@@ -17,7 +17,10 @@ export class ColorViewerComponent implements OnInit {
   inPalette = false
 
   @Output()
-  onAction = new EventEmitter<Color>()
+  onRemove = new EventEmitter<Color>()
+
+  @Output()
+  onEdit = new EventEmitter<Color>()
 
   ngOnInit(): void {
     if (document.getElementById('body')?.classList.contains('dark'))

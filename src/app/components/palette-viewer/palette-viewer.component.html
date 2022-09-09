@@ -34,6 +34,7 @@
     [color]="color"
     [dark]="dark"
     [inPalette]="true"
-    (onAction)="removeColor(color)"
+    (onRemove)="removeColor(color)"
+    (onEdit)="onEdit.emit($event)"
   ></color-viewer>
 </section>

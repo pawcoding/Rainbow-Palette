@@ -14,15 +14,19 @@
   </header>
 
   <main class="px-4">
-    <shade-picker [shade]="shade" (colorEmitter)="color = $event" [dark]="dark"></shade-picker>
+    <color-editor [dark]="dark" (onAdd)="addColor($event)" [editColor]="editColor"></color-editor>
+
+    <!--shade-picker [shade]="shade" (colorEmitter)="color = $event" [dark]="dark"></shade-picker-->
 
     <section class="max-w-5xl mx-auto pt-4">
-      <color-viewer [color]="color" [dark]="dark" (onAction)="addColor(color)"></color-viewer>
+      <color-viewer [color]="color" [dark]="dark" (onRemove)="addColor(color)"></color-viewer>
     </section>
 
     <palette-viewer
       *ngIf="palette" (onRemove)="removePalette()"
-      [palette]="palette" [dark]="dark"></palette-viewer>
+      [palette]="palette" [dark]="dark"
+      (onEdit)="editColor.emit($event)"
+    ></palette-viewer>
 
     <button
       *ngIf="!palette" (click)="randomPalette()"

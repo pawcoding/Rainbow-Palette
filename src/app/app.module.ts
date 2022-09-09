@@ -7,6 +7,7 @@ import { PaletteViewerComponent } from './components/palette-viewer/palette-view
 import { ShadePickerComponent } from './components/shade-picker/shade-picker.component';
 import {StorageService} from "./services/storage.service";
 import { LightSwitchComponent } from './components/light-switch/light-switch.component';
+import { ColorEditorComponent } from './components/color-editor/color-editor.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { LightSwitchComponent } from './components/light-switch/light-switch.com
     ColorViewerComponent,
     PaletteViewerComponent,
     ShadePickerComponent,
-    LightSwitchComponent
+    LightSwitchComponent,
+    ColorEditorComponent
   ],
   imports: [
     BrowserModule
