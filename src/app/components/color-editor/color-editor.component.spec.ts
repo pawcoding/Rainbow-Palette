@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ColorPickerComponent } from './color-picker.component';
+import { ColorEditorComponent } from './color-editor.component';
 
-describe('ColorPickerComponent', () => {
-  let component: ColorPickerComponent;
-  let fixture: ComponentFixture<ColorPickerComponent>;
+describe('ColorEditorComponent', () => {
+  let component: ColorEditorComponent;
+  let fixture: ComponentFixture<ColorEditorComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ColorPickerComponent ]
+      declarations: [ ColorEditorComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ColorPickerComponent);
+    fixture = TestBed.createComponent(ColorEditorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

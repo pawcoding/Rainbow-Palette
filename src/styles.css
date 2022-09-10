@@ -3,14 +3,22 @@
 @tailwind utilities;
 
 /* You can add global styles to this file, and also import other style files */
-h1 {
-  @apply text-3xl font-bold text-center py-8;
+@layer components {
+  h1 {
+    @apply text-3xl font-bold text-center py-8 cursor-default transition-colors duration-200;
+  }
+
+  h2 {
+    @apply text-2xl font-bold transition-colors duration-200;
+  }
+
+  h3 {
+    @apply text-xl font-bold py-2 lg:py-3 cursor-default;
+  }
 }
 
-h2 {
-  @apply text-2xl font-bold py-4;
-}
-
-h3 {
-  @apply text-xl font-bold py-2 lg:py-3
+@layer utilities {
+  .icon {
+    @apply h-8 w-8 dark:invert drop-shadow hover:drop-shadow-lg cursor-pointer transition-all duration-200;
+  }
 }
