@@ -2,24 +2,29 @@
 
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)
 [![Live Demo](https://img.shields.io/badge/live--demo-online-blue)](https://colors.apps.pawcode.de)
-![Version](https://img.shields.io/badge/version-0.0.4-orange)
+![Version](https://img.shields.io/badge/version-0.0.5-red)
 
 This little web app lets you create you own custom color palette and export it in plain CSS or Tailwind CSS.
 
 ![Screenshot](/assets/screenshot.png)
 
 ## Roadmap
-| Version | Features                                                |
-|---------|---------------------------------------------------------|
-| `0.0.1` | Calculate between color models                          |
-| `0.0.2` | Generate shades for every color                         |
-| `0.0.3` | Pick custom shade and generate other shades for color   |
-| `0.0.4` | Add custom color to palette / remove color from palette |
-| `0.0.5` | Adjust colors from palette                              |
-| `0.1.0` | Export palette for plain CSS, Tailwind                  |
-| `0.1.1` | Adjust every shade                                      |
-| `0.1.2` | Improved algorithm for color generation                 |
-| `0.2.0` | Redesign                                                |
+| Status | Version | Features                                                |
+|--------|---------|---------------------------------------------------------|
+| 🟩     | `0.0.1` | Calculate between color models                          |
+| 🟩     | `0.0.2` | Generate shades for every color                         |
+| 🟩     | `0.0.3` | Pick custom shade and generate other shades for color   |
+| 🟩     | `0.0.4` | Add custom color to palette / remove color from palette |
+| 🟩     | `0.0.5` | Adjust colors from palette                              |
+| 🟥     | `0.1.0` | Export palette for plain CSS, Tailwind                  |
+| 🟥     | `0.1.1` | Adjust every shade                                      |
+| 🟥     | `0.1.2` | Improved algorithm for color generation                 |
+| 🟥     | `0.2.0` | Redesign                                                |
+
+### ToDo for Version 0.0.5
+- [x] Adjust colors from palette
+- [x] Redesign
+- [ ] Storybook Documentation and Code Comments
 
 ### Side features
 - [x] Random color palette
@@ -33,8 +38,10 @@ This little web app lets you create you own custom color palette and export it i
   - [ ] CMYK
   - [ ] HSB
 - [ ] Provide exemplary components for preview
+- [ ] Provide prefabricated palettes
+- [ ] Generate color palette from images
+- [ ] Generate full color palette from just a single color
 - [ ] Database storage for sharing palettes
-  - [ ] Provide prefabricated palettes
 
 ## License
 [MIT](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)

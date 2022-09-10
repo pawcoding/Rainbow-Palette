@@ -1,30 +1,27 @@
 <section
-  *ngIf="palette"
-  class="max-w-5xl mx-auto px-4 rounded-xl
-    border-2 border-neutral-600 dark:bord-neutral-300
-    bg-neutral-200 dark:bg-neutral-700 shadow-lg"
+  class="max-w-5xl mx-auto p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700"
 >
-  <div class="flex items-center justify-between">
+  <div class="grid grid-cols-2 items-center mb-6">
     <h2 *ngIf="!editingState" (click)="openEditor()">{{palette.title}}</h2>
 
     <input *ngIf="editingState" type="text"
            [value]="palette.title" #editTitle
            placeholder="Palette title"
            (focusout)="closeEditor()" (keydown.enter)="closeEditor()"
-           class="bg-transparent p-0 text-xl font-bold my-4
+           class="bg-transparent p-0 text-xl font-bold
             border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0">
 
-    <div class="flex">
-      <span title="Edit palette" class="px-4 cursor-pointer dark:invert" (click)="openEditor()">
-        <img src="/assets/icons/edit.svg" alt="Edit" class="h-8">
+    <div class="flex gap-6 pr-6 justify-end">
+      <span title="Sort palette by hue" (click)="sortPalette()">
+        <img src="/assets/icons/sort.svg" alt="Sort" class="icon">
       </span>
 
-      <span title="Sort palette by hue" class="px-4 cursor-pointer dark:invert" (click)="sortPalette()">
-        <img src="/assets/icons/sort.svg" alt="Sort" class="h-8">
+      <span title="Edit palette" (click)="openEditor()">
+        <img src="/assets/icons/edit.svg" alt="Edit" class="icon">
       </span>
 
-      <span title="Remove palette" class="px-4 cursor-pointer dark:invert" (click)="removePalette($event)">
-        <img src="/assets/icons/delete.svg" alt="Remove" class="h-8">
+      <span title="Remove palette" (click)="removePalette($event)">
+        <img src="/assets/icons/delete.svg" alt="Remove" class="icon">
       </span>
     </div>
   </div>
@@ -33,8 +30,15 @@
     *ngFor="let color of palette.colors"
     [color]="color"
     [dark]="dark"
-    [inPalette]="true"
     (onRemove)="removeColor(color)"
-    (onEdit)="onEdit.emit($event)"
   ></color-viewer>
+
+  <button
+    (click)="addRandomColor()"
+    class="
+        rounded-xl px-4 py-2 block mx-auto mt-4
+        bg-neutral-400 dark:bg-neutral-600 shadow hover:shadow-lg font-medium"
+  >
+    Add random color
+  </button>
 </section>

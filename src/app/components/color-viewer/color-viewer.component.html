@@ -1,15 +1,10 @@
 <article
-  *ngIf="color"
-  [ngStyle]="{
-    'border-color': color.shades[dark ? 2 : 7].hex
-  }"
-  class="overflow-clip my-4 rounded-xl shadow-lg border-2 grid grid-areas-color-square sm:grid-areas-color-wide items-center"
+  class="overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center"
 >
   <h3
     [ngStyle]="{
-      'background-color': color.shades[dark ? 8 : 1].hex,
-      'color': color.shades[dark ? 1 : 8].hex,
-      'text-align': dark ? 'right' : 'left'
+      'background-color': color.shades[dark ? 7 : 2].hex,
+      'color': color.shades[dark ? 1 : 8].hex
     }"
     class="grid-in-name px-4"
   >
@@ -18,22 +13,21 @@
 
   <span
     [ngStyle]="{
-      'background-color': color.shades[dark ? 8 : 1].hex,
-      'color': color.shades[dark ? 1 : 8].hex,
-      'text-align': dark ? 'right' : 'left'
+      'background-color': color.shades[dark ? 7 : 2].hex,
+      'color': color.shades[dark ? 1 : 8].hex
     }"
 
-    class="grid-in-button flex h-full justify-center items-center cursor-pointer"
+    class="grid-in-button flex gap-6 pr-6 h-full justify-end items-center"
   >
     <img
-      class="h-8 dark:invert" *ngIf="inPalette"
+      class="icon"
       src="/assets/icons/edit.svg" alt="Edit color"
-      (click)="onEdit.emit(color)"
+      (click)="colorService.loadColor(color)"
     >
 
     <img
-      class="h-8 dark:invert" *ngIf="inPalette"
-      src="/assets/icons/close.svg" alt="Remove from palette"
+      class="icon"
+      src="/assets/icons/delete.svg" alt="Remove from palette"
       (click)="onRemove.emit(color)"
     >
   </span>

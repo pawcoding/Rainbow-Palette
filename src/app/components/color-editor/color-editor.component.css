@@ -3,7 +3,7 @@ input {
 }
 
 input[type=range], input[type=color] {
-  @apply w-full outline-none appearance-none;
+  @apply w-full outline-none appearance-none cursor-pointer;
   -webkit-appearance: none;
 }
 
@@ -12,14 +12,14 @@ input[type=range] {
 }
 
 input[type=range]::-webkit-slider-thumb {
-  @apply w-6 h-5/6 min-h-10 cursor-pointer appearance-none outline-none rounded;
+  @apply w-6 h-5/6 min-h-10 cursor-grab appearance-none outline-none rounded shadow hover:shadow-lg;
   background-color: var(--selected-hex);
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
 input[type=range]::-moz-range-thumb {
-  @apply w-6 h-5/6 min-h-10 cursor-pointer rounded;
+  @apply w-6 h-5/6 min-h-10 cursor-grab rounded shadow hover:shadow-lg;
   background-color: var(--selected-hex);
 }
 

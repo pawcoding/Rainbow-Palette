@@ -4,7 +4,7 @@
 >
   <header class="relative">
     <light-switch
-      class="absolute right-0 mr-6"
+      class="absolute xl:fixed right-0 mr-6"
       [dark]="dark"
     ></light-switch>
 
@@ -13,19 +13,16 @@
     </h1>
   </header>
 
-  <main class="px-4">
-    <color-editor [dark]="dark" (onAdd)="addColor($event)" [editColor]="editColor"></color-editor>
-
-    <!--shade-picker [shade]="shade" (colorEmitter)="color = $event" [dark]="dark"></shade-picker-->
-
-    <section class="max-w-5xl mx-auto pt-4">
-      <color-viewer [color]="color" [dark]="dark" (onRemove)="addColor(color)"></color-viewer>
-    </section>
+  <main class="px-10">
+    <!-- Color Editor -->
+    <color-editor
+      [dark]="dark"
+      (addColor)="addColor($event)"
+    ></color-editor>
 
     <palette-viewer
       *ngIf="palette" (onRemove)="removePalette()"
       [palette]="palette" [dark]="dark"
-      (onEdit)="editColor.emit($event)"
     ></palette-viewer>
 
     <button

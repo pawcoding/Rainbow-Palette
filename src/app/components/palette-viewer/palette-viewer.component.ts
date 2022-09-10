@@ -11,16 +11,13 @@ import {StorageService} from "../../services/storage.service";
 export class PaletteViewerComponent implements OnInit {
 
   @Input()
-  palette: Palette | undefined
+  palette: Palette
 
   @Input()
   dark = false
 
   @Output()
   onRemove = new EventEmitter<Event>()
-
-  @Output()
-  onEdit = new EventEmitter<Color>()
 
   editingState = false
 
@@ -29,7 +26,9 @@ export class PaletteViewerComponent implements OnInit {
 
   constructor(
     private storage: StorageService
-  ) { }
+  ) {
+    this.palette = Palette.generateRandomPalette(5)
+  }
 
   ngOnInit(): void {
   }
@@ -49,16 +48,19 @@ export class PaletteViewerComponent implements OnInit {
    * @param color Color to remove from palette
    */
   removeColor(color: Color) {
-    if (this.palette?.removeColor(color))
+    if (this.palette.removeColor(color))
       this.savePalette()
+  }
+
+  addRandomColor() {
+    this.palette.addColor(Color.generateRandomColor())
   }
 
   /**
    * Save current palette to local storage.
    */
   savePalette() {
-    if (this.palette)
-      this.storage.savePalette(this.palette)
+    this.storage.savePalette(this.palette)
   }
 
   /**
@@ -85,7 +87,7 @@ export class PaletteViewerComponent implements OnInit {
    * Trigger palette sorting.
    */
   sortPalette() {
-    this.palette?.sortColors()
+    this.palette.sortColors()
   }
 
 }
