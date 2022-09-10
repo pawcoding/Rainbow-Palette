@@ -1,6 +1,5 @@
 import {ColorEditorComponent} from "./color-editor.component";
 import {Meta, Story} from "@storybook/angular";
-import {Color} from "../../models/color.model";
 
 export default {
   title: 'Components/Color Editor',
@@ -14,6 +13,5 @@ const Template: Story = (args) => ({
 export const Primary = Template.bind({})
 
 Primary.args = {
-  dark: false,
-  color: Color.generateRandomColor()
+  dark: false
 }

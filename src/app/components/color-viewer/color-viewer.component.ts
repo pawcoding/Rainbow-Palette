@@ -1,6 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Color} from "../../models/color.model";
 import {ColorService} from "../../services/color.service";
+import {Shade} from "../../models/shade.model";
+import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
 
 @Component({
   selector: 'color-viewer',
@@ -25,6 +27,18 @@ export class ColorViewerComponent implements OnInit {
   ngOnInit(): void {
     if (document.getElementById('body')?.classList.contains('dark'))
       this.dark = true
+  }
+
+  /**
+   * Copy a shades hex to clipboard.
+   * @param shade
+   */
+  copyToClipboard(shade: Shade) {
+    navigator.clipboard.writeText(shade.hex).then(() => {
+      alert(`${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'bs')} copied to clipboard.`)
+    }).catch(e => {
+      console.error('Error while copying to clipboard', e)
+    })
   }
 
 }

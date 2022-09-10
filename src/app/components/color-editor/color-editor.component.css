@@ -12,14 +12,14 @@ input[type=range] {
 }
 
 input[type=range]::-webkit-slider-thumb {
-  @apply w-6 h-5/6 min-h-10 cursor-grab appearance-none outline-none rounded shadow hover:shadow-lg;
+  @apply w-6 h-5/6 min-h-10 cursor-grab appearance-none outline-none rounded shadow hover:shadow-md transition-shadow duration-200;
   background-color: var(--selected-hex);
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
 input[type=range]::-moz-range-thumb {
-  @apply w-6 h-5/6 min-h-10 cursor-grab rounded shadow hover:shadow-lg;
+  @apply w-6 h-5/6 min-h-10 cursor-grab outline-none border-none rounded shadow hover:shadow-md transition-shadow duration-200;
   background-color: var(--selected-hex);
 }
 

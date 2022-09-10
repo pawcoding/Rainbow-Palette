@@ -1,100 +1,100 @@
-<article
-  class="flex gap-4 max-w-5xl mx-auto mb-8 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700"
->
+<div [class]="dark ? 'dark' : ''" class="max-w-5xl mx-auto mb-8">
+  <article
+    class="flex gap-4 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition-colors duration-200"
+  >
 
-  <!-- Edit Color -->
-  <section class="grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center">
+    <!-- Edit Color -->
+    <section class="grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center">
 
-    <!-- Edit Hex -->
-    <input
-      type="color"
-      title="Select a shade"
-      id="hexInput" #hexInput
-      class="overflow-clip rounded-xl shadow hover:shadow-lg"
-      [value]="shade.hex"
-      (input)="updateColor(0, hexInput.value)"
-      (change)="adjustColor()"
-    >
-
-    <!-- Edit Hue -->
-    <input
-      type="range"
-      title="Adjust the hue"
-      id="hueInput" #hueInput
-      min=0 max=360
-      [value]="shade.hue"
-      (input)="updateColor(1, hueInput.value)"
-      (change)="adjustColor()"
-    >
-
-    <!-- Edit Saturation -->
-    <input
-      type="range"
-      title="Adjust the saturation"
-      id="saturationInput" #saturationInput
-      min=0 max=100
-      [value]="shade.saturation"
-      (input)="updateColor(2, saturationInput.value)"
-      (change)="adjustColor()"
-    >
-
-    <!-- Edit Luminosity -->
-    <input
-      type="range"
-      title="Adjust the luminosity"
-      id="luminosityInput" #luminosityInput
-      min=0 max=100
-      [value]="100 - shade.luminosity"
-      (input)="updateColor(3, luminosityInput.value)"
-      (change)="adjustColor()"
-    >
-
-    <div class="flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full">
-      <!-- Edit Name -->
+      <!-- Edit Hex -->
       <input
-        type="text"
-        title="Give your color a name"
-        id="nameInput" #nameInput
-        class="text-black overflow-clip rounded-xl shadow hover:shadow-lg focus:ring-neutral-500 focus:border-neutral-500"
-        placeholder="Color Name"
-        [value]="colorService.getColor().name"
-        (input)="updateName(nameInput.value)"
+        type="color"
+        title="Select a shade"
+        id="hexInput" #hexInput
+        class="overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200"
+        [value]="shade.hex"
+        (input)="updateColor(0, hexInput.value)"
+        (change)="adjustColor()"
       >
 
-      <!-- Add Color to Palette -->
+      <!-- Edit Hue -->
       <input
-        type="button"
-        class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-lg font-medium"
-        [ngClass]="dark ? 'bg-neutral-600' : 'bg-neutral-400'"
-        [title]="state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'"
-        [value]="state === 0 ? 'Add to palette' : 'Replace existing color'"
-        (click)="addColor.emit(colorService.getColor())"
+        type="range"
+        title="Adjust the hue"
+        id="hueInput" #hueInput
+        min=0 max=360
+        [value]="shade.hue"
+        (input)="updateColor(1, hueInput.value)"
+        (change)="adjustColor()"
       >
 
-      <!-- Generate new random color -->
+      <!-- Edit Saturation -->
       <input
-        type="button"
-        title="Generate new random color"
-        value="Random Color"
-        class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-lg font-medium"
-        [ngClass]="dark ? 'bg-neutral-600' : 'bg-neutral-400'"
-        (click)="colorService.randomColor()"
+        type="range"
+        title="Adjust the saturation"
+        id="saturationInput" #saturationInput
+        min=0 max=100
+        [value]="shade.saturation"
+        (input)="updateColor(2, saturationInput.value)"
+        (change)="adjustColor()"
       >
-    </div>
-  </section>
 
-  <!-- Preview Color -->
-  <section class="grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow">
-    <span
-      *ngFor="let shade of colorService.getColor().shades"
-      [title]="shade.index + '&#10;' + shade.hex"
-      [ngStyle]="{
-        'background-color': shade.hex,
-        'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex
-      }"
-      class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2"
-    >
-      {{shade.hex}}
-    </span>
-  </section>
-</article>
+      <!-- Edit Luminosity -->
+      <input
+        type="range"
+        title="Adjust the luminosity"
+        id="luminosityInput" #luminosityInput
+        min=0 max=100
+        [value]="100 - shade.luminosity"
+        (input)="updateColor(3, luminosityInput.value)"
+        (change)="adjustColor()"
+      >
+
+      <div class="flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full">
+        <!-- Edit Name -->
+        <input
+          type="text"
+          title="Give your color a name"
+          id="nameInput" #nameInput
+          class="text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-all duration-200"
+          placeholder="Color Name"
+          [value]="colorService.getColor().name"
+          (input)="updateName(nameInput.value)"
+        >
+
+        <!-- Add Color to Palette -->
+        <input
+          type="button"
+          class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 "
+          [title]="state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'"
+          [value]="state === 0 ? 'Add to palette' : 'Replace existing color'"
+          (click)="addColor.emit(colorService.getColor())"
+        >
+
+        <!-- Generate new random color -->
+        <input
+          type="button"
+          title="Generate new random color"
+          value="Random Color"
+          class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 "
+          (click)="colorService.randomColor()"
+        >
+      </div>
+    </section>
+
+    <!-- Preview Color -->
+    <section class="grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default">
+      <span
+        *ngFor="let shade of colorService.getColor().shades"
+        [title]="shade.index + '&#10;' + shade.hex"
+        [ngStyle]="{
+          'background-color': shade.hex,
+          'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex
+        }"
+        class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2"
+      >
+        {{shade.hex}}
+      </span>
+    </section>
+  </article>
+</div>

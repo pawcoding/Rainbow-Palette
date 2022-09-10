@@ -18,7 +18,7 @@ export class LightSwitchComponent implements OnInit {
   }
 
   /**
-   * Toggle between light and dark theme
+   * Toggle between light and dark theme.
    */
   toggleTheme(): void {
     this.dark = this.storage.toggleTheme(!this.dark)

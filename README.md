@@ -21,11 +21,6 @@ This little web app lets you create you own custom color palette and export it i
 | 🟥     | `0.1.2` | Improved algorithm for color generation                 |
 | 🟥     | `0.2.0` | Redesign                                                |
 
-### ToDo for Version 0.0.5
-- [x] Adjust colors from palette
-- [x] Redesign
-- [ ] Storybook Documentation and Code Comments
-
 ### Side features
 - [x] Random color palette
 - [x] Light & dark mode
@@ -38,6 +33,7 @@ This little web app lets you create you own custom color palette and export it i
   - [ ] CMYK
   - [ ] HSB
 - [ ] Provide exemplary components for preview
+- [ ] Preview palette in uploaded SVGs
 - [ ] Provide prefabricated palettes
 - [ ] Generate color palette from images
 - [ ] Generate full color palette from just a single color

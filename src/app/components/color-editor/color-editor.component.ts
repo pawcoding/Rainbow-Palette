@@ -62,6 +62,9 @@ export class ColorEditorComponent implements OnInit {
     this.updateProperties()
   }
 
+  /**
+   * Adjust the color in the global ColorService.
+   */
   adjustColor() {
     this.colorService.adjustColor(
       new Color(this.colorService.getColor().name, this.shade.hex)
@@ -69,7 +72,7 @@ export class ColorEditorComponent implements OnInit {
   }
 
   /**
-   * Update all css properties to the values of the current selected shade
+   * Update all css properties to the values of the current selected shade.
    */
   updateProperties() {
     document.documentElement.style.setProperty('--selected-hex', this.shade.hex)
@@ -79,7 +82,7 @@ export class ColorEditorComponent implements OnInit {
   }
 
   /**
-   * Update the name of the current color
+   * Update the name of the current color.
    * @param name
    */
   updateName(name: string) {

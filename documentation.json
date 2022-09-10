@@ -166,58 +166,6 @@
             "type": "injectable"
         },
         {
-            "name": "PaletteService",
-            "id": "injectable-PaletteService-42217e4307354a2342040ad0d3cee7af3b7e42922c372984a90ec38f06c614aa3e0344bf5d6d00dcd650bf3724e64de016ba984ea3a34724fe2c109117cb8a44",
-            "file": "src/app/services/palette.service.ts",
-            "properties": [
-                {
-                    "name": "palette",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Palette",
-                    "optional": false,
-                    "description": "",
-                    "line": 10,
-                    "modifierKind": [
-                        121
-                    ]
-                }
-            ],
-            "methods": [],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "description": "",
-            "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport {Palette} from \"../models/palette.model\";\nimport {StorageService} from \"./storage.service\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class PaletteService {\n\n  private palette: Palette\n\n  constructor(\n    private storage: StorageService\n  ) {\n    this.palette = storage.loadPalette()\n  }\n\n}\n",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "storage",
-                        "type": "StorageService",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 10,
-                "jsdoctags": [
-                    {
-                        "name": "storage",
-                        "type": "StorageService",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
-            "type": "injectable"
-        },
-        {
             "name": "StorageService",
             "id": "injectable-StorageService-fb7586235ba4e179663dfc949ec4ed2d259f37a18f3e9886dcaf560252c71aee096a80a695a10f79e04ee11c84646d0b6c322fcf85f6e72afa421f22e4e079bb",
             "file": "src/app/services/storage.service.ts",
@@ -2344,7 +2292,7 @@
                     }
                 ]
             },
-            "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between\r\n    py-4 text-zinc-900 bg-zinc-100 dark:text-zinc-100 dark:bg-zinc-900\"\r\n>\r\n  <header class=\"relative\">\r\n    <light-switch\r\n      class=\"absolute right-0 mr-6\"\r\n      [dark]=\"dark\"\r\n    ></light-switch>\r\n\r\n    <h1>\r\n      Color Palette Generator\r\n    </h1>\r\n  </header>\r\n\r\n  <main class=\"px-4\">\r\n    <!-- Color Editor -->\r\n    <color-editor\r\n      [dark]=\"dark\"\r\n      (addColor)=\"addColor($event)\"\r\n    ></color-editor>\r\n\r\n    <palette-viewer\r\n      *ngIf=\"palette\" (onRemove)=\"removePalette()\"\r\n      [palette]=\"palette\" [dark]=\"dark\"\r\n    ></palette-viewer>\r\n\r\n    <button\r\n      *ngIf=\"!palette\" (click)=\"randomPalette()\"\r\n      class=\"\r\n        rounded-lg px-4 py-2 block mx-auto my-6\r\n        border-2 border-neutral-600 dark:bord-neutral-300\r\n        bg-neutral-200 dark:bg-neutral-700 shadow-lg font-bold\"\r\n    >\r\n      Generate random palette\r\n    </button>\r\n  </main>\r\n\r\n  <footer class=\"p-4 flex gap-4 justify-between flex-col sm:flex-row text-center mx-auto max-w-5xl w-full mt-10\">\r\n    <a href=\"https://github.com/pawcoding/tailwind-color-generator\" rel=\"noreferrer noopener\" target=\"_blank\" title=\"View source code on GitHub\">View on GitHub</a>\r\n    <span>Version {{version}}</span>\r\n    <a href=\"https://pawcode.de\" target=\"_blank\" title=\"Created by pawcode Development\">\r\n      <img [src]=\"'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" alt=\"pawcode&nbsp;Development\" class=\"inline h-8\">\r\n    </a>\r\n  </footer>\r\n</div>\r\n"
+            "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between\r\n    py-4 text-zinc-900 bg-zinc-100 dark:text-zinc-100 dark:bg-zinc-900\"\r\n>\r\n  <header class=\"relative\">\r\n    <light-switch\r\n      class=\"absolute xl:fixed right-0 mr-6\"\r\n      [dark]=\"dark\"\r\n    ></light-switch>\r\n\r\n    <h1>\r\n      Color Palette Generator\r\n    </h1>\r\n  </header>\r\n\r\n  <main class=\"px-10\">\r\n    <!-- Color Editor -->\r\n    <color-editor\r\n      [dark]=\"dark\"\r\n      (addColor)=\"addColor($event)\"\r\n    ></color-editor>\r\n\r\n    <palette-viewer\r\n      *ngIf=\"palette\" (onRemove)=\"removePalette()\"\r\n      [palette]=\"palette\" [dark]=\"dark\"\r\n    ></palette-viewer>\r\n\r\n    <button\r\n      *ngIf=\"!palette\" (click)=\"randomPalette()\"\r\n      class=\"\r\n        rounded-lg px-4 py-2 block mx-auto my-6\r\n        border-2 border-neutral-600 dark:bord-neutral-300\r\n        bg-neutral-200 dark:bg-neutral-700 shadow-lg font-bold\"\r\n    >\r\n      Generate random palette\r\n    </button>\r\n  </main>\r\n\r\n  <footer class=\"p-4 flex gap-4 justify-between flex-col sm:flex-row text-center mx-auto max-w-5xl w-full mt-10\">\r\n    <a href=\"https://github.com/pawcoding/tailwind-color-generator\" rel=\"noreferrer noopener\" target=\"_blank\" title=\"View source code on GitHub\">View on GitHub</a>\r\n    <span>Version {{version}}</span>\r\n    <a href=\"https://pawcode.de\" target=\"_blank\" title=\"Created by pawcode Development\">\r\n      <img [src]=\"'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" alt=\"pawcode&nbsp;Development\" class=\"inline h-8\">\r\n    </a>\r\n  </footer>\r\n</div>\r\n"
         },
         {
             "name": "ColorEditorComponent",
@@ -2584,7 +2532,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "input {\r\n  @apply block w-full;\r\n}\r\n\r\ninput[type=range], input[type=color] {\r\n  @apply w-full outline-none appearance-none cursor-pointer;\r\n  -webkit-appearance: none;\r\n}\r\n\r\ninput[type=range] {\r\n  @apply h-1/2;\r\n}\r\n\r\ninput[type=range]::-webkit-slider-thumb {\r\n  @apply w-6 h-5/6 min-h-10 cursor-grab appearance-none outline-none rounded shadow;\r\n  background-color: var(--selected-hex);\r\n  -webkit-appearance: none;\r\n  -moz-appearance: none;\r\n}\r\n\r\ninput[type=range]::-moz-range-thumb {\r\n  @apply w-6 h-5/6 min-h-10 cursor-grab rounded shadow;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch-wrapper {\r\n  @apply p-0;\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch {\r\n  @apply border-none h-full;\r\n}\r\n\r\n#hexInput {\r\n  @apply h-full max-h-8 sm:max-h-full;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\n#hueInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,\r\n  hsl(36, var(--selected-saturation), var(--selected-luminosity)) 10%,\r\n  hsl(72, var(--selected-saturation), var(--selected-luminosity)) 20%,\r\n  hsl(108, var(--selected-saturation), var(--selected-luminosity)) 30%,\r\n  hsl(144, var(--selected-saturation), var(--selected-luminosity)) 40%,\r\n  hsl(180, var(--selected-saturation), var(--selected-luminosity)) 50%,\r\n  hsl(216, var(--selected-saturation), var(--selected-luminosity)) 60%,\r\n  hsl(252, var(--selected-saturation), var(--selected-luminosity)) 70%,\r\n  hsl(288, var(--selected-saturation), var(--selected-luminosity)) 80%,\r\n  hsl(324, var(--selected-saturation), var(--selected-luminosity)) 90%,\r\n  hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#saturationInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,\r\n  hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#luminosityInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%);\r\n}\r\n",
+                    "data": "input {\r\n  @apply block w-full;\r\n}\r\n\r\ninput[type=range], input[type=color] {\r\n  @apply w-full outline-none appearance-none cursor-pointer;\r\n  -webkit-appearance: none;\r\n}\r\n\r\ninput[type=range] {\r\n  @apply h-1/2;\r\n}\r\n\r\ninput[type=range]::-webkit-slider-thumb {\r\n  @apply w-6 h-5/6 min-h-10 cursor-grab appearance-none outline-none rounded shadow hover:shadow-md transition-shadow duration-200;\r\n  background-color: var(--selected-hex);\r\n  -webkit-appearance: none;\r\n  -moz-appearance: none;\r\n}\r\n\r\ninput[type=range]::-moz-range-thumb {\r\n  @apply w-6 h-5/6 min-h-10 cursor-grab outline-none border-none rounded shadow hover:shadow-md transition-shadow duration-200;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch-wrapper {\r\n  @apply p-0;\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch {\r\n  @apply border-none h-full;\r\n}\r\n\r\n#hexInput {\r\n  @apply h-full max-h-8 sm:max-h-full;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\n#hueInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,\r\n  hsl(36, var(--selected-saturation), var(--selected-luminosity)) 10%,\r\n  hsl(72, var(--selected-saturation), var(--selected-luminosity)) 20%,\r\n  hsl(108, var(--selected-saturation), var(--selected-luminosity)) 30%,\r\n  hsl(144, var(--selected-saturation), var(--selected-luminosity)) 40%,\r\n  hsl(180, var(--selected-saturation), var(--selected-luminosity)) 50%,\r\n  hsl(216, var(--selected-saturation), var(--selected-luminosity)) 60%,\r\n  hsl(252, var(--selected-saturation), var(--selected-luminosity)) 70%,\r\n  hsl(288, var(--selected-saturation), var(--selected-luminosity)) 80%,\r\n  hsl(324, var(--selected-saturation), var(--selected-luminosity)) 90%,\r\n  hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#saturationInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,\r\n  hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#luminosityInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%);\r\n}\r\n",
                     "styleUrl": "./color-editor.component.css"
                 }
             ],
@@ -2618,7 +2566,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<article\n  class=\"flex gap-4 max-w-5xl mx-auto mb-8 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700\"\n>\n\n  <!-- Edit Color -->\n  <section class=\"grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center\">\n\n    <!-- Edit Hex -->\n    <input\n      type=\"color\"\n      title=\"Select a shade\"\n      id=\"hexInput\" #hexInput\n      [value]=\"shade.hex\"\n      (input)=\"updateColor(0, hexInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Hue -->\n    <input\n      type=\"range\"\n      title=\"Adjust the hue\"\n      id=\"hueInput\" #hueInput\n      min=0 max=360\n      [value]=\"shade.hue\"\n      (input)=\"updateColor(1, hueInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Saturation -->\n    <input\n      type=\"range\"\n      title=\"Adjust the saturation\"\n      id=\"saturationInput\" #saturationInput\n      min=0 max=100\n      [value]=\"shade.saturation\"\n      (input)=\"updateColor(2, saturationInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Luminosity -->\n    <input\n      type=\"range\"\n      title=\"Adjust the luminosity\"\n      id=\"luminosityInput\" #luminosityInput\n      min=0 max=100\n      [value]=\"100 - shade.luminosity\"\n      (input)=\"updateColor(3, luminosityInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <div class=\"flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1\">\n      <!-- Edit Name -->\n      <input\n        type=\"text\"\n        title=\"Give your color a name\"\n        id=\"nameInput\" #nameInput\n        class=\"text-black\"\n        placeholder=\"Color Name\"\n        [value]=\"colorService.getColor().name\"\n        (input)=\"updateName(nameInput.value)\"\n      >\n\n      <!-- Add Color to Palette -->\n      <input\n        type=\"button\"\n        class=\"cursor-pointer p-2\"\n        [ngClass]=\"dark ? 'bg-neutral-600' : 'bg-neutral-400'\"\n        [title]=\"state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'\"\n        [value]=\"state === 0 ? 'Add to palette' : 'Replace existing color'\"\n        (click)=\"addColor.emit(colorService.getColor())\"\n      >\n\n      <!-- Generate new random color -->\n      <input\n        type=\"button\"\n        title=\"Generate new random color\"\n        value=\"Random Color\"\n        class=\"cursor-pointer p-2\"\n        [ngClass]=\"dark ? 'bg-neutral-600' : 'bg-neutral-400'\"\n        (click)=\"colorService.randomColor()\"\n      >\n    </div>\n  </section>\n\n  <!-- Preview Color -->\n  <section class=\"grow grid grid-cols-1 sm:grid-cols-2 text-center\">\n    <span\n      *ngFor=\"let shade of colorService.getColor().shades\"\n      [title]=\"shade.index + '&#10;' + shade.hex\"\n      [ngStyle]=\"{\n        'background-color': shade.hex,\n        'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex\n      }\"\n      class=\"p-2\"\n    >\n      {{shade.hex}}\n    </span>\n  </section>\n</article>\n"
+            "templateData": "<article\n  class=\"flex gap-4 max-w-5xl mx-auto mb-8 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 transition-colors duration-200\"\n>\n\n  <!-- Edit Color -->\n  <section class=\"grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center\">\n\n    <!-- Edit Hex -->\n    <input\n      type=\"color\"\n      title=\"Select a shade\"\n      id=\"hexInput\" #hexInput\n      class=\"overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200\"\n      [value]=\"shade.hex\"\n      (input)=\"updateColor(0, hexInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Hue -->\n    <input\n      type=\"range\"\n      title=\"Adjust the hue\"\n      id=\"hueInput\" #hueInput\n      min=0 max=360\n      [value]=\"shade.hue\"\n      (input)=\"updateColor(1, hueInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Saturation -->\n    <input\n      type=\"range\"\n      title=\"Adjust the saturation\"\n      id=\"saturationInput\" #saturationInput\n      min=0 max=100\n      [value]=\"shade.saturation\"\n      (input)=\"updateColor(2, saturationInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Luminosity -->\n    <input\n      type=\"range\"\n      title=\"Adjust the luminosity\"\n      id=\"luminosityInput\" #luminosityInput\n      min=0 max=100\n      [value]=\"100 - shade.luminosity\"\n      (input)=\"updateColor(3, luminosityInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <div class=\"flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full\">\n      <!-- Edit Name -->\n      <input\n        type=\"text\"\n        title=\"Give your color a name\"\n        id=\"nameInput\" #nameInput\n        class=\"text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-shadow duration-200\"\n        placeholder=\"Color Name\"\n        [value]=\"colorService.getColor().name\"\n        (input)=\"updateName(nameInput.value)\"\n      >\n\n      <!-- Add Color to Palette -->\n      <input\n        type=\"button\"\n        class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium transition-all duration-200\"\n        [ngClass]=\"dark ? 'bg-neutral-600' : 'bg-neutral-400'\"\n        [title]=\"state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'\"\n        [value]=\"state === 0 ? 'Add to palette' : 'Replace existing color'\"\n        (click)=\"addColor.emit(colorService.getColor())\"\n      >\n\n      <!-- Generate new random color -->\n      <input\n        type=\"button\"\n        title=\"Generate new random color\"\n        value=\"Random Color\"\n        class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium transition-all duration-200\"\n        [ngClass]=\"dark ? 'bg-neutral-600' : 'bg-neutral-400'\"\n        (click)=\"colorService.randomColor()\"\n      >\n    </div>\n  </section>\n\n  <!-- Preview Color -->\n  <section class=\"grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default\">\n    <span\n      *ngFor=\"let shade of colorService.getColor().shades\"\n      [title]=\"shade.index + '&#10;' + shade.hex\"\n      [ngStyle]=\"{\n        'background-color': shade.hex,\n        'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex\n      }\"\n      class=\"block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2\"\n    >\n      {{shade.hex}}\n    </span>\n  </section>\n</article>\n"
         },
         {
             "name": "ColorViewerComponent",
@@ -2731,7 +2679,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<article\r\n  [ngStyle]=\"{\r\n    'border-color': color.shades[dark ? 2 : 7].hex\r\n  }\"\r\n  class=\"overflow-clip mt-4 rounded-xl shadow-lg border-2 grid grid-areas-color-square sm:grid-areas-color-wide items-center\"\r\n>\r\n  <h3\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 8 : 1].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex,\r\n      'text-align': dark ? 'right' : 'left'\r\n    }\"\r\n    class=\"grid-in-name px-4\"\r\n  >\r\n    {{color.name}}\r\n  </h3>\r\n\r\n  <span\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 8 : 1].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex,\r\n      'text-align': dark ? 'right' : 'left'\r\n    }\"\r\n\r\n    class=\"grid-in-button flex h-full justify-center items-center cursor-pointer\"\r\n  >\r\n    <img\r\n      class=\"h-8 dark:invert\"\r\n      src=\"/assets/icons/edit.svg\" alt=\"Edit color\"\r\n      (click)=\"colorService.loadColor(color)\"\r\n    >\r\n\r\n    <img\r\n      class=\"h-8 dark:invert\"\r\n      src=\"/assets/icons/close.svg\" alt=\"Remove from palette\"\r\n      (click)=\"onRemove.emit(color)\"\r\n    >\r\n  </span>\r\n\r\n  <span\r\n    *ngFor=\"let shade of color.shades\"\r\n    [ngStyle]=\"{\r\n      'background-color': shade.hex,\r\n      'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex\r\n    }\"\r\n    class=\"block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6\"\r\n    [title]=\"shade.index + '&#10;' + shade.hex\"\r\n  >\r\n    {{shade.hex}}\r\n  </span>\r\n</article>\r\n"
+            "templateData": "<article\r\n  class=\"overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center\"\r\n>\r\n  <h3\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 7 : 2].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex\r\n    }\"\r\n    class=\"grid-in-name px-4\"\r\n  >\r\n    {{color.name}}\r\n  </h3>\r\n\r\n  <span\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 7 : 2].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex\r\n    }\"\r\n\r\n    class=\"grid-in-button flex gap-6 pr-6 h-full justify-end items-center\"\r\n  >\r\n    <img\r\n      class=\"icon\"\r\n      src=\"/assets/icons/edit.svg\" alt=\"Edit color\"\r\n      (click)=\"colorService.loadColor(color)\"\r\n    >\r\n\r\n    <img\r\n      class=\"icon\"\r\n      src=\"/assets/icons/delete.svg\" alt=\"Remove from palette\"\r\n      (click)=\"onRemove.emit(color)\"\r\n    >\r\n  </span>\r\n\r\n  <span\r\n    *ngFor=\"let shade of color.shades\"\r\n    [ngStyle]=\"{\r\n      'background-color': shade.hex,\r\n      'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex\r\n    }\"\r\n    class=\"block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6\"\r\n    [title]=\"shade.index + '&#10;' + shade.hex\"\r\n  >\r\n    {{shade.hex}}\r\n  </span>\r\n</article>\r\n"
         },
         {
             "name": "LightSwitchComponent",
@@ -2829,7 +2777,7 @@
         },
         {
             "name": "PaletteViewerComponent",
-            "id": "component-PaletteViewerComponent-364f3528038e99a7ac406cc2039984ab7d5e59e6e437aaac7f3ac6fa7bc6829eb41f9e61a5e7f23b46ec8ffed2159e30911bb0a0fd3ccf1046f2caf332fbf0ce",
+            "id": "component-PaletteViewerComponent-2245bbbd0e963b4b9e257d2e48dc37e850bb68c55e4b0125af86f47ddd38d1af9ea5bd9b6e6f67c692aab3a80dddf22acbecdf260a884324fe836f99f41a92a9",
             "file": "src/app/components/palette-viewer/palette-viewer.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -2901,12 +2849,22 @@
             ],
             "methodsClass": [
                 {
+                    "name": "addRandomColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "closeEditor",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 75,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nClose editor for palette name and save the palette to local storage.\n",
@@ -2928,7 +2886,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 69,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nOpen editor for palette name.\n",
@@ -3030,7 +2988,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 58,
+                    "line": 62,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSave current palette to local storage.\n",
@@ -3042,7 +3000,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 85,
+                    "line": 89,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTrigger palette sorting.\n",
@@ -3056,7 +3014,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ToUnicodeVariantUtil} from \"../../utils/to-unicode-variant.util\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\n\r\n@Component({\r\n  selector: 'palette-viewer',\r\n  templateUrl: './palette-viewer.component.html',\r\n})\r\nexport class PaletteViewerComponent implements OnInit {\r\n\r\n  @Input()\r\n  palette: Palette\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  onRemove = new EventEmitter<Event>()\r\n\r\n  editingState = false\r\n\r\n  @ViewChild('editTitle')\r\n  editTitle: ElementRef<HTMLInputElement> | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService\r\n  ) {\r\n    this.palette = Palette.generateRandomPalette(5)\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n  /**\r\n   * Ask user for confirmation an trigger onRemove event handler.\r\n   * @param $event MouseEvent\r\n   */\r\n  removePalette($event: MouseEvent) {\r\n    if (confirm(`Are you sure you want to delete the palette?\\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`))\r\n      this.onRemove.emit($event)\r\n  }\r\n\r\n  /**\r\n   * Remove color from palette and save the current palette to local storage.\r\n   * If color is not present in palette nothing happens.\r\n   * @param color Color to remove from palette\r\n   */\r\n  removeColor(color: Color) {\r\n    if (this.palette.removeColor(color))\r\n      this.savePalette()\r\n  }\r\n\r\n  /**\r\n   * Save current palette to local storage.\r\n   */\r\n  savePalette() {\r\n    this.storage.savePalette(this.palette)\r\n  }\r\n\r\n  /**\r\n   * Open editor for palette name.\r\n   */\r\n  openEditor() {\r\n    this.editingState = true\r\n    setTimeout(() => {\r\n      this.editTitle?.nativeElement.focus()\r\n    }, 0)\r\n  }\r\n\r\n  /**\r\n   * Close editor for palette name and save the palette to local storage.\r\n   */\r\n  closeEditor() {\r\n    this.editingState = false\r\n    if (this.palette)\r\n      this.palette.title = this.editTitle?.nativeElement.value || 'Random'\r\n    this.savePalette()\r\n  }\r\n\r\n  /**\r\n   * Trigger palette sorting.\r\n   */\r\n  sortPalette() {\r\n    this.palette.sortColors()\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ToUnicodeVariantUtil} from \"../../utils/to-unicode-variant.util\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\n\r\n@Component({\r\n  selector: 'palette-viewer',\r\n  templateUrl: './palette-viewer.component.html',\r\n})\r\nexport class PaletteViewerComponent implements OnInit {\r\n\r\n  @Input()\r\n  palette: Palette\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  onRemove = new EventEmitter<Event>()\r\n\r\n  editingState = false\r\n\r\n  @ViewChild('editTitle')\r\n  editTitle: ElementRef<HTMLInputElement> | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService\r\n  ) {\r\n    this.palette = Palette.generateRandomPalette(5)\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n  /**\r\n   * Ask user for confirmation an trigger onRemove event handler.\r\n   * @param $event MouseEvent\r\n   */\r\n  removePalette($event: MouseEvent) {\r\n    if (confirm(`Are you sure you want to delete the palette?\\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`))\r\n      this.onRemove.emit($event)\r\n  }\r\n\r\n  /**\r\n   * Remove color from palette and save the current palette to local storage.\r\n   * If color is not present in palette nothing happens.\r\n   * @param color Color to remove from palette\r\n   */\r\n  removeColor(color: Color) {\r\n    if (this.palette.removeColor(color))\r\n      this.savePalette()\r\n  }\r\n\r\n  addRandomColor() {\r\n    this.palette.addColor(Color.generateRandomColor())\r\n  }\r\n\r\n  /**\r\n   * Save current palette to local storage.\r\n   */\r\n  savePalette() {\r\n    this.storage.savePalette(this.palette)\r\n  }\r\n\r\n  /**\r\n   * Open editor for palette name.\r\n   */\r\n  openEditor() {\r\n    this.editingState = true\r\n    setTimeout(() => {\r\n      this.editTitle?.nativeElement.focus()\r\n    }, 0)\r\n  }\r\n\r\n  /**\r\n   * Close editor for palette name and save the palette to local storage.\r\n   */\r\n  closeEditor() {\r\n    this.editingState = false\r\n    if (this.palette)\r\n      this.palette.title = this.editTitle?.nativeElement.value || 'Random'\r\n    this.savePalette()\r\n  }\r\n\r\n  /**\r\n   * Trigger palette sorting.\r\n   */\r\n  sortPalette() {\r\n    this.palette.sortColors()\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -3089,254 +3047,19 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<section\r\n  class=\"max-w-5xl mx-auto p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700\"\r\n>\r\n  <div class=\"flex items-center justify-between\">\r\n    <h2 *ngIf=\"!editingState\" (click)=\"openEditor()\">{{palette.title}}</h2>\r\n\r\n    <input *ngIf=\"editingState\" type=\"text\"\r\n           [value]=\"palette.title\" #editTitle\r\n           placeholder=\"Palette title\"\r\n           (focusout)=\"closeEditor()\" (keydown.enter)=\"closeEditor()\"\r\n           class=\"bg-transparent p-0 text-xl font-bold my-4\r\n            border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0\">\r\n\r\n    <div class=\"flex\">\r\n      <span title=\"Edit palette\" class=\"px-4 cursor-pointer dark:invert\" (click)=\"openEditor()\">\r\n        <img src=\"/assets/icons/edit.svg\" alt=\"Edit\" class=\"h-8\">\r\n      </span>\r\n\r\n      <span title=\"Sort palette by hue\" class=\"px-4 cursor-pointer dark:invert\" (click)=\"sortPalette()\">\r\n        <img src=\"/assets/icons/sort.svg\" alt=\"Sort\" class=\"h-8\">\r\n      </span>\r\n\r\n      <span title=\"Remove palette\" class=\"px-4 cursor-pointer dark:invert\" (click)=\"removePalette($event)\">\r\n        <img src=\"/assets/icons/delete.svg\" alt=\"Remove\" class=\"h-8\">\r\n      </span>\r\n    </div>\r\n  </div>\r\n\r\n  <color-viewer\r\n    *ngFor=\"let color of palette.colors\"\r\n    [color]=\"color\"\r\n    [dark]=\"dark\"\r\n    (onRemove)=\"removeColor(color)\"\r\n  ></color-viewer>\r\n</section>\r\n"
-        },
-        {
-            "name": "ShadePickerComponent",
-            "id": "component-ShadePickerComponent-6ecbf55c531140494bb86f60098d0ef6c699673789eb6656d64c15a25a18f9f9db95e3b4ad0447c46f68f96a1373bc1166adf8b0aa44fe4190c085ccf87c3e0a",
-            "file": "src/app/components/shade-picker/shade-picker.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "shade-picker",
-            "styleUrls": [
-                "./shade-picker.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./shade-picker.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "dark",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 16,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "name",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 19,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "shade",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "Shade | undefined",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "colorEmitter",
-                    "defaultValue": "new EventEmitter<Color>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 22,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "generateColor",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 78,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nGenerate all shades for the current color.\n",
-                    "description": "<p>Generate all shades for the current color.</p>\n"
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 24,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "updateName",
-                    "args": [
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 71,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nUpdate the name of the current color / shade\n",
-                    "description": "<p>Update the name of the current color / shade</p>\n",
-                    "jsdoctags": [
-                        {
-                            "name": {
-                                "pos": 2117,
-                                "end": 2121,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "name"
-                            },
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 2111,
-                                "end": 2116,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": ""
-                        }
-                    ]
-                },
-                {
-                    "name": "updateProperties",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 58,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nUpdate all css properties to the values of the current selected shade\n",
-                    "description": "<p>Update all css properties to the values of the current selected shade</p>\n"
-                },
-                {
-                    "name": "updateShade",
-                    "args": [
-                        {
-                            "name": "type",
-                            "type": "ChangeType",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "value",
-                            "type": "string | number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 36,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "rawdescription": "\n\nUpdate current shade. The property with type is changed to the new value.\n",
-                    "description": "<p>Update current shade. The property with type is changed to the new value.</p>\n",
-                    "jsdoctags": [
-                        {
-                            "name": {
-                                "pos": 758,
-                                "end": 762,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "originalKeywordKind": 151,
-                                "escapedText": "type"
-                            },
-                            "type": "ChangeType",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 752,
-                                "end": 757,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>Property to change</p>\n"
-                        },
-                        {
-                            "name": {
-                                "pos": 794,
-                                "end": 799,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "value"
-                            },
-                            "type": "string | number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "pos": 788,
-                                "end": 793,
-                                "flags": 4227072,
-                                "modifierFlagsCache": 0,
-                                "transformFlags": 0,
-                                "kind": 79,
-                                "escapedText": "param"
-                            },
-                            "comment": "<p>Value to change to</p>\n"
-                        }
-                    ]
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\nimport {Shade} from \"../../models/shade.model\";\nimport {Color} from \"../../models/color.model\";\n\n@Component({\n  selector: 'shade-picker',\n  templateUrl: './shade-picker.component.html',\n  styleUrls: ['./shade-picker.component.css']\n})\nexport class ShadePickerComponent implements OnInit {\n\n  @Input()\n  shade: Shade | undefined\n\n  @Input()\n  dark = false\n\n  @Input()\n  name = ''\n\n  @Output()\n  colorEmitter = new EventEmitter<Color>()\n\n  ngOnInit(): void {\n    if (document.getElementById('body')?.classList.contains('dark'))\n      this.dark = true\n\n    this.updateProperties()\n  }\n\n  /**\n   * Update current shade. The property with type is changed to the new value.\n   * @param type Property to change\n   * @param value Value to change to\n   */\n  updateShade(type: ChangeType, value: string | number): void {\n    if (type === ChangeType.HEX && isNaN(+value))\n      this.shade = new Shade(0, `${value}`)\n    else if (!isNaN(+value)) {\n      if (type === ChangeType.HUE) {\n        // @ts-ignore\n        this.shade = new Shade(0, value, this.shade?.saturation, this.shade?.luminosity)\n      } else if (type === ChangeType.SATURATION) {\n        // @ts-ignore\n        this.shade = new Shade(0, this.shade?.hue, value, this.shade?.luminosity)\n      } else if (type === ChangeType.LUMINOSITY) {\n        // @ts-ignore\n        this.shade = new Shade(0, this.shade?.hue, this.shade?.saturation, 100 - value)\n      }\n    }\n\n    this.updateProperties()\n  }\n\n  /**\n   * Update all css properties to the values of the current selected shade\n   */\n  updateProperties() {\n    if (this.shade) {\n      document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\n      document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\n      document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\n      document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\n    }\n  }\n\n  /**\n   * Update the name of the current color / shade\n   * @param name\n   */\n  updateName(name: string) {\n    this.name = name\n  }\n\n  /**\n   * Generate all shades for the current color.\n   */\n  generateColor() {\n    if (this.shade)\n      this.colorEmitter.emit(new Color(this.name || this.shade.hex, this.shade.hex))\n  }\n\n}\n\n\nexport enum ChangeType {\n  HEX, HUE, SATURATION, LUMINOSITY\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "input {\r\n  @apply block w-full;\r\n}\r\n\r\ninput[type=range], input[type=color] {\r\n  @apply w-full outline-none appearance-none;\r\n  -webkit-appearance: none;\r\n}\r\n\r\ninput[type=range] {\r\n  @apply h-1/2;\r\n}\r\n\r\ninput[type=range]::-webkit-slider-thumb {\r\n  @apply w-6 h-10 cursor-pointer appearance-none outline-none rounded;\r\n  background-color: var(--selected-hex);\r\n  -webkit-appearance: none;\r\n  -moz-appearance: none;\r\n}\r\n\r\ninput[type=range]::-moz-range-thumb {\r\n  @apply w-6 h-10 cursor-pointer rounded;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch-wrapper {\r\n  @apply p-0;\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch {\r\n  @apply border-none;\r\n}\r\n\r\n#hexInput {\r\n  @apply h-full max-h-8 sm:max-h-full;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\n#hueInput {\r\n  background: linear-gradient(90deg,\r\n    hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,\r\n    hsl(36, var(--selected-saturation), var(--selected-luminosity)) 10%,\r\n    hsl(72, var(--selected-saturation), var(--selected-luminosity)) 20%,\r\n    hsl(108, var(--selected-saturation), var(--selected-luminosity)) 30%,\r\n    hsl(144, var(--selected-saturation), var(--selected-luminosity)) 40%,\r\n    hsl(180, var(--selected-saturation), var(--selected-luminosity)) 50%,\r\n    hsl(216, var(--selected-saturation), var(--selected-luminosity)) 60%,\r\n    hsl(252, var(--selected-saturation), var(--selected-luminosity)) 70%,\r\n    hsl(288, var(--selected-saturation), var(--selected-luminosity)) 80%,\r\n    hsl(324, var(--selected-saturation), var(--selected-luminosity)) 90%,\r\n    hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#saturationInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,\r\n  hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#luminosityInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%);\r\n}\r\n",
-                    "styleUrl": "./shade-picker.component.css"
-                }
-            ],
-            "stylesData": "",
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<article\r\n  class=\"grid sm:grid-cols-2 grid-rows-7 sm:grid-rows-5 gap-x-4 gap-y-2\r\n    max-w-5xl mx-auto items-center p-4 rounded-xl border-2 shadow-lg\"\r\n  [ngClass]=\"dark ? 'border-neutral-300 bg-neutral-700' : 'border-neutral-600 bg-neutral-200'\"\r\n  *ngIf=\"shade\"\r\n>\r\n  <input\r\n    class=\"sm:row-span-2\"\r\n    id=\"hexInput\" type=\"color\" title=\"Select a color\"\r\n    [value]=\"shade.hex\" #hexInput\r\n    (input)=\"updateShade(0, hexInput.value)\">\r\n\r\n  <input\r\n    class=\"row-start-1 sm:row-auto text-black\"\r\n    id=\"nameInput\" type=\"text\" title=\"Give your color a name\"\r\n    [value]=\"name\" #nameInput placeholder=\"Color Name\"\r\n    (input)=\"updateName(nameInput.value)\">\r\n\r\n  <section\r\n    [ngStyle]=\"{\r\n      'background-color': shade.hex,\r\n      'color': shade.luminosity > 48 ? '#000000' : '#ffffff'\r\n    }\"\r\n    (click)=\"generateColor()\"\r\n    class=\"block w-full text-lg flex items-center justify-center\r\n      row-span-2 sm:row-span-4 row-start-6 h-full cursor-pointer p-4\"\r\n    title=\"Click to generate all 10 shades for your color\"\r\n  >\r\n    <h2 class=\"text-center\">\r\n      Click to generate color\r\n      {{name ? (name + ' (' + shade.hex + ')') : shade.hex}}\r\n    </h2>\r\n  </section>\r\n\r\n  <input\r\n    id=\"hueInput\" type=\"range\" title=\"Adjust the hue\"\r\n    [value]=\"shade.hue\" #hueInput min=\"0\" max=\"360\"\r\n    (input)=\"updateShade(1, hueInput.value)\">\r\n\r\n  <input\r\n    id=\"saturationInput\" type=\"range\" title=\"Adjust the saturation\"\r\n    [value]=\"shade.saturation\" #saturationInput min=\"0\" max=\"100\"\r\n    (input)=\"updateShade(2, saturationInput.value)\">\r\n\r\n  <input\r\n    id=\"luminosityInput\" type=\"range\" title=\"Adjust the luminosity\"\r\n    [value]=\"100 - shade.luminosity\" #luminosityInput min=\"0\" max=\"100\"\r\n    (input)=\"updateShade(3, luminosityInput.value)\">\r\n</article>\r\n"
+            "templateData": "<section\r\n  class=\"max-w-5xl mx-auto p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700\"\r\n>\r\n  <div class=\"grid grid-cols-2 items-center mb-6\">\r\n    <h2 *ngIf=\"!editingState\" (click)=\"openEditor()\">{{palette.title}}</h2>\r\n\r\n    <input *ngIf=\"editingState\" type=\"text\"\r\n           [value]=\"palette.title\" #editTitle\r\n           placeholder=\"Palette title\"\r\n           (focusout)=\"closeEditor()\" (keydown.enter)=\"closeEditor()\"\r\n           class=\"bg-transparent p-0 text-xl font-bold\r\n            border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0\">\r\n\r\n    <div class=\"flex gap-6 pr-6 justify-end\">\r\n      <span title=\"Sort palette by hue\" (click)=\"sortPalette()\">\r\n        <img src=\"/assets/icons/sort.svg\" alt=\"Sort\" class=\"icon\">\r\n      </span>\r\n\r\n      <span title=\"Edit palette\" (click)=\"openEditor()\">\r\n        <img src=\"/assets/icons/edit.svg\" alt=\"Edit\" class=\"icon\">\r\n      </span>\r\n\r\n      <span title=\"Remove palette\" (click)=\"removePalette($event)\">\r\n        <img src=\"/assets/icons/delete.svg\" alt=\"Remove\" class=\"icon\">\r\n      </span>\r\n    </div>\r\n  </div>\r\n\r\n  <color-viewer\r\n    *ngFor=\"let color of palette.colors\"\r\n    [color]=\"color\"\r\n    [dark]=\"dark\"\r\n    (onRemove)=\"removeColor(color)\"\r\n  ></color-viewer>\r\n\r\n  <button\r\n    (click)=\"addRandomColor()\"\r\n    class=\"\r\n        rounded-xl px-4 py-2 block mx-auto mt-4\r\n        bg-neutral-400 dark:bg-neutral-600 shadow hover:shadow-lg font-medium\"\r\n  >\r\n    Add random color\r\n  </button>\r\n</section>\r\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-409acf4db1b2b293cf05335a4393affa7b16a99895fa7ca0bfdca899f70fd47ab4be90edf149c5ee92a8e466a5ed334d66ebd99414ba1a64cb4ba386e0834e26",
+            "id": "module-AppModule-2b5e1a6d09580c76922ff191f5a23c020541e219cf7dd8b98b1f9758ce2976bb69dc176a920cd3279aaf7031ce4d088dfbfbe5487fba9f150bafe94cc5b3eaca",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppComponent } from './app.component';\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component';\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component';\nimport { ShadePickerComponent } from './components/shade-picker/shade-picker.component';\nimport {StorageService} from \"./services/storage.service\";\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component';\nimport { ColorEditorComponent } from './components/color-editor/color-editor.component';\nimport {ColorService} from \"./services/color.service\";\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ColorViewerComponent,\n    PaletteViewerComponent,\n    ShadePickerComponent,\n    LightSwitchComponent,\n    ColorEditorComponent\n  ],\n  imports: [\n    BrowserModule\n  ],\n  providers: [\n    StorageService,\n    ColorService\n  ],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppComponent } from './app.component';\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component';\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component';\nimport {StorageService} from \"./services/storage.service\";\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component';\nimport { ColorEditorComponent } from './components/color-editor/color-editor.component';\nimport {ColorService} from \"./services/color.service\";\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ColorViewerComponent,\n    PaletteViewerComponent,\n    LightSwitchComponent,\n    ColorEditorComponent\n  ],\n  imports: [\n    BrowserModule\n  ],\n  providers: [\n    StorageService,\n    ColorService\n  ],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -3366,9 +3089,6 @@
                         },
                         {
                             "name": "PaletteViewerComponent"
-                        },
-                        {
-                            "name": "ShadePickerComponent"
                         }
                     ]
                 },
@@ -3461,27 +3181,7 @@
                 "name": "PawcodeBlue",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "PawcodeBlue",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "PawcodeBlue",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -3496,6 +3196,16 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "new Palette('pawcode', uuidv4())"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Primary",
@@ -3560,7 +3270,7 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -3580,17 +3290,7 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
+                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -3625,37 +3325,6 @@
                 "deprecationMessage": "",
                 "description": "",
                 "file": "src/app/services/color.service.ts"
-            },
-            {
-                "name": "ChangeType",
-                "childs": [
-                    {
-                        "name": "HEX",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
-                        "name": "HUE",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
-                        "name": "SATURATION",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    },
-                    {
-                        "name": "LUMINOSITY",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "ctype": "miscellaneous",
-                "subtype": "enum",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "description": "",
-                "file": "src/app/components/shade-picker/shade-picker.component.ts"
             },
             {
                 "name": "EditorState",
@@ -3838,28 +3507,6 @@
                     "defaultValue": "(args) => ({\r\n  props: args\r\n})"
                 }
             ],
-            "src/app/components/color-editor/color-editor.component.stories.ts": [
-                {
-                    "name": "PawcodeBlue",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-                }
-            ],
             "src/app/components/color-viewer/color-viewer.component.stories.ts": [
                 {
                     "name": "PawcodeBlue",
@@ -3882,12 +3529,12 @@
                     "defaultValue": "(args) => ({\r\n  props: args\r\n})"
                 }
             ],
-            "src/app/components/shade-picker/shade-picker.component.stories.ts": [
+            "src/app/components/color-editor/color-editor.component.stories.ts": [
                 {
-                    "name": "PawcodeBlue",
+                    "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
+                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -3897,7 +3544,7 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
+                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -3955,39 +3602,6 @@
                     "deprecationMessage": "",
                     "description": "",
                     "file": "src/app/services/color.service.ts"
-                }
-            ],
-            "src/app/components/shade-picker/shade-picker.component.ts": [
-                {
-                    "name": "ChangeType",
-                    "childs": [
-                        {
-                            "name": "HEX",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "HUE",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "SATURATION",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "LUMINOSITY",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "ctype": "miscellaneous",
-                    "subtype": "enum",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "description": "",
-                    "file": "src/app/components/shade-picker/shade-picker.component.ts"
                 }
             ],
             "src/app/components/color-editor/color-editor.component.ts": [
@@ -4049,7 +3663,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 13,
+        "count": 14,
         "status": "low",
         "files": [
             {
@@ -4084,7 +3698,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "PawcodeBlue",
+                "name": "Primary",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -4251,37 +3865,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "PaletteViewerComponent",
-                "coveragePercent": 42,
-                "coverageCount": "6/14",
-                "status": "medium"
-            },
-            {
-                "filePath": "src/app/components/shade-picker/shade-picker.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "PawcodeBlue",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/shade-picker/shade-picker.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/shade-picker/shade-picker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ShadePickerComponent",
                 "coveragePercent": 40,
-                "coverageCount": "4/10",
+                "coverageCount": "6/15",
                 "status": "medium"
             },
             {
@@ -4318,15 +3903,6 @@
                 "name": "ColorService",
                 "coveragePercent": 0,
                 "coverageCount": "0/10",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/services/palette.service.ts",
-                "type": "injectable",
-                "linktype": "injectable",
-                "name": "PaletteService",
-                "coveragePercent": 0,
-                "coverageCount": "0/3",
                 "status": "low"
             },
             {

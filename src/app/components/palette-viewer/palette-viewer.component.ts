@@ -52,6 +52,9 @@ export class PaletteViewerComponent implements OnInit {
       this.savePalette()
   }
 
+  /**
+   * Add a random color to the palette.
+   */
   addRandomColor() {
     this.palette.addColor(Color.generateRandomColor())
   }

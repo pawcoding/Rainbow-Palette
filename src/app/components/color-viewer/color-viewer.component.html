@@ -1,46 +1,54 @@
-<article
-  class="overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center"
->
-  <h3
-    [ngStyle]="{
-      'background-color': color.shades[dark ? 7 : 2].hex,
-      'color': color.shades[dark ? 1 : 8].hex
-    }"
-    class="grid-in-name px-4"
+<div [class]="dark ? 'dark' : ''">
+  <article
+    class="overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center cursor-default"
   >
-    {{color.name}}
-  </h3>
-
-  <span
-    [ngStyle]="{
-      'background-color': color.shades[dark ? 7 : 2].hex,
-      'color': color.shades[dark ? 1 : 8].hex
-    }"
-
-    class="grid-in-button flex gap-6 pr-6 h-full justify-end items-center"
-  >
-    <img
-      class="icon"
-      src="/assets/icons/edit.svg" alt="Edit color"
-      (click)="colorService.loadColor(color)"
+    <!-- Name of the color -->
+    <h3
+      [ngStyle]="{
+        'background-color': color.shades[dark ? 7 : 2].hex,
+        'color': color.shades[dark ? 1 : 8].hex
+      }"
+      class="grid-in-name px-4 transition-colors duration-200"
     >
+      {{color.name}}
+    </h3>
 
-    <img
-      class="icon"
-      src="/assets/icons/delete.svg" alt="Remove from palette"
-      (click)="onRemove.emit(color)"
+    <!-- Action Buttons -->
+    <span
+      [ngStyle]="{
+        'background-color': color.shades[dark ? 7 : 2].hex,
+        'color': color.shades[dark ? 1 : 8].hex
+      }"
+
+      class="grid-in-button flex gap-6 pr-6 h-full justify-end items-center transition-colors duration-200"
     >
-  </span>
+      <img
+        class="icon"
+        src="/assets/icons/edit.svg" alt="Edit color"
+        title="Edit color"
+        (click)="colorService.loadColor(color)"
+      >
 
-  <span
-    *ngFor="let shade of color.shades"
-    [ngStyle]="{
-      'background-color': shade.hex,
-      'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
-    }"
-    class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6"
-    [title]="shade.index + '&#10;' + shade.hex"
-  >
-    {{shade.hex}}
-  </span>
-</article>
+      <img
+        class="icon"
+        src="/assets/icons/delete.svg" alt="Remove from palette"
+        title="Remove color from palette"
+        (click)="onRemove.emit(color)"
+      >
+    </span>
+
+    <!-- Display all shades -->
+    <span
+      *ngFor="let shade of color.shades"
+      [ngStyle]="{
+        'background-color': shade.hex,
+        'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
+      }"
+      class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6 cursor-pointer"
+      [title]="shade.index + '&#10;' + shade.hex"
+      (click)="copyToClipboard(shade)"
+    >
+      {{shade.hex}}
+    </span>
+  </article>
+</div>
