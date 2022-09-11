@@ -34,9 +34,6 @@ export class ColorEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (document.body.classList.contains('dark'))
-      this.dark = true
-
     this.updateProperties()
   }
 

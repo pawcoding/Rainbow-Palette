@@ -21,6 +21,14 @@ This little web app lets you create you own custom color palette and export it i
 | 🟥     | `0.1.2` | Improved algorithm for color generation                 |
 | 🟥     | `0.2.0` | Redesign                                                |
 
+### ToDo's for Version 0.1.0
+- [x] Export CSS to Clipboard
+- [x] Export CSS to File
+- [x] Export Tailwind to Clipboard
+- [x] Export Tailwind to File
+- [x] Global Notification Modal
+  - [ ] Style Modal
+
 ### Side features
 - [x] Random color palette
 - [x] Light & dark mode

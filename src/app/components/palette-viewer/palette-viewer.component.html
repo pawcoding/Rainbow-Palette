@@ -2,7 +2,7 @@
   <section
     class="p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition-colors duration-200"
   >
-    <div class="grid grid-cols-2 items-center mb-6">
+    <div class="grid grid-cols-3 items-center mb-6">
       <!-- Palette name -->
       <h2 *ngIf="!editingState" (click)="openEditor()">{{palette.title}}</h2>
 
@@ -15,7 +15,11 @@
               border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0 transition-all duration-200">
 
       <!-- Action Buttons -->
-      <div class="flex gap-6 pr-6 justify-end">
+      <div class="flex gap-6 pr-6 justify-end col-span-2">
+        <span title="Export palette" (click)="exportPalette()">
+          <img src="/assets/icons/download.svg" alt="Export" class="icon">
+        </span>
+
         <span title="Sort palette by hue" (click)="sortPalette()">
           <img src="/assets/icons/sort.svg" alt="Sort" class="icon">
         </span>

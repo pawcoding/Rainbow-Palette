@@ -16,7 +16,6 @@
   <main class="px-10">
     <!-- Color Editor -->
     <color-editor
-      [dark]="dark"
       (addColor)="addColor($event)"
     ></color-editor>
 
@@ -34,4 +33,8 @@
       <img [src]="'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'" alt="pawcode&nbsp;Development" class="inline h-8">
     </a>
   </footer>
+
+  <export-dialog
+    class="fixed top-0 left-0"
+  ></export-dialog>
 </div>

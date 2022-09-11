@@ -8,6 +8,7 @@ import {StorageService} from "./services/storage.service";
 import { LightSwitchComponent } from './components/light-switch/light-switch.component';
 import { ColorEditorComponent } from './components/color-editor/color-editor.component';
 import {ColorService} from "./services/color.service";
+import { ExportDialogComponent } from './components/export-dialog/export-dialog.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {ColorService} from "./services/color.service";
     ColorViewerComponent,
     PaletteViewerComponent,
     LightSwitchComponent,
-    ColorEditorComponent
+    ColorEditorComponent,
+    ExportDialogComponent
   ],
   imports: [
     BrowserModule
