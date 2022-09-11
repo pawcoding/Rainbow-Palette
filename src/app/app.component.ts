@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, EventEmitter} from '@angular/core';
 import {Palette} from "./models/palette.model";
 import {Shade} from "./models/shade.model";
 import {Color} from "./models/color.model";
@@ -6,23 +6,32 @@ import {environment} from "../environments/environment";
 import {StorageService} from "./services/storage.service";
 // @ts-ignore
 import {v4 as uuidv4} from "uuid";
+import {ColorService} from "./services/color.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent {
+
   title = 'tailwind-color-generator'
   version = environment.version
   dark
 
-  shade = Shade.generateRandomShade()
-  color: Color | undefined
-  palette: Palette | undefined
+  shade: Shade = Shade.generateRandomShade()
+  color: Color
+  palette: Palette
+
+  editColor = new EventEmitter<Color>()
 
   constructor(
-    private storage: StorageService
+    private storage: StorageService,
+    public colorService: ColorService
   ) {
+    // Redirect to https if server served / browser fetched with http
+    if (environment.production && window.location.href.startsWith('http://'))
+      window.location.href = 'https://' + window.location.href.substring(6)
+
     // Load theme from local storage and subscribe to changes
     this.dark = storage.loadTheme()
     storage.darkEmitter.subscribe(d => this.dark = d.valueOf())
@@ -30,9 +39,8 @@ export class AppComponent {
     // Load palette if saved in local storage
     this.palette = storage.loadPalette()
 
-    // Redirect to https if server served or browser fetched with http
-    if (environment.production && window.location.href.startsWith('http://'))
-      window.location.href = 'https://' + window.location.href.substring(6)
+    // Load random color for editor
+    this.color = Color.generateRandomColor()
   }
 
   /**
@@ -47,7 +55,7 @@ export class AppComponent {
    * The palette can be restored if it was saved in local storage.
    */
   removePalette() {
-    this.palette = undefined
+    this.palette = new Palette('Palette', uuidv4())
   }
 
   /**
@@ -60,7 +68,6 @@ export class AppComponent {
       if (!this.palette)
         this.palette = new Palette('Palette', uuidv4())
       this.palette.addColor(color)
-      this.color = undefined
     }
   }
 

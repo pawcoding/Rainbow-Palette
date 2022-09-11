@@ -41,7 +41,7 @@ export class Shade {
     return new Shade(
       0,
       Math.floor(Math.random() * 360),
-      Math.floor(Math.random() * 100),
+      30 + Math.floor(Math.random() * 60),
       25 + Math.floor(Math.random() * 50)
     )
   }

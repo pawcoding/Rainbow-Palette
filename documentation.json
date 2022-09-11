@@ -3,8 +3,171 @@
     "interfaces": [],
     "injectables": [
         {
+            "name": "ColorService",
+            "id": "injectable-ColorService-3867f6583bc28607172b50344161cea7a7f070606ecbf3d31175b2a70b637cdfd4a22c4a974eba48b2441b3bdb5d60496468d66bb6406c51127a4bb66c886ebc",
+            "file": "src/app/services/color.service.ts",
+            "properties": [
+                {
+                    "name": "color",
+                    "defaultValue": "Color.generateRandomColor()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Color",
+                    "optional": false,
+                    "description": "",
+                    "line": 9,
+                    "modifierKind": [
+                        121
+                    ]
+                },
+                {
+                    "name": "colorChangeEmitter",
+                    "defaultValue": "new EventEmitter<ChangeType>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "EventEmitter<ChangeType>",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "modifierKind": [
+                        121
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "adjustColor",
+                    "args": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "Color",
+                    "typeParameters": [],
+                    "line": 29,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getColorChangeEmitter",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "EventEmitter<ChangeType>",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "loadColor",
+                    "args": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "randomColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateColorName",
+                    "args": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "description": "",
+            "rawdescription": "\n",
+            "sourceCode": "import {EventEmitter, Injectable} from '@angular/core';\nimport {Color} from \"../models/color.model\";\n\n@Injectable({\n  providedIn: 'root'\n})\nexport class ColorService {\n\n  private color: Color = Color.generateRandomColor()\n  private colorChangeEmitter: EventEmitter<ChangeType> = new EventEmitter<ChangeType>()\n\n  constructor() { }\n\n  loadColor(color: Color) {\n    this.color = color\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\n  }\n\n  adjustColor(color: Color) {\n    this.color = color\n    this.colorChangeEmitter.emit(ChangeType.ADJUST)\n  }\n\n  updateColorName(name: string) {\n    this.color.name = name\n    this.colorChangeEmitter.emit(ChangeType.ADJUST)\n  }\n\n  getColor() {\n    return this.color\n  }\n\n  randomColor() {\n    this.color = Color.generateRandomColor()\n    this.colorChangeEmitter.emit(ChangeType.RANDOM)\n  }\n\n  getColorChangeEmitter() {\n    return this.colorChangeEmitter\n  }\n\n}\n\nexport enum ChangeType {\n  LOAD, ADJUST, RANDOM\n}\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 10
+            },
+            "type": "injectable"
+        },
+        {
             "name": "StorageService",
-            "id": "injectable-StorageService-7735d4697266502ddbc4c69d6c8bfd7cfd3ef615d086a8267fc18302e42b98222327614df23a73dbd11f91660ea44a762653af63080b04a604961d7d11183728",
+            "id": "injectable-StorageService-fb7586235ba4e179663dfc949ec4ed2d259f37a18f3e9886dcaf560252c71aee096a80a695a10f79e04ee11c84646d0b6c322fcf85f6e72afa421f22e4e079bb",
             "file": "src/app/services/storage.service.ts",
             "properties": [
                 {
@@ -25,11 +188,11 @@
                     "optional": false,
                     "returnType": "Palette",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "rawdescription": "\n\nLoad the palette saved in local storage.\n",
-                    "description": "<p>Load the palette saved in local storage.</p>\n"
+                    "rawdescription": "\n\nLoad the palette saved in local storage.\nIf no palette is saved a random one is going to be generated.\n",
+                    "description": "<p>Load the palette saved in local storage.\nIf no palette is saved a random one is going to be generated.</p>\n"
                 },
                 {
                     "name": "loadTheme",
@@ -56,7 +219,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 67,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSave palette in local storage.\n",
@@ -64,8 +227,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1555,
-                                "end": 1562,
+                                "pos": 1625,
+                                "end": 1632,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -76,8 +239,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1549,
-                                "end": 1554,
+                                "pos": 1619,
+                                "end": 1624,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -138,7 +301,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import {EventEmitter, Injectable} from '@angular/core';\r\nimport {Palette} from \"../models/palette.model\";\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class StorageService {\r\n\r\n  darkEmitter = new EventEmitter<Boolean>()\r\n\r\n  constructor() { }\r\n\r\n  /**\r\n   * Load the theme if it is stored in local storage.\r\n   * If no theme was saved, the browser default theme is used.\r\n   */\r\n  loadTheme() {\r\n    if (!localStorage.getItem('theme')) {\r\n      if (window.matchMedia('(prefers-color-scheme: dark)'))\r\n        return this.toggleTheme(true)\r\n      else {\r\n        this.darkEmitter.emit(true)\r\n        return false\r\n      }\r\n    } else {\r\n      return this.toggleTheme(localStorage.getItem('theme') === 'dark')\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Toggle between dark and light theme.\r\n   * Force dark or light mode with parameter.\r\n   * @param dark\r\n   */\r\n  toggleTheme(dark: boolean | undefined) {\r\n    document.body.classList.toggle('dark', dark)\r\n\r\n    dark = document.body.classList.contains('dark')\r\n    localStorage.setItem('theme', dark ? 'dark' : 'light')\r\n\r\n    this.darkEmitter.emit(dark)\r\n\r\n    return dark\r\n  }\r\n\r\n  /**\r\n   * Load the palette saved in local storage.\r\n   */\r\n  loadPalette(): Palette {\r\n    const stored = localStorage.getItem('palette')\r\n    if (stored) {\r\n      try {\r\n        return Palette.parsePalette(JSON.parse(stored))\r\n      } catch (e) {\r\n        console.error(e)\r\n      }\r\n    }\r\n    return Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))\r\n  }\r\n\r\n  /**\r\n   * Save palette in local storage.\r\n   * @param palette\r\n   */\r\n  savePalette(palette: Palette) {\r\n    localStorage.setItem('palette', palette.toString())\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {EventEmitter, Injectable} from '@angular/core';\r\nimport {Palette} from \"../models/palette.model\";\r\n\r\n@Injectable({\r\n  providedIn: 'root'\r\n})\r\nexport class StorageService {\r\n\r\n  darkEmitter = new EventEmitter<Boolean>()\r\n\r\n  constructor() { }\r\n\r\n  /**\r\n   * Load the theme if it is stored in local storage.\r\n   * If no theme was saved, the browser default theme is used.\r\n   */\r\n  loadTheme() {\r\n    if (!localStorage.getItem('theme')) {\r\n      if (window.matchMedia('(prefers-color-scheme: dark)'))\r\n        return this.toggleTheme(true)\r\n      else {\r\n        this.darkEmitter.emit(true)\r\n        return false\r\n      }\r\n    } else {\r\n      return this.toggleTheme(localStorage.getItem('theme') === 'dark')\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Toggle between dark and light theme.\r\n   * Force dark or light mode with parameter.\r\n   * @param dark\r\n   */\r\n  toggleTheme(dark: boolean | undefined) {\r\n    document.body.classList.toggle('dark', dark)\r\n\r\n    dark = document.body.classList.contains('dark')\r\n    localStorage.setItem('theme', dark ? 'dark' : 'light')\r\n\r\n    this.darkEmitter.emit(dark)\r\n\r\n    return dark\r\n  }\r\n\r\n  /**\r\n   * Load the palette saved in local storage.\r\n   * If no palette is saved a random one is going to be generated.\r\n   */\r\n  loadPalette(): Palette {\r\n    const stored = localStorage.getItem('palette')\r\n    if (stored) {\r\n      try {\r\n        return Palette.parsePalette(JSON.parse(stored))\r\n      } catch (e) {\r\n        console.error(e)\r\n      }\r\n    }\r\n\r\n    return Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))\r\n  }\r\n\r\n  /**\r\n   * Save palette in local storage.\r\n   * @param palette\r\n   */\r\n  savePalette(palette: Palette) {\r\n    localStorage.setItem('palette', palette.toString())\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -358,19 +521,19 @@
         },
         {
             "name": "ColorConverter",
-            "id": "class-ColorConverter-0132430addf55c559fbe2f567c6ed82f01eda860b6ada27f8be9b9e3455c4a3c9ea1783fc13ab2d754e32ceb9e76ea4ecd4ca7c8dd21fac0783e4739ded68526",
+            "id": "class-ColorConverter-883de7b42deef840bc70fcccf9101f6939a132eafb7cc2e16db42f51a283b2e2d49941f1bee9d01012c53662c8a741dd31065f9e40771318b3b803535a82645d",
             "file": "src/app/class/color-converter.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "export class ColorConverter {\n\n  static rgbToHsl(color: string) {\n    if (!color.startsWith('#') || color.length !== 7)\n      throw `Color '${color}' is not in form #RRGGBB.`\n\n    const r = parseInt(color.substring(1, 3), 16) / 255\n    const g = parseInt(color.substring(3, 5), 16) / 255\n    const b = parseInt(color.substring(5, 7), 16) / 255\n\n    const cMax = Math.max(r, g, b)\n    const cMin = Math.min(r, g, b)\n    const d = cMax - cMin\n\n    const l = this.getLightnessFromRgb(cMax, cMin)\n    const s = this.getSaturation(d, l)\n    let h = this.getHue(d, cMax, r, g, b)\n    if (h < 0)\n      h += 360\n\n    return {\n      hue: Math.round(h),\n      saturation: Math.round(s),\n      luminosity: Math.round(l)\n    }\n  }\n\n  private static getLightnessFromRgb(cMax: number, cMin: number): number {\n    return (cMax + cMin) * 50\n  }\n\n  private static getSaturation(d: number, l: number): number {\n    if (d === 0)\n      return 0\n    else\n      return 100 * d / (1 - Math.abs(2 * (l / 100) - 1))\n  }\n\n  private static getHue(d: number, cMax: number, r: number, g: number, b: number): number {\n    if (d === 0)\n      return 0\n    else if (cMax === r)\n      return 60 * ( ( (g - b) / d) % 6)\n    else if (cMax === g)\n      return 60 * ( ( (b - r) / d) + 2)\n    else\n      return 60 * ( ( (r - g) / d) + 4)\n  }\n\n\n  static hslToRgb(hue: number, saturation: number, lightness: number): string {\n    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || lightness < 0 || lightness > 100)\n      throw `Color values [${hue}°, ${saturation}%, ${lightness}%] are not in valid ranges.`\n\n    const h = hue\n    const s = saturation / 100\n    const l = lightness / 100\n\n    const c = (1 - Math.abs(2 * l - 1)) * s\n    const x = c * (1 - Math.abs((h / 60) % 2 - 1))\n    const m = l - c / 2\n\n    const r = (h < 60 || h >=300) ? c : (h < 120 || h >= 240) ? x : 0\n    const g = (h >= 240) ? 0 : (h < 60 || h >= 180) ? x : c\n    const b = (h < 120) ? 0 : (h < 180 || h >= 300) ? x : c\n\n    const R = Math.round((r + m) * 255)\n    const G = Math.round((g + m) * 255)\n    const B = Math.round((b + m) * 255)\n\n    return `#${(R < 16 ? 0 : '') + R.toString(16)}${(G < 16 ? 0 : '') + G.toString(16)}${(B < 16 ? 0 : '') + B.toString(16)}`\n  }\n\n}\n",
+            "sourceCode": "export class ColorConverter {\n\n  /**\n   * Convert from HEX string (#RRGGBB) to HSL format.\n   * @param hex HEX color sting (#RRGGBB)\n   * @constructor\n   */\n  static HEXtoHSL(hex: string) {\n    if (!hex.startsWith('#') || hex.length !== 7)\n      throw `Color '${hex}' is not in form #RRGGBB.`\n\n    const rgb = this.HEXtoRGB(hex)\n    const r = rgb.red / 255\n    const g = rgb.green / 255\n    const b = rgb.blue / 255\n\n    const cMax = Math.max(r, g, b)\n    const cMin = Math.min(r, g, b)\n    const d = cMax - cMin\n\n    const l = this.getLuminosity(cMax, cMin)\n    const s = this.getSaturation(d, l)\n    let h = this.getHue(d, cMax, r, g, b)\n    if (h < 0)\n      h += 360\n\n    return {\n      hue: Math.round(h),\n      saturation: Math.round(s),\n      luminosity: Math.round(l)\n    }\n  }\n\n  /**\n   * Get luminosity for HSL format.\n   * @param cMax Max value from [red, green, blue] / 255\n   * @param cMin Min value from [red, green, blue] / 255\n   * @private\n   */\n  private static getLuminosity(cMax: number, cMin: number): number {\n    return (cMax + cMin) * 50\n  }\n\n  /**\n   * Get saturation for HSL format.\n   * @param delta Difference between max and min values from [red, green, blue] / 255\n   * @param luminosity Luminosity from HSL format.\n   * @private\n   */\n  private static getSaturation(delta: number, luminosity: number): number {\n    if (delta === 0)\n      return 0\n    else\n      return 100 * delta / (1 - Math.abs(2 * (luminosity / 100) - 1))\n  }\n\n  /**\n   * Get hue for HSL or HSB format.\n   * @param delta Difference between max and min values from [red, green, blue] / 255\n   * @param cMax Max value from [red, green, blue] / 255\n   * @param red Red value between 0 - 1\n   * @param green Green value between 0 - 1\n   * @param blue Blue value between 0 - 1\n   * @private\n   */\n  private static getHue(delta: number, cMax: number, red: number, green: number, blue: number): number {\n    if (delta === 0)\n      return 0\n    else if (cMax === red)\n      return 60 * ( ( (green - blue) / delta) % 6)\n    else if (cMax === green)\n      return 60 * ( ( (blue - red) / delta) + 2)\n    else\n      return 60 * ( ( (red - green) / delta) + 4)\n  }\n\n  /**\n   * Convert color from HSL format into HEX string.\n   * @param hue Hue between 0 - 360\n   * @param saturation Saturation between 0 - 100\n   * @param lightness Lightness between 0 - 100\n   * @constructor\n   */\n  static HSLtoHEX(hue: number, saturation: number, lightness: number): string {\n    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || lightness < 0 || lightness > 100)\n      throw `Color values [${hue}°, ${saturation}%, ${lightness}%] are not in valid ranges.`\n\n    const h = hue\n    const s = saturation / 100\n    const l = lightness / 100\n\n    const c = (1 - Math.abs(2 * l - 1)) * s\n    const x = c * (1 - Math.abs((h / 60) % 2 - 1))\n    const m = l - c / 2\n\n    const r = (h < 60 || h >=300) ? c : (h < 120 || h >= 240) ? x : 0\n    const g = (h >= 240) ? 0 : (h < 60 || h >= 180) ? x : c\n    const b = (h < 120) ? 0 : (h < 180 || h >= 300) ? x : c\n\n    const R = Math.round((r + m) * 255)\n    const G = Math.round((g + m) * 255)\n    const B = Math.round((b + m) * 255)\n\n    return `#${(R < 16 ? 0 : '') + R.toString(16)}${(G < 16 ? 0 : '') + G.toString(16)}${(B < 16 ? 0 : '') + B.toString(16)}`\n  }\n\n  /**\n   * Convert from HEX string to RGB values.\n   * @param hex HEX color string (#RRGGBB)\n   * @constructor\n   */\n  static HEXtoRGB(hex: string) {\n    if (!hex.startsWith('#') || hex.length !== 7)\n      throw `Color ${hex} is not in form #RRGGBB.`\n\n    return {\n      red: parseInt(hex.substring(1, 3), 16),\n      green: parseInt(hex.substring(3, 5), 16),\n      blue: parseInt(hex.substring(5, 7), 16)\n    }\n  }\n\n}\n",
             "properties": [],
             "methods": [
                 {
                     "name": "getHue",
                     "args": [
                         {
-                            "name": "d",
+                            "name": "delta",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -382,19 +545,19 @@
                             "deprecationMessage": ""
                         },
                         {
-                            "name": "r",
+                            "name": "red",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
                         },
                         {
-                            "name": "g",
+                            "name": "green",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
                         },
                         {
-                            "name": "b",
+                            "name": "blue",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -403,63 +566,153 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nGet hue for HSL or HSB format.\n",
+                    "description": "<p>Get hue for HSL or HSB format.</p>\n",
                     "modifierKind": [
                         121,
                         124
                     ],
                     "jsdoctags": [
                         {
-                            "name": "d",
+                            "name": {
+                                "pos": 1515,
+                                "end": 1520,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "delta"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1509,
+                                "end": 1514,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Difference between max and min values from [red, green, blue] / 255</p>\n"
                         },
                         {
-                            "name": "cMax",
+                            "name": {
+                                "pos": 1601,
+                                "end": 1605,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "cMax"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1595,
+                                "end": 1600,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Max value from [red, green, blue] / 255</p>\n"
                         },
                         {
-                            "name": "r",
+                            "name": {
+                                "pos": 1658,
+                                "end": 1661,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "red"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1652,
+                                "end": 1657,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Red value between 0 - 1</p>\n"
                         },
                         {
-                            "name": "g",
+                            "name": {
+                                "pos": 1698,
+                                "end": 1703,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "green"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1692,
+                                "end": 1697,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Green value between 0 - 1</p>\n"
                         },
                         {
-                            "name": "b",
+                            "name": {
+                                "pos": 1742,
+                                "end": 1746,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "blue"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1736,
+                                "end": 1741,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Blue value between 0 - 1</p>\n"
+                        },
+                        {
+                            "tagName": {
+                                "pos": 1778,
+                                "end": 1785,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 121,
+                                "escapedText": "private"
+                            },
+                            "comment": ""
                         }
                     ]
                 },
                 {
-                    "name": "getLightnessFromRgb",
+                    "name": "getLuminosity",
                     "args": [
                         {
                             "name": "cMax",
@@ -477,31 +730,76 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nGet luminosity for HSL format.\n",
+                    "description": "<p>Get luminosity for HSL format.</p>\n",
                     "modifierKind": [
                         121,
                         124
                     ],
                     "jsdoctags": [
                         {
-                            "name": "cMax",
+                            "name": {
+                                "pos": 840,
+                                "end": 844,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "cMax"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 834,
+                                "end": 839,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Max value from [red, green, blue] / 255</p>\n"
                         },
                         {
-                            "name": "cMin",
+                            "name": {
+                                "pos": 897,
+                                "end": 901,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "cMin"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 891,
+                                "end": 896,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Min value from [red, green, blue] / 255</p>\n"
+                        },
+                        {
+                            "tagName": {
+                                "pos": 948,
+                                "end": 955,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 121,
+                                "escapedText": "private"
+                            },
+                            "comment": ""
                         }
                     ]
                 },
@@ -509,13 +807,13 @@
                     "name": "getSaturation",
                     "args": [
                         {
-                            "name": "d",
+                            "name": "delta",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
                         },
                         {
-                            "name": "l",
+                            "name": "luminosity",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -524,36 +822,177 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nGet saturation for HSL format.\n",
+                    "description": "<p>Get saturation for HSL format.</p>\n",
                     "modifierKind": [
                         121,
                         124
                     ],
                     "jsdoctags": [
                         {
-                            "name": "d",
+                            "name": {
+                                "pos": 1120,
+                                "end": 1125,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "delta"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1114,
+                                "end": 1119,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Difference between max and min values from [red, green, blue] / 255</p>\n"
                         },
                         {
-                            "name": "l",
+                            "name": {
+                                "pos": 1206,
+                                "end": 1216,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "luminosity"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1200,
+                                "end": 1205,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Luminosity from HSL format.</p>\n"
+                        },
+                        {
+                            "tagName": {
+                                "pos": 1251,
+                                "end": 1258,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 121,
+                                "escapedText": "private"
+                            },
+                            "comment": ""
                         }
                     ]
                 },
                 {
-                    "name": "hslToRgb",
+                    "name": "HEXtoHSL",
+                    "args": [
+                        {
+                            "name": "hex",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "{ hue: any; saturation: any; luminosity: any; }",
+                    "typeParameters": [],
+                    "line": 8,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nConvert from HEX string (#RRGGBB) to HSL format.\n",
+                    "description": "<p>Convert from HEX string (#RRGGBB) to HSL format.</p>\n",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 103,
+                                "end": 106,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "hex"
+                            },
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 97,
+                                "end": 102,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>HEX color sting (#RRGGBB)</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "HEXtoRGB",
+                    "args": [
+                        {
+                            "name": "hex",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "{ red: any; green: any; blue: any; }",
+                    "typeParameters": [],
+                    "line": 112,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nConvert from HEX string to RGB values.\n",
+                    "description": "<p>Convert from HEX string to RGB values.</p>\n",
+                    "modifierKind": [
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 3352,
+                                "end": 3355,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "hex"
+                            },
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 3346,
+                                "end": 3351,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>HEX color string (#RRGGBB)</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "HSLtoHEX",
                     "args": [
                         {
                             "name": "hue",
@@ -577,70 +1016,86 @@
                     "optional": false,
                     "returnType": "string",
                     "typeParameters": [],
-                    "line": 51,
+                    "line": 84,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nConvert color from HSL format into HEX string.\n",
+                    "description": "<p>Convert color from HSL format into HEX string.</p>\n",
                     "modifierKind": [
                         124
                     ],
                     "jsdoctags": [
                         {
-                            "name": "hue",
+                            "name": {
+                                "pos": 2223,
+                                "end": 2226,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "hue"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 2217,
+                                "end": 2222,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Hue between 0 - 360</p>\n"
                         },
                         {
-                            "name": "saturation",
+                            "name": {
+                                "pos": 2259,
+                                "end": 2269,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "saturation"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 2253,
+                                "end": 2258,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Saturation between 0 - 100</p>\n"
                         },
                         {
-                            "name": "lightness",
+                            "name": {
+                                "pos": 2309,
+                                "end": 2318,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "lightness"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "rgbToHsl",
-                    "args": [
-                        {
-                            "name": "color",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "{ hue: any; saturation: any; luminosity: any; }",
-                    "typeParameters": [],
-                    "line": 3,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "modifierKind": [
-                        124
-                    ],
-                    "jsdoctags": [
-                        {
-                            "name": "color",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 2303,
+                                "end": 2308,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Lightness between 0 - 100</p>\n"
                         }
                     ]
                 }
@@ -653,25 +1108,25 @@
         },
         {
             "name": "ColorInterpolater",
-            "id": "class-ColorInterpolater-d73655a074c958aab3c2e4d130f25c6856945c2490638eb0c1c9346e071cbac88f8c1b6682498e254c5f0c598412862f35388b71f71bd65776dba9a92a193933",
+            "id": "class-ColorInterpolater-c34e13511caf0e524a94c3146dcefb6ce2407bea4b23f841cfba86e09bc7059e0d960e210df0129e81f5b70cda197078607b0cb979602e2361ac57131a453569",
             "file": "src/app/class/color-interpolater.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {ColorConverter} from \"./color-converter\";\nimport {Shade} from \"../models/shade.model\";\n\nexport class ColorInterpolater {\n\n  static interpolateShades(color: string) {\n    if (!color.startsWith('#') || color.length !== 7)\n      throw `Color '${color}' is not in form #RRGGBB.`\n\n    const shades: Shade[] = []\n    const hsl = ColorConverter.rgbToHsl(color)\n\n    if (100 - hsl.luminosity < 7.5) {\n      shades.push(new Shade(50, color))\n      this.generateDarkerColors(hsl, 0, shades)\n    } else if (100 - hsl.luminosity >= 85) {\n      shades.push(new Shade(900, color))\n      this.generateLighterColors(hsl, 900, shades)\n    } else {\n      let index = 100\n      while (100 - hsl.luminosity > (index / 10) + 5)\n        index += 100\n      shades.push(new Shade(index, color))\n      this.generateLighterColors(hsl, index, shades)\n      this.generateDarkerColors(hsl, index, shades)\n    }\n\n    return shades\n  }\n\n  private static generateLighterColors(hslColor: { saturation: number; hue: number; luminosity: number }, step: number, shades: Shade[]) {\n    const index = step / 100\n    let i = 1\n\n    for (; i < index; i++) {\n      const interpolatedLuminosity = hslColor.luminosity + (i / index) * (100 - hslColor.luminosity)\n      const newIndex = step - i * 100\n      shades.push(new Shade(newIndex, hslColor.hue, hslColor.saturation, interpolatedLuminosity))\n    }\n\n    const interpolatedLuminosity = hslColor.luminosity + ((2 * i - 1) / (2 * index)) * (100 - hslColor.luminosity)\n    shades.push(new Shade(50, hslColor.hue, hslColor.saturation, interpolatedLuminosity))\n  }\n\n  private static generateDarkerColors(hslColor: { saturation: number; hue: number; luminosity: number }, step: number, shades: Shade[]) {\n    const index = (1000 - step) / 100\n    let i = 1\n\n    for (; i < index; i++) {\n      const interpolatedLuminosity = hslColor.luminosity - (i / index) * hslColor.luminosity\n      const newIndex = step + i * 100\n      shades.push(new Shade(newIndex, hslColor.hue, hslColor.saturation, interpolatedLuminosity))\n    }\n  }\n\n}\n",
+            "sourceCode": "import {ColorConverter} from \"./color-converter\";\nimport {Shade} from \"../models/shade.model\";\n\nexport class ColorInterpolater {\n\n  /**\n   * Interpolate 10 shades starting with one HEX color string.\n   * @param hex HEX color string (#RRGGBB)\n   */\n  static interpolateShades(hex: string) {\n    if (!hex.startsWith('#') || hex.length !== 7)\n      throw `Color '${hex}' is not in form #RRGGBB.`\n\n    const shades: Shade[] = []\n    const hsl = ColorConverter.HEXtoHSL(hex)\n\n    if (100 - hsl.luminosity < 7.5) {\n      shades.push(new Shade(50, hex))\n      this.generateDarkerColors(hsl, 0, shades)\n    } else if (100 - hsl.luminosity >= 85) {\n      shades.push(new Shade(900, hex))\n      this.generateLighterColors(hsl, 900, shades)\n    } else {\n      let index = 100\n      while (100 - hsl.luminosity > (index / 10) + 5)\n        index += 100\n      shades.push(new Shade(index, hex))\n      this.generateLighterColors(hsl, index, shades)\n      this.generateDarkerColors(hsl, index, shades)\n    }\n\n    return shades\n  }\n\n  /**\n   * Interpolate all lighter shades from HSL color.\n   * @param hsl Color in HSL format\n   * @param index Index of HSL color shade\n   * @param shades Array to add all generated shades\n   * @private\n   */\n  private static generateLighterColors(hsl: { saturation: number; hue: number; luminosity: number }, index: number, shades: Shade[]) {\n    const step = index / 100\n    let i = 1\n\n    for (; i < step; i++) {\n      const interpolatedLuminosity = hsl.luminosity + (i / step) * (100 - hsl.luminosity)\n      const newIndex = index - i * 100\n      shades.push(new Shade(newIndex, hsl.hue, hsl.saturation, interpolatedLuminosity))\n    }\n\n    const interpolatedLuminosity = hsl.luminosity + ((2 * i - 1) / (2 * step)) * (100 - hsl.luminosity)\n    shades.push(new Shade(50, hsl.hue, hsl.saturation, interpolatedLuminosity))\n  }\n\n  /**\n   * Interpolate all darker shades from HSL color.\n   * @param hsl Color in HSL format\n   * @param index Index of HSL color shade\n   * @param shades Array to add all generated shades\n   * @private\n   */\n  private static generateDarkerColors(hsl: { saturation: number; hue: number; luminosity: number }, index: number, shades: Shade[]) {\n    const step = (1000 - index) / 100\n    let i = 1\n\n    for (; i < step; i++) {\n      const interpolatedLuminosity = hsl.luminosity - (i / step) * hsl.luminosity\n      const newIndex = index + i * 100\n      shades.push(new Shade(newIndex, hsl.hue, hsl.saturation, interpolatedLuminosity))\n    }\n  }\n\n}\n",
             "properties": [],
             "methods": [
                 {
                     "name": "generateDarkerColors",
                     "args": [
                         {
-                            "name": "hslColor",
+                            "name": "hsl",
                             "type": "literal type",
                             "deprecated": false,
                             "deprecationMessage": ""
                         },
                         {
-                            "name": "step",
+                            "name": "index",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -686,40 +1141,100 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nInterpolate all darker shades from HSL color.\n",
+                    "description": "<p>Interpolate all darker shades from HSL color.</p>\n",
                     "modifierKind": [
                         121,
                         124
                     ],
                     "jsdoctags": [
                         {
-                            "name": "hslColor",
+                            "name": {
+                                "pos": 1915,
+                                "end": 1918,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "hsl"
+                            },
                             "type": "literal type",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1909,
+                                "end": 1914,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Color in HSL format</p>\n"
                         },
                         {
-                            "name": "step",
+                            "name": {
+                                "pos": 1951,
+                                "end": 1956,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "index"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1945,
+                                "end": 1950,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Index of HSL color shade</p>\n"
                         },
                         {
-                            "name": "shades",
+                            "name": {
+                                "pos": 1994,
+                                "end": 2000,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "shades"
+                            },
                             "type": "Shade[]",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1988,
+                                "end": 1993,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Array to add all generated shades</p>\n"
+                        },
+                        {
+                            "tagName": {
+                                "pos": 2041,
+                                "end": 2048,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 121,
+                                "escapedText": "private"
+                            },
+                            "comment": ""
                         }
                     ]
                 },
@@ -727,13 +1242,13 @@
                     "name": "generateLighterColors",
                     "args": [
                         {
-                            "name": "hslColor",
+                            "name": "hsl",
                             "type": "literal type",
                             "deprecated": false,
                             "deprecationMessage": ""
                         },
                         {
-                            "name": "step",
+                            "name": "index",
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -748,40 +1263,100 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 31,
+                    "line": 42,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nInterpolate all lighter shades from HSL color.\n",
+                    "description": "<p>Interpolate all lighter shades from HSL color.</p>\n",
                     "modifierKind": [
                         121,
                         124
                     ],
                     "jsdoctags": [
                         {
-                            "name": "hslColor",
+                            "name": {
+                                "pos": 1086,
+                                "end": 1089,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "hsl"
+                            },
                             "type": "literal type",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1080,
+                                "end": 1085,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Color in HSL format</p>\n"
                         },
                         {
-                            "name": "step",
+                            "name": {
+                                "pos": 1122,
+                                "end": 1127,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "index"
+                            },
                             "type": "number",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1116,
+                                "end": 1121,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Index of HSL color shade</p>\n"
                         },
                         {
-                            "name": "shades",
+                            "name": {
+                                "pos": 1165,
+                                "end": 1171,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "shades"
+                            },
                             "type": "Shade[]",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1159,
+                                "end": 1164,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Array to add all generated shades</p>\n"
+                        },
+                        {
+                            "tagName": {
+                                "pos": 1212,
+                                "end": 1219,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 121,
+                                "escapedText": "private"
+                            },
+                            "comment": ""
                         }
                     ]
                 },
@@ -789,7 +1364,7 @@
                     "name": "interpolateShades",
                     "args": [
                         {
-                            "name": "color",
+                            "name": "hex",
                             "type": "string",
                             "deprecated": false,
                             "deprecationMessage": ""
@@ -798,21 +1373,38 @@
                     "optional": false,
                     "returnType": "{}",
                     "typeParameters": [],
-                    "line": 6,
+                    "line": 10,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nInterpolate 10 shades starting with one HEX color string.\n",
+                    "description": "<p>Interpolate 10 shades starting with one HEX color string.</p>\n",
                     "modifierKind": [
                         124
                     ],
                     "jsdoctags": [
                         {
-                            "name": "color",
+                            "name": {
+                                "pos": 211,
+                                "end": 214,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "hex"
+                            },
                             "type": "string",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 205,
+                                "end": 210,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>HEX color string (#RRGGBB)</p>\n"
                         }
                     ]
                 }
@@ -825,12 +1417,12 @@
         },
         {
             "name": "Palette",
-            "id": "class-Palette-aecc6a3dc78f146d5333d92e098a58f975d3e3b68ec2651e55ddeab19bb4095bcb4c4b1f0dcef624ac50a8f73fd42dcd83a17905231b5271e4eb31f7a7e9a419",
+            "id": "class-Palette-4e9842a136c7a896c44e3be6d1e03a47c26aad997867131e1abbf7ab0b01b0dc5c94a95eeac12929ff0b7ab03a0a7cdcd883925fcbb7749a90a2394b752bd27f",
             "file": "src/app/models/palette.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {Color} from \"./color.model\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\n\r\nexport class Palette {\r\n\r\n  title: string\r\n  id: string\r\n  colors: Color[] = []\r\n\r\n  constructor(title: string, id: string) {\r\n    this.title = title\r\n    this.id = id\r\n  }\r\n\r\n  /**\r\n   * Add a color to the beginning of the palette.\r\n   * @param color\r\n   */\r\n  public addColor(color: Color) {\r\n    this.colors.unshift(color)\r\n  }\r\n\r\n  /**\r\n   * Remove the color from the palette\r\n   * @param color\r\n   */\r\n  public removeColor(color: Color) {\r\n    const index = this.colors.indexOf(color)\r\n    if (index > -1)\r\n      this.colors.splice(index, 1)\r\n  }\r\n\r\n  /**\r\n   * Sort all colors of the palette by hue\r\n   */\r\n  public sortColors() {\r\n    this.colors.sort((a, b) => a.getShade(500).hue - b.getShade(500).hue)\r\n  }\r\n\r\n  /**\r\n   * Generate a new random palette with 'size' colors.\r\n   * @param size\r\n   */\r\n  public static generateRandomPalette(size: number): Palette {\r\n    if (size < 1)\r\n      throw `Size was ${size} but must be positive.`\r\n\r\n    const palette = new Palette('Random', uuidv4())\r\n    for (let i = 0; i < size; i++) {\r\n      const color = Color.generateRandomColor()\r\n      palette.addColor(new Color(color.name, color.getShade(500).hex))\r\n    }\r\n\r\n    palette.colors.sort((a, b) => a.getShade(500).hue - b.getShade(500).hue)\r\n\r\n    return palette;\r\n  }\r\n\r\n  /**\r\n   * Stringify the palette.\r\n   */\r\n  public toString() {\r\n    return JSON.stringify({\r\n      id: this.id,\r\n      title: this.title,\r\n      colors: this.colors\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Parse the json object to a palette.\r\n   * Throws exception if not all values are given.\r\n   * @param json\r\n   */\r\n  public static parsePalette(json: any): Palette {\r\n    if (!json.title)\r\n      throw 'Palette has no title'\r\n    if (!json.id)\r\n      throw 'Palette has no id'\r\n    if (!json.colors)\r\n      throw 'Palette has no colors'\r\n\r\n    const palette = new Palette(json.title, json.id)\r\n\r\n    for (const color of json.colors) {\r\n      palette.addColor(Color.parseColor(color))\r\n    }\r\n    palette.colors.reverse()\r\n\r\n    return palette\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {Color} from \"./color.model\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\n\r\nexport class Palette {\r\n\r\n  title: string\r\n  id: string\r\n  colors: Color[] = []\r\n  order = false\r\n\r\n  constructor(title: string, id: string) {\r\n    this.title = title\r\n    this.id = id\r\n  }\r\n\r\n  /**\r\n   * Add a color to the beginning of the palette.\r\n   * @param color\r\n   */\r\n  public addColor(color: Color) {\r\n    if (this.colors.find(c => c.name === color.name))\r\n      this.colors[this.colors.findIndex(c => c.name === color.name)] = color\r\n    else\r\n      this.colors.unshift(color)\r\n\r\n    this.order = false\r\n  }\r\n\r\n  /**\r\n   * Remove the color from the palette\r\n   * @param color\r\n   */\r\n  public removeColor(color: Color) {\r\n    const index = this.colors.indexOf(color)\r\n    if (index > -1) {\r\n      this.colors.splice(index, 1)\r\n      return true\r\n    } else {\r\n      return false\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Sort all colors of the palette by hue\r\n   */\r\n  public sortColors() {\r\n    this.colors.sort((a, b) => {\r\n      if (this.order)\r\n        return a.getShade(500).hue - b.getShade(500).hue\r\n      else\r\n        return b.getShade(500).hue - a.getShade(500).hue\r\n    })\r\n    this.order = !this.order\r\n  }\r\n\r\n  /**\r\n   * Generate a new random palette with 'size' colors.\r\n   * @param size\r\n   */\r\n  public static generateRandomPalette(size: number): Palette {\r\n    if (size < 1)\r\n      throw `Size was ${size} but must be positive.`\r\n\r\n    const palette = new Palette('Random', uuidv4())\r\n    for (let i = 0; i < size; i++) {\r\n      const color = Color.generateRandomColor()\r\n      palette.addColor(new Color(color.name, color.getShade(500).hex))\r\n    }\r\n\r\n    palette.colors.sort((a, b) => a.getShade(500).hue - b.getShade(500).hue)\r\n\r\n    return palette;\r\n  }\r\n\r\n  /**\r\n   * Stringify the palette.\r\n   */\r\n  public toString() {\r\n    return JSON.stringify({\r\n      id: this.id,\r\n      title: this.title,\r\n      colors: this.colors\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Parse the json object to a palette.\r\n   * Throws exception if not all values are given.\r\n   * @param json\r\n   */\r\n  public static parsePalette(json: any): Palette {\r\n    if (!json.title)\r\n      throw 'Palette has no title'\r\n    if (!json.id)\r\n      throw 'Palette has no id'\r\n    if (!json.colors)\r\n      throw 'Palette has no colors'\r\n\r\n    const palette = new Palette(json.title, json.id)\r\n\r\n    for (const color of json.colors) {\r\n      palette.addColor(Color.parseColor(color))\r\n    }\r\n    palette.colors.reverse()\r\n\r\n    return palette\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -850,7 +1442,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 9,
+                "line": 10,
                 "jsdoctags": [
                     {
                         "name": "title",
@@ -893,6 +1485,16 @@
                     "line": 8
                 },
                 {
+                    "name": "order",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
                     "name": "title",
                     "deprecated": false,
                     "deprecationMessage": "",
@@ -916,7 +1518,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 21,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAdd a color to the beginning of the palette.\n",
@@ -927,8 +1529,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 337,
-                                "end": 342,
+                                "pos": 354,
+                                "end": 359,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -939,8 +1541,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 331,
-                                "end": 336,
+                                "pos": 348,
+                                "end": 353,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -964,7 +1566,7 @@
                     "optional": false,
                     "returnType": "Palette",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 61,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGenerate a new random palette with 'size' colors.\n",
@@ -975,8 +1577,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 886,
-                                "end": 890,
+                                "pos": 1284,
+                                "end": 1288,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -987,8 +1589,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 880,
-                                "end": 885,
+                                "pos": 1278,
+                                "end": 1283,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1012,7 +1614,7 @@
                     "optional": false,
                     "returnType": "Palette",
                     "typeParameters": [],
-                    "line": 76,
+                    "line": 92,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nParse the json object to a palette.\nThrows exception if not all values are given.\n",
@@ -1023,8 +1625,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1663,
-                                "end": 1667,
+                                "pos": 2061,
+                                "end": 2065,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1035,8 +1637,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1657,
-                                "end": 1662,
+                                "pos": 2055,
+                                "end": 2060,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1058,9 +1660,9 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "void",
+                    "returnType": "boolean",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 34,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nRemove the color from the palette\n",
@@ -1071,8 +1673,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 484,
-                                "end": 489,
+                                "pos": 672,
+                                "end": 677,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1083,8 +1685,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 478,
-                                "end": 483,
+                                "pos": 666,
+                                "end": 671,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1101,7 +1703,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 47,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSort all colors of the palette by hue\n",
@@ -1116,7 +1718,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 63,
+                    "line": 79,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nStringify the palette.\n",
@@ -1134,12 +1736,12 @@
         },
         {
             "name": "Shade",
-            "id": "class-Shade-b2b461b4b00db8a21d60be714272d413330a216502ae31a2f203bffa55832b704979f11211ef1842b32c440e6d523e57d81a4097b3ef5319a2db4719775efe20",
+            "id": "class-Shade-7289935cf60e27020a0f5caf97e476a555f70c44451897bc53392f0b837a07abb75d255352b1d4b59a7d9275c4408f2a2328dbbabc65a59e7fac9d1776dc5b82",
             "file": "src/app/models/shade.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {ColorConverter} from \"../class/color-converter\";\n\nexport class Shade {\n\n  index: number\n  hex: string\n  hue: number\n  saturation: number\n  luminosity: number\n\n  public constructor(index: number, hex: string);\n  public constructor(index: number, hue: number, saturation: number, luminosity: number);\n  public constructor(index: number, hex: string, hue: number, saturation: number, luminosity: number);\n\n  constructor(...args: any[]) {\n    this.index = args[0]\n\n    if (args.length === 2) {\n      this.hex = args[1]\n      const hsl = ColorConverter.rgbToHsl(this.hex)\n      this.hue = hsl.hue\n      this.saturation = hsl.saturation\n      this.luminosity = hsl.luminosity\n    } else if (args.length === 4) {\n      this.hex = ColorConverter.hslToRgb(args[1], args[2], args[3])\n      this.hue = args[1]\n      this.saturation = args[2]\n      this.luminosity = args[3]\n    } else {\n      this.hex = args[1]\n      this.hue = args[2]\n      this.saturation = args[3]\n      this.luminosity = args[4]\n    }\n  }\n\n  public static generateRandomShade(): Shade {\n    return new Shade(\n      0,\n      Math.floor(Math.random() * 360),\n      Math.floor(Math.random() * 100),\n      25 + Math.floor(Math.random() * 50)\n    )\n  }\n\n}\n",
+            "sourceCode": "import {ColorConverter} from \"../class/color-converter\";\n\nexport class Shade {\n\n  index: number\n  hex: string\n  hue: number\n  saturation: number\n  luminosity: number\n\n  public constructor(index: number, hex: string);\n  public constructor(index: number, hue: number, saturation: number, luminosity: number);\n  public constructor(index: number, hex: string, hue: number, saturation: number, luminosity: number);\n\n  constructor(...args: any[]) {\n    this.index = args[0]\n\n    if (args.length === 2) {\n      this.hex = args[1]\n      const hsl = ColorConverter.HEXtoHSL(this.hex)\n      this.hue = hsl.hue\n      this.saturation = hsl.saturation\n      this.luminosity = hsl.luminosity\n    } else if (args.length === 4) {\n      this.hex = ColorConverter.HSLtoHEX(args[1], args[2], args[3])\n      this.hue = args[1]\n      this.saturation = args[2]\n      this.luminosity = args[3]\n    } else {\n      this.hex = args[1]\n      this.hue = args[2]\n      this.saturation = args[3]\n      this.luminosity = args[4]\n    }\n  }\n\n  /**\n   * Generate a random shade.\n   */\n  public static generateRandomShade(): Shade {\n    return new Shade(\n      0,\n      Math.floor(Math.random() * 360),\n      30 + Math.floor(Math.random() * 60),\n      25 + Math.floor(Math.random() * 50)\n    )\n  }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1222,9 +1824,11 @@
                     "optional": false,
                     "returnType": "Shade",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nGenerate a random shade.\n",
+                    "description": "<p>Generate a random shade.</p>\n",
                     "modifierKind": [
                         124
                     ]
@@ -1468,7 +2072,7 @@
     "components": [
         {
             "name": "AppComponent",
-            "id": "component-AppComponent-7dcb33b545f8855595c0abdf8fa3a4c522dfbfb6e1d7754e88d7903937a70cc4bad366477fcc357e8781dbbeb556120d6f689221e3a2c0fb1ada376b3d4a75bf",
+            "id": "component-AppComponent-9c387bf6b95880168851fbf53b82a4f42255e47592ffa3268264c166a54864a8968a4c7f08cafa5d32eefb29cbf50725d4a16e63cbbf7e2bd90568d0e5fd3637",
             "file": "src/app/app.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1489,10 +2093,22 @@
                     "name": "color",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Color | undefined",
+                    "type": "Color",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 22
+                },
+                {
+                    "name": "colorService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColorService",
+                    "optional": false,
+                    "description": "",
+                    "line": 29,
+                    "modifierKind": [
+                        123
+                    ]
                 },
                 {
                     "name": "dark",
@@ -1501,26 +2117,36 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 19
+                },
+                {
+                    "name": "editColor",
+                    "defaultValue": "new EventEmitter<Color>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
                 },
                 {
                     "name": "palette",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Palette | undefined",
+                    "type": "Palette",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 23
                 },
                 {
                     "name": "shade",
                     "defaultValue": "Shade.generateRandomShade()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "Shade",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 21
                 },
                 {
                     "name": "title",
@@ -1530,7 +2156,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 17
                 },
                 {
                     "name": "version",
@@ -1540,7 +2166,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 18
                 }
             ],
             "methodsClass": [
@@ -1557,7 +2183,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 58,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAdd color to the current palette.\nIf no palette exists, a new one is created.\n",
@@ -1565,8 +2191,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1685,
-                                "end": 1690,
+                                "pos": 1928,
+                                "end": 1933,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1577,8 +2203,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1679,
-                                "end": 1684,
+                                "pos": 1922,
+                                "end": 1927,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1595,7 +2221,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 49,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nSet and display a new random palette with 5 - 10 colors.\n",
@@ -1607,7 +2233,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 57,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nRemove the current palette from logic.\nThe palette can be restored if it was saved in local storage.\n",
@@ -1621,7 +2247,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component } from '@angular/core';\r\nimport {Palette} from \"./models/palette.model\";\r\nimport {Shade} from \"./models/shade.model\";\r\nimport {Color} from \"./models/color.model\";\r\nimport {environment} from \"../environments/environment\";\r\nimport {StorageService} from \"./services/storage.service\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n})\r\nexport class AppComponent {\r\n  title = 'tailwind-color-generator'\r\n  version = environment.version\r\n  dark\r\n\r\n  shade = Shade.generateRandomShade()\r\n  color: Color | undefined\r\n  palette: Palette | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService\r\n  ) {\r\n    // Load theme from local storage and subscribe to changes\r\n    this.dark = storage.loadTheme()\r\n    storage.darkEmitter.subscribe(d => this.dark = d.valueOf())\r\n\r\n    // Load palette if saved in local storage\r\n    this.palette = storage.loadPalette()\r\n\r\n    // Redirect to https if server served or browser fetched with http\r\n    if (environment.production && window.location.href.startsWith('http://'))\r\n      window.location.href = 'https://' + window.location.href.substring(6)\r\n  }\r\n\r\n  /**\r\n   * Set and display a new random palette with 5 - 10 colors.\r\n   */\r\n  randomPalette() {\r\n    this.palette = Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))\r\n  }\r\n\r\n  /**\r\n   * Remove the current palette from logic.\r\n   * The palette can be restored if it was saved in local storage.\r\n   */\r\n  removePalette() {\r\n    this.palette = undefined\r\n  }\r\n\r\n  /**\r\n   * Add color to the current palette.\r\n   * If no palette exists, a new one is created.\r\n   * @param color\r\n   */\r\n  addColor(color: Color | undefined) {\r\n    if (color) {\r\n      if (!this.palette)\r\n        this.palette = new Palette('Palette', uuidv4())\r\n      this.palette.addColor(color)\r\n      this.color = undefined\r\n    }\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {Component, EventEmitter} from '@angular/core';\r\nimport {Palette} from \"./models/palette.model\";\r\nimport {Shade} from \"./models/shade.model\";\r\nimport {Color} from \"./models/color.model\";\r\nimport {environment} from \"../environments/environment\";\r\nimport {StorageService} from \"./services/storage.service\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {ColorService} from \"./services/color.service\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n})\r\nexport class AppComponent {\r\n\r\n  title = 'tailwind-color-generator'\r\n  version = environment.version\r\n  dark\r\n\r\n  shade: Shade = Shade.generateRandomShade()\r\n  color: Color\r\n  palette: Palette\r\n\r\n  editColor = new EventEmitter<Color>()\r\n\r\n  constructor(\r\n    private storage: StorageService,\r\n    public colorService: ColorService\r\n  ) {\r\n    // Redirect to https if server served / browser fetched with http\r\n    if (environment.production && window.location.href.startsWith('http://'))\r\n      window.location.href = 'https://' + window.location.href.substring(6)\r\n\r\n    // Load theme from local storage and subscribe to changes\r\n    this.dark = storage.loadTheme()\r\n    storage.darkEmitter.subscribe(d => this.dark = d.valueOf())\r\n\r\n    // Load palette if saved in local storage\r\n    this.palette = storage.loadPalette()\r\n\r\n    // Load random color for editor\r\n    this.color = Color.generateRandomColor()\r\n  }\r\n\r\n  /**\r\n   * Set and display a new random palette with 5 - 10 colors.\r\n   */\r\n  randomPalette() {\r\n    this.palette = Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))\r\n  }\r\n\r\n  /**\r\n   * Remove the current palette from logic.\r\n   * The palette can be restored if it was saved in local storage.\r\n   */\r\n  removePalette() {\r\n    this.palette = new Palette('Palette', uuidv4())\r\n  }\r\n\r\n  /**\r\n   * Add color to the current palette.\r\n   * If no palette exists, a new one is created.\r\n   * @param color\r\n   */\r\n  addColor(color: Color | undefined) {\r\n    if (color) {\r\n      if (!this.palette)\r\n        this.palette = new Palette('Palette', uuidv4())\r\n      this.palette.addColor(color)\r\n    }\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1636,9 +2262,15 @@
                         "type": "StorageService",
                         "deprecated": false,
                         "deprecationMessage": ""
+                    },
+                    {
+                        "name": "colorService",
+                        "type": "ColorService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
                     }
                 ],
-                "line": 21,
+                "line": 25,
                 "jsdoctags": [
                     {
                         "name": "storage",
@@ -1648,14 +2280,297 @@
                         "tagName": {
                             "text": "param"
                         }
+                    },
+                    {
+                        "name": "colorService",
+                        "type": "ColorService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
                     }
                 ]
             },
-            "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between\r\n    py-4 text-zinc-900 bg-zinc-100 dark:text-zinc-100 dark:bg-zinc-900\"\r\n>\r\n  <header class=\"relative\">\r\n    <light-switch\r\n      class=\"absolute right-0 mr-6\"\r\n      [dark]=\"dark\"\r\n    ></light-switch>\r\n\r\n    <h1>\r\n      Color Palette Generator\r\n    </h1>\r\n  </header>\r\n\r\n  <main class=\"px-4\">\r\n    <shade-picker [shade]=\"shade\" (colorEmitter)=\"color = $event\" [dark]=\"dark\"></shade-picker>\r\n\r\n    <section class=\"max-w-5xl mx-auto pt-4\">\r\n      <color-viewer [color]=\"color\" [dark]=\"dark\" (onAction)=\"addColor(color)\"></color-viewer>\r\n    </section>\r\n\r\n    <palette-viewer\r\n      *ngIf=\"palette\" (onRemove)=\"removePalette()\"\r\n      [palette]=\"palette\" [dark]=\"dark\"></palette-viewer>\r\n\r\n    <button\r\n      *ngIf=\"!palette\" (click)=\"randomPalette()\"\r\n      class=\"\r\n        rounded-lg px-4 py-2 block mx-auto my-6\r\n        border-2 border-neutral-600 dark:bord-neutral-300\r\n        bg-neutral-200 dark:bg-neutral-700 shadow-lg font-bold\"\r\n    >\r\n      Generate random palette\r\n    </button>\r\n  </main>\r\n\r\n  <footer class=\"p-4 flex gap-4 justify-between flex-col sm:flex-row text-center mx-auto max-w-5xl w-full mt-10\">\r\n    <a href=\"https://github.com/pawcoding/tailwind-color-generator\" rel=\"noreferrer noopener\" target=\"_blank\" title=\"View source code on GitHub\">View on GitHub</a>\r\n    <span>Version {{version}}</span>\r\n    <a href=\"https://pawcode.de\" target=\"_blank\" title=\"Created by pawcode Development\">\r\n      <img [src]=\"'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" alt=\"pawcode&nbsp;Development\" class=\"inline h-8\">\r\n    </a>\r\n  </footer>\r\n</div>\r\n"
+            "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between\r\n    py-4 text-zinc-900 bg-zinc-100 dark:text-zinc-100 dark:bg-zinc-900\"\r\n>\r\n  <header class=\"relative\">\r\n    <light-switch\r\n      class=\"absolute xl:fixed right-0 mr-6\"\r\n      [dark]=\"dark\"\r\n    ></light-switch>\r\n\r\n    <h1>\r\n      Color Palette Generator\r\n    </h1>\r\n  </header>\r\n\r\n  <main class=\"px-10\">\r\n    <!-- Color Editor -->\r\n    <color-editor\r\n      [dark]=\"dark\"\r\n      (addColor)=\"addColor($event)\"\r\n    ></color-editor>\r\n\r\n    <palette-viewer\r\n      *ngIf=\"palette\" (onRemove)=\"removePalette()\"\r\n      [palette]=\"palette\" [dark]=\"dark\"\r\n    ></palette-viewer>\r\n\r\n    <button\r\n      *ngIf=\"!palette\" (click)=\"randomPalette()\"\r\n      class=\"\r\n        rounded-lg px-4 py-2 block mx-auto my-6\r\n        border-2 border-neutral-600 dark:bord-neutral-300\r\n        bg-neutral-200 dark:bg-neutral-700 shadow-lg font-bold\"\r\n    >\r\n      Generate random palette\r\n    </button>\r\n  </main>\r\n\r\n  <footer class=\"p-4 flex gap-4 justify-between flex-col sm:flex-row text-center mx-auto max-w-5xl w-full mt-10\">\r\n    <a href=\"https://github.com/pawcoding/tailwind-color-generator\" rel=\"noreferrer noopener\" target=\"_blank\" title=\"View source code on GitHub\">View on GitHub</a>\r\n    <span>Version {{version}}</span>\r\n    <a href=\"https://pawcode.de\" target=\"_blank\" title=\"Created by pawcode Development\">\r\n      <img [src]=\"'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" alt=\"pawcode&nbsp;Development\" class=\"inline h-8\">\r\n    </a>\r\n  </footer>\r\n</div>\r\n"
+        },
+        {
+            "name": "ColorEditorComponent",
+            "id": "component-ColorEditorComponent-92b79993b76b0f9f27588ee064d86366b513954893a6a9b9ee3495a5dbcd647c29f109e8b36f088bbb0eb12eebf3d5c0a966f07a8bc956b4605d1287dd0edca0",
+            "file": "src/app/components/color-editor/color-editor.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "color-editor",
+            "styleUrls": [
+                "./color-editor.component.css"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./color-editor.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "dark",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "addColor",
+                    "defaultValue": "new EventEmitter<Color>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "colorService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColorService",
+                    "optional": false,
+                    "description": "",
+                    "line": 23,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "shade",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Shade",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                },
+                {
+                    "name": "state",
+                    "defaultValue": "EditorState.ADD",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "EditorState",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "adjustColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 65,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateColor",
+                    "args": [
+                        {
+                            "name": "type",
+                            "type": "UpdateType",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "value",
+                            "type": "string | number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 48,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpdate current shade. The property with type is changed to the new value.\n",
+                    "description": "<p>Update current shade. The property with type is changed to the new value.</p>\n",
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 1241,
+                                "end": 1245,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "originalKeywordKind": 151,
+                                "escapedText": "type"
+                            },
+                            "type": "UpdateType",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 1235,
+                                "end": 1240,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Property to change</p>\n"
+                        },
+                        {
+                            "name": {
+                                "pos": 1277,
+                                "end": 1282,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "value"
+                            },
+                            "type": "string | number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 1271,
+                                "end": 1276,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Value to change to</p>\n"
+                        }
+                    ]
+                },
+                {
+                    "name": "updateName",
+                    "args": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 85,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpdate the name of the current color\n",
+                    "description": "<p>Update the name of the current color</p>\n",
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 2648,
+                                "end": 2652,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "name"
+                            },
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 2642,
+                                "end": 2647,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "updateProperties",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 74,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nUpdate all css properties to the values of the current selected shade\n",
+                    "description": "<p>Update all css properties to the values of the current selected shade</p>\n"
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\nimport {Color} from \"../../models/color.model\";\nimport {Shade} from \"../../models/shade.model\";\nimport {ChangeType, ColorService} from \"../../services/color.service\";\n\n@Component({\n  selector: 'color-editor',\n  templateUrl: './color-editor.component.html',\n  styleUrls: ['./color-editor.component.css']\n})\nexport class ColorEditorComponent implements OnInit {\n\n  @Input()\n  dark = false\n\n  @Output()\n  addColor = new EventEmitter<Color>()\n\n  shade: Shade\n  state: EditorState = EditorState.ADD\n\n  constructor(\n    public colorService: ColorService\n  ) {\n    this.shade = this.colorService.getColor().getShade(500)\n\n    this.colorService.getColorChangeEmitter().subscribe(changeType => {\n      if (changeType !== ChangeType.ADJUST) {\n        this.shade = this.colorService.getColor().getShade(500)\n        this.state = changeType === ChangeType.RANDOM ? EditorState.ADD : EditorState.EDIT\n      }\n      this.updateProperties()\n    })\n  }\n\n  ngOnInit(): void {\n    if (document.body.classList.contains('dark'))\n      this.dark = true\n\n    this.updateProperties()\n  }\n\n  /**\n   * Update current shade. The property with type is changed to the new value.\n   * @param type Property to change\n   * @param value Value to change to\n   */\n  updateColor(type: UpdateType, value: string | number) {\n    if (type === UpdateType.HEX && isNaN(+value)) {\n      this.shade = new Shade(0, `${value}`)\n    } else if (!isNaN(+value)) {\n      value = parseInt(`${value}`)\n      if (type === UpdateType.HUE) {\n        this.shade = new Shade(0, value, this.shade.saturation, this.shade.luminosity)\n      } else if (type === UpdateType.SATURATION) {\n        this.shade = new Shade(0, this.shade.hue, value, this.shade.luminosity)\n      } else if (type === UpdateType.LUMINOSITY) {\n        this.shade = new Shade(0, this.shade.hue, this.shade.saturation, 100 - value)\n      }\n    }\n\n    this.updateProperties()\n  }\n\n  adjustColor() {\n    this.colorService.adjustColor(\n      new Color(this.colorService.getColor().name, this.shade.hex)\n    )\n  }\n\n  /**\n   * Update all css properties to the values of the current selected shade\n   */\n  updateProperties() {\n    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\n    document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\n    document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\n    document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\n  }\n\n  /**\n   * Update the name of the current color\n   * @param name\n   */\n  updateName(name: string) {\n    this.colorService.updateColorName(name)\n  }\n\n}\n\nenum UpdateType {\n  HEX, HUE, SATURATION, LUMINOSITY\n}\n\nenum EditorState {\n  ADD, EDIT\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "input {\r\n  @apply block w-full;\r\n}\r\n\r\ninput[type=range], input[type=color] {\r\n  @apply w-full outline-none appearance-none cursor-pointer;\r\n  -webkit-appearance: none;\r\n}\r\n\r\ninput[type=range] {\r\n  @apply h-1/2;\r\n}\r\n\r\ninput[type=range]::-webkit-slider-thumb {\r\n  @apply w-6 h-5/6 min-h-10 cursor-grab appearance-none outline-none rounded shadow hover:shadow-md transition-shadow duration-200;\r\n  background-color: var(--selected-hex);\r\n  -webkit-appearance: none;\r\n  -moz-appearance: none;\r\n}\r\n\r\ninput[type=range]::-moz-range-thumb {\r\n  @apply w-6 h-5/6 min-h-10 cursor-grab outline-none border-none rounded shadow hover:shadow-md transition-shadow duration-200;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch-wrapper {\r\n  @apply p-0;\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch {\r\n  @apply border-none h-full;\r\n}\r\n\r\n#hexInput {\r\n  @apply h-full max-h-8 sm:max-h-full;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\n#hueInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,\r\n  hsl(36, var(--selected-saturation), var(--selected-luminosity)) 10%,\r\n  hsl(72, var(--selected-saturation), var(--selected-luminosity)) 20%,\r\n  hsl(108, var(--selected-saturation), var(--selected-luminosity)) 30%,\r\n  hsl(144, var(--selected-saturation), var(--selected-luminosity)) 40%,\r\n  hsl(180, var(--selected-saturation), var(--selected-luminosity)) 50%,\r\n  hsl(216, var(--selected-saturation), var(--selected-luminosity)) 60%,\r\n  hsl(252, var(--selected-saturation), var(--selected-luminosity)) 70%,\r\n  hsl(288, var(--selected-saturation), var(--selected-luminosity)) 80%,\r\n  hsl(324, var(--selected-saturation), var(--selected-luminosity)) 90%,\r\n  hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#saturationInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,\r\n  hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#luminosityInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%);\r\n}\r\n",
+                    "styleUrl": "./color-editor.component.css"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "colorService",
+                        "type": "ColorService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 20,
+                "jsdoctags": [
+                    {
+                        "name": "colorService",
+                        "type": "ColorService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<article\n  class=\"flex gap-4 max-w-5xl mx-auto mb-8 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 transition-colors duration-200\"\n>\n\n  <!-- Edit Color -->\n  <section class=\"grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center\">\n\n    <!-- Edit Hex -->\n    <input\n      type=\"color\"\n      title=\"Select a shade\"\n      id=\"hexInput\" #hexInput\n      class=\"overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200\"\n      [value]=\"shade.hex\"\n      (input)=\"updateColor(0, hexInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Hue -->\n    <input\n      type=\"range\"\n      title=\"Adjust the hue\"\n      id=\"hueInput\" #hueInput\n      min=0 max=360\n      [value]=\"shade.hue\"\n      (input)=\"updateColor(1, hueInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Saturation -->\n    <input\n      type=\"range\"\n      title=\"Adjust the saturation\"\n      id=\"saturationInput\" #saturationInput\n      min=0 max=100\n      [value]=\"shade.saturation\"\n      (input)=\"updateColor(2, saturationInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <!-- Edit Luminosity -->\n    <input\n      type=\"range\"\n      title=\"Adjust the luminosity\"\n      id=\"luminosityInput\" #luminosityInput\n      min=0 max=100\n      [value]=\"100 - shade.luminosity\"\n      (input)=\"updateColor(3, luminosityInput.value)\"\n      (change)=\"adjustColor()\"\n    >\n\n    <div class=\"flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full\">\n      <!-- Edit Name -->\n      <input\n        type=\"text\"\n        title=\"Give your color a name\"\n        id=\"nameInput\" #nameInput\n        class=\"text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-shadow duration-200\"\n        placeholder=\"Color Name\"\n        [value]=\"colorService.getColor().name\"\n        (input)=\"updateName(nameInput.value)\"\n      >\n\n      <!-- Add Color to Palette -->\n      <input\n        type=\"button\"\n        class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium transition-all duration-200\"\n        [ngClass]=\"dark ? 'bg-neutral-600' : 'bg-neutral-400'\"\n        [title]=\"state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'\"\n        [value]=\"state === 0 ? 'Add to palette' : 'Replace existing color'\"\n        (click)=\"addColor.emit(colorService.getColor())\"\n      >\n\n      <!-- Generate new random color -->\n      <input\n        type=\"button\"\n        title=\"Generate new random color\"\n        value=\"Random Color\"\n        class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium transition-all duration-200\"\n        [ngClass]=\"dark ? 'bg-neutral-600' : 'bg-neutral-400'\"\n        (click)=\"colorService.randomColor()\"\n      >\n    </div>\n  </section>\n\n  <!-- Preview Color -->\n  <section class=\"grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default\">\n    <span\n      *ngFor=\"let shade of colorService.getColor().shades\"\n      [title]=\"shade.index + '&#10;' + shade.hex\"\n      [ngStyle]=\"{\n        'background-color': shade.hex,\n        'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex\n      }\"\n      class=\"block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2\"\n    >\n      {{shade.hex}}\n    </span>\n  </section>\n</article>\n"
         },
         {
             "name": "ColorViewerComponent",
-            "id": "component-ColorViewerComponent-0d7ed8533f80f378c247f5d7014ef500bd2dda33251cce6990a4c4543a8ac7fce5a89881035bb6e374d47411f02ac79b48a8e66ccda7e6d231644ade1db55595",
+            "id": "component-ColorViewerComponent-8186df04db70ca5526f453d92acbc807a936057c9919865f296b05199b474f611d37851d232f23870d3b80bda7c5df6a2e0738244dbc15e3e71d846b824235cf",
             "file": "src/app/components/color-viewer/color-viewer.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1674,8 +2589,8 @@
                     "name": "color",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
-                    "type": "Color | undefined",
+                    "line": 12,
+                    "type": "Color",
                     "decorators": []
                 },
                 {
@@ -1686,28 +2601,32 @@
                     "line": 14,
                     "type": "boolean",
                     "decorators": []
-                },
-                {
-                    "name": "inPalette",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 17,
-                    "type": "boolean",
-                    "decorators": []
                 }
             ],
             "outputsClass": [
                 {
-                    "name": "onAction",
+                    "name": "onRemove",
                     "defaultValue": "new EventEmitter<Color>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 17,
                     "type": "EventEmitter"
                 }
             ],
-            "propertiesClass": [],
+            "propertiesClass": [
+                {
+                    "name": "colorService",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColorService",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        123
+                    ]
+                }
+            ],
             "methodsClass": [
                 {
                     "name": "ngOnInit",
@@ -1715,7 +2634,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -1727,18 +2646,44 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\n\r\n@Component({\r\n  selector: 'color-viewer',\r\n  templateUrl: './color-viewer.component.html',\r\n})\r\nexport class ColorViewerComponent implements OnInit {\r\n\r\n  @Input()\r\n  color: Color | undefined\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Input()\r\n  inPalette = false\r\n\r\n  @Output()\r\n  onAction = new EventEmitter<Color>()\r\n\r\n  ngOnInit(): void {\r\n    if (document.getElementById('body')?.classList.contains('dark'))\r\n      this.dark = true\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\nimport {ColorService} from \"../../services/color.service\";\r\n\r\n@Component({\r\n  selector: 'color-viewer',\r\n  templateUrl: './color-viewer.component.html',\r\n})\r\nexport class ColorViewerComponent implements OnInit {\r\n\r\n  @Input()\r\n  color: Color\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  onRemove = new EventEmitter<Color>()\r\n\r\n  constructor(\r\n    public colorService: ColorService\r\n  ) {\r\n    this.color = Color.generateRandomColor()\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    if (document.getElementById('body')?.classList.contains('dark'))\r\n      this.dark = true\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "colorService",
+                        "type": "ColorService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 17,
+                "jsdoctags": [
+                    {
+                        "name": "colorService",
+                        "type": "ColorService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<article\r\n  *ngIf=\"color\"\r\n  [ngStyle]=\"{\r\n    'border-color': color.shades[dark ? 2 : 7].hex\r\n  }\"\r\n  class=\"overflow-clip my-4 rounded-xl shadow-lg border-2 grid grid-areas-color-square sm:grid-areas-color-wide items-center\"\r\n>\r\n  <h3\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 8 : 1].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex,\r\n      'text-align': dark ? 'right' : 'left'\r\n    }\"\r\n    class=\"grid-in-name px-4\"\r\n  >\r\n    {{color.name}}\r\n  </h3>\r\n\r\n  <span\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 8 : 1].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex,\r\n      'text-align': dark ? 'right' : 'left'\r\n    }\"\r\n    (click)=\"onAction.emit(color)\"\r\n    class=\"grid-in-button flex h-full justify-center items-center cursor-pointer\"\r\n  >\r\n    <img\r\n      class=\"h-8 dark:invert\" *ngIf=\"inPalette\"\r\n      src=\"/assets/icons/close.svg\" alt=\"Remove from palette\"\r\n    >\r\n    <img\r\n      class=\"h-8 dark:invert\" *ngIf=\"!inPalette\"\r\n      src=\"/assets/icons/add.svg\" alt=\"Add to palette\"\r\n    >\r\n  </span>\r\n\r\n  <span\r\n    *ngFor=\"let shade of color.shades\"\r\n    [ngStyle]=\"{\r\n      'background-color': shade.hex,\r\n      'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex\r\n    }\"\r\n    class=\"block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6\"\r\n    [title]=\"shade.index + '&#10;' + shade.hex\"\r\n  >\r\n    {{shade.hex}}\r\n  </span>\r\n</article>\r\n"
+            "templateData": "<article\r\n  class=\"overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center\"\r\n>\r\n  <h3\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 7 : 2].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex\r\n    }\"\r\n    class=\"grid-in-name px-4\"\r\n  >\r\n    {{color.name}}\r\n  </h3>\r\n\r\n  <span\r\n    [ngStyle]=\"{\r\n      'background-color': color.shades[dark ? 7 : 2].hex,\r\n      'color': color.shades[dark ? 1 : 8].hex\r\n    }\"\r\n\r\n    class=\"grid-in-button flex gap-6 pr-6 h-full justify-end items-center\"\r\n  >\r\n    <img\r\n      class=\"icon\"\r\n      src=\"/assets/icons/edit.svg\" alt=\"Edit color\"\r\n      (click)=\"colorService.loadColor(color)\"\r\n    >\r\n\r\n    <img\r\n      class=\"icon\"\r\n      src=\"/assets/icons/delete.svg\" alt=\"Remove from palette\"\r\n      (click)=\"onRemove.emit(color)\"\r\n    >\r\n  </span>\r\n\r\n  <span\r\n    *ngFor=\"let shade of color.shades\"\r\n    [ngStyle]=\"{\r\n      'background-color': shade.hex,\r\n      'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex\r\n    }\"\r\n    class=\"block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6\"\r\n    [title]=\"shade.index + '&#10;' + shade.hex\"\r\n  >\r\n    {{shade.hex}}\r\n  </span>\r\n</article>\r\n"
         },
         {
             "name": "LightSwitchComponent",
-            "id": "component-LightSwitchComponent-290e41b619fb7f77300f37368da24222ba1bde70b982519736a650ab2a469d051f677f52e02b9a7f6efe892c184d61da48e59d278851088470f16a4d664c82a2",
+            "id": "component-LightSwitchComponent-cfe186dceae8f6fb444dd9d3f4c958f4bb4eb4201892241008286c92e4e5f9e541df338178f7fe3f05de0f70885c222f715659f9b500bda7d58052ccd4e08e34",
             "file": "src/app/components/light-switch/light-switch.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1781,9 +2726,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 23,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nToggle between light and dark theme\n",
+                    "description": "<p>Toggle between light and dark theme</p>\n"
                 }
             ],
             "deprecated": false,
@@ -1793,7 +2740,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnInit} from '@angular/core';\r\nimport {StorageService} from \"../../services/storage.service\";\r\n\r\n@Component({\r\n  selector: 'light-switch',\r\n  templateUrl: './light-switch.component.html',\r\n})\r\nexport class LightSwitchComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark: boolean | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService\r\n  ) { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n  toggleTheme(): void {\r\n    this.dark = this.storage.toggleTheme(!this.dark)\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {Component, Input, OnInit} from '@angular/core';\r\nimport {StorageService} from \"../../services/storage.service\";\r\n\r\n@Component({\r\n  selector: 'light-switch',\r\n  templateUrl: './light-switch.component.html',\r\n})\r\nexport class LightSwitchComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark: boolean | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService\r\n  ) { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n  /**\r\n   * Toggle between light and dark theme\r\n   */\r\n  toggleTheme(): void {\r\n    this.dark = this.storage.toggleTheme(!this.dark)\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -1830,7 +2777,7 @@
         },
         {
             "name": "PaletteViewerComponent",
-            "id": "component-PaletteViewerComponent-ad1c322215307cebd611343df3ff0c4efbc44bb4bdd711e0d53e02fd2ce2ed04408e30b9be6e05edd386d12f5099d19cacc6dc9b0681156d79a3f12d2c4c0c6a",
+            "id": "component-PaletteViewerComponent-2245bbbd0e963b4b9e257d2e48dc37e850bb68c55e4b0125af86f47ddd38d1af9ea5bd9b6e6f67c692aab3a80dddf22acbecdf260a884324fe836f99f41a92a9",
             "file": "src/app/components/palette-viewer/palette-viewer.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -1859,7 +2806,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 14,
-                    "type": "Palette | undefined",
+                    "type": "Palette",
                     "decorators": []
                 }
             ],
@@ -1902,14 +2849,26 @@
             ],
             "methodsClass": [
                 {
+                    "name": "addRandomColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 55,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
                     "name": "closeEditor",
                     "args": [],
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 57,
+                    "line": 79,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nClose editor for palette name and save the palette to local storage.\n",
+                    "description": "<p>Close editor for palette name and save the palette to local storage.</p>\n"
                 },
                 {
                     "name": "ngOnInit",
@@ -1917,7 +2876,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 31,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -1927,9 +2886,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 49,
+                    "line": 69,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nOpen editor for palette name.\n",
+                    "description": "<p>Open editor for palette name.</p>\n"
                 },
                 {
                     "name": "removeColor",
@@ -1944,18 +2905,35 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 50,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nRemove color from palette and save the current palette to local storage.\nIf color is not present in palette nothing happens.\n",
+                    "description": "<p>Remove color from palette and save the current palette to local storage.\nIf color is not present in palette nothing happens.</p>\n",
                     "jsdoctags": [
                         {
-                            "name": "color",
+                            "name": {
+                                "pos": 1371,
+                                "end": 1376,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "color"
+                            },
                             "type": "Color",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 1365,
+                                "end": 1370,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>Color to remove from palette</p>\n"
                         }
                     ]
                 },
@@ -1972,18 +2950,35 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": "",
+                    "rawdescription": "\n\nAsk user for confirmation an trigger onRemove event handler.\n",
+                    "description": "<p>Ask user for confirmation an trigger onRemove event handler.</p>\n",
                     "jsdoctags": [
                         {
-                            "name": "$event",
+                            "name": {
+                                "pos": 968,
+                                "end": 974,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "$event"
+                            },
                             "type": "MouseEvent",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "text": "param"
-                            }
+                                "pos": 962,
+                                "end": 967,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": "<p>MouseEvent</p>\n"
                         }
                     ]
                 },
@@ -1993,9 +2988,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 62,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nSave current palette to local storage.\n",
+                    "description": "<p>Save current palette to local storage.</p>\n"
                 },
                 {
                     "name": "sortPalette",
@@ -2003,9 +3000,11 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 64,
+                    "line": 89,
                     "deprecated": false,
-                    "deprecationMessage": ""
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nTrigger palette sorting.\n",
+                    "description": "<p>Trigger palette sorting.</p>\n"
                 }
             ],
             "deprecated": false,
@@ -2015,7 +3014,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ToUnicodeVariantUtil} from \"../../utils/to-unicode-variant.util\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\n\r\n@Component({\r\n  selector: 'palette-viewer',\r\n  templateUrl: './palette-viewer.component.html',\r\n})\r\nexport class PaletteViewerComponent implements OnInit {\r\n\r\n  @Input()\r\n  palette: Palette | undefined\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  onRemove = new EventEmitter<Event>()\r\n\r\n  editingState = false\r\n\r\n  @ViewChild('editTitle')\r\n  editTitle: ElementRef<HTMLInputElement> | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService\r\n  ) { }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n  removePalette($event: MouseEvent) {\r\n    if (confirm(`Are you sure you want to delete the palette?\\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`))\r\n      this.onRemove.emit($event)\r\n  }\r\n\r\n  removeColor(color: Color) {\r\n    this.palette?.removeColor(color)\r\n    this.savePalette()\r\n  }\r\n\r\n  savePalette() {\r\n    if (this.palette)\r\n      this.storage.savePalette(this.palette)\r\n  }\r\n\r\n  openEditor() {\r\n    this.editingState = true\r\n    setTimeout(() => {\r\n      console.info(this.editTitle)\r\n      this.editTitle?.nativeElement.focus()\r\n    }, 0)\r\n  }\r\n\r\n  closeEditor() {\r\n    this.editingState = false\r\n    if (this.palette)\r\n      this.palette.title = this.editTitle?.nativeElement.value || 'Random'\r\n    this.savePalette()\r\n  }\r\n\r\n  sortPalette() {\r\n    this.palette?.sortColors()\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ToUnicodeVariantUtil} from \"../../utils/to-unicode-variant.util\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\n\r\n@Component({\r\n  selector: 'palette-viewer',\r\n  templateUrl: './palette-viewer.component.html',\r\n})\r\nexport class PaletteViewerComponent implements OnInit {\r\n\r\n  @Input()\r\n  palette: Palette\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  onRemove = new EventEmitter<Event>()\r\n\r\n  editingState = false\r\n\r\n  @ViewChild('editTitle')\r\n  editTitle: ElementRef<HTMLInputElement> | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService\r\n  ) {\r\n    this.palette = Palette.generateRandomPalette(5)\r\n  }\r\n\r\n  ngOnInit(): void {\r\n  }\r\n\r\n  /**\r\n   * Ask user for confirmation an trigger onRemove event handler.\r\n   * @param $event MouseEvent\r\n   */\r\n  removePalette($event: MouseEvent) {\r\n    if (confirm(`Are you sure you want to delete the palette?\\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`))\r\n      this.onRemove.emit($event)\r\n  }\r\n\r\n  /**\r\n   * Remove color from palette and save the current palette to local storage.\r\n   * If color is not present in palette nothing happens.\r\n   * @param color Color to remove from palette\r\n   */\r\n  removeColor(color: Color) {\r\n    if (this.palette.removeColor(color))\r\n      this.savePalette()\r\n  }\r\n\r\n  addRandomColor() {\r\n    this.palette.addColor(Color.generateRandomColor())\r\n  }\r\n\r\n  /**\r\n   * Save current palette to local storage.\r\n   */\r\n  savePalette() {\r\n    this.storage.savePalette(this.palette)\r\n  }\r\n\r\n  /**\r\n   * Open editor for palette name.\r\n   */\r\n  openEditor() {\r\n    this.editingState = true\r\n    setTimeout(() => {\r\n      this.editTitle?.nativeElement.focus()\r\n    }, 0)\r\n  }\r\n\r\n  /**\r\n   * Close editor for palette name and save the palette to local storage.\r\n   */\r\n  closeEditor() {\r\n    this.editingState = false\r\n    if (this.palette)\r\n      this.palette.title = this.editTitle?.nativeElement.value || 'Random'\r\n    this.savePalette()\r\n  }\r\n\r\n  /**\r\n   * Trigger palette sorting.\r\n   */\r\n  sortPalette() {\r\n    this.palette.sortColors()\r\n  }\r\n\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -2048,204 +3047,26 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<section\r\n  *ngIf=\"palette\"\r\n  class=\"max-w-5xl mx-auto px-4 rounded-xl\r\n    border-2 border-neutral-600 dark:bord-neutral-300\r\n    bg-neutral-200 dark:bg-neutral-700 shadow-lg\"\r\n>\r\n  <div class=\"flex items-center justify-between\">\r\n    <h2 *ngIf=\"!editingState\" (click)=\"savePalette()\">{{palette.title}}</h2>\r\n\r\n    <input *ngIf=\"editingState\" type=\"text\"\r\n           [value]=\"palette.title\" #editTitle\r\n           placeholder=\"Palette title\"\r\n           (focusout)=\"closeEditor()\" (keydown.enter)=\"closeEditor()\"\r\n           class=\"bg-transparent p-0 text-xl font-bold my-4\r\n            border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0\">\r\n\r\n    <div class=\"flex\">\r\n      <span title=\"Edit palette\" class=\"px-4 cursor-pointer dark:invert\" (click)=\"openEditor()\">\r\n        <img src=\"/assets/icons/edit.svg\" alt=\"Edit\" class=\"h-8\">\r\n      </span>\r\n\r\n      <span title=\"Sort palette by hue\" class=\"px-4 cursor-pointer dark:invert\" (click)=\"sortPalette()\">\r\n        <img src=\"/assets/icons/sort.svg\" alt=\"Sort\" class=\"h-8\">\r\n      </span>\r\n\r\n      <span title=\"Remove palette\" class=\"px-4 cursor-pointer dark:invert\" (click)=\"removePalette($event)\">\r\n        <img src=\"/assets/icons/delete.svg\" alt=\"Remove\" class=\"h-8\">\r\n      </span>\r\n    </div>\r\n  </div>\r\n\r\n  <color-viewer\r\n    *ngFor=\"let color of palette.colors\"\r\n    [color]=\"color\"\r\n    [dark]=\"dark\"\r\n    [inPalette]=\"true\"\r\n    (onAction)=\"removeColor(color)\"\r\n  ></color-viewer>\r\n</section>\r\n"
-        },
-        {
-            "name": "ShadePickerComponent",
-            "id": "component-ShadePickerComponent-b9e8c2e071fc8ad847a9bb9ed4c09cc4283ef717e2be5432048a194e4d0c08fae27bbc230ba90d4cb8123b4dcaae20f9e2b2134a8022683389f5f67c2a91575e",
-            "file": "src/app/components/shade-picker/shade-picker.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "shade-picker",
-            "styleUrls": [
-                "./shade-picker.component.css"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./shade-picker.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "dark",
-                    "defaultValue": "false",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 16,
-                    "type": "boolean",
-                    "decorators": []
-                },
-                {
-                    "name": "name",
-                    "defaultValue": "''",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 19,
-                    "type": "string",
-                    "decorators": []
-                },
-                {
-                    "name": "shade",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "Shade | undefined",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "colorEmitter",
-                    "defaultValue": "new EventEmitter<Color>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 22,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "generateColor",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 63,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 24,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "updateName",
-                    "args": [
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 59,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "updateProperties",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 50,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "updateShade",
-                    "args": [
-                        {
-                            "name": "type",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        },
-                        {
-                            "name": "value",
-                            "type": "string | number",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 31,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "type",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        },
-                        {
-                            "name": "value",
-                            "type": "string | number",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\nimport {Shade} from \"../../models/shade.model\";\nimport {Color} from \"../../models/color.model\";\n\n@Component({\n  selector: 'shade-picker',\n  templateUrl: './shade-picker.component.html',\n  styleUrls: ['./shade-picker.component.css']\n})\nexport class ShadePickerComponent implements OnInit {\n\n  @Input()\n  shade: Shade | undefined\n\n  @Input()\n  dark = false\n\n  @Input()\n  name = ''\n\n  @Output()\n  colorEmitter = new EventEmitter<Color>()\n\n  ngOnInit(): void {\n    if (document.getElementById('body')?.classList.contains('dark'))\n      this.dark = true\n\n    this.updateProperties()\n  }\n\n  updateShade(type: string, value: string | number): void {\n    if (type === 'HEX' && isNaN(+value))\n      this.shade = new Shade(0, `${value}`)\n    else if (!isNaN(+value)) {\n      if (type === 'HUE') {\n        // @ts-ignore\n        this.shade = new Shade(0, value, this.shade?.saturation, this.shade?.luminosity)\n      } else if (type === 'SATURATION') {\n        // @ts-ignore\n        this.shade = new Shade(0, this.shade?.hue, value, this.shade?.luminosity)\n      } else if (type === 'LUMINOSITY') {\n        // @ts-ignore\n        this.shade = new Shade(0, this.shade?.hue, this.shade?.saturation, 100 - value)\n      }\n    }\n\n    this.updateProperties()\n  }\n\n  updateProperties() {\n    if (this.shade) {\n      document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\n      document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\n      document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\n      document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\n    }\n  }\n\n  updateName(name: string) {\n    this.name = name\n  }\n\n  generateColor() {\n    if (this.shade)\n      this.colorEmitter.emit(new Color(this.name || this.shade.hex, this.shade.hex))\n  }\n\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "input {\r\n  @apply block w-full;\r\n}\r\n\r\ninput[type=range], input[type=color] {\r\n  @apply w-full outline-none appearance-none;\r\n  -webkit-appearance: none;\r\n}\r\n\r\ninput[type=range] {\r\n  @apply h-1/2;\r\n}\r\n\r\ninput[type=range]::-webkit-slider-thumb {\r\n  @apply w-6 h-10 cursor-pointer appearance-none outline-none rounded;\r\n  background-color: var(--selected-hex);\r\n  -webkit-appearance: none;\r\n  -moz-appearance: none;\r\n}\r\n\r\ninput[type=range]::-moz-range-thumb {\r\n  @apply w-6 h-10 cursor-pointer rounded;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch-wrapper {\r\n  @apply p-0;\r\n}\r\n\r\ninput[type=color]::-webkit-color-swatch {\r\n  @apply border-none;\r\n}\r\n\r\n#hexInput {\r\n  @apply h-full max-h-8 sm:max-h-full;\r\n  background-color: var(--selected-hex);\r\n}\r\n\r\n#hueInput {\r\n  background: linear-gradient(90deg,\r\n    hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,\r\n    hsl(36, var(--selected-saturation), var(--selected-luminosity)) 10%,\r\n    hsl(72, var(--selected-saturation), var(--selected-luminosity)) 20%,\r\n    hsl(108, var(--selected-saturation), var(--selected-luminosity)) 30%,\r\n    hsl(144, var(--selected-saturation), var(--selected-luminosity)) 40%,\r\n    hsl(180, var(--selected-saturation), var(--selected-luminosity)) 50%,\r\n    hsl(216, var(--selected-saturation), var(--selected-luminosity)) 60%,\r\n    hsl(252, var(--selected-saturation), var(--selected-luminosity)) 70%,\r\n    hsl(288, var(--selected-saturation), var(--selected-luminosity)) 80%,\r\n    hsl(324, var(--selected-saturation), var(--selected-luminosity)) 90%,\r\n    hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#saturationInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,\r\n  hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%);\r\n}\r\n\r\n#luminosityInput {\r\n  background: linear-gradient(90deg,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,\r\n  hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%);\r\n}\r\n",
-                    "styleUrl": "./shade-picker.component.css"
-                }
-            ],
-            "stylesData": "",
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<article\r\n  class=\"grid sm:grid-cols-2 grid-rows-7 sm:grid-rows-5 gap-x-4 gap-y-2\r\n    max-w-5xl mx-auto items-center p-4 rounded-xl border-2 shadow-lg\"\r\n  [ngClass]=\"dark ? 'border-neutral-300 bg-neutral-700' : 'border-neutral-600 bg-neutral-200'\"\r\n  *ngIf=\"shade\"\r\n>\r\n  <input\r\n    class=\"sm:row-span-2\"\r\n    id=\"hexInput\" type=\"color\" title=\"Select a color\"\r\n    [value]=\"shade.hex\" #hexInput\r\n    (input)=\"updateShade('HEX', hexInput.value)\">\r\n\r\n  <input\r\n    class=\"row-start-1 sm:row-auto text-black\"\r\n    id=\"nameInput\" type=\"text\" title=\"Give your color a name\"\r\n    [value]=\"name\" #nameInput placeholder=\"Color Name\"\r\n    (input)=\"updateName(nameInput.value)\">\r\n\r\n  <section\r\n    [ngStyle]=\"{\r\n      'background-color': shade.hex,\r\n      'color': shade.luminosity > 48 ? '#000000' : '#ffffff'\r\n    }\"\r\n    (click)=\"generateColor()\"\r\n    class=\"block w-full text-lg flex items-center justify-center\r\n      row-span-2 sm:row-span-4 row-start-6 h-full cursor-pointer p-4\"\r\n    title=\"Click to generate all 10 shades for your color\"\r\n  >\r\n    <h2 class=\"text-center\">\r\n      Click to generate color\r\n      {{name ? (name + ' (' + shade.hex + ')') : shade.hex}}\r\n    </h2>\r\n  </section>\r\n\r\n  <input\r\n    id=\"hueInput\" type=\"range\" title=\"Adjust the hue\"\r\n    [value]=\"shade.hue\" #hueInput min=\"0\" max=\"360\"\r\n    (input)=\"updateShade('HUE', hueInput.value)\">\r\n\r\n  <input\r\n    id=\"saturationInput\" type=\"range\" title=\"Adjust the saturation\"\r\n    [value]=\"shade.saturation\" #saturationInput min=\"0\" max=\"100\"\r\n    (input)=\"updateShade('SATURATION', saturationInput.value)\">\r\n\r\n  <input\r\n    id=\"luminosityInput\" type=\"range\" title=\"Adjust the luminosity\"\r\n    [value]=\"100 - shade.luminosity\" #luminosityInput min=\"0\" max=\"100\"\r\n    (input)=\"updateShade('LUMINOSITY', luminosityInput.value)\">\r\n</article>\r\n"
+            "templateData": "<section\r\n  class=\"max-w-5xl mx-auto p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700\"\r\n>\r\n  <div class=\"grid grid-cols-2 items-center mb-6\">\r\n    <h2 *ngIf=\"!editingState\" (click)=\"openEditor()\">{{palette.title}}</h2>\r\n\r\n    <input *ngIf=\"editingState\" type=\"text\"\r\n           [value]=\"palette.title\" #editTitle\r\n           placeholder=\"Palette title\"\r\n           (focusout)=\"closeEditor()\" (keydown.enter)=\"closeEditor()\"\r\n           class=\"bg-transparent p-0 text-xl font-bold\r\n            border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0\">\r\n\r\n    <div class=\"flex gap-6 pr-6 justify-end\">\r\n      <span title=\"Sort palette by hue\" (click)=\"sortPalette()\">\r\n        <img src=\"/assets/icons/sort.svg\" alt=\"Sort\" class=\"icon\">\r\n      </span>\r\n\r\n      <span title=\"Edit palette\" (click)=\"openEditor()\">\r\n        <img src=\"/assets/icons/edit.svg\" alt=\"Edit\" class=\"icon\">\r\n      </span>\r\n\r\n      <span title=\"Remove palette\" (click)=\"removePalette($event)\">\r\n        <img src=\"/assets/icons/delete.svg\" alt=\"Remove\" class=\"icon\">\r\n      </span>\r\n    </div>\r\n  </div>\r\n\r\n  <color-viewer\r\n    *ngFor=\"let color of palette.colors\"\r\n    [color]=\"color\"\r\n    [dark]=\"dark\"\r\n    (onRemove)=\"removeColor(color)\"\r\n  ></color-viewer>\r\n\r\n  <button\r\n    (click)=\"addRandomColor()\"\r\n    class=\"\r\n        rounded-xl px-4 py-2 block mx-auto mt-4\r\n        bg-neutral-400 dark:bg-neutral-600 shadow hover:shadow-lg font-medium\"\r\n  >\r\n    Add random color\r\n  </button>\r\n</section>\r\n"
         }
     ],
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-054fa5150ab26549014a384874f2479def14781d6603dc61aef2ef80c330bb84477ba428fd8ae18393cb511a51b5f88105431dc61845ae623e8e42b77350b2e0",
+            "id": "module-AppModule-2b5e1a6d09580c76922ff191f5a23c020541e219cf7dd8b98b1f9758ce2976bb69dc176a920cd3279aaf7031ce4d088dfbfbe5487fba9f150bafe94cc5b3eaca",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppComponent } from './app.component';\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component';\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component';\nimport { ShadePickerComponent } from './components/shade-picker/shade-picker.component';\nimport {StorageService} from \"./services/storage.service\";\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component';\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ColorViewerComponent,\n    PaletteViewerComponent,\n    ShadePickerComponent,\n    LightSwitchComponent\n  ],\n  imports: [\n    BrowserModule\n  ],\n  providers: [StorageService],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppComponent } from './app.component';\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component';\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component';\nimport {StorageService} from \"./services/storage.service\";\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component';\nimport { ColorEditorComponent } from './components/color-editor/color-editor.component';\nimport {ColorService} from \"./services/color.service\";\n\n@NgModule({\n  declarations: [\n    AppComponent,\n    ColorViewerComponent,\n    PaletteViewerComponent,\n    LightSwitchComponent,\n    ColorEditorComponent\n  ],\n  imports: [\n    BrowserModule\n  ],\n  providers: [\n    StorageService,\n    ColorService\n  ],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
                     "elements": [
+                        {
+                            "name": "ColorService"
+                        },
                         {
                             "name": "StorageService"
                         }
@@ -2258,6 +3079,9 @@
                             "name": "AppComponent"
                         },
                         {
+                            "name": "ColorEditorComponent"
+                        },
+                        {
                             "name": "ColorViewerComponent"
                         },
                         {
@@ -2265,9 +3089,6 @@
                         },
                         {
                             "name": "PaletteViewerComponent"
-                        },
-                        {
-                            "name": "ShadePickerComponent"
                         }
                     ]
                 },
@@ -2344,7 +3165,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new Palette('media-scope')"
+                "defaultValue": "new Palette('media-scope', uuidv4())"
             },
             {
                 "name": "Pawcode",
@@ -2367,16 +3188,6 @@
                 "defaultValue": "Template.bind({})"
             },
             {
-                "name": "PawcodeBlue",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
                 "name": "pawcodePalette",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2384,7 +3195,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new Palette('pawcode')"
+                "defaultValue": "new Palette('pawcode', uuidv4())"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Primary",
@@ -2414,7 +3235,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "new Palette('Rainbow')"
+                "defaultValue": "new Palette('Rainbow', uuidv4())"
+            },
+            {
+                "name": "Random",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "require",
@@ -2424,6 +3255,16 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "literal type"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
             },
             {
                 "name": "Template",
@@ -2454,21 +3295,90 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
             }
         ],
         "functions": [],
         "typealiases": [],
-        "enumerations": [],
+        "enumerations": [
+            {
+                "name": "ChangeType",
+                "childs": [
+                    {
+                        "name": "LOAD",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "ADJUST",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "RANDOM",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/services/color.service.ts"
+            },
+            {
+                "name": "EditorState",
+                "childs": [
+                    {
+                        "name": "ADD",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "EDIT",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/components/color-editor/color-editor.component.ts"
+            },
+            {
+                "name": "UpdateType",
+                "childs": [
+                    {
+                        "name": "HEX",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "HUE",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "SATURATION",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "LUMINOSITY",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/components/color-editor/color-editor.component.ts"
+            }
+        ],
         "groupedVariables": {
             "src/test.ts": [
                 {
@@ -2534,7 +3444,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new Palette('media-scope')"
+                    "defaultValue": "new Palette('media-scope', uuidv4())"
                 },
                 {
                     "name": "Pawcode",
@@ -2554,7 +3464,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new Palette('pawcode')"
+                    "defaultValue": "new Palette('pawcode', uuidv4())"
                 },
                 {
                     "name": "Rainbow",
@@ -2574,7 +3484,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "new Palette('Rainbow')"
+                    "defaultValue": "new Palette('Rainbow', uuidv4())"
+                },
+                {
+                    "name": "Random",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
                 },
                 {
                     "name": "Template",
@@ -2609,12 +3529,12 @@
                     "defaultValue": "(args) => ({\r\n  props: args\r\n})"
                 }
             ],
-            "src/app/components/shade-picker/shade-picker.component.stories.ts": [
+            "src/app/components/color-editor/color-editor.component.stories.ts": [
                 {
-                    "name": "PawcodeBlue",
+                    "name": "Primary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
+                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
@@ -2624,7 +3544,7 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/components/shade-picker/shade-picker.component.stories.ts",
+                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -2655,12 +3575,95 @@
             ]
         },
         "groupedFunctions": {},
-        "groupedEnumerations": {},
+        "groupedEnumerations": {
+            "src/app/services/color.service.ts": [
+                {
+                    "name": "ChangeType",
+                    "childs": [
+                        {
+                            "name": "LOAD",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "ADJUST",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "RANDOM",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/services/color.service.ts"
+                }
+            ],
+            "src/app/components/color-editor/color-editor.component.ts": [
+                {
+                    "name": "EditorState",
+                    "childs": [
+                        {
+                            "name": "ADD",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "EDIT",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/components/color-editor/color-editor.component.ts"
+                },
+                {
+                    "name": "UpdateType",
+                    "childs": [
+                        {
+                            "name": "HEX",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "HUE",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "SATURATION",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "LUMINOSITY",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/components/color-editor/color-editor.component.ts"
+                }
+            ]
+        },
         "groupedTypeAliases": {}
     },
     "routes": [],
     "coverage": {
-        "count": 6,
+        "count": 14,
         "status": "low",
         "files": [
             {
@@ -2668,26 +3671,55 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "AppComponent",
-                "coveragePercent": 27,
-                "coverageCount": "3/11",
-                "status": "medium"
+                "coveragePercent": 23,
+                "coverageCount": "3/13",
+                "status": "low"
             },
             {
                 "filePath": "src/app/class/color-converter.ts",
                 "type": "class",
                 "linktype": "classe",
                 "name": "ColorConverter",
-                "coveragePercent": 0,
-                "coverageCount": "0/6",
-                "status": "low"
+                "coveragePercent": 85,
+                "coverageCount": "6/7",
+                "status": "very-good"
             },
             {
                 "filePath": "src/app/class/color-interpolater.ts",
                 "type": "class",
                 "linktype": "classe",
                 "name": "ColorInterpolater",
+                "coveragePercent": 75,
+                "coverageCount": "3/4",
+                "status": "good"
+            },
+            {
+                "filePath": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Primary",
                 "coveragePercent": 0,
-                "coverageCount": "0/4",
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/color-editor/color-editor.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "ColorEditorComponent",
+                "coveragePercent": 25,
+                "coverageCount": "3/12",
                 "status": "low"
             },
             {
@@ -2716,7 +3748,7 @@
                 "linktype": "component",
                 "name": "ColorViewerComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/6",
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -2744,8 +3776,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "LightSwitchComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/5",
+                "coveragePercent": 20,
+                "coverageCount": "1/5",
                 "status": "low"
             },
             {
@@ -2813,6 +3845,16 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Random",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Template",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -2823,38 +3865,9 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "PaletteViewerComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/14",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/shade-picker/shade-picker.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "PawcodeBlue",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/shade-picker/shade-picker.component.stories.ts",
-                "type": "variable",
-                "linktype": "miscellaneous",
-                "linksubtype": "variable",
-                "name": "Template",
-                "coveragePercent": 0,
-                "coverageCount": "0/1",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/components/shade-picker/shade-picker.component.ts",
-                "type": "component",
-                "linktype": "component",
-                "name": "ShadePickerComponent",
-                "coveragePercent": 0,
-                "coverageCount": "0/10",
-                "status": "low"
+                "coveragePercent": 40,
+                "coverageCount": "6/15",
+                "status": "medium"
             },
             {
                 "filePath": "src/app/models/color.model.ts",
@@ -2870,17 +3883,26 @@
                 "type": "class",
                 "linktype": "classe",
                 "name": "Palette",
-                "coveragePercent": 54,
-                "coverageCount": "6/11",
-                "status": "good"
+                "coveragePercent": 50,
+                "coverageCount": "6/12",
+                "status": "medium"
             },
             {
                 "filePath": "src/app/models/shade.model.ts",
                 "type": "class",
                 "linktype": "classe",
                 "name": "Shade",
+                "coveragePercent": 12,
+                "coverageCount": "1/8",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/services/color.service.ts",
+                "type": "injectable",
+                "linktype": "injectable",
+                "name": "ColorService",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {

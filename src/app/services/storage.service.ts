@@ -45,6 +45,7 @@ export class StorageService {
 
   /**
    * Load the palette saved in local storage.
+   * If no palette is saved a random one is going to be generated.
    */
   loadPalette(): Palette {
     const stored = localStorage.getItem('palette')
@@ -55,6 +56,7 @@ export class StorageService {
         console.error(e)
       }
     }
+
     return Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))
   }
 
