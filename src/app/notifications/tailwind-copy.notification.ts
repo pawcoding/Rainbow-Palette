@@ -7,17 +7,26 @@ export class TailwindCopyNotification {
     private notification: EventEmitter<Notification | undefined>,
   ) { }
 
-  getNotification() {
+  getNotification(): Notification {
     const closeEmitter = new EventEmitter()
     closeEmitter.subscribe(() => {
       this.notification.emit(undefined)
+    })
+
+    const docEmitter = new EventEmitter()
+    docEmitter.subscribe(() => {
+      window.open('https://tailwindcss.com/docs/customizing-colors#color-object-syntax', '_blank')
     })
 
     return {
       message: 'The palette has been copied to your clipboard. ' +
         'To use the colors copy the contents of the clipboard to the tailwind.config.js file.\n\n' +
         'Check TailwindsCSS\'s documentation for further instructions.',
-      actions: []
+      actions: [{
+        text: 'Read more',
+        title: 'Open documentation',
+        action: docEmitter
+      }]
     }
   }
 

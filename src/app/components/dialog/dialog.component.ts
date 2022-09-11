@@ -1,12 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { NotificationService} from "../../services/notification.service";
 import {Notification} from "../../notifications/notification.interface";
 
 @Component({
-  selector: 'export-dialog',
-  templateUrl: './export-dialog.component.html',
+  selector: 'custom-dialog',
+  templateUrl: './dialog.component.html',
 })
-export class ExportDialogComponent implements OnInit {
+export class DialogComponent implements OnInit {
+
+  @Input()
+  dark = false
 
   notification: Notification | undefined
 

@@ -65,7 +65,7 @@
         <!-- Add Color to Palette -->
         <input
           type="button"
-          class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 "
+          class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200"
           [title]="state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'"
           [value]="state === 0 ? 'Add to palette' : 'Replace existing color'"
           (click)="addColor.emit(colorService.getColor())"

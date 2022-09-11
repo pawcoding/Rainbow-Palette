@@ -27,7 +27,8 @@ This little web app lets you create you own custom color palette and export it i
 - [x] Export Tailwind to Clipboard
 - [x] Export Tailwind to File
 - [x] Global Notification Modal
-  - [ ] Style Modal
+  - [x] Style Modal
+  - [x] Storybook Documentation for Modal
 
 ### Side features
 - [x] Random color palette
@@ -35,6 +36,7 @@ This little web app lets you create you own custom color palette and export it i
 - [x] Mobile view
 - [x] Save palette in local storage
 - [x] Sort colors by hue
+- [ ] Add [MDX-Stories for Storybook](https://storybook.js.org/docs/react/writing-docs/mdx)
 - [ ] GitHub Action for automatic release update
 - [ ] Support other color models
   - [x] RGB
