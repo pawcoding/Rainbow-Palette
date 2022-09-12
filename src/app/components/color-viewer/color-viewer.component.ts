@@ -3,6 +3,7 @@ import {Color} from "../../models/color.model";
 import {ColorService} from "../../services/color.service";
 import {Shade} from "../../models/shade.model";
 import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'color-viewer',
@@ -19,7 +20,8 @@ export class ColorViewerComponent implements OnInit {
   onRemove = new EventEmitter<Color>()
 
   constructor(
-    public colorService: ColorService
+    public colorService: ColorService,
+    private notificationService: NotificationService
   ) {
     this.color = Color.generateRandomColor()
   }
@@ -33,7 +35,7 @@ export class ColorViewerComponent implements OnInit {
    */
   copyToClipboard(shade: Shade) {
     navigator.clipboard.writeText(shade.hex).then(() => {
-      alert(`${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'bs')} copied to clipboard.`)
+      this.notificationService.notification.emit(`Copied "${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'm')}" to your clipboard`)
     }).catch(e => {
       console.error('Error while copying to clipboard', e)
     })

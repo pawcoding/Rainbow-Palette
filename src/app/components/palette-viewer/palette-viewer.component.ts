@@ -4,7 +4,7 @@ import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
 import {Color} from "../../models/color.model";
 import {StorageService} from "../../services/storage.service";
 import {NotificationService} from "../../services/notification.service";
-import {ExportNotification} from "../../notifications/export.notification";
+import {ExportDialog} from "../../dialogs/export.dialog";
 
 @Component({
   selector: 'palette-viewer',
@@ -87,10 +87,7 @@ export class PaletteViewerComponent implements OnInit {
    */
   savePalette() {
     this.storage.savePalette(this.palette)
-    this.notificationService.notification.emit({
-      message: 'Palette saved',
-      actions: []
-    })
+    this.notificationService.notification.emit('Palette saved')
   }
 
   /**
@@ -117,10 +114,7 @@ export class PaletteViewerComponent implements OnInit {
    */
   sortPalette() {
     this.palette.sortColors()
-    this.notificationService.notification.emit({
-      message: 'Palette sorted',
-      actions: []
-    })
+    this.notificationService.notification.emit('Palette sorted')
   }
 
   /**
@@ -128,7 +122,7 @@ export class PaletteViewerComponent implements OnInit {
    */
   exportPalette() {
     this.notificationService.dialog
-      .emit(new ExportNotification(
+      .emit(new ExportDialog(
         this.notificationService.dialog,
         this.palette
       ).getNotification())

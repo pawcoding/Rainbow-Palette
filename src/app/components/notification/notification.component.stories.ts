@@ -2,7 +2,6 @@ import {NotificationComponent} from "./notification.component";
 import {Meta, Story} from "@storybook/angular";
 import {NotificationService} from "../../services/notification.service";
 import {EventEmitter} from "@angular/core";
-import {Notification} from "../../notifications/notification.interface";
 
 export default {
   title: 'Components/Notification',
@@ -11,25 +10,22 @@ export default {
 
 class MockNotificationService implements Partial<NotificationService> {
 
-  notification = new EventEmitter<Notification | undefined>()
+  notification = new EventEmitter<string | undefined>()
 
   constructor() {
-    let content = {
-      message: 'This is short notification.',
-      actions: []
-    }
+    const message = 'This is short notification.'
 
     setTimeout(() => {
-      this.notification.emit(content)
+      this.notification.emit(message)
     }, 0)
 
-    this.notification.subscribe(notification => {
-      if (notification) {
-        console.log('Show Notification\n', notification.message)
+    this.notification.subscribe(nextMessage => {
+      if (nextMessage) {
+        console.log('Show Notification\n', nextMessage)
       } else {
         console.log('Close Notification')
         setTimeout(() => {
-          this.notification.emit(content)
+          this.notification.emit(message)
         }, 1000)
       }
     })

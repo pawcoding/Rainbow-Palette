@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Notification} from "../../notifications/notification.interface";
 import {NotificationService} from "../../services/notification.service";
 
 @Component({
@@ -11,17 +10,17 @@ export class NotificationComponent implements OnInit {
   @Input()
   dark = false
 
-  content: Notification | undefined
-
+  message: string | undefined
   timeout: number | undefined
 
   constructor(
     private notificationService: NotificationService
   ) {
     notificationService.notification
-      .subscribe(notificationContent => {
-        this.content = notificationContent
-        if (notificationContent) {
+      .subscribe(notification => {
+        this.message = notification
+
+        if (notification) {
           clearTimeout(this.timeout)
           this.timeout = setTimeout(() => {
             this.closeNotification()

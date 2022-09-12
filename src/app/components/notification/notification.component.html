@@ -1,7 +1,7 @@
-<div *ngIf="content" [class]="dark ? 'dark' : ''" class="mb-6 mr-6 z-50">
+<div *ngIf="message" [class]="dark ? 'dark' : ''" class="mb-6 mr-6 z-50">
   <article class="flex items-center p-4 w-full max-w-xs bg-neutral-200 rounded-lg shadow dark:bg-neutral-500 text-neutral-600 dark:text-neutral-100" role="alert">
     <p class="mr-4 text-sm cursor-default">
-      {{content.message}}
+      {{message}}
     </p>
 
     <button type="button" (click)="closeNotification()"

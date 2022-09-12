@@ -8,7 +8,7 @@ import {Color} from "../../models/color.model";
 import {StorageService} from "../../services/storage.service";
 import {NotificationService} from "../../services/notification.service";
 import {EventEmitter} from "@angular/core";
-import {Notification} from "../../notifications/notification.interface";
+import {Dialog} from "../../interfaces/dialog.interface";
 
 export default {
   title: 'Components/Palette',
@@ -31,9 +31,9 @@ class MockStorageService implements Partial<StorageService> {
 
 class MockNotificationService implements Partial<NotificationService> {
 
-  dialog: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
+  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()
 
-  notification: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
+  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()
 
   constructor() {
     this.dialog.subscribe(dialogContent => {
@@ -44,9 +44,9 @@ class MockNotificationService implements Partial<NotificationService> {
       }
     })
 
-    this.notification.subscribe(notificationContent => {
-      if (notificationContent) {
-        console.log('Show notification\n', notificationContent.message)
+    this.notification.subscribe(message => {
+      if (message) {
+        console.log('Show notification\n', message)
       } else {
         console.log('Close notification')
       }

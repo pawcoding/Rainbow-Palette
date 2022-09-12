@@ -2,6 +2,8 @@ import {ColorEditorComponent} from "./color-editor.component";
 import {Meta, Story} from "@storybook/angular";
 import {ColorService} from "../../services/color.service";
 import {Color} from "../../models/color.model";
+import {NotificationService} from "../../services/notification.service";
+import {EventEmitter} from "@angular/core";
 
 export default {
   title: 'Components/Color Editor',
@@ -39,12 +41,31 @@ class MockColorService implements Partial<ColorService> {
 
 }
 
+class MockNotificationService implements Partial<NotificationService> {
+
+  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()
+
+  constructor() {
+    this.notification.subscribe(message => {
+      if (message) {
+        console.log('Show notification\n', message)
+      } else {
+        console.log('Close notification')
+      }
+    })
+  }
+
+}
+
 const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
     providers: [{
       provide: ColorService,
       useClass: MockColorService
+    }, {
+      provide: NotificationService,
+      useClass: MockNotificationService
     }]
   }
 })

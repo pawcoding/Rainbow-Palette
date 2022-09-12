@@ -1,14 +1,15 @@
 import {EventEmitter} from "@angular/core";
 import {PaletteExporter} from "../class/palette-exporter";
 import {Palette} from "../models/palette.model";
-import {Notification} from "./notification.interface";
-import {TailwindCopyNotification} from "./tailwind-copy.notification";
-import {TailwindFileNotification} from "./tailwind-file.notification";
+import {Dialog} from "../interfaces/dialog.interface";
+import {TailwindCopyDialog} from "./tailwind-copy.dialog";
+import {TailwindFileDialog} from "./tailwind-file.dialog";
+import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
 
-export class TailwindNotification {
+export class TailwindDialog {
 
   constructor(
-    private notification: EventEmitter<Notification | undefined>,
+    private notification: EventEmitter<Dialog | undefined>,
     private palette: Palette
   ) { }
 
@@ -17,7 +18,7 @@ export class TailwindNotification {
     tailwindCopyEmitter.subscribe(() => {
       const tailwind = PaletteExporter.exportPaletteToTailwind(this.palette)
       navigator.clipboard.writeText(tailwind).then(() => {
-        this.notification.emit(new TailwindCopyNotification(
+        this.notification.emit(new TailwindCopyDialog(
           this.notification
         ).getNotification())
       }).catch(e => {
@@ -38,13 +39,13 @@ export class TailwindNotification {
       a.download = 'tailwind.colors.js'
       a.click()
 
-      this.notification.emit(new TailwindFileNotification(
+      this.notification.emit(new TailwindFileDialog(
         this.notification
       ).getNotification())
     })
 
     return {
-      message: 'Do you want to copy the colors to your existing tailwind.config.js or create an extra file only for your palette?',
+      message: `Do you want to copy the colors to your existing ${ToUnicodeVariantUtil.toUnicodeVariant('tailwind.config.js', 'm')} or create an extra file only for your palette?`,
       actions: [{
         text: 'Copy',
         title: 'Copy content in existing file',

@@ -16,7 +16,7 @@ This little web app lets you create you own custom color palette and export it i
 | 🟩     | `0.0.3` | Pick custom shade and generate other shades for color   |
 | 🟩     | `0.0.4` | Add custom color to palette / remove color from palette |
 | 🟩     | `0.0.5` | Adjust colors from palette                              |
-| 🟥     | `0.1.0` | Export palette for plain CSS, Tailwind                  |
+| 🟩     | `0.1.0` | Export palette for plain CSS, Tailwind                  |
 | 🟥     | `0.1.1` | Adjust every shade                                      |
 | 🟥     | `0.1.2` | Improved algorithm for color generation                 |
 | 🟥     | `0.2.0` | Redesign                                                |
@@ -28,7 +28,7 @@ This little web app lets you create you own custom color palette and export it i
 - [x] Export Tailwind to File
 - [x] Global Dialog Modal
 - [x] Provide Mock Services for Storybook
-- [ ] Global Notification
+- [x] Global Notification System
 
 ### Side features
 - [x] Random color palette

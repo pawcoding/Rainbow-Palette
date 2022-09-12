@@ -86,12 +86,13 @@
     <section class="grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default">
       <span
         *ngFor="let shade of color.shades"
-        [title]="shade.index + '&#10;' + shade.hex"
         [ngStyle]="{
           'background-color': shade.hex,
           'color': color.getShade(shade.luminosity > 48 ? 900 : 50).hex
         }"
-        class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2"
+        class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2 cursor-pointer"
+        title="Copy hex to clipboard"
+        (click)="copyToClipboard(shade)"
       >
         {{shade.hex}}
       </span>

@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import { NotificationService} from "../../services/notification.service";
-import {Notification} from "../../notifications/notification.interface";
+import {Dialog} from "../../interfaces/dialog.interface";
 
 @Component({
   selector: 'custom-dialog',
@@ -11,7 +11,7 @@ export class DialogComponent implements OnInit {
   @Input()
   dark = false
 
-  content: Notification | undefined
+  content: Dialog | undefined
 
   constructor(
     private notificationService: NotificationService

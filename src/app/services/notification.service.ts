@@ -1,14 +1,14 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {Notification} from "../notifications/notification.interface";
+import {Dialog} from "../interfaces/dialog.interface";
 
 @Injectable({
   providedIn: 'root'
 })
 export class NotificationService {
 
-  dialog: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
+  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()
 
-  notification: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
+  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()
 
   constructor() { }
 

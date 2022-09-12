@@ -2,7 +2,7 @@ import {DialogComponent} from "./dialog.component";
 import {Meta, Story} from "@storybook/angular";
 import {NotificationService} from "../../services/notification.service";
 import {EventEmitter} from "@angular/core";
-import {Notification} from "../../notifications/notification.interface";
+import {Dialog} from "../../interfaces/dialog.interface";
 
 export default {
   title: 'Components/Dialog',
@@ -11,7 +11,7 @@ export default {
 
 class MockNotificationService implements Partial<NotificationService> {
 
-  dialog = new EventEmitter<Notification | undefined>()
+  dialog = new EventEmitter<Dialog | undefined>()
 
   constructor() {
     const wait = new EventEmitter()

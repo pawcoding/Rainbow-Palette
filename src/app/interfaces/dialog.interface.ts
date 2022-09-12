@@ -1,6 +1,6 @@
 import {EventEmitter} from "@angular/core";
 
-export interface Notification {
+export interface Dialog {
 
   message: string
   actions: Action[]

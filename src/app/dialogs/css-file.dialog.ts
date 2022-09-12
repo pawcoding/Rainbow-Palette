@@ -1,13 +1,14 @@
 import {EventEmitter} from "@angular/core";
-import {Notification} from "./notification.interface";
+import {Dialog} from "../interfaces/dialog.interface";
+import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
 
-export class CssFileNotification {
+export class CssFileDialog {
 
   constructor(
-    private notification: EventEmitter<Notification | undefined>,
+    private notification: EventEmitter<Dialog | undefined>,
   ) { }
 
-  getNotification(): Notification {
+  getNotification(): Dialog {
     const closeEmitter = new EventEmitter()
     closeEmitter.subscribe(() => {
       this.notification.emit(undefined)
@@ -20,10 +21,10 @@ export class CssFileNotification {
 
     return {
       message: 'Move the downloaded colors.css file to the root of your webserver. ' +
-        'Then link it in the head of your html file like\n\n' +
-        '<link rel="stylesheet" href="/colors.css">\n\n' +
-        'Now you can use them by referencing them like:\n\n' +
-        'color: var(--color-100);',
+        'Then link it in the head of your html file like:\n' +
+        ToUnicodeVariantUtil.toUnicodeVariant('<link rel="stylesheet" href="/colors.css">', 'm') + '\n\n' +
+        'Now you can use them by referencing them like:\n' +
+        ToUnicodeVariantUtil.toUnicodeVariant('color: var(--color-100);', 'm'),
       actions: [{
         text: 'Read more',
         title: 'Open MDN Web Docs',

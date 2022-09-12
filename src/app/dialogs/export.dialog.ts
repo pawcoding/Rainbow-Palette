@@ -1,13 +1,13 @@
 import {EventEmitter} from "@angular/core";
-import {CssNotification} from "./css.notification";
 import {Palette} from "../models/palette.model";
-import {Notification} from "./notification.interface";
-import {TailwindNotification} from "./tailwind.notification";
+import {Dialog} from "../interfaces/dialog.interface";
+import {CssDialog} from "./css.dialog";
+import {TailwindDialog} from "./tailwind.dialog";
 
-export class ExportNotification {
+export class ExportDialog {
 
   constructor(
-    private notification: EventEmitter<Notification | undefined>,
+    private notification: EventEmitter<Dialog | undefined>,
     private palette: Palette
   ) { }
 
@@ -15,7 +15,7 @@ export class ExportNotification {
     const cssEmitter = new EventEmitter()
     cssEmitter.subscribe(() => {
       this.notification
-        .emit(new CssNotification(
+        .emit(new CssDialog(
           this.notification,
           this.palette
         ).getNotification())
@@ -24,7 +24,7 @@ export class ExportNotification {
     const tailwindEmitter = new EventEmitter()
     tailwindEmitter.subscribe(() => {
       this.notification
-        .emit(new TailwindNotification(
+        .emit(new TailwindDialog(
           this.notification,
           this.palette
         ).getNotification())

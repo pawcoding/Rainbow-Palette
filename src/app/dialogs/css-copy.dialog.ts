@@ -1,13 +1,14 @@
 import {EventEmitter} from "@angular/core";
-import {Notification} from "./notification.interface";
+import {Dialog} from "../interfaces/dialog.interface";
+import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
 
-export class CssCopyNotification {
+export class CssCopyDialog {
 
   constructor(
-    private notification: EventEmitter<Notification | undefined>,
+    private notification: EventEmitter<Dialog | undefined>,
   ) { }
 
-  getNotification(): Notification {
+  getNotification(): Dialog {
     const closeEmitter = new EventEmitter()
     closeEmitter.subscribe(() => {
       this.notification.emit(undefined)
@@ -20,9 +21,9 @@ export class CssCopyNotification {
 
     return {
       message: 'The palette has been copied to your clipboard. ' +
-        'To use the colors as CSS properties copy the contents of the clipboard to the :root of your css file. ' +
-        'Now you can use them by referencing them like:\n\n' +
-        'color: var(--color-100);',
+        `To use the colors as CSS properties copy the contents of the clipboard to the ${ToUnicodeVariantUtil.toUnicodeVariant(':root', 'm')} of your css file. ` +
+        'Now you can use them by referencing them like:\n' +
+        ToUnicodeVariantUtil.toUnicodeVariant('color: var(--color-100);', 'm'),
       actions: [{
         text: 'Read more',
         title: 'Open MDN Web Docs',

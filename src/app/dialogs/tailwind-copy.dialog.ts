@@ -1,13 +1,14 @@
 import {EventEmitter} from "@angular/core";
-import {Notification} from "./notification.interface";
+import {Dialog} from "../interfaces/dialog.interface";
+import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
 
-export class TailwindCopyNotification {
+export class TailwindCopyDialog {
 
   constructor(
-    private notification: EventEmitter<Notification | undefined>,
+    private notification: EventEmitter<Dialog | undefined>,
   ) { }
 
-  getNotification(): Notification {
+  getNotification(): Dialog {
     const closeEmitter = new EventEmitter()
     closeEmitter.subscribe(() => {
       this.notification.emit(undefined)
@@ -20,7 +21,7 @@ export class TailwindCopyNotification {
 
     return {
       message: 'The palette has been copied to your clipboard. ' +
-        'To use the colors copy the contents of the clipboard to the tailwind.config.js file.\n\n' +
+        `To use the colors copy the contents of the clipboard to the ${ToUnicodeVariantUtil.toUnicodeVariant('tailwind.config.js', 'm')} file.\n\n` +
         'Check TailwindsCSS\'s documentation for further instructions.',
       actions: [{
         text: 'Read more',
