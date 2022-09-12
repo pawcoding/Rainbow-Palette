@@ -6,6 +6,8 @@ import {Notification} from "../notifications/notification.interface";
 })
 export class NotificationService {
 
+  dialog: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
+
   notification: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
 
   constructor() { }

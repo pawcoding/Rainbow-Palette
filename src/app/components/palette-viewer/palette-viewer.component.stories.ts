@@ -5,6 +5,10 @@ import {ColorViewerComponent} from "../color-viewer/color-viewer.component";
 // @ts-ignore
 import {v4 as uuidv4} from "uuid";
 import {Color} from "../../models/color.model";
+import {StorageService} from "../../services/storage.service";
+import {NotificationService} from "../../services/notification.service";
+import {EventEmitter} from "@angular/core";
+import {Notification} from "../../notifications/notification.interface";
 
 export default {
   title: 'Components/Palette',
@@ -17,8 +21,51 @@ export default {
   ]
 } as Meta
 
+class MockStorageService implements Partial<StorageService> {
+
+  savePalette(palette: Palette) {
+    console.log(`savePalette(${palette.title})`)
+  }
+
+}
+
+class MockNotificationService implements Partial<NotificationService> {
+
+  dialog: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
+
+  notification: EventEmitter<Notification | undefined> = new EventEmitter<Notification | undefined>()
+
+  constructor() {
+    this.dialog.subscribe(dialogContent => {
+      if (dialogContent) {
+        console.log('Show dialog\n', dialogContent.message)
+      } else {
+        console.log('Close dialog')
+      }
+    })
+
+    this.notification.subscribe(notificationContent => {
+      if (notificationContent) {
+        console.log('Show notification\n', notificationContent.message)
+      } else {
+        console.log('Close notification')
+      }
+    })
+  }
+
+}
+
 const Template: Story = (args) => ({
-  props: args
+  props: args,
+  moduleMetadata: {
+    providers: [{
+      provide: StorageService,
+      useClass: MockStorageService
+    }, {
+      provide: NotificationService,
+      useClass: MockNotificationService
+    }]
+  }
 })
 
 

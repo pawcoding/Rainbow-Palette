@@ -17,12 +17,17 @@ export class Palette {
   /**
    * Add a color to the beginning of the palette.
    * @param color
+   * @param front
    */
-  public addColor(color: Color) {
-    if (this.colors.find(c => c.name === color.name))
+  public addColor(color: Color, front = true) {
+    if (this.colors.find(c => c.name === color.name)) {
       this.colors[this.colors.findIndex(c => c.name === color.name)] = color
-    else
-      this.colors.unshift(color)
+    } else {
+      if (front)
+        this.colors.unshift(color)
+      else
+        this.colors.push(color)
+    }
 
     this.order = false
   }

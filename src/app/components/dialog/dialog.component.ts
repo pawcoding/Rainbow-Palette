@@ -11,20 +11,20 @@ export class DialogComponent implements OnInit {
   @Input()
   dark = false
 
-  notification: Notification | undefined
+  content: Notification | undefined
 
   constructor(
     private notificationService: NotificationService
   ) {
-    notificationService.notification
-      .subscribe(notification => this.notification = notification)
+    notificationService.dialog
+      .subscribe(dialogContent => this.content = dialogContent)
   }
 
   ngOnInit(): void {
   }
 
   closeNotification() {
-    this.notificationService.notification.emit(undefined)
+    this.notificationService.dialog.emit(undefined)
   }
 
 }

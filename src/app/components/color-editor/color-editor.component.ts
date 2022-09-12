@@ -17,18 +17,23 @@ export class ColorEditorComponent implements OnInit {
   addColor = new EventEmitter<Color>()
 
   shade: Shade
+  color: Color
   state: EditorState = EditorState.ADD
 
   constructor(
     public colorService: ColorService
   ) {
-    this.shade = this.colorService.getColor().getShade(500)
+    this.color = this.colorService.getColor()
+    this.shade = this.color.getShade(500)
 
     this.colorService.getColorChangeEmitter().subscribe(changeType => {
+      this.color = this.colorService.getColor()
+
       if (changeType !== ChangeType.ADJUST) {
-        this.shade = this.colorService.getColor().getShade(500)
-        this.state = changeType === ChangeType.RANDOM ? EditorState.ADD : EditorState.EDIT
+        this.shade = this.color.getShade(500)
+        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT
       }
+
       this.updateProperties()
     })
   }
@@ -64,7 +69,7 @@ export class ColorEditorComponent implements OnInit {
    */
   adjustColor() {
     this.colorService.adjustColor(
-      new Color(this.colorService.getColor().name, this.shade.hex)
+      new Color(this.color.name, this.shade.hex)
     )
   }
 

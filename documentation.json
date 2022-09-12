@@ -1523,12 +1523,12 @@
         },
         {
             "name": "CssCopyNotification",
-            "id": "class-CssCopyNotification-48618b7ca98b5af78c6ac6937cd6925f42c474154a1d7a732e9c7fdba85bcb6bc270c92d1b386f02498c87556664336659b5afdde8a37e9e266d019f91091854",
+            "id": "class-CssCopyNotification-4c9e5826b355a087e28176be5ea048db14a8c9d893e880775f69731486ca03ca62f25c99100d040930e214166b4577bac0615b4f0fd86f8bf2543e85a85fdeec",
             "file": "src/app/notifications/css-copy.notification.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class CssCopyNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification() {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    return {\r\n      message: 'The palette has been copied to your clipboard. ' +\r\n        'To use the colors as CSS properties copy the contents of the clipboard to the :root of your css file. ' +\r\n        'Now you can use them by referencing them like:\\n\\n' +\r\n        'color: var(--color-100);',\r\n      actions: []\r\n    }\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class CssCopyNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification(): Notification {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open('https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class', '_blank')\r\n    })\r\n\r\n    return {\r\n      message: 'The palette has been copied to your clipboard. ' +\r\n        'To use the colors as CSS properties copy the contents of the clipboard to the :root of your css file. ' +\r\n        'Now you can use them by referencing them like:\\n\\n' +\r\n        'color: var(--color-100);',\r\n      actions: [{\r\n        text: 'Read more',\r\n        title: 'Open MDN Web Docs',\r\n        action: docEmitter\r\n      }]\r\n    }\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1561,7 +1561,7 @@
                     "name": "getNotification",
                     "args": [],
                     "optional": false,
-                    "returnType": "{ message: string; actions: {}; }",
+                    "returnType": "Notification",
                     "typeParameters": [],
                     "line": 10,
                     "deprecated": false,
@@ -1576,12 +1576,12 @@
         },
         {
             "name": "CssFileNotification",
-            "id": "class-CssFileNotification-16df29eb3df51802f544b7f6e5b491924190b5957dea68fe17c9187e9eed257580ccebfa41959066a63fa161bbb17b20e4a6286eb8264f9b21b4666873642e8e",
+            "id": "class-CssFileNotification-a2376fd0a7d75d1930461640b781e07658b576ac59f301ede1c46810a44271f6db7bd8212fde85fe4d67625b4ad1e43592a5542518845954fb50238d76cf02c8",
             "file": "src/app/notifications/css-file.notification.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class CssFileNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification() {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    return {\r\n      message: 'Move the downloaded colors.css file to the root of your webserver. ' +\r\n        'Then link it in the head of your html file like\\n\\n' +\r\n        '<link rel=\"stylesheet\" href=\"/colors.css\">\\n\\n' +\r\n        'Now you can use them by referencing them like:\\n\\n' +\r\n        'color: var(--color-100);',\r\n      actions: []\r\n    }\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class CssFileNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification(): Notification {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open('https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class', '_blank')\r\n    })\r\n\r\n    return {\r\n      message: 'Move the downloaded colors.css file to the root of your webserver. ' +\r\n        'Then link it in the head of your html file like\\n\\n' +\r\n        '<link rel=\"stylesheet\" href=\"/colors.css\">\\n\\n' +\r\n        'Now you can use them by referencing them like:\\n\\n' +\r\n        'color: var(--color-100);',\r\n      actions: [{\r\n        text: 'Read more',\r\n        title: 'Open MDN Web Docs',\r\n        action: docEmitter\r\n      }]\r\n    }\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1614,7 +1614,7 @@
                     "name": "getNotification",
                     "args": [],
                     "optional": false,
-                    "returnType": "{ message: string; actions: {}; }",
+                    "returnType": "Notification",
                     "typeParameters": [],
                     "line": 10,
                     "deprecated": false,
@@ -1762,6 +1762,212 @@
             "outputsClass": [],
             "hostBindings": [],
             "hostListeners": []
+        },
+        {
+            "name": "MockColorService",
+            "id": "class-MockColorService-67c87818464fd9353f61fab9e00bcd3599f6c1284f26c44e00bc5c29f148034394975f6922e2e3c14f029c4241e713d9412d1668219d5c59fe6a1769c5c3c584",
+            "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {ColorEditorComponent} from \"./color-editor.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {ChangeType, ColorService} from \"../../services/color.service\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {EventEmitter} from \"@angular/core\";\r\n\r\nexport default {\r\n  title: 'Components/Color Editor',\r\n  component: ColorEditorComponent\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n\r\n  private colorService: ColorService = new ColorService()\r\n\r\n  getColor() {\r\n    console.log('getColor()')\r\n    return this.colorService.getColor()\r\n  }\r\n\r\n  getColorChangeEmitter() {\r\n    console.log('getColorChangeEmitter()')\r\n    return this.colorService.getColorChangeEmitter()\r\n  }\r\n\r\n  adjustColor(color: Color) {\r\n    console.log(`adjustColor(${color.name})`)\r\n    return this.colorService.adjustColor(color)\r\n  }\r\n\r\n  updateColorName(name: string) {\r\n    console.log(`updateColorName(${name})`)\r\n    return this.colorService.updateColorName(name)\r\n  }\r\n\r\n  randomColor() {\r\n    console.log('randomColor()')\r\n    return this.colorService.randomColor()\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "colorService",
+                    "defaultValue": "new ColorService()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColorService",
+                    "optional": false,
+                    "description": "",
+                    "line": 14,
+                    "modifierKind": [
+                        121
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "adjustColor",
+                    "args": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getColorChangeEmitter",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "randomColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 36,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateColorName",
+                    "args": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 31,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Partial"
+            ]
+        },
+        {
+            "name": "MockNotificationService",
+            "id": "class-MockNotificationService-7c289c61430bf66efec3328537e3a8688c8f7b062fb51fa35ab2d2e841e918ce23b416c81f0f8efd779cf07f09c713e71bdb179da0e15282e8bbea9e3e0fc347",
+            "file": "src/app/components/dialog/dialog.component.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {DialogComponent} from \"./dialog.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"../../notifications/notification.interface\";\r\n\r\nexport default {\r\n  title: 'Components/Dialog',\r\n  component: DialogComponent\r\n} as Meta\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  notification = new EventEmitter<Notification | undefined>()\r\n\r\n  constructor() {\r\n    const wait = new EventEmitter()\r\n    const next = new EventEmitter()\r\n\r\n    let content = {\r\n      message: 'This is a test message for storybook.\\n\\n' +\r\n        'You can use \\\\n to create new lines in here.',\r\n      actions: [{\r\n        text: 'Wait',\r\n        title: 'Wait 2 seconds for next dialog',\r\n        action: wait\r\n      }, {\r\n        text: 'Next',\r\n        title: 'Show next dialog',\r\n        action: next\r\n      }]\r\n    }\r\n\r\n    wait.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n      setTimeout(() => {\r\n        this.notification.emit(content)\r\n      }, 2000)\r\n    })\r\n    next.subscribe(() => {\r\n      this.notification.emit(content)\r\n    })\r\n\r\n    setTimeout(() => {\r\n      this.notification.emit(content)\r\n    }, 0)\r\n\r\n    this.notification.subscribe(next => {\r\n      console.log(next)\r\n    })\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 14
+            },
+            "properties": [
+                {
+                    "name": "notification",
+                    "defaultValue": "new EventEmitter<Notification | undefined>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Partial"
+            ]
+        },
+        {
+            "name": "MockStorageService",
+            "id": "class-MockStorageService-986b5b9e2aa0db6ef4bb89f8c775a15cae461c8d5fd5b5505bbcbc0ba5faad4868d3af1d27feb6e180d97b6b5d98462c22911fda1bcc05cdeca02612fda56f55",
+            "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {Meta, Story} from \"@storybook/angular\";\r\nimport {LightSwitchComponent} from \"./light-switch.component\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\n\r\nexport default {\r\n  title: 'Components/Light Switch',\r\n  component: LightSwitchComponent,\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  toggleTheme(dark: boolean | undefined) {\r\n    console.log(`toggleTheme(${dark})`)\r\n    return dark || false\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false,\r\n}\r\n",
+            "properties": [],
+            "methods": [
+                {
+                    "name": "toggleTheme",
+                    "args": [
+                        {
+                            "name": "dark",
+                            "type": "boolean | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "boolean",
+                    "typeParameters": [],
+                    "line": 12,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "dark",
+                            "type": "boolean | undefined",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Partial"
+            ]
         },
         {
             "name": "Palette",
@@ -2677,12 +2883,12 @@
         },
         {
             "name": "TailwindCopyNotification",
-            "id": "class-TailwindCopyNotification-289d5a443cb5f72f5912cb49749a365c4e97b8ea28089ed289303f2e4144cbfc28bf4755c698c6071ba312a9fbf0765358c3908f59e9b9e17397d72c757a8ba6",
+            "id": "class-TailwindCopyNotification-9a71238834bc0665116faa2edeb5bac0392f62988e82ed6bd719bd94b74964a8629a2772459ae862999ab60c222bec167a34dcf47019e680c579151c8a24b322",
             "file": "src/app/notifications/tailwind-copy.notification.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class TailwindCopyNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification() {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    return {\r\n      message: 'The palette has been copied to your clipboard. ' +\r\n        'To use the colors copy the contents of the clipboard to the tailwind.config.js file.\\n\\n' +\r\n        'Check TailwindsCSS\\'s documentation for further instructions.',\r\n      actions: []\r\n    }\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class TailwindCopyNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification(): Notification {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open('https://tailwindcss.com/docs/customizing-colors#color-object-syntax', '_blank')\r\n    })\r\n\r\n    return {\r\n      message: 'The palette has been copied to your clipboard. ' +\r\n        'To use the colors copy the contents of the clipboard to the tailwind.config.js file.\\n\\n' +\r\n        'Check TailwindsCSS\\'s documentation for further instructions.',\r\n      actions: [{\r\n        text: 'Read more',\r\n        title: 'Open documentation',\r\n        action: docEmitter\r\n      }]\r\n    }\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2715,7 +2921,7 @@
                     "name": "getNotification",
                     "args": [],
                     "optional": false,
-                    "returnType": "{ message: string; actions: {}; }",
+                    "returnType": "Notification",
                     "typeParameters": [],
                     "line": 10,
                     "deprecated": false,
@@ -2730,12 +2936,12 @@
         },
         {
             "name": "TailwindFileNotification",
-            "id": "class-TailwindFileNotification-377693a26d9ed9c0217a8bd8a437cc53096d956f88a8eb2f508aa32ae3ac680c6396602705bcb5b065d0277fb7b9fe84546c10f3571a9da7cf94f90a4f572fd9",
+            "id": "class-TailwindFileNotification-30cf4df6717eec843c564915dbe1d453d19affb567a59d8096379201de801e08d4e4c4df0257f865f0399a3e4a40132ce8424b12bb0f6ede67208e99f0527fbc",
             "file": "src/app/notifications/tailwind-file.notification.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class TailwindFileNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification() {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    return {\r\n      message: 'Move the downloaded tailwind.colors.js file to the root of your project. ' +\r\n        'Then import the colors in your tailwind.config.js file like:\\n\\n' +\r\n        'colors: require(\\'./tailwind.colors\\')\\n\\n' +\r\n        'Check TailwindsCSS\\'s documentation for further instructions.',\r\n      actions: []\r\n    }\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {EventEmitter} from \"@angular/core\";\r\nimport {Notification} from \"./notification.interface\";\r\n\r\nexport class TailwindFileNotification {\r\n\r\n  constructor(\r\n    private notification: EventEmitter<Notification | undefined>,\r\n  ) { }\r\n\r\n  getNotification(): Notification {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open('https://tailwindcss.com/docs/customizing-colors#using-the-default-colors', '_blank')\r\n    })\r\n\r\n    return {\r\n      message: 'Move the downloaded tailwind.colors.js file to the root of your project. ' +\r\n        'Then import the colors in your tailwind.config.js file like:\\n\\n' +\r\n        'colors: require(\\'./tailwind.colors\\')\\n\\n' +\r\n        'Check TailwindsCSS\\'s documentation for further instructions.',\r\n      actions: [{\r\n        text: 'Read more',\r\n        title: 'Open documentation',\r\n        action: docEmitter\r\n      }]\r\n    }\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2768,7 +2974,7 @@
                     "name": "getNotification",
                     "args": [],
                     "optional": false,
-                    "returnType": "{ message: string; actions: {}; }",
+                    "returnType": "Notification",
                     "typeParameters": [],
                     "line": 10,
                     "deprecated": false,
@@ -3301,11 +3507,11 @@
                     }
                 ]
             },
-            "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between\r\n    py-4 text-neutral-900 bg-neutral-100 dark:text-neutral-100 dark:bg-neutral-900 transition-colors duration-200\"\r\n>\r\n  <header class=\"relative\">\r\n    <light-switch\r\n      class=\"absolute xl:fixed right-0 mr-6\"\r\n      [dark]=\"dark\"\r\n    ></light-switch>\r\n\r\n    <h1>\r\n      Color Palette Generator\r\n    </h1>\r\n  </header>\r\n\r\n  <main class=\"px-10\">\r\n    <!-- Color Editor -->\r\n    <color-editor\r\n      (addColor)=\"addColor($event)\"\r\n    ></color-editor>\r\n\r\n    <!-- Display color palette -->\r\n    <palette-viewer\r\n      *ngIf=\"palette\" (onRemove)=\"removePalette()\"\r\n      [palette]=\"palette\" [dark]=\"dark\"\r\n    ></palette-viewer>\r\n  </main>\r\n\r\n  <footer class=\"p-4 flex gap-4 justify-between flex-col sm:flex-row text-center mx-auto max-w-5xl w-full mt-10\">\r\n    <a href=\"https://github.com/pawcoding/tailwind-color-generator\" rel=\"noreferrer noopener\" target=\"_blank\" title=\"View source code on GitHub\">View on GitHub</a>\r\n    <span class=\"cursor-default\">Version {{version}}</span>\r\n    <a href=\"https://pawcode.de\" target=\"_blank\" title=\"Created by pawcode Development\">\r\n      <img [src]=\"'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" alt=\"pawcode&nbsp;Development\" class=\"inline h-8\">\r\n    </a>\r\n  </footer>\r\n\r\n  <dialog\r\n    class=\"fixed top-0 left-0\"\r\n  ></dialog>\r\n</div>\r\n"
+            "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between\r\n    py-4 text-neutral-900 bg-neutral-100 dark:text-neutral-100 dark:bg-neutral-900 transition-colors duration-200\"\r\n>\r\n  <header class=\"relative\">\r\n    <light-switch\r\n      class=\"absolute xl:fixed right-0 mr-6\"\r\n      [dark]=\"dark\"\r\n    ></light-switch>\r\n\r\n    <h1>\r\n      Color Palette Generator\r\n    </h1>\r\n  </header>\r\n\r\n  <main class=\"px-10\">\r\n    <!-- Color Editor -->\r\n    <color-editor\r\n      (addColor)=\"addColor($event)\"\r\n    ></color-editor>\r\n\r\n    <!-- Display color palette -->\r\n    <palette-viewer\r\n      *ngIf=\"palette\" (onRemove)=\"removePalette()\"\r\n      [palette]=\"palette\" [dark]=\"dark\"\r\n    ></palette-viewer>\r\n  </main>\r\n\r\n  <footer class=\"p-4 flex gap-4 justify-between flex-col sm:flex-row text-center mx-auto max-w-5xl w-full mt-10\">\r\n    <a href=\"https://github.com/pawcoding/tailwind-color-generator\" rel=\"noreferrer noopener\" target=\"_blank\" title=\"View source code on GitHub\">View on GitHub</a>\r\n    <span class=\"cursor-default\">Version {{version}}</span>\r\n    <a href=\"https://pawcode.de\" target=\"_blank\" title=\"Created by pawcode Development\">\r\n      <img [src]=\"'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" alt=\"pawcode&nbsp;Development\" class=\"inline h-8\">\r\n    </a>\r\n  </footer>\r\n\r\n  <custom-dialog\r\n    class=\"fixed top-0 left-0\"\r\n  ></custom-dialog>\r\n</div>\r\n"
         },
         {
             "name": "ColorEditorComponent",
-            "id": "component-ColorEditorComponent-d1a33e3cdf155bb38889c9c99a0fa84293a4925244126d580e982bdab86957349fb5b59d81ae5c7a74eec98097e3c0c8280d76135664ed4399b88659b9426cf9",
+            "id": "component-ColorEditorComponent-72c117d9139bd4bb276aa5ebf4a8b86e893ab23dbf1c4e95ddc7f5e3a56d6b26465cccf8c574234331fcaddafcaa7269cd6014d3cfef9ff224e6a0a6edfeba8f",
             "file": "src/app/components/color-editor/color-editor.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3425,8 +3631,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1208,
-                                "end": 1212,
+                                "pos": 1210,
+                                "end": 1214,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3438,8 +3644,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1202,
-                                "end": 1207,
+                                "pos": 1204,
+                                "end": 1209,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3450,8 +3656,8 @@
                         },
                         {
                             "name": {
-                                "pos": 1245,
-                                "end": 1250,
+                                "pos": 1247,
+                                "end": 1252,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3462,8 +3668,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1239,
-                                "end": 1244,
+                                "pos": 1241,
+                                "end": 1246,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3495,8 +3701,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2720,
-                                "end": 2724,
+                                "pos": 2722,
+                                "end": 2726,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3507,8 +3713,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2714,
-                                "end": 2719,
+                                "pos": 2716,
+                                "end": 2721,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3539,7 +3745,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\nimport {Shade} from \"../../models/shade.model\";\r\nimport {ChangeType, ColorService} from \"../../services/color.service\";\r\n\r\n@Component({\r\n  selector: 'color-editor',\r\n  templateUrl: './color-editor.component.html',\r\n  styleUrls: ['./color-editor.component.css']\r\n})\r\nexport class ColorEditorComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  addColor = new EventEmitter<Color>()\r\n\r\n  shade: Shade\r\n  state: EditorState = EditorState.ADD\r\n\r\n  constructor(\r\n    public colorService: ColorService\r\n  ) {\r\n    this.shade = this.colorService.getColor().getShade(500)\r\n\r\n    this.colorService.getColorChangeEmitter().subscribe(changeType => {\r\n      if (changeType !== ChangeType.ADJUST) {\r\n        this.shade = this.colorService.getColor().getShade(500)\r\n        this.state = changeType === ChangeType.RANDOM ? EditorState.ADD : EditorState.EDIT\r\n      }\r\n      this.updateProperties()\r\n    })\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Update current shade. The property with type is changed to the new value.\r\n   * @param type Property to change\r\n   * @param value Value to change to\r\n   */\r\n  updateColor(type: UpdateType, value: string | number) {\r\n    if (type === UpdateType.HEX && isNaN(+value)) {\r\n      this.shade = new Shade(0, `${value}`)\r\n    } else if (!isNaN(+value)) {\r\n      value = parseInt(`${value}`)\r\n      if (type === UpdateType.HUE) {\r\n        this.shade = new Shade(0, value, this.shade.saturation, this.shade.luminosity)\r\n      } else if (type === UpdateType.SATURATION) {\r\n        this.shade = new Shade(0, this.shade.hue, value, this.shade.luminosity)\r\n      } else if (type === UpdateType.LUMINOSITY) {\r\n        this.shade = new Shade(0, this.shade.hue, this.shade.saturation, 100 - value)\r\n      }\r\n    }\r\n\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Adjust the color in the global ColorService.\r\n   */\r\n  adjustColor() {\r\n    this.colorService.adjustColor(\r\n      new Color(this.colorService.getColor().name, this.shade.hex)\r\n    )\r\n  }\r\n\r\n  /**\r\n   * Update all css properties to the values of the current selected shade.\r\n   */\r\n  updateProperties() {\r\n    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\r\n    document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\r\n    document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\r\n    document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\r\n  }\r\n\r\n  /**\r\n   * Update the name of the current color.\r\n   * @param name\r\n   */\r\n  updateName(name: string) {\r\n    this.colorService.updateColorName(name)\r\n  }\r\n\r\n}\r\n\r\nenum UpdateType {\r\n  HEX, HUE, SATURATION, LUMINOSITY\r\n}\r\n\r\nenum EditorState {\r\n  ADD, EDIT\r\n}\r\n",
+            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\nimport {Shade} from \"../../models/shade.model\";\r\nimport {ChangeType, ColorService} from \"../../services/color.service\";\r\n\r\n@Component({\r\n  selector: 'color-editor',\r\n  templateUrl: './color-editor.component.html',\r\n  styleUrls: ['./color-editor.component.css']\r\n})\r\nexport class ColorEditorComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  addColor = new EventEmitter<Color>()\r\n\r\n  shade: Shade\r\n  state: EditorState = EditorState.ADD\r\n\r\n  constructor(\r\n    public colorService: ColorService\r\n  ) {\r\n    this.shade = this.colorService.getColor().getShade(500)\r\n\r\n    this.colorService.getColorChangeEmitter().subscribe(changeType => {\r\n      if (changeType !== ChangeType.ADJUST) {\r\n        this.shade = this.colorService.getColor().getShade(500)\r\n        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT\r\n      }\r\n      this.updateProperties()\r\n    })\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Update current shade. The property with type is changed to the new value.\r\n   * @param type Property to change\r\n   * @param value Value to change to\r\n   */\r\n  updateColor(type: UpdateType, value: string | number) {\r\n    if (type === UpdateType.HEX && isNaN(+value)) {\r\n      this.shade = new Shade(0, `${value}`)\r\n    } else if (!isNaN(+value)) {\r\n      value = parseInt(`${value}`)\r\n      if (type === UpdateType.HUE) {\r\n        this.shade = new Shade(0, value, this.shade.saturation, this.shade.luminosity)\r\n      } else if (type === UpdateType.SATURATION) {\r\n        this.shade = new Shade(0, this.shade.hue, value, this.shade.luminosity)\r\n      } else if (type === UpdateType.LUMINOSITY) {\r\n        this.shade = new Shade(0, this.shade.hue, this.shade.saturation, 100 - value)\r\n      }\r\n    }\r\n\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Adjust the color in the global ColorService.\r\n   */\r\n  adjustColor() {\r\n    this.colorService.adjustColor(\r\n      new Color(this.colorService.getColor().name, this.shade.hex)\r\n    )\r\n  }\r\n\r\n  /**\r\n   * Update all css properties to the values of the current selected shade.\r\n   */\r\n  updateProperties() {\r\n    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\r\n    document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\r\n    document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\r\n    document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\r\n  }\r\n\r\n  /**\r\n   * Update the name of the current color.\r\n   * @param name\r\n   */\r\n  updateName(name: string) {\r\n    this.colorService.updateColorName(name)\r\n  }\r\n\r\n}\r\n\r\nenum UpdateType {\r\n  HEX, HUE, SATURATION, LUMINOSITY\r\n}\r\n\r\nenum EditorState {\r\n  ADD, EDIT\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -3577,7 +3783,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div [class]=\"dark ? 'dark' : ''\" class=\"max-w-5xl mx-auto mb-8\">\r\n  <article\r\n    class=\"flex gap-4 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition-colors duration-200\"\r\n  >\r\n\r\n    <!-- Edit Color -->\r\n    <section class=\"grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center\">\r\n\r\n      <!-- Edit Hex -->\r\n      <input\r\n        type=\"color\"\r\n        title=\"Select a shade\"\r\n        id=\"hexInput\" #hexInput\r\n        class=\"overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200\"\r\n        [value]=\"shade.hex\"\r\n        (input)=\"updateColor(0, hexInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Hue -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the hue\"\r\n        id=\"hueInput\" #hueInput\r\n        min=0 max=360\r\n        [value]=\"shade.hue\"\r\n        (input)=\"updateColor(1, hueInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Saturation -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the saturation\"\r\n        id=\"saturationInput\" #saturationInput\r\n        min=0 max=100\r\n        [value]=\"shade.saturation\"\r\n        (input)=\"updateColor(2, saturationInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Luminosity -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the luminosity\"\r\n        id=\"luminosityInput\" #luminosityInput\r\n        min=0 max=100\r\n        [value]=\"100 - shade.luminosity\"\r\n        (input)=\"updateColor(3, luminosityInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <div class=\"flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full\">\r\n        <!-- Edit Name -->\r\n        <input\r\n          type=\"text\"\r\n          title=\"Give your color a name\"\r\n          id=\"nameInput\" #nameInput\r\n          class=\"text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-all duration-200\"\r\n          placeholder=\"Color Name\"\r\n          [value]=\"colorService.getColor().name\"\r\n          (input)=\"updateName(nameInput.value)\"\r\n        >\r\n\r\n        <!-- Add Color to Palette -->\r\n        <input\r\n          type=\"button\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 \"\r\n          [title]=\"state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'\"\r\n          [value]=\"state === 0 ? 'Add to palette' : 'Replace existing color'\"\r\n          (click)=\"addColor.emit(colorService.getColor())\"\r\n        >\r\n\r\n        <!-- Generate new random color -->\r\n        <input\r\n          type=\"button\"\r\n          title=\"Generate new random color\"\r\n          value=\"Random Color\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 \"\r\n          (click)=\"colorService.randomColor()\"\r\n        >\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Preview Color -->\r\n    <section class=\"grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default\">\r\n      <span\r\n        *ngFor=\"let shade of colorService.getColor().shades\"\r\n        [title]=\"shade.index + '&#10;' + shade.hex\"\r\n        [ngStyle]=\"{\r\n          'background-color': shade.hex,\r\n          'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex\r\n        }\"\r\n        class=\"block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2\"\r\n      >\r\n        {{shade.hex}}\r\n      </span>\r\n    </section>\r\n  </article>\r\n</div>\r\n"
+            "templateData": "<div [class]=\"dark ? 'dark' : ''\" class=\"max-w-5xl mx-auto mb-8\">\r\n  <article\r\n    class=\"flex gap-4 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition-colors duration-200\"\r\n  >\r\n\r\n    <!-- Edit Color -->\r\n    <section class=\"grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center\">\r\n\r\n      <!-- Edit Hex -->\r\n      <input\r\n        type=\"color\"\r\n        title=\"Select a shade\"\r\n        id=\"hexInput\" #hexInput\r\n        class=\"overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200\"\r\n        [value]=\"shade.hex\"\r\n        (input)=\"updateColor(0, hexInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Hue -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the hue\"\r\n        id=\"hueInput\" #hueInput\r\n        min=0 max=360\r\n        [value]=\"shade.hue\"\r\n        (input)=\"updateColor(1, hueInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Saturation -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the saturation\"\r\n        id=\"saturationInput\" #saturationInput\r\n        min=0 max=100\r\n        [value]=\"shade.saturation\"\r\n        (input)=\"updateColor(2, saturationInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Luminosity -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the luminosity\"\r\n        id=\"luminosityInput\" #luminosityInput\r\n        min=0 max=100\r\n        [value]=\"100 - shade.luminosity\"\r\n        (input)=\"updateColor(3, luminosityInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <div class=\"flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full\">\r\n        <!-- Edit Name -->\r\n        <input\r\n          type=\"text\"\r\n          title=\"Give your color a name\"\r\n          id=\"nameInput\" #nameInput\r\n          class=\"text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-all duration-200\"\r\n          placeholder=\"Color Name\"\r\n          [value]=\"colorService.getColor().name\"\r\n          (input)=\"updateName(nameInput.value)\"\r\n        >\r\n\r\n        <!-- Add Color to Palette -->\r\n        <input\r\n          type=\"button\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200\"\r\n          [title]=\"state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'\"\r\n          [value]=\"state === 0 ? 'Add to palette' : 'Replace existing color'\"\r\n          (click)=\"addColor.emit(colorService.getColor())\"\r\n        >\r\n\r\n        <!-- Generate new random color -->\r\n        <input\r\n          type=\"button\"\r\n          title=\"Generate new random color\"\r\n          value=\"Random Color\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 \"\r\n          (click)=\"colorService.randomColor()\"\r\n        >\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Preview Color -->\r\n    <section class=\"grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default\">\r\n      <span\r\n        *ngFor=\"let shade of colorService.getColor().shades\"\r\n        [title]=\"shade.index + '&#10;' + shade.hex\"\r\n        [ngStyle]=\"{\r\n          'background-color': shade.hex,\r\n          'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex\r\n        }\"\r\n        class=\"block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2\"\r\n      >\r\n        {{shade.hex}}\r\n      </span>\r\n    </section>\r\n  </article>\r\n</div>\r\n"
         },
         {
             "name": "ColorViewerComponent",
@@ -3739,14 +3945,14 @@
         },
         {
             "name": "DialogComponent",
-            "id": "component-DialogComponent-9cd3b97fc6d41b1f2ccd42a3181ae9e574f375f3f8b00c6322aa053d9eb3bf1a546effa71257bec23766638304729cd09cb42b02a2bba05197eaff1f112ee94e",
+            "id": "component-DialogComponent-9bc2ae30f93ce252dbe5d047d3097133b9ac5286607a18ce652efd9f5980f9275eae4597a29aa808c5a8602653a6bc4c983a541c7f807b216232dfb9d1f293ec",
             "file": "src/app/components/dialog/dialog.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "dialog",
+            "selector": "custom-dialog",
             "styleUrls": [],
             "styles": [],
             "templateUrl": [
@@ -3805,7 +4011,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, Input, OnInit} from '@angular/core';\nimport { NotificationService} from \"../../services/notification.service\";\nimport {Notification} from \"../../notifications/notification.interface\";\n\n@Component({\n  selector: 'dialog',\n  templateUrl: './dialog.component.html',\n})\nexport class DialogComponent implements OnInit {\n\n  @Input()\n  dark = false\n\n  notification: Notification | undefined\n\n  constructor(\n    private notificationService: NotificationService\n  ) {\n    notificationService.notification\n      .subscribe(notification => this.notification = notification)\n  }\n\n  ngOnInit(): void {\n  }\n\n  closeNotification() {\n    this.notificationService.notification.emit(undefined)\n  }\n\n}\n",
+            "sourceCode": "import {Component, Input, OnInit} from '@angular/core';\nimport { NotificationService} from \"../../services/notification.service\";\nimport {Notification} from \"../../notifications/notification.interface\";\n\n@Component({\n  selector: 'custom-dialog',\n  templateUrl: './dialog.component.html',\n})\nexport class DialogComponent implements OnInit {\n\n  @Input()\n  dark = false\n\n  notification: Notification | undefined\n\n  constructor(\n    private notificationService: NotificationService\n  ) {\n    notificationService.notification\n      .subscribe(notification => this.notification = notification)\n  }\n\n  ngOnInit(): void {\n  }\n\n  closeNotification() {\n    this.notificationService.notification.emit(undefined)\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": "",
             "stylesData": "",
@@ -3838,7 +4044,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div id=\"popup-modal\" tabindex=\"-1\" *ngIf=\"notification\" (click)=\"closeNotification()\" class=\"flex overflow-y-auto overflow-x-hidden z-50 h-modal h-screen w-screen justify-center items-center bg-black/50\" [class]=\"dark ? 'dark' : ''\" aria-hidden=\"true\">\n  <div class=\"relative p-4 w-full max-w-md h-full md:h-auto\" (click)=\"$event.stopPropagation()\">\n    <div class=\"relative bg-white rounded-lg shadow dark:bg-gray-700 p-6\">\n\n      <button type=\"button\" (click)=\"closeNotification()\"\n              class=\"absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white\" data-modal-toggle=\"popup-modal\">\n        <svg aria-hidden=\"true\" class=\"w-5 h-5\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\">\n          <path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\"></path>\n        </svg>\n        <span class=\"sr-only\">Close modal</span>\n      </button>\n\n      <div class=\"mt-4 text-center\">\n        <h3 class=\"text-lg font-normal text-gray-500 dark:text-gray-400\"\n            [innerText]=\"notification.message\">\n        </h3>\n\n        <button\n          *ngFor=\"let action of notification.actions\"\n          type=\"button\"\n          class=\"mt-2 mx-2 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600\"\n          [title]=\"action.title\"\n          (click)=\"action.action.emit(undefined)\"\n        >\n          {{action.text}}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n"
+            "templateData": "<div tabindex=\"-1\" *ngIf=\"notification\" (click)=\"closeNotification()\" class=\"flex overflow-y-auto overflow-x-hidden z-50 h-modal h-screen w-screen justify-center items-center bg-black/50\" [class]=\"dark ? 'dark' : ''\" aria-hidden=\"true\">\n  <div class=\"relative p-4 w-full max-w-2xl\" (click)=\"$event.stopPropagation()\">\n    <div class=\"relative bg-neutral-300 text-neutral-900 rounded-xl shadow dark:bg-neutral-600 dark:text-neutral-200 p-6\">\n\n      <button type=\"button\" (click)=\"closeNotification()\"\n              title=\"Close dialog\"\n              class=\"absolute top-3 right-2.5 bg-transparent hover:bg-neutral-200 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-neutral-700 transition-colors duration-200\">\n        <svg aria-hidden=\"true\" class=\"w-5 h-5\" fill=\"currentColor\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\">\n          <path fill-rule=\"evenodd\" d=\"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z\" clip-rule=\"evenodd\"></path>\n        </svg>\n        <span class=\"sr-only\">Close dialog</span>\n      </button>\n\n      <div class=\"mt-4 text-center\">\n        <p class=\"text-lg font-normal py-2 lg:py-3\"\n            [innerText]=\"notification.message\">\n        </p>\n\n        <button\n          *ngFor=\"let action of notification.actions\"\n          type=\"button\"\n          class=\"mt-2 mx-2 bg-neutral-400 hover:bg-neutral-500 focus:ring-0 focus:outline-none rounded-lg shadow hover:shadow-lg text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-neutral-700 dark:hover:bg-neutral-800 transition-all duration-200\"\n          [title]=\"action.title\"\n          (click)=\"action.action.emit(undefined)\"\n        >\n          {{action.text}}\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n"
         },
         {
             "name": "LightSwitchComponent",
@@ -4334,21 +4540,21 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.prod.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/environments/environment.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: false,\n  version: packageJson.version\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
             },
             {
                 "name": "MediaScope",
@@ -4404,6 +4610,16 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/light-switch/light-switch.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -4415,16 +4631,6 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/dialog/dialog.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -4473,6 +4679,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }]\r\n  }\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -4487,17 +4703,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/components/dialog/dialog.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }]\r\n  }\r\n})"
             },
             {
                 "name": "Template",
@@ -4513,11 +4719,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "file": "src/app/components/dialog/dialog.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
             }
         ],
         "functions": [],
@@ -4624,18 +4830,6 @@
                     "type": "literal type"
                 }
             ],
-            "src/environments/environment.prod.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.prod.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
-                }
-            ],
             "src/environments/environment.ts": [
                 {
                     "name": "environment",
@@ -4646,6 +4840,18 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: false,\n  version: packageJson.version\n}"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
                 }
             ],
             "src/app/components/palette-viewer/palette-viewer.component.stories.ts": [
@@ -4752,6 +4958,28 @@
                     "defaultValue": "(args) => ({\r\n  props: args\r\n})"
                 }
             ],
+            "src/app/components/color-editor/color-editor.component.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }]\r\n  }\r\n})"
+                }
+            ],
             "src/app/components/light-switch/light-switch.component.stories.ts": [
                 {
                     "name": "Primary",
@@ -4771,7 +4999,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }]\r\n  }\r\n})"
                 }
             ],
             "src/app/components/dialog/dialog.component.stories.ts": [
@@ -4793,29 +5021,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
-                }
-            ],
-            "src/app/components/color-editor/color-editor.component.stories.ts": [
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "(args) => ({\r\n  props: args\r\n})"
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
                 }
             ]
         },
@@ -4908,7 +5114,7 @@
     },
     "routes": [],
     "coverage": {
-        "count": 12,
+        "count": 11,
         "status": "low",
         "files": [
             {
@@ -4946,6 +5152,15 @@
                 "coveragePercent": 88,
                 "coverageCount": "8/9",
                 "status": "very-good"
+            },
+            {
+                "filePath": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MockColorService",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
+                "status": "low"
             },
             {
                 "filePath": "src/app/components/color-editor/color-editor.component.stories.ts",
@@ -5007,6 +5222,15 @@
             },
             {
                 "filePath": "src/app/components/dialog/dialog.component.stories.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MockNotificationService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/dialog/dialog.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -5032,6 +5256,15 @@
                 "name": "DialogComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/6",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/light-switch/light-switch.component.stories.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MockStorageService",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {

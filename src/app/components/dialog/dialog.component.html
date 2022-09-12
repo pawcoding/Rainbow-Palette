@@ -1,6 +1,8 @@
-<div tabindex="-1" *ngIf="notification" (click)="closeNotification()" class="flex overflow-y-auto overflow-x-hidden z-50 h-modal h-screen w-screen justify-center items-center bg-black/50" [class]="dark ? 'dark' : ''" aria-hidden="true">
+<div tabindex="-1" *ngIf="content" (click)="closeNotification()"
+     class="flex overflow-y-auto overflow-x-hidden z-40 h-modal h-screen w-screen justify-center items-center bg-black/50" [class]="dark ? 'dark' : ''" aria-hidden="true"
+>
   <div class="relative p-4 w-full max-w-2xl" (click)="$event.stopPropagation()">
-    <div class="relative bg-neutral-300 text-neutral-900 rounded-xl shadow dark:bg-neutral-600 dark:text-neutral-200 p-6">
+    <article class="relative bg-neutral-300 text-neutral-900 rounded-xl shadow dark:bg-neutral-600 dark:text-neutral-200 p-6">
 
       <button type="button" (click)="closeNotification()"
               title="Close dialog"
@@ -13,19 +15,19 @@
 
       <div class="mt-4 text-center">
         <p class="text-lg font-normal py-2 lg:py-3"
-            [innerText]="notification.message">
+            [innerText]="content.message">
         </p>
 
         <button
-          *ngFor="let action of notification.actions"
+          *ngFor="let action of content.actions"
           type="button"
-          class="mt-2 mx-2 bg-neutral-400 hover:bg-neutral-500 focus:ring-0 focus:outline-none rounded-lg shadow hover:shadow-lg text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-neutral-700 dark:hover:bg-neutral-800 transition-all duration-200"
+          class="mt-2 mx-2 bg-neutral-400 focus:ring-0 focus:outline-none rounded-lg shadow hover:shadow-lg text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-neutral-700 transition-all duration-200"
           [title]="action.title"
           (click)="action.action.emit(undefined)"
         >
           {{action.text}}
         </button>
       </div>
-    </div>
+    </article>
   </div>
 </div>

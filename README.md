@@ -26,9 +26,9 @@ This little web app lets you create you own custom color palette and export it i
 - [x] Export CSS to File
 - [x] Export Tailwind to Clipboard
 - [x] Export Tailwind to File
-- [x] Global Notification Modal
-  - [x] Style Modal
-  - [x] Storybook Documentation for Modal
+- [x] Global Dialog Modal
+- [x] Provide Mock Services for Storybook
+- [ ] Global Notification
 
 ### Side features
 - [x] Random color palette

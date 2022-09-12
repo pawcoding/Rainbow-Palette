@@ -58,8 +58,8 @@
           id="nameInput" #nameInput
           class="text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-all duration-200"
           placeholder="Color Name"
-          [value]="colorService.getColor().name"
-          (input)="updateName(nameInput.value)"
+          [value]="color.name"
+          (change)="updateName(nameInput.value)"
         >
 
         <!-- Add Color to Palette -->
@@ -68,7 +68,7 @@
           class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200"
           [title]="state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'"
           [value]="state === 0 ? 'Add to palette' : 'Replace existing color'"
-          (click)="addColor.emit(colorService.getColor())"
+          (click)="addColor.emit(color)"
         >
 
         <!-- Generate new random color -->
@@ -85,11 +85,11 @@
     <!-- Preview Color -->
     <section class="grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default">
       <span
-        *ngFor="let shade of colorService.getColor().shades"
+        *ngFor="let shade of color.shades"
         [title]="shade.index + '&#10;' + shade.hex"
         [ngStyle]="{
           'background-color': shade.hex,
-          'color': colorService.getColor().getShade(shade.luminosity > 48 ? 900 : 50).hex
+          'color': color.getShade(shade.luminosity > 48 ? 900 : 50).hex
         }"
         class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2"
       >

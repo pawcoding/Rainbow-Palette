@@ -9,6 +9,7 @@ import { LightSwitchComponent } from './components/light-switch/light-switch.com
 import { ColorEditorComponent } from './components/color-editor/color-editor.component';
 import { ColorService } from "./services/color.service";
 import { DialogComponent } from './components/dialog/dialog.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DialogComponent } from './components/dialog/dialog.component';
     PaletteViewerComponent,
     LightSwitchComponent,
     ColorEditorComponent,
-    DialogComponent
+    DialogComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule

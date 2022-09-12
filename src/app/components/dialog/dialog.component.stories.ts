@@ -10,7 +10,8 @@ export default {
 } as Meta
 
 class MockNotificationService implements Partial<NotificationService> {
-  notification = new EventEmitter<Notification | undefined>()
+
+  dialog = new EventEmitter<Notification | undefined>()
 
   constructor() {
     const wait = new EventEmitter()
@@ -31,21 +32,24 @@ class MockNotificationService implements Partial<NotificationService> {
     }
 
     wait.subscribe(() => {
-      this.notification.emit(undefined)
+      this.dialog.emit(undefined)
       setTimeout(() => {
-        this.notification.emit(content)
+        this.dialog.emit(content)
       }, 2000)
     })
     next.subscribe(() => {
-      this.notification.emit(content)
+      this.dialog.emit(content)
     })
 
     setTimeout(() => {
-      this.notification.emit(content)
+      this.dialog.emit(content)
     }, 0)
 
-    this.notification.subscribe(n => {
-      console.log(n)
+    this.dialog.subscribe(notification => {
+      if (notification)
+        console.log('Show dialog\n', notification.message)
+      else
+        console.log('Close dialog')
     })
   }
 }
