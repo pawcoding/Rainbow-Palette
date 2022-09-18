@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Color} from "../../models/color.model";
 import {Shade} from "../../models/shade.model";
 import {ChangeType, ColorService} from "../../services/color.service";
+import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
+import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'color-editor',
@@ -17,26 +19,29 @@ export class ColorEditorComponent implements OnInit {
   addColor = new EventEmitter<Color>()
 
   shade: Shade
+  color: Color
   state: EditorState = EditorState.ADD
 
   constructor(
-    public colorService: ColorService
+    public colorService: ColorService,
+    private notificationService: NotificationService
   ) {
-    this.shade = this.colorService.getColor().getShade(500)
+    this.color = this.colorService.getColor()
+    this.shade = this.color.getShade(500)
 
     this.colorService.getColorChangeEmitter().subscribe(changeType => {
+      this.color = this.colorService.getColor()
+
       if (changeType !== ChangeType.ADJUST) {
-        this.shade = this.colorService.getColor().getShade(500)
-        this.state = changeType === ChangeType.RANDOM ? EditorState.ADD : EditorState.EDIT
+        this.shade = this.color.getShade(500)
+        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT
       }
+
       this.updateProperties()
     })
   }
 
   ngOnInit(): void {
-    if (document.body.classList.contains('dark'))
-      this.dark = true
-
     this.updateProperties()
   }
 
@@ -67,7 +72,7 @@ export class ColorEditorComponent implements OnInit {
    */
   adjustColor() {
     this.colorService.adjustColor(
-      new Color(this.colorService.getColor().name, this.shade.hex)
+      new Color(this.color.name, this.shade.hex)
     )
   }
 
@@ -87,6 +92,18 @@ export class ColorEditorComponent implements OnInit {
    */
   updateName(name: string) {
     this.colorService.updateColorName(name)
+  }
+
+  /**
+   * Copy a shades hex to clipboard.
+   * @param shade
+   */
+  copyToClipboard(shade: Shade) {
+    navigator.clipboard.writeText(shade.hex).then(() => {
+      this.notificationService.notification.emit(`Copied "${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'm')}" to your clipboard`)
+    }).catch(e => {
+      console.error('Error while copying to clipboard', e)
+    })
   }
 
 }

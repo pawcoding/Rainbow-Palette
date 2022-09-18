@@ -45,7 +45,7 @@
         'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
       }"
       class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6 cursor-pointer"
-      [title]="shade.index + '&#10;' + shade.hex"
+      title="Copy hex to clipboard"
       (click)="copyToClipboard(shade)"
     >
       {{shade.hex}}

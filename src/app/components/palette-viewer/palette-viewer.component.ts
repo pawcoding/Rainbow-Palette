@@ -3,6 +3,8 @@ import {Palette} from "../../models/palette.model";
 import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
 import {Color} from "../../models/color.model";
 import {StorageService} from "../../services/storage.service";
+import {NotificationService} from "../../services/notification.service";
+import {ExportDialog} from "../../dialogs/export.dialog";
 
 @Component({
   selector: 'palette-viewer',
@@ -25,7 +27,8 @@ export class PaletteViewerComponent implements OnInit {
   editTitle: ElementRef<HTMLInputElement> | undefined
 
   constructor(
-    private storage: StorageService
+    private storage: StorageService,
+    private notificationService: NotificationService
   ) {
     this.palette = Palette.generateRandomPalette(5)
   }
@@ -38,8 +41,28 @@ export class PaletteViewerComponent implements OnInit {
    * @param $event MouseEvent
    */
   removePalette($event: MouseEvent) {
-    if (confirm(`Are you sure you want to delete the palette?\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`))
+    const removeEmitter = new EventEmitter()
+    removeEmitter.subscribe(() => {
+      this.notificationService.dialog.emit(undefined)
       this.onRemove.emit($event)
+    })
+    const closeEmitter = new EventEmitter()
+    closeEmitter.subscribe(() => {
+      this.notificationService.dialog.emit(undefined)
+    })
+
+    this.notificationService.dialog.emit({
+      message: `Are you sure you want to delete the palette?\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`,
+      actions: [{
+        text: 'Cancel',
+        title: 'Cancel deletion',
+        action: closeEmitter
+      }, {
+        text: 'Delete',
+        title: 'Delete palette',
+        action: removeEmitter
+      }]
+    })
   }
 
   /**
@@ -56,7 +79,7 @@ export class PaletteViewerComponent implements OnInit {
    * Add a random color to the palette.
    */
   addRandomColor() {
-    this.palette.addColor(Color.generateRandomColor())
+    this.palette.addColor(Color.generateRandomColor(), false)
   }
 
   /**
@@ -64,6 +87,7 @@ export class PaletteViewerComponent implements OnInit {
    */
   savePalette() {
     this.storage.savePalette(this.palette)
+    this.notificationService.notification.emit('Palette saved')
   }
 
   /**
@@ -81,8 +105,7 @@ export class PaletteViewerComponent implements OnInit {
    */
   closeEditor() {
     this.editingState = false
-    if (this.palette)
-      this.palette.title = this.editTitle?.nativeElement.value || 'Random'
+    this.palette.title = this.editTitle?.nativeElement.value || 'Random'
     this.savePalette()
   }
 
@@ -91,6 +114,18 @@ export class PaletteViewerComponent implements OnInit {
    */
   sortPalette() {
     this.palette.sortColors()
+    this.notificationService.notification.emit('Palette sorted')
+  }
+
+  /**
+   * Export a palette for download and usage as plain CSS or Tailwind config.
+   */
+  exportPalette() {
+    this.notificationService.dialog
+      .emit(new ExportDialog(
+        this.notificationService.dialog,
+        this.palette
+      ).getNotification())
   }
 
 }

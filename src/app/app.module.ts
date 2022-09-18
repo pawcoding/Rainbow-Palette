@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { ColorViewerComponent } from './components/color-viewer/color-viewer.component';
 import { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component';
-import {StorageService} from "./services/storage.service";
+import { StorageService } from "./services/storage.service";
 import { LightSwitchComponent } from './components/light-switch/light-switch.component';
 import { ColorEditorComponent } from './components/color-editor/color-editor.component';
-import {ColorService} from "./services/color.service";
+import { ColorService } from "./services/color.service";
+import { DialogComponent } from './components/dialog/dialog.component';
+import { NotificationComponent } from './components/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import {ColorService} from "./services/color.service";
     ColorViewerComponent,
     PaletteViewerComponent,
     LightSwitchComponent,
-    ColorEditorComponent
+    ColorEditorComponent,
+    DialogComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule
