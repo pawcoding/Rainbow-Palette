@@ -15,16 +15,16 @@ export class ColorInterpolater {
     const hsl = ColorConverter.HEXtoHSL(hex)
 
     if (100 - hsl.luminosity < 7.5) {
-      shades.push(new Shade(50, hex))
+      shades.push(new Shade(50, true, hex))
       this.generateDarkerColors(hsl, 0, shades)
     } else if (100 - hsl.luminosity >= 85) {
-      shades.push(new Shade(900, hex))
+      shades.push(new Shade(900, true, hex))
       this.generateLighterColors(hsl, 900, shades)
     } else {
       let index = 100
       while (100 - hsl.luminosity > (index / 10) + 5)
         index += 100
-      shades.push(new Shade(index, hex))
+      shades.push(new Shade(index, true, hex))
       this.generateLighterColors(hsl, index, shades)
       this.generateDarkerColors(hsl, index, shades)
     }
@@ -46,11 +46,11 @@ export class ColorInterpolater {
     for (; i < step; i++) {
       const interpolatedLuminosity = hsl.luminosity + (i / step) * (100 - hsl.luminosity)
       const newIndex = index - i * 100
-      shades.push(new Shade(newIndex, hsl.hue, hsl.saturation, interpolatedLuminosity))
+      shades.push(new Shade(newIndex, false, hsl.hue, hsl.saturation, interpolatedLuminosity))
     }
 
     const interpolatedLuminosity = hsl.luminosity + ((2 * i - 1) / (2 * step)) * (100 - hsl.luminosity)
-    shades.push(new Shade(50, hsl.hue, hsl.saturation, interpolatedLuminosity))
+    shades.push(new Shade(50, false, hsl.hue, hsl.saturation, interpolatedLuminosity))
   }
 
   /**
@@ -67,7 +67,7 @@ export class ColorInterpolater {
     for (; i < step; i++) {
       const interpolatedLuminosity = hsl.luminosity - (i / step) * hsl.luminosity
       const newIndex = index + i * 100
-      shades.push(new Shade(newIndex, hsl.hue, hsl.saturation, interpolatedLuminosity))
+      shades.push(new Shade(newIndex, false, hsl.hue, hsl.saturation, interpolatedLuminosity))
     }
   }
 

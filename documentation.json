@@ -1775,127 +1775,7 @@
         },
         {
             "name": "MockColorService",
-            "id": "class-MockColorService-8dc39d6a8c02ba82df20ed69871ccb359fb85ed0efa06e4a5a4c582d3ce8da6fab2727b258614d80d78bad19d9ec7b786125b0b9a996756e6a62a054a511f61c",
-            "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "class",
-            "sourceCode": "import {ColorEditorComponent} from \"./color-editor.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {ColorService} from \"../../services/color.service\";\r\nimport {Color} from \"../../models/color.model\";\r\n\r\nexport default {\r\n  title: 'Components/Color Editor',\r\n  component: ColorEditorComponent\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n\r\n  private colorService: ColorService = new ColorService()\r\n\r\n  getColor() {\r\n    console.log('getColor()')\r\n    return this.colorService.getColor()\r\n  }\r\n\r\n  getColorChangeEmitter() {\r\n    console.log('getColorChangeEmitter()')\r\n    return this.colorService.getColorChangeEmitter()\r\n  }\r\n\r\n  adjustColor(color: Color) {\r\n    console.log(`adjustColor(${color.name})`)\r\n    return this.colorService.adjustColor(color)\r\n  }\r\n\r\n  updateColorName(name: string) {\r\n    console.log(`updateColorName(${name})`)\r\n    return this.colorService.updateColorName(name)\r\n  }\r\n\r\n  randomColor() {\r\n    console.log('randomColor()')\r\n    return this.colorService.randomColor()\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false\r\n}\r\n",
-            "properties": [
-                {
-                    "name": "colorService",
-                    "defaultValue": "new ColorService()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "ColorService",
-                    "optional": false,
-                    "description": "",
-                    "line": 13,
-                    "modifierKind": [
-                        121
-                    ]
-                }
-            ],
-            "methods": [
-                {
-                    "name": "adjustColor",
-                    "args": [
-                        {
-                            "name": "color",
-                            "type": "Color",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 25,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "color",
-                            "type": "Color",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "getColor",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 15,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "getColorChangeEmitter",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 20,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "randomColor",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 35,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "updateColorName",
-                    "args": [
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "any",
-                    "typeParameters": [],
-                    "line": 30,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "name",
-                            "type": "string",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                }
-            ],
-            "indexSignatures": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "implements": [
-                "Partial"
-            ]
-        },
-        {
-            "name": "MockColorService",
-            "id": "class-MockColorService-de3fc8f10e8ccf13884e53e134e2a85ee4e5277a51507049d75375727e6adc357c74ae3f899a9fe9a40e0d40c8cfe8babdf20fdcdf0711fd353b482e49ed0891-1",
+            "id": "class-MockColorService-de3fc8f10e8ccf13884e53e134e2a85ee4e5277a51507049d75375727e6adc357c74ae3f899a9fe9a40e0d40c8cfe8babdf20fdcdf0711fd353b482e49ed0891",
             "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -1923,6 +1803,126 @@
                         {
                             "name": "color",
                             "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Partial"
+            ]
+        },
+        {
+            "name": "MockColorService",
+            "id": "class-MockColorService-4b0cdde211173c5d2722f4e0b111525677519b94ac67ceaa586885ebcd7471f17cbf5e5c5a7833998b4c4f55b281ff7bc25fe4d5b4736c9f5e0637b0f3cfa355-1",
+            "file": "src/app/components/color-editor/color-editor.component.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {ColorEditorComponent} from \"./color-editor.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {ColorService} from \"../../services/color.service\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\n\r\nexport default {\r\n  title: 'Components/Color Editor',\r\n  component: ColorEditorComponent\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n\r\n  private colorService: ColorService = new ColorService()\r\n\r\n  getColor() {\r\n    console.log('getColor()')\r\n    return this.colorService.getColor()\r\n  }\r\n\r\n  getColorChangeEmitter() {\r\n    console.log('getColorChangeEmitter()')\r\n    return this.colorService.getColorChangeEmitter()\r\n  }\r\n\r\n  adjustColor(color: Color) {\r\n    console.log(`adjustColor(${color.name})`)\r\n    return this.colorService.adjustColor(color)\r\n  }\r\n\r\n  updateColorName(name: string) {\r\n    console.log(`updateColorName(${name})`)\r\n    return this.colorService.updateColorName(name)\r\n  }\r\n\r\n  randomColor() {\r\n    console.log('randomColor()')\r\n    return this.colorService.randomColor()\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false\r\n}\r\n",
+            "properties": [
+                {
+                    "name": "colorService",
+                    "defaultValue": "new ColorService()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ColorService",
+                    "optional": false,
+                    "description": "",
+                    "line": 15,
+                    "modifierKind": [
+                        121
+                    ]
+                }
+            ],
+            "methods": [
+                {
+                    "name": "adjustColor",
+                    "args": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 27,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "color",
+                            "type": "Color",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "getColorChangeEmitter",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "randomColor",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 37,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "updateColorName",
+                    "args": [
+                        {
+                            "name": "name",
+                            "type": "string",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "name",
+                            "type": "string",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -1984,30 +1984,30 @@
         },
         {
             "name": "MockNotificationService",
-            "id": "class-MockNotificationService-6f0e2e8ec45c6852344b5992ee33129e86d8cb2eb13d5aac2d92c8df9024bc734e2ec1ddb965614dda324596f2afb0109d672e3e918a3cb8bcda31345360afb5-1",
-            "file": "src/app/components/dialog/dialog.component.stories.ts",
+            "id": "class-MockNotificationService-4b0cdde211173c5d2722f4e0b111525677519b94ac67ceaa586885ebcd7471f17cbf5e5c5a7833998b4c4f55b281ff7bc25fe4d5b4736c9f5e0637b0f3cfa355-1",
+            "file": "src/app/components/color-editor/color-editor.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {DialogComponent} from \"./dialog.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\n\r\nexport default {\r\n  title: 'Components/Dialog',\r\n  component: DialogComponent\r\n} as Meta\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog = new EventEmitter<Dialog | undefined>()\r\n\r\n  constructor() {\r\n    const wait = new EventEmitter()\r\n    const next = new EventEmitter()\r\n\r\n    let content = {\r\n      message: 'This is a test message for storybook.\\n\\n' +\r\n        'You can use \\\\n to create new lines in here.',\r\n      actions: [{\r\n        text: 'Wait',\r\n        title: 'Wait 2 seconds for next dialog',\r\n        action: wait\r\n      }, {\r\n        text: 'Next',\r\n        title: 'Show next dialog',\r\n        action: next\r\n      }]\r\n    }\r\n\r\n    wait.subscribe(() => {\r\n      this.dialog.emit(undefined)\r\n      setTimeout(() => {\r\n        this.dialog.emit(content)\r\n      }, 2000)\r\n    })\r\n    next.subscribe(() => {\r\n      this.dialog.emit(content)\r\n    })\r\n\r\n    setTimeout(() => {\r\n      this.dialog.emit(content)\r\n    }, 0)\r\n\r\n    this.dialog.subscribe(notification => {\r\n      if (notification)\r\n        console.log('Show dialog\\n', notification.message)\r\n      else\r\n        console.log('Close dialog')\r\n    })\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false\r\n}\r\n",
+            "sourceCode": "import {ColorEditorComponent} from \"./color-editor.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {ColorService} from \"../../services/color.service\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\n\r\nexport default {\r\n  title: 'Components/Color Editor',\r\n  component: ColorEditorComponent\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n\r\n  private colorService: ColorService = new ColorService()\r\n\r\n  getColor() {\r\n    console.log('getColor()')\r\n    return this.colorService.getColor()\r\n  }\r\n\r\n  getColorChangeEmitter() {\r\n    console.log('getColorChangeEmitter()')\r\n    return this.colorService.getColorChangeEmitter()\r\n  }\r\n\r\n  adjustColor(color: Color) {\r\n    console.log(`adjustColor(${color.name})`)\r\n    return this.colorService.adjustColor(color)\r\n  }\r\n\r\n  updateColorName(name: string) {\r\n    console.log(`updateColorName(${name})`)\r\n    return this.colorService.updateColorName(name)\r\n  }\r\n\r\n  randomColor() {\r\n    console.log('randomColor()')\r\n    return this.colorService.randomColor()\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "args": [],
-                "line": 14
+                "line": 46
             },
             "properties": [
                 {
-                    "name": "dialog",
-                    "defaultValue": "new EventEmitter<Dialog | undefined>()",
+                    "name": "notification",
+                    "defaultValue": "new EventEmitter<string | undefined>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "EventEmitter<string | undefined>",
                     "optional": false,
                     "description": "",
-                    "line": 14
+                    "line": 46
                 }
             ],
             "methods": [],
@@ -2066,7 +2066,48 @@
         },
         {
             "name": "MockNotificationService",
-            "id": "class-MockNotificationService-72ab9742084248e618bb1e88a55b426a9f2cfa7cb153a127dbc37f1004ba8bc40b1508b071687df269c4d510587852b76a0f1f0afff7e4923ce0ab72a7ce8892-3",
+            "id": "class-MockNotificationService-6f0e2e8ec45c6852344b5992ee33129e86d8cb2eb13d5aac2d92c8df9024bc734e2ec1ddb965614dda324596f2afb0109d672e3e918a3cb8bcda31345360afb5-3",
+            "file": "src/app/components/dialog/dialog.component.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {DialogComponent} from \"./dialog.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\n\r\nexport default {\r\n  title: 'Components/Dialog',\r\n  component: DialogComponent\r\n} as Meta\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog = new EventEmitter<Dialog | undefined>()\r\n\r\n  constructor() {\r\n    const wait = new EventEmitter()\r\n    const next = new EventEmitter()\r\n\r\n    let content = {\r\n      message: 'This is a test message for storybook.\\n\\n' +\r\n        'You can use \\\\n to create new lines in here.',\r\n      actions: [{\r\n        text: 'Wait',\r\n        title: 'Wait 2 seconds for next dialog',\r\n        action: wait\r\n      }, {\r\n        text: 'Next',\r\n        title: 'Show next dialog',\r\n        action: next\r\n      }]\r\n    }\r\n\r\n    wait.subscribe(() => {\r\n      this.dialog.emit(undefined)\r\n      setTimeout(() => {\r\n        this.dialog.emit(content)\r\n      }, 2000)\r\n    })\r\n    next.subscribe(() => {\r\n      this.dialog.emit(content)\r\n    })\r\n\r\n    setTimeout(() => {\r\n      this.dialog.emit(content)\r\n    }, 0)\r\n\r\n    this.dialog.subscribe(notification => {\r\n      if (notification)\r\n        console.log('Show dialog\\n', notification.message)\r\n      else\r\n        console.log('Close dialog')\r\n    })\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 14
+            },
+            "properties": [
+                {
+                    "name": "dialog",
+                    "defaultValue": "new EventEmitter<Dialog | undefined>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Partial"
+            ],
+            "isDuplicate": true,
+            "duplicateId": 3,
+            "duplicateName": "MockNotificationService-3"
+        },
+        {
+            "name": "MockNotificationService",
+            "id": "class-MockNotificationService-72ab9742084248e618bb1e88a55b426a9f2cfa7cb153a127dbc37f1004ba8bc40b1508b071687df269c4d510587852b76a0f1f0afff7e4923ce0ab72a7ce8892-4",
             "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -2112,8 +2153,8 @@
                 "Partial"
             ],
             "isDuplicate": true,
-            "duplicateId": 3,
-            "duplicateName": "MockNotificationService-3"
+            "duplicateId": 4,
+            "duplicateName": "MockNotificationService-4"
         },
         {
             "name": "MockStorageService",
@@ -3788,7 +3829,7 @@
         },
         {
             "name": "ColorEditorComponent",
-            "id": "component-ColorEditorComponent-9b189ae1d2dd7dd4ac04dcade9c078f0a7279e2760081291a1c31ea8fec7e054f7162e6c493334b986b8576f37e5f664734c8e30c0f5472c6051ea9ff87c46a5",
+            "id": "component-ColorEditorComponent-5ded60708c163b71d077b64394bdb7c6dab06e3b764f38a100a5f0d815d76575a1b247afc93c6350af820f942bdae3d50141e76da6102716a3cb02a153296d65",
             "file": "src/app/components/color-editor/color-editor.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3810,7 +3851,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 16,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -3821,7 +3862,7 @@
                     "defaultValue": "new EventEmitter<Color>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 19,
                     "type": "EventEmitter"
                 }
             ],
@@ -3833,7 +3874,7 @@
                     "type": "Color",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 22
                 },
                 {
                     "name": "colorService",
@@ -3842,7 +3883,7 @@
                     "type": "ColorService",
                     "optional": false,
                     "description": "",
-                    "line": 24,
+                    "line": 26,
                     "modifierKind": [
                         123
                     ]
@@ -3854,7 +3895,7 @@
                     "type": "Shade",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 21
                 },
                 {
                     "name": "state",
@@ -3864,7 +3905,7 @@
                     "type": "EditorState",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 23
                 }
             ],
             "methodsClass": [
@@ -3874,11 +3915,56 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 73,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nAdjust the color in the global ColorService.\n",
                     "description": "<p>Adjust the color in the global ColorService.</p>\n"
+                },
+                {
+                    "name": "copyToClipboard",
+                    "args": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 101,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "rawdescription": "\n\nCopy a shades hex to clipboard.\n",
+                    "description": "<p>Copy a shades hex to clipboard.</p>\n",
+                    "jsdoctags": [
+                        {
+                            "name": {
+                                "pos": 3140,
+                                "end": 3145,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "shade"
+                            },
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "pos": 3134,
+                                "end": 3139,
+                                "flags": 4227072,
+                                "modifierFlagsCache": 0,
+                                "transformFlags": 0,
+                                "kind": 79,
+                                "escapedText": "param"
+                            },
+                            "comment": ""
+                        }
+                    ]
                 },
                 {
                     "name": "ngOnInit",
@@ -3886,7 +3972,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 44,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3909,7 +3995,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 53,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate current shade. The property with type is changed to the new value.\n",
@@ -3917,8 +4003,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1290,
-                                "end": 1294,
+                                "pos": 1494,
+                                "end": 1498,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3930,8 +4016,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1284,
-                                "end": 1289,
+                                "pos": 1488,
+                                "end": 1493,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3942,8 +4028,8 @@
                         },
                         {
                             "name": {
-                                "pos": 1327,
-                                "end": 1332,
+                                "pos": 1531,
+                                "end": 1536,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3954,8 +4040,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1321,
-                                "end": 1326,
+                                "pos": 1525,
+                                "end": 1530,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3979,7 +4065,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 90,
+                    "line": 93,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate the name of the current color.\n",
@@ -3987,8 +4073,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2784,
-                                "end": 2788,
+                                "pos": 2988,
+                                "end": 2992,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -3999,8 +4085,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2778,
-                                "end": 2783,
+                                "pos": 2982,
+                                "end": 2987,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4017,7 +4103,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 79,
+                    "line": 82,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate all css properties to the values of the current selected shade.\n",
@@ -4031,7 +4117,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\nimport {Shade} from \"../../models/shade.model\";\r\nimport {ChangeType, ColorService} from \"../../services/color.service\";\r\n\r\n@Component({\r\n  selector: 'color-editor',\r\n  templateUrl: './color-editor.component.html',\r\n  styleUrls: ['./color-editor.component.css']\r\n})\r\nexport class ColorEditorComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  addColor = new EventEmitter<Color>()\r\n\r\n  shade: Shade\r\n  color: Color\r\n  state: EditorState = EditorState.ADD\r\n\r\n  constructor(\r\n    public colorService: ColorService\r\n  ) {\r\n    this.color = this.colorService.getColor()\r\n    this.shade = this.color.getShade(500)\r\n\r\n    this.colorService.getColorChangeEmitter().subscribe(changeType => {\r\n      this.color = this.colorService.getColor()\r\n\r\n      if (changeType !== ChangeType.ADJUST) {\r\n        this.shade = this.color.getShade(500)\r\n        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT\r\n      }\r\n\r\n      this.updateProperties()\r\n    })\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Update current shade. The property with type is changed to the new value.\r\n   * @param type Property to change\r\n   * @param value Value to change to\r\n   */\r\n  updateColor(type: UpdateType, value: string | number) {\r\n    if (type === UpdateType.HEX && isNaN(+value)) {\r\n      this.shade = new Shade(0, `${value}`)\r\n    } else if (!isNaN(+value)) {\r\n      value = parseInt(`${value}`)\r\n      if (type === UpdateType.HUE) {\r\n        this.shade = new Shade(0, value, this.shade.saturation, this.shade.luminosity)\r\n      } else if (type === UpdateType.SATURATION) {\r\n        this.shade = new Shade(0, this.shade.hue, value, this.shade.luminosity)\r\n      } else if (type === UpdateType.LUMINOSITY) {\r\n        this.shade = new Shade(0, this.shade.hue, this.shade.saturation, 100 - value)\r\n      }\r\n    }\r\n\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Adjust the color in the global ColorService.\r\n   */\r\n  adjustColor() {\r\n    this.colorService.adjustColor(\r\n      new Color(this.color.name, this.shade.hex)\r\n    )\r\n  }\r\n\r\n  /**\r\n   * Update all css properties to the values of the current selected shade.\r\n   */\r\n  updateProperties() {\r\n    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\r\n    document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\r\n    document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\r\n    document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\r\n  }\r\n\r\n  /**\r\n   * Update the name of the current color.\r\n   * @param name\r\n   */\r\n  updateName(name: string) {\r\n    this.colorService.updateColorName(name)\r\n  }\r\n\r\n}\r\n\r\nenum UpdateType {\r\n  HEX, HUE, SATURATION, LUMINOSITY\r\n}\r\n\r\nenum EditorState {\r\n  ADD, EDIT\r\n}\r\n",
+            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\nimport {Shade} from \"../../models/shade.model\";\r\nimport {ChangeType, ColorService} from \"../../services/color.service\";\r\nimport {ToUnicodeVariantUtil} from \"../../utils/to-unicode-variant.util\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\n\r\n@Component({\r\n  selector: 'color-editor',\r\n  templateUrl: './color-editor.component.html',\r\n  styleUrls: ['./color-editor.component.css']\r\n})\r\nexport class ColorEditorComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  addColor = new EventEmitter<Color>()\r\n\r\n  shade: Shade\r\n  color: Color\r\n  state: EditorState = EditorState.ADD\r\n\r\n  constructor(\r\n    public colorService: ColorService,\r\n    private notificationService: NotificationService\r\n  ) {\r\n    this.color = this.colorService.getColor()\r\n    this.shade = this.color.getShade(500)\r\n\r\n    this.colorService.getColorChangeEmitter().subscribe(changeType => {\r\n      this.color = this.colorService.getColor()\r\n\r\n      if (changeType !== ChangeType.ADJUST) {\r\n        this.shade = this.color.getShade(500)\r\n        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT\r\n      }\r\n\r\n      this.updateProperties()\r\n    })\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Update current shade. The property with type is changed to the new value.\r\n   * @param type Property to change\r\n   * @param value Value to change to\r\n   */\r\n  updateColor(type: UpdateType, value: string | number) {\r\n    if (type === UpdateType.HEX && isNaN(+value)) {\r\n      this.shade = new Shade(0, `${value}`)\r\n    } else if (!isNaN(+value)) {\r\n      value = parseInt(`${value}`)\r\n      if (type === UpdateType.HUE) {\r\n        this.shade = new Shade(0, value, this.shade.saturation, this.shade.luminosity)\r\n      } else if (type === UpdateType.SATURATION) {\r\n        this.shade = new Shade(0, this.shade.hue, value, this.shade.luminosity)\r\n      } else if (type === UpdateType.LUMINOSITY) {\r\n        this.shade = new Shade(0, this.shade.hue, this.shade.saturation, 100 - value)\r\n      }\r\n    }\r\n\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Adjust the color in the global ColorService.\r\n   */\r\n  adjustColor() {\r\n    this.colorService.adjustColor(\r\n      new Color(this.color.name, this.shade.hex)\r\n    )\r\n  }\r\n\r\n  /**\r\n   * Update all css properties to the values of the current selected shade.\r\n   */\r\n  updateProperties() {\r\n    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\r\n    document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\r\n    document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\r\n    document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\r\n  }\r\n\r\n  /**\r\n   * Update the name of the current color.\r\n   * @param name\r\n   */\r\n  updateName(name: string) {\r\n    this.colorService.updateColorName(name)\r\n  }\r\n\r\n  /**\r\n   * Copy a shades hex to clipboard.\r\n   * @param shade\r\n   */\r\n  copyToClipboard(shade: Shade) {\r\n    navigator.clipboard.writeText(shade.hex).then(() => {\r\n      this.notificationService.notification.emit(`Copied \"${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'm')}\" to your clipboard`)\r\n    }).catch(e => {\r\n      console.error('Error while copying to clipboard', e)\r\n    })\r\n  }\r\n\r\n}\r\n\r\nenum UpdateType {\r\n  HEX, HUE, SATURATION, LUMINOSITY\r\n}\r\n\r\nenum EditorState {\r\n  ADD, EDIT\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4051,13 +4137,28 @@
                         "type": "ColorService",
                         "deprecated": false,
                         "deprecationMessage": ""
+                    },
+                    {
+                        "name": "notificationService",
+                        "type": "NotificationService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
                     }
                 ],
-                "line": 21,
+                "line": 23,
                 "jsdoctags": [
                     {
                         "name": "colorService",
                         "type": "ColorService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "notificationService",
+                        "type": "NotificationService",
                         "deprecated": false,
                         "deprecationMessage": "",
                         "tagName": {
@@ -4069,7 +4170,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div [class]=\"dark ? 'dark' : ''\" class=\"max-w-5xl mx-auto mb-8\">\r\n  <article\r\n    class=\"flex gap-4 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition-colors duration-200\"\r\n  >\r\n\r\n    <!-- Edit Color -->\r\n    <section class=\"grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center\">\r\n\r\n      <!-- Edit Hex -->\r\n      <input\r\n        type=\"color\"\r\n        title=\"Select a shade\"\r\n        id=\"hexInput\" #hexInput\r\n        class=\"overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200\"\r\n        [value]=\"shade.hex\"\r\n        (input)=\"updateColor(0, hexInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Hue -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the hue\"\r\n        id=\"hueInput\" #hueInput\r\n        min=0 max=360\r\n        [value]=\"shade.hue\"\r\n        (input)=\"updateColor(1, hueInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Saturation -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the saturation\"\r\n        id=\"saturationInput\" #saturationInput\r\n        min=0 max=100\r\n        [value]=\"shade.saturation\"\r\n        (input)=\"updateColor(2, saturationInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Luminosity -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the luminosity\"\r\n        id=\"luminosityInput\" #luminosityInput\r\n        min=0 max=100\r\n        [value]=\"100 - shade.luminosity\"\r\n        (input)=\"updateColor(3, luminosityInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <div class=\"flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full\">\r\n        <!-- Edit Name -->\r\n        <input\r\n          type=\"text\"\r\n          title=\"Give your color a name\"\r\n          id=\"nameInput\" #nameInput\r\n          class=\"text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-all duration-200\"\r\n          placeholder=\"Color Name\"\r\n          [value]=\"color.name\"\r\n          (change)=\"updateName(nameInput.value)\"\r\n        >\r\n\r\n        <!-- Add Color to Palette -->\r\n        <input\r\n          type=\"button\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200\"\r\n          [title]=\"state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'\"\r\n          [value]=\"state === 0 ? 'Add to palette' : 'Replace existing color'\"\r\n          (click)=\"addColor.emit(color)\"\r\n        >\r\n\r\n        <!-- Generate new random color -->\r\n        <input\r\n          type=\"button\"\r\n          title=\"Generate new random color\"\r\n          value=\"Random Color\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 \"\r\n          (click)=\"colorService.randomColor()\"\r\n        >\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Preview Color -->\r\n    <section class=\"grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default\">\r\n      <span\r\n        *ngFor=\"let shade of color.shades\"\r\n        [title]=\"shade.index + '&#10;' + shade.hex\"\r\n        [ngStyle]=\"{\r\n          'background-color': shade.hex,\r\n          'color': color.getShade(shade.luminosity > 48 ? 900 : 50).hex\r\n        }\"\r\n        class=\"block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2\"\r\n      >\r\n        {{shade.hex}}\r\n      </span>\r\n    </section>\r\n  </article>\r\n</div>\r\n"
+            "templateData": "<div [class]=\"dark ? 'dark' : ''\" class=\"max-w-5xl mx-auto mb-8\">\r\n  <article\r\n    class=\"flex gap-4 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition-colors duration-200\"\r\n  >\r\n\r\n    <!-- Edit Color -->\r\n    <section class=\"grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center\">\r\n\r\n      <!-- Edit Hex -->\r\n      <input\r\n        type=\"color\"\r\n        title=\"Select a shade\"\r\n        id=\"hexInput\" #hexInput\r\n        class=\"overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200\"\r\n        [value]=\"shade.hex\"\r\n        (input)=\"updateColor(0, hexInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Hue -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the hue\"\r\n        id=\"hueInput\" #hueInput\r\n        min=0 max=360\r\n        [value]=\"shade.hue\"\r\n        (input)=\"updateColor(1, hueInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Saturation -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the saturation\"\r\n        id=\"saturationInput\" #saturationInput\r\n        min=0 max=100\r\n        [value]=\"shade.saturation\"\r\n        (input)=\"updateColor(2, saturationInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <!-- Edit Luminosity -->\r\n      <input\r\n        type=\"range\"\r\n        title=\"Adjust the luminosity\"\r\n        id=\"luminosityInput\" #luminosityInput\r\n        min=0 max=100\r\n        [value]=\"100 - shade.luminosity\"\r\n        (input)=\"updateColor(3, luminosityInput.value)\"\r\n        (change)=\"adjustColor()\"\r\n      >\r\n\r\n      <div class=\"flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full\">\r\n        <!-- Edit Name -->\r\n        <input\r\n          type=\"text\"\r\n          title=\"Give your color a name\"\r\n          id=\"nameInput\" #nameInput\r\n          class=\"text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-all duration-200\"\r\n          placeholder=\"Color Name\"\r\n          [value]=\"color.name\"\r\n          (change)=\"updateName(nameInput.value)\"\r\n        >\r\n\r\n        <!-- Add Color to Palette -->\r\n        <input\r\n          type=\"button\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200\"\r\n          [title]=\"state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'\"\r\n          [value]=\"state === 0 ? 'Add to palette' : 'Replace existing color'\"\r\n          (click)=\"addColor.emit(color)\"\r\n        >\r\n\r\n        <!-- Generate new random color -->\r\n        <input\r\n          type=\"button\"\r\n          title=\"Generate new random color\"\r\n          value=\"Random Color\"\r\n          class=\"cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 \"\r\n          (click)=\"colorService.randomColor()\"\r\n        >\r\n      </div>\r\n    </section>\r\n\r\n    <!-- Preview Color -->\r\n    <section class=\"grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default\">\r\n      <span\r\n        *ngFor=\"let shade of color.shades\"\r\n        [ngStyle]=\"{\r\n          'background-color': shade.hex,\r\n          'color': color.getShade(shade.luminosity > 48 ? 900 : 50).hex\r\n        }\"\r\n        class=\"block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2 cursor-pointer\"\r\n        title=\"Copy hex to clipboard\"\r\n        (click)=\"copyToClipboard(shade)\"\r\n      >\r\n        {{shade.hex}}\r\n      </span>\r\n    </section>\r\n  </article>\r\n</div>\r\n"
         },
         {
             "name": "ColorViewerComponent",
@@ -4944,21 +5045,21 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.prod.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/environments/environment.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: false,\n  version: packageJson.version\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
             },
             {
                 "name": "MediaScope",
@@ -5024,16 +5125,6 @@
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/dialog/dialog.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "Primary",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/light-switch/light-switch.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -5045,6 +5136,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/notification/notification.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Primary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/dialog/dialog.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -5093,16 +5194,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }]\r\n  }\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -5113,11 +5204,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/dialog/dialog.component.stories.ts",
+                "file": "src/app/components/color-editor/color-editor.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
             },
             {
                 "name": "Template",
@@ -5134,6 +5225,16 @@
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/notification/notification.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/dialog/dialog.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story",
@@ -5254,18 +5355,6 @@
                     "type": "literal type"
                 }
             ],
-            "src/environments/environment.prod.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.prod.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
-                }
-            ],
             "src/environments/environment.ts": [
                 {
                     "name": "environment",
@@ -5276,6 +5365,18 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: false,\n  version: packageJson.version\n}"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
                 }
             ],
             "src/app/components/palette-viewer/palette-viewer.component.stories.ts": [
@@ -5401,29 +5502,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
-                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }]\r\n  }\r\n})"
-                }
-            ],
-            "src/app/components/dialog/dialog.component.stories.ts": [
-                {
-                    "name": "Primary",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/dialog/dialog.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/components/dialog/dialog.component.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story",
-                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
                 }
             ],
             "src/app/components/light-switch/light-switch.component.stories.ts": [
@@ -5464,6 +5543,28 @@
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/components/notification/notification.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
+                }
+            ],
+            "src/app/components/dialog/dialog.component.stories.ts": [
+                {
+                    "name": "Primary",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/dialog/dialog.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/dialog/dialog.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "Story",
@@ -5610,6 +5711,15 @@
             },
             {
                 "filePath": "src/app/components/color-editor/color-editor.component.stories.ts",
+                "type": "class",
+                "linktype": "classe",
+                "name": "MockNotificationService",
+                "coveragePercent": 0,
+                "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/color-editor/color-editor.component.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -5633,8 +5743,8 @@
                 "type": "component",
                 "linktype": "component",
                 "name": "ColorEditorComponent",
-                "coveragePercent": 30,
-                "coverageCount": "4/13",
+                "coveragePercent": 35,
+                "coverageCount": "5/14",
                 "status": "medium"
             },
             {

@@ -7,15 +7,24 @@ export class Color {
 
   shades: Shade[]
 
-  constructor(
-    name: string,
-    hex: string
-  ) {
-    if (!hex.startsWith('#') || hex.length !== 7)
-      throw `Color '${hex}' is not in form #RRGGBB.`
+  public constructor(name: string)
+  public constructor(name: string, hex: string)
+  public constructor(name: string, shades: Shade[])
 
-    this.name = name.startsWith('#') ? name.substring(1) : name
-    this.shades = ColorInterpolater.interpolateShades(hex)
+  constructor(...args: any[]) {
+    this.name = args[0].startsWith('#') ? args[0].substring(1) : args[0]
+
+    if (args.length === 2) {
+      if (typeof args[1] === 'string') {
+        if (!args[1].startsWith('#') || args[1].length !== 7)
+          throw `Color '${args[1]}' is not in form #RRGGBB.`
+        this.shades = ColorInterpolater.interpolateShades(args[1])
+      } else {
+        this.shades = args[1]
+      }
+    } else {
+      this.shades = []
+    }
 
     this.shades.sort((a, b) => a.index - b.index)
   }
@@ -57,10 +66,15 @@ export class Color {
   public static parseColor(json: any): Color {
     if (!json.name)
       throw 'Color has no name'
-    if (!json.shades || json.shades.length < 6)
+    if (!json.shades || json.shades.length < 1)
       throw 'Color has not enough shades'
 
-    return new Color(json.name, json.shades[5].hex)
+    const shades: Shade[] = []
+    for (const shade of json.shades) {
+      shades.push(Shade.parseShade(shade))
+    }
+
+    return new Color(json.name, shades)
   }
 
 }

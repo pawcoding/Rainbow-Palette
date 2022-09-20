@@ -120,4 +120,21 @@ export class ColorConverter {
     }
   }
 
+  /**
+   * Convert from RGB values to HEX string.
+   * @param red
+   * @param green
+   * @param blue
+   * @constructor
+   */
+  static RGBtoHEX(red: number, green: number, blue: number) {
+    return `#${
+      (red < 16 ? 0 : '') + red.toString(16)
+    }${
+      (green < 16 ? 0 : '') + green.toString(16)
+    }${
+      (blue < 16 ? 0 : '') + blue.toString(16)
+    }`
+  }
+
 }
