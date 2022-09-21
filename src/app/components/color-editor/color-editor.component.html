@@ -14,7 +14,6 @@
         class="overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200"
         [value]="shade.hex"
         (input)="updateColor(0, hexInput.value)"
-        (change)="adjustColor()"
       >
 
       <!-- Edit Hue -->
@@ -25,7 +24,6 @@
         min=0 max=360
         [value]="shade.hue"
         (input)="updateColor(1, hueInput.value)"
-        (change)="adjustColor()"
       >
 
       <!-- Edit Saturation -->
@@ -36,7 +34,6 @@
         min=0 max=100
         [value]="shade.saturation"
         (input)="updateColor(2, saturationInput.value)"
-        (change)="adjustColor()"
       >
 
       <!-- Edit Luminosity -->
@@ -47,7 +44,6 @@
         min=0 max=100
         [value]="100 - shade.luminosity"
         (input)="updateColor(3, luminosityInput.value)"
-        (change)="adjustColor()"
       >
 
       <div class="flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full">
@@ -85,16 +81,17 @@
     <!-- Preview Color -->
     <section class="grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default">
       <span
-        *ngFor="let shade of color.shades"
+        *ngFor="let shadeToShow of color.shades"
         [ngStyle]="{
-          'background-color': shade.hex,
-          'color': color.getShade(shade.luminosity > 48 ? 900 : 50).hex
+          'background-color': shadeToShow.hex,
+          'color': color.getShade(shadeToShow.luminosity > 48 ? 900 : 50).hex,
+          'font-weight': shadeToShow === shade ? 'bold' : 'inherit'
         }"
         class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2 cursor-pointer"
         title="Copy hex to clipboard"
-        (click)="copyToClipboard(shade)"
+        (click)="changeShade(shadeToShow)"
       >
-        {{shade.hex}}
+        {{shadeToShow.hex}}
       </span>
     </section>
   </article>

@@ -30,9 +30,8 @@ export class ColorEditorComponent implements OnInit {
     this.shade = this.color.getShade(500)
 
     this.colorService.getColorChangeEmitter().subscribe(changeType => {
-      this.color = this.colorService.getColor()
-
       if (changeType !== ChangeType.ADJUST) {
+        this.color = this.colorService.getColor()
         this.shade = this.color.getShade(500)
         this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT
       }
@@ -52,28 +51,23 @@ export class ColorEditorComponent implements OnInit {
    */
   updateColor(type: UpdateType, value: string | number) {
     if (type === UpdateType.HEX && isNaN(+value)) {
-      this.shade = new Shade(0, true, `${value}`)
+      this.shade.setHEX(`${value}`, true)
+      //this.shade = new Shade(0, true, `${value}`)
     } else if (!isNaN(+value)) {
       value = parseInt(`${value}`)
       if (type === UpdateType.HUE) {
-        this.shade = new Shade(0, true, value, this.shade.saturation, this.shade.luminosity)
+        this.shade.setHSL(value, this.shade.saturation, this.shade.luminosity, true)
+        //this.shade = new Shade(0, true, value, this.shade.saturation, this.shade.luminosity)
       } else if (type === UpdateType.SATURATION) {
-        this.shade = new Shade(0, true, this.shade.hue, value, this.shade.luminosity)
+        this.shade.setHSL(this.shade.hue, value, this.shade.luminosity, true)
+        //this.shade = new Shade(0, true, this.shade.hue, value, this.shade.luminosity)
       } else if (type === UpdateType.LUMINOSITY) {
-        this.shade = new Shade(0, true, this.shade.hue, this.shade.saturation, 100 - value)
+        this.shade.setHSL(this.shade.hue, this.shade.saturation, 100 - value, true)
+        //this.shade = new Shade(0, true, this.shade.hue, this.shade.saturation, 100 - value)
       }
     }
 
-    this.updateProperties()
-  }
-
-  /**
-   * Adjust the color in the global ColorService.
-   */
-  adjustColor() {
-    this.colorService.adjustColor(
-      new Color(this.color.name, this.shade.hex)
-    )
+    this.colorService.adjustShade()
   }
 
   /**
@@ -92,6 +86,11 @@ export class ColorEditorComponent implements OnInit {
    */
   updateName(name: string) {
     this.colorService.updateColorName(name)
+  }
+
+  changeShade(shade: Shade) {
+    this.shade = shade
+    this.updateProperties()
   }
 
   /**

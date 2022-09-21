@@ -26,7 +26,7 @@ class MockColorService implements Partial<ColorService> {
 
   adjustColor(color: Color) {
     console.log(`adjustColor(${color.name})`)
-    return this.colorService.adjustColor(color)
+    return this.colorService.adjustShade()
   }
 
   updateColorName(name: string) {

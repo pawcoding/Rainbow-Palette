@@ -18,8 +18,12 @@ export class Color {
         throw `Color '${args[1]}' is not in form #RRGGBB.`
 
       this.shades = []
-      this.shades.push(new Shade(500, true, args[1]))
+      const shade = new Shade(-1, true, args[1])
+      this.shades.push(shade)
       ColorInterpolater.regenerateShades(this)
+
+      shade.fixed = false
+      this.getShade(500).fixed = true
     } else {
       this.shades = args[1]
     }

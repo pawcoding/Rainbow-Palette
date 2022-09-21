@@ -47,6 +47,7 @@ export class ColorInterpolater {
 
     // remove white and black and set shades to color
     color.shades = shades.filter(shade => shade.index !== 0 && shade.index !== 1000)
+    color.shades.sort((a, b) => a.index - b.index)
   }
 
   /**
