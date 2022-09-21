@@ -7,23 +7,21 @@ export class Color {
 
   shades: Shade[]
 
-  public constructor(name: string)
   public constructor(name: string, hex: string)
   public constructor(name: string, shades: Shade[])
 
   constructor(...args: any[]) {
     this.name = args[0].startsWith('#') ? args[0].substring(1) : args[0]
 
-    if (args.length === 2) {
-      if (typeof args[1] === 'string') {
-        if (!args[1].startsWith('#') || args[1].length !== 7)
-          throw `Color '${args[1]}' is not in form #RRGGBB.`
-        this.shades = ColorInterpolater.interpolateShades(args[1])
-      } else {
-        this.shades = args[1]
-      }
-    } else {
+    if (typeof args[1] === 'string') {
+      if (!args[1].startsWith('#') || args[1].length !== 7)
+        throw `Color '${args[1]}' is not in form #RRGGBB.`
+
       this.shades = []
+      this.shades.push(new Shade(500, true, args[1]))
+      ColorInterpolater.regenerateShades(this)
+    } else {
+      this.shades = args[1]
     }
 
     this.shades.sort((a, b) => a.index - b.index)
