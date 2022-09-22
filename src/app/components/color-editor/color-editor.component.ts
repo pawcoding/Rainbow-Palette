@@ -52,19 +52,14 @@ export class ColorEditorComponent implements OnInit {
   updateColor(type: UpdateType, value: string | number) {
     if (type === UpdateType.HEX && isNaN(+value)) {
       this.shade.setHEX(`${value}`, true)
-      //this.shade = new Shade(0, true, `${value}`)
     } else if (!isNaN(+value)) {
       value = parseInt(`${value}`)
-      if (type === UpdateType.HUE) {
+      if (type === UpdateType.HUE)
         this.shade.setHSL(value, this.shade.saturation, this.shade.luminosity, true)
-        //this.shade = new Shade(0, true, value, this.shade.saturation, this.shade.luminosity)
-      } else if (type === UpdateType.SATURATION) {
+      else if (type === UpdateType.SATURATION)
         this.shade.setHSL(this.shade.hue, value, this.shade.luminosity, true)
-        //this.shade = new Shade(0, true, this.shade.hue, value, this.shade.luminosity)
-      } else if (type === UpdateType.LUMINOSITY) {
+      else if (type === UpdateType.LUMINOSITY)
         this.shade.setHSL(this.shade.hue, this.shade.saturation, 100 - value, true)
-        //this.shade = new Shade(0, true, this.shade.hue, this.shade.saturation, 100 - value)
-      }
     }
 
     this.colorService.adjustShade()
@@ -91,6 +86,15 @@ export class ColorEditorComponent implements OnInit {
   changeShade(shade: Shade) {
     this.shade = shade
     this.updateProperties()
+  }
+
+  releaseShade(shade: Shade, $event: MouseEvent) {
+    $event.preventDefault()
+
+    if (this.color.shades.filter(s => s.fixed).length > 1) {
+      shade.fixed = false
+      this.colorService.adjustShade()
+    }
   }
 
   /**

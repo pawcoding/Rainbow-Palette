@@ -83,7 +83,7 @@ export class Shade {
         || (!json.luminosity && json.luminosity !== 0))
       throw 'Not all parameters for shade are set'
 
-    return new Shade(json.index, json.fixed || true, json.hex, json.hue, json.saturation, json.luminosity)
+    return new Shade(json.index, json.fixed, json.hex, json.hue, json.saturation, json.luminosity)
   }
 
 }

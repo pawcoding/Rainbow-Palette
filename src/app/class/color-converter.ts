@@ -1,116 +1,7 @@
 export class ColorConverter {
 
-  /**
-   * Convert from HEX string (#RRGGBB) to HSL format.
-   * @param hex HEX color sting (#RRGGBB)
-   * @constructor
-   */
-  static HEXtoHSL(hex: string) {
-    if (!hex.startsWith('#') || hex.length !== 7)
-      throw `Color '${hex}' is not in form #RRGGBB.`
-
-    const rgb = this.HEXtoRGB(hex)
-    const r = rgb.red / 255
-    const g = rgb.green / 255
-    const b = rgb.blue / 255
-
-    const cMax = Math.max(r, g, b)
-    const cMin = Math.min(r, g, b)
-    const d = cMax - cMin
-
-    const l = this.getLuminosity(cMax, cMin)
-    const s = this.getSaturation(d, l)
-    let h = this.getHue(d, cMax, r, g, b)
-    if (h < 0)
-      h += 360
-
-    return {
-      hue: Math.round(h),
-      saturation: Math.round(s),
-      luminosity: Math.round(l)
-    }
-  }
-
-  /**
-   * Get luminosity for HSL format.
-   * @param cMax Max value from [red, green, blue] / 255
-   * @param cMin Min value from [red, green, blue] / 255
-   * @private
-   */
-  private static getLuminosity(cMax: number, cMin: number): number {
-    return (cMax + cMin) * 50
-  }
-
-  /**
-   * Get saturation for HSL format.
-   * @param delta Difference between max and min values from [red, green, blue] / 255
-   * @param luminosity Luminosity from HSL format.
-   * @private
-   */
-  private static getSaturation(delta: number, luminosity: number): number {
-    if (delta === 0)
-      return 0
-    else
-      return 100 * delta / (1 - Math.abs(2 * (luminosity / 100) - 1))
-  }
-
-  /**
-   * Get hue for HSL or HSB format.
-   * @param delta Difference between max and min values from [red, green, blue] / 255
-   * @param cMax Max value from [red, green, blue] / 255
-   * @param red Red value between 0 - 1
-   * @param green Green value between 0 - 1
-   * @param blue Blue value between 0 - 1
-   * @private
-   */
-  private static getHue(delta: number, cMax: number, red: number, green: number, blue: number): number {
-    if (delta === 0)
-      return 0
-    else if (cMax === red)
-      return 60 * ( ( (green - blue) / delta) % 6)
-    else if (cMax === green)
-      return 60 * ( ( (blue - red) / delta) + 2)
-    else
-      return 60 * ( ( (red - green) / delta) + 4)
-  }
-
-  /**
-   * Convert color from HSL format into HEX string.
-   * @param hue Hue between 0 - 360
-   * @param saturation Saturation between 0 - 100
-   * @param lightness Lightness between 0 - 100
-   * @constructor
-   */
-  static HSLtoHEX(hue: number, saturation: number, lightness: number): string {
-    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || lightness < 0 || lightness > 100)
-      throw `Color values [${hue}°, ${saturation}%, ${lightness}%] are not in valid ranges.`
-
-    const h = hue
-    const s = saturation / 100
-    const l = lightness / 100
-
-    const c = (1 - Math.abs(2 * l - 1)) * s
-    const x = c * (1 - Math.abs((h / 60) % 2 - 1))
-    const m = l - c / 2
-
-    const r = (h < 60 || h >=300) ? c : (h < 120 || h >= 240) ? x : 0
-    const g = (h >= 240) ? 0 : (h < 60 || h >= 180) ? x : c
-    const b = (h < 120) ? 0 : (h < 180 || h >= 300) ? x : c
-
-    const R = Math.round((r + m) * 255)
-    const G = Math.round((g + m) * 255)
-    const B = Math.round((b + m) * 255)
-
-    return `#${(R < 16 ? 0 : '') + R.toString(16)}${(G < 16 ? 0 : '') + G.toString(16)}${(B < 16 ? 0 : '') + B.toString(16)}`
-  }
-
-  /**
-   * Convert from HEX string to RGB values.
-   * @param hex HEX color string (#RRGGBB)
-   * @constructor
-   */
   static HEXtoRGB(hex: string) {
-    if (!hex.startsWith('#') || hex.length !== 7)
+    if (!hex.match(/^#[0-9A-Fa-f]{6}$/))
       throw `Color ${hex} is not in form #RRGGBB.`
 
     return {
@@ -120,14 +11,21 @@ export class ColorConverter {
     }
   }
 
-  /**
-   * Convert from RGB values to HEX string.
-   * @param red
-   * @param green
-   * @param blue
-   * @constructor
-   */
+  static HEXtoHSL(hex: string) {
+    const rgb = this.HEXtoRGB(hex)
+    return this.RGBtoHSL(rgb.red, rgb.green, rgb.blue)
+  }
+
+  static HEXtoHSV(hex: string) {
+    const hsl = this.HEXtoHSL(hex)
+    return this.HSLtoHSV(hsl.hue, hsl.saturation, hsl.luminosity)
+  }
+
+
   static RGBtoHEX(red: number, green: number, blue: number) {
+    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
+      throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`
+
     return `#${
       (red < 16 ? 0 : '') + red.toString(16)
     }${
@@ -135,6 +33,118 @@ export class ColorConverter {
     }${
       (blue < 16 ? 0 : '') + blue.toString(16)
     }`
+  }
+
+  static RGBtoHSL(red: number, green: number, blue: number) {
+    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
+      throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`
+
+    const r = red / 255
+    const g = green / 255
+    const b = blue / 255
+
+    const cMax = Math.max(r, g, b)
+    const cMin = Math.min(r, g, b)
+    const delta = cMax - cMin
+
+    const luminosity = (cMax + cMin) * 50
+    const saturation = (delta === 0) ? 0 : (100 * delta / (1 - Math.abs(2 * (luminosity / 100) - 1)))
+
+    let hue
+    if (delta === 0)
+      hue = 0
+    else if (cMax === r)
+      hue = 60 * ( ( (g - b) / delta) % 6)
+    else if (cMax === g)
+      hue = 60 * ( ( (b - r) / delta) + 2)
+    else
+      hue = 60 * ( ( (r - g) / delta) + 4)
+
+    if (hue < 0)
+      hue += 360
+
+    return {
+      hue: Math.round(hue),
+      saturation: Math.round(saturation),
+      luminosity: Math.round(luminosity)
+    }
+  }
+
+  static RGBtoHSV(red: number, green: number, blue: number) {
+    const hsl = this.RGBtoHSL(red, green, blue)
+    return this.HSLtoHSV(hsl.hue, hsl.saturation, hsl.luminosity)
+  }
+
+
+  static HSLtoHEX(hue: number, saturation: number, luminosity: number): string {
+    const rgb = this.HSLtoRGB(hue, saturation, luminosity)
+    return this.RGBtoHEX(rgb.red, rgb.green, rgb.blue)
+  }
+
+  static HSLtoRGB(hue: number, saturation: number, luminosity: number) {
+    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || luminosity < 0 || luminosity > 100)
+      throw `Color values [${hue}°, ${saturation}%, ${luminosity}%] are not in valid ranges.`
+
+    const h = hue
+    const s = saturation / 100
+    const l = luminosity / 100
+
+    const c = (1 - Math.abs(2 * l - 1)) * s
+    const x = c * (1 - Math.abs((h / 60) % 2 - 1))
+    const m = l - c / 2
+
+    const r = (h < 60 || h >= 300) ? c : (h < 120 || h >= 240) ? x : 0
+    const g = (h >= 240) ? 0 : (h < 60 || h >= 180) ? x : c
+    const b = (h < 120) ? 0 : (h < 180 || h >= 300) ? x : c
+
+    return {
+      red: Math.round((r + m) * 255),
+      green: Math.round((g + m) * 255),
+      blue: Math.round((b + m) * 255)
+    }
+  }
+
+  static HSLtoHSV(hue: number, saturation: number, luminosity: number) {
+    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || luminosity < 0 || luminosity > 100)
+      throw `Color values [${hue}°, ${saturation}%, ${luminosity}%] are not in valid ranges.`
+
+    const v = luminosity + saturation * Math.min(luminosity, 1 - luminosity)
+
+    const s = (v === 0) ? 0 :
+      (2 * (1 - (luminosity / v)))
+
+    return {
+      hue: hue,
+      saturation: Math.round(s),
+      value: Math.round(v)
+    }
+  }
+
+
+  static HSVtoHEX(hue: number, saturation: number, value: number) {
+    const rgb = this.HSVtoRGB(hue, saturation, value)
+    return this.RGBtoHEX(rgb.red, rgb.green, rgb.blue)
+  }
+
+  static HSVtoRGB(hue: number, saturation: number, value: number) {
+    const hsl = this.HSVtoHSL(hue, saturation, value)
+    return this.HSLtoRGB(hsl.hue, hsl.saturation, hsl.luminosity)
+  }
+
+  static HSVtoHSL(hue: number, saturation: number, value: number) {
+    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || value < 0 || value > 100)
+      throw `Color values [${hue}°, ${saturation}%, ${value}%] are not in valid ranges.`
+
+    const l = value * (1 - (saturation / 2))
+
+    const s = (l === 0 || l === 1) ? 0 :
+      ((value - l) / Math.min(l, 1 - l))
+
+    return {
+      hue: hue,
+      saturation: Math.round(s),
+      luminosity: Math.round(l)
+    }
   }
 
 }

@@ -8,21 +8,28 @@ export class Color {
   shades: Shade[]
 
   public constructor(name: string, hex: string)
+  public constructor(name: string, hexes: string[])
   public constructor(name: string, shades: Shade[])
 
   constructor(...args: any[]) {
     this.name = args[0].startsWith('#') ? args[0].substring(1) : args[0]
 
     if (typeof args[1] === 'string') {
-      if (!args[1].startsWith('#') || args[1].length !== 7)
-        throw `Color '${args[1]}' is not in form #RRGGBB.`
-
       this.shades = []
       const shade = new Shade(-1, true, args[1])
       this.shades.push(shade)
       ColorInterpolater.regenerateShades(this)
 
       shade.fixed = false
+      this.getShade(500).fixed = true
+    } else if (typeof args[1][0] === 'string') {
+      this.shades = []
+
+      for (const hex of args[1]) {
+        this.shades.push(new Shade(-1, true, hex))
+      }
+      ColorInterpolater.regenerateShades(this)
+
       this.getShade(500).fixed = true
     } else {
       this.shades = args[1]

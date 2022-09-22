@@ -30,9 +30,9 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 - [ ] Favicon Draft
 - [x] Distinction between generated and fixed shadows
   - [x] Improved shade interpolation with multiple fixed shades
-  - [ ] Editor for color shades
+  - [x] Editor for color shades
 - [ ] MDX-Stories for Storybook
-- [ ] Karma Tests for every class and component
+- [ ] Karma Tests for every class
 
 ### Side features
 - [x] Random color palette
@@ -42,16 +42,26 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 - [x] Sort colors by hue
 - [ ] Add [MDX-Stories for Storybook](https://storybook.js.org/docs/react/writing-docs/mdx)
 - [ ] GitHub Action for automatic release update
-- [ ] Support other color models
-  - [x] RGB
-  - [ ] CMYK
-  - [ ] HSB
 - [ ] Provide exemplary components for preview
 - [ ] Preview palette in uploaded SVGs
 - [ ] Provide prefabricated palettes
 - [ ] Generate color palette from images
 - [ ] Generate full color palette from just a single color
 - [ ] Database storage for sharing palettes
+
+### Support for color formats
+
+| From \ To | HEX | RGB | HSL | HSV | CMYK |
+|-----------|-----|-----|-----|-----|------|
+| **HEX**   |     | 🟩  | 🟨  | 🟨  | 🟥  |
+| **RGB**   | 🟩  |     | 🟩  | 🟨  | 🟥  |
+| **HSL**   | 🟨  | 🟩  |     | 🟩  | 🟥  |
+| **HSV**   | 🟨  | 🟨  | 🟩  |     | 🟥  |
+| **CMYK**  | 🟥  | 🟥  | 🟥  | 🟥  |     |
+
+🟩: Direct conversion
+🟨: Indirect conversion
+🟥: No conversion implemented
 
 ## License
 [MIT](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)

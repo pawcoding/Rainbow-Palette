@@ -85,11 +85,13 @@
         [ngStyle]="{
           'background-color': shadeToShow.hex,
           'color': color.getShade(shadeToShow.luminosity > 48 ? 900 : 50).hex,
-          'font-weight': shadeToShow === shade ? 'bold' : 'inherit'
+          'font-weight': shadeToShow.fixed ? 'bold' : 'inherit',
+          'text-decoration': shadeToShow === shade ? 'underline' : 'inherit'
         }"
         class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2 cursor-pointer"
-        title="Copy hex to clipboard"
+        title="Edit this shade&#10;Rightclick: Release this shade"
         (click)="changeShade(shadeToShow)"
+        (contextmenu)="releaseShade(shadeToShow, $event)"
       >
         {{shadeToShow.hex}}
       </span>

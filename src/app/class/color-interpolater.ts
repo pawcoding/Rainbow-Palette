@@ -13,7 +13,7 @@ export class ColorInterpolater {
 
     // clear and sort shades
     shades = shades.filter(shade => shade.fixed)
-    shades.sort((a, b) => a.luminosity - b.luminosity)
+    shades.sort((a, b) => b.luminosity - a.luminosity)
 
     // set new indices
     // ToDo: Adjust generation for optimal keys when using other sizes than 10
@@ -36,18 +36,26 @@ export class ColorInterpolater {
       const smaller = [...shades].reverse().find(shade => shade.index < index) || shades[0]
       const bigger = shades.find(shade => shade.index > index) || shades[shades.length-1]
 
-      const hue = this.mapNumbers(index, smaller.index, bigger.index, smaller.hue, bigger.hue)
+      const hue = this.mapNumbers(index, smaller.index, bigger.index, bigger.hue - smaller.hue > 180 ? (smaller.hue + 360) : smaller.hue, bigger.hue) % 360
+
       const saturation = this.mapNumbers(index, smaller.index, bigger.index, smaller.saturation, bigger.saturation)
       const luminosity = this.mapNumbers(index, smaller.index, bigger.index, smaller.luminosity, bigger.luminosity)
 
       shades.push(new Shade(index, false, hue, saturation, luminosity))
-
-      shades.sort((a, b) => a.index - b.index)
     }
 
     // remove white and black and set shades to color
-    color.shades = shades.filter(shade => shade.index !== 0 && shade.index !== 1000)
-    color.shades.sort((a, b) => a.index - b.index)
+    shades = shades.filter(shade => shade.index !== 0 && shade.index !== 1000)
+
+    // repair broken orders
+    shades.sort((a, b) => b.luminosity - a.luminosity)
+    indices = [...Array(size).keys()].map(index => index * 100)
+    indices[0] = 50
+    for (let i = 0; i < shades.length; i++) {
+      shades[i].setIndex(indices[i])
+    }
+
+    color.shades = shades
   }
 
   /**
