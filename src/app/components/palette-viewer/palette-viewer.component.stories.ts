@@ -104,8 +104,8 @@ Rainbow.args = {
 export const Pawcode = Template.bind({})
 
 const pawcodePalette = new Palette('pawcode', uuidv4())
-pawcodePalette.addColor(new Color('Blue', '#4472c4'))
-pawcodePalette.addColor(new Color('Gray', '#262626'))
+pawcodePalette.addColor(new Color('Blue', ['#edf1f9', '#dae3f3', '#b5c7e7', '#8fabdb', '#6a8ed0', '#4472c4', '#365b9d', '#294476', '#1c2e4f', '#0e1727']))
+pawcodePalette.addColor(new Color('Gray', ['#eeeeee', '#dcdcdc', '#bababa', '#999999', '#777777', '#555555', '#444444', '#333333', '#222222', '#111111']))
 
 Pawcode.args = {
   dark: false,
@@ -116,10 +116,10 @@ Pawcode.args = {
 export const MediaScope = Template.bind({})
 
 const mediaScopePalette = new Palette('media-scope', uuidv4())
-mediaScopePalette.addColor(new Color('Blue', '#2faafa'))
-mediaScopePalette.addColor(new Color('Orange', '#f79e36'))
-mediaScopePalette.addColor(new Color('Red', '#bb2b47'))
-mediaScopePalette.addColor(new Color('Gray', '#444444'))
+mediaScopePalette.addColor(new Color('Blue', ['#eff8fe', '#dff1fc', '#bfe4e9', '#9fd7f6', '#77bde9', '#4ea3db', '#4385c5', '#3967af', '#2e4998', '#17254c']))
+mediaScopePalette.addColor(new Color('Red', ['#fbe0e5', '#f7c1cb', '#f08498', '#e94765', '#da3e5b', '#cb3552', '#bc2c48', '#a2213e', '#871534', '#440b1a']))
+mediaScopePalette.addColor(new Color('Yellow', ['#fff3db', '#fee7b7', '#fdd06f', '#fbb827', '#f8ab30', '#f59e39', '#d87d2d', '#bc5d22', '#9f3c16', '#501e0b']))
+mediaScopePalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))
 
 MediaScope.args = {
   dark: false,

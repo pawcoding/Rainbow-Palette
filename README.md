@@ -26,13 +26,14 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 | 🟥     | `0.1.2` | Improved algorithm for color generation                 |
 | 🟥     | `0.2.0` | Redesign                                                |
 
-### ToDo's for Version 0.1.1
+### ToDo's for Version 0.1.2
 - [ ] Favicon Draft
 - [x] Distinction between generated and fixed shadows
   - [x] Improved shade interpolation with multiple fixed shades
   - [x] Editor for color shades
 - [ ] MDX-Stories for Storybook
 - [ ] Karma Tests for every class
+- [x] Improved algorithm for color generation
 
 ### Side features
 - [x] Random color palette

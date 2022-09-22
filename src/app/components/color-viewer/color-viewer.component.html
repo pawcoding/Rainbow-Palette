@@ -5,8 +5,8 @@
     <!-- Name of the color -->
     <h3
       [ngStyle]="{
-        'background-color': color.shades[dark ? 7 : 2].hex,
-        'color': color.shades[dark ? 1 : 8].hex
+        'background-color': color.shades[dark ? 8 : 3].hex,
+        'color': color.shades[dark ? 2 : 9].hex
       }"
       class="grid-in-name px-4 transition-colors duration-200"
     >
@@ -16,8 +16,8 @@
     <!-- Action Buttons -->
     <span
       [ngStyle]="{
-        'background-color': color.shades[dark ? 7 : 2].hex,
-        'color': color.shades[dark ? 1 : 8].hex
+        'background-color': color.shades[dark ? 8 : 3].hex,
+        'color': color.shades[dark ? 2 : 9].hex
       }"
 
       class="grid-in-button flex gap-6 pr-6 h-full justify-end items-center transition-colors duration-200"
@@ -42,7 +42,7 @@
       *ngFor="let shade of color.shades"
       [ngStyle]="{
         'background-color': shade.hex,
-        'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex
+        'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
       }"
       class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6 cursor-pointer"
       title="Copy hex to clipboard"

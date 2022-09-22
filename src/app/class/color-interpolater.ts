@@ -17,18 +17,27 @@ export class ColorInterpolater {
 
     // set new indices
     // ToDo: Adjust generation for optimal keys when using other sizes than 10
-    let indices = [...Array(size).keys()].map(index => index * 100)
+    let indices = [...Array(size).keys()].map(index => 20 + index * 80)
     indices[0] = 50
     for (const shade of shades) {
       const index = indices.reduce((prev, curr) =>
-        (Math.abs(curr - (100 - shade.luminosity) * 10) < Math.abs(prev - (100 - shade.luminosity) * 10) ? curr : prev))
+        (Math.abs(curr - (100 - shade.brightness) * 10) < Math.abs(prev - (100 - shade.brightness) * 10) ? curr : prev))
       shade.setIndex(index)
       indices = indices.filter(i => i !== index)
     }
 
     // add white and black to shades
-    shades.push(new Shade(0, true, shades[0].hue, shades[0].saturation, 100))
-    shades.push(new Shade(1000, true, shades[shades.length-1].hue, shades[shades.length-1].saturation, 0))
+    shades.push(new Shade(0, true,
+      (shades[0].hue + 5) % 360,
+      Math.min(shades[0].saturation + 10, 100),
+      100)
+    )
+    shades.push(new Shade(1000, true,
+      (shades[shades.length-1].hue + 355) % 360,
+      Math.max(shades[shades.length-1].saturation - 10, 0),
+      0)
+    )
+
     shades.sort((a, b) => a.index - b.index)
 
     // generate missing shades
@@ -36,7 +45,13 @@ export class ColorInterpolater {
       const smaller = [...shades].reverse().find(shade => shade.index < index) || shades[0]
       const bigger = shades.find(shade => shade.index > index) || shades[shades.length-1]
 
-      const hue = this.mapNumbers(index, smaller.index, bigger.index, bigger.hue - smaller.hue > 180 ? (smaller.hue + 360) : smaller.hue, bigger.hue) % 360
+      const hue = this.mapNumbers(
+        index,
+        smaller.index,
+        bigger.index,
+        bigger.hue - smaller.hue > 180 ? (smaller.hue + 360) : smaller.hue,
+        smaller.hue - bigger.hue > 180 ? (bigger.hue + 360) : bigger.hue
+      ) % 360
 
       const saturation = this.mapNumbers(index, smaller.index, bigger.index, smaller.saturation, bigger.saturation)
       const luminosity = this.mapNumbers(index, smaller.index, bigger.index, smaller.luminosity, bigger.luminosity)

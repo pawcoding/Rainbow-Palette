@@ -416,12 +416,12 @@
     "classes": [
         {
             "name": "Color",
-            "id": "class-Color-55c48bc105075e250999ecb561cb3d918acbb3ce5413e673fdf9bc74ad1e6d27e7001b1da2e633769659790b9caefb69c26e27ea72bf91c55b4fccfd4884cb95",
+            "id": "class-Color-34942a361b50d131105f34cf8acf1980a1cdeb635c52665daeeb869adf364369f6bc3a2c572d4ec19da894f364989f90de611bcdb002aee4b11be8e78b8cfe32",
             "file": "src/app/models/color.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {ColorInterpolater} from \"../class/color-interpolater\";\r\nimport {Shade} from \"./shade.model\";\r\n\r\nexport class Color {\r\n\r\n  name: string\r\n\r\n  shades: Shade[]\r\n\r\n  public constructor(name: string, hex: string)\r\n  public constructor(name: string, shades: Shade[])\r\n\r\n  constructor(...args: any[]) {\r\n    this.name = args[0].startsWith('#') ? args[0].substring(1) : args[0]\r\n\r\n    if (typeof args[1] === 'string') {\r\n      if (!args[1].startsWith('#') || args[1].length !== 7)\r\n        throw `Color '${args[1]}' is not in form #RRGGBB.`\r\n\r\n      this.shades = []\r\n      const shade = new Shade(-1, true, args[1])\r\n      this.shades.push(shade)\r\n      ColorInterpolater.regenerateShades(this)\r\n\r\n      shade.fixed = false\r\n      this.getShade(500).fixed = true\r\n    } else {\r\n      this.shades = args[1]\r\n    }\r\n\r\n    this.shades.sort((a, b) => a.index - b.index)\r\n  }\r\n\r\n  /**\r\n   * Get shade by index (50, 100, 200, ..., 900)\r\n   * @param index\r\n   */\r\n  public getShade(index: number): Shade {\r\n    return this.shades.find(s => s.index === index) || this.shades[0]\r\n  }\r\n\r\n  /**\r\n   * Generate a random color with all shades.\r\n   */\r\n  public static generateRandomColor(): Color {\r\n    const shade = Shade.generateRandomShade()\r\n    return new Color(\r\n      shade.hex,\r\n      shade.hex\r\n    )\r\n  }\r\n\r\n  /**\r\n   * Stringify the color.\r\n   */\r\n  public toString() {\r\n    return JSON.stringify({\r\n      name: this.name,\r\n      shades: this.shades\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Parse the json object to a color.\r\n   * Throws exception if json object is no valid color object.\r\n   * @param json\r\n   */\r\n  public static parseColor(json: any): Color {\r\n    if (!json.name)\r\n      throw 'Color has no name'\r\n    if (!json.shades || json.shades.length < 1)\r\n      throw 'Color has not enough shades'\r\n\r\n    const shades: Shade[] = []\r\n    for (const shade of json.shades) {\r\n      shades.push(Shade.parseShade(shade))\r\n    }\r\n\r\n    return new Color(json.name, shades)\r\n  }\r\n\r\n}\r\n",
+            "sourceCode": "import {ColorInterpolater} from \"../class/color-interpolater\";\r\nimport {Shade} from \"./shade.model\";\r\n\r\nexport class Color {\r\n\r\n  name: string\r\n\r\n  shades: Shade[]\r\n\r\n  public constructor(name: string, hex: string)\r\n  public constructor(name: string, hexes: string[])\r\n  public constructor(name: string, shades: Shade[])\r\n\r\n  constructor(...args: any[]) {\r\n    this.name = args[0].startsWith('#') ? args[0].substring(1) : args[0]\r\n\r\n    if (typeof args[1] === 'string') {\r\n      this.shades = []\r\n      const shade = new Shade(-1, true, args[1])\r\n      this.shades.push(shade)\r\n      ColorInterpolater.regenerateShades(this)\r\n\r\n      shade.fixed = false\r\n      this.getShade(500).fixed = true\r\n    } else if (typeof args[1][0] === 'string') {\r\n      this.shades = []\r\n\r\n      for (const hex of args[1]) {\r\n        this.shades.push(new Shade(-1, true, hex))\r\n      }\r\n      ColorInterpolater.regenerateShades(this)\r\n\r\n      this.getShade(500).fixed = true\r\n    } else {\r\n      this.shades = args[1]\r\n    }\r\n\r\n    this.shades.sort((a, b) => a.index - b.index)\r\n  }\r\n\r\n  /**\r\n   * Get shade by index (50, 100, 200, ..., 900)\r\n   * @param index\r\n   */\r\n  public getShade(index: number): Shade {\r\n    return this.shades.find(s => s.index === index) || this.shades[0]\r\n  }\r\n\r\n  /**\r\n   * Generate a random color with all shades.\r\n   */\r\n  public static generateRandomColor(): Color {\r\n    const shade = Shade.generateRandomShade()\r\n    return new Color(\r\n      shade.hex,\r\n      shade.hex\r\n    )\r\n  }\r\n\r\n  /**\r\n   * Stringify the color.\r\n   */\r\n  public toString() {\r\n    return JSON.stringify({\r\n      name: this.name,\r\n      shades: this.shades\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Parse the json object to a color.\r\n   * Throws exception if json object is no valid color object.\r\n   * @param json\r\n   */\r\n  public static parseColor(json: any): Color {\r\n    if (!json.name)\r\n      throw 'Color has no name'\r\n    if (!json.shades || json.shades.length < 1)\r\n      throw 'Color has not enough shades'\r\n\r\n    const shades: Shade[] = []\r\n    for (const shade of json.shades) {\r\n      shades.push(Shade.parseShade(shade))\r\n    }\r\n\r\n    return new Color(json.name, shades)\r\n  }\r\n\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -436,7 +436,7 @@
                         "dotDotDotToken": true
                     }
                 ],
-                "line": 11,
+                "line": 12,
                 "jsdoctags": [
                     {
                         "name": "args",
@@ -477,7 +477,7 @@
                     "optional": false,
                     "returnType": "Color",
                     "typeParameters": [],
-                    "line": 45,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGenerate a random color with all shades.\n",
@@ -499,7 +499,7 @@
                     "optional": false,
                     "returnType": "Shade",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 45,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nGet shade by index (50, 100, 200, ..., 900)\n",
@@ -510,8 +510,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 943,
-                                "end": 948,
+                                "pos": 1135,
+                                "end": 1140,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -522,8 +522,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 937,
-                                "end": 942,
+                                "pos": 1129,
+                                "end": 1134,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -547,7 +547,7 @@
                     "optional": false,
                     "returnType": "Color",
                     "typeParameters": [],
-                    "line": 68,
+                    "line": 75,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nParse the json object to a color.\nThrows exception if json object is no valid color object.\n",
@@ -558,8 +558,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1588,
-                                "end": 1592,
+                                "pos": 1780,
+                                "end": 1784,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -570,8 +570,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1582,
-                                "end": 1587,
+                                "pos": 1774,
+                                "end": 1779,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -588,7 +588,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 56,
+                    "line": 63,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nStringify the color.\n",
@@ -1265,12 +1265,12 @@
         },
         {
             "name": "ColorInterpolater",
-            "id": "class-ColorInterpolater-12f3a254456a86f48a718a78c3446776da7c949f07a3fda41a1d2b6f7ec4d7408a69f565dcad7ed4ecd43979c64e85dc7235f87fd673fbb648784b2711154e58",
+            "id": "class-ColorInterpolater-0d811abb6da75ed2a681c7e76ae25d75069897de82acad59d5cff5f2e52cdda048cf91a4b1e3dc6c0968cb297d6388bdd5460634044487c5741bd4045e3221f9",
             "file": "src/app/class/color-interpolater.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {Shade} from \"../models/shade.model\";\nimport {Color} from \"../models/color.model\";\n\nexport class ColorInterpolater {\n\n  /**\n   * Regenerate every shade but the fixed ones\n   * @param color\n   */\n  public static regenerateShades(color: Color) {\n    const size = 10\n    let shades = [...color.shades]\n\n    // clear and sort shades\n    shades = shades.filter(shade => shade.fixed)\n    shades.sort((a, b) => a.luminosity - b.luminosity)\n\n    // set new indices\n    // ToDo: Adjust generation for optimal keys when using other sizes than 10\n    let indices = [...Array(size).keys()].map(index => index * 100)\n    indices[0] = 50\n    for (const shade of shades) {\n      const index = indices.reduce((prev, curr) =>\n        (Math.abs(curr - (100 - shade.luminosity) * 10) < Math.abs(prev - (100 - shade.luminosity) * 10) ? curr : prev))\n      shade.setIndex(index)\n      indices = indices.filter(i => i !== index)\n    }\n\n    // add white and black to shades\n    shades.push(new Shade(0, true, shades[0].hue, shades[0].saturation, 100))\n    shades.push(new Shade(1000, true, shades[shades.length-1].hue, shades[shades.length-1].saturation, 0))\n    shades.sort((a, b) => a.index - b.index)\n\n    // generate missing shades\n    for (const index of indices) {\n      const smaller = [...shades].reverse().find(shade => shade.index < index) || shades[0]\n      const bigger = shades.find(shade => shade.index > index) || shades[shades.length-1]\n\n      const hue = this.mapNumbers(index, smaller.index, bigger.index, bigger.hue - smaller.hue > 180 ? (smaller.hue + 360) : smaller.hue, bigger.hue) % 360\n\n      const saturation = this.mapNumbers(index, smaller.index, bigger.index, smaller.saturation, bigger.saturation)\n      const luminosity = this.mapNumbers(index, smaller.index, bigger.index, smaller.luminosity, bigger.luminosity)\n\n      shades.push(new Shade(index, false, hue, saturation, luminosity))\n\n      shades.sort((a, b) => a.index - b.index)\n    }\n\n    // remove white and black and set shades to color\n    color.shades = shades.filter(shade => shade.index !== 0 && shade.index !== 1000)\n    color.shades.sort((a, b) => a.index - b.index)\n  }\n\n  /**\n   * Translate x in [in_min to in_max] to y in [out_min to out_max]\n   * @param x\n   * @param in_min\n   * @param in_max\n   * @param out_min\n   * @param out_max\n   * @private\n   */\n  private static mapNumbers(x: number, in_min: number, in_max: number, out_min: number, out_max: number): number {\n    return Math.round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)\n  }\n\n}\n",
+            "sourceCode": "import {Shade} from \"../models/shade.model\";\nimport {Color} from \"../models/color.model\";\n\nexport class ColorInterpolater {\n\n  /**\n   * Regenerate every shade but the fixed ones\n   * @param color\n   */\n  public static regenerateShades(color: Color) {\n    const size = 10\n    let shades = [...color.shades]\n\n    // clear and sort shades\n    shades = shades.filter(shade => shade.fixed)\n    shades.sort((a, b) => b.luminosity - a.luminosity)\n\n    // set new indices\n    // ToDo: Adjust generation for optimal keys when using other sizes than 10\n    let indices = [...Array(size).keys()].map(index => index * 100)\n    indices[0] = 50\n    for (const shade of shades) {\n      const index = indices.reduce((prev, curr) =>\n        (Math.abs(curr - (100 - shade.luminosity) * 10) < Math.abs(prev - (100 - shade.luminosity) * 10) ? curr : prev))\n      shade.setIndex(index)\n      indices = indices.filter(i => i !== index)\n    }\n\n    // add white and black to shades\n    shades.push(new Shade(0, true, shades[0].hue, shades[0].saturation, 100))\n    shades.push(new Shade(1000, true, shades[shades.length-1].hue, shades[shades.length-1].saturation, 0))\n    shades.sort((a, b) => a.index - b.index)\n\n    // generate missing shades\n    for (const index of indices) {\n      const smaller = [...shades].reverse().find(shade => shade.index < index) || shades[0]\n      const bigger = shades.find(shade => shade.index > index) || shades[shades.length-1]\n\n      const hue = this.mapNumbers(index, smaller.index, bigger.index, bigger.hue - smaller.hue > 180 ? (smaller.hue + 360) : smaller.hue, bigger.hue) % 360\n\n      const saturation = this.mapNumbers(index, smaller.index, bigger.index, smaller.saturation, bigger.saturation)\n      const luminosity = this.mapNumbers(index, smaller.index, bigger.index, smaller.luminosity, bigger.luminosity)\n\n      shades.push(new Shade(index, false, hue, saturation, luminosity))\n    }\n\n    // remove white and black and set shades to color\n    shades = shades.filter(shade => shade.index !== 0 && shade.index !== 1000)\n\n    // repair broken orders\n    shades.sort((a, b) => b.luminosity - a.luminosity)\n    indices = [...Array(size).keys()].map(index => index * 100)\n    indices[0] = 50\n    for (let i = 0; i < shades.length; i++) {\n      shades[i].setIndex(indices[i])\n    }\n\n    color.shades = shades\n  }\n\n  /**\n   * Translate x in [in_min to in_max] to y in [out_min to out_max]\n   * @param x\n   * @param in_min\n   * @param in_max\n   * @param out_min\n   * @param out_max\n   * @private\n   */\n  private static mapNumbers(x: number, in_min: number, in_max: number, out_min: number, out_max: number): number {\n    return Math.round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)\n  }\n\n}\n",
             "properties": [],
             "methods": [
                 {
@@ -1310,7 +1310,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 63,
+                    "line": 70,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nTranslate x in [in_min to in_max] to y in [out_min to out_max]\n",
@@ -1322,8 +1322,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2236,
-                                "end": 2237,
+                                "pos": 2415,
+                                "end": 2416,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1334,8 +1334,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2230,
-                                "end": 2235,
+                                "pos": 2409,
+                                "end": 2414,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1346,8 +1346,8 @@
                         },
                         {
                             "name": {
-                                "pos": 2250,
-                                "end": 2256,
+                                "pos": 2429,
+                                "end": 2435,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1358,8 +1358,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2244,
-                                "end": 2249,
+                                "pos": 2423,
+                                "end": 2428,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1370,8 +1370,8 @@
                         },
                         {
                             "name": {
-                                "pos": 2269,
-                                "end": 2275,
+                                "pos": 2448,
+                                "end": 2454,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1382,8 +1382,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2263,
-                                "end": 2268,
+                                "pos": 2442,
+                                "end": 2447,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1394,8 +1394,8 @@
                         },
                         {
                             "name": {
-                                "pos": 2288,
-                                "end": 2295,
+                                "pos": 2467,
+                                "end": 2474,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1406,8 +1406,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2282,
-                                "end": 2287,
+                                "pos": 2461,
+                                "end": 2466,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1418,8 +1418,8 @@
                         },
                         {
                             "name": {
-                                "pos": 2308,
-                                "end": 2315,
+                                "pos": 2487,
+                                "end": 2494,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1430,8 +1430,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2302,
-                                "end": 2307,
+                                "pos": 2481,
+                                "end": 2486,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -1442,8 +1442,8 @@
                         },
                         {
                             "tagName": {
-                                "pos": 2322,
-                                "end": 2329,
+                                "pos": 2501,
+                                "end": 2508,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -2004,48 +2004,7 @@
         },
         {
             "name": "MockNotificationService",
-            "id": "class-MockNotificationService-de3fc8f10e8ccf13884e53e134e2a85ee4e5277a51507049d75375727e6adc357c74ae3f899a9fe9a40e0d40c8cfe8babdf20fdcdf0711fd353b482e49ed0891-2",
-            "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "class",
-            "sourceCode": "import {ColorViewerComponent} from \"./color-viewer.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {ColorService} from \"../../services/color.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\n\r\nexport default {\r\n  title: 'Components/Color',\r\n  component: ColorViewerComponent\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n\r\n  loadColor(color: Color) {\r\n    console.log(`loadColor(${color.name})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const PawcodeBlue = Template.bind({})\r\n\r\nPawcodeBlue.args = {\r\n  dark: false,\r\n  color: new Color('pawcode Blue', '#4472c4')\r\n}\r\n",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [],
-                "line": 23
-            },
-            "properties": [
-                {
-                    "name": "notification",
-                    "defaultValue": "new EventEmitter<string | undefined>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "EventEmitter<string | undefined>",
-                    "optional": false,
-                    "description": "",
-                    "line": 23
-                }
-            ],
-            "methods": [],
-            "indexSignatures": [],
-            "inputsClass": [],
-            "outputsClass": [],
-            "hostBindings": [],
-            "hostListeners": [],
-            "implements": [
-                "Partial"
-            ],
-            "isDuplicate": true,
-            "duplicateId": 2,
-            "duplicateName": "MockNotificationService-2"
-        },
-        {
-            "name": "MockNotificationService",
-            "id": "class-MockNotificationService-793eede438ce98e6950a58230a078efdcf6b20e1da97aced415c19bfdb02b6bc64c2c08145309647e51e54f9f21c9619e1ae72926554eefc2fa4610e2de371d4-3",
+            "id": "class-MockNotificationService-793eede438ce98e6950a58230a078efdcf6b20e1da97aced415c19bfdb02b6bc64c2c08145309647e51e54f9f21c9619e1ae72926554eefc2fa4610e2de371d4-2",
             "file": "src/app/components/notification/notification.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
@@ -2081,17 +2040,17 @@
                 "Partial"
             ],
             "isDuplicate": true,
-            "duplicateId": 3,
-            "duplicateName": "MockNotificationService-3"
+            "duplicateId": 2,
+            "duplicateName": "MockNotificationService-2"
         },
         {
             "name": "MockNotificationService",
-            "id": "class-MockNotificationService-72ab9742084248e618bb1e88a55b426a9f2cfa7cb153a127dbc37f1004ba8bc40b1508b071687df269c4d510587852b76a0f1f0afff7e4923ce0ab72a7ce8892-4",
+            "id": "class-MockNotificationService-68800adba6f819e8fe1a63cca3861a5683c5e1e654b5f21a92f1eb503c74ea24998749c1254422e284e7bb5bafbd13955c1c3c5ae877a8eefada4090c2090fa8-3",
             "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, Story, moduleMetadata} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', '#64748b'))\r\nrainbowPalette.addColor(new Color('Gray', '#6b7280'))\r\nrainbowPalette.addColor(new Color('Zinc', '#71717a'))\r\nrainbowPalette.addColor(new Color('Neutral', '#737373'))\r\nrainbowPalette.addColor(new Color('Stone', '#78716c'))\r\nrainbowPalette.addColor(new Color('Red', '#ef4444'))\r\nrainbowPalette.addColor(new Color('Orange', '#f97316'))\r\nrainbowPalette.addColor(new Color('Amber', '#f59c0b'))\r\nrainbowPalette.addColor(new Color('Yellow', '#eab308'))\r\nrainbowPalette.addColor(new Color('Lime', '#84cc16'))\r\nrainbowPalette.addColor(new Color('Green', '#22c55e'))\r\nrainbowPalette.addColor(new Color('Emerald', '#10b981'))\r\nrainbowPalette.addColor(new Color('Teal', '#14b8a6'))\r\nrainbowPalette.addColor(new Color('Cyan', '#06b6d4'))\r\nrainbowPalette.addColor(new Color('Sky', '#0ea5e9'))\r\nrainbowPalette.addColor(new Color('Blue', '#3b82f6'))\r\nrainbowPalette.addColor(new Color('Indigo', '#6366f1'))\r\nrainbowPalette.addColor(new Color('Violet', '#8b5cf6'))\r\nrainbowPalette.addColor(new Color('Purple', '#a855f7'))\r\nrainbowPalette.addColor(new Color('Fuchsia', '#d946ef'))\r\nrainbowPalette.addColor(new Color('Pink', '#ec4899'))\r\nrainbowPalette.addColor(new Color('Rose', '#f43f5e'))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', '#4472c4'))\r\npawcodePalette.addColor(new Color('Gray', '#262626'))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', '#2faafa'))\r\nmediaScopePalette.addColor(new Color('Orange', '#f79e36'))\r\nmediaScopePalette.addColor(new Color('Red', '#bb2b47'))\r\nmediaScopePalette.addColor(new Color('Gray', '#444444'))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n",
+            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, Story, moduleMetadata} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', ['#f8fafc', '#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8', '#64748b', '#475569', '#334155', '#1e293b', '#0f172a']))\r\nrainbowPalette.addColor(new Color('Gray', ['#f9fafb', '#f3f4f6', '#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#4b5563', '#374151', '#1f2937', '#111827']))\r\nrainbowPalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\nrainbowPalette.addColor(new Color('Neutral', ['#fafafa', '#f5f5f5', '#e5e5e5', '#d4d4d4', '#a3a3a3', '#737373', '#525252', '#404040', '#262626', '#171717']))\r\nrainbowPalette.addColor(new Color('Stone', ['#fafaf9', '#f5f5f4', '#e7e5e4', '#d6d3d1', '#a8a29e', '#78716c', '#57534e', '#44403c', '#292524', '#1c1917']))\r\nrainbowPalette.addColor(new Color('Red', ['#fef2f2', '#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d']))\r\nrainbowPalette.addColor(new Color('Orange', ['#fff7ed', '#ffedd5', '#fed7aa', '#fdba74', '#fb923c', '#f97316', '#ea580c', '#c2410c', '#9a3412', '#7c2d12']))\r\nrainbowPalette.addColor(new Color('Amber', ['#fffbeb', '#fef3c7', '#fde68a', '#fcd34d', '#fbbf24', '#f59e0b', '#d97706', '#b45309', '#92400e', '#78350f']))\r\nrainbowPalette.addColor(new Color('Yellow', ['#fefce8', '#fef9c3', '#fef08a', '#fde047', '#facc15', '#eab308', '#ca8a04', '#a16207', '#854d0e', '#713f12']))\r\nrainbowPalette.addColor(new Color('Lime', ['#f7fee7', '#ecfccb', '#d9f99d', '#bef264', '#a3e635', '#84cc16', '#65a30d', '#4d7c0f', '#3f6212', '#365314']))\r\nrainbowPalette.addColor(new Color('Green', ['#f0fdf4', '#dcfce7', '#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#16a34a', '#15803d', '#166534', '#14532d']))\r\nrainbowPalette.addColor(new Color('Emerald', ['#ecfdf5', '#d1fae5', '#a7f3d0', '#6ee7b7', '#34d399', '#10b981', '#059669', '#047857', '#065f46', '#064e3b']))\r\nrainbowPalette.addColor(new Color('Teal', ['#f0fdfa', '#ccfbf1', '#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6', '#0d9488', '#0f766e', '#115e59', '#134e4a']))\r\nrainbowPalette.addColor(new Color('Cyan', ['#ecfeff', '#cffafe', '#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4', '#0891b2', '#0e7490', '#155e75', '#164e63']))\r\nrainbowPalette.addColor(new Color('Sky', ['#f0f9ff', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#075985', '#0c4a6e']))\r\nrainbowPalette.addColor(new Color('Blue', ['#eff6ff', '#dbeafe', '#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a']))\r\nrainbowPalette.addColor(new Color('Indigo', ['#eef2ff', '#e0e7ff', '#c7d2fe', '#a5b4fc', '#818cf8', '#6366f1', '#4f46e5', '#4338ca', '#3730a3', '#312e81']))\r\nrainbowPalette.addColor(new Color('Violet', ['#f5f3ff', '#ede9fe', '#ddd6fe', '#c4b5fd', '#a78bfa', '#8b5cf6', '#7c3aed', '#6d28d9', '#5b21b6', '#4c1d95']))\r\nrainbowPalette.addColor(new Color('Purple', ['#faf5ff', '#f3e8ff', '#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7', '#9333ea', '#7e22ce', '#6b21a8', '#581c87']))\r\nrainbowPalette.addColor(new Color('Fuchsia', ['#fdf4ff', '#fae8ff', '#f5d0fe', '#f0abfc', '#e879f9', '#d946ef', '#c026d3', '#a21caf', '#86198f', '#701a75']))\r\nrainbowPalette.addColor(new Color('Pink', ['#fdf2f8', '#fce7f3', '#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899', '#db2777', '#be185d', '#9d174d', '#831843']))\r\nrainbowPalette.addColor(new Color('Rose', ['#fff1f2', '#ffe4e6', '#fecdd3', '#fda4af', '#fb7185', '#f43f5e', '#e11d48', '#be123c', '#9f1239', '#881337']))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', '#4472c4'))\r\npawcodePalette.addColor(new Color('Gray', '#262626'))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', '#2faafa'))\r\nmediaScopePalette.addColor(new Color('Orange', '#f79e36'))\r\nmediaScopePalette.addColor(new Color('Red', '#bb2b47'))\r\nmediaScopePalette.addColor(new Color('Gray', '#444444'))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2120,6 +2079,47 @@
                     "optional": false,
                     "description": "",
                     "line": 36
+                }
+            ],
+            "methods": [],
+            "indexSignatures": [],
+            "inputsClass": [],
+            "outputsClass": [],
+            "hostBindings": [],
+            "hostListeners": [],
+            "implements": [
+                "Partial"
+            ],
+            "isDuplicate": true,
+            "duplicateId": 3,
+            "duplicateName": "MockNotificationService-3"
+        },
+        {
+            "name": "MockNotificationService",
+            "id": "class-MockNotificationService-de3fc8f10e8ccf13884e53e134e2a85ee4e5277a51507049d75375727e6adc357c74ae3f899a9fe9a40e0d40c8cfe8babdf20fdcdf0711fd353b482e49ed0891-4",
+            "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "class",
+            "sourceCode": "import {ColorViewerComponent} from \"./color-viewer.component\";\r\nimport {Meta, Story} from \"@storybook/angular\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {ColorService} from \"../../services/color.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\n\r\nexport default {\r\n  title: 'Components/Color',\r\n  component: ColorViewerComponent\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n\r\n  loadColor(color: Color) {\r\n    console.log(`loadColor(${color.name})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\nexport const PawcodeBlue = Template.bind({})\r\n\r\nPawcodeBlue.args = {\r\n  dark: false,\r\n  color: new Color('pawcode Blue', '#4472c4')\r\n}\r\n",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [],
+                "line": 23
+            },
+            "properties": [
+                {
+                    "name": "notification",
+                    "defaultValue": "new EventEmitter<string | undefined>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "EventEmitter<string | undefined>",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
                 }
             ],
             "methods": [],
@@ -2185,12 +2185,12 @@
         },
         {
             "name": "MockStorageService",
-            "id": "class-MockStorageService-72ab9742084248e618bb1e88a55b426a9f2cfa7cb153a127dbc37f1004ba8bc40b1508b071687df269c4d510587852b76a0f1f0afff7e4923ce0ab72a7ce8892-1",
+            "id": "class-MockStorageService-68800adba6f819e8fe1a63cca3861a5683c5e1e654b5f21a92f1eb503c74ea24998749c1254422e284e7bb5bafbd13955c1c3c5ae877a8eefada4090c2090fa8-1",
             "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, Story, moduleMetadata} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', '#64748b'))\r\nrainbowPalette.addColor(new Color('Gray', '#6b7280'))\r\nrainbowPalette.addColor(new Color('Zinc', '#71717a'))\r\nrainbowPalette.addColor(new Color('Neutral', '#737373'))\r\nrainbowPalette.addColor(new Color('Stone', '#78716c'))\r\nrainbowPalette.addColor(new Color('Red', '#ef4444'))\r\nrainbowPalette.addColor(new Color('Orange', '#f97316'))\r\nrainbowPalette.addColor(new Color('Amber', '#f59c0b'))\r\nrainbowPalette.addColor(new Color('Yellow', '#eab308'))\r\nrainbowPalette.addColor(new Color('Lime', '#84cc16'))\r\nrainbowPalette.addColor(new Color('Green', '#22c55e'))\r\nrainbowPalette.addColor(new Color('Emerald', '#10b981'))\r\nrainbowPalette.addColor(new Color('Teal', '#14b8a6'))\r\nrainbowPalette.addColor(new Color('Cyan', '#06b6d4'))\r\nrainbowPalette.addColor(new Color('Sky', '#0ea5e9'))\r\nrainbowPalette.addColor(new Color('Blue', '#3b82f6'))\r\nrainbowPalette.addColor(new Color('Indigo', '#6366f1'))\r\nrainbowPalette.addColor(new Color('Violet', '#8b5cf6'))\r\nrainbowPalette.addColor(new Color('Purple', '#a855f7'))\r\nrainbowPalette.addColor(new Color('Fuchsia', '#d946ef'))\r\nrainbowPalette.addColor(new Color('Pink', '#ec4899'))\r\nrainbowPalette.addColor(new Color('Rose', '#f43f5e'))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', '#4472c4'))\r\npawcodePalette.addColor(new Color('Gray', '#262626'))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', '#2faafa'))\r\nmediaScopePalette.addColor(new Color('Orange', '#f79e36'))\r\nmediaScopePalette.addColor(new Color('Red', '#bb2b47'))\r\nmediaScopePalette.addColor(new Color('Gray', '#444444'))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n",
+            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, Story, moduleMetadata} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', ['#f8fafc', '#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8', '#64748b', '#475569', '#334155', '#1e293b', '#0f172a']))\r\nrainbowPalette.addColor(new Color('Gray', ['#f9fafb', '#f3f4f6', '#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#4b5563', '#374151', '#1f2937', '#111827']))\r\nrainbowPalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\nrainbowPalette.addColor(new Color('Neutral', ['#fafafa', '#f5f5f5', '#e5e5e5', '#d4d4d4', '#a3a3a3', '#737373', '#525252', '#404040', '#262626', '#171717']))\r\nrainbowPalette.addColor(new Color('Stone', ['#fafaf9', '#f5f5f4', '#e7e5e4', '#d6d3d1', '#a8a29e', '#78716c', '#57534e', '#44403c', '#292524', '#1c1917']))\r\nrainbowPalette.addColor(new Color('Red', ['#fef2f2', '#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d']))\r\nrainbowPalette.addColor(new Color('Orange', ['#fff7ed', '#ffedd5', '#fed7aa', '#fdba74', '#fb923c', '#f97316', '#ea580c', '#c2410c', '#9a3412', '#7c2d12']))\r\nrainbowPalette.addColor(new Color('Amber', ['#fffbeb', '#fef3c7', '#fde68a', '#fcd34d', '#fbbf24', '#f59e0b', '#d97706', '#b45309', '#92400e', '#78350f']))\r\nrainbowPalette.addColor(new Color('Yellow', ['#fefce8', '#fef9c3', '#fef08a', '#fde047', '#facc15', '#eab308', '#ca8a04', '#a16207', '#854d0e', '#713f12']))\r\nrainbowPalette.addColor(new Color('Lime', ['#f7fee7', '#ecfccb', '#d9f99d', '#bef264', '#a3e635', '#84cc16', '#65a30d', '#4d7c0f', '#3f6212', '#365314']))\r\nrainbowPalette.addColor(new Color('Green', ['#f0fdf4', '#dcfce7', '#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#16a34a', '#15803d', '#166534', '#14532d']))\r\nrainbowPalette.addColor(new Color('Emerald', ['#ecfdf5', '#d1fae5', '#a7f3d0', '#6ee7b7', '#34d399', '#10b981', '#059669', '#047857', '#065f46', '#064e3b']))\r\nrainbowPalette.addColor(new Color('Teal', ['#f0fdfa', '#ccfbf1', '#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6', '#0d9488', '#0f766e', '#115e59', '#134e4a']))\r\nrainbowPalette.addColor(new Color('Cyan', ['#ecfeff', '#cffafe', '#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4', '#0891b2', '#0e7490', '#155e75', '#164e63']))\r\nrainbowPalette.addColor(new Color('Sky', ['#f0f9ff', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#075985', '#0c4a6e']))\r\nrainbowPalette.addColor(new Color('Blue', ['#eff6ff', '#dbeafe', '#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a']))\r\nrainbowPalette.addColor(new Color('Indigo', ['#eef2ff', '#e0e7ff', '#c7d2fe', '#a5b4fc', '#818cf8', '#6366f1', '#4f46e5', '#4338ca', '#3730a3', '#312e81']))\r\nrainbowPalette.addColor(new Color('Violet', ['#f5f3ff', '#ede9fe', '#ddd6fe', '#c4b5fd', '#a78bfa', '#8b5cf6', '#7c3aed', '#6d28d9', '#5b21b6', '#4c1d95']))\r\nrainbowPalette.addColor(new Color('Purple', ['#faf5ff', '#f3e8ff', '#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7', '#9333ea', '#7e22ce', '#6b21a8', '#581c87']))\r\nrainbowPalette.addColor(new Color('Fuchsia', ['#fdf4ff', '#fae8ff', '#f5d0fe', '#f0abfc', '#e879f9', '#d946ef', '#c026d3', '#a21caf', '#86198f', '#701a75']))\r\nrainbowPalette.addColor(new Color('Pink', ['#fdf2f8', '#fce7f3', '#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899', '#db2777', '#be185d', '#9d174d', '#831843']))\r\nrainbowPalette.addColor(new Color('Rose', ['#fff1f2', '#ffe4e6', '#fecdd3', '#fda4af', '#fb7185', '#f43f5e', '#e11d48', '#be123c', '#9f1239', '#881337']))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', '#4472c4'))\r\npawcodePalette.addColor(new Color('Gray', '#262626'))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', '#2faafa'))\r\nmediaScopePalette.addColor(new Color('Orange', '#f79e36'))\r\nmediaScopePalette.addColor(new Color('Red', '#bb2b47'))\r\nmediaScopePalette.addColor(new Color('Gray', '#444444'))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n",
             "properties": [],
             "methods": [
                 {
@@ -4022,7 +4022,7 @@
         },
         {
             "name": "ColorEditorComponent",
-            "id": "component-ColorEditorComponent-b3044ade04bd110568c77ac4942c197d8ea2f45aae0d9bb9f691cdf5069098dc121f864e35d33e6a751e3f5fae01227d5e4ce556559967766a183e4ed159aab6",
+            "id": "component-ColorEditorComponent-030e9bb919e17a09d6d0782ae77647ca9d675d3002ed688fb5d2b2ba1e985436d95f7c24d54002d7c660e5e3ff345349a47aab41b6b0e8215649a85df3ed42c6",
             "file": "src/app/components/color-editor/color-editor.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4044,7 +4044,7 @@
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 16,
                     "type": "boolean",
                     "decorators": []
                 }
@@ -4055,7 +4055,7 @@
                     "defaultValue": "new EventEmitter<Color>()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 19,
                     "type": "EventEmitter"
                 }
             ],
@@ -4067,7 +4067,7 @@
                     "type": "Color",
                     "optional": false,
                     "description": "",
-                    "line": 23
+                    "line": 22
                 },
                 {
                     "name": "colorService",
@@ -4076,7 +4076,7 @@
                     "type": "ColorService",
                     "optional": false,
                     "description": "",
-                    "line": 27,
+                    "line": 26,
                     "modifierKind": [
                         123
                     ]
@@ -4088,7 +4088,7 @@
                     "type": "Shade",
                     "optional": false,
                     "description": "",
-                    "line": 22
+                    "line": 21
                 },
                 {
                     "name": "state",
@@ -4098,7 +4098,7 @@
                     "type": "EditorState",
                     "optional": false,
                     "description": "",
-                    "line": 24
+                    "line": 23
                 }
             ],
             "methodsClass": [
@@ -4115,7 +4115,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 87,
+                    "line": 86,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4143,7 +4143,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 105,
+                    "line": 104,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nCopy a shades hex to clipboard.\n",
@@ -4151,8 +4151,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 3320,
-                                "end": 3325,
+                                "pos": 3253,
+                                "end": 3258,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4163,8 +4163,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 3314,
-                                "end": 3319,
+                                "pos": 3247,
+                                "end": 3252,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4181,7 +4181,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4204,7 +4204,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 92,
+                    "line": 91,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4247,7 +4247,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 53,
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate current shade. The property with type is changed to the new value.\n",
@@ -4255,8 +4255,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 1561,
-                                "end": 1565,
+                                "pos": 1494,
+                                "end": 1498,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4268,8 +4268,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1555,
-                                "end": 1560,
+                                "pos": 1488,
+                                "end": 1493,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4280,8 +4280,8 @@
                         },
                         {
                             "name": {
-                                "pos": 1598,
-                                "end": 1603,
+                                "pos": 1531,
+                                "end": 1536,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4292,8 +4292,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 1592,
-                                "end": 1597,
+                                "pos": 1525,
+                                "end": 1530,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4317,7 +4317,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 83,
+                    "line": 82,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate the name of the current color.\n",
@@ -4325,8 +4325,8 @@
                     "jsdoctags": [
                         {
                             "name": {
-                                "pos": 2852,
-                                "end": 2856,
+                                "pos": 2785,
+                                "end": 2789,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4337,8 +4337,8 @@
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
-                                "pos": 2846,
-                                "end": 2851,
+                                "pos": 2779,
+                                "end": 2784,
                                 "flags": 4227072,
                                 "modifierFlagsCache": 0,
                                 "transformFlags": 0,
@@ -4355,7 +4355,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 72,
+                    "line": 71,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n\nUpdate all css properties to the values of the current selected shade.\n",
@@ -4369,7 +4369,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\nimport {Shade} from \"../../models/shade.model\";\r\nimport {ChangeType, ColorService} from \"../../services/color.service\";\r\nimport {ToUnicodeVariantUtil} from \"../../utils/to-unicode-variant.util\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {ColorInterpolater} from \"../../class/color-interpolater\";\r\n\r\n@Component({\r\n  selector: 'color-editor',\r\n  templateUrl: './color-editor.component.html',\r\n  styleUrls: ['./color-editor.component.css']\r\n})\r\nexport class ColorEditorComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  addColor = new EventEmitter<Color>()\r\n\r\n  shade: Shade\r\n  color: Color\r\n  state: EditorState = EditorState.ADD\r\n\r\n  constructor(\r\n    public colorService: ColorService,\r\n    private notificationService: NotificationService\r\n  ) {\r\n    this.color = this.colorService.getColor()\r\n    this.shade = this.color.getShade(500)\r\n\r\n    this.colorService.getColorChangeEmitter().subscribe(changeType => {\r\n      if (changeType !== ChangeType.ADJUST) {\r\n        this.color = this.colorService.getColor()\r\n        this.shade = this.color.getShade(500)\r\n        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT\r\n      }\r\n\r\n      this.updateProperties()\r\n    })\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Update current shade. The property with type is changed to the new value.\r\n   * @param type Property to change\r\n   * @param value Value to change to\r\n   */\r\n  updateColor(type: UpdateType, value: string | number) {\r\n    if (type === UpdateType.HEX && isNaN(+value)) {\r\n      this.shade.setHEX(`${value}`, true)\r\n    } else if (!isNaN(+value)) {\r\n      value = parseInt(`${value}`)\r\n      if (type === UpdateType.HUE)\r\n        this.shade.setHSL(value, this.shade.saturation, this.shade.luminosity, true)\r\n      else if (type === UpdateType.SATURATION)\r\n        this.shade.setHSL(this.shade.hue, value, this.shade.luminosity, true)\r\n      else if (type === UpdateType.LUMINOSITY)\r\n        this.shade.setHSL(this.shade.hue, this.shade.saturation, 100 - value, true)\r\n    }\r\n\r\n    this.colorService.adjustShade()\r\n  }\r\n\r\n  /**\r\n   * Update all css properties to the values of the current selected shade.\r\n   */\r\n  updateProperties() {\r\n    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\r\n    document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\r\n    document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\r\n    document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\r\n  }\r\n\r\n  /**\r\n   * Update the name of the current color.\r\n   * @param name\r\n   */\r\n  updateName(name: string) {\r\n    this.colorService.updateColorName(name)\r\n  }\r\n\r\n  changeShade(shade: Shade) {\r\n    this.shade = shade\r\n    this.updateProperties()\r\n  }\r\n\r\n  releaseShade(shade: Shade, $event: MouseEvent) {\r\n    $event.preventDefault()\r\n\r\n    if (this.color.shades.filter(s => s.fixed).length > 1) {\r\n      shade.fixed = false\r\n      this.colorService.adjustShade()\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Copy a shades hex to clipboard.\r\n   * @param shade\r\n   */\r\n  copyToClipboard(shade: Shade) {\r\n    navigator.clipboard.writeText(shade.hex).then(() => {\r\n      this.notificationService.notification.emit(`Copied \"${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'm')}\" to your clipboard`)\r\n    }).catch(e => {\r\n      console.error('Error while copying to clipboard', e)\r\n    })\r\n  }\r\n\r\n}\r\n\r\nenum UpdateType {\r\n  HEX, HUE, SATURATION, LUMINOSITY\r\n}\r\n\r\nenum EditorState {\r\n  ADD, EDIT\r\n}\r\n",
+            "sourceCode": "import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';\r\nimport {Color} from \"../../models/color.model\";\r\nimport {Shade} from \"../../models/shade.model\";\r\nimport {ChangeType, ColorService} from \"../../services/color.service\";\r\nimport {ToUnicodeVariantUtil} from \"../../utils/to-unicode-variant.util\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\n\r\n@Component({\r\n  selector: 'color-editor',\r\n  templateUrl: './color-editor.component.html',\r\n  styleUrls: ['./color-editor.component.css']\r\n})\r\nexport class ColorEditorComponent implements OnInit {\r\n\r\n  @Input()\r\n  dark = false\r\n\r\n  @Output()\r\n  addColor = new EventEmitter<Color>()\r\n\r\n  shade: Shade\r\n  color: Color\r\n  state: EditorState = EditorState.ADD\r\n\r\n  constructor(\r\n    public colorService: ColorService,\r\n    private notificationService: NotificationService\r\n  ) {\r\n    this.color = this.colorService.getColor()\r\n    this.shade = this.color.getShade(500)\r\n\r\n    this.colorService.getColorChangeEmitter().subscribe(changeType => {\r\n      if (changeType !== ChangeType.ADJUST) {\r\n        this.color = this.colorService.getColor()\r\n        this.shade = this.color.getShade(500)\r\n        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT\r\n      }\r\n\r\n      this.updateProperties()\r\n    })\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.updateProperties()\r\n  }\r\n\r\n  /**\r\n   * Update current shade. The property with type is changed to the new value.\r\n   * @param type Property to change\r\n   * @param value Value to change to\r\n   */\r\n  updateColor(type: UpdateType, value: string | number) {\r\n    if (type === UpdateType.HEX && isNaN(+value)) {\r\n      this.shade.setHEX(`${value}`, true)\r\n    } else if (!isNaN(+value)) {\r\n      value = parseInt(`${value}`)\r\n      if (type === UpdateType.HUE)\r\n        this.shade.setHSL(value, this.shade.saturation, this.shade.luminosity, true)\r\n      else if (type === UpdateType.SATURATION)\r\n        this.shade.setHSL(this.shade.hue, value, this.shade.luminosity, true)\r\n      else if (type === UpdateType.LUMINOSITY)\r\n        this.shade.setHSL(this.shade.hue, this.shade.saturation, 100 - value, true)\r\n    }\r\n\r\n    this.colorService.adjustShade()\r\n  }\r\n\r\n  /**\r\n   * Update all css properties to the values of the current selected shade.\r\n   */\r\n  updateProperties() {\r\n    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)\r\n    document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))\r\n    document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + \"%\")\r\n    document.documentElement.style.setProperty('--selected-luminosity', this.shade.luminosity + \"%\")\r\n  }\r\n\r\n  /**\r\n   * Update the name of the current color.\r\n   * @param name\r\n   */\r\n  updateName(name: string) {\r\n    this.colorService.updateColorName(name)\r\n  }\r\n\r\n  changeShade(shade: Shade) {\r\n    this.shade = shade\r\n    this.updateProperties()\r\n  }\r\n\r\n  releaseShade(shade: Shade, $event: MouseEvent) {\r\n    $event.preventDefault()\r\n\r\n    if (this.color.shades.filter(s => s.fixed).length > 1) {\r\n      shade.fixed = false\r\n      this.colorService.adjustShade()\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Copy a shades hex to clipboard.\r\n   * @param shade\r\n   */\r\n  copyToClipboard(shade: Shade) {\r\n    navigator.clipboard.writeText(shade.hex).then(() => {\r\n      this.notificationService.notification.emit(`Copied \"${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'm')}\" to your clipboard`)\r\n    }).catch(e => {\r\n      console.error('Error while copying to clipboard', e)\r\n    })\r\n  }\r\n\r\n}\r\n\r\nenum UpdateType {\r\n  HEX, HUE, SATURATION, LUMINOSITY\r\n}\r\n\r\nenum EditorState {\r\n  ADD, EDIT\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4397,7 +4397,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 24,
+                "line": 23,
                 "jsdoctags": [
                     {
                         "name": "colorService",
@@ -4595,7 +4595,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div [class]=\"dark ? 'dark' : ''\">\r\n  <article\r\n    class=\"overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center cursor-default\"\r\n  >\r\n    <!-- Name of the color -->\r\n    <h3\r\n      [ngStyle]=\"{\r\n        'background-color': color.shades[dark ? 7 : 2].hex,\r\n        'color': color.shades[dark ? 1 : 8].hex\r\n      }\"\r\n      class=\"grid-in-name px-4 transition-colors duration-200\"\r\n    >\r\n      {{color.name}}\r\n    </h3>\r\n\r\n    <!-- Action Buttons -->\r\n    <span\r\n      [ngStyle]=\"{\r\n        'background-color': color.shades[dark ? 7 : 2].hex,\r\n        'color': color.shades[dark ? 1 : 8].hex\r\n      }\"\r\n\r\n      class=\"grid-in-button flex gap-6 pr-6 h-full justify-end items-center transition-colors duration-200\"\r\n    >\r\n      <img\r\n        class=\"icon\"\r\n        src=\"/assets/icons/edit.svg\" alt=\"Edit color\"\r\n        title=\"Edit color\"\r\n        (click)=\"colorService.loadColor(color)\"\r\n      >\r\n\r\n      <img\r\n        class=\"icon\"\r\n        src=\"/assets/icons/delete.svg\" alt=\"Remove from palette\"\r\n        title=\"Remove color from palette\"\r\n        (click)=\"onRemove.emit(color)\"\r\n      >\r\n    </span>\r\n\r\n    <!-- Display all shades -->\r\n    <span\r\n      *ngFor=\"let shade of color.shades\"\r\n      [ngStyle]=\"{\r\n        'background-color': shade.hex,\r\n        'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex\r\n      }\"\r\n      class=\"block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6 cursor-pointer\"\r\n      title=\"Copy hex to clipboard\"\r\n      (click)=\"copyToClipboard(shade)\"\r\n    >\r\n      {{shade.hex}}\r\n    </span>\r\n  </article>\r\n</div>\r\n"
+            "templateData": "<div [class]=\"dark ? 'dark' : ''\">\r\n  <article\r\n    class=\"overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center cursor-default\"\r\n  >\r\n    <!-- Name of the color -->\r\n    <h3\r\n      [ngStyle]=\"{\r\n        'background-color': color.shades[dark ? 7 : 2].hex,\r\n        'color': color.shades[dark ? 1 : 8].hex\r\n      }\"\r\n      class=\"grid-in-name px-4 transition-colors duration-200\"\r\n    >\r\n      {{color.name}}\r\n    </h3>\r\n\r\n    <!-- Action Buttons -->\r\n    <span\r\n      [ngStyle]=\"{\r\n        'background-color': color.shades[dark ? 7 : 2].hex,\r\n        'color': color.shades[dark ? 1 : 8].hex\r\n      }\"\r\n\r\n      class=\"grid-in-button flex gap-6 pr-6 h-full justify-end items-center transition-colors duration-200\"\r\n    >\r\n      <img\r\n        class=\"icon\"\r\n        src=\"/assets/icons/edit.svg\" alt=\"Edit color\"\r\n        title=\"Edit color\"\r\n        (click)=\"colorService.loadColor(color)\"\r\n      >\r\n\r\n      <img\r\n        class=\"icon\"\r\n        src=\"/assets/icons/delete.svg\" alt=\"Remove from palette\"\r\n        title=\"Remove color from palette\"\r\n        (click)=\"onRemove.emit(color)\"\r\n      >\r\n    </span>\r\n\r\n    <!-- Display all shades -->\r\n    <span\r\n      *ngFor=\"let shade of color.shades\"\r\n      [ngStyle]=\"{\r\n        'background-color': shade.hex,\r\n        'color': color.shades[shade.luminosity > 48 ? 9 : 0].hex\r\n      }\"\r\n      class=\"block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6 cursor-pointer\"\r\n      title=\"Copy hex to clipboard\"\r\n      (click)=\"copyToClipboard(shade)\"\r\n    >\r\n      {{shade.luminosity}}\r\n      {{shade.hex}}\r\n    </span>\r\n  </article>\r\n</div>\r\n"
         },
         {
             "name": "DialogComponent",
@@ -5466,16 +5466,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story",
-                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/components/light-switch/light-switch.component.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -5501,6 +5491,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: ColorService,\r\n      useClass: MockColorService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
             }
         ],
         "functions": [],

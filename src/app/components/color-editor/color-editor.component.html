@@ -84,7 +84,7 @@
         *ngFor="let shadeToShow of color.shades"
         [ngStyle]="{
           'background-color': shadeToShow.hex,
-          'color': color.getShade(shadeToShow.luminosity > 48 ? 900 : 50).hex,
+          'color': color.shades[shadeToShow.brightness > 51 ? 9 : 0].hex,
           'font-weight': shadeToShow.fixed ? 'bold' : 'inherit',
           'text-decoration': shadeToShow === shade ? 'underline' : 'inherit'
         }"

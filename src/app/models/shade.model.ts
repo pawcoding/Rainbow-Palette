@@ -7,6 +7,7 @@ export class Shade {
   hue: number
   saturation: number
   luminosity: number
+  brightness: number = 0
   fixed: boolean
 
   public constructor(index: number, fixed: boolean, hex: string)
@@ -23,16 +24,19 @@ export class Shade {
       this.hue = hsl.hue
       this.saturation = hsl.saturation
       this.luminosity = hsl.luminosity
+      this.updateBrightness()
     } else if (args.length === 5) {
       this.hue = args[2]
       this.saturation = args[3]
       this.luminosity = args[4]
+      this.updateBrightness()
       this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
     } else {
       this.hex = args[2]
       this.hue = args[3]
       this.saturation = args[4]
       this.luminosity = args[5]
+      this.updateBrightness()
     }
   }
 
@@ -47,6 +51,7 @@ export class Shade {
     this.hue = hsl.hue
     this.saturation = hsl.saturation
     this.luminosity = hsl.luminosity
+    this.updateBrightness()
   }
 
   public setHSL(hue: number, saturation: number, luminosity: number, fixed = false) {
@@ -54,7 +59,22 @@ export class Shade {
     this.hue = hue
     this.saturation = saturation
     this.luminosity = luminosity
+    this.updateBrightness()
     this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
+  }
+
+  private updateBrightness() {
+    let x = 360 - this.hue
+
+    let adjustment
+    if (x < 120)
+      adjustment = -0.0007 * x * x + 0.17 * x - 0.3
+    else if (x > 260)
+      adjustment = 0.001 * x * x - 0.52 * x + 57.6
+    else
+      adjustment = ((-20) / (1 + Math.pow(243.21, - x / 70) * 2640162)) + 10
+
+    this.brightness = this.luminosity - Math.round(adjustment)
   }
 
   /**
