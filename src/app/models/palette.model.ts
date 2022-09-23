@@ -9,9 +9,9 @@ export class Palette {
   colors: Color[] = []
   order = false
 
-  constructor(title: string, id: string) {
+  constructor(title: string, id?: string) {
     this.title = title
-    this.id = id
+    this.id = id || uuidv4()
   }
 
   /**
@@ -67,7 +67,7 @@ export class Palette {
     if (size < 1)
       throw `Size was ${size} but must be positive.`
 
-    const palette = new Palette('Random', uuidv4())
+    const palette = new Palette('Random')
     for (let i = 0; i < size; i++) {
       const color = Color.generateRandomColor()
       palette.addColor(new Color(color.name, color.getShade(500).hex))

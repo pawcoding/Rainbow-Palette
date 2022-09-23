@@ -1,5 +1,5 @@
 import {PaletteViewerComponent} from "./palette-viewer.component";
-import {Meta, Story, moduleMetadata} from "@storybook/angular";
+import {Meta, moduleMetadata, Story} from "@storybook/angular";
 import {Palette} from "../../models/palette.model";
 import {ColorViewerComponent} from "../color-viewer/color-viewer.component";
 // @ts-ignore
@@ -9,6 +9,8 @@ import {StorageService} from "../../services/storage.service";
 import {NotificationService} from "../../services/notification.service";
 import {EventEmitter} from "@angular/core";
 import {Dialog} from "../../interfaces/dialog.interface";
+import {PaletteGenerator, PaletteScheme} from "../../class/palette-generator";
+import {Shade} from "../../models/shade.model";
 
 export default {
   title: 'Components/Palette',
@@ -132,4 +134,70 @@ export const Random = Template.bind({})
 Random.args = {
   dark: false,
   palette: Palette.generateRandomPalette(5)
+}
+
+
+export const Monochromatic = Template.bind({})
+
+Monochromatic.args = {
+  dark: false,
+  palette: PaletteGenerator.generatePalette(
+    new Shade(-1, true, '#da4e44'),
+    PaletteScheme.MONOCHROMATIC
+  )
+}
+
+
+export const Analogous = Template.bind({})
+
+Analogous.args = {
+  dark: false,
+  palette: PaletteGenerator.generatePalette(
+    new Shade(-1, true, '#77cf97'),
+    PaletteScheme.ANALOGOUS
+  )
+}
+
+
+export const Complementary = Template.bind({})
+
+Complementary.args = {
+  dark: false,
+  palette: PaletteGenerator.generatePalette(
+    new Shade(-1, true, '#ff7231'),
+    PaletteScheme.COMPLEMENTARY
+  )
+}
+
+
+export const Split = Template.bind({})
+
+Split.args = {
+  dark: false,
+  palette: PaletteGenerator.generatePalette(
+    new Shade(-1, true, '#29cddc'),
+    PaletteScheme.SPLIT
+  )
+}
+
+
+export const Triadic = Template.bind({})
+
+Triadic.args = {
+  dark: false,
+  palette: PaletteGenerator.generatePalette(
+    new Shade(-1, true, '#00ad64'),
+    PaletteScheme.TRIADIC
+  )
+}
+
+
+export const Compound = Template.bind({})
+
+Compound.args = {
+  dark: false,
+  palette: PaletteGenerator.generatePalette(
+    new Shade(-1, true, '#66b032'),
+    PaletteScheme.COMPOUND
+  )
 }

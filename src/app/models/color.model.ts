@@ -33,6 +33,8 @@ export class Color {
       this.getShade(500).fixed = true
     } else {
       this.shades = args[1]
+      ColorInterpolater.regenerateShades(this)
+      this.getShade(500).fixed = true
     }
 
     this.shades.sort((a, b) => a.index - b.index)
