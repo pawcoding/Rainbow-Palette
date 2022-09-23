@@ -61,8 +61,7 @@ const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
     providers: [{
-      provide: ColorService,
-      useClass: MockColorService
+      provide: ColorService
     }, {
       provide: NotificationService,
       useClass: MockNotificationService

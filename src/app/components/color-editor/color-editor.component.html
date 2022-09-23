@@ -22,7 +22,7 @@
         title="Adjust the hue"
         id="hueInput" #hueInput
         min=0 max=360
-        [value]="shade.hue"
+        [value]="hueToWheel(shade.hue)"
         (input)="updateColor(1, hueInput.value)"
       >
 

@@ -55,7 +55,7 @@ export class ColorEditorComponent implements OnInit {
     } else if (!isNaN(+value)) {
       value = parseInt(`${value}`)
       if (type === UpdateType.HUE)
-        this.shade.setHSL(value, this.shade.saturation, this.shade.luminosity, true)
+        this.shade.setHSL(this.wheelToHue(value), this.shade.saturation, this.shade.luminosity, true)
       else if (type === UpdateType.SATURATION)
         this.shade.setHSL(this.shade.hue, value, this.shade.luminosity, true)
       else if (type === UpdateType.LUMINOSITY)
@@ -107,6 +107,34 @@ export class ColorEditorComponent implements OnInit {
     }).catch(e => {
       console.error('Error while copying to clipboard', e)
     })
+  }
+
+  wheelToHue(wheel: number) {
+    let newHue
+    if (wheel < 120)
+      newHue = .5 * wheel
+    else if (wheel < 180)
+      newHue = wheel + 300
+    else if (wheel < 240)
+      newHue = 2 * wheel + 120
+    else
+      newHue = wheel
+
+    return newHue % 360
+  }
+
+  hueToWheel(hue: number) {
+    let wheel
+    if (hue < 60)
+      wheel = 2 * hue
+    else if (hue < 120)
+      wheel = hue + 60
+    else if (hue < 240)
+      wheel = .5 * hue + 120
+    else
+      wheel = hue
+
+    return wheel % 360
   }
 
 }

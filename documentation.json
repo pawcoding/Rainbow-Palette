@@ -2086,12 +2086,12 @@
         },
         {
             "name": "MockNotificationService",
-            "id": "class-MockNotificationService-e018443b9a78d7a56a7329aefb98787a7a5d9f9372b92f80646b275756ffebe1a6146010ac4eb813ed71750c599feeb241aa3d52b595ca6f11bc73fbb08822bf-4",
+            "id": "class-MockNotificationService-afef1f286cc03f2e136f08900addf366e1340e70b084abc6e25cc41f19d614df63c540eb0c25d85556506717c10f9f14d734d600e32d74239ac4ec7e59c648a9-4",
             "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, moduleMetadata, Story} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\nimport {PaletteGenerator, PaletteScheme} from \"../../class/palette-generator\";\r\nimport {Shade} from \"../../models/shade.model\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', ['#f8fafc', '#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8', '#64748b', '#475569', '#334155', '#1e293b', '#0f172a']))\r\nrainbowPalette.addColor(new Color('Gray', ['#f9fafb', '#f3f4f6', '#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#4b5563', '#374151', '#1f2937', '#111827']))\r\nrainbowPalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\nrainbowPalette.addColor(new Color('Neutral', ['#fafafa', '#f5f5f5', '#e5e5e5', '#d4d4d4', '#a3a3a3', '#737373', '#525252', '#404040', '#262626', '#171717']))\r\nrainbowPalette.addColor(new Color('Stone', ['#fafaf9', '#f5f5f4', '#e7e5e4', '#d6d3d1', '#a8a29e', '#78716c', '#57534e', '#44403c', '#292524', '#1c1917']))\r\nrainbowPalette.addColor(new Color('Red', ['#fef2f2', '#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d']))\r\nrainbowPalette.addColor(new Color('Orange', ['#fff7ed', '#ffedd5', '#fed7aa', '#fdba74', '#fb923c', '#f97316', '#ea580c', '#c2410c', '#9a3412', '#7c2d12']))\r\nrainbowPalette.addColor(new Color('Amber', ['#fffbeb', '#fef3c7', '#fde68a', '#fcd34d', '#fbbf24', '#f59e0b', '#d97706', '#b45309', '#92400e', '#78350f']))\r\nrainbowPalette.addColor(new Color('Yellow', ['#fefce8', '#fef9c3', '#fef08a', '#fde047', '#facc15', '#eab308', '#ca8a04', '#a16207', '#854d0e', '#713f12']))\r\nrainbowPalette.addColor(new Color('Lime', ['#f7fee7', '#ecfccb', '#d9f99d', '#bef264', '#a3e635', '#84cc16', '#65a30d', '#4d7c0f', '#3f6212', '#365314']))\r\nrainbowPalette.addColor(new Color('Green', ['#f0fdf4', '#dcfce7', '#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#16a34a', '#15803d', '#166534', '#14532d']))\r\nrainbowPalette.addColor(new Color('Emerald', ['#ecfdf5', '#d1fae5', '#a7f3d0', '#6ee7b7', '#34d399', '#10b981', '#059669', '#047857', '#065f46', '#064e3b']))\r\nrainbowPalette.addColor(new Color('Teal', ['#f0fdfa', '#ccfbf1', '#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6', '#0d9488', '#0f766e', '#115e59', '#134e4a']))\r\nrainbowPalette.addColor(new Color('Cyan', ['#ecfeff', '#cffafe', '#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4', '#0891b2', '#0e7490', '#155e75', '#164e63']))\r\nrainbowPalette.addColor(new Color('Sky', ['#f0f9ff', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#075985', '#0c4a6e']))\r\nrainbowPalette.addColor(new Color('Blue', ['#eff6ff', '#dbeafe', '#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a']))\r\nrainbowPalette.addColor(new Color('Indigo', ['#eef2ff', '#e0e7ff', '#c7d2fe', '#a5b4fc', '#818cf8', '#6366f1', '#4f46e5', '#4338ca', '#3730a3', '#312e81']))\r\nrainbowPalette.addColor(new Color('Violet', ['#f5f3ff', '#ede9fe', '#ddd6fe', '#c4b5fd', '#a78bfa', '#8b5cf6', '#7c3aed', '#6d28d9', '#5b21b6', '#4c1d95']))\r\nrainbowPalette.addColor(new Color('Purple', ['#faf5ff', '#f3e8ff', '#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7', '#9333ea', '#7e22ce', '#6b21a8', '#581c87']))\r\nrainbowPalette.addColor(new Color('Fuchsia', ['#fdf4ff', '#fae8ff', '#f5d0fe', '#f0abfc', '#e879f9', '#d946ef', '#c026d3', '#a21caf', '#86198f', '#701a75']))\r\nrainbowPalette.addColor(new Color('Pink', ['#fdf2f8', '#fce7f3', '#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899', '#db2777', '#be185d', '#9d174d', '#831843']))\r\nrainbowPalette.addColor(new Color('Rose', ['#fff1f2', '#ffe4e6', '#fecdd3', '#fda4af', '#fb7185', '#f43f5e', '#e11d48', '#be123c', '#9f1239', '#881337']))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', ['#edf1f9', '#dae3f3', '#b5c7e7', '#8fabdb', '#6a8ed0', '#4472c4', '#365b9d', '#294476', '#1c2e4f', '#0e1727']))\r\npawcodePalette.addColor(new Color('Gray', ['#eeeeee', '#dcdcdc', '#bababa', '#999999', '#777777', '#555555', '#444444', '#333333', '#222222', '#111111']))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', ['#eff8fe', '#dff1fc', '#bfe4e9', '#9fd7f6', '#77bde9', '#4ea3db', '#4385c5', '#3967af', '#2e4998', '#17254c']))\r\nmediaScopePalette.addColor(new Color('Red', ['#fbe0e5', '#f7c1cb', '#f08498', '#e94765', '#da3e5b', '#cb3552', '#bc2c48', '#a2213e', '#871534', '#440b1a']))\r\nmediaScopePalette.addColor(new Color('Yellow', ['#fff3db', '#fee7b7', '#fdd06f', '#fbb827', '#f8ab30', '#f59e39', '#d87d2d', '#bc5d22', '#9f3c16', '#501e0b']))\r\nmediaScopePalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n\r\n\r\nexport const Monochromeatic = Template.bind({})\r\n\r\nMonochromeatic.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(new Shade(-1, true, '#4472c4'), PaletteScheme.MONOCHROMATIC)\r\n}\r\n",
+            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, moduleMetadata, Story} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\nimport {PaletteGenerator, PaletteScheme} from \"../../class/palette-generator\";\r\nimport {Shade} from \"../../models/shade.model\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', ['#f8fafc', '#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8', '#64748b', '#475569', '#334155', '#1e293b', '#0f172a']))\r\nrainbowPalette.addColor(new Color('Gray', ['#f9fafb', '#f3f4f6', '#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#4b5563', '#374151', '#1f2937', '#111827']))\r\nrainbowPalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\nrainbowPalette.addColor(new Color('Neutral', ['#fafafa', '#f5f5f5', '#e5e5e5', '#d4d4d4', '#a3a3a3', '#737373', '#525252', '#404040', '#262626', '#171717']))\r\nrainbowPalette.addColor(new Color('Stone', ['#fafaf9', '#f5f5f4', '#e7e5e4', '#d6d3d1', '#a8a29e', '#78716c', '#57534e', '#44403c', '#292524', '#1c1917']))\r\nrainbowPalette.addColor(new Color('Red', ['#fef2f2', '#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d']))\r\nrainbowPalette.addColor(new Color('Orange', ['#fff7ed', '#ffedd5', '#fed7aa', '#fdba74', '#fb923c', '#f97316', '#ea580c', '#c2410c', '#9a3412', '#7c2d12']))\r\nrainbowPalette.addColor(new Color('Amber', ['#fffbeb', '#fef3c7', '#fde68a', '#fcd34d', '#fbbf24', '#f59e0b', '#d97706', '#b45309', '#92400e', '#78350f']))\r\nrainbowPalette.addColor(new Color('Yellow', ['#fefce8', '#fef9c3', '#fef08a', '#fde047', '#facc15', '#eab308', '#ca8a04', '#a16207', '#854d0e', '#713f12']))\r\nrainbowPalette.addColor(new Color('Lime', ['#f7fee7', '#ecfccb', '#d9f99d', '#bef264', '#a3e635', '#84cc16', '#65a30d', '#4d7c0f', '#3f6212', '#365314']))\r\nrainbowPalette.addColor(new Color('Green', ['#f0fdf4', '#dcfce7', '#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#16a34a', '#15803d', '#166534', '#14532d']))\r\nrainbowPalette.addColor(new Color('Emerald', ['#ecfdf5', '#d1fae5', '#a7f3d0', '#6ee7b7', '#34d399', '#10b981', '#059669', '#047857', '#065f46', '#064e3b']))\r\nrainbowPalette.addColor(new Color('Teal', ['#f0fdfa', '#ccfbf1', '#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6', '#0d9488', '#0f766e', '#115e59', '#134e4a']))\r\nrainbowPalette.addColor(new Color('Cyan', ['#ecfeff', '#cffafe', '#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4', '#0891b2', '#0e7490', '#155e75', '#164e63']))\r\nrainbowPalette.addColor(new Color('Sky', ['#f0f9ff', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#075985', '#0c4a6e']))\r\nrainbowPalette.addColor(new Color('Blue', ['#eff6ff', '#dbeafe', '#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a']))\r\nrainbowPalette.addColor(new Color('Indigo', ['#eef2ff', '#e0e7ff', '#c7d2fe', '#a5b4fc', '#818cf8', '#6366f1', '#4f46e5', '#4338ca', '#3730a3', '#312e81']))\r\nrainbowPalette.addColor(new Color('Violet', ['#f5f3ff', '#ede9fe', '#ddd6fe', '#c4b5fd', '#a78bfa', '#8b5cf6', '#7c3aed', '#6d28d9', '#5b21b6', '#4c1d95']))\r\nrainbowPalette.addColor(new Color('Purple', ['#faf5ff', '#f3e8ff', '#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7', '#9333ea', '#7e22ce', '#6b21a8', '#581c87']))\r\nrainbowPalette.addColor(new Color('Fuchsia', ['#fdf4ff', '#fae8ff', '#f5d0fe', '#f0abfc', '#e879f9', '#d946ef', '#c026d3', '#a21caf', '#86198f', '#701a75']))\r\nrainbowPalette.addColor(new Color('Pink', ['#fdf2f8', '#fce7f3', '#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899', '#db2777', '#be185d', '#9d174d', '#831843']))\r\nrainbowPalette.addColor(new Color('Rose', ['#fff1f2', '#ffe4e6', '#fecdd3', '#fda4af', '#fb7185', '#f43f5e', '#e11d48', '#be123c', '#9f1239', '#881337']))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', ['#edf1f9', '#dae3f3', '#b5c7e7', '#8fabdb', '#6a8ed0', '#4472c4', '#365b9d', '#294476', '#1c2e4f', '#0e1727']))\r\npawcodePalette.addColor(new Color('Gray', ['#eeeeee', '#dcdcdc', '#bababa', '#999999', '#777777', '#555555', '#444444', '#333333', '#222222', '#111111']))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', ['#eff8fe', '#dff1fc', '#bfe4e9', '#9fd7f6', '#77bde9', '#4ea3db', '#4385c5', '#3967af', '#2e4998', '#17254c']))\r\nmediaScopePalette.addColor(new Color('Red', ['#fbe0e5', '#f7c1cb', '#f08498', '#e94765', '#da3e5b', '#cb3552', '#bc2c48', '#a2213e', '#871534', '#440b1a']))\r\nmediaScopePalette.addColor(new Color('Yellow', ['#fff3db', '#fee7b7', '#fdd06f', '#fbb827', '#f8ab30', '#f59e39', '#d87d2d', '#bc5d22', '#9f3c16', '#501e0b']))\r\nmediaScopePalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n\r\n\r\nexport const Monochromatic = Template.bind({})\r\n\r\nMonochromatic.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#da4e44'),\r\n    PaletteScheme.MONOCHROMATIC\r\n  )\r\n}\r\n\r\n\r\nexport const Analogous = Template.bind({})\r\n\r\nAnalogous.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#77cf97'),\r\n    PaletteScheme.ANALOGOUS\r\n  )\r\n}\r\n\r\n\r\nexport const Complementary = Template.bind({})\r\n\r\nComplementary.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#ff7231'),\r\n    PaletteScheme.COMPLEMENTARY\r\n  )\r\n}\r\n\r\n\r\nexport const Split = Template.bind({})\r\n\r\nSplit.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#29cddc'),\r\n    PaletteScheme.SPLIT\r\n  )\r\n}\r\n\r\n\r\nexport const Triadic = Template.bind({})\r\n\r\nTriadic.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#00ad64'),\r\n    PaletteScheme.TRIADIC\r\n  )\r\n}\r\n\r\n\r\nexport const Compound = Template.bind({})\r\n\r\nCompound.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#66b032'),\r\n    PaletteScheme.COMPOUND\r\n  )\r\n}\r\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -2185,12 +2185,12 @@
         },
         {
             "name": "MockStorageService",
-            "id": "class-MockStorageService-e018443b9a78d7a56a7329aefb98787a7a5d9f9372b92f80646b275756ffebe1a6146010ac4eb813ed71750c599feeb241aa3d52b595ca6f11bc73fbb08822bf-1",
+            "id": "class-MockStorageService-afef1f286cc03f2e136f08900addf366e1340e70b084abc6e25cc41f19d614df63c540eb0c25d85556506717c10f9f14d734d600e32d74239ac4ec7e59c648a9-1",
             "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, moduleMetadata, Story} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\nimport {PaletteGenerator, PaletteScheme} from \"../../class/palette-generator\";\r\nimport {Shade} from \"../../models/shade.model\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', ['#f8fafc', '#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8', '#64748b', '#475569', '#334155', '#1e293b', '#0f172a']))\r\nrainbowPalette.addColor(new Color('Gray', ['#f9fafb', '#f3f4f6', '#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#4b5563', '#374151', '#1f2937', '#111827']))\r\nrainbowPalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\nrainbowPalette.addColor(new Color('Neutral', ['#fafafa', '#f5f5f5', '#e5e5e5', '#d4d4d4', '#a3a3a3', '#737373', '#525252', '#404040', '#262626', '#171717']))\r\nrainbowPalette.addColor(new Color('Stone', ['#fafaf9', '#f5f5f4', '#e7e5e4', '#d6d3d1', '#a8a29e', '#78716c', '#57534e', '#44403c', '#292524', '#1c1917']))\r\nrainbowPalette.addColor(new Color('Red', ['#fef2f2', '#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d']))\r\nrainbowPalette.addColor(new Color('Orange', ['#fff7ed', '#ffedd5', '#fed7aa', '#fdba74', '#fb923c', '#f97316', '#ea580c', '#c2410c', '#9a3412', '#7c2d12']))\r\nrainbowPalette.addColor(new Color('Amber', ['#fffbeb', '#fef3c7', '#fde68a', '#fcd34d', '#fbbf24', '#f59e0b', '#d97706', '#b45309', '#92400e', '#78350f']))\r\nrainbowPalette.addColor(new Color('Yellow', ['#fefce8', '#fef9c3', '#fef08a', '#fde047', '#facc15', '#eab308', '#ca8a04', '#a16207', '#854d0e', '#713f12']))\r\nrainbowPalette.addColor(new Color('Lime', ['#f7fee7', '#ecfccb', '#d9f99d', '#bef264', '#a3e635', '#84cc16', '#65a30d', '#4d7c0f', '#3f6212', '#365314']))\r\nrainbowPalette.addColor(new Color('Green', ['#f0fdf4', '#dcfce7', '#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#16a34a', '#15803d', '#166534', '#14532d']))\r\nrainbowPalette.addColor(new Color('Emerald', ['#ecfdf5', '#d1fae5', '#a7f3d0', '#6ee7b7', '#34d399', '#10b981', '#059669', '#047857', '#065f46', '#064e3b']))\r\nrainbowPalette.addColor(new Color('Teal', ['#f0fdfa', '#ccfbf1', '#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6', '#0d9488', '#0f766e', '#115e59', '#134e4a']))\r\nrainbowPalette.addColor(new Color('Cyan', ['#ecfeff', '#cffafe', '#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4', '#0891b2', '#0e7490', '#155e75', '#164e63']))\r\nrainbowPalette.addColor(new Color('Sky', ['#f0f9ff', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#075985', '#0c4a6e']))\r\nrainbowPalette.addColor(new Color('Blue', ['#eff6ff', '#dbeafe', '#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a']))\r\nrainbowPalette.addColor(new Color('Indigo', ['#eef2ff', '#e0e7ff', '#c7d2fe', '#a5b4fc', '#818cf8', '#6366f1', '#4f46e5', '#4338ca', '#3730a3', '#312e81']))\r\nrainbowPalette.addColor(new Color('Violet', ['#f5f3ff', '#ede9fe', '#ddd6fe', '#c4b5fd', '#a78bfa', '#8b5cf6', '#7c3aed', '#6d28d9', '#5b21b6', '#4c1d95']))\r\nrainbowPalette.addColor(new Color('Purple', ['#faf5ff', '#f3e8ff', '#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7', '#9333ea', '#7e22ce', '#6b21a8', '#581c87']))\r\nrainbowPalette.addColor(new Color('Fuchsia', ['#fdf4ff', '#fae8ff', '#f5d0fe', '#f0abfc', '#e879f9', '#d946ef', '#c026d3', '#a21caf', '#86198f', '#701a75']))\r\nrainbowPalette.addColor(new Color('Pink', ['#fdf2f8', '#fce7f3', '#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899', '#db2777', '#be185d', '#9d174d', '#831843']))\r\nrainbowPalette.addColor(new Color('Rose', ['#fff1f2', '#ffe4e6', '#fecdd3', '#fda4af', '#fb7185', '#f43f5e', '#e11d48', '#be123c', '#9f1239', '#881337']))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', ['#edf1f9', '#dae3f3', '#b5c7e7', '#8fabdb', '#6a8ed0', '#4472c4', '#365b9d', '#294476', '#1c2e4f', '#0e1727']))\r\npawcodePalette.addColor(new Color('Gray', ['#eeeeee', '#dcdcdc', '#bababa', '#999999', '#777777', '#555555', '#444444', '#333333', '#222222', '#111111']))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', ['#eff8fe', '#dff1fc', '#bfe4e9', '#9fd7f6', '#77bde9', '#4ea3db', '#4385c5', '#3967af', '#2e4998', '#17254c']))\r\nmediaScopePalette.addColor(new Color('Red', ['#fbe0e5', '#f7c1cb', '#f08498', '#e94765', '#da3e5b', '#cb3552', '#bc2c48', '#a2213e', '#871534', '#440b1a']))\r\nmediaScopePalette.addColor(new Color('Yellow', ['#fff3db', '#fee7b7', '#fdd06f', '#fbb827', '#f8ab30', '#f59e39', '#d87d2d', '#bc5d22', '#9f3c16', '#501e0b']))\r\nmediaScopePalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n\r\n\r\nexport const Monochromeatic = Template.bind({})\r\n\r\nMonochromeatic.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(new Shade(-1, true, '#4472c4'), PaletteScheme.MONOCHROMATIC)\r\n}\r\n",
+            "sourceCode": "import {PaletteViewerComponent} from \"./palette-viewer.component\";\r\nimport {Meta, moduleMetadata, Story} from \"@storybook/angular\";\r\nimport {Palette} from \"../../models/palette.model\";\r\nimport {ColorViewerComponent} from \"../color-viewer/color-viewer.component\";\r\n// @ts-ignore\r\nimport {v4 as uuidv4} from \"uuid\";\r\nimport {Color} from \"../../models/color.model\";\r\nimport {StorageService} from \"../../services/storage.service\";\r\nimport {NotificationService} from \"../../services/notification.service\";\r\nimport {EventEmitter} from \"@angular/core\";\r\nimport {Dialog} from \"../../interfaces/dialog.interface\";\r\nimport {PaletteGenerator, PaletteScheme} from \"../../class/palette-generator\";\r\nimport {Shade} from \"../../models/shade.model\";\r\n\r\nexport default {\r\n  title: 'Components/Palette',\r\n  component: PaletteViewerComponent,\r\n  subcomponents: {ColorViewerComponent},\r\n  decorators: [\r\n    moduleMetadata({\r\n      declarations: [ColorViewerComponent]\r\n    })\r\n  ]\r\n} as Meta\r\n\r\nclass MockStorageService implements Partial<StorageService> {\r\n\r\n  savePalette(palette: Palette) {\r\n    console.log(`savePalette(${palette.title})`)\r\n  }\r\n\r\n}\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n\r\n  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()\r\n\r\n  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()\r\n\r\n  constructor() {\r\n    this.dialog.subscribe(dialogContent => {\r\n      if (dialogContent) {\r\n        console.log('Show dialog\\n', dialogContent.message)\r\n      } else {\r\n        console.log('Close dialog')\r\n      }\r\n    })\r\n\r\n    this.notification.subscribe(message => {\r\n      if (message) {\r\n        console.log('Show notification\\n', message)\r\n      } else {\r\n        console.log('Close notification')\r\n      }\r\n    })\r\n  }\r\n\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})\r\n\r\n\r\nexport const Rainbow = Template.bind({})\r\n\r\nconst rainbowPalette = new Palette('Rainbow', uuidv4())\r\nrainbowPalette.addColor(new Color('Slate', ['#f8fafc', '#f1f5f9', '#e2e8f0', '#cbd5e1', '#94a3b8', '#64748b', '#475569', '#334155', '#1e293b', '#0f172a']))\r\nrainbowPalette.addColor(new Color('Gray', ['#f9fafb', '#f3f4f6', '#e5e7eb', '#d1d5db', '#9ca3af', '#6b7280', '#4b5563', '#374151', '#1f2937', '#111827']))\r\nrainbowPalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\nrainbowPalette.addColor(new Color('Neutral', ['#fafafa', '#f5f5f5', '#e5e5e5', '#d4d4d4', '#a3a3a3', '#737373', '#525252', '#404040', '#262626', '#171717']))\r\nrainbowPalette.addColor(new Color('Stone', ['#fafaf9', '#f5f5f4', '#e7e5e4', '#d6d3d1', '#a8a29e', '#78716c', '#57534e', '#44403c', '#292524', '#1c1917']))\r\nrainbowPalette.addColor(new Color('Red', ['#fef2f2', '#fee2e2', '#fecaca', '#fca5a5', '#f87171', '#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d']))\r\nrainbowPalette.addColor(new Color('Orange', ['#fff7ed', '#ffedd5', '#fed7aa', '#fdba74', '#fb923c', '#f97316', '#ea580c', '#c2410c', '#9a3412', '#7c2d12']))\r\nrainbowPalette.addColor(new Color('Amber', ['#fffbeb', '#fef3c7', '#fde68a', '#fcd34d', '#fbbf24', '#f59e0b', '#d97706', '#b45309', '#92400e', '#78350f']))\r\nrainbowPalette.addColor(new Color('Yellow', ['#fefce8', '#fef9c3', '#fef08a', '#fde047', '#facc15', '#eab308', '#ca8a04', '#a16207', '#854d0e', '#713f12']))\r\nrainbowPalette.addColor(new Color('Lime', ['#f7fee7', '#ecfccb', '#d9f99d', '#bef264', '#a3e635', '#84cc16', '#65a30d', '#4d7c0f', '#3f6212', '#365314']))\r\nrainbowPalette.addColor(new Color('Green', ['#f0fdf4', '#dcfce7', '#bbf7d0', '#86efac', '#4ade80', '#22c55e', '#16a34a', '#15803d', '#166534', '#14532d']))\r\nrainbowPalette.addColor(new Color('Emerald', ['#ecfdf5', '#d1fae5', '#a7f3d0', '#6ee7b7', '#34d399', '#10b981', '#059669', '#047857', '#065f46', '#064e3b']))\r\nrainbowPalette.addColor(new Color('Teal', ['#f0fdfa', '#ccfbf1', '#99f6e4', '#5eead4', '#2dd4bf', '#14b8a6', '#0d9488', '#0f766e', '#115e59', '#134e4a']))\r\nrainbowPalette.addColor(new Color('Cyan', ['#ecfeff', '#cffafe', '#a5f3fc', '#67e8f9', '#22d3ee', '#06b6d4', '#0891b2', '#0e7490', '#155e75', '#164e63']))\r\nrainbowPalette.addColor(new Color('Sky', ['#f0f9ff', '#e0f2fe', '#bae6fd', '#7dd3fc', '#38bdf8', '#0ea5e9', '#0284c7', '#0369a1', '#075985', '#0c4a6e']))\r\nrainbowPalette.addColor(new Color('Blue', ['#eff6ff', '#dbeafe', '#bfdbfe', '#93c5fd', '#60a5fa', '#3b82f6', '#2563eb', '#1d4ed8', '#1e40af', '#1e3a8a']))\r\nrainbowPalette.addColor(new Color('Indigo', ['#eef2ff', '#e0e7ff', '#c7d2fe', '#a5b4fc', '#818cf8', '#6366f1', '#4f46e5', '#4338ca', '#3730a3', '#312e81']))\r\nrainbowPalette.addColor(new Color('Violet', ['#f5f3ff', '#ede9fe', '#ddd6fe', '#c4b5fd', '#a78bfa', '#8b5cf6', '#7c3aed', '#6d28d9', '#5b21b6', '#4c1d95']))\r\nrainbowPalette.addColor(new Color('Purple', ['#faf5ff', '#f3e8ff', '#e9d5ff', '#d8b4fe', '#c084fc', '#a855f7', '#9333ea', '#7e22ce', '#6b21a8', '#581c87']))\r\nrainbowPalette.addColor(new Color('Fuchsia', ['#fdf4ff', '#fae8ff', '#f5d0fe', '#f0abfc', '#e879f9', '#d946ef', '#c026d3', '#a21caf', '#86198f', '#701a75']))\r\nrainbowPalette.addColor(new Color('Pink', ['#fdf2f8', '#fce7f3', '#fbcfe8', '#f9a8d4', '#f472b6', '#ec4899', '#db2777', '#be185d', '#9d174d', '#831843']))\r\nrainbowPalette.addColor(new Color('Rose', ['#fff1f2', '#ffe4e6', '#fecdd3', '#fda4af', '#fb7185', '#f43f5e', '#e11d48', '#be123c', '#9f1239', '#881337']))\r\n\r\nRainbow.args = {\r\n  dark: false,\r\n  palette: rainbowPalette\r\n}\r\n\r\n\r\nexport const Pawcode = Template.bind({})\r\n\r\nconst pawcodePalette = new Palette('pawcode', uuidv4())\r\npawcodePalette.addColor(new Color('Blue', ['#edf1f9', '#dae3f3', '#b5c7e7', '#8fabdb', '#6a8ed0', '#4472c4', '#365b9d', '#294476', '#1c2e4f', '#0e1727']))\r\npawcodePalette.addColor(new Color('Gray', ['#eeeeee', '#dcdcdc', '#bababa', '#999999', '#777777', '#555555', '#444444', '#333333', '#222222', '#111111']))\r\n\r\nPawcode.args = {\r\n  dark: false,\r\n  palette: pawcodePalette\r\n}\r\n\r\n\r\nexport const MediaScope = Template.bind({})\r\n\r\nconst mediaScopePalette = new Palette('media-scope', uuidv4())\r\nmediaScopePalette.addColor(new Color('Blue', ['#eff8fe', '#dff1fc', '#bfe4e9', '#9fd7f6', '#77bde9', '#4ea3db', '#4385c5', '#3967af', '#2e4998', '#17254c']))\r\nmediaScopePalette.addColor(new Color('Red', ['#fbe0e5', '#f7c1cb', '#f08498', '#e94765', '#da3e5b', '#cb3552', '#bc2c48', '#a2213e', '#871534', '#440b1a']))\r\nmediaScopePalette.addColor(new Color('Yellow', ['#fff3db', '#fee7b7', '#fdd06f', '#fbb827', '#f8ab30', '#f59e39', '#d87d2d', '#bc5d22', '#9f3c16', '#501e0b']))\r\nmediaScopePalette.addColor(new Color('Zinc', ['#fafafa', '#f4f4f5', '#e4e4e7', '#d4d4d8', '#a1a1aa', '#71717a', '#52525b', '#3f3f46', '#27272a', '#18181b']))\r\n\r\nMediaScope.args = {\r\n  dark: false,\r\n  palette: mediaScopePalette\r\n}\r\n\r\n\r\nexport const Random = Template.bind({})\r\n\r\nRandom.args = {\r\n  dark: false,\r\n  palette: Palette.generateRandomPalette(5)\r\n}\r\n\r\n\r\nexport const Monochromatic = Template.bind({})\r\n\r\nMonochromatic.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#da4e44'),\r\n    PaletteScheme.MONOCHROMATIC\r\n  )\r\n}\r\n\r\n\r\nexport const Analogous = Template.bind({})\r\n\r\nAnalogous.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#77cf97'),\r\n    PaletteScheme.ANALOGOUS\r\n  )\r\n}\r\n\r\n\r\nexport const Complementary = Template.bind({})\r\n\r\nComplementary.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#ff7231'),\r\n    PaletteScheme.COMPLEMENTARY\r\n  )\r\n}\r\n\r\n\r\nexport const Split = Template.bind({})\r\n\r\nSplit.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#29cddc'),\r\n    PaletteScheme.SPLIT\r\n  )\r\n}\r\n\r\n\r\nexport const Triadic = Template.bind({})\r\n\r\nTriadic.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#00ad64'),\r\n    PaletteScheme.TRIADIC\r\n  )\r\n}\r\n\r\n\r\nexport const Compound = Template.bind({})\r\n\r\nCompound.args = {\r\n  dark: false,\r\n  palette: PaletteGenerator.generatePalette(\r\n    new Shade(-1, true, '#66b032'),\r\n    PaletteScheme.COMPOUND\r\n  )\r\n}\r\n",
             "properties": [],
             "methods": [
                 {
@@ -3076,14 +3076,157 @@
         },
         {
             "name": "PaletteGenerator",
-            "id": "class-PaletteGenerator-6a40d61c19e4324d37910f9ba9372af9ad40544c1e1849cfdc2c6c7da143def6acc0e9ad79563a61677b2d960e6d1bbe8c09dd774f5ae089c968a4358c5a4b06",
+            "id": "class-PaletteGenerator-d7b01fedf7d8f6598fe1aa8f14b5eb9291449311ac83cb2405ab841598ef7342053f0da773a4b057ee7822d09ca84468fbdea3dd8c66d62441d1f8e58fbb8030",
             "file": "src/app/class/palette-generator.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "class",
-            "sourceCode": "import {Shade} from \"../models/shade.model\";\nimport {Palette} from \"../models/palette.model\";\nimport {Color} from \"../models/color.model\";\n\nexport class PaletteGenerator {\n\n  static generatePalette(shade: Shade, scheme: PaletteScheme) {\n    switch (scheme) {\n      case PaletteScheme.MONOCHROMATIC:\n        return this.generateMonochromaticPalette(shade)\n      default:\n        return Palette.generateRandomPalette(5)\n    }\n  }\n\n  private static generateMonochromaticPalette(shade: Shade) {\n    const monochrome = new Palette('Monochrom')\n\n    monochrome.addColor(new Color(shade.hex, [shade]))\n    monochrome.addColor(new Color('gray', [new Shade(-1, true, shade.hue, 5, 50)]))\n\n    return monochrome\n  }\n\n}\n\nexport enum PaletteScheme {\n  MONOCHROMATIC,\n  ANALOGOUS,\n  COMPLEMENTARY,\n  TRIADIC,\n  COMPOUND,\n  RANDOM\n}\n",
+            "sourceCode": "import {Shade} from \"../models/shade.model\";\nimport {Palette} from \"../models/palette.model\";\nimport {Color} from \"../models/color.model\";\n\nexport class PaletteGenerator {\n\n  static generatePalette(shade: Shade, scheme: PaletteScheme): Palette {\n    switch (scheme) {\n      case PaletteScheme.MONOCHROMATIC:\n        return this.generateMonochromaticPalette(shade)\n      case PaletteScheme.ANALOGOUS:\n        return this.generateAnalogousPalette(shade)\n      case PaletteScheme.COMPLEMENTARY:\n        return this.generateComplementaryPalette(shade)\n      case PaletteScheme.SPLIT:\n        return this.generateSplitPalette(shade)\n      case PaletteScheme.TRIADIC:\n        return this.generateTriadicPalette(shade)\n      case PaletteScheme.COMPOUND:\n        return this.generateCompoundPalette(shade)\n      case PaletteScheme.SURPRISE:\n        const schemes = Object.values(PaletteScheme.RANDOM)\n        const index = Math.floor(Math.random() * schemes.length)\n        return this.generatePalette(shade, schemes[index])\n      default:\n        return Palette.generateRandomPalette(5)\n    }\n  }\n\n  private static generateMonochromaticPalette(shade: Shade) {\n    const monochromatic = new Palette('Monochrom')\n\n    monochromatic.addColor(new Color('primary', [shade]))\n    monochromatic.addColor(new Color('muted', [\n      new Shade(-1, true, shade.hue, 30, 50)\n    ]), false)\n    monochromatic.addColor(new Color('gray', [\n      new Shade(-1, true, shade.hue, 2, 50)\n    ]), false)\n\n    return monochromatic\n  }\n\n  private static generateAnalogousPalette(shade: Shade) {\n    const analogous = new Palette('Analogous')\n\n    analogous.addColor(new Color('primary', [shade]))\n\n    analogous.addColor(new Color('secondary', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 315), Math.max(shade.saturation - 20, 0), 40)\n    ]), false)\n    analogous.addColor(new Color('secondary muted', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 270), 25, 20)\n    ]), false)\n\n    analogous.addColor(new Color('accent', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 45), shade.saturation, 50)\n    ]), false)\n    analogous.addColor(new Color('accent muted', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 90) % 360, 25, 20)\n    ]), false)\n\n    return analogous\n  }\n\n  private static generateComplementaryPalette(shade: Shade) {\n    const complementary = new Palette('Complementary')\n\n    complementary.addColor(new Color('primary', [shade]))\n\n    complementary.addColor(new Color('gray', [\n      new Shade(-1, true, shade.hue, 3, 50)\n    ]), false)\n\n    complementary.addColor(new Color('secondary', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 180), Math.max(shade.saturation - 20, 0), 40)\n    ]), false)\n\n    return complementary\n  }\n\n  private static generateSplitPalette(shade: Shade) {\n    const split = new Palette('Split')\n\n    split.addColor(new Color('primary', [shade]))\n\n    split.addColor(new Color('secondary', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 20), Math.max(shade.saturation - 20, 0), 40)\n    ]), false)\n    split.addColor(new Color('gray', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 20), 3, 50)\n    ]), false)\n\n    split.addColor(new Color('accent', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 180), shade.saturation, 80)\n    ]), false)\n\n    return split\n  }\n\n  private static generateTriadicPalette(shade: Shade) {\n    const triadic = new Palette('Triadic')\n\n    triadic.addColor(new Color('primary', [shade]))\n\n    triadic.addColor(new Color('primary muted', [\n      new Shade(-1, true, shade.hue, 20, 30)\n    ]), false)\n\n    triadic.addColor(new Color('secondary', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 120), Math.max(shade.saturation - 20, 0), 40)\n    ]), false)\n    triadic.addColor(new Color('secondary muted', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 120), 20, 30)\n    ]), false)\n\n    triadic.addColor(new Color('accent', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 240), shade.saturation, 20)\n    ]), false)\n\n    return triadic\n  }\n\n  private static generateCompoundPalette(shade: Shade) {\n    const compound = new Palette('Compound')\n\n    compound.addColor(new Color('primary', [shade]))\n\n    compound.addColor(new Color('secondary', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 210), Math.max(shade.saturation - 20, 0), 40)\n    ]), false)\n\n    compound.addColor(new Color('accent', [\n      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 150), shade.saturation, 50)\n    ]), false)\n\n    return compound\n  }\n\n  private static changeHueOnWheel(hue: number, change: number) {\n    let wheel\n    if (hue < 60)\n      wheel = 2 * hue\n    else if (hue < 120)\n      wheel = hue + 60\n    else if (hue < 240)\n      wheel = .5 * hue + 120\n    else\n      wheel = hue\n\n    wheel += change\n    wheel %= 360\n\n    let newHue\n    if (wheel < 120)\n      newHue = .5 * wheel\n    else if (wheel < 180)\n      newHue = wheel + 300\n    else if (wheel < 240)\n      newHue = 2 * wheel + 120\n    else\n      newHue = wheel\n\n    return newHue % 360\n  }\n\n}\n\nexport enum PaletteScheme {\n  MONOCHROMATIC,\n  ANALOGOUS,\n  COMPLEMENTARY,\n  SPLIT,\n  TRIADIC,\n  COMPOUND,\n  SURPRISE,\n  RANDOM\n}\n",
             "properties": [],
             "methods": [
+                {
+                    "name": "changeHueOnWheel",
+                    "args": [
+                        {
+                            "name": "hue",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "change",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "number",
+                    "typeParameters": [],
+                    "line": 140,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121,
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "hue",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        },
+                        {
+                            "name": "change",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "generateAnalogousPalette",
+                    "args": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 44,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121,
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "generateComplementaryPalette",
+                    "args": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 66,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121,
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "generateCompoundPalette",
+                    "args": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 124,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121,
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
                 {
                     "name": "generateMonochromaticPalette",
                     "args": [
@@ -3097,7 +3240,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 16,
+                    "line": 30,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3133,7 +3276,7 @@
                         }
                     ],
                     "optional": false,
-                    "returnType": "any",
+                    "returnType": "Palette",
                     "typeParameters": [],
                     "line": 7,
                     "deprecated": false,
@@ -3154,6 +3297,70 @@
                         {
                             "name": "scheme",
                             "type": "PaletteScheme",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "generateSplitPalette",
+                    "args": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 82,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121,
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "generateTriadicPalette",
+                    "args": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 101,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        121,
+                        124
+                    ],
+                    "jsdoctags": [
+                        {
+                            "name": "shade",
+                            "type": "Shade",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -5404,6 +5611,36 @@
     "miscellaneous": {
         "variables": [
             {
+                "name": "Analogous",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Complementary",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
+                "name": "Compound",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "context",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5417,21 +5654,21 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.prod.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/environments/environment.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: false,\n  version: packageJson.version\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.prod.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
             },
             {
                 "name": "MediaScope",
@@ -5454,7 +5691,7 @@
                 "defaultValue": "new Palette('media-scope', uuidv4())"
             },
             {
-                "name": "Monochromeatic",
+                "name": "Monochromatic",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
@@ -5573,6 +5810,16 @@
                 "type": "literal type"
             },
             {
+                "name": "Split",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -5631,6 +5878,16 @@
                 "deprecationMessage": "",
                 "type": "Story",
                 "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
+            },
+            {
+                "name": "Triadic",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "Template.bind({})"
             }
         ],
         "functions": [],
@@ -5702,12 +5959,22 @@
                         "deprecationMessage": ""
                     },
                     {
+                        "name": "SPLIT",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
                         "name": "TRIADIC",
                         "deprecated": false,
                         "deprecationMessage": ""
                     },
                     {
                         "name": "COMPOUND",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "SURPRISE",
                         "deprecated": false,
                         "deprecationMessage": ""
                     },
@@ -5757,52 +6024,37 @@
             }
         ],
         "groupedVariables": {
-            "src/test.ts": [
+            "src/app/components/palette-viewer/palette-viewer.component.stories.ts": [
                 {
-                    "name": "context",
+                    "name": "Analogous",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/test.ts",
+                    "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                    "defaultValue": "Template.bind({})"
                 },
                 {
-                    "name": "require",
+                    "name": "Complementary",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/test.ts",
+                    "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "literal type"
-                }
-            ],
-            "src/environments/environment.prod.ts": [
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
                 {
-                    "name": "environment",
+                    "name": "Compound",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/environments/environment.prod.ts",
+                    "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
-                }
-            ],
-            "src/environments/environment.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: false,\n  version: packageJson.version\n}"
-                }
-            ],
-            "src/app/components/palette-viewer/palette-viewer.component.stories.ts": [
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
                 {
                     "name": "MediaScope",
                     "ctype": "miscellaneous",
@@ -5824,7 +6076,7 @@
                     "defaultValue": "new Palette('media-scope', uuidv4())"
                 },
                 {
-                    "name": "Monochromeatic",
+                    "name": "Monochromatic",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
                     "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
@@ -5884,6 +6136,16 @@
                     "defaultValue": "Template.bind({})"
                 },
                 {
+                    "name": "Split",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
@@ -5892,6 +6154,61 @@
                     "deprecationMessage": "",
                     "type": "Story",
                     "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [{\r\n      provide: StorageService,\r\n      useClass: MockStorageService\r\n    }, {\r\n      provide: NotificationService,\r\n      useClass: MockNotificationService\r\n    }]\r\n  }\r\n})"
+                },
+                {
+                    "name": "Triadic",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/test.ts": [
+                {
+                    "name": "context",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "require.context('./', true, /\\.spec\\.ts$/)"
+                },
+                {
+                    "name": "require",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/test.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false,\n  version: packageJson.version\n}"
+                }
+            ],
+            "src/environments/environment.prod.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.prod.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: true,\n  version: packageJson.version\n}"
                 }
             ],
             "src/app/components/color-viewer/color-viewer.component.stories.ts": [
@@ -6109,12 +6426,22 @@
                             "deprecationMessage": ""
                         },
                         {
+                            "name": "SPLIT",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
                             "name": "TRIADIC",
                             "deprecated": false,
                             "deprecationMessage": ""
                         },
                         {
                             "name": "COMPOUND",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        },
+                        {
+                            "name": "SURPRISE",
                             "deprecated": false,
                             "deprecationMessage": ""
                         },
@@ -6182,7 +6509,7 @@
                 "linktype": "classe",
                 "name": "PaletteGenerator",
                 "coveragePercent": 0,
-                "coverageCount": "0/3",
+                "coverageCount": "0/9",
                 "status": "low"
             },
             {
@@ -6416,6 +6743,36 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Analogous",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Complementary",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Compound",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "MediaScope",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
@@ -6436,7 +6793,7 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
-                "name": "Monochromeatic",
+                "name": "Monochromatic",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -6496,7 +6853,27 @@
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
+                "name": "Split",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
                 "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Triadic",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
