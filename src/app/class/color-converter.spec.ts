@@ -26,4 +26,17 @@ describe('ColorConverter', () => {
       .toBe('#e73887')
   })
 
+  it('should convert rgb to cmyk', () => {
+    const cmyk = ColorConverter.RGBtoCMYK(24, 184, 93)
+    expect(cmyk.cyan).toBe(87)
+    expect(cmyk.magenta).toBe(0)
+    expect(cmyk.yellow).toBe(49)
+    expect(cmyk.key).toBe(28)
+
+    const rgb = ColorConverter.CMYKtoRGB(87, 0, 49, 28)
+    expect(rgb.red).toBe(24)
+    expect(rgb.green).toBe(184)
+    expect(rgb.blue).toBeCloseTo(93, -1)
+  })
+
 })

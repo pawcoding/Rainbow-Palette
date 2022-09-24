@@ -19,9 +19,10 @@ export class PaletteGenerator {
       case PaletteScheme.COMPOUND:
         return this.generateCompoundPalette(shade)
       case PaletteScheme.SURPRISE:
-        const schemes = Object.values(PaletteScheme.RANDOM)
-        const index = Math.floor(Math.random() * schemes.length)
-        return this.generatePalette(shade, schemes[index])
+        const schemes = Object.keys(PaletteScheme)
+        const index = schemes[Math.floor(Math.random() * schemes.length)]
+        // @ts-ignore
+        return this.generatePalette(shade, PaletteScheme[index])
       default:
         return Palette.generateRandomPalette(5)
     }

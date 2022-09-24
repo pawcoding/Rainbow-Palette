@@ -21,6 +21,11 @@ export class ColorConverter {
     return this.HSLtoHSV(hsl.hue, hsl.saturation, hsl.luminosity)
   }
 
+  static HEXtoCMYK(hex: string) {
+    const rgb = this.HEXtoRGB(hex)
+    return this.RGBtoCMYK(rgb.red, rgb.green, rgb.blue)
+  }
+
 
   static RGBtoHEX(red: number, green: number, blue: number) {
     if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
@@ -75,6 +80,27 @@ export class ColorConverter {
     return this.HSLtoHSV(hsl.hue, hsl.saturation, hsl.luminosity)
   }
 
+  static RGBtoCMYK(red: number, green: number, blue: number) {
+    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
+      throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`
+
+    const r = red / 255
+    const g = green / 255
+    const b = blue / 255
+
+    const k = 1 - Math.max(r, g, b)
+    const c = (1 - r - k) / (1 - k)
+    const m = (1 - g - k) / (1 - k)
+    const y = (1 - b - k) / (1 - k)
+
+    return {
+      cyan: Math.round(c * 100),
+      magenta: Math.round(m * 100),
+      yellow: Math.round(y * 100),
+      key: Math.round(k * 100)
+    }
+  }
+
 
   static HSLtoHEX(hue: number, saturation: number, luminosity: number): string {
     const rgb = this.HSLtoRGB(hue, saturation, luminosity)
@@ -120,6 +146,11 @@ export class ColorConverter {
     }
   }
 
+  static HSLtoCMYK(hue: number, saturation: number, luminosity: number) {
+    const rgb = this.HSLtoRGB(hue, saturation, luminosity)
+    return this.RGBtoCMYK(rgb.red, rgb.green, rgb.blue)
+  }
+
 
   static HSVtoHEX(hue: number, saturation: number, value: number) {
     const rgb = this.HSVtoRGB(hue, saturation, value)
@@ -145,6 +176,47 @@ export class ColorConverter {
       saturation: Math.round(s),
       luminosity: Math.round(l)
     }
+  }
+
+  static HSVtoCMYK(hue: number, saturation: number, value: number) {
+    const rgb = this.HSVtoRGB(hue, saturation, value)
+    return this.RGBtoCMYK(rgb.red, rgb.green, rgb.blue)
+  }
+
+
+  static CMYKtoHEX(cyan: number, magenta: number, yellow: number, key: number) {
+    const rgb = this.CMYKtoRGB(cyan, magenta, yellow, key)
+    return this.RGBtoHEX(rgb.red, rgb.green, rgb.blue)
+  }
+
+  static CMYKtoRGB(cyan: number, magenta: number, yellow: number, key: number) {
+    if (cyan < 0 || cyan > 100 || magenta < 0 || magenta > 100 || yellow < 0 || yellow > 100 || key < 0 || key > 100)
+      throw `[${cyan}, ${magenta}, ${yellow}, ${key}] is not in valid format.`
+
+    const c = cyan / 100
+    const m = magenta / 100
+    const y = yellow / 100
+    const k = key / 100
+
+    const r = (1 - c) * (1 - k)
+    const g = (1 - m) * (1 - k)
+    const b = (1 - y) * (1 - k)
+
+    return {
+      red: Math.round(255 * r),
+      green: Math.round(255 * g),
+      blue: Math.round(255 * b),
+    }
+  }
+
+  static CMYKtoHSL(cyan: number, magenta: number, yellow: number, key: number) {
+    const rgb = this.CMYKtoRGB(cyan, magenta, yellow, key)
+    return this.RGBtoHSL(rgb.red, rgb.green, rgb.blue)
+  }
+
+  static CMYKtoHSV(cyan: number, magenta: number, yellow: number, key: number) {
+    const rgb = this.CMYKtoRGB(cyan, magenta, yellow, key)
+    return this.RGBtoHSV(rgb.red, rgb.green, rgb.blue)
   }
 
 }
