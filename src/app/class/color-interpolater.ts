@@ -1,74 +1,89 @@
-import {ColorConverter} from "./color-converter";
 import {Shade} from "../models/shade.model";
+import {Color} from "../models/color.model";
 
 export class ColorInterpolater {
 
   /**
-   * Interpolate 10 shades starting with one HEX color string.
-   * @param hex HEX color string (#RRGGBB)
+   * Regenerate every shade but the fixed ones
+   * @param color
    */
-  static interpolateShades(hex: string) {
-    if (!hex.startsWith('#') || hex.length !== 7)
-      throw `Color '${hex}' is not in form #RRGGBB.`
+  public static regenerateShades(color: Color) {
+    const size = 10
+    let shades = [...color.shades]
 
-    const shades: Shade[] = []
-    const hsl = ColorConverter.HEXtoHSL(hex)
+    // clear and sort shades
+    shades = shades.filter(shade => shade.fixed)
+    shades.sort((a, b) => b.luminosity - a.luminosity)
 
-    if (100 - hsl.luminosity < 7.5) {
-      shades.push(new Shade(50, hex))
-      this.generateDarkerColors(hsl, 0, shades)
-    } else if (100 - hsl.luminosity >= 85) {
-      shades.push(new Shade(900, hex))
-      this.generateLighterColors(hsl, 900, shades)
-    } else {
-      let index = 100
-      while (100 - hsl.luminosity > (index / 10) + 5)
-        index += 100
-      shades.push(new Shade(index, hex))
-      this.generateLighterColors(hsl, index, shades)
-      this.generateDarkerColors(hsl, index, shades)
+    // set new indices
+    // ToDo: Adjust generation for optimal keys when using other sizes than 10
+    let indices = [...Array(size).keys()].map(index => 20 + index * 80)
+    indices[0] = 50
+    for (const shade of shades) {
+      const index = indices.reduce((prev, curr) =>
+        (Math.abs(curr - (100 - shade.brightness) * 10) < Math.abs(prev - (100 - shade.brightness) * 10) ? curr : prev))
+      shade.setIndex(index)
+      indices = indices.filter(i => i !== index)
     }
 
-    return shades
+    // add white and black to shades
+    shades.push(new Shade(0, true,
+      (shades[0].hue + 5) % 360,
+      Math.min(shades[0].saturation + 10, 100),
+      100)
+    )
+    shades.push(new Shade(1000, true,
+      (shades[shades.length-1].hue + 355) % 360,
+      Math.max(shades[shades.length-1].saturation - 10, 0),
+      0)
+    )
+
+    shades.sort((a, b) => a.index - b.index)
+
+    // generate missing shades
+    for (const index of indices) {
+      const smaller = [...shades].reverse().find(shade => shade.index < index) || shades[0]
+      const bigger = shades.find(shade => shade.index > index) || shades[shades.length-1]
+
+      const hue = this.mapNumbers(
+        index,
+        smaller.index,
+        bigger.index,
+        bigger.hue - smaller.hue > 180 ? (smaller.hue + 360) : smaller.hue,
+        smaller.hue - bigger.hue > 180 ? (bigger.hue + 360) : bigger.hue
+      ) % 360
+
+      const saturation = this.mapNumbers(index, smaller.index, bigger.index, smaller.saturation, bigger.saturation)
+      const luminosity = this.mapNumbers(index, smaller.index, bigger.index, smaller.luminosity, bigger.luminosity)
+
+      shades.push(new Shade(index, false, hue, saturation, luminosity))
+    }
+
+    // remove white and black and set shades to color
+    shades = shades.filter(shade => shade.index !== 0 && shade.index !== 1000)
+
+    // repair broken orders
+    shades.sort((a, b) => b.luminosity - a.luminosity)
+    indices = [...Array(size).keys()].map(index => index * 100)
+    indices[0] = 50
+    for (let i = 0; i < shades.length; i++) {
+      shades[i].setIndex(indices[i])
+    }
+
+    color.shades = shades
   }
 
   /**
-   * Interpolate all lighter shades from HSL color.
-   * @param hsl Color in HSL format
-   * @param index Index of HSL color shade
-   * @param shades Array to add all generated shades
+   * Translate x in [in_min to in_max] to y in [out_min to out_max]
+   * @param x
+   * @param in_min
+   * @param in_max
+   * @param out_min
+   * @param out_max
    * @private
    */
-  private static generateLighterColors(hsl: { saturation: number; hue: number; luminosity: number }, index: number, shades: Shade[]) {
-    const step = index / 100
-    let i = 1
-
-    for (; i < step; i++) {
-      const interpolatedLuminosity = hsl.luminosity + (i / step) * (100 - hsl.luminosity)
-      const newIndex = index - i * 100
-      shades.push(new Shade(newIndex, hsl.hue, hsl.saturation, interpolatedLuminosity))
-    }
-
-    const interpolatedLuminosity = hsl.luminosity + ((2 * i - 1) / (2 * step)) * (100 - hsl.luminosity)
-    shades.push(new Shade(50, hsl.hue, hsl.saturation, interpolatedLuminosity))
-  }
-
-  /**
-   * Interpolate all darker shades from HSL color.
-   * @param hsl Color in HSL format
-   * @param index Index of HSL color shade
-   * @param shades Array to add all generated shades
-   * @private
-   */
-  private static generateDarkerColors(hsl: { saturation: number; hue: number; luminosity: number }, index: number, shades: Shade[]) {
-    const step = (1000 - index) / 100
-    let i = 1
-
-    for (; i < step; i++) {
-      const interpolatedLuminosity = hsl.luminosity - (i / step) * hsl.luminosity
-      const newIndex = index + i * 100
-      shades.push(new Shade(newIndex, hsl.hue, hsl.saturation, interpolatedLuminosity))
-    }
+  private static mapNumbers(x: number, in_min: number, in_max: number, out_min: number, out_max: number): number {
+    return Math.round((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min)
   }
 
 }

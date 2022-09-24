@@ -1,5 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Palette} from "../models/palette.model";
+import {PaletteGenerator, PaletteScheme} from "../class/palette-generator";
+import {Shade} from "../models/shade.model";
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +59,7 @@ export class StorageService {
       }
     }
 
-    return Palette.generateRandomPalette(Math.floor(5 + Math.random() * 5))
+    return PaletteGenerator.generatePalette(Shade.generateRandomShade(), PaletteScheme.SURPRISE)
   }
 
   /**

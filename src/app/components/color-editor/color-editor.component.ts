@@ -30,9 +30,8 @@ export class ColorEditorComponent implements OnInit {
     this.shade = this.color.getShade(500)
 
     this.colorService.getColorChangeEmitter().subscribe(changeType => {
-      this.color = this.colorService.getColor()
-
       if (changeType !== ChangeType.ADJUST) {
+        this.color = this.colorService.getColor()
         this.shade = this.color.getShade(500)
         this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT
       }
@@ -52,28 +51,18 @@ export class ColorEditorComponent implements OnInit {
    */
   updateColor(type: UpdateType, value: string | number) {
     if (type === UpdateType.HEX && isNaN(+value)) {
-      this.shade = new Shade(0, `${value}`)
+      this.shade.setHEX(`${value}`, true)
     } else if (!isNaN(+value)) {
       value = parseInt(`${value}`)
-      if (type === UpdateType.HUE) {
-        this.shade = new Shade(0, value, this.shade.saturation, this.shade.luminosity)
-      } else if (type === UpdateType.SATURATION) {
-        this.shade = new Shade(0, this.shade.hue, value, this.shade.luminosity)
-      } else if (type === UpdateType.LUMINOSITY) {
-        this.shade = new Shade(0, this.shade.hue, this.shade.saturation, 100 - value)
-      }
+      if (type === UpdateType.HUE)
+        this.shade.setHSL(this.wheelToHue(value), this.shade.saturation, this.shade.luminosity, true)
+      else if (type === UpdateType.SATURATION)
+        this.shade.setHSL(this.shade.hue, value, this.shade.luminosity, true)
+      else if (type === UpdateType.LUMINOSITY)
+        this.shade.setHSL(this.shade.hue, this.shade.saturation, 100 - value, true)
     }
 
-    this.updateProperties()
-  }
-
-  /**
-   * Adjust the color in the global ColorService.
-   */
-  adjustColor() {
-    this.colorService.adjustColor(
-      new Color(this.color.name, this.shade.hex)
-    )
+    this.colorService.adjustShade()
   }
 
   /**
@@ -94,6 +83,20 @@ export class ColorEditorComponent implements OnInit {
     this.colorService.updateColorName(name)
   }
 
+  changeShade(shade: Shade) {
+    this.shade = shade
+    this.updateProperties()
+  }
+
+  releaseShade(shade: Shade, $event: MouseEvent) {
+    $event.preventDefault()
+
+    if (this.color.shades.filter(s => s.fixed).length > 1) {
+      shade.fixed = false
+      this.colorService.adjustShade()
+    }
+  }
+
   /**
    * Copy a shades hex to clipboard.
    * @param shade
@@ -104,6 +107,34 @@ export class ColorEditorComponent implements OnInit {
     }).catch(e => {
       console.error('Error while copying to clipboard', e)
     })
+  }
+
+  wheelToHue(wheel: number) {
+    let newHue
+    if (wheel < 120)
+      newHue = .5 * wheel
+    else if (wheel < 180)
+      newHue = wheel + 300
+    else if (wheel < 240)
+      newHue = 2 * wheel + 120
+    else
+      newHue = wheel
+
+    return newHue % 360
+  }
+
+  hueToWheel(hue: number) {
+    let wheel
+    if (hue < 60)
+      wheel = 2 * hue
+    else if (hue < 120)
+      wheel = hue + 60
+    else if (hue < 240)
+      wheel = .5 * hue + 120
+    else
+      wheel = hue
+
+    return wheel % 360
   }
 
 }

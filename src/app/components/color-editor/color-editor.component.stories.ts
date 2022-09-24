@@ -26,7 +26,7 @@ class MockColorService implements Partial<ColorService> {
 
   adjustColor(color: Color) {
     console.log(`adjustColor(${color.name})`)
-    return this.colorService.adjustColor(color)
+    return this.colorService.adjustShade()
   }
 
   updateColorName(name: string) {
@@ -61,8 +61,7 @@ const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
     providers: [{
-      provide: ColorService,
-      useClass: MockColorService
+      provide: ColorService
     }, {
       provide: NotificationService,
       useClass: MockNotificationService

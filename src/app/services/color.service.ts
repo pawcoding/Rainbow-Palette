@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Color} from "../models/color.model";
+import {ColorInterpolater} from "../class/color-interpolater";
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,8 @@ export class ColorService {
     this.colorChangeEmitter.emit(ChangeType.LOAD)
   }
 
-  adjustColor(color: Color) {
-    this.color = color
+  adjustShade() {
+    ColorInterpolater.regenerateShades(this.color)
     this.colorChangeEmitter.emit(ChangeType.ADJUST)
   }
 
