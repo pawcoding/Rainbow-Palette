@@ -29,8 +29,8 @@ export class Shade {
       this.hue = args[2]
       this.saturation = args[3]
       this.luminosity = args[4]
-      this.updateBrightness()
       this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
+      this.updateBrightness()
     } else {
       this.hex = args[2]
       this.hue = args[3]
@@ -59,12 +59,21 @@ export class Shade {
     this.hue = hue
     this.saturation = saturation
     this.luminosity = luminosity
-    this.updateBrightness()
     this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
+    this.updateBrightness()
   }
 
   private updateBrightness() {
-    let x = 360 - this.hue
+    const rgb = ColorConverter.HEXtoRGB(this.hex)
+    this.brightness = Math.round(
+      Math.sqrt(
+        .299 * rgb.red * rgb.red +
+        .587 * rgb.green * rgb.green +
+        .114 * rgb.blue * rgb.blue
+      ) / 2.55
+    )
+
+    /*let x = 360 - this.hue
 
     let adjustment
     if (x < 120)
@@ -74,7 +83,7 @@ export class Shade {
     else
       adjustment = ((-20) / (1 + Math.pow(243.21, - x / 70) * 2640162)) + 10
 
-    this.brightness = this.luminosity - Math.round(adjustment)
+    this.brightness = this.luminosity - Math.round(adjustment)*/
   }
 
   /**

@@ -1,13 +1,22 @@
-<label for="light-switch" class="inline-flex relative items-center cursor-pointer" title="Toggle the lights">
-  <input type="checkbox" [checked]="dark" (change)="toggleTheme()" id="light-switch" class="sr-only peer">
+<label
+  for="light-switch"
+  class="inline-flex relative items-center cursor-pointer"
+  title="Toggle the lights"
+>
+  <input
+    type="checkbox"
+    id="light-switch"
+    class="sr-only peer"
+    [checked]="dark"
+    (change)="toggleTheme()"
+  >
 
-  <div class="
-    w-14 h-7 rounded-full
-    bg-neutral-200 peer-checked:bg-neutral-700 shadow transition-all duration-200
-    peer-focus:outline-none peer peer-checked:after:translate-x-full
-    after:content-[url('/assets/icons/sun.svg')] peer-checked:after:content-[url('/assets/icons/moon.svg')]
-    after:absolute after:top-0.5 after:left-[4px]
-    after:rounded-full after:h-6 after:w-6
-    after:bg-white after:transition-all after:duration-200"
+  <div class="w-14 h-7 rounded-full
+              bg-gray-100 peer-checked:bg-gray-800 transition-all duration-500
+              peer-focus:outline-none peer peer-checked:after:translate-x-full
+              after:content-[url('/assets/icons/sun.svg')] peer-checked:after:content-[url('/assets/icons/moon.svg')]
+              after:absolute after:top-0.5 after:left-[4px]
+              after:rounded-full after:h-6 after:w-6
+              after:transition-all after:duration-500"
   ></div>
 </label>

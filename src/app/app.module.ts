@@ -10,24 +10,30 @@ import { ColorEditorComponent } from './components/color-editor/color-editor.com
 import { ColorService } from "./services/color.service";
 import { DialogComponent } from './components/dialog/dialog.component';
 import { NotificationComponent } from './components/notification/notification.component';
+import { HomeComponent } from './pages/home/home.component';
+import {AppRoutingModule} from "./app-routing.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ColorViewerComponent,
-    PaletteViewerComponent,
-    LightSwitchComponent,
     ColorEditorComponent,
+    ColorViewerComponent,
     DialogComponent,
-    NotificationComponent
+    HomeComponent,
+    LightSwitchComponent,
+    NotificationComponent,
+    PaletteViewerComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule
   ],
   providers: [
-    StorageService,
-    ColorService
+    ColorService,
+    StorageService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

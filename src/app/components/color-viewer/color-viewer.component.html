@@ -1,54 +1,53 @@
 <div [class]="dark ? 'dark' : ''">
   <article
-    class="overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center cursor-default"
+    class="overflow-clip my-8 items-center cursor-default
+           grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 grid-areas-color-square sm:grid-areas-color-semi lg:grid-areas-color-wide"
   >
     <!-- Name of the color -->
-    <h3
-      [ngStyle]="{
-        'background-color': color.shades[dark ? 8 : 3].hex,
-        'color': color.shades[dark ? 2 : 9].hex
-      }"
-      class="grid-in-name px-4 transition-colors duration-200"
-    >
+    <h3 class="grid-in-name py-4">
       {{color.name}}
     </h3>
 
     <!-- Action Buttons -->
     <span
-      [ngStyle]="{
-        'background-color': color.shades[dark ? 8 : 3].hex,
-        'color': color.shades[dark ? 2 : 9].hex
-      }"
-
-      class="grid-in-button flex gap-6 pr-6 h-full justify-end items-center transition-colors duration-200"
+      class="grid-in-button flex gap-4 h-full justify-end items-center"
     >
       <img
         class="icon"
-        src="/assets/icons/edit.svg" alt="Edit color"
+        src="/assets/icons/edit.svg"
+        alt="Edit color"
         title="Edit color"
         (click)="colorService.loadColor(color)"
       >
 
       <img
         class="icon"
-        src="/assets/icons/delete.svg" alt="Remove from palette"
+        src="/assets/icons/delete.svg"
+        alt="Remove from palette"
         title="Remove color from palette"
         (click)="onRemove.emit(color)"
       >
     </span>
 
     <!-- Display all shades -->
-    <span
-      *ngFor="let shade of color.shades"
-      [ngStyle]="{
-        'background-color': shade.hex,
-        'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
-      }"
-      class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6 cursor-pointer"
-      title="Copy hex to clipboard"
-      (click)="copyToClipboard(shade)"
+    <div
+      class="grid-in-shade grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10
+             rounded overflow-clip"
     >
-      {{shade.hex}}
+      <span
+        *ngFor="let shade of color.shades; index as i"
+        title="Copy hex to clipboard"
+        class="block w-full p-4
+               text-lg font-semibold cursor-pointer"
+        [ngStyle]="{
+          'background-color': shade.hex,
+          'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
+        }"
+        (click)="copyToClipboard(shade)"
+      >
+        {{shade.index}}:
+        {{shade.hex.toUpperCase()}}
     </span>
+    </div>
   </article>
 </div>

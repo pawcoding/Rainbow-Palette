@@ -5,7 +5,7 @@
 /* You can add global styles to this file, and also import other style files */
 @layer components {
   h1 {
-    @apply text-3xl font-bold text-center py-8 cursor-default transition-colors duration-200;
+    @apply text-3xl font-bold cursor-default transition-colors duration-200;
   }
 
   h2 {
@@ -15,10 +15,23 @@
   h3 {
     @apply text-xl font-bold py-2 lg:py-3 cursor-default;
   }
+
+  input[type=color] {
+    @apply outline-none appearance-none cursor-pointer;
+    -webkit-appearance: none;
+  }
+
+  input[type=color]::-webkit-color-swatch-wrapper {
+    @apply p-0;
+  }
+
+  input[type=color]::-webkit-color-swatch {
+    @apply border-none h-full;
+  }
 }
 
 @layer utilities {
   .icon {
-    @apply h-8 w-8 dark:invert drop-shadow hover:drop-shadow-lg cursor-pointer transition-all duration-200;
+    @apply h-8 w-8 dark:invert cursor-pointer transition-all duration-200;
   }
 }

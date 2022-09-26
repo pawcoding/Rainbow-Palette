@@ -34,6 +34,7 @@ export class Color {
     } else {
       this.shades = args[1]
       ColorInterpolater.regenerateShades(this)
+
       this.getShade(500).fixed = true
     }
 

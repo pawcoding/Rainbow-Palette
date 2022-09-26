@@ -5,19 +5,20 @@ module.exports = {
     './src/**/*.{html,ts}'
   ],
   theme: {
+    colors: require('./tailwind.colors'),
     extend: {
       gridTemplateAreas: {
         'color-square': [
           'name button',
-          '50 100',
-          '200 300',
-          '400 500',
-          '600 700',
-          '800 900'
+          'shade shade'
+        ],
+        'color-semi': [
+          'name name name name button',
+          'shade shade shade shade shade'
         ],
         'color-wide': [
           'name name name name name name name name button button',
-          '50 100 200 300 400 500 600 700 800 900'
+          'shade shade shade shade shade shade shade shade shade shade'
         ]
       },
       gridTemplateRows: {
@@ -32,6 +33,9 @@ module.exports = {
       },
       minHeight: {
         10: '2.5rem'
+      },
+      maxWidth: {
+        xxs: '16rem'
       }
     },
   },
