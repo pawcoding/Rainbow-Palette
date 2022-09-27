@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Shade} from "../../models/shade.model";
 import {NotificationService} from "../../services/notification.service";
 import {PaletteScheme} from "../../class/palette-generator";
+import {PaletteService} from "../../services/palette.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
 
   value: string
+  scheme: PaletteScheme
+  schemeTitle: string
   schemes: any
   invalid = false
   dropdown = false
 
   constructor(
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private paletteService: PaletteService,
+    private router: Router
   ) {
-    this.value = Shade.generateRandomShade().hex.toUpperCase()
+    this.value = paletteService.hex || Shade.generateRandomShade().hex.toUpperCase()
     let i = 0
     this.schemes = Object.values(PaletteScheme)
       .filter(s => s.toString().length > 1)
@@ -33,9 +38,15 @@ export class HomeComponent implements OnInit {
           title: s.toString().charAt(0) + s.toString()
             .substring(1)
             .replace('_', ' ')
-            .toLowerCase()
+            .toLowerCase(),
+          scheme: s
         }
     })
+
+    this.scheme = paletteService.scheme
+    this.schemeTitle = this.schemes
+      .find((s: { index: PaletteScheme; }) => s.index === this.scheme)
+      .title
   }
 
   ngOnInit(): void {
@@ -46,11 +57,22 @@ export class HomeComponent implements OnInit {
     this.invalid = !this.value.match(/^#[0-9A-Fa-f]{6}$/)
   }
 
+  updateScheme(scheme: PaletteScheme) {
+    this.scheme = scheme
+    const index = Object.values(PaletteScheme).indexOf(scheme) % 8
+    this.schemeTitle = this.schemes
+      .find((s: { index: PaletteScheme; }) => s.index === index)
+      .title
+  }
+
   generatePalette() {
-    if (this.invalid)
+    if (this.invalid) {
       this.notificationService.notification.emit('You need to enter a 6-digit hex code.')
-    else
-      this.notificationService.notification.emit('Generate palette')
+      return
+    }
+
+    this.paletteService.generatePalette(this.value, this.scheme)
+    this.router.navigate(['edit'])
   }
 
 }

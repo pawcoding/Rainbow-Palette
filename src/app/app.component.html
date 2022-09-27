@@ -8,23 +8,47 @@
 
     <nav class="grow">
       <div
-        *ngIf="false"
         class="mx-auto w-fit"
       >
-        <ul class="flex flex-wrap gap-4
-                   font-medium text-gray-700 dark:text-gray-200">
+        <ul
+          *ngIf="paletteService.hasPalette()"
+          class="flex flex-wrap gap-4
+                 font-medium text-gray-700 dark:text-gray-200">
           <li>
-            <a class="inline-block py-2 px-4
-                      text-primary-600 bg-primary-200 dark:text-primary-200 dark:bg-primary-800 rounded
-                      cursor-pointer transition-colors duration-500">
-              Edit
+            <a
+              routerLink="/"
+              class="inline-block py-2 px-4
+                     rounded cursor-pointer transition-colors duration-500"
+              [class]="(router.url === '/')
+                ? 'text-primary-600 bg-primary-200 dark:text-primary-200 dark:bg-primary-800'
+                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
+            >
+              Regenerate
             </a>
           </li>
 
           <li>
-            <a class="inline-block py-2 px-4
-                      hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800 rounded
-                      cursor-pointer transition-colors duration-500">
+            <a
+              routerLink="/edit"
+              class="inline-block py-2 px-4
+                     rounded cursor-pointer transition-colors duration-500"
+              [class]="(router.url === '/edit')
+                ? 'text-primary-600 bg-primary-200 dark:text-primary-200 dark:bg-primary-800'
+                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
+            >
+              Edit
+            </a>
+          </li>
+
+          <li *ngIf="false">
+            <a
+              routerLink="/preview"
+              class="inline-block py-2 px-4
+                     rounded cursor-pointer transition-colors duration-500"
+              [class]="(router.url === '/preview')
+                ? 'text-primary-600 bg-primary-200 dark:text-primary-200 dark:bg-primary-800'
+                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
+            >
               Preview
             </a>
           </li>
@@ -79,6 +103,10 @@
   </footer>
 
 
+  <custom-dialog
+    class="fixed top-0 left-0"
+  ></custom-dialog>
+
   <notification
     class="fixed bottom-0 right-0"
   ></notification>
@@ -94,9 +122,5 @@
       *ngIf="palette" (onRemove)="removePalette()"
       [palette]="palette" [dark]="dark"
     ></palette-viewer>
-  </main>
-
-  <custom-dialog
-    class="fixed top-0 left-0"
-  ></custom-dialog-->
+  </main-->
 </div>

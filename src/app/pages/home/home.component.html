@@ -41,11 +41,12 @@
           [disabled]="invalid"
         >
           <span
+            class="text-center grow"
             [class]="invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
             [title]="invalid ? 'You need a 6-digit hex code' : 'Generate a color palette'"
             (click)="generatePalette()"
           >
-            Generate color palette
+            {{schemeTitle}}
           </span>
 
           <svg
@@ -71,22 +72,23 @@
 
           <section class="h-48 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600">
             <label
-              *ngFor="let scheme of schemes"
+              *ngFor="let schemeToShow of schemes"
               class="block p-2 mb-1 mr-4
                      hover:bg-gray-200 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500"
-              [htmlFor]="scheme.for"
+              [htmlFor]="schemeToShow.for"
             >
               <input
                 type="radio"
                 name="scheme"
                 class="hidden peer"
-                [checked]="scheme.index === 0"
-                [id]="scheme.for"
-                [value]="scheme.name"
+                [checked]="schemeToShow.index === scheme"
+                [id]="schemeToShow.for"
+                [value]="schemeToShow.name"
+                (change)="updateScheme(schemeToShow.scheme)"
               >
 
               <span class="peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500">
-                {{scheme.title}}
+                {{schemeToShow.title}}
               </span>
             </label>
           </section>

@@ -12,6 +12,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { NotificationComponent } from './components/notification/notification.component';
 import { HomeComponent } from './pages/home/home.component';
 import {AppRoutingModule} from "./app-routing.module";
+import { EditComponent } from './pages/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {AppRoutingModule} from "./app-routing.module";
     HomeComponent,
     LightSwitchComponent,
     NotificationComponent,
-    PaletteViewerComponent
+    PaletteViewerComponent,
+    EditComponent
   ],
   imports: [
     AppRoutingModule,

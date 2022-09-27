@@ -4,13 +4,18 @@ import {Color} from "../models/color.model";
 
 export class PaletteGenerator {
 
-  static generatePalette(shade: Shade, scheme: PaletteScheme): Palette {
-    switch (scheme) {
+  static generatePalette(hex: string, scheme: PaletteScheme): Palette {
+    const shade = new Shade(-1, true, hex)
+
+    const values = Object.values(PaletteScheme)
+    const value = values.indexOf(scheme) % (values.length / 2)
+
+    switch (value) {
       case PaletteScheme.SURPRISE_ME:
         const schemes = Object.keys(PaletteScheme)
         const index = schemes[Math.floor(Math.random() * schemes.length)]
         // @ts-ignore
-        return this.generatePalette(shade, PaletteScheme[index])
+        return this.generatePalette(hex, PaletteScheme[index])
       case PaletteScheme.MONOCHROMATIC:
         return this.generateMonochromaticPalette(shade)
       case PaletteScheme.ANALOGOUS:

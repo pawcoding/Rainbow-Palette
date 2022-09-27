@@ -7,6 +7,8 @@ import {StorageService} from "./services/storage.service";
 // @ts-ignore
 import {v4 as uuidv4} from "uuid";
 import {ColorService} from "./services/color.service";
+import {PaletteService} from "./services/palette.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -26,7 +28,9 @@ export class AppComponent {
 
   constructor(
     private storage: StorageService,
-    public colorService: ColorService
+    public colorService: ColorService,
+    public paletteService: PaletteService,
+    public router: Router
   ) {
     // Redirect to https if server served / browser fetched with http
     if (environment.production && window.location.href.startsWith('http://'))
@@ -37,10 +41,21 @@ export class AppComponent {
     storage.darkEmitter.subscribe(d => this.dark = d.valueOf())
 
     // Load palette if saved in local storage
-    this.palette = storage.loadPalette()
+    // this.palette = storage.loadPalette()
+    this.palette = Palette.generateRandomPalette(5)
 
     // Load random color for editor
     this.color = Color.generateRandomColor()
+
+    this.paletteService.getPaletteChangeEmitter().subscribe(palette => {
+      if (palette)
+        storage.savePalette(palette)
+    })
+    const palette = storage.loadPalette()
+    if (palette)
+      this.paletteService.loadPalette(palette)
+    else
+      this.paletteService.clearPalette()
   }
 
   /**
