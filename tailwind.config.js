@@ -41,6 +41,7 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('@savvywombat/tailwindcss-grid-areas')
+    require('@savvywombat/tailwindcss-grid-areas'),
+    require('tailwind-scrollbar')
   ],
 }

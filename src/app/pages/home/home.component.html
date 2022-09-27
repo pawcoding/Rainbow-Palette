@@ -8,7 +8,7 @@
         Enter a hex code below or pick a color to get a full color palette.
       </p>
 
-      <div class="flex flex-col mt-4 max-w-xxs mx-auto">
+      <div class="flex flex-col mt-4 max-w-xxs mx-auto relative">
         <span
           class="flex border-2 border-gray-600 rounded overflow-clip"
         >
@@ -35,13 +35,13 @@
         </span>
 
         <button
-          data-dropdown-toggle="dropdownDivider"
           class="py-2 px-4 mt-2 inline-flex items-center
                  text-primary-100 bg-primary-700 font-medium rounded
-                 cursor-pointer disabled:cursor-not-allowed transition-colors duration-500"
+                 transition-colors duration-500"
           [disabled]="invalid"
         >
           <span
+            [class]="invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
             [title]="invalid ? 'You need a 6-digit hex code' : 'Generate a color palette'"
             (click)="generatePalette()"
           >
@@ -49,31 +49,47 @@
           </span>
 
           <svg
-            class="ml-4 w-6 h-6"
+            class="ml-4 w-6 h-6 cursor-pointer"
             fill="currentColor"
             viewBox="0 0 48 48"
             xmlns="http://www.w3.org/2000/svg"
+            (click)="dropdown = !dropdown"
           >
             <path d="M24 30.95q-.45 0-.875-.175t-.775-.525l-9.9-9.9q-.65-.65-.625-1.65.025-1 .675-1.7.75-.75 1.675-.675.925.075 1.625.725l8.2 8.2 8.2-8.2q.7-.65 1.7-.7 1-.05 1.65.7.75.7.675 1.675-.075.975-.725 1.675l-9.85 9.85q-.35.35-.775.525-.425.175-.875.175Z"/>
           </svg>
         </button>
 
-        <!-- Dropdown menu -->
-        <div id="dropdownDivider" class="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600" data-popper-reference-hidden="" data-popper-escaped="" data-popper-placement="bottom" style="position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate(0px, 10px);">
-          <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDividerButton">
-            <li>
-              <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
-            </li>
-            <li>
-              <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-            </li>
-            <li>
-              <a href="#" class="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
-            </li>
-          </ul>
-          <div class="py-1">
-            <a href="#" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Separated link</a>
-          </div>
+        <div
+          class="w-64 mt-1 p-2 absolute top-full
+                 text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-gray-700 rounded"
+          [class]="dropdown ? '' : 'hidden'"
+          (mouseleave)="dropdown = false"
+        >
+          <span class="block p-2 mb-1 text-left text-base font-medium">
+            Pick a color scheme:
+          </span>
+
+          <section class="h-48 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600">
+            <label
+              *ngFor="let scheme of schemes"
+              class="block p-2 mb-1 mr-4
+                     hover:bg-gray-200 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500"
+              [htmlFor]="scheme.for"
+            >
+              <input
+                type="radio"
+                name="scheme"
+                class="hidden peer"
+                [checked]="scheme.index === 0"
+                [id]="scheme.for"
+                [value]="scheme.name"
+              >
+
+              <span class="peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500">
+                {{scheme.title}}
+              </span>
+            </label>
+          </section>
         </div>
 
       </div>

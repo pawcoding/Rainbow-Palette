@@ -6,6 +6,11 @@ export class PaletteGenerator {
 
   static generatePalette(shade: Shade, scheme: PaletteScheme): Palette {
     switch (scheme) {
+      case PaletteScheme.SURPRISE_ME:
+        const schemes = Object.keys(PaletteScheme)
+        const index = schemes[Math.floor(Math.random() * schemes.length)]
+        // @ts-ignore
+        return this.generatePalette(shade, PaletteScheme[index])
       case PaletteScheme.MONOCHROMATIC:
         return this.generateMonochromaticPalette(shade)
       case PaletteScheme.ANALOGOUS:
@@ -18,11 +23,6 @@ export class PaletteGenerator {
         return this.generateTriadicPalette(shade)
       case PaletteScheme.COMPOUND:
         return this.generateCompoundPalette(shade)
-      case PaletteScheme.SURPRISE:
-        const schemes = Object.keys(PaletteScheme)
-        const index = schemes[Math.floor(Math.random() * schemes.length)]
-        // @ts-ignore
-        return this.generatePalette(shade, PaletteScheme[index])
       default:
         return Palette.generateRandomPalette(5)
     }
@@ -168,12 +168,12 @@ export class PaletteGenerator {
 }
 
 export enum PaletteScheme {
+  SURPRISE_ME,
   MONOCHROMATIC,
   ANALOGOUS,
   COMPLEMENTARY,
   SPLIT,
   TRIADIC,
   COMPOUND,
-  SURPRISE,
   RANDOM
 }

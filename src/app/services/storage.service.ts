@@ -59,7 +59,7 @@ export class StorageService {
       }
     }
 
-    return PaletteGenerator.generatePalette(Shade.generateRandomShade(), PaletteScheme.SURPRISE)
+    return PaletteGenerator.generatePalette(Shade.generateRandomShade(), PaletteScheme.SURPRISE_ME)
   }
 
   /**
