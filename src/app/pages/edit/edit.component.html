@@ -1,9 +1,14 @@
-<div *ngIf="palette">
-  <section>
-    Editor
+<div *ngIf="palette"
+  class="flex"
+>
+  <section
+    class="w-96 border-r-4 py-2 border-r-gray-100 dark:border-r-gray-800 transition-colors duration-500"
+  >
+    <color-editor
+    ></color-editor>
   </section>
 
-  <section>
+  <section class="w-full py-2">
     <palette-viewer
       [palette]="palette"
     ></palette-viewer>

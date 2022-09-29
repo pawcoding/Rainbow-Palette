@@ -3,53 +3,36 @@
          text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-gray-900
          transition-colors duration-500"
 >
-  <header class="w-full grid grid-cols-3 gap-4 px-8 items-center">
-    <h1>Color Palette Generator</h1>
+  <header class="w-full grid grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10">
+    <h1 class="col-span-2 lg:col-span-1">Color Palette Generator</h1>
 
-    <nav class="grow">
+    <nav class="col-span-4 lg:col-span-2">
       <div
         class="mx-auto w-fit"
       >
         <ul
           *ngIf="paletteService.hasPalette()"
-          class="flex flex-wrap gap-4
+          class="flex flex-wrap gap-2 md:gap-4
                  font-medium text-gray-700 dark:text-gray-200">
-          <li>
+          <li *ngFor="let nav of navigation">
             <a
-              routerLink="/"
-              class="inline-block py-2 px-4
+              class="inline-flex py-2 px-4 items-center
                      rounded cursor-pointer transition-colors duration-500"
-              [class]="(router.url === '/')
-                ? 'text-primary-600 bg-primary-200 dark:text-primary-200 dark:bg-primary-800'
+              [class]="(router.url === nav.link)
+                ? 'text-primary-600 bg-primary-200 dark:text-primary-900 dark:bg-primary-500'
                 : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
+              [routerLink]="nav.link"
+              [title]="nav.title"
             >
-              Regenerate
-            </a>
-          </li>
+              <svg
+                class="w-6 h-6 mr-2 hidden md:block"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+                [innerHTML]="nav.icon | safeHtml"
+              >
+              </svg>
 
-          <li>
-            <a
-              routerLink="/edit"
-              class="inline-block py-2 px-4
-                     rounded cursor-pointer transition-colors duration-500"
-              [class]="(router.url === '/edit')
-                ? 'text-primary-600 bg-primary-200 dark:text-primary-200 dark:bg-primary-800'
-                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
-            >
-              Edit
-            </a>
-          </li>
-
-          <li *ngIf="false">
-            <a
-              routerLink="/preview"
-              class="inline-block py-2 px-4
-                     rounded cursor-pointer transition-colors duration-500"
-              [class]="(router.url === '/preview')
-                ? 'text-primary-600 bg-primary-200 dark:text-primary-200 dark:bg-primary-800'
-                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
-            >
-              Preview
+              {{nav.text}}
             </a>
           </li>
         </ul>
@@ -110,17 +93,4 @@
   <notification
     class="fixed bottom-0 right-0"
   ></notification>
-
-  <!--main class="px-10">
-    <!- Color Editor ->
-    <color-editor
-      (addColor)="addColor($event)"
-    ></color-editor>
-
-    <!- Display color palette ->
-    <palette-viewer
-      *ngIf="palette" (onRemove)="removePalette()"
-      [palette]="palette" [dark]="dark"
-    ></palette-viewer>
-  </main-->
 </div>

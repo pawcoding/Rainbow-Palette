@@ -7,6 +7,9 @@ module.exports = {
   theme: {
     colors: require('./tailwind.colors'),
     extend: {
+      colors: {
+        'transparent': '#00000000'
+      },
       gridTemplateAreas: {
         'color-square': [
           'name button',

@@ -1,55 +1,85 @@
-<div [class]="dark ? 'dark' : ''" class="max-w-5xl mx-auto">
+<div [class]="dark ? 'dark' : ''">
   <section
-    class="p-4"
+    class="px-4"
   >
-    <div class="grid grid-cols-3 items-center mb-6">
+    <div class="flex items-center mb-6">
       <!-- Palette name -->
-      <h2 *ngIf="!editingState" (click)="openEditor()">{{palette.title}}</h2>
+      <div class="flex gap-4">
+        <h2
+          *ngIf="!editingState"
+          class="inline-block cursor-pointer"
+          (click)="openEditor()"
+        >
+          {{palette.title}}
+        </h2>
 
-      <!-- Palette name input -->
-      <input *ngIf="editingState" type="text"
-             [value]="palette.title" #editTitle
-             placeholder="Palette title"
-             (focusout)="closeEditor()" (keydown.enter)="closeEditor()"
-             class="bg-transparent p-0 text-xl font-bold
-              border-0 focus:border-b-neutral-700 dark:focus:border-b-neutral-200 border-b-2 focus:ring-0 transition-all duration-200">
+        <!-- Palette name input -->
+        <input *ngIf="editingState"
+               type="text" #editTitle
+               placeholder="Palette title"
+               class="bg-transparent p-0 text-xl font-bold
+                      border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
+               (focusout)="closeEditor()"
+               (keydown.enter)="closeEditor()"
+               [value]="palette.title"
+        >
 
-      <!-- Action Buttons -->
-      <div class="flex gap-6 pr-6 justify-end col-span-2">
-        <span title="Export palette" (click)="exportPalette()">
-          <img src="/assets/icons/download.svg" alt="Export" class="icon">
-        </span>
-
-        <span title="Sort palette by hue" (click)="sortPalette()">
-          <img src="/assets/icons/sort.svg" alt="Sort" class="icon">
-        </span>
-
-        <span title="Edit palette" (click)="openEditor()">
+        <span
+          *ngIf="!editingState"
+          class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
+          title="Edit palette name"
+          (click)="openEditor()"
+        >
           <img src="/assets/icons/edit.svg" alt="Edit" class="icon">
         </span>
-
-        <span title="Remove palette" (click)="removePalette($event)">
-          <img src="/assets/icons/delete.svg" alt="Remove" class="icon">
-        </span>
       </div>
+
+      <!-- Export Button -->
+      <button
+        class="py-2 px-4 ml-auto inline-flex items-center
+               text-primary-100 bg-primary-700 font-medium rounded
+               cursor-pointer transition-colors duration-500"
+        title="Export the palette"
+        (click)="exportPalette()"
+      >
+        <svg
+          class="w-6 h-6 mr-2"
+          viewBox="0 0 48 48"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            fill="currentColor"
+            d="M24 30.35q-.45 0-.875-.175t-.775-.525l-8.1-8.1q-.7-.7-.675-1.675.025-.975.725-1.675.7-.7 1.65-.7t1.65.7l4.05 4.1V6.85q0-1 .675-1.7T24 4.45q1 0 1.675.7t.675 1.7V22.3l4.1-4.1q.7-.7 1.65-.7t1.65.7q.7.7.7 1.675 0 .975-.7 1.675l-8.1 8.1q-.35.35-.775.525-.425.175-.875.175ZM10.25 42.4q-1.95 0-3.325-1.4-1.375-1.4-1.375-3.4v-7q0-1 .675-1.675T7.9 28.25q1 0 1.675.675t.675 1.675v7.05H37.7V30.6q0-1 .675-1.675t1.675-.675q1 0 1.675.675T42.4 30.6v7.05q0 1.95-1.4 3.35-1.4 1.4-3.3 1.4Z"/>
+        </svg>
+
+        Export palette
+      </button>
     </div>
 
     <!-- Display all colors -->
     <color-viewer
       *ngFor="let color of palette.colors"
       [color]="color"
-      [dark]="dark"
       (onRemove)="removeColor(color)"
     ></color-viewer>
 
     <!-- Add random color to palette -->
     <button
+      class="py-2 px-4 mt-4 mx-auto flex items-center
+             font-medium text-primary-100 bg-primary-700 rounded transition-all duration-200"
       (click)="addRandomColor()"
-      class="
-          rounded-xl px-4 py-2 block mx-auto mt-4
-          bg-neutral-400 dark:bg-neutral-600 shadow hover:shadow-lg font-medium transition-all duration-200"
     >
-      Add random color
+      <svg
+        class="w-6 h-6 mr-2"
+        viewBox="0 0 48 48"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="currentColor"
+          d="M27 29.1q.65 0 1.075-.425.425-.425.425-1.075v-5.1h5.1q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-5.1v-5.1q0-.65-.425-1.075Q27.65 12.9 27 12.9q-.65 0-1.075.425-.425.425-.425 1.075v5.1h-5.1q-.65 0-1.075.425Q18.9 20.35 18.9 21q0 .65.425 1.075.425.425 1.075.425h5.1v5.1q0 .65.425 1.075.425.425 1.075.425ZM13 38q-1.2 0-2.1-.9-.9-.9-.9-2.1V7q0-1.2.9-2.1.9-.9 2.1-.9h28q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h28V7H13v28Zm-6 9q-1.2 0-2.1-.9Q4 42.2 4 41V11.5q0-.65.425-1.075Q4.85 10 5.5 10q.65 0 1.075.425Q7 10.85 7 11.5V41h29.5q.65 0 1.075.425Q38 41.85 38 42.5q0 .65-.425 1.075Q37.15 44 36.5 44Zm6-37v28V7Z"/>
+      </svg>
+
+      Add color
     </button>
   </section>
 </div>
