@@ -3,12 +3,12 @@
          text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-gray-900
          transition-colors duration-500"
 >
-  <header class="w-full grid grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10">
-    <h1 class="col-span-2 lg:col-span-1">Color Palette Generator</h1>
+  <header class="w-full grid grid-cols-1 sm:grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10">
+    <h1 class="col-span-2 lg:col-span-1 text-center sm:text-left">Color Palette Generator</h1>
 
-    <nav class="col-span-4 lg:col-span-2">
+    <nav class="col-span-1 sm:col-span-4 lg:col-span-2">
       <div
-        class="mx-auto w-fit"
+        class="mr-auto sm:mx-auto w-fit"
       >
         <ul
           *ngIf="paletteService.hasPalette()"

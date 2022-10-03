@@ -39,21 +39,20 @@
 
     <!-- Display all shades -->
     <div
-      class="grid-in-shade grid grid-cols-10 md:grid-cols-5 xl:grid-cols-10
-             rounded overflow-clip"
+      class="grid-in-shade grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 gap-2"
     >
       <span
         *ngFor="let shade of color.shades; index as i"
         title="Copy hex to clipboard"
         class="block w-full p-4
-               text-center text-lg font-semibold cursor-pointer"
+               text-center text-lg font-semibold cursor-pointer rounded"
         [ngStyle]="{
           'background-color': shade.hex,
           'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
         }"
         (click)="copyToClipboard(shade)"
       >
-        <span class="opacity-0 md:opacity-100">
+        <span class="opacity-0 sm:opacity-100">
           {{shade.index}}
           <br>
           {{shade.hex.toUpperCase()}}

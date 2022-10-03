@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Color} from "../../models/color.model";
 import {Shade} from "../../models/shade.model";
 import {ChangeType, ColorService} from "../../services/color.service";
@@ -15,25 +15,17 @@ export class ColorEditorComponent implements OnInit {
   @Input()
   dark = false
 
-  @Output()
-  addColor = new EventEmitter<Color>()
-
-  shade: Shade
-  color: Color
-  state: EditorState = EditorState.ADD
+  shade: Shade | undefined
+  color: Color | undefined
 
   constructor(
     public colorService: ColorService,
     private notificationService: NotificationService
   ) {
-    this.color = this.colorService.getColor()
-    this.shade = this.color.getShade(500)
-
     this.colorService.getColorChangeEmitter().subscribe(changeType => {
-      if (changeType !== ChangeType.ADJUST) {
+      if (changeType === ChangeType.LOAD) {
         this.color = this.colorService.getColor()
-        this.shade = this.color.getShade(500)
-        this.state = (changeType === ChangeType.RANDOM) ? EditorState.ADD : EditorState.EDIT
+        this.shade = this.colorService.getShade()
       }
 
       this.updateProperties()
@@ -50,6 +42,9 @@ export class ColorEditorComponent implements OnInit {
    * @param value Value to change to
    */
   updateColor(type: UpdateType, value: string | number) {
+    if (!this.shade)
+      return
+
     if (type === UpdateType.HEX && isNaN(+value)) {
       this.shade.setHEX(`${value}`, true)
     } else if (!isNaN(+value)) {
@@ -69,6 +64,9 @@ export class ColorEditorComponent implements OnInit {
    * Update all css properties to the values of the current selected shade.
    */
   updateProperties() {
+    if (!this.shade)
+      return
+
     document.documentElement.style.setProperty('--selected-hex', this.shade.hex)
     document.documentElement.style.setProperty('--selected-hue', String(this.shade.hue))
     document.documentElement.style.setProperty('--selected-saturation', this.shade.saturation + "%")
@@ -84,12 +82,14 @@ export class ColorEditorComponent implements OnInit {
   }
 
   changeShade(shade: Shade) {
-    this.shade = shade
-    this.updateProperties()
+    if (this.color)
+      this.colorService.loadColor(this.color, shade)
   }
 
   releaseShade(shade: Shade, $event: MouseEvent) {
     $event.preventDefault()
+    if (!this.color)
+      return
 
     if (this.color.shades.filter(s => s.fixed).length > 1) {
       shade.fixed = false
@@ -141,8 +141,4 @@ export class ColorEditorComponent implements OnInit {
 
 enum UpdateType {
   HEX, HUE, SATURATION, LUMINOSITY
-}
-
-enum EditorState {
-  ADD, EDIT
 }
