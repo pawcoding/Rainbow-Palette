@@ -22,6 +22,8 @@ export class PaletteViewerComponent implements OnInit {
   onRemove = new EventEmitter<Event>()
 
   editingState = false
+  saving = false
+  adding = false
 
   @ViewChild('editTitle')
   editTitle: ElementRef<HTMLInputElement> | undefined
@@ -78,16 +80,28 @@ export class PaletteViewerComponent implements OnInit {
   /**
    * Add a random color to the palette.
    */
-  addRandomColor() {
-    this.palette.addColor(Color.generateRandomColor(), false)
+  addRandomColor($event: MouseEvent) {
+    const target = ($event.target as HTMLButtonElement)
+    this.adding = true
+    setTimeout(() => {
+      this.palette.addColor(Color.generateRandomColor(), false)
+      this.adding = false
+      setTimeout(() => {
+        target.scrollIntoView({behavior: 'smooth', block: 'end'})
+      }, 10)
+    }, 2000)
   }
 
   /**
    * Save current palette to local storage.
    */
   savePalette() {
+    this.saving = true
     this.storage.savePalette(this.palette)
-    this.notificationService.notification.emit('Palette saved')
+    setTimeout(() => {
+      this.notificationService.notification.emit('Palette saved')
+      this.saving = false
+    }, 3000)
   }
 
   /**

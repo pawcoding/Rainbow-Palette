@@ -26,6 +26,11 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 | 🟥     | `0.1.6` | Adjust colors in other formats (RGB, HSV, ...) |
 | 🟥     | `0.2.0` | Exemplary web components to preview palette    |
 
+### ToDo
+- [ ] Edit color name
+- [ ] Display info for web components
+- [ ] Refactoring
+
 ### Side features
 - [x] Light & dark mode
 - [x] Mobile view

@@ -1,5 +1,5 @@
 <div tabindex="-1" *ngIf="content" (click)="closeNotification()"
-     class="flex overflow-y-auto overflow-x-hidden z-40 h-modal h-screen w-screen justify-center items-center bg-gray-900/50 dark:bg-gray-900/75" [class]="dark ? 'dark' : ''" aria-hidden="true"
+     class="flex overflow-y-auto overflow-x-hidden z-40 h-modal h-screen w-screen justify-center items-center bg-gray-900/50 dark:bg-gray-900/75 cursor-pointer" [class]="dark ? 'dark' : ''" aria-hidden="true"
 >
   <div class="relative p-4 w-full max-w-2xl" (click)="$event.stopPropagation()">
     <article class="relative bg-gray-100 text-gray-900 rounded dark:bg-gray-700 dark:text-gray-100 p-6">

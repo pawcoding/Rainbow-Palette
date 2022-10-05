@@ -10,6 +10,20 @@ module.exports = {
       colors: {
         'transparent': '#00000000'
       },
+      keyframes: {
+        load: {
+          '0%': { width: '5%' },
+          '10%': { width: '15%' },
+          '20%': { width: '25%' },
+          '40%': { width: '35%' },
+          '80%': { width: '60%' },
+          '95%': { width: '80%' },
+          '100%': { width: '100%' }
+        }
+      },
+      animation: {
+        load: 'load 5s linear'
+      },
       gridTemplateAreas: {
         'color-square': [
           'name button',

@@ -81,9 +81,9 @@ export class ColorEditorComponent implements OnInit {
     this.colorService.updateColorName(name)
   }
 
-  changeShade(shade: Shade) {
+  changeShade(shadeIndex: number) {
     if (this.color)
-      this.colorService.loadColor(this.color, shade)
+      this.colorService.loadColor(this.color, shadeIndex)
   }
 
   releaseShade(shade: Shade, $event: MouseEvent) {

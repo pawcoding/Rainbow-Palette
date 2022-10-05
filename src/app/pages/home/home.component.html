@@ -1,5 +1,6 @@
 <div>
   <article class="text-center text-lg">
+    <section *ngIf="!loading">
       <p class="font-bold">
         Generate an entire color palette from just one color
       </p>
@@ -25,7 +26,7 @@
             type="text"
             title="Put your hex code here"
             id="hexCode" #hexCode
-            placeholder="#447bda"
+            placeholder="#4472C4"
             class="w-4/5
                    text-medium text-gray-900 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500
                    border-0 focus:ring-0"
@@ -93,7 +94,18 @@
             </label>
           </section>
         </div>
-
       </div>
+    </section>
+
+    <div #loadContainer
+      *ngIf="loading"
+      class="w-full max-w-md mx-auto h-6 bg-gray-200 dark:bg-gray-800 rounded-full"
+    >
+      <span #loadBar
+        class="flex items-center justify-center h-6 text-sm font-bold text-primary-50 bg-primary-700 rounded-full animate-load"
+      >
+        {{progress}} %
+      </span>
+    </div>
   </article>
 </div>

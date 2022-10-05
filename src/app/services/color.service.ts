@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {Color} from "../models/color.model";
 import {ColorInterpolater} from "../class/color-interpolater";
 import {Shade} from "../models/shade.model";
+import {PaletteService} from "./palette.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,16 @@ export class ColorService {
   private shade: Shade | undefined
   private colorChangeEmitter: EventEmitter<ChangeType> = new EventEmitter<ChangeType>()
 
-  constructor() { }
+  constructor(
+    private paletteService: PaletteService
+  ) { }
 
-  loadColor(color: Color, shade?: Shade) {
-    this.color = color
-    this.shade = shade || this.color.shades.find(s => s.fixed)
+  loadColor(color: Color, shadeIndex?: number) {
+    this.color = Color.parseColor(color)
+    if (shadeIndex)
+      this.shade = this.color.getShade(shadeIndex)
+    else
+      this.shade = this.color.shades.find(s => s.fixed)
     this.colorChangeEmitter.emit(ChangeType.LOAD)
   }
 
@@ -37,6 +43,13 @@ export class ColorService {
     if (this.color) {
       this.color.name = name
       this.colorChangeEmitter.emit(ChangeType.ADJUST)
+    }
+  }
+
+  saveColor() {
+    if (this.color) {
+      this.paletteService.getPalette()?.replaceColor(this.color)
+      this.closeEditor()
     }
   }
 

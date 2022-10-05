@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Shade} from "../../models/shade.model";
 import {NotificationService} from "../../services/notification.service";
 import {PaletteScheme} from "../../class/palette-generator";
@@ -17,6 +17,13 @@ export class HomeComponent implements OnInit {
   schemes: any
   invalid = false
   dropdown = false
+  loading = false
+  progress = 0
+
+  @ViewChild('loadContainer')
+  loadContainer: ElementRef<HTMLDivElement> | undefined
+  @ViewChild('loadBar')
+  loadBar: ElementRef<HTMLSpanElement> | undefined
 
   constructor(
     private notificationService: NotificationService,
@@ -53,8 +60,9 @@ export class HomeComponent implements OnInit {
   }
 
   updateValue(value: string) {
-    this.value = value.toUpperCase()
-    this.invalid = !this.value.match(/^#[0-9A-Fa-f]{6}$/)
+    this.invalid = !value.match(/^#[0-9A-Fa-f]{6}$/)
+    if (!this.invalid)
+      this.value = value.toUpperCase()
   }
 
   updateScheme(scheme: PaletteScheme) {
@@ -63,6 +71,7 @@ export class HomeComponent implements OnInit {
     this.schemeTitle = this.schemes
       .find((s: { index: PaletteScheme; }) => s.index === index)
       .title
+    this.dropdown = false
   }
 
   generatePalette() {
@@ -71,8 +80,17 @@ export class HomeComponent implements OnInit {
       return
     }
 
+    this.loading = true
     this.paletteService.generatePalette(this.value, this.scheme)
-    this.router.navigate(['edit'])
+
+    const interval = setInterval(() => {
+      this.progress = Math.round(100 * (this.loadBar?.nativeElement.clientWidth || 0) / (this.loadContainer?.nativeElement.clientWidth || 100))
+    }, 50)
+
+    setTimeout(() => {
+      clearInterval(interval)
+      this.router.navigate(['edit'])
+    }, 5100)
   }
 
 }
