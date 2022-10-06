@@ -1,54 +1,88 @@
 <div [class]="dark ? 'dark' : ''">
   <article
-    class="overflow-clip mt-4 rounded-xl shadow grid grid-cols-2 sm:grid-cols-10 grid-areas-color-square sm:grid-areas-color-wide items-center cursor-default"
+    class="my-8 items-center cursor-default overflow-clip
+           grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 grid-areas-color-square sm:grid-areas-color-semi lg:grid-areas-color-wide"
   >
     <!-- Name of the color -->
-    <h3
-      [ngStyle]="{
-        'background-color': color.shades[dark ? 8 : 3].hex,
-        'color': color.shades[dark ? 2 : 9].hex
-      }"
-      class="grid-in-name px-4 transition-colors duration-200"
-    >
-      {{color.name}}
-    </h3>
+    <div class="grid-in-name flex gap-4 items-center mb-2">
+      <h3
+        *ngIf="!editingState"
+        class="inline-block py-0 cursor-pointer"
+        (click)="openEditor()"
+      >
+        {{color.name}}
+      </h3>
+
+      <input *ngIf="editingState"
+             type="text" #editName
+             placeholder="Color name"
+             class="bg-transparent p-0 mb-1 mt-1.5 text-lg font-bold
+                    border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
+             (focusout)="closeEditor()"
+             (keydown.enter)="closeEditor()"
+             [value]="color.name">
+
+      <span
+        *ngIf="!editingState"
+        class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
+        title="Edit color name"
+        (click)="openEditor()"
+      >
+        <img src="/assets/icons/edit.svg" alt="Edit name" class="icon">
+      </span>
+    </div>
 
     <!-- Action Buttons -->
-    <span
-      [ngStyle]="{
-        'background-color': color.shades[dark ? 8 : 3].hex,
-        'color': color.shades[dark ? 2 : 9].hex
-      }"
-
-      class="grid-in-button flex gap-6 pr-6 h-full justify-end items-center transition-colors duration-200"
+    <div
+      class="grid-in-button flex gap-2 h-full justify-end items-center"
     >
-      <img
-        class="icon"
-        src="/assets/icons/edit.svg" alt="Edit color"
-        title="Edit color"
+      <span
+        class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
+        title="Tune color"
         (click)="colorService.loadColor(color)"
       >
+        <img
+          class="icon"
+          src="/assets/icons/tune.svg"
+          alt="Tune color"
+        >
+      </span>
 
-      <img
-        class="icon"
-        src="/assets/icons/delete.svg" alt="Remove from palette"
+      <span
+        class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
         title="Remove color from palette"
         (click)="onRemove.emit(color)"
       >
-    </span>
+        <img
+          class="icon"
+          src="/assets/icons/delete.svg"
+          alt="Remove from palette"
+        >
+      </span>
+    </div>
 
     <!-- Display all shades -->
-    <span
-      *ngFor="let shade of color.shades"
-      [ngStyle]="{
-        'background-color': shade.hex,
-        'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
-      }"
-      class="block w-full text-center text-sm md:text-base lg:text-xl py-4 lg:py-6 cursor-pointer"
-      title="Copy hex to clipboard"
-      (click)="copyToClipboard(shade)"
+    <div
+      class="grid-in-shade grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 gap-2"
     >
-      {{shade.hex}}
-    </span>
+      <span
+        *ngFor="let shade of color.shades; index as i"
+        title="Tune shade"
+        class="block w-full py-4
+               text-center text-lg font-semibold cursor-pointer rounded"
+        [ngStyle]="{
+          'background-color': shade.hex,
+          'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
+        }"
+        (click)="editShade(shade.index)"
+        (contextmenu)="copyToClipboard(shade, $event)"
+      >
+        <span class="opacity-0 sm:opacity-100">
+          {{shade.index}}
+          <br>
+          {{shade.hex.toUpperCase()}}
+        </span>
+      </span>
+    </div>
   </article>
 </div>

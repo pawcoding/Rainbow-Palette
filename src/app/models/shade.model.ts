@@ -19,7 +19,10 @@ export class Shade {
     this.fixed = args[1]
 
     if (args.length === 3) {
-      this.hex = args[2]
+      if (!args[2].match(/^#[0-9A-Fa-f]{6}$/))
+        throw `Color ${args[2]} is not in form #RRGGBB.`
+
+      this.hex = args[2].toUpperCase()
       const hsl = ColorConverter.HEXtoHSL(this.hex)
       this.hue = hsl.hue
       this.saturation = hsl.saturation
@@ -29,10 +32,13 @@ export class Shade {
       this.hue = args[2]
       this.saturation = args[3]
       this.luminosity = args[4]
-      this.updateBrightness()
       this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
+      this.updateBrightness()
     } else {
-      this.hex = args[2]
+      if (!args[2].match(/^#[0-9A-Fa-f]{6}$/))
+        throw `Color ${args[2]} is not in form #RRGGBB.`
+
+      this.hex = args[2].toUpperCase()
       this.hue = args[3]
       this.saturation = args[4]
       this.luminosity = args[5]
@@ -40,13 +46,25 @@ export class Shade {
     }
   }
 
+  /**
+   * Set the shades index
+   * @param index
+   */
   public setIndex(index: number) {
     this.index = index
   }
 
+  /**
+   * Set the shades HEX value and update all other properties
+   * @param hex
+   * @param fixed
+   */
   public setHEX(hex: string, fixed = false) {
+    if (!hex.match(/^#[0-9A-Fa-f]{6}$/))
+      throw `Color ${hex} is not in form #RRGGBB.`
+
     this.fixed = fixed
-    this.hex = hex
+    this.hex = hex.toUpperCase()
     const hsl = ColorConverter.HEXtoHSL(this.hex)
     this.hue = hsl.hue
     this.saturation = hsl.saturation
@@ -54,27 +72,35 @@ export class Shade {
     this.updateBrightness()
   }
 
+  /**
+   * Set the shades HSL values and update all other properties
+   * @param hue
+   * @param saturation
+   * @param luminosity
+   * @param fixed
+   */
   public setHSL(hue: number, saturation: number, luminosity: number, fixed = false) {
     this.fixed = fixed
     this.hue = hue
     this.saturation = saturation
     this.luminosity = luminosity
-    this.updateBrightness()
     this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
+    this.updateBrightness()
   }
 
+  /**
+   * Update perceived brightness
+   * @private
+   */
   private updateBrightness() {
-    let x = 360 - this.hue
-
-    let adjustment
-    if (x < 120)
-      adjustment = -0.0007 * x * x + 0.17 * x - 0.3
-    else if (x > 260)
-      adjustment = 0.001 * x * x - 0.52 * x + 57.6
-    else
-      adjustment = ((-20) / (1 + Math.pow(243.21, - x / 70) * 2640162)) + 10
-
-    this.brightness = this.luminosity - Math.round(adjustment)
+    const rgb = ColorConverter.HEXtoRGB(this.hex)
+    this.brightness = Math.round(
+      Math.sqrt(
+        .299 * rgb.red * rgb.red +
+        .587 * rgb.green * rgb.green +
+        .114 * rgb.blue * rgb.blue
+      ) / 2.55
+    )
   }
 
   /**
@@ -103,7 +129,7 @@ export class Shade {
         || (!json.luminosity && json.luminosity !== 0))
       throw 'Not all parameters for shade are set'
 
-    return new Shade(json.index, json.fixed, json.hex, json.hue, json.saturation, json.luminosity)
+    return new Shade(json.index, json.fixed, json.hex.toUpperCase(), json.hue, json.saturation, json.luminosity)
   }
 
 }

@@ -1,0 +1,111 @@
+<div>
+  <article class="text-center text-lg">
+    <section *ngIf="!loading">
+      <p class="font-bold">
+        Generate an entire color palette from just one color
+      </p>
+
+      <p>
+        Enter a hex code below or pick a color to get a full color palette.
+      </p>
+
+      <div class="flex flex-col mt-4 max-w-xxs mx-auto relative">
+        <span
+          class="flex rounded overflow-clip"
+        >
+          <input
+            type="color"
+            title="Pick your color"
+            id="color" #color
+            class="w-1/5 h-10"
+            [value]="value"
+            (input)="updateValue(color.value)"
+          >
+
+          <input
+            type="text"
+            title="Put your hex code here"
+            id="hexCode" #hexCode
+            placeholder="#4472C4"
+            class="w-4/5
+                   text-medium text-gray-900 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500
+                   border-0 focus:ring-0"
+            [value]="value"
+            (input)="updateValue(hexCode.value)"
+          >
+        </span>
+
+        <button
+          class="py-2 px-4 mt-2 inline-flex items-center
+                 text-primary-100 bg-primary-700 font-medium rounded
+                 transition-colors duration-500"
+          [disabled]="invalid"
+        >
+          <span
+            class="text-center grow"
+            [class]="invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
+            [title]="invalid ? 'You need a 6-digit hex code' : 'Generate a color palette'"
+            (click)="generatePalette()"
+          >
+            {{schemeTitle}}
+          </span>
+
+          <svg
+            class="ml-4 w-6 h-6 cursor-pointer"
+            fill="currentColor"
+            viewBox="0 0 48 48"
+            xmlns="http://www.w3.org/2000/svg"
+            (click)="dropdown = !dropdown"
+          >
+            <path d="M24 30.95q-.45 0-.875-.175t-.775-.525l-9.9-9.9q-.65-.65-.625-1.65.025-1 .675-1.7.75-.75 1.675-.675.925.075 1.625.725l8.2 8.2 8.2-8.2q.7-.65 1.7-.7 1-.05 1.65.7.75.7.675 1.675-.075.975-.725 1.675l-9.85 9.85q-.35.35-.775.525-.425.175-.875.175Z"/>
+          </svg>
+        </button>
+
+        <div
+          class="w-64 mt-1 p-2 absolute top-full
+                 text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-gray-700 rounded"
+          [class]="dropdown ? '' : 'hidden'"
+          (mouseleave)="dropdown = false"
+        >
+          <span class="block p-2 mb-1 text-left text-base font-medium">
+            Pick a color scheme:
+          </span>
+
+          <section class="h-48 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600">
+            <label
+              *ngFor="let schemeToShow of schemes"
+              class="block p-2 mb-1 mr-4
+                     hover:bg-gray-200 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500"
+              [htmlFor]="schemeToShow.for"
+            >
+              <input
+                type="radio"
+                name="scheme"
+                class="hidden peer"
+                [checked]="schemeToShow.index === scheme"
+                [id]="schemeToShow.for"
+                [value]="schemeToShow.name"
+                (change)="updateScheme(schemeToShow.scheme)"
+              >
+
+              <span class="peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500">
+                {{schemeToShow.title}}
+              </span>
+            </label>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <div #loadContainer
+      *ngIf="loading"
+      class="w-full max-w-md mx-auto h-6 bg-gray-200 dark:bg-gray-800 rounded-full"
+    >
+      <span #loadBar
+        class="flex items-center justify-center h-6 text-sm font-bold text-primary-50 bg-primary-700 rounded-full animate-load"
+      >
+        {{progress}} %
+      </span>
+    </div>
+  </article>
+</div>

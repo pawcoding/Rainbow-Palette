@@ -18,26 +18,17 @@ export class Color {
       this.shades = []
       const shade = new Shade(-1, true, args[1])
       this.shades.push(shade)
-      ColorInterpolater.regenerateShades(this)
-
-      shade.fixed = false
-      this.getShade(500).fixed = true
     } else if (typeof args[1][0] === 'string') {
       this.shades = []
 
       for (const hex of args[1]) {
         this.shades.push(new Shade(-1, true, hex))
       }
-      ColorInterpolater.regenerateShades(this)
-
-      this.getShade(500).fixed = true
     } else {
       this.shades = args[1]
-      ColorInterpolater.regenerateShades(this)
-      this.getShade(500).fixed = true
     }
 
-    this.shades.sort((a, b) => a.index - b.index)
+    ColorInterpolater.regenerateShades(this)
   }
 
   /**

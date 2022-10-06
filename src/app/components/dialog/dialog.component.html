@@ -1,14 +1,14 @@
 <div tabindex="-1" *ngIf="content" (click)="closeNotification()"
-     class="flex overflow-y-auto overflow-x-hidden z-40 h-modal h-screen w-screen justify-center items-center bg-black/50" [class]="dark ? 'dark' : ''" aria-hidden="true"
+     class="flex overflow-y-auto overflow-x-hidden z-40 h-modal h-screen w-screen justify-center items-center bg-gray-900/50 dark:bg-gray-900/75 cursor-pointer" [class]="dark ? 'dark' : ''" aria-hidden="true"
 >
   <div class="relative p-4 w-full max-w-2xl" (click)="$event.stopPropagation()">
-    <article class="relative bg-neutral-300 text-neutral-900 rounded-xl shadow dark:bg-neutral-600 dark:text-neutral-200 p-6">
+    <article class="relative bg-gray-100 text-gray-900 rounded dark:bg-gray-700 dark:text-gray-100 p-6">
 
       <button type="button" (click)="closeNotification()"
               title="Close dialog"
-              class="absolute top-3 right-2.5 bg-transparent hover:bg-neutral-200 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-neutral-700 transition-colors duration-200">
+              class="absolute top-3 right-2.5 bg-transparent hover:bg-gray-200 rounded text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 transition-colors duration-200">
         <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+          <path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
         </svg>
         <span class="sr-only">Close dialog</span>
       </button>
@@ -21,7 +21,7 @@
         <button
           *ngFor="let action of content.actions"
           type="button"
-          class="mt-2 mx-2 bg-neutral-400 focus:ring-0 focus:outline-none rounded-lg shadow hover:shadow-lg text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-neutral-700 transition-all duration-200"
+          class="mt-2 mx-2 bg-gray-200 hover:bg-gray-300 focus:ring-0 focus:outline-none rounded text-sm font-medium px-5 py-2.5 focus:z-10 dark:bg-gray-800 dark:hover:bg-gray-900 transition-all duration-200"
           [title]="action.title"
           (click)="action.action.emit(undefined)"
         >

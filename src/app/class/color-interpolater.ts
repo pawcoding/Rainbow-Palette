@@ -8,7 +8,6 @@ export class ColorInterpolater {
    * @param color
    */
   public static regenerateShades(color: Color) {
-    const size = 10
     let shades = [...color.shades]
 
     // clear and sort shades
@@ -16,8 +15,7 @@ export class ColorInterpolater {
     shades.sort((a, b) => b.luminosity - a.luminosity)
 
     // set new indices
-    // ToDo: Adjust generation for optimal keys when using other sizes than 10
-    let indices = [...Array(size).keys()].map(index => 20 + index * 80)
+    let indices = [...Array(10).keys()].map(index => 20 + index * 80)
     indices[0] = 50
     for (const shade of shades) {
       const index = indices.reduce((prev, curr) =>
@@ -27,32 +25,27 @@ export class ColorInterpolater {
     }
 
     // add white and black to shades
-    shades.push(new Shade(0, true,
-      (shades[0].hue + 5) % 360,
-      Math.min(shades[0].saturation + 10, 100),
-      100)
-    )
     shades.push(new Shade(1000, true,
-      (shades[shades.length-1].hue + 355) % 360,
+      shades[shades.length-1].hue,
       Math.max(shades[shades.length-1].saturation - 10, 0),
       0)
     )
-
+    shades.push(new Shade(0, true,
+      shades[0].hue,
+      Math.min(shades[0].saturation + 10, 100),
+      100)
+    )
     shades.sort((a, b) => a.index - b.index)
 
     // generate missing shades
     for (const index of indices) {
-      const smaller = [...shades].reverse().find(shade => shade.index < index) || shades[0]
-      const bigger = shades.find(shade => shade.index > index) || shades[shades.length-1]
+      const smaller = [...shades].reverse().find(shade => shade.index < index && shade.fixed) || shades[0]
+      const bigger = shades.find(shade => shade.index > index && shade.fixed) || shades[shades.length-1]
 
-      const hue = this.mapNumbers(
-        index,
-        smaller.index,
-        bigger.index,
+      const hue = this.mapNumbers(index, smaller.index, bigger.index,
         bigger.hue - smaller.hue > 180 ? (smaller.hue + 360) : smaller.hue,
         smaller.hue - bigger.hue > 180 ? (bigger.hue + 360) : bigger.hue
       ) % 360
-
       const saturation = this.mapNumbers(index, smaller.index, bigger.index, smaller.saturation, bigger.saturation)
       const luminosity = this.mapNumbers(index, smaller.index, bigger.index, smaller.luminosity, bigger.luminosity)
 
@@ -64,7 +57,7 @@ export class ColorInterpolater {
 
     // repair broken orders
     shades.sort((a, b) => b.luminosity - a.luminosity)
-    indices = [...Array(size).keys()].map(index => index * 100)
+    indices = [...Array(10).keys()].map(index => index * 100)
     indices[0] = 50
     for (let i = 0; i < shades.length; i++) {
       shades[i].setIndex(indices[i])

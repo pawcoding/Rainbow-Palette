@@ -7,10 +7,7 @@ import {v4 as uuidv4} from "uuid";
 import {Color} from "../../models/color.model";
 import {StorageService} from "../../services/storage.service";
 import {NotificationService} from "../../services/notification.service";
-import {EventEmitter} from "@angular/core";
-import {Dialog} from "../../interfaces/dialog.interface";
 import {PaletteGenerator, PaletteScheme} from "../../class/palette-generator";
-import {Shade} from "../../models/shade.model";
 
 export default {
   title: 'Components/Palette',
@@ -23,49 +20,13 @@ export default {
   ]
 } as Meta
 
-class MockStorageService implements Partial<StorageService> {
-
-  savePalette(palette: Palette) {
-    console.log(`savePalette(${palette.title})`)
-  }
-
-}
-
-class MockNotificationService implements Partial<NotificationService> {
-
-  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()
-
-  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()
-
-  constructor() {
-    this.dialog.subscribe(dialogContent => {
-      if (dialogContent) {
-        console.log('Show dialog\n', dialogContent.message)
-      } else {
-        console.log('Close dialog')
-      }
-    })
-
-    this.notification.subscribe(message => {
-      if (message) {
-        console.log('Show notification\n', message)
-      } else {
-        console.log('Close notification')
-      }
-    })
-  }
-
-}
-
 const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
     providers: [{
-      provide: StorageService,
-      useClass: MockStorageService
+      provide: StorageService
     }, {
-      provide: NotificationService,
-      useClass: MockNotificationService
+      provide: NotificationService
     }]
   }
 })
@@ -129,20 +90,12 @@ MediaScope.args = {
 }
 
 
-export const Random = Template.bind({})
-
-Random.args = {
-  dark: false,
-  palette: Palette.generateRandomPalette(5)
-}
-
-
 export const Monochromatic = Template.bind({})
 
 Monochromatic.args = {
   dark: false,
   palette: PaletteGenerator.generatePalette(
-    new Shade(-1, true, '#da4e44'),
+    '#da4e44',
     PaletteScheme.MONOCHROMATIC
   )
 }
@@ -153,7 +106,7 @@ export const Analogous = Template.bind({})
 Analogous.args = {
   dark: false,
   palette: PaletteGenerator.generatePalette(
-    new Shade(-1, true, '#77cf97'),
+    '#77cf97',
     PaletteScheme.ANALOGOUS
   )
 }
@@ -164,7 +117,7 @@ export const Complementary = Template.bind({})
 Complementary.args = {
   dark: false,
   palette: PaletteGenerator.generatePalette(
-    new Shade(-1, true, '#ff7231'),
+    '#ff7231',
     PaletteScheme.COMPLEMENTARY
   )
 }
@@ -175,7 +128,7 @@ export const Split = Template.bind({})
 Split.args = {
   dark: false,
   palette: PaletteGenerator.generatePalette(
-    new Shade(-1, true, '#29cddc'),
+    '#29cddc',
     PaletteScheme.SPLIT
   )
 }
@@ -186,7 +139,7 @@ export const Triadic = Template.bind({})
 Triadic.args = {
   dark: false,
   palette: PaletteGenerator.generatePalette(
-    new Shade(-1, true, '#00ad64'),
+    '#00ad64',
     PaletteScheme.TRIADIC
   )
 }
@@ -197,7 +150,7 @@ export const Compound = Template.bind({})
 Compound.args = {
   dark: false,
   palette: PaletteGenerator.generatePalette(
-    new Shade(-1, true, '#66b032'),
+    '#66b032',
     PaletteScheme.COMPOUND
   )
 }

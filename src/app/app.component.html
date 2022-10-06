@@ -1,38 +1,90 @@
 <div
-  class="min-h-screen grid grid-rows-site content-between
-    py-6 text-neutral-900 bg-neutral-100 dark:text-neutral-100 dark:bg-neutral-900 transition-colors duration-200"
+  class="min-h-screen grid grid-rows-site content-between py-6
+         text-gray-900 bg-gray-50 dark:text-gray-100 dark:bg-gray-900
+         transition-colors duration-500"
 >
-  <header class="relative">
-    <light-switch
-      class="absolute xl:fixed right-0 mr-6"
-      [dark]="dark"
-    ></light-switch>
+  <header class="w-full grid grid-cols-1 sm:grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10">
+    <h1 class="col-span-2 lg:col-span-1 text-center sm:text-left">Color Palette Generator</h1>
 
-    <h1>
-      Color Palette Generator
-    </h1>
+    <nav class="col-span-1 sm:col-span-4 lg:col-span-2">
+      <div
+        class="mr-auto sm:mx-auto w-fit"
+      >
+        <ul
+          *ngIf="paletteService.hasPalette()"
+          class="flex flex-wrap gap-2 md:gap-4
+                 font-medium text-gray-700 dark:text-gray-200">
+          <li *ngFor="let nav of navigation">
+            <a
+              class="inline-flex py-2 px-4 items-center
+                     rounded cursor-pointer transition-colors duration-500"
+              [class]="(router.url === nav.link)
+                ? 'text-primary-600 bg-primary-200 dark:text-primary-900 dark:bg-primary-500'
+                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
+              [routerLink]="nav.link"
+              [title]="nav.title"
+            >
+              <svg
+                class="w-6 h-6 mr-2 hidden md:block"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+                [innerHTML]="nav.icon | safeHtml"
+              >
+              </svg>
+
+              {{nav.text}}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <light-switch
+      class="ml-auto"
+      [dark]="dark"
+    >
+    </light-switch>
   </header>
 
-  <main class="px-10">
-    <!-- Color Editor -->
-    <color-editor
-      (addColor)="addColor($event)"
-    ></color-editor>
 
-    <!-- Display color palette -->
-    <palette-viewer
-      *ngIf="palette" (onRemove)="removePalette()"
-      [palette]="palette" [dark]="dark"
-    ></palette-viewer>
+  <main>
+    <router-outlet>
+    </router-outlet>
   </main>
 
-  <footer class="p-4 flex gap-4 justify-between flex-col sm:flex-row text-center mx-auto max-w-5xl w-full mt-10">
-    <a href="https://github.com/pawcoding/tailwind-color-generator" rel="noreferrer noopener" target="_blank" title="View source code on GitHub">View on GitHub</a>
-    <span class="cursor-default">Version {{version}}</span>
-    <a href="https://pawcode.de" target="_blank" title="Created by pawcode Development">
-      <img [src]="'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'" alt="pawcode&nbsp;Development" class="inline h-8">
+
+  <footer
+    class="flex gap-4 flex-col sm:flex-row px-8 items-center justify-between
+           text-center w-full max-w-4xl mx-auto mt-10"
+  >
+    <a
+      href="https://github.com/pawcoding/tailwind-color-generator"
+      rel="noreferrer noopener"
+      target="_blank"
+      title="View source code on GitHub"
+    >
+      View on GitHub
+    </a>
+
+    <span
+      class="cursor-default"
+    >
+      Version {{version}}
+    </span>
+
+    <a
+      href="https://pawcode.de"
+      target="_blank"
+      title="Created by pawcode Development"
+    >
+      <img
+        height="32" width="139"
+        alt="pawcode&nbsp;Development"
+        [src]="'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'"
+      >
     </a>
   </footer>
+
 
   <custom-dialog
     class="fixed top-0 left-0"

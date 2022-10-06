@@ -32,11 +32,11 @@ export class ColorConverter {
       throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`
 
     return `#${
-      (red < 16 ? 0 : '') + red.toString(16)
+      (red < 16 ? 0 : '') + red.toString(16).toUpperCase()
     }${
-      (green < 16 ? 0 : '') + green.toString(16)
+      (green < 16 ? 0 : '') + green.toString(16).toUpperCase()
     }${
-      (blue < 16 ? 0 : '') + blue.toString(16)
+      (blue < 16 ? 0 : '') + blue.toString(16).toUpperCase()
     }`
   }
 

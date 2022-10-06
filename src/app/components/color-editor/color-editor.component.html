@@ -1,100 +1,143 @@
-<div [class]="dark ? 'dark' : ''" class="max-w-5xl mx-auto mb-8">
-  <article
-    class="flex gap-4 p-4 rounded-xl shadow bg-neutral-300 dark:bg-neutral-700 text-neutral-900 dark:text-neutral-100 transition-colors duration-200"
+<div [class]="dark ? 'dark' : ''" *ngIf="shade && color" class="w-full">
+  <section
+    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20
+           bg-gray-900/50 dark:bg-gray-900/90"
+    (click)="colorService.closeEditor()"
   >
+    <article
+      class="w-full max-w-sm mx-auto p-4 grid gap-2
+             font-medium bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 class="mb-2">Edit Color</h2>
 
-    <!-- Edit Color -->
-    <section class="grow-2 grid grid-rows-7 sm:grid-rows-5 gap-2 items-center">
 
       <!-- Edit Hex -->
-      <input
-        type="color"
-        title="Select a shade"
-        id="hexInput" #hexInput
-        class="overflow-clip rounded-xl shadow hover:shadow-md transition-shadow duration-200"
-        [value]="shade.hex"
-        (input)="updateColor(0, hexInput.value)"
-      >
+      <div class="flex rounded overflow-clip">
+        <input
+          type="color"
+          title="Select a shade"
+          id="hexInput" #hexInput
+          class="w-1/5 h-10"
+          [value]="shade.hex"
+          (input)="updateColor(0, hexInput.value)"
+        >
 
-      <!-- Edit Hue -->
-      <input
-        type="range"
-        title="Adjust the hue"
-        id="hueInput" #hueInput
-        min=0 max=360
-        [value]="hueToWheel(shade.hue)"
-        (input)="updateColor(1, hueInput.value)"
-      >
-
-      <!-- Edit Saturation -->
-      <input
-        type="range"
-        title="Adjust the saturation"
-        id="saturationInput" #saturationInput
-        min=0 max=100
-        [value]="shade.saturation"
-        (input)="updateColor(2, saturationInput.value)"
-      >
-
-      <!-- Edit Luminosity -->
-      <input
-        type="range"
-        title="Adjust the luminosity"
-        id="luminosityInput" #luminosityInput
-        min=0 max=100
-        [value]="100 - shade.luminosity"
-        (input)="updateColor(3, luminosityInput.value)"
-      >
-
-      <div class="flex gap-2 flex-col sm:flex-row row-span-3 sm:row-span-1 h-full">
-        <!-- Edit Name -->
         <input
           type="text"
-          title="Give your color a name"
-          id="nameInput" #nameInput
-          class="text-black bg-neutral-200 dark:bg-neutral-500 overflow-clip rounded-xl shadow hover:shadow-md focus:ring-0 focus:border-none transition-all duration-200"
-          placeholder="Color Name"
-          [value]="color.name"
-          (change)="updateName(nameInput.value)"
-        >
-
-        <!-- Add Color to Palette -->
-        <input
-          type="button"
-          class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200"
-          [title]="state === 0 ? 'Add current color to palette' : 'Replace existing color in palette'"
-          [value]="state === 0 ? 'Add to palette' : 'Replace existing color'"
-          (click)="addColor.emit(color)"
-        >
-
-        <!-- Generate new random color -->
-        <input
-          type="button"
-          title="Generate new random color"
-          value="Random Color"
-          class="cursor-pointer p-2 overflow-clip rounded-xl shadow hover:shadow-md font-medium bg-neutral-400 dark:bg-neutral-600 transition-all duration-200 "
-          (click)="colorService.randomColor()"
+          title="Put your hex code here"
+          id="hexCode" #hexCode
+          placeholder="#4472C4"
+          class="w-4/5
+                 text-medium text-gray-900 bg-gray-200 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500
+                 border-0 focus:ring-0"
+          [value]="shade.hex"
+          (input)="updateColor(0, hexCode.value)"
         >
       </div>
-    </section>
 
-    <!-- Preview Color -->
-    <section class="grow grid grid-cols-1 sm:grid-cols-2 text-center overflow-clip rounded-xl shadow cursor-default">
-      <span
-        *ngFor="let shadeToShow of color.shades"
-        [ngStyle]="{
-          'background-color': shadeToShow.hex,
-          'color': color.shades[shadeToShow.brightness > 51 ? 9 : 0].hex,
-          'font-weight': shadeToShow.fixed ? 'bold' : 'inherit',
-          'text-decoration': shadeToShow === shade ? 'underline' : 'inherit'
-        }"
-        class="block w-full text-center text-sm md:text-base lg:text-xl py-2 sm:py-4 px-2 cursor-pointer"
-        title="Edit this shade&#10;Rightclick: Release this shade"
-        (click)="changeShade(shadeToShow)"
-        (contextmenu)="releaseShade(shadeToShow, $event)"
-      >
-        {{shadeToShow.hex}}
-      </span>
-    </section>
-  </article>
+      <!-- Edit Hue -->
+      <div>
+        <label
+          for="hueInput"
+          class="flex justify-between"
+        >
+          <span>Hue</span>
+          <span id="hueLabel" #hueLabel>{{shade.hue}}</span>
+        </label>
+
+        <input
+          type="range"
+          title="Adjust the hue"
+          id="hueInput" #hueInput
+          min=0 max=360 step="1"
+          [value]="hueToWheel(shade.hue)"
+          (input)="updateColor(1, hueInput.value)"
+        >
+      </div>
+
+      <!-- Edit Saturation -->
+      <div>
+        <label
+          for="saturationInput"
+          class="flex justify-between"
+        >
+          <span>Saturation</span>
+          <span id="saturationLabel" #saturationLabel>{{shade.saturation}}</span>
+        </label>
+
+        <input
+          type="range"
+          title="Adjust the saturation"
+          id="saturationInput" #saturationInput
+          min=0 max=100 step="1"
+          [value]="shade.saturation"
+          (input)="updateColor(2, saturationInput.value)"
+        >
+      </div>
+
+      <!-- Edit Luminosity -->
+      <div>
+        <label
+          for="luminosityInput"
+          class="flex justify-between"
+        >
+          <span>Luminosity</span>
+          <span id="luminosityLabel" #luminosityLabel>{{shade.luminosity}}</span>
+        </label>
+
+        <input
+          type="range"
+          title="Adjust the luminosity"
+          id="luminosityInput" #luminosityInput
+          min=0 max=100 step="1"
+          [value]="100 - shade.luminosity"
+          (input)="updateColor(3, luminosityInput.value)"
+        >
+      </div>
+
+
+      <!-- Preview Color -->
+      <section class="grow grid grid-cols-10 mt-8 text-center overflow-clip cursor-default">
+        <span
+          *ngFor="let shadeToShow of color.shades"
+          [ngStyle]="{
+            'background-color': shadeToShow.hex,
+            'border-color': shadeToShow === shade ? 'currentColor' : shadeToShow.hex,
+            'color': color.shades[shadeToShow.brightness > 51 ? 9 : 0].hex,
+            'font-weight': shadeToShow.fixed ? 'bold' : 'inherit'
+          }"
+          [class]="shadeToShow.index === 50 ? 'rounded-l' : (shadeToShow.index === 900 ? 'rounded-r' : '')"
+          class="flex w-full h-14 items-center justify-center cursor-pointer border-4"
+          title="Edit this shade&#10;Rightclick: Interpolate this shade"
+          (click)="changeShade(shadeToShow.index)"
+          (contextmenu)="releaseShade(shadeToShow, $event)"
+        >
+          {{shadeToShow.fixed ? '■' : ''}}
+        </span>
+      </section>
+
+
+      <!-- Buttons -->
+      <section class="ml-auto">
+        <button
+          class="py-2 px-4 mt-4
+                 font-medium bg-gray-200 dark:bg-gray-800 rounded transition-all duration-200"
+          title="Close editor without saving"
+          (click)="colorService.closeEditor()"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="py-2 px-4 mt-4 ml-2
+                 font-medium text-primary-100 bg-primary-700 dark:bg-primary-600 rounded transition-all duration-200"
+          title="Save changes"
+          (click)="colorService.saveColor()"
+        >
+          Save
+        </button>
+      </section>
+    </article>
+  </section>
 </div>

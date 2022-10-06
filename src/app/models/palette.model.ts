@@ -47,6 +47,18 @@ export class Palette {
   }
 
   /**
+   * Replace color with same name
+   * @param color
+   */
+  replaceColor(color: Color) {
+    let index = this.colors.findIndex(c => c.name === color.name)
+    if (index < 0)
+      this.addColor(color, false)
+    else
+      this.colors[index] = color
+  }
+
+  /**
    * Sort all colors of the palette by hue
    */
   public sortColors() {

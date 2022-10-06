@@ -22,6 +22,8 @@ export class PaletteViewerComponent implements OnInit {
   onRemove = new EventEmitter<Event>()
 
   editingState = false
+  saving = false
+  adding = false
 
   @ViewChild('editTitle')
   editTitle: ElementRef<HTMLInputElement> | undefined
@@ -78,16 +80,31 @@ export class PaletteViewerComponent implements OnInit {
   /**
    * Add a random color to the palette.
    */
-  addRandomColor() {
-    this.palette.addColor(Color.generateRandomColor(), false)
+  addRandomColor($event: MouseEvent) {
+    const target = ($event.target as HTMLButtonElement)
+    this.adding = true
+    setTimeout(() => {
+      this.palette.addColor(Color.generateRandomColor(), false)
+      this.adding = false
+      setTimeout(() => {
+        window.scroll({
+          behavior: 'smooth',
+          top: window.scrollY + target.getBoundingClientRect().bottom - window.innerHeight + 20
+        })
+      }, 10)
+    }, 2000)
   }
 
   /**
    * Save current palette to local storage.
    */
   savePalette() {
+    this.saving = true
     this.storage.savePalette(this.palette)
-    this.notificationService.notification.emit('Palette saved')
+    setTimeout(() => {
+      this.notificationService.notification.emit('Palette saved')
+      this.saving = false
+    }, 1500)
   }
 
   /**
@@ -101,20 +118,11 @@ export class PaletteViewerComponent implements OnInit {
   }
 
   /**
-   * Close editor for palette name and save the palette to local storage.
+   * Close editor for palette name.
    */
   closeEditor() {
     this.editingState = false
     this.palette.title = this.editTitle?.nativeElement.value || 'Random'
-    this.savePalette()
-  }
-
-  /**
-   * Trigger palette sorting.
-   */
-  sortPalette() {
-    this.palette.sortColors()
-    this.notificationService.notification.emit('Palette sorted')
   }
 
   /**

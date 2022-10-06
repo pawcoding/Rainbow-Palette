@@ -1,7 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Palette} from "../models/palette.model";
-import {PaletteGenerator, PaletteScheme} from "../class/palette-generator";
-import {Shade} from "../models/shade.model";
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +47,7 @@ export class StorageService {
    * Load the palette saved in local storage.
    * If no palette is saved a random one is going to be generated.
    */
-  loadPalette(): Palette {
+  loadPalette(): Palette | undefined {
     const stored = localStorage.getItem('palette')
     if (stored) {
       try {
@@ -58,8 +56,7 @@ export class StorageService {
         console.error(e)
       }
     }
-
-    return PaletteGenerator.generatePalette(Shade.generateRandomShade(), PaletteScheme.SURPRISE)
+    return undefined
   }
 
   /**
