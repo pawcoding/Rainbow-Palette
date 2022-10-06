@@ -21,16 +21,15 @@
                       border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
                (focusout)="closeEditor()"
                (keydown.enter)="closeEditor()"
-               [value]="palette.title"
-        >
+               [value]="palette.title">
 
         <span
           *ngIf="!editingState"
           class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
-          title="Edit palette name"
+          title="Edit palette title"
           (click)="openEditor()"
         >
-          <img src="/assets/icons/edit.svg" alt="Edit" class="icon">
+          <img src="/assets/icons/edit.svg" alt="Edit title" class="icon">
         </span>
       </div>
 

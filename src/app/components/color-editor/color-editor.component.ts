@@ -2,8 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Color} from "../../models/color.model";
 import {Shade} from "../../models/shade.model";
 import {ChangeType, ColorService} from "../../services/color.service";
-import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
-import {NotificationService} from "../../services/notification.service";
 
 @Component({
   selector: 'color-editor',
@@ -19,8 +17,7 @@ export class ColorEditorComponent implements OnInit {
   color: Color | undefined
 
   constructor(
-    public colorService: ColorService,
-    private notificationService: NotificationService
+    public colorService: ColorService
   ) {
     this.colorService.getColorChangeEmitter().subscribe(changeType => {
       if (changeType === ChangeType.LOAD) {
@@ -46,7 +43,8 @@ export class ColorEditorComponent implements OnInit {
       return
 
     if (type === UpdateType.HEX && isNaN(+value)) {
-      this.shade.setHEX(`${value}`, true)
+      if (`${value}`.match(/^#[0-9A-Fa-f]{6}$/))
+        this.shade.setHEX(`${value}`, true)
     } else if (!isNaN(+value)) {
       value = parseInt(`${value}`)
       if (type === UpdateType.HUE)
@@ -57,7 +55,7 @@ export class ColorEditorComponent implements OnInit {
         this.shade.setHSL(this.shade.hue, this.shade.saturation, 100 - value, true)
     }
 
-    this.colorService.adjustShade()
+    this.colorService.adjustShades()
   }
 
   /**
@@ -74,18 +72,19 @@ export class ColorEditorComponent implements OnInit {
   }
 
   /**
-   * Update the name of the current color.
-   * @param name
+   * Change a shade to be edited
+   * @param shadeIndex
    */
-  updateName(name: string) {
-    this.colorService.updateColorName(name)
-  }
-
   changeShade(shadeIndex: number) {
     if (this.color)
       this.colorService.loadColor(this.color, shadeIndex)
   }
 
+  /**
+   * Release a shade and let it be interpolated instead
+   * @param shade
+   * @param $event
+   */
   releaseShade(shade: Shade, $event: MouseEvent) {
     $event.preventDefault()
     if (!this.color)
@@ -93,22 +92,14 @@ export class ColorEditorComponent implements OnInit {
 
     if (this.color.shades.filter(s => s.fixed).length > 1) {
       shade.fixed = false
-      this.colorService.adjustShade()
+      this.colorService.adjustShades()
     }
   }
 
   /**
-   * Copy a shades hex to clipboard.
-   * @param shade
+   * Calculate from color wheel degree to hue
+   * @param wheel
    */
-  copyToClipboard(shade: Shade) {
-    navigator.clipboard.writeText(shade.hex).then(() => {
-      this.notificationService.notification.emit(`Copied "${ToUnicodeVariantUtil.toUnicodeVariant(shade.hex, 'm')}" to your clipboard`)
-    }).catch(e => {
-      console.error('Error while copying to clipboard', e)
-    })
-  }
-
   wheelToHue(wheel: number) {
     let newHue
     if (wheel < 120)
@@ -123,6 +114,10 @@ export class ColorEditorComponent implements OnInit {
     return newHue % 360
   }
 
+  /**
+   * Calculate from hue to color wheel degree
+   * @param hue
+   */
   hueToWheel(hue: number) {
     let wheel
     if (hue < 60)

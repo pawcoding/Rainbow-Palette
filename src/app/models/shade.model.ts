@@ -46,10 +46,19 @@ export class Shade {
     }
   }
 
+  /**
+   * Set the shades index
+   * @param index
+   */
   public setIndex(index: number) {
     this.index = index
   }
 
+  /**
+   * Set the shades HEX value and update all other properties
+   * @param hex
+   * @param fixed
+   */
   public setHEX(hex: string, fixed = false) {
     if (!hex.match(/^#[0-9A-Fa-f]{6}$/))
       throw `Color ${hex} is not in form #RRGGBB.`
@@ -63,6 +72,13 @@ export class Shade {
     this.updateBrightness()
   }
 
+  /**
+   * Set the shades HSL values and update all other properties
+   * @param hue
+   * @param saturation
+   * @param luminosity
+   * @param fixed
+   */
   public setHSL(hue: number, saturation: number, luminosity: number, fixed = false) {
     this.fixed = fixed
     this.hue = hue
@@ -72,6 +88,10 @@ export class Shade {
     this.updateBrightness()
   }
 
+  /**
+   * Update perceived brightness
+   * @private
+   */
   private updateBrightness() {
     const rgb = ColorConverter.HEXtoRGB(this.hex)
     this.brightness = Math.round(

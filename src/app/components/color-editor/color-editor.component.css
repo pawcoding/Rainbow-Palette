@@ -16,11 +16,6 @@ input[type=range]::-moz-range-thumb {
   -moz-appearance: none;
 }
 
-/*#hexInput {
-  @apply h-full max-h-8 sm:max-h-full;
-  background-color: var(--selected-hex);
-}*/
-
 #hueInput {
   background: linear-gradient(90deg,
   hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,

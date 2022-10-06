@@ -14,6 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { EditComponent } from './pages/edit/edit.component';
 import {SafeHtmlPipeline} from "./pipelines/safe-html.pipeline";
+import { PreviewComponent } from './pages/preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {SafeHtmlPipeline} from "./pipelines/safe-html.pipeline";
     NotificationComponent,
     PaletteViewerComponent,
     EditComponent,
-    SafeHtmlPipeline
+    SafeHtmlPipeline,
+    PreviewComponent
   ],
   imports: [
     AppRoutingModule,
