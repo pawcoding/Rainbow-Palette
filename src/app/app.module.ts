@@ -15,6 +15,8 @@ import {AppRoutingModule} from "./app-routing.module";
 import { EditComponent } from './pages/edit/edit.component';
 import {SafeHtmlPipeline} from "./pipelines/safe-html.pipeline";
 import { PreviewComponent } from './pages/preview/preview.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,13 @@ import { PreviewComponent } from './pages/preview/preview.component';
   ],
   imports: [
     AppRoutingModule,
-    BrowserModule
+    BrowserModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [
     ColorService,

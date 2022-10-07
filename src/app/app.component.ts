@@ -39,7 +39,7 @@ export class AppComponent {
     public router: Router
   ) {
     // Redirect to https if server served / browser fetched with http
-    if (environment.production && window.location.href.startsWith('http://'))
+    if (environment.production && window.location.href.startsWith('http://') && !window.location.href.startsWith('http://localhost'))
       window.location.href = 'https://' + window.location.href.substring(6)
 
     // Load theme from local storage and subscribe to changes
