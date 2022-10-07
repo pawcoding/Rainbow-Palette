@@ -33,6 +33,12 @@
             "purpose": "maskable"
         },
         {
+            "src": "/assets/favicon/mstile-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
             "src": "/assets/favicon/apple-touch-icon.png",
             "sizes": "180x180",
             "type": "image/png",

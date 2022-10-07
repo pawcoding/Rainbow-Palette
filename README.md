@@ -35,12 +35,12 @@ All suggestions are discussed there, tasks are distributed and help is offered.
   - [x] `manifest.webmanifest`
   - [x] `angular.json`
   - [x] `index.html`
-- [ ] Setup hosting for `/edit` with `.htaccess`
-- [ ] Create `sitemap.xml`
-- [ ] Check Lighthouse Reports
-  - [ ] Desktop
-  - [ ] Mobile
-- [ ] Check IONOS Website Checker
+- [x] Setup hosting for `/edit` with `.htaccess`
+- [x] Create `sitemap.xml`
+- [x] Check Lighthouse Reports
+  - [x] Desktop
+  - [x] Mobile
+- [x] Check IONOS Website Checker
 
 ### Side features
 - [x] Favicon draft
@@ -51,6 +51,7 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 - [ ] Provide prefabricated palettes
 - [ ] Generate color palette from images
 - [ ] Database storage for sharing palettes
+- [ ] Localize with i18n or transloco
 
 ### Support for color formats
 

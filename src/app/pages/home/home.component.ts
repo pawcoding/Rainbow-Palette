@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
         }
     })
 
-    this.scheme = paletteService.scheme & this.schemes.length
+    this.scheme = paletteService.scheme % this.schemes.length
     this.schemeTitle = this.schemes
       .find((s: { index: PaletteScheme; }) => s.index === this.scheme)
       .title
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 
     this.loading = true
     const interval = setInterval(() => {
-      this.progress = Math.round(100 * (this.loadBar?.nativeElement.clientWidth || 0) / (this.loadContainer?.nativeElement.clientWidth || 100))
+      this.progress = (this.loadBar?.nativeElement.clientWidth || 0) / (this.loadContainer?.nativeElement.clientWidth || 100)
     }, 50)
 
     setTimeout(() => {
