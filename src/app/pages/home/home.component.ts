@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
         }
     })
 
-    this.scheme = paletteService.scheme
+    this.scheme = paletteService.scheme % this.schemes.length
     this.schemeTitle = this.schemes
       .find((s: { index: PaletteScheme; }) => s.index === this.scheme)
       .title
