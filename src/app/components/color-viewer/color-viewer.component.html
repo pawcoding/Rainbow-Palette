@@ -7,7 +7,7 @@
     <div class="grid-in-name flex gap-4 items-center mb-2">
       <h3
         *ngIf="!editingState"
-        class="inline-block py-0 cursor-pointer"
+        class="inline-block py-2 cursor-pointer"
         (click)="openEditor()"
       >
         {{color.name}}
@@ -16,7 +16,7 @@
       <input *ngIf="editingState"
              type="text" #editName
              placeholder="Color name"
-             class="bg-transparent p-0 mb-1 mt-1.5 text-lg font-bold
+             class="bg-transparent p-0 mb-1.5 mt-2 text-lg font-bold
                     border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
              (focusout)="closeEditor()"
              (keydown.enter)="closeEditor()"

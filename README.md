@@ -35,12 +35,20 @@ All suggestions are discussed there, tasks are distributed and help is offered.
   - [x] `manifest.webmanifest`
   - [x] `angular.json`
   - [x] `index.html`
+  - [ ] Favicon
 - [x] Setup hosting for `/edit` with `.htaccess`
 - [x] Create `sitemap.xml`
 - [x] Check Lighthouse Reports
   - [x] Desktop
   - [x] Mobile
 - [x] Check IONOS Website Checker
+- [ ] Proper mobile view
+- [x] Color-Namer
+  - [x] Add dictionary
+- [x] ~~Separate scheme selector from generate button~~ Rename generate button
+- [x] Add rainbow scheme
+- [x] Reduce icon size
+- [ ] Change name
 
 ### Side features
 - [x] Favicon draft

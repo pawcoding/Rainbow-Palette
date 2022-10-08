@@ -1,0 +1,903 @@
+name;hue;saturation;luminosity
+Black;-1;0;0
+Cultured;-1;0;96
+Davys grey;-1;0;33
+Dim gray;-1;0;41
+Eerie black;-1;0;11
+Gainsboro;-1;0;86
+Granite gray;-1;0;40
+Gray;-1;0;50
+Gray;-1;0;75
+Jet;-1;0;20
+Light gray;-1;0;83
+Quick Silver;-1;0;65
+Silver;-1;0;75
+Silver chalice;-1;0;67
+Sonic silver;-1;0;46
+Spanish gray;-1;0;60
+White;-1;0;100
+Baby pink;0;69;86
+Blood red;0;100;20
+Carnelian;0;74;40
+Copper rose;0;20;50
+Dark red;0;100;27
+Dark sienna;0;50;16
+Falu red;0;68;30
+Firebrick;0;68;42
+Indian red;0;53;58
+Light coral;0;79;72
+Maroon;0;100;25
+Maximum red;0;74;49
+Middle red purple;0;33;49
+Oxblood;0;100;15
+Permanent Geranium Lake;0;75;53
+Persian plum;0;60;27
+Persian red;0;60;50
+Prune;0;60;27
+Red;0;100;50
+Rose taupe;0;22;46
+Rosso corsa;0;100;42
+Rosy brown;0;25;65
+Seal brown;0;43;14
+Snow;0;100;99
+Tea rose;0;69;86
+Tuscan red;0;27;38
+Tuscany;0;24;68
+Pastel pink;1;47;76
+Spanish pink;1;78;86
+Tart Orange;2;96;63
+Deep chestnut;3;45;50
+International orange;3;88;39
+Mona Lisa;3;100;78
+New York pink;3;52;67
+Red-orange;3;100;64
+Silver pink;3;16;72
+Sweet Brown;3;55;43
+Barn red;4;97;25
+International orange;4;63;46
+Orange-red;4;100;64
+Rose ebony;4;19;34
+Chili red;5;76;52
+Cinnabar;5;76;55
+Congo pink;5;90;72
+Copper penny;5;29;55
+Coral pink;5;90;72
+Medium carmine;5;54;45
+Red;5;99;53
+Vermilion;5;76;55
+Misty rose;6;100;94
+Old burgundy;6;19;22
+Redwood;6;33;48
+Rojo Spanish red;6;99;33
+Salmon;6;93;71
+Burnished brown;8;19;54
+Cedar Chest;8;54;54
+Rufous;8;92;34
+Scarlet;8;100;50
+Vermilion;8;76;48
+Bole;9;34;35
+Burnt umber;9;59;34
+Liver;9;18;34
+Syracuse Orange;9;100;42
+Tomato;9;100;64
+Black bean;10;94;12
+Chestnut;10;48;40
+Melon;10;98;84
+Orange soda;10;95;61
+Terra cotta;10;70;62
+Chinese red;11;70;39
+Portland Orange;11;100;61
+Blast-off bronze;12;27;52
+Cinereous;12;12;54
+Dark liver;12;21;27
+Kobe;12;71;31
+Liver;12;55;27
+Outrageous Orange;12;100;65
+Sienna;12;71;31
+Vivid tangerine;12;100;77
+Coquelicot;13;100;50
+Burnt sienna;14;78;62
+Copper red;14;54;56
+Dark salmon;15;72;70
+Middle red;15;69;68
+Coral;16;100;66
+Red-orange;16;100;50
+Flame;17;77;51
+Light salmon;17;100;74
+Sinopia;17;90;42
+Copper;18;61;63
+Mandarin;18;88;62
+Orange;18;100;61
+Rust;18;86;39
+International orange;19;100;50
+Strawberry Blonde;19;100;69
+Atomic tangerine;20;100;70
+Brown sugar;20;39;49
+Fuzzy Wuzzy;20;63;33
+Grenadier;20;100;41
+Mahogany;20;100;38
+Mango Tango;20;100;63
+Orange-red;20;100;56
+Red-orange;20;100;56
+Orange;21;100;50
+Pale silver;21;12;76
+Silver;21;12;76
+Umber;21;17;33
+Antique brass;22;47;63
+Beaver;22;20;53
+Persimmon;22;100;46
+Unbleached silk;22;100;90
+Apricot;24;90;84
+Bistre;24;33;18
+Pumpkin;24;100;55
+Raw sienna;24;60;59
+Safety orange;24;100;50
+Tumbleweed;24;57;70
+Burnt orange;25;100;40
+Champagne pink;25;55;88
+Chocolate;25;75;47
+Coffee;25;34;33
+Desert sand;25;63;81
+Saddle brown;25;76;31
+Seashell;25;100;97
+Spanish orange;25;100;45
+Tan;25;44;69
+Tenn;25;100;40
+Tuscan brown;25;34;33
+Van Dyke brown;25;44;28
+Caf  au lait;26;30;50
+French beige;26;30;50
+Peach;26;100;82
+Persian orange;26;63;60
+Princeton orange;26;91;55
+Russet;26;65;30
+Tuscan tan;26;30;50
+Alloy orange;27;85;42
+Dark lava;27;18;24
+Liver chestnut;27;28;47
+Macaroni and Cheese;27;100;77
+Taupe;27;18;24
+Cadmium orange;28;84;55
+Kobicha;28;51;28
+Peach puff;28;100;86
+Safety orange;28;100;50
+Sandy brown;28;87;67
+Copper;29;57;46
+Heat Wave;29;100;50
+Liver;29;64;44
+Rajah;29;95;68
+Almond;30;52;87
+Bronze;30;61;50
+Caf  noir;30;39;21
+Dark brown;30;51;26
+Deep saffron;30;100;60
+Fawn;30;69;67
+Isabelline;30;27;94
+Light orange;30;98;85
+Linen;30;67;94
+Mellow apricot;30;90;72
+Middle yellow red;30;76;69
+Ochre;30;71;47
+Orange;30;100;50
+Sepia;30;70;26
+Smoky black;30;33;5
+Windsor tan;30;98;33
+Chocolate;31;100;24
+Coyote brown;32;37;37
+Bisque;33;100;88
+Buff;33;100;75
+Camel;33;41;59
+Carrot orange;33;85;53
+Dark orange;33;100;50
+Desert;33;41;59
+Fallow;33;41;59
+Lion;33;41;59
+Middle grey;33;5;52
+Pullman Brown;33;63;24
+Raw umber;33;31;39
+Tangerine;33;100;47
+Timberwolf;33;11;84
+Wood brown;33;41;59
+Antique white;34;78;91
+Burlywood;34;57;70
+French bistre;34;27;41
+Gold;34;65;72
+Grullo;34;17;59
+Tan;34;59;64
+Yellow Orange;34;100;63
+Deep champagne;35;90;81
+Fulvous;35;100;45
+Indian yellow;35;71;62
+Sunset;35;90;81
+Tuscan;35;90;81
+Blanched almond;36;100;90
+Golden brown;36;76;34
+Navajo white;36;100;84
+Sunray;36;71;62
+Yellow Orange;36;100;51
+Bright yellow;37;100;56
+Champagne;37;72;89
+Khaki;37;29;67
+Orange peel;37;100;50
+Papaya whip;37;100;92
+Shadow;37;20;45
+Light French beige;38;40;64
+Magnolia;38;51;90
+Bone;39;32;84
+Gamboge;39;88;48
+Marigold;39;83;52
+Old lace;39;85;95
+Orange;39;100;50
+Peach;39;100;85
+Wheat;39;77;83
+Floral white;40;100;97
+Harvest gold;40;100;43
+Maximum yellow red;40;87;62
+Platinum;40;6;89
+Metallic Sunburst;41;47;42
+Xanthous;41;87;57
+Chinese yellow;42;100;50
+Dutch white;42;62;84
+Field drab;42;57;27
+Banana Mania;43;87;85
+Bistre brown;43;73;34
+Cosmic latte;43;100;95
+Dark goldenrod;43;89;38
+Drab;43;73;34
+Drab dark brown;43;28;23
+Gold Fusion;43;26;41
+Goldenrod;43;74;49
+Mode beige;43;73;34
+Olive Drab;43;32;18
+Sand dune;43;73;34
+Satin sheen gold;43;59;50
+Maize;44;87;62
+Orange-yellow;44;92;54
+Selective yellow;44;100;50
+Amber;45;100;50
+Ecru;45;35;63
+Lemon curry;45;75;46
+Mikado yellow;45;100;52
+Orange-yellow;45;91;69
+Parchment;45;53;88
+Saffron;45;90;57
+Sand;45;35;63
+Sunglow;45;100;60
+Eggshell;46;46;89
+Gold;46;100;32
+Gold;46;65;52
+Golden poppy;46;100;49
+Mango;46;98;50
+Metallic gold;46;64;52
+Jasmine;47;90;73
+Lemon meringue;47;76;85
+Mellow yellow;47;90;73
+Mustard;47;100;67
+Cornsilk;48;100;93
+Medium champagne;48;75;81
+Naples yellow;48;94;67
+Royal yellow;48;94;67
+Stil de grain yellow;48;94;67
+Vanilla;48;75;81
+Jonquil;49;91;52
+Old gold;49;61;52
+Cyber yellow;50;100;50
+Flax;50;76;72
+Vegas gold;50;48;56
+Yellow;50;95;75
+Yellow;50;100;50
+Arylide yellow;51;74;67
+Gold;51;100;50
+Hansa yellow;51;74;67
+School bus yellow;51;100;50
+Yellow;51;100;47
+Golden yellow;52;100;50
+Minion yellow;52;89;64
+Sizzling Sunrise;52;100;50
+Spanish bistre;52;44;35
+Antique bronze;53;55;26
+Safety yellow;53;98;47
+Yellow;53;100;50
+Citrine;54;92;47
+Corn;54;95;68
+Khaki;54;77;75
+Lemon chiffon;54;100;90
+Maize;54;95;67
+Misty moss;54;33;60
+Straw;54;68;66
+Green-yellow;55;76;76
+Middle yellow;55;100;50
+Sage;55;27;64
+Aureolin;56;100;50
+Canary yellow;56;100;50
+Dark khaki;56;38;58
+Lemon yellow;56;100;65
+Process yellow;56;100;50
+Yellow;56;100;50
+Cream;57;100;91
+Icterine;58;96;68
+Lemon;58;100;50
+Titanium yellow;58;100;47
+Yellow Sunshine;58;100;50
+Olive green;59;38;54
+Pale spring bud;59;55;83
+Spring green;59;55;83
+Baby powder;60;67;99
+Battleship grey;60;1;51
+Beige;60;56;91
+Canary;60;100;80
+Ivory;60;100;97
+Laser lemon;60;100;70
+Lemon glacier;60;100;50
+Lemon yellow;60;100;81
+Light goldenrod yellow;60;80;90
+Light yellow;60;100;94
+Maximum yellow;60;95;60
+Old silver;60;1;51
+Olive;60;100;25
+Unmellow yellow;60;100;70
+Xanthic;60;93;48
+Yellow;60;100;50
+Yellow;60;99;60
+Citron;64;69;39
+Acid green;65;76;43
+Maximum green yellow;65;75;61
+Bitter lemon;66;89;47
+Pear;66;75;54
+Key lime;67;83;75
+Black olive;70;5;22
+Arctic lime;72;100;54
+Electric lime;72;100;50
+Middle green yellow;72;43;56
+Mindaro;72;90;75
+Volt;72;100;50
+June bud;73;64;60
+Lime;75;100;50
+Moss green;75;26;48
+Turtle green;75;26;48
+Yellow-green;79;63;70
+Olive Drab;80;61;35
+Sheen green;80;100;42
+Spring bud;80;100;49
+Yellow-green;80;61;50
+Dark olive green;82;39;30
+Green Lizard;84;90;58
+Green-yellow;84;100;59
+Inchworm;84;79;65
+Rifle green;84;15;26
+Pine tree;85;15;16
+Olivine;87;33;59
+French lime;89;98;61
+Chartreuse;90;100;50
+Lawn green;90;100;49
+Maximum green;90;48;37
+Sap green;93;50;33
+Spring Frost;94;100;58
+Green;95;56;44
+Laurel green;95;17;67
+Pistachio;96;42;61
+Ebony;97;8;34
+Nyanza;97;100;93
+Tea green;100;62;85
+Kelly green;101;78;41
+Bud green;102;37;55
+Kombu green;103;16;22
+Harlequin;105;100;50
+Fern green;106;29;37
+Lincoln green;106;89;18
+Artichoke green;110;24;35
+Mantis;110;44;58
+Neon green;111;100;54
+Slimy green;111;73;34
+May green;112;38;41
+Yellow-green;112;75;40
+Granny Smith apple;113;56;76
+India green;115;89;28
+Dark green;120;100;20
+Dark sea green;120;25;65
+Forest green;120;61;34
+Green;120;100;50
+Green;120;100;25
+Honeydew;120;100;97
+Light green;120;73;75
+Lime;120;100;50
+Lime green;120;61;50
+Mint green;120;100;80
+Nickel;120;1;45
+Pakistan green;120;100;20
+Russian green;120;17;49
+Screamin Green;120;100;70
+Celadon;123;47;78
+Hunter green;129;28;29
+Middle green;130;29;43
+Eton blue;134;31;69
+Ash gray;135;9;72
+Erin;135;100;50
+Xanadu;136;8;49
+Cambridge blue;140;20;70
+Emerald;140;52;55
+Malachite;140;90;45
+Paris Green;140;52;55
+Shiny Shamrock;141;29;51
+Turquoise green;142;40;73
+Green;143;100;34
+Sea green;146;50;36
+Amazon;147;35;36
+Medium sea green;147;50;47
+Android green;148;69;55
+Green;149;100;32
+Forest green;149;97;14
+Dark spring green;150;66;27
+Mint cream;150;100;98
+Spring green;150;100;50
+Phthalo green;151;49;14
+Magic mint;153;70;80
+Morning blue;153;11;60
+Spanish green;153;100;28
+Cadmium green;154;100;21
+Medium aquamarine;154;64;63
+Green;156;100;34
+Shamrock green;156;100;31
+Medium spring green;157;100;49
+Green;158;72;39
+Jade;158;100;33
+Mint;158;49;47
+Aquamarine;160;100;75
+Green;160;100;31
+Green-cyan;160;100;30
+Sacramento State green;160;87;12
+Mountain Meadow;161;59;46
+Viridian;161;34;38
+Dark jungle green;162;16;12
+Green;163;100;33
+Hookers green;163;25;38
+Jungle green;163;61;42
+Spanish viridian;163;100;25
+Illuminating emerald;164;49;38
+Opal;164;18;71
+Caribbean green;165;100;40
+Polished Pine;166;28;50
+Zomp;166;49;44
+Green;167;48;18
+Wintergreen Dream;167;23;44
+Generic viridian;168;100;25
+Gotham green;168;100;17
+Green Sheen;168;28;56
+Paolo Veronese green;168;100;30
+Sea green;168;100;50
+Tropical rainforest;168;100;23
+Middle blue green;170;50;70
+Keppel;171;50;46
+Persian green;173;100;33
+Turquoise;174;72;56
+Pine green;175;98;24
+Myrtle green;176;42;33
+Turquoise blue;176;100;50
+Light sea green;177;70;41
+Verdigris;177;46;48
+Deep jungle green;178;100;15
+Medium turquoise;178;60;55
+Tiffany Blue;178;90;38
+Aqua;180;100;50
+Azure;180;100;97
+Celeste;180;100;85
+Cyan;180;100;50
+Dark cyan;180;100;27
+Dark slate gray;180;25;25
+Italian sky blue;180;100;85
+Light cyan;180;100;94
+Maximum blue green;180;60;47
+Rich black;180;100;13
+Robin egg blue;180;100;40
+Skobeloff;180;100;23
+Spanish sky blue;180;100;50
+Teal;180;100;25
+Warm black;180;100;13
+Dark turquoise;181;100;41
+Viridian green;181;100;30
+Cadet blue;182;26;50
+Metallic Seaweed;186;87;29
+Midnight green;187;100;16
+Powder blue;187;52;80
+Blizzard blue;188;66;80
+Ming;188;40;35
+Outer space;189;13;20
+Blue;190;100;34
+Middle blue;190;68;70
+Sky blue;190;73;69
+Pacific blue;191;76;45
+Vivid sky blue;192;100;50
+Cyan;193;100;46
+Non-photo blue;193;67;79
+Cerulean;194;76;48
+Deep Space Sparkle;194;19;36
+Teal blue;194;43;37
+Tourmaline;194;17;50
+Capri;195;100;50
+Deep sky blue;195;100;50
+Light blue;195;53;79
+Maximum blue;195;57;54
+Onyx;195;4;22
+Cerulean;196;100;33
+Weezy Blue;196;79;45
+Blue;197;100;37
+Blue sapphire;197;75;29
+Sky blue;197;71;73
+Baby blue;199;77;74
+Dark sky blue;199;47;69
+Gunmetal;200;15;19
+Pewter Blue;200;23;63
+Silver sand;200;2;75
+Star command blue;200;100;36
+Light cornflower blue;201;67;75
+Columbia Blue;202;56;82
+Uranian blue;202;78;82
+French blue;203;100;37
+Honolulu blue;203;100;35
+Indigo dye;203;100;21
+Light sky blue;203;92;75
+Sapphire blue;203;100;32
+Spanish blue;203;100;36
+Carolina blue;204;59;58
+Charcoal;204;19;26
+Green-blue;204;67;47
+Air;205;39;60
+Cadet grey;205;16;63
+Maya blue;205;94;72
+Pale cerulean;205;55;75
+Prussian blue;205;100;16
+Aero;206;70;70
+Beau blue;206;46;82
+Blue jeans;206;79;65
+Dark electric blue;206;18;40
+Pale aqua;206;46;82
+Paynes grey;206;18;40
+Iceberg;207;52;63
+Rich black;207;90;4
+Steel blue;207;44;49
+True Blue;207;100;41
+Alice blue;208;100;97
+Cerulean frost;208;42;60
+Baby blue eyes;209;74;79
+Black coral;209;14;38
+Green-blue;209;83;39
+USAFA blue;209;100;30
+Azure;210;100;50
+Bleu de France;210;79;55
+Blue-gray;210;50;60
+Bright navy blue;210;79;46
+Dodger blue;210;100;56
+Lapis lazuli;210;61;38
+Light slate gray;210;14;53
+Livid;210;50;60
+Navy blue;210;79;46
+Rich black;210;50;1
+Slate gray;210;13;50
+Tufts blue;210;71;56
+Yale Blue;210;100;21
+Queen blue;211;38;42
+French sky blue;212;99;73
+Little boy blue;212;62;64
+Oxford blue;212;100;14
+Denim;213;80;41
+Light steel blue;214;41;78
+Shadow blue;214;20;56
+Bdazzled blue;215;53;38
+Sapphire;215;56;40
+Glaucous;216;37;55
+Sapphire;216;85;39
+United Nations blue;216;73;63
+Blue;217;99;56
+Blue yonder;217;35;48
+Cornflower blue;219;79;66
+Royal blue;219;100;20
+YInMn Blue;219;52;37
+Roman silver;221;8;55
+Blue;222;100;33
+Han blue;223;59;54
+Periwinkle;223;41;83
+Bluetiful;224;78;57
+Cerulean blue;224;64;46
+Resolution blue;224;100;26
+Royal blue;225;73;57
+Space cadet;226;47;22
+Wild blue yonder;226;33;73
+Denim blue;227;69;42
+Light periwinkle;228;32;83
+Ultramarine blue;228;90;61
+Cool grey;229;16;61
+Persian blue;229;74;42
+Violet-blue;229;56;45
+Neon blue;230;100;64
+Blue;231;100;33
+Independence;231;18;36
+Manatee;231;10;63
+Phthalo blue;233;100;27
+Zaffre;233;100;33
+Liberty;236;33;49
+Purple navy;236;24;40
+St Patricks blue;236;55;31
+Blue;240;100;50
+Blue;240;50;40
+Blue bell;240;33;73
+Duke blue;240;100;31
+Ghost white;240;100;99
+Lavender;240;67;94
+Lavender blue;240;100;90
+Maximum blue purple;240;54;79
+Medium blue;240;100;40
+Midnight blue;240;64;27
+Navy blue;240;100;25
+Periwinkle;240;100;90
+Cosmic cobalt;241;50;36
+Rhythm;242;13;53
+International Klein Blue;244;87;30
+Picotee blue;244;55;34
+Ultramarine;244;87;30
+Iris;245;57;56
+Lavender gray;245;12;79
+Violet-blue;246;45;61
+Majorelle blue;247;67;59
+Dark slate blue;248;39;39
+Slate blue;248;54;58
+Trypan Blue;248;95;36
+Medium slate blue;249;80;67
+Plump Purple;251;44;49
+Han purple;255;96;54
+Silver;255;2;67
+Persian indigo;258;74;27
+Medium purple;260;60;65
+Middle blue purple;260;37;60
+Paua;260;100;18
+Cyber grape;263;31;37
+Spanish violet;264;53;33
+Indigo;266;100;26
+Purple;266;55;33
+Royal purple;267;35;49
+Purple mountain majesty;269;30;59
+Amethyst;270;50;60
+Rebecca Purple;270;49;40
+Russian violet;270;54;20
+Violet;270;100;50
+Blue-violet;271;76;53
+Electric violet;274;100;50
+Violet;274;100;50
+Lavender;275;57;68
+Purple;275;100;37
+Mauve;276;100;85
+Purple;277;87;53
+Veronica;277;87;53
+Vivid violet;277;100;50
+Languid lavender;278;22;83
+Seance;278;61;33
+French violet;279;94;42
+Dark orchid;280;61;50
+Wisteria;281;46;75
+Dark violet;282;100;41
+Eminence;284;46;35
+Bright lilac;285;75;75
+Electric purple;285;100;50
+Glossy grape;285;18;64
+Purple Plum;285;41;52
+Heliotrope;286;100;73
+Violet;286;99;35
+African violet;288;31;63
+Medium orchid;288;59;58
+Purple;288;100;39
+Purpureus;288;38;49
+English violet;289;21;30
+French lilac;290;19;47
+Maximum purple;290;43;35
+Pomp and Power;290;19;47
+Dark purple;291;35;15
+Phlox;292;100;50
+Psychedelic purple;292;100;50
+Chinese violet;296;17;46
+Dark magenta;300;100;27
+Finn;300;37;30
+French mauve;300;53;64
+Fuchsia;300;100;50
+Fuchsia;300;47;54
+Lilac;300;26;71
+Magenta;300;100;50
+Midnight;300;49;29
+Pale purple;300;67;94
+Patriarch;300;100;25
+Plum;300;47;75
+Purple;300;100;25
+Raisin black;300;4;14
+Shocking pink;300;100;72
+Steel pink;300;60;50
+Thistle;300;24;80
+Ultra pink;300;100;72
+Violet;300;76;72
+Mardi Gras;301;100;27
+Orchid;302;59;65
+Secret;302;28;36
+Heliotrope gray;303;10;63
+Rose quartz;303;10;63
+Old lavender;304;8;44
+Japanese violet;307;29;28
+Plum;307;35;41
+Palatinate purple;308;44;28
+Razzmic Berry;308;29;43
+Byzantine;311;58;47
+Byzantium;311;46;30
+Lilac Luster;311;12;64
+Pink lavender;311;33;77
+Purple pizzazz;312;99;65
+Hot magenta;313;100;56
+Orchid;314;55;75
+Dark byzantium;315;24;29
+Razzle dazzle rose;315;100;60
+Shocking pink;315;98;52
+Antique fuchsia;316;22;46
+Pearly purple;316;35;56
+Violet;316;42;41
+Opera mauve;319;26;62
+Pink lace;319;100;93
+Fandango;320;56;46
+Flirt;320;100;32
+Hollywood cerise;320;100;48
+Rose pink;320;100;70
+Sky magenta;320;50;63
+Taupe gray;320;3;53
+Frostbite;322;80;56
+Medium violet-red;322;81;43
+Red-violet;322;81;43
+Mountbatten pink;323;13;54
+Mulberry;323;52;55
+Super pink;323;51;62
+Red-violet;324;50;51
+Maximum red purple;325;48;44
+Middle purple;325;53;68
+Sugar Plum;325;30;44
+Tyrian purple;325;96;20
+Magenta;326;100;50
+Persian rose;326;99;58
+Magenta haze;327;39;45
+Mexican pink;327;100;45
+Amaranth deep purple;328;57;40
+Deep pink;328;100;54
+Jazzberry jam;328;88;35
+Magenta;328;73;46
+Mulberry;328;51;53
+Pink;328;64;56
+Red-purple;328;100;45
+Eggplant;329;21;32
+Kobi;329;60;76
+Magenta;329;90;65
+Mystic maroon;329;44;47
+Pansy purple;329;67;28
+Persian pink;329;88;73
+Smitten;329;55;52
+Twilight lavender;329;31;41
+Wild Strawberry;329;100;63
+Deep cerise;330;69;53
+Hot pink;330;100;71
+Rose;330;100;50
+Rose bonbon;330;94;62
+Wild orchid;330;54;64
+Winter Sky;331;100;50
+China pink;333;63;65
+Liseran purple;333;63;65
+Thulian pink;333;63;65
+Violet-red;333;83;65
+Cotton candy;334;100;87
+French fuchsia;334;98;62
+Magenta;334;60;54
+Pale Dogwood;334;76;70
+Rose Pompadour;334;76;70
+Telemagenta;334;62;51
+Rubine red;335;100;41
+Carnation pink;336;100;83
+Mimi pink;336;100;93
+Old mauve;336;36;30
+Queen pink;336;38;85
+Violet-red;336;91;65
+Wine dregs;336;36;30
+Raspberry;337;91;47
+Ruby;337;86;47
+Amaranth pink;338;75;78
+Cyclamen;338;87;70
+English lavender;338;25;61
+Fandango pink;338;68;60
+Irresistible;338;45;48
+Maroon;338;57;44
+Mystic;338;62;58
+Pictorial carmine;338;89;40
+Quinacridone magenta;338;42;39
+Raspberry rose;338;45;48
+Razzmatazz;338;77;52
+French pink;339;97;71
+Nadeshiko pink;339;80;82
+Ruber;339;58;54
+Red;339;100;43
+Cameo pink;340;62;84
+Charm pink;340;64;73
+Lavender blush;340;100;97
+Rose red;340;73;44
+Spanish carmine;340;100;41
+Amaranth purple;342;63;41
+Blush;342;66;62
+Carmine;342;100;42
+Orchid pink;342;67;85
+Tickle Me Pink;342;95;76
+Cerise;343;72;53
+Cinnamon Satin;343;52;59
+Claret;343;69;29
+Mauve taupe;343;21;47
+Piggy pink;343;89;93
+Raspberry glace;343;21;47
+Baker-Miller pink;344;100;78
+Rose Dust;344;25;49
+Schauss pink;344;100;78
+Vanilla ice;344;81;76
+Big dip o ruby;345;62;38
+Burgundy;345;100;25
+Puce;345;40;67
+Red;345;100;47
+Red;345;98;39
+Bright maroon;346;71;45
+Maroon;346;71;45
+Pink Sherbet;346;87;76
+Paradise pink;347;77;57
+Red;347;86;53
+Catawba;348;35;33
+Cherry blossom pink;348;100;86
+Crimson;348;83;47
+Infrared;348;100;64
+Mauvelous;348;73;77
+Radical Red;348;100;60
+University of Pennsylvania red;348;100;32
+Black Shadows;349;11;72
+Crimson;349;71;36
+French raspberry;349;64;48
+Neon fuchsia;349;99;63
+Shimmering Blush;349;52;69
+Vivid burgundy;349;69;37
+Antique ruby;350;66;31
+Cardinal;350;74;44
+Carmine;350;100;29
+Fiery rose;350;100;67
+Medium candy apple red;350;95;45
+Pink;350;100;88
+Popstar;350;46;53
+Red-violet;350;55;37
+Salmon pink;350;100;78
+Spanish red;350;100;45
+Ultra red;350;96;71
+Wild watermelon;350;96;71
+Light pink;351;100;86
+Sizzling Red;351;100;61
+Alizarin;352;71;52
+Brick red;352;57;53
+Rusty red;352;70;51
+Solid pink;352;42;38
+Rosewood;353;100;20
+Wine;353;42;32
+Pale pink;354;76;92
+Ruby red;354;80;34
+Candy pink;355;68;67
+Cordovan;355;37;39
+Imperial red;355;84;55
+Japanese carmine;355;59;39
+Lava;355;86;44
+Red;355;85;55
+Red Salsa;355;98;61
+Rocket metallic;355;5;52
+Rose madder;355;77;52
+Tango pink;355;68;67
+Deep taupe;356;15;43
+English red;356;39;48
+Upsdell red;356;69;40
+Venetian red;356;92;41
+Fire engine red;357;73;47
+Rose vale;357;37;49
+English vermillion;358;57;54
+Red;358;85;52
+Madder Lake;359;60;50
+Old rose;359;34;63
+Strawberry;359;94;65
+Maroon;359;76;27
+Crimson red;360;71;30

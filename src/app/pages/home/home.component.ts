@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
 
   value: string
   scheme: PaletteScheme
-  schemeTitle: string
   schemes: any
   invalid = false
   dropdown = false
@@ -51,9 +50,6 @@ export class HomeComponent implements OnInit {
     })
 
     this.scheme = paletteService.scheme % this.schemes.length
-    this.schemeTitle = this.schemes
-      .find((s: { index: PaletteScheme; }) => s.index === this.scheme)
-      .title
   }
 
   ngOnInit(): void {
@@ -67,10 +63,6 @@ export class HomeComponent implements OnInit {
 
   updateScheme(scheme: PaletteScheme) {
     this.scheme = scheme
-    const index = Object.values(PaletteScheme).indexOf(scheme) % 8
-    this.schemeTitle = this.schemes
-      .find((s: { index: PaletteScheme; }) => s.index === index)
-      .title
     this.dropdown = false
   }
 

@@ -32,6 +32,6 @@
 
 @layer utilities {
   .icon {
-    @apply h-8 w-8 dark:invert cursor-pointer transition-all duration-200;
+    @apply h-6 w-6 dark:invert cursor-pointer transition-all duration-200;
   }
 }
