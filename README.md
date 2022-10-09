@@ -45,10 +45,13 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 - [ ] Proper mobile view
 - [x] Color-Namer
   - [x] Add dictionary
-- [x] ~~Separate scheme selector from generate button~~ Rename generate button
+  - [x] Switch dictionary to CSV format for better loading times (reduced size by 1/3)
+- [x] Rename generate button
 - [x] Add rainbow scheme
 - [x] Reduce icon size
 - [ ] Change name
+- [x] Fix rounded color input (hopefully fixed. Need confirmation)
+- [ ] Schriftart heraussuchen
 
 ### Side features
 - [x] Favicon draft

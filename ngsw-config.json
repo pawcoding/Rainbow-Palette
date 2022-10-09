@@ -12,7 +12,8 @@
           "/assets/favicon/site.webmanifest",
           "/*.css",
           "/*.js",
-          "/assets/icons/*.svg"
+          "/assets/icons/*.svg",
+          "/assets/color_dictionary.svg"
         ]
       }
     },
