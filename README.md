@@ -36,6 +36,7 @@ All suggestions are discussed there, tasks are distributed and help is offered.
   - [x] `angular.json`
   - [x] `index.html`
   - [ ] Favicon
+  - [ ] Font caching
 - [x] Setup hosting for `/edit` with `.htaccess`
 - [x] Create `sitemap.xml`
 - [x] Check Lighthouse Reports
@@ -51,7 +52,7 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 - [x] Reduce icon size
 - [ ] Change name
 - [x] Fix rounded color input (hopefully fixed. Need confirmation)
-- [ ] Schriftart heraussuchen
+- [x] Search font from Google Fonts
 
 ### Side features
 - [x] Favicon draft

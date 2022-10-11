@@ -155,8 +155,6 @@ export class PaletteGenerator {
     if (currentHue === 253 && shade.hue > 308)
       currentHue = 4
 
-    console.log(currentHue)
-
     hues.forEach(hue => {
       if (hue !== currentHue) {
         let newHue = (shade.hue + (hue - currentHue) + 360) % 360

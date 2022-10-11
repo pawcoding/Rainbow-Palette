@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: 'class',
@@ -22,7 +24,8 @@ module.exports = {
         }
       },
       animation: {
-        load: 'load 5s linear'
+        load: 'load 5s linear',
+        processing: 'spin 1s ease-in-out infinite'
       },
       gridTemplateAreas: {
         'color-square': [
@@ -47,6 +50,9 @@ module.exports = {
       },
       flexGrow: {
         2: 2
+      },
+      fontFamily: {
+        'sans': ['Poppins', ...defaultTheme.fontFamily.sans]
       },
       minHeight: {
         10: '2.5rem'

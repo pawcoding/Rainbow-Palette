@@ -63,13 +63,14 @@
 
     <!-- Display all shades -->
     <div
-      class="grid-in-shade grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 gap-2"
+      class="grid-in-shade grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 sm:gap-2"
     >
       <span
         *ngFor="let shade of color.shades; index as i"
         title="Tune shade"
         class="block w-full py-4
-               text-center text-lg font-semibold cursor-pointer rounded"
+               text-center text-lg cursor-pointer sm:rounded"
+        [class]="i === 0 ? 'rounded-l' : (i === color.shades.length-1 ? 'rounded-r' : '')"
         [ngStyle]="{
           'background-color': shade.hex,
           'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
@@ -78,9 +79,11 @@
         (contextmenu)="copyToClipboard(shade, $event)"
       >
         <span class="opacity-0 sm:opacity-100">
-          {{shade.index}}
+          <span class="font-semibold">
+            {{shade.index}}
+          </span>
           <br>
-          {{shade.hex.toUpperCase()}}
+          {{shade.hex.toUpperCase().substring(1)}}
         </span>
       </span>
     </div>

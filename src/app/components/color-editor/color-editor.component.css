@@ -1,19 +1,9 @@
-input[type=range] {
-  @apply h-3 mt-2 w-full outline-none appearance-none cursor-pointer rounded;
-}
-
 input[type=range]::-webkit-slider-thumb {
-  @apply w-6 h-6 cursor-grab appearance-none outline-none border-none rounded;
   background-color: var(--selected-hex);
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 input[type=range]::-moz-range-thumb {
-  @apply w-6 h-6 cursor-grab appearance-none outline-none border-none rounded;
   background-color: var(--selected-hex);
-  -webkit-appearance: none;
-  -moz-appearance: none;
 }
 
 #hueInput {

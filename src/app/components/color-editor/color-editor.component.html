@@ -1,6 +1,6 @@
 <div [class]="dark ? 'dark' : ''" *ngIf="shade && color" class="w-full">
   <section
-    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20
+    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20 px-4
            bg-gray-900/50 dark:bg-gray-900/90"
     (click)="colorService.closeEditor()"
   >
@@ -42,7 +42,7 @@
           for="hueInput"
           class="flex justify-between"
         >
-          <span>Hue</span>
+          <span class="font-semibold">Hue</span>
           <span id="hueLabel" #hueLabel>{{shade.hue}}</span>
         </label>
 
@@ -62,7 +62,7 @@
           for="saturationInput"
           class="flex justify-between"
         >
-          <span>Saturation</span>
+          <span class="font-semibold">Saturation</span>
           <span id="saturationLabel" #saturationLabel>{{shade.saturation}}</span>
         </label>
 
@@ -82,7 +82,7 @@
           for="luminosityInput"
           class="flex justify-between"
         >
-          <span>Luminosity</span>
+          <span class="font-semibold">Luminosity</span>
           <span id="luminosityLabel" #luminosityLabel>{{shade.luminosity}}</span>
         </label>
 

@@ -104,7 +104,7 @@ export class PaletteViewerComponent implements OnInit {
     setTimeout(() => {
       this.notificationService.notification.emit('Palette saved')
       this.saving = false
-    }, 1500)
+    }, 2000)
   }
 
   /**

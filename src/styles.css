@@ -28,6 +28,22 @@
   input[type=color]::-webkit-color-swatch {
     @apply border-none h-full;
   }
+
+  input[type=range] {
+    @apply h-4 sm:h-3 mt-2 w-full outline-none appearance-none cursor-pointer rounded
+  }
+
+  input[type=range]::-webkit-slider-thumb {
+    @apply w-8 sm:w-6 h-8 sm:h-6 cursor-grab appearance-none outline-none border-none rounded;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  input[type=range]::-moz-range-thumb {
+    @apply w-8 sm:w-6 h-8 sm:h-6 cursor-grab appearance-none outline-none border-none rounded;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
 }
 
 @layer utilities {

@@ -1,5 +1,5 @@
 <div>
-  <article class="text-center text-lg">
+  <article class="text-center text-lg px-4">
     <section *ngIf="!loading">
       <p class="font-bold">
         Generate an entire color palette from just one color.
@@ -71,7 +71,7 @@
             Pick a color scheme:
           </span>
 
-          <section class="h-48 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600">
+          <section class="h-32 sm:h-48 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600">
             <label
               *ngFor="let schemeToShow of schemes"
               class="block p-2 mb-1 mr-4
