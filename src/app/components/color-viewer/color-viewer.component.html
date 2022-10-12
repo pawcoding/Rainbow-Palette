@@ -1,5 +1,5 @@
 <div [class]="dark ? 'dark' : ''">
-  <article
+  <article *ngIf="color"
     class="my-8 items-center cursor-default overflow-clip
            grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 grid-areas-color-square sm:grid-areas-color-semi lg:grid-areas-color-wide"
   >

@@ -13,7 +13,8 @@
           "/*.css",
           "/*.js",
           "/assets/icons/*.svg",
-          "/assets/color_dictionary.csv"
+          "/assets/color_dictionary.csv",
+          "/assets/rainbow-palette-*.svg"
         ]
       }
     },

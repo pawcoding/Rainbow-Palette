@@ -5,14 +5,15 @@
 >
   <header class="w-full grid grid-cols-1 sm:grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10">
     <img
-      src="/assets/rainbow-palette-logo.svg"
       alt="Rainbow Palette"
-      class="max-h-16 mx-auto sm:ml-0"
+      class="mx-auto sm:ml-0 col-span-1 sm:col-span-2 lg:col-span-1"
+      height="50" width="179"
+      [src]="'/assets/rainbow-palette-' + (dark ? 'light' : 'dark') + '.svg'"
     >
 
     <nav class="col-span-1 sm:col-span-4 lg:col-span-2">
       <div
-        class="mr-auto sm:mx-auto w-fit"
+        class="mx-auto w-fit"
       >
         <ul
           *ngIf="paletteService.hasPalette()"
@@ -84,7 +85,7 @@
       <img
         height="32" width="139"
         alt="pawcode&nbsp;Development"
-        [src]="'assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'"
+        [src]="'/assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'"
       >
     </a>
   </footer>
