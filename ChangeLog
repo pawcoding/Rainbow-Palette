@@ -1,3 +1,64 @@
+2022.10.13, v0.1.2
+
+feature:
+- (web) pwa support
+- (theme) name and logo change
+- (theme) new font
+
+improvement:
+- (color) proper color names
+- (theme) proper mobile view
+- (palette) new rainbow theme
+
+
+2022.10.06, v0.1.2
+
+feature:
+- (palette) palette generation with different schemes
+- (theme) new animaitons
+- (web) routing
+
+improvement:
+- (theme) new homepage
+- (editor) new editor
+
+
+2022.09.24, v0.1.1
+
+feature:
+- (color) hsv and cmyk color format
+
+improvement:
+- (color) new shade interpolation algorithm
+- (editor) improved color editor
+
+
+2022.09.10, v0.1.0
+
+feature:
+- (export) css and tailwind export
+- (notification) notification toast
+- (dialog) dialog modal
+- (services) global dialog and notification service
+
+
+2022.09.10, v0.0.5
+
+feature:
+- (picker) improved editor
+- (palette) edit palette
+
+improvement:
+- (theme) small redesign
+
+
+2022.09.03, v0.0.4
+
+feature:
+- (theme) light switch
+- (palette) save palette
+
+
 2022.08.30, v0.0.3
 
 feature:

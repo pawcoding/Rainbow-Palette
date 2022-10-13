@@ -2,7 +2,7 @@
 
 [![GitHub](https://img.shields.io/github/license/pawcoding/tailwind-color-generator?color=brightgreen)](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)
 [![Live Demo](https://img.shields.io/badge/live--demo-online-blue)](https://colors.apps.pawcode.de)
-![Version](https://img.shields.io/badge/version-0.1.2-orange)
+![Version](https://img.shields.io/badge/version-0.1.3-orange)
 [![Discord](https://badgen.net/discord/members/GzgTh4hxrx)](https://discord.gg/GzgTh4hxrx)
 
 This webapp helps you to generate your own color palette for websites and other projects.
