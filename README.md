@@ -20,44 +20,13 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 | 🟩     | `0.1.0` | Proof of concept                               |
 | 🟩     | `0.1.1` | Adjust every shade                             |
 | 🟩     | `0.1.2` | First Redesign                                 |
-| 🟥     | `0.1.3` | Create PWA                                     |
+| 🟩     | `0.1.3` | Create PWA                                     |
 | 🟥     | `0.1.4` | Improved algorithm for color generation        |
 | 🟥     | `0.1.5` | Improved algorithm for palette generation      |
 | 🟥     | `0.1.6` | Adjust colors in other formats (RGB, HSV, ...) |
 | 🟥     | `0.2.0` | Exemplary web components to preview palette    |
 
-### Version 0.1.3
-- [x] Add PWA package
-- [x] Create favicon
-- [x] Check settings
-  - [x] `package.json`
-  - [x] `ngsw-config.json`
-  - [x] `manifest.webmanifest`
-  - [x] `angular.json`
-  - [x] `index.html`
-  - [x] Favicon
-- [x] Setup hosting for `/edit` with `.htaccess`
-- [x] Create `sitemap.xml`
-- [x] Check Lighthouse Reports
-  - [x] Desktop
-  - [x] Mobile
-- [x] Check IONOS Website Checker
-- [x] Proper mobile view
-- [x] Color-Namer
-  - [x] Add dictionary
-  - [x] Switch dictionary to CSV format for better loading times (reduced size by 1/3)
-- [x] Rename generate button
-- [x] Add rainbow scheme
-- [x] Reduce icon size
-- [x] Change name
-- [ ] Fix rounded color input (hopefully fixed, need confirmation)
-- [x] Search font from Google Fonts
-- [x] New Screenshots
-- [x] Minify `.svg`s
-- [x] Remove unnecessary nameColor calls
-
 ### Side features
-- [x] Favicon draft
 - [ ] Add [MDX-Stories for Storybook](https://storybook.js.org/docs/react/writing-docs/mdx)
 - [ ] Karma tests for classes
 - [ ] GitHub Action for automatic release update

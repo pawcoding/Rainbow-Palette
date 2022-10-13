@@ -1,9 +1,11 @@
 import { PaletteExporter } from './palette-exporter';
 import {Palette} from "../models/palette.model";
+import {Color} from "../models/color.model";
 
 describe('PaletteExporter', () => {
 
-  let palette = Palette.generateRandomPalette(1)
+  let palette = new Palette('test', '0123456789')
+  palette.addColor(Color.generateRandomColor())
 
   it('should return css strings', () => {
     const cssRegEx = /--(.*)-(5|([1-9])0)0: +#[0-9A-Fa-f]{6}\b;/g

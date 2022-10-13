@@ -13,7 +13,7 @@ class MockNotificationService implements Partial<NotificationService> {
   notification = new EventEmitter<string | undefined>()
 
   constructor() {
-    const message = 'This is short notification.'
+    const message = 'This is a short notification.'
 
     setTimeout(() => {
       this.notification.emit(message)
