@@ -22,6 +22,7 @@ export class NotificationComponent implements OnInit {
 
         if (notification) {
           clearTimeout(this.timeout)
+          // @ts-ignore
           this.timeout = setTimeout(() => {
             this.closeNotification()
           }, 5000)

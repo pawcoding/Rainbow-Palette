@@ -1,6 +1,6 @@
 <div [class]="dark ? 'dark' : ''" *ngIf="shade && color" class="w-full">
   <section
-    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20
+    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20 px-4
            bg-gray-900/50 dark:bg-gray-900/90"
     (click)="colorService.closeEditor()"
   >
@@ -9,16 +9,16 @@
              font-medium bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded"
       (click)="$event.stopPropagation()"
     >
-      <h2 class="mb-2">Edit Color</h2>
+      <h2 class="mb-2">{{color.name}}</h2>
 
 
       <!-- Edit Hex -->
-      <div class="flex rounded overflow-clip">
+      <div class="flex">
         <input
           type="color"
           title="Select a shade"
           id="hexInput" #hexInput
-          class="w-1/5 h-10"
+          class="w-1/5 h-10 rounded-l rounded-r-none overflow-clip"
           [value]="shade.hex"
           (input)="updateColor(0, hexInput.value)"
         >
@@ -28,7 +28,7 @@
           title="Put your hex code here"
           id="hexCode" #hexCode
           placeholder="#4472C4"
-          class="w-4/5
+          class="w-4/5 rounded-r
                  text-medium text-gray-900 bg-gray-200 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500
                  border-0 focus:ring-0"
           [value]="shade.hex"
@@ -42,7 +42,7 @@
           for="hueInput"
           class="flex justify-between"
         >
-          <span>Hue</span>
+          <span class="font-semibold">Hue</span>
           <span id="hueLabel" #hueLabel>{{shade.hue}}</span>
         </label>
 
@@ -62,7 +62,7 @@
           for="saturationInput"
           class="flex justify-between"
         >
-          <span>Saturation</span>
+          <span class="font-semibold">Saturation</span>
           <span id="saturationLabel" #saturationLabel>{{shade.saturation}}</span>
         </label>
 
@@ -82,7 +82,7 @@
           for="luminosityInput"
           class="flex justify-between"
         >
-          <span>Luminosity</span>
+          <span class="font-semibold">Luminosity</span>
           <span id="luminosityLabel" #luminosityLabel>{{shade.luminosity}}</span>
         </label>
 

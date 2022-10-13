@@ -11,7 +11,7 @@ describe('ColorConverter', () => {
 
   it('should convert hsl to hex', () => {
     expect(ColorConverter.HSLtoHEX(0, 100, 50))
-      .toBe('#ff0000')
+      .toBe('#FF0000')
   })
 
   it('should convert hex to rgb', () => {
@@ -23,7 +23,7 @@ describe('ColorConverter', () => {
 
   it('should convert rgb to hex', () => {
     expect(ColorConverter.RGBtoHEX(231, 56, 135))
-      .toBe('#e73887')
+      .toBe('#E73887')
   })
 
   it('should convert rgb to cmyk', () => {

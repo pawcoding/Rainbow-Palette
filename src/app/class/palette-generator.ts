@@ -1,6 +1,7 @@
 import {Shade} from "../models/shade.model";
 import {Palette} from "../models/palette.model";
 import {Color} from "../models/color.model";
+import {ColorNamer} from "./color-namer";
 
 export class PaletteGenerator {
 
@@ -23,6 +24,8 @@ export class PaletteGenerator {
         return this.generateTriadicPalette(shade)
       case PaletteScheme.COMPOUND:
         return this.generateCompoundPalette(shade)
+      case PaletteScheme.RAINBOW:
+        return this.generateRainbowPalette(shade)
       default:
         const schemes = Object.keys(PaletteScheme)
         const index = schemes[Math.floor(Math.random() * schemes.length)]
@@ -141,6 +144,32 @@ export class PaletteGenerator {
     return compound
   }
 
+  private static generateRainbowPalette(shade: Shade) {
+    const rainbow = new Palette('Rainbow')
+
+    rainbow.addColor(new Color('primary', [shade]))
+
+    const hues = [4, 26, 55, 95, 149, 200, 253]
+    let currentHue = hues.reduce((prev, curr) =>
+      (Math.abs(curr - shade.hue) < Math.abs(prev - shade.hue) ? curr : prev))
+    if (currentHue === 253 && shade.hue > 308)
+      currentHue = 4
+
+    hues.forEach(hue => {
+      if (hue !== currentHue) {
+        let newHue = (shade.hue + (hue - currentHue) + 360) % 360
+        const newShade = new Shade(-1, true,
+          newHue,
+          20 + Math.floor(Math.random() * 80),
+          25 + Math.floor(Math.random() * 50)
+        )
+        rainbow.addColor(new Color(ColorNamer.nameColor(newShade), [newShade]), false)
+      }
+    })
+
+    return rainbow
+  }
+
   private static changeHueOnWheel(hue: number, change: number) {
     let wheel
     if (hue < 60)
@@ -178,4 +207,5 @@ export enum PaletteScheme {
   SPLIT,
   TRIADIC,
   COMPOUND,
+  RAINBOW
 }

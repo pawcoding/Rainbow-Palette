@@ -1,0 +1,67 @@
+{
+    "name": "Rainbow Palette",
+    "short_name": "Rainbow Palette",
+    "description": "This webapp helps you to generate your own color palette for websites and other projects.",
+    "theme_color": "#265dc5",
+    "background_color": "#f0efef",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/assets/favicon/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/mstile-70x70.png",
+            "sizes": "128x128",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/mstile-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/mstile-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/mstile-150x150.png",
+            "sizes": "270x270",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/mstile-310x150.png",
+            "sizes": "558x270",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/favicon/mstile-310x310.png",
+            "sizes": "558x558",
+            "type": "image/png"
+        }
+    ]
+}

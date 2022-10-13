@@ -1,8 +1,8 @@
 <div>
-  <article class="text-center text-lg">
+  <article class="text-center text-lg px-4">
     <section *ngIf="!loading">
       <p class="font-bold">
-        Generate an entire color palette from just one color
+        Generate an entire color palette from just one color.
       </p>
 
       <p>
@@ -11,13 +11,13 @@
 
       <div class="flex flex-col mt-4 max-w-xxs mx-auto relative">
         <span
-          class="flex rounded overflow-clip"
+          class="flex"
         >
           <input
             type="color"
             title="Pick your color"
             id="color" #color
-            class="w-1/5 h-10"
+            class="w-1/5 h-10 rounded-l rounded-r-none overflow-clip"
             [value]="value"
             (input)="updateValue(color.value)"
           >
@@ -27,7 +27,7 @@
             title="Put your hex code here"
             id="hexCode" #hexCode
             placeholder="#4472C4"
-            class="w-4/5
+            class="w-4/5 rounded-r
                    text-medium text-gray-900 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500
                    border-0 focus:ring-0"
             [value]="value"
@@ -47,7 +47,7 @@
             [title]="invalid ? 'You need a 6-digit hex code' : 'Generate a color palette'"
             (click)="generatePalette()"
           >
-            {{schemeTitle}}
+            Generate palette
           </span>
 
           <svg
@@ -71,7 +71,7 @@
             Pick a color scheme:
           </span>
 
-          <section class="h-48 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600">
+          <section class="h-32 sm:h-48 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600">
             <label
               *ngFor="let schemeToShow of schemes"
               class="block p-2 mb-1 mr-4
@@ -104,7 +104,7 @@
       <span #loadBar
         class="flex items-center justify-center h-6 text-sm font-bold text-primary-50 bg-primary-700 rounded-full animate-load"
       >
-        {{progress}} %
+        {{progress | percent:'2.0'}}
       </span>
     </div>
   </article>

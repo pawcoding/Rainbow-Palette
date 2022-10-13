@@ -1,5 +1,6 @@
 import {ColorInterpolater} from "../class/color-interpolater";
 import {Shade} from "./shade.model";
+import {ColorNamer} from "../class/color-namer";
 
 export class Color {
 
@@ -45,7 +46,7 @@ export class Color {
   public static generateRandomColor(): Color {
     const shade = Shade.generateRandomShade()
     return new Color(
-      shade.hex,
+      ColorNamer.nameColor(shade),
       shade.hex
     )
   }

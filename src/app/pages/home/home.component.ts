@@ -13,7 +13,6 @@ export class HomeComponent implements OnInit {
 
   value: string
   scheme: PaletteScheme
-  schemeTitle: string
   schemes: any
   invalid = false
   dropdown = false
@@ -51,9 +50,6 @@ export class HomeComponent implements OnInit {
     })
 
     this.scheme = paletteService.scheme % this.schemes.length
-    this.schemeTitle = this.schemes
-      .find((s: { index: PaletteScheme; }) => s.index === this.scheme)
-      .title
   }
 
   ngOnInit(): void {
@@ -67,10 +63,6 @@ export class HomeComponent implements OnInit {
 
   updateScheme(scheme: PaletteScheme) {
     this.scheme = scheme
-    const index = Object.values(PaletteScheme).indexOf(scheme) % 8
-    this.schemeTitle = this.schemes
-      .find((s: { index: PaletteScheme; }) => s.index === index)
-      .title
     this.dropdown = false
   }
 
@@ -81,14 +73,13 @@ export class HomeComponent implements OnInit {
     }
 
     this.loading = true
-    this.paletteService.generatePalette(this.value, this.scheme)
-
     const interval = setInterval(() => {
-      this.progress = Math.round(100 * (this.loadBar?.nativeElement.clientWidth || 0) / (this.loadContainer?.nativeElement.clientWidth || 100))
+      this.progress = (this.loadBar?.nativeElement.clientWidth || 0) / (this.loadContainer?.nativeElement.clientWidth || 100)
     }, 50)
 
     setTimeout(() => {
       clearInterval(interval)
+      this.paletteService.generatePalette(this.value, this.scheme)
       this.router.navigate(['edit'])
     }, 5100)
   }

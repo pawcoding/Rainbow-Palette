@@ -12,7 +12,7 @@ import {NotificationService} from "../../services/notification.service";
 export class ColorViewerComponent implements OnInit {
 
   @Input()
-  color: Color
+  color: Color | undefined
   @Input()
   dark = false
 
@@ -27,9 +27,7 @@ export class ColorViewerComponent implements OnInit {
   constructor(
     public colorService: ColorService,
     private notificationService: NotificationService
-  ) {
-    this.color = Color.generateRandomColor()
-  }
+  ) { }
 
   ngOnInit(): void {
   }
@@ -58,7 +56,8 @@ export class ColorViewerComponent implements OnInit {
    */
   closeEditor() {
     this.editingState = false
-    this.color.name = this.editName?.nativeElement.value || 'Random'
+    if (this.color)
+      this.color.name = this.editName?.nativeElement.value || 'Random'
   }
 
   /**

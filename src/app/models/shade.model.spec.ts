@@ -21,7 +21,7 @@ describe('Shade', () => {
     expect(shade.luminosity).toBe(50)
 
     shade = new Shade(0, true, '#00ff00')
-    expect(shade.hex).toBe('#00ff00')
+    expect(shade.hex).toBe('#00FF00')
   })
 
   it('should set random values', () => {
@@ -35,7 +35,7 @@ describe('Shade', () => {
     expect(shade.luminosity).toBe(37)
 
     shade.setHEX('#00bb00', true)
-    expect(shade.hex).toBe('#00bb00')
+    expect(shade.hex).toBe('#00BB00')
     expect(shade.fixed).toBeTrue()
   })
 

@@ -6,6 +6,7 @@ import {StorageService} from "../../services/storage.service";
 import {NotificationService} from "../../services/notification.service";
 import {ExportDialog} from "../../dialogs/export.dialog";
 
+
 @Component({
   selector: 'palette-viewer',
   templateUrl: './palette-viewer.component.html',
@@ -13,7 +14,7 @@ import {ExportDialog} from "../../dialogs/export.dialog";
 export class PaletteViewerComponent implements OnInit {
 
   @Input()
-  palette: Palette
+  palette: Palette | undefined
 
   @Input()
   dark = false
@@ -31,9 +32,7 @@ export class PaletteViewerComponent implements OnInit {
   constructor(
     private storage: StorageService,
     private notificationService: NotificationService
-  ) {
-    this.palette = Palette.generateRandomPalette(5)
-  }
+  ) { }
 
   ngOnInit(): void {
   }
@@ -73,8 +72,7 @@ export class PaletteViewerComponent implements OnInit {
    * @param color Color to remove from palette
    */
   removeColor(color: Color) {
-    if (this.palette.removeColor(color))
-      this.savePalette()
+    this.palette?.removeColor(color)
   }
 
   /**
@@ -84,7 +82,7 @@ export class PaletteViewerComponent implements OnInit {
     const target = ($event.target as HTMLButtonElement)
     this.adding = true
     setTimeout(() => {
-      this.palette.addColor(Color.generateRandomColor(), false)
+      this.palette?.addColor(Color.generateRandomColor(), false)
       this.adding = false
       setTimeout(() => {
         window.scroll({
@@ -100,11 +98,12 @@ export class PaletteViewerComponent implements OnInit {
    */
   savePalette() {
     this.saving = true
-    this.storage.savePalette(this.palette)
+    if (this.palette)
+      this.storage.savePalette(this.palette)
     setTimeout(() => {
       this.notificationService.notification.emit('Palette saved')
       this.saving = false
-    }, 1500)
+    }, 2000)
   }
 
   /**
@@ -122,18 +121,21 @@ export class PaletteViewerComponent implements OnInit {
    */
   closeEditor() {
     this.editingState = false
-    this.palette.title = this.editTitle?.nativeElement.value || 'Random'
+    if (this.palette)
+      this.palette.title = this.editTitle?.nativeElement.value || 'Random'
   }
 
   /**
    * Export a palette for download and usage as plain CSS or Tailwind config.
    */
   exportPalette() {
-    this.notificationService.dialog
-      .emit(new ExportDialog(
-        this.notificationService.dialog,
-        this.palette
-      ).getNotification())
+    if (this.palette) {
+      this.notificationService.dialog
+        .emit(new ExportDialog(
+          this.notificationService.dialog,
+          this.palette
+        ).getNotification())
+    }
   }
 
 }
