@@ -9,7 +9,7 @@ import {StorageService} from "./storage.service";
 export class PaletteService {
 
   hex: string | undefined
-  scheme: PaletteScheme = PaletteScheme.SURPRISE_ME
+  scheme: PaletteScheme = PaletteScheme.RAINBOW
   private palette: Palette | undefined
   private paletteChangeEmitter: EventEmitter<Palette | undefined> = new EventEmitter()
 

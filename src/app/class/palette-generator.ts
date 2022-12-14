@@ -160,8 +160,8 @@ export class PaletteGenerator {
         let newHue = (shade.hue + (hue - currentHue) + 360) % 360
         const newShade = new Shade(-1, true,
           newHue,
-          20 + Math.floor(Math.random() * 80),
-          25 + Math.floor(Math.random() * 50)
+          Math.min(100, Math.max(0, shade.saturation - 20 + Math.floor(Math.random() * 40))),
+          Math.min(100, Math.max(0, shade.luminosity - 20 + Math.floor(Math.random() * 40)))
         )
         rainbow.addColor(new Color(ColorNamer.nameColor(newShade), [newShade]), false)
       }
@@ -200,12 +200,12 @@ export class PaletteGenerator {
 }
 
 export enum PaletteScheme {
+  RAINBOW,
   SURPRISE_ME,
   MONOCHROMATIC,
   ANALOGOUS,
   COMPLEMENTARY,
   SPLIT,
   TRIADIC,
-  COMPOUND,
-  RAINBOW
+  COMPOUND
 }
