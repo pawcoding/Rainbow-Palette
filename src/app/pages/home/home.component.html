@@ -220,15 +220,22 @@
       </div>
     </div>
 
-    <div #loadContainer
-         *ngIf="loading"
-         class="mx-auto h-6 w-full max-w-md rounded-full bg-gray-200 dark:bg-gray-800"
-    >
-      <span #loadBar
-            class="flex h-6 items-center justify-center rounded-full text-sm font-bold text-primary-50 bg-primary-700 animate-load"
+    <article class="mx-auto max-w-md" *ngIf="loading">
+      <p>
+        <b>Note:</b><br>
+        No generator achieves perfect results.<br>
+        Please fine tune the last details yourself.
+      </p>
+
+      <div #loadContainer
+           class="h-6 w-full mt-10 rounded-full bg-gray-200 dark:bg-gray-800"
       >
-        {{progress | percent:'2.0'}}
-      </span>
-    </div>
+        <span #loadBar
+              class="flex h-6 items-center justify-center rounded-full text-sm font-bold text-primary-50 bg-primary-700 animate-load"
+        >
+          {{progress | percent:'2.0'}}
+        </span>
+      </div>
+    </article>
   </article>
 </div>

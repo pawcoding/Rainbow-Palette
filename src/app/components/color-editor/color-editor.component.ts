@@ -45,6 +45,8 @@ export class ColorEditorComponent implements OnInit {
     if (type === UpdateType.HEX && isNaN(+value)) {
       if (`${value}`.match(/^#[0-9A-Fa-f]{6}$/))
         this.shade.setHEX(`${value}`, true)
+      else
+        return
     } else if (!isNaN(+value)) {
       value = parseInt(`${value}`)
       if (type === UpdateType.HUE)
