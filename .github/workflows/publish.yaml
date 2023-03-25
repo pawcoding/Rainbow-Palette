@@ -42,13 +42,12 @@ jobs:
           npm run build
 
       - name: 📤 Upload to server
-        uses: appleboy/scp-action@master
-        env:
-          HOST: ${{ secrets.ftp_host }}
-          USERNAME: ${{ secrets.ftp_user }}
-          PORT: ${{ secrets.ftp_port }}
-          PASSWORD: ${{ secrets.ftp_password }}
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
-          source: "./dist/"
-          target: "~/color-generator"
-          strip_components: 2
+          username: ${{ secrets.FTP_USER }}
+          server: ${{ secrets.FTP_HOST }}
+          port: ${{ secrets.FTP_PORT }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: './dist/tailwind-color-generator/*'
+          remote_path: './'
+          sftp_only: true
