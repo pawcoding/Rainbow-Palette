@@ -1,0 +1,54 @@
+name: 🚀 Deploy website on push
+
+# Controls when the action will run.
+# Triggers the workflow on push on master branch
+on:
+  push:
+    branches:
+      - main
+      - feat/automatic-release
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    # using Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+        # Setup Node v18
+      - name: 💻 Use node 18
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+        # Cache node_modules for faster build times
+      - name: 💾 Cache node_modules
+        uses: actions/cache@v1
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: 🔨 Build project
+        run: |
+          npm cache clean --force
+          npm install
+          npm install -g @angular/cli@14.x > /dev/null
+          npm run build
+
+      - name: 📤 Upload to server
+        uses: appleboy/scp-action@master
+        env:
+          HOST: ${{ secrets.ftp_host }}
+          USERNAME: ${{ secrets.ftp_user }}
+          PORT: ${{ secrets.ftp_port }}
+          PASSWORD: ${{ secrets.ftp_password }}
+        with:
+          source: "./dist/"
+          target: "~/color-generator"
+          strip_components: 2
