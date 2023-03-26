@@ -8,7 +8,6 @@
     "pwa": "npx http-server -p 4242 -c-1 dist/tailwind-color-generator",
     "prebuild": "npm run build:sitemap",
     "build": "ng build",
-    "postbuild": "node scripts/download-fonts.js",
     "build:sitemap": "node scripts/update-sitemap.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

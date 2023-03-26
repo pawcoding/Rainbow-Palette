@@ -43,4 +43,3 @@ jobs:
           local_path: './dist/rainbow-palette/*'
           remote_path: './'
           sftp_only: true
-          delete_remote_files: true
