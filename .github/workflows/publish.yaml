@@ -1,4 +1,4 @@
-name: 🚀 Deploy website on push
+name: 🚀 Deploy website
 
 # Controls when the action will run.
 # Triggers the workflow on push on master branch
@@ -17,27 +17,19 @@ jobs:
     steps:
       # Checkout repository
       - name: 🚚 Get latest code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
-        # Setup Node v18
-      - name: 💻 Use node 18
-        uses: actions/setup-node@v2
+        # Setup Node v16
+      - name: 💻 Use node 16
+        uses: actions/setup-node@v3
         with:
-          node-version: "18"
-
-        # Cache node_modules for faster build times
-      - name: 💾 Cache node_modules
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          node-version: 16
+          cache: 'npm'
 
       - name: 🔨 Build project
         run: |
           npm cache clean --force
-          npm install
+          npm ci
           npm install -g @angular/cli@14.x > /dev/null
           npm run build
 
@@ -48,6 +40,6 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           port: ${{ secrets.FTP_PORT }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_path: './dist/tailwind-color-generator/*'
+          local_path: './dist/rainbow-palette/*'
           remote_path: './'
           sftp_only: true
