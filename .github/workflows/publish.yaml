@@ -43,3 +43,9 @@ jobs:
           local_path: './dist/rainbow-palette/*'
           remote_path: './'
           sftp_only: true
+
+      - name: 🗑️ Purge unused files
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.HTTP_PURGE }}
+          method: 'GET'
