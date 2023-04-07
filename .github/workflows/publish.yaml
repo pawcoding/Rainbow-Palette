@@ -1,0 +1,50 @@
+name: 🚀 Deploy website
+
+# Controls when the action will run.
+# Triggers the workflow on push on master branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    # using Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+
+        # Setup Node v16
+      - name: 💻 Use node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      - name: 🔨 Build project
+        run: |
+          npm cache clean --force
+          npm ci
+          npm install -g @angular/cli@14.x > /dev/null
+          npm run build
+
+      - name: 📤 Upload to server
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+        with:
+          username: ${{ secrets.FTP_USER }}
+          server: ${{ secrets.FTP_HOST }}
+          port: ${{ secrets.FTP_PORT }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: './dist/rainbow-palette/*'
+          remote_path: './'
+          sftp_only: true
+
+      - name: 🗑️ Purge unused files
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.HTTP_PURGE }}
+          method: 'GET'
