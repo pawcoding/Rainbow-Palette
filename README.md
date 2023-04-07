@@ -32,7 +32,6 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 ### Side features
 - [ ] Add [MDX-Stories for Storybook](https://storybook.js.org/docs/react/writing-docs/mdx)
 - [ ] Karma tests for classes
-- [ ] GitHub Action for automatic release update
 - [ ] Preview palette in uploaded SVGs
 - [ ] Database storage for sharing palettes
 - [ ] Localize with i18n or transloco

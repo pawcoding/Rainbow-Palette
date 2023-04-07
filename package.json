@@ -1,12 +1,14 @@
 {
-  "name": "tailwind-color-generator",
+  "name": "rainbow-palette",
   "version": "0.1.4",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "prepwa": "npm run build",
     "pwa": "npx http-server -p 4242 -c-1 dist/tailwind-color-generator",
+    "prebuild": "npm run build:sitemap",
     "build": "ng build",
+    "build:sitemap": "node scripts/update-sitemap.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
