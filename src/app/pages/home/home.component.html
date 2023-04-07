@@ -4,11 +4,11 @@
       <div class="flex items-center justify-center" style="min-height: calc(100vh - 170px)">
         <section>
           <p class="font-bold">
-            Generate an entire color palette from just one color.
+            {{ 'home.text1' | translate }}
           </p>
 
           <p>
-            Enter a hex code below or pick a color to get a full color palette.
+            {{ 'home.text2' | translate }}
           </p>
 
           <div class="relative mx-auto mt-4 flex flex-col max-w-xxs">
@@ -17,7 +17,7 @@
             >
               <input
                 type="color"
-                title="Pick your color"
+                [title]="'home.generation.pick' | translate"
                 id="color" #color
                 class="h-10 w-1/5 overflow-clip rounded-r-none rounded-l"
                 [value]="value"
@@ -26,7 +26,7 @@
 
               <input
                 type="text"
-                title="Put your hex code here"
+                [title]="'home.generation.hex' | translate"
                 id="hexCode" #hexCode
                 placeholder="#4472C4"
                 class="w-4/5 rounded-r
@@ -49,7 +49,7 @@
                 [title]="invalid ? 'You need a 6-digit hex code' : 'Generate a color palette'"
                 (click)="generatePalette()"
               >
-                Generate palette
+                {{ 'home.generation.start' | translate }}
               </span>
 
               <svg
@@ -71,7 +71,7 @@
               (mouseleave)="dropdown = false"
             >
               <span class="mb-1 block p-2 text-left text-base font-medium">
-                Pick a color scheme:
+                {{ 'home.scheme.pick' | translate }}:
               </span>
 
               <section
@@ -93,7 +93,7 @@
                   >
 
                   <span class="peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500">
-                    {{schemeToShow.title}}
+                    {{ 'home.scheme.' + schemeToShow.name | translate }}
                   </span>
                 </label>
               </section>
@@ -104,7 +104,7 @@
 
       <div class="border-t border-t-gray-300 pt-16 dark:border-t-gray-600">
         <section class="mx-auto max-w-xl text-justify text-base lg:max-w-7xl lg:px-4">
-          <h2 class="mb-8 text-center">How it works</h2>
+          <h2 class="mb-8 text-center">{{ 'home.tutorial.title' | translate }}</h2>
 
           <div class="grid gap-8 lg:grid-cols-3 lg:gap-16">
             <article class="xs:grid lg:block grid-cols-3 items-center">
@@ -117,15 +117,11 @@
                         d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"/>
                 </svg>
 
-                <h3>Generation</h3>
+                <h3>{{ 'home.tutorial.generation.title' | translate }}</h3>
               </div>
 
               <p class="col-span-2">
-                Just pick your favorite color or enter your brand color and hit "generate".
-                If you want, you can optionally select a specific color scheme, otherwise you will get a rainbow color
-                scheme.
-                The algorithm then starts to add more colors to match yours and generates 10 different shades for each
-                one.
+                {{ 'home.tutorial.generation.text' | translate }}
               </p>
             </article>
 
@@ -139,15 +135,11 @@
                         d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
                 </svg>
 
-                <h3>Editing</h3>
+                <h3>{{ 'home.tutorial.editing.title' | translate }}</h3>
               </div>
 
               <p class="col-span-2 lg:order-last">
-                After the algorithm has finished the generation, editing begins.
-                Now you can view your palette and adjust the colors using the "tune" icon.
-                If you just want to try it out and complete the palette later, your progress will be cached locally in
-                your
-                browser for later.
+                {{ 'home.tutorial.editing.text' | translate }}
               </p>
             </article>
 
@@ -161,60 +153,54 @@
                         d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/>
                 </svg>
 
-                <h3>Export</h3>
+                <h3>{{ 'home.tutorial.export.title' | translate }}</h3>
               </div>
 
               <p class="col-span-2">
-                When you're finished you can export your personal palette in the format of your choice.
-                So far this site supports both CSS variables and TailwindCSS.
-                In addition, with each format you have the choice between the pure code or a file that you can easily
-                integrate into your existing project.
+                {{ 'home.tutorial.export.text' | translate }}
               </p>
             </article>
           </div>
 
           <p class="mt-8 text-center">
-            <b>That's it!</b><br>
-            It's that easy to create your very own color palette.
+            <b>{{ 'home.tutorial.end.title' | translate }}</b><br>
+            {{ 'home.tutorial.end.subtitle' | translate }}
           </p>
         </section>
 
         <section class="mx-auto mt-16 max-w-xl text-justify text-base">
-          <h2>Additional Info & Support</h2>
+          <h2>{{ 'home.additions.title' | translate }}</h2>
 
-          <h3 class="pb-0.5">Development paused</h3>
-          <p class="dark:text-gray-200">
-            Unfortunately, at the moment I don't have enough free time to improve the tool myself.
-            Nevertheless, I monitor the activities of the
-            <a href="https://github.com/pawcoding/tailwind-color-generator"
-               target="_blank"
-               rel="noreferrer noopener"
-               class="underline"
-               title="View source code on GitHub">
-              GitHub
-            </a>
-            repository on the side.
-            So if you have any ideas on how the tool could be expanded, want to implement new interfaces yourself or can
-            improve the algorithms, feel free to contact me on my
-            <a href="https://discord.gg/GzgTh4hxrx"
-               target="_blank"
-               rel="noreferrer noopener"
-               class="underline"
-               title="Get more info on Discord">
-              Discord Server</a>.
+          <h3 class="pb-0.5">{{ 'home.additions.development.title' | translate }}</h3>
+          <p class="dark:text-gray-200"
+             [innerHtml]="'home.additions.development.text' | translate : { github: getGitHubLink(), discord: getDiscordLink() }">
           </p>
 
-          <h3 class="pb-0.5">Planned features</h3>
+          <h3 class="pb-0.5">{{ 'home.additions.planned.title' | translate }}</h3>
           <p class="dark:text-gray-200">
-            Even though I can't develop the tool myself at the moment, I have a few features planned.
-            These include:
+            {{ 'home.additions.planned.text' | translate }}
           </p>
           <ul class="list-inside list-disc space-y-1 md:space-y-0 text-left mt-2 dark:text-gray-200">
-            <li>Adjust colors in different formats (RGB, HSV)</li>
-            <li>Exemplary web components to preview palette</li>
-            <li>Provide prefabricated palettes</li>
-            <li>Generate color palette from images</li>
-            <li>Localization for different languages</li>
+            <li>{{ 'home.additions.planned.list.1' | translate }} (<a
+              href="https://github.com/pawcoding/Rainbow-Palette/issues/15" target="_blank" rel="noreferrer noopener"
+              class="underline" [title]="'home.additions.planned.issue' | translate">#15</a>)
+            </li>
+            <li>{{ 'home.additions.planned.list.2' | translate }} (<a
+              href="https://github.com/pawcoding/Rainbow-Palette/issues/17" target="_blank" rel="noreferrer noopener"
+              class="underline" [title]="'home.additions.planned.issue' | translate">#17</a>)
+            </li>
+            <li>{{ 'home.additions.planned.list.3' | translate }} (<a
+              href="https://github.com/pawcoding/Rainbow-Palette/issues/18" target="_blank" rel="noreferrer noopener"
+              class="underline" [title]="'home.additions.planned.issue' | translate">#18</a>)
+            </li>
+            <li>{{ 'home.additions.planned.list.4' | translate }} (<a
+              href="https://github.com/pawcoding/Rainbow-Palette/issues/19" target="_blank" rel="noreferrer noopener"
+              class="underline" [title]="'home.additions.planned.issue' | translate">#19</a>)
+            </li>
+            <li>{{ 'home.additions.planned.list.5' | translate }} (<a
+              href="https://github.com/pawcoding/Rainbow-Palette/issues/22" target="_blank" rel="noreferrer noopener"
+              class="underline" [title]="'home.additions.planned.issue' | translate">#22</a>)
+            </li>
           </ul>
         </section>
       </div>
@@ -222,9 +208,8 @@
 
     <article class="mx-auto max-w-md" *ngIf="loading">
       <p>
-        <b>Note:</b><br>
-        No generator achieves perfect results.<br>
-        Please fine tune the last details yourself.
+        <b>{{ 'home.generation.note' | translate }}:</b><br>
+        <span [innerHtml]="'home.generation.perfection' | translate"></span>
       </p>
 
       <div #loadContainer
@@ -233,7 +218,7 @@
         <span #loadBar
               class="flex h-6 items-center justify-center rounded-full text-sm font-bold text-primary-50 bg-primary-700 animate-load"
         >
-          {{progress | percent:'2.0'}}
+          {{ progress | percent:'2.0' }}
         </span>
       </div>
     </article>

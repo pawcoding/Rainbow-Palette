@@ -37,7 +37,7 @@
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
-                [innerHTML]="nav.icon | safeHtml"
+                [innerHTML]="nav.icon | safeHtml "
               >
               </svg>
 
@@ -70,21 +70,21 @@
       href="https://github.com/pawcoding/tailwind-color-generator"
       rel="noreferrer noopener"
       target="_blank"
-      title="View source code on GitHub"
+      [title]="'app.footer.source-code' | translate"
     >
-      View on GitHub
+      {{ 'app.footer.github' | translate }}
     </a>
 
     <span
       class="cursor-default"
     >
-      Version {{version}}
+      {{ 'app.footer.version' | translate : { version: version } }}
     </span>
 
     <a
       href="https://pawcode.de"
       target="_blank"
-      title="Created by pawcode Development"
+      [title]="'app.footer.created' | translate : { pawcode: 'pawcode Development' }"
     >
       <img
         height="32" width="139"

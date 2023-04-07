@@ -13,10 +13,13 @@ import { NotificationComponent } from './components/notification/notification.co
 import { HomeComponent } from './pages/home/home.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { EditComponent } from './pages/edit/edit.component';
-import {SafeHtmlPipeline} from "./pipelines/safe-html.pipeline";
+import {SafeHtmlPipe} from "./pipes/safe-html.pipe";
 import { PreviewComponent } from './pages/preview/preview.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 @NgModule({
   declarations: [
@@ -29,12 +32,20 @@ import { environment } from '../environments/environment';
     NotificationComponent,
     PaletteViewerComponent,
     EditComponent,
-    SafeHtmlPipeline,
+    SafeHtmlPipe,
     PreviewComponent
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       // Register the ServiceWorker as soon as the application is stable
@@ -51,3 +62,7 @@ import { environment } from '../environments/environment';
   ]
 })
 export class AppModule { }
+
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
+  return new TranslateHttpLoader(http);
+}

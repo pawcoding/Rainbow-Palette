@@ -1,0 +1,86 @@
+{
+  "app": {
+    "footer": {
+      "created": "Erstellt von {{ pawcode }}",
+      "github": "Auf GitHub ansehen",
+      "source-code": "Quellcode auf GitHub ansehen",
+      "version": "Version {{ version }}"
+    },
+    "navigation": {
+      "edit": {
+        "text": "Bearbeiten",
+        "title": "Bearbeite deine Palette"
+      },
+      "preview": {
+        "text": "Vorschau",
+        "title": "Vorschau deiner Palette mit Webkomponenten"
+      },
+      "regenerate": {
+        "text": "Generieren",
+        "title": "Generiere eine neue Farbpalette"
+      }
+    },
+    "title": "Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe"
+  },
+  "home": {
+    "additions": {
+      "development": {
+        "title": "Entwicklung pausiert",
+        "text": "Leider habe ich im Moment nur wenig Zeit, um das Tool aktiv selbst zu verbessern. Dennoch überwache ich nebenbei die Aktivitäten des {{ github }} Repository. Wenn du also Ideen hast, wie das Tool erweitert werden könnte, selbst neue Benutzeroberflächen implementieren möchtest oder meine Algorithmen verbessern kannst, kannst du mich gerne auf meinem {{ discord }} kontaktieren."
+      },
+      "planned": {
+        "issue": "Thema auf GitHub ansehen",
+        "list": {
+          "1": "Anpassen von Farben in verschiedenen Formaten (RGB, HSV)",
+          "2": "Beispielhafte Webkomponenten zur Vorschau von Paletten",
+          "3": "Bereitstellen von vorgefertigten Paletten",
+          "4": "Erzeugen von Farbpaletten aus Bildern",
+          "5": "Lokalisierung für verschiedene Regionen"
+        },
+        "text": "Auch wenn ich das Tool im Moment nicht selbst entwickeln kann, habe ich einige Funktionen geplant. Dazu gehören:",
+        "title": "Geplante Features"
+      },
+      "title": "Weitere Infos und Support"
+    },
+    "generation": {
+      "hex": "Gebe einen Hex-Code ein",
+      "invalid-hex": "Du musst einen 6 stelligen Hex-Code eingeben.",
+      "note": "Hinweis",
+      "perfection": "Kein Generator erzielt perfekte Resultate.<br>Bitte passe die Farben nach deinem Geschmack an.",
+      "pick": "Wähle eine Farbe",
+      "start": "Palette generieren"
+    },
+    "scheme": {
+      "ANALOGOUS": "Analog",
+      "COMPLEMENTARY": "Komplementär",
+      "COMPOUND": "Verbund",
+      "MONOCHROMATIC": "Monochrom",
+      "pick": "Wähle ein Farbschema",
+      "RAINBOW": "Regenbogen",
+      "SURPRISE_ME": "Überrasch mich!",
+      "SPLIT": "Geteilte Komplementär",
+      "TRIADIC": "Triadisch"
+    },
+    "text1": "Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe.",
+    "text2": "Gebe einen Hex-Code ein oder wähle eine Farbe, um loszulegen.",
+    "tutorial": {
+      "editing": {
+        "title": "Bearbeiten",
+        "text": "Nachdem der Algorithmus die Erstellung abgeschlossen hat, beginnt die Bearbeitung. Jetzt kannst du deine Palette anschauen und die Farben mit dem \"Tune\"-Symbol anpassen. Wenn du das Ganze erstmal nur ausprobieren und die Palette später vervollständigen möchtest, kannst du deinen Fortschritt lokal im Browser für später speichern."
+      },
+      "end": {
+        "title": "Das war's!",
+        "subtitle": "So einfach kannst du deine ganz eigene Farbpalette erstellen."
+      },
+      "export": {
+        "title": "Exportieren",
+        "text": "Wenn du fertig bist, kannst du deine persönliche Palette in einem Format deiner Wahl exportieren. Bislang unterstützt diese Seite sowohl CSS-Variablen als auch TailwindCSS. Außerdem hast du bei jedem Format die Wahl zwischen dem reinen Code oder einer Datei, die du leicht in dein bestehendes Projekt integrieren kannst."
+      },
+      "generation": {
+        "title": "Generieren",
+        "text": "Wähle einfach eine Farbe aus und klicke auf \"Palette generieren\". Wenn du willst, kannst du optional ein spezielles Farbschema auswählen, ansonsten wird dir eine zufällige Palette generiert. Der Algorithmus beginnt dann, weitere Farben hinzuzufügen, die zu deiner Farbe passen, und erzeugt für jede Farbe 10 verschiedene Schattierungen."
+      },
+      "title": "Wie funktioniert's?"
+    }
+  }
+}

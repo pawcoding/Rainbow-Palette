@@ -4,6 +4,7 @@ import {NotificationService} from "../../services/notification.service";
 import {PaletteScheme} from "../../class/palette-generator";
 import {PaletteService} from "../../services/palette.service";
 import {Router} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-home',
@@ -27,7 +28,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private paletteService: PaletteService,
-    private router: Router
+    private router: Router,
+    private translate: TranslateService
   ) {
     this.value = paletteService.hex || Shade.generateRandomShade().hex.toUpperCase()
     let i = 0
@@ -41,10 +43,6 @@ export class HomeComponent implements OnInit {
             .replace(/(\w)(\w*)/g, (g0, g1, g2) => g1.toUpperCase() + g2.toLowerCase())
             .replace(' ', ''),
           name: s.toString(),
-          title: s.toString().charAt(0) + s.toString()
-            .substring(1)
-            .replace('_', ' ')
-            .toLowerCase(),
           scheme: s
         }
     })
@@ -68,7 +66,7 @@ export class HomeComponent implements OnInit {
 
   generatePalette() {
     if (this.invalid) {
-      this.notificationService.notification.emit('You need to enter a 6-digit hex code.')
+      this.notificationService.notification.emit(this.translate.instant('home.generation.invalid-hex'))
       return
     }
 
@@ -82,6 +80,18 @@ export class HomeComponent implements OnInit {
       this.paletteService.generatePalette(this.value, this.scheme)
       this.router.navigate(['edit'])
     }, 5100)
+  }
+
+  public getGitHubLink(): string {
+    return `<a href="https://github.com/pawcoding/rainbow-palette" target="_blank" rel="noreferrer noopener" class="underline" title="${
+      this.translate.instant('app.footer.source-code')
+    }">GitHub</a>`
+  }
+
+  public getDiscordLink(): string {
+    return `<a href="https://discord.gg/GzgTh4hxrx" target="_blank" rel="noreferrer noopener" class="underline" title="${
+      this.translate.instant('home.additions.development.discord')
+    }">Discord</a>`
   }
 
 }

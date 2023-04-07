@@ -5,7 +5,6 @@ import {ColorNamer} from "../class/color-namer";
 export class Color {
 
   name: string
-
   shades: Shade[]
 
   public constructor(name: string, hex: string)

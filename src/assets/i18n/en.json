@@ -1,0 +1,87 @@
+{
+  "app": {
+    "footer": {
+      "created": "Created by {{ pawcode }}",
+      "github": "View on GitHub",
+      "source-code": "View source code on GitHub",
+      "version": "Version {{ version }}"
+    },
+    "navigation": {
+      "edit": {
+        "text": "Edit",
+        "title": "Edit your palette"
+      },
+      "preview": {
+        "text": "Preview",
+        "title": "Preview your palette with components"
+      },
+      "regenerate": {
+        "text": "Regenerate",
+        "title": "Generate a new palette"
+      }
+    },
+    "title": "Get your own color palette from just a single color"
+  },
+  "home": {
+    "additions": {
+      "development": {
+        "title": "Development paused",
+        "text": "Unfortunately, at the moment I don't have much time to actively improve the tool myself. Nevertheless, I monitor the activities of the {{ github }} repository on the side. So if you have any ideas on how the tool could be expanded, want to implement new interfaces yourself or can improve my algorithms, feel free to contact me on my {{ discord }}.",
+        "discord": "Get more info on Discord"
+      },
+      "planned": {
+        "issue": "View issue on GitHub",
+        "list": {
+          "1": "Adjust colors in different formats (RGB, HSV)",
+          "2": "Exemplary web components to preview palette",
+          "3": "Provide prefabricated palettes",
+          "4": "Generate color palette from images",
+          "5": "Localization for different regions"
+        },
+        "text": "Even though I can't develop the tool myself at the moment, I have a few features planned. These include:",
+        "title": "Planned features"
+      },
+      "title": "Additional info & support"
+    },
+    "generation": {
+      "hex": "Put your hex code here",
+      "invalid-hex": "You need to enter a 6-digit hex code.",
+      "note": "Note",
+      "perfection": "No generator achieves perfect results.<br>Please adjust the colors to your liking.",
+      "pick": "Pick your color",
+      "start": "Generate palette"
+    },
+    "scheme": {
+      "ANALOGOUS": "Analogous",
+      "COMPLEMENTARY": "Complementary",
+      "COMPOUND": "Compound",
+      "MONOCHROMATIC": "Monochromatic",
+      "pick": "Pick a color scheme",
+      "RAINBOW": "RAINBOW",
+      "SURPRISE_ME": "Surprise me!",
+      "SPLIT": "Split Complementary",
+      "TRIADIC": "Triadic"
+    },
+    "text1": "Generate an entire color palette from just a single color.",
+    "text2": "Enter a hex code below or pick a color to get started.",
+    "tutorial": {
+      "editing": {
+        "title": "Editing",
+        "text": "After the algorithm has finished the generation, editing begins. Now you can view your palette and adjust the colors using the \"tune\" icon. If you just want to try it out and complete the palette later, your progress can be saved locally in your browser for later."
+      },
+      "end": {
+        "title": "That's it!",
+        "subtitle": "It's that easy to create your very own color palette."
+      },
+      "export": {
+        "title": "Export",
+        "text": "When you're finished you can export your personal palette in the format of your choice. So far this site supports both CSS variables and TailwindCSS. In addition, with each format you have the choice between the pure code or a file that you can easily integrate into your existing project."
+      },
+      "generation": {
+        "title": "Generation",
+        "text": "Just pick your favorite color or enter your brand color and hit \"generate\". If you want, you can optionally select a specific color scheme, otherwise you will get a rainbow color scheme. The algorithm then starts to add more colors to match yours and generates 10 different shades for each one."
+      },
+      "title": "How it works"
+    }
+  }
+}
