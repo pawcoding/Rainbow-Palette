@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main
-      - feat/automatic-release
 
 jobs:
   web-deploy:
