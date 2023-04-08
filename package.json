@@ -14,20 +14,19 @@
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless,FirefoxHeadless --code-coverage --progress=false",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
-    "build-storybook": "npm run docs:json && build-storybook",
-    "update": "ng update @angular/core@15 @angular/cli@15"
+    "build-storybook": "npm run docs:json && build-storybook"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.0.0",
-    "@angular/common": "^14.0.0",
-    "@angular/compiler": "^14.0.0",
-    "@angular/core": "^14.0.0",
-    "@angular/forms": "^14.0.0",
-    "@angular/platform-browser": "^14.0.0",
-    "@angular/platform-browser-dynamic": "^14.0.0",
-    "@angular/router": "^14.0.0",
-    "@angular/service-worker": "^14.0.0",
+    "@angular/animations": "^15.2.6",
+    "@angular/common": "^15.2.6",
+    "@angular/compiler": "^15.2.6",
+    "@angular/core": "^15.2.6",
+    "@angular/forms": "^15.2.6",
+    "@angular/platform-browser": "^15.2.6",
+    "@angular/platform-browser-dynamic": "^15.2.6",
+    "@angular/router": "^15.2.6",
+    "@angular/service-worker": "^15.2.6",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
     "rxjs": "~7.5.0",
@@ -36,9 +35,9 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^14.0.5",
-    "@angular/cli": "~14.0.5",
-    "@angular/compiler-cli": "^14.0.0",
+    "@angular-devkit/build-angular": "^15.2.5",
+    "@angular/cli": "~15.2.5",
+    "@angular/compiler-cli": "^15.2.6",
     "@babel/core": "^7.18.13",
     "@compodoc/compodoc": "^1.1.19",
     "@savvywombat/tailwindcss-grid-areas": "^2.1.0",
@@ -64,6 +63,6 @@
     "postcss": "^8.4.16",
     "tailwind-scrollbar": "^2.0.1",
     "tailwindcss": "^3.1.8",
-    "typescript": "^5.0.4"
+    "typescript": "~4.8.0"
   }
 }
