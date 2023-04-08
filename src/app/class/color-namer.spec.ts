@@ -1,7 +1,7 @@
-import { ColorNamer } from './color-namer';
+import { ColorNamer } from './color-namer'
 
 describe('ColorNamer', () => {
   it('should create an instance', () => {
-    expect(new ColorNamer()).toBeTruthy();
-  });
-});
+    expect(new ColorNamer()).toBeTruthy()
+  })
+})

@@ -1,53 +1,56 @@
 <div [class]="dark ? 'dark' : ''">
-  <section *ngIf="palette"
-    class="px-4"
-  >
+  <section *ngIf="palette" class="px-4">
     <div class="flex flex-col sm:flex-row items-center gap-4 mb-6">
       <!-- Palette name -->
       <div class="flex gap-4 items-end">
         <h2
           *ngIf="!editingState"
           class="inline-block cursor-pointer"
-          (click)="openEditor()"
-        >
-          {{palette.title}}
+          (click)="openEditor()">
+          {{ palette.title }}
         </h2>
 
         <!-- Palette name input -->
-        <input *ngIf="editingState"
-               type="text" #editTitle
-               [placeholder]="'palette-viewer.title-placeholder' | translate"
-               class="bg-transparent p-0 text-xl font-bold
-                      border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
-               (focusout)="closeEditor()"
-               (keydown.enter)="closeEditor()"
-               [value]="palette.title">
+        <input
+          *ngIf="editingState"
+          type="text"
+          #editTitle
+          [placeholder]="'palette-viewer.title-placeholder' | translate"
+          class="bg-transparent p-0 text-xl font-bold border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
+          (focusout)="closeEditor()"
+          (keydown.enter)="closeEditor()"
+          [value]="palette.title" />
 
         <span
           *ngIf="!editingState"
           class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
           [title]="'palette-viewer.edit-title' | translate"
-          (click)="openEditor()"
-        >
-          <img src="/assets/icons/edit.svg" alt="Edit title" class="icon !h-8 !w-8">
+          (click)="openEditor()">
+          <img
+            src="/assets/icons/edit.svg"
+            alt="Edit title"
+            class="icon !h-8 !w-8" />
         </span>
       </div>
 
       <!-- Export Button -->
       <div class="sm:ml-auto">
         <button
-          class="py-2 px-4 inline-flex items-center
-                 text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
+          class="py-2 px-4 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
           [title]="'palette-viewer.export-title' | translate"
-          (click)="exportPalette()"
-        >
+          (click)="exportPalette()">
           <svg
             class="w-6 h-6 mr-2"
             viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path fill="currentColor" d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
-            <path fill="currentColor" fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zM12 10.5a.75.75 0 01.75.75v4.94l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 111.06-1.06l1.72 1.72v-4.94a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              fill="currentColor"
+              d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zM12 10.5a.75.75 0 01.75.75v4.94l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 111.06-1.06l1.72 1.72v-4.94a.75.75 0 01.75-.75z"
+              clip-rule="evenodd" />
           </svg>
 
           {{ 'palette-viewer.export' | translate }}
@@ -55,29 +58,34 @@
 
         <!-- Save Button -->
         <button
-          class="py-2 px-4 ml-4 inline-flex items-center
-                 text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
-          [title]="'palette-viewer.' + (saving ? 'saving' : 'save') + '-title' | translate"
-          (click)="savePalette()"
-        >
+          class="py-2 px-4 ml-4 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
+          [title]="
+            'palette-viewer.' + (saving ? 'saving' : 'save') + '-title'
+              | translate
+          "
+          (click)="savePalette()">
           <svg
             *ngIf="!saving"
             class="w-6 h-6 mr-2"
             viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path fill="currentColor" fill-rule="evenodd" d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z" clip-rule="evenodd" />
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              fill="currentColor"
+              fill-rule="evenodd"
+              d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
+              clip-rule="evenodd" />
           </svg>
 
           <svg
             *ngIf="saving"
             class="w-6 h-6 mr-2 animate-processing"
             viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+            xmlns="http://www.w3.org/2000/svg">
             <path
               fill="currentColor"
-              fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" />
+              fill-rule="evenodd"
+              d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
+              clip-rule="evenodd" />
           </svg>
 
           {{ 'palette-viewer.' + (saving ? 'saving' : 'save') | translate }}
@@ -86,39 +94,36 @@
     </div>
 
     <!-- Display all colors -->
-    <color-viewer
+    <app-color-viewer
       *ngFor="let color of palette.colors"
       [color]="color"
-      (onRemove)="removeColor(color)"
-    ></color-viewer>
+      (onRemove)="removeColor(color)"></app-color-viewer>
 
     <!-- Add random color to palette -->
     <button
-      class="py-2 px-4 mt-4 mx-auto flex items-center
-             font-medium text-primary-100 bg-primary-700 rounded transition-all duration-200"
-      [title]="'palette-viewer.' + (adding ? 'adding' : 'add') + '-title' | translate"
-      (click)="addRandomColor($event)"
-    >
+      class="py-2 px-4 mt-4 mx-auto flex items-center font-medium text-primary-100 bg-primary-700 rounded transition-all duration-200"
+      [title]="
+        'palette-viewer.' + (adding ? 'adding' : 'add') + '-title' | translate
+      "
+      (click)="addRandomColor($event)">
       <svg
         *ngIf="!adding"
         class="w-6 h-6 mr-2"
         viewBox="0 0 48 48"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
         <path
           fill="currentColor"
-          d="M27 29.1q.65 0 1.075-.425.425-.425.425-1.075v-5.1h5.1q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-5.1v-5.1q0-.65-.425-1.075Q27.65 12.9 27 12.9q-.65 0-1.075.425-.425.425-.425 1.075v5.1h-5.1q-.65 0-1.075.425Q18.9 20.35 18.9 21q0 .65.425 1.075.425.425 1.075.425h5.1v5.1q0 .65.425 1.075.425.425 1.075.425ZM13 38q-1.2 0-2.1-.9-.9-.9-.9-2.1V7q0-1.2.9-2.1.9-.9 2.1-.9h28q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h28V7H13v28Zm-6 9q-1.2 0-2.1-.9Q4 42.2 4 41V11.5q0-.65.425-1.075Q4.85 10 5.5 10q.65 0 1.075.425Q7 10.85 7 11.5V41h29.5q.65 0 1.075.425Q38 41.85 38 42.5q0 .65-.425 1.075Q37.15 44 36.5 44Zm6-37v28V7Z"/>
+          d="M27 29.1q.65 0 1.075-.425.425-.425.425-1.075v-5.1h5.1q.65 0 1.075-.425.425-.425.425-1.075 0-.65-.425-1.075-.425-.425-1.075-.425h-5.1v-5.1q0-.65-.425-1.075Q27.65 12.9 27 12.9q-.65 0-1.075.425-.425.425-.425 1.075v5.1h-5.1q-.65 0-1.075.425Q18.9 20.35 18.9 21q0 .65.425 1.075.425.425 1.075.425h5.1v5.1q0 .65.425 1.075.425.425 1.075.425ZM13 38q-1.2 0-2.1-.9-.9-.9-.9-2.1V7q0-1.2.9-2.1.9-.9 2.1-.9h28q1.2 0 2.1.9.9.9.9 2.1v28q0 1.2-.9 2.1-.9.9-2.1.9Zm0-3h28V7H13v28Zm-6 9q-1.2 0-2.1-.9Q4 42.2 4 41V11.5q0-.65.425-1.075Q4.85 10 5.5 10q.65 0 1.075.425Q7 10.85 7 11.5V41h29.5q.65 0 1.075.425Q38 41.85 38 42.5q0 .65-.425 1.075Q37.15 44 36.5 44Zm6-37v28V7Z" />
       </svg>
 
       <svg
         *ngIf="adding"
         class="w-6 h-6 mr-2 animate-processing"
         viewBox="0 0 48 48"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+        xmlns="http://www.w3.org/2000/svg">
         <path
           fill="currentColor"
-          d="M8.25 30.1q-.6-1.45-.85-2.975Q7.15 25.6 7.15 24q0-6.75 4.9-11.75t11.6-5h2.15l-2.3-2.3q-.45-.45-.45-1.15t.5-1.2q.45-.45 1.175-.45.725 0 1.225.45l5.25 5.35q.35.35.55.775.2.425.2.875t-.2.875q-.2.425-.55.775l-5.25 5.3q-.5.5-1.225.5-.725 0-1.225-.5-.5-.5-.5-1.225 0-.725.5-1.225l2.2-2.15h-1.95q-4.85 0-8.375 3.575Q11.85 19.1 11.85 24q0 1.2.175 2.25t.475 2q.2.65.05 1.325-.15.675-.55 1.125-.95.95-2.125.775Q8.7 31.3 8.25 30.1Zm13.8 15.4-5.35-5.25q-.35-.35-.525-.775Q16 39.05 16 38.6q0-.5.175-.9t.525-.75l5.35-5.35q.45-.45 1.15-.45t1.2.45q.45.5.45 1.175T24.4 33.9l-2.3 2.3h2.15q4.85 0 8.375-3.575Q36.15 29.05 36.15 24.1q0-1.15-.175-2.225Q35.8 20.8 35.5 19.85q-.2-.6-.075-1.25t.525-1.1q.95-.95 2.125-.8 1.175.15 1.675 1.3.55 1.5.825 3.025.275 1.525.275 3.075 0 6.8-4.9 11.825-4.9 5.025-11.55 5.025h-2.3l2.25 2.25q.45.45.45 1.15t-.45 1.15q-.5.5-1.175.5t-1.125-.5Z"/>
+          d="M8.25 30.1q-.6-1.45-.85-2.975Q7.15 25.6 7.15 24q0-6.75 4.9-11.75t11.6-5h2.15l-2.3-2.3q-.45-.45-.45-1.15t.5-1.2q.45-.45 1.175-.45.725 0 1.225.45l5.25 5.35q.35.35.55.775.2.425.2.875t-.2.875q-.2.425-.55.775l-5.25 5.3q-.5.5-1.225.5-.725 0-1.225-.5-.5-.5-.5-1.225 0-.725.5-1.225l2.2-2.15h-1.95q-4.85 0-8.375 3.575Q11.85 19.1 11.85 24q0 1.2.175 2.25t.475 2q.2.65.05 1.325-.15.675-.55 1.125-.95.95-2.125.775Q8.7 31.3 8.25 30.1Zm13.8 15.4-5.35-5.25q-.35-.35-.525-.775Q16 39.05 16 38.6q0-.5.175-.9t.525-.75l5.35-5.35q.45-.45 1.15-.45t1.2.45q.45.5.45 1.175T24.4 33.9l-2.3 2.3h2.15q4.85 0 8.375-3.575Q36.15 29.05 36.15 24.1q0-1.15-.175-2.225Q35.8 20.8 35.5 19.85q-.2-.6-.075-1.25t.525-1.1q.95-.95 2.125-.8 1.175.15 1.675 1.3.55 1.5.825 3.025.275 1.525.275 3.075 0 6.8-4.9 11.825-4.9 5.025-11.55 5.025h-2.3l2.25 2.25q.45.45.45 1.15t-.45 1.15q-.5.5-1.175.5t-1.125-.5Z" />
       </svg>
 
       {{ 'palette-viewer.' + (adding ? 'adding' : 'add') | translate }}

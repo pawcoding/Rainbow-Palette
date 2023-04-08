@@ -1,29 +1,35 @@
-input[type=range]::-webkit-slider-thumb {
+input[type='range']::-webkit-slider-thumb {
   background-color: var(--selected-hex);
 }
 
-input[type=range]::-moz-range-thumb {
+input[type='range']::-moz-range-thumb {
   background-color: var(--selected-hex);
 }
 
 #hueInput {
-  background: linear-gradient(90deg,
-  hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,
-  hsl(60, var(--selected-saturation), var(--selected-luminosity)) 33.3%,
-  hsl(120, var(--selected-saturation), var(--selected-luminosity)) 50%,
-  hsl(240, var(--selected-saturation), var(--selected-luminosity)) 66.6%,
-  hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%);
+  background: linear-gradient(
+    90deg,
+    hsl(0, var(--selected-saturation), var(--selected-luminosity)) 0%,
+    hsl(60, var(--selected-saturation), var(--selected-luminosity)) 33.3%,
+    hsl(120, var(--selected-saturation), var(--selected-luminosity)) 50%,
+    hsl(240, var(--selected-saturation), var(--selected-luminosity)) 66.6%,
+    hsl(360, var(--selected-saturation), var(--selected-luminosity)) 100%
+  );
 }
 
 #saturationInput {
-  background: linear-gradient(90deg,
-  hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,
-  hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%);
+  background: linear-gradient(
+    90deg,
+    hsl(var(--selected-hue), 0%, var(--selected-luminosity)) 0%,
+    hsl(var(--selected-hue), 100%, var(--selected-luminosity)) 100%
+  );
 }
 
 #luminosityInput {
-  background: linear-gradient(90deg,
-  hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,
-  hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,
-  hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%);
+  background: linear-gradient(
+    90deg,
+    hsl(var(--selected-hue), var(--selected-saturation), 100%) 0%,
+    hsl(var(--selected-hue), var(--selected-saturation), 50%) 50%,
+    hsl(var(--selected-hue), var(--selected-saturation), 0%) 100%
+  );
 }

@@ -1,10 +1,9 @@
-import { PaletteExporter } from './palette-exporter';
-import {Palette} from "../models/palette.model";
-import {Color} from "../models/color.model";
+import { PaletteExporter } from './palette-exporter'
+import { Palette } from '../models/palette.model'
+import { Color } from '../models/color.model'
 
 describe('PaletteExporter', () => {
-
-  let palette = new Palette('test', '0123456789')
+  const palette = new Palette('test', '0123456789')
   palette.addColor(Color.generateRandomColor())
 
   it('should return css strings', () => {
@@ -30,5 +29,4 @@ describe('PaletteExporter', () => {
     expect(tailwind).toMatch(/'.*': {[^}]*}/)
     expect((tailwind.match(tailwindRegEx) || []).length).toBe(10)
   })
-
 })

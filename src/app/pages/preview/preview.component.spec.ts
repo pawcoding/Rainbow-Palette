@@ -1,27 +1,24 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import {PreviewComponent} from './preview.component';
-import {TranslateModule} from "@ngx-translate/core";
+import { PreviewComponent } from './preview.component'
+import { TranslateModule } from '@ngx-translate/core'
 
 describe('PreviewComponent', () => {
-  let component: PreviewComponent;
-  let fixture: ComponentFixture<PreviewComponent>;
+  let component: PreviewComponent
+  let fixture: ComponentFixture<PreviewComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PreviewComponent],
-      imports: [
-        TranslateModule.forRoot()
-      ]
-    })
-      .compileComponents();
+      imports: [TranslateModule.forRoot()],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(PreviewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(PreviewComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

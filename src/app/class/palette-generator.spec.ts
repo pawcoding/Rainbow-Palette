@@ -1,7 +1,7 @@
-import { PaletteGenerator } from './palette-generator';
+import { PaletteGenerator } from './palette-generator'
 
 describe('PaletteGenerator', () => {
   it('should create an instance', () => {
-    expect(new PaletteGenerator()).toBeTruthy();
-  });
-});
+    expect(new PaletteGenerator()).toBeTruthy()
+  })
+})

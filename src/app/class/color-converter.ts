@@ -1,5 +1,4 @@
 export class ColorConverter {
-
   static HEXtoRGB(hex: string) {
     if (!hex.match(/^#[0-9A-Fa-f]{6}$/))
       throw `Color ${hex} is not in form #RRGGBB.`
@@ -7,7 +6,7 @@ export class ColorConverter {
     return {
       red: parseInt(hex.substring(1, 3), 16),
       green: parseInt(hex.substring(3, 5), 16),
-      blue: parseInt(hex.substring(5, 7), 16)
+      blue: parseInt(hex.substring(5, 7), 16),
     }
   }
 
@@ -26,22 +25,31 @@ export class ColorConverter {
     return this.RGBtoCMYK(rgb.red, rgb.green, rgb.blue)
   }
 
-
   static RGBtoHEX(red: number, green: number, blue: number) {
-    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
+    if (
+      red < 0 ||
+      red > 255 ||
+      green < 0 ||
+      green > 255 ||
+      blue < 0 ||
+      blue > 255
+    )
       throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`
 
-    return `#${
-      (red < 16 ? 0 : '') + red.toString(16).toUpperCase()
-    }${
+    return `#${(red < 16 ? 0 : '') + red.toString(16).toUpperCase()}${
       (green < 16 ? 0 : '') + green.toString(16).toUpperCase()
-    }${
-      (blue < 16 ? 0 : '') + blue.toString(16).toUpperCase()
-    }`
+    }${(blue < 16 ? 0 : '') + blue.toString(16).toUpperCase()}`
   }
 
   static RGBtoHSL(red: number, green: number, blue: number) {
-    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
+    if (
+      red < 0 ||
+      red > 255 ||
+      green < 0 ||
+      green > 255 ||
+      blue < 0 ||
+      blue > 255
+    )
       throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`
 
     const r = red / 255
@@ -53,25 +61,23 @@ export class ColorConverter {
     const delta = cMax - cMin
 
     const luminosity = (cMax + cMin) * 50
-    const saturation = (delta === 0) ? 0 : (100 * delta / (1 - Math.abs(2 * (luminosity / 100) - 1)))
+    const saturation =
+      delta === 0
+        ? 0
+        : (100 * delta) / (1 - Math.abs(2 * (luminosity / 100) - 1))
 
     let hue
-    if (delta === 0)
-      hue = 0
-    else if (cMax === r)
-      hue = 60 * ( ( (g - b) / delta) % 6)
-    else if (cMax === g)
-      hue = 60 * ( ( (b - r) / delta) + 2)
-    else
-      hue = 60 * ( ( (r - g) / delta) + 4)
+    if (delta === 0) hue = 0
+    else if (cMax === r) hue = 60 * (((g - b) / delta) % 6)
+    else if (cMax === g) hue = 60 * ((b - r) / delta + 2)
+    else hue = 60 * ((r - g) / delta + 4)
 
-    if (hue < 0)
-      hue += 360
+    if (hue < 0) hue += 360
 
     return {
       hue: Math.round(hue),
       saturation: Math.round(saturation),
-      luminosity: Math.round(luminosity)
+      luminosity: Math.round(luminosity),
     }
   }
 
@@ -81,7 +87,14 @@ export class ColorConverter {
   }
 
   static RGBtoCMYK(red: number, green: number, blue: number) {
-    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255)
+    if (
+      red < 0 ||
+      red > 255 ||
+      green < 0 ||
+      green > 255 ||
+      blue < 0 ||
+      blue > 255
+    )
       throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`
 
     const r = red / 255
@@ -97,10 +110,9 @@ export class ColorConverter {
       cyan: Math.round(c * 100),
       magenta: Math.round(m * 100),
       yellow: Math.round(y * 100),
-      key: Math.round(k * 100)
+      key: Math.round(k * 100),
     }
   }
-
 
   static HSLtoHEX(hue: number, saturation: number, luminosity: number): string {
     const rgb = this.HSLtoRGB(hue, saturation, luminosity)
@@ -108,7 +120,14 @@ export class ColorConverter {
   }
 
   static HSLtoRGB(hue: number, saturation: number, luminosity: number) {
-    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || luminosity < 0 || luminosity > 100)
+    if (
+      hue < 0 ||
+      hue > 360 ||
+      saturation < 0 ||
+      saturation > 100 ||
+      luminosity < 0 ||
+      luminosity > 100
+    )
       throw `Color values [${hue}°, ${saturation}%, ${luminosity}%] are not in valid ranges.`
 
     const h = hue
@@ -116,33 +135,39 @@ export class ColorConverter {
     const l = luminosity / 100
 
     const c = (1 - Math.abs(2 * l - 1)) * s
-    const x = c * (1 - Math.abs((h / 60) % 2 - 1))
+    const x = c * (1 - Math.abs(((h / 60) % 2) - 1))
     const m = l - c / 2
 
-    const r = (h < 60 || h >= 300) ? c : (h < 120 || h >= 240) ? x : 0
-    const g = (h >= 240) ? 0 : (h < 60 || h >= 180) ? x : c
-    const b = (h < 120) ? 0 : (h < 180 || h >= 300) ? x : c
+    const r = h < 60 || h >= 300 ? c : h < 120 || h >= 240 ? x : 0
+    const g = h >= 240 ? 0 : h < 60 || h >= 180 ? x : c
+    const b = h < 120 ? 0 : h < 180 || h >= 300 ? x : c
 
     return {
       red: Math.round((r + m) * 255),
       green: Math.round((g + m) * 255),
-      blue: Math.round((b + m) * 255)
+      blue: Math.round((b + m) * 255),
     }
   }
 
   static HSLtoHSV(hue: number, saturation: number, luminosity: number) {
-    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || luminosity < 0 || luminosity > 100)
+    if (
+      hue < 0 ||
+      hue > 360 ||
+      saturation < 0 ||
+      saturation > 100 ||
+      luminosity < 0 ||
+      luminosity > 100
+    )
       throw `Color values [${hue}°, ${saturation}%, ${luminosity}%] are not in valid ranges.`
 
     const v = luminosity + saturation * Math.min(luminosity, 1 - luminosity)
 
-    const s = (v === 0) ? 0 :
-      (2 * (1 - (luminosity / v)))
+    const s = v === 0 ? 0 : 2 * (1 - luminosity / v)
 
     return {
       hue: hue,
       saturation: Math.round(s),
-      value: Math.round(v)
+      value: Math.round(v),
     }
   }
 
@@ -150,7 +175,6 @@ export class ColorConverter {
     const rgb = this.HSLtoRGB(hue, saturation, luminosity)
     return this.RGBtoCMYK(rgb.red, rgb.green, rgb.blue)
   }
-
 
   static HSVtoHEX(hue: number, saturation: number, value: number) {
     const rgb = this.HSVtoRGB(hue, saturation, value)
@@ -163,18 +187,24 @@ export class ColorConverter {
   }
 
   static HSVtoHSL(hue: number, saturation: number, value: number) {
-    if (hue < 0 || hue > 360 || saturation < 0 || saturation > 100 || value < 0 || value > 100)
+    if (
+      hue < 0 ||
+      hue > 360 ||
+      saturation < 0 ||
+      saturation > 100 ||
+      value < 0 ||
+      value > 100
+    )
       throw `Color values [${hue}°, ${saturation}%, ${value}%] are not in valid ranges.`
 
-    const l = value * (1 - (saturation / 2))
+    const l = value * (1 - saturation / 2)
 
-    const s = (l === 0 || l === 1) ? 0 :
-      ((value - l) / Math.min(l, 1 - l))
+    const s = l === 0 || l === 1 ? 0 : (value - l) / Math.min(l, 1 - l)
 
     return {
       hue: hue,
       saturation: Math.round(s),
-      luminosity: Math.round(l)
+      luminosity: Math.round(l),
     }
   }
 
@@ -183,14 +213,22 @@ export class ColorConverter {
     return this.RGBtoCMYK(rgb.red, rgb.green, rgb.blue)
   }
 
-
   static CMYKtoHEX(cyan: number, magenta: number, yellow: number, key: number) {
     const rgb = this.CMYKtoRGB(cyan, magenta, yellow, key)
     return this.RGBtoHEX(rgb.red, rgb.green, rgb.blue)
   }
 
   static CMYKtoRGB(cyan: number, magenta: number, yellow: number, key: number) {
-    if (cyan < 0 || cyan > 100 || magenta < 0 || magenta > 100 || yellow < 0 || yellow > 100 || key < 0 || key > 100)
+    if (
+      cyan < 0 ||
+      cyan > 100 ||
+      magenta < 0 ||
+      magenta > 100 ||
+      yellow < 0 ||
+      yellow > 100 ||
+      key < 0 ||
+      key > 100
+    )
       throw `[${cyan}, ${magenta}, ${yellow}, ${key}] is not in valid format.`
 
     const c = cyan / 100
@@ -218,5 +256,4 @@ export class ColorConverter {
     const rgb = this.CMYKtoRGB(cyan, magenta, yellow, key)
     return this.RGBtoHSV(rgb.red, rgb.green, rgb.blue)
   }
-
 }

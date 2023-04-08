@@ -1,9 +1,7 @@
 <div *ngIf="palette">
-  <color-editor></color-editor>
+  <app-color-editor></app-color-editor>
 
   <section class="py-2 max-w-screen-xl mx-auto">
-    <palette-viewer
-      [palette]="palette"
-    ></palette-viewer>
+    <app-palette-viewer [palette]="palette"></app-palette-viewer>
   </section>
 </div>

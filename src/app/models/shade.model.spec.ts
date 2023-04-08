@@ -1,7 +1,6 @@
-import { Shade } from './shade.model';
+import { Shade } from './shade.model'
 
 describe('Shade', () => {
-
   let shade: Shade
 
   beforeEach(() => {
@@ -46,10 +45,9 @@ describe('Shade', () => {
       hex: '#ff0000',
       hue: 0,
       saturation: 100,
-      luminosity: 50
+      luminosity: 50,
     }
 
     expect(Shade.parseShade(json)).toEqual(shade)
   })
-
 })

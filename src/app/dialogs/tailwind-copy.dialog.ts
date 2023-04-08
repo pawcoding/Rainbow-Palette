@@ -1,12 +1,9 @@
-import {EventEmitter} from "@angular/core";
-import {Dialog} from "../interfaces/dialog.interface";
-import {toUnicodeVariant} from "../utils/to-unicode-variant.util";
+import { EventEmitter } from '@angular/core'
+import { Dialog } from '../interfaces/dialog.interface'
+import { toUnicodeVariant } from '../utils/to-unicode-variant.util'
 
 export class TailwindCopyDialog {
-
-  constructor(
-    private notification: EventEmitter<Dialog | undefined>,
-  ) { }
+  constructor(private notification: EventEmitter<Dialog | undefined>) {}
 
   getNotification(): Dialog {
     const closeEmitter = new EventEmitter()
@@ -16,19 +13,23 @@ export class TailwindCopyDialog {
 
     const docEmitter = new EventEmitter()
     docEmitter.subscribe(() => {
-      window.open('https://tailwindcss.com/docs/customizing-colors#color-object-syntax', '_blank')
+      window.open(
+        'https://tailwindcss.com/docs/customizing-colors#color-object-syntax',
+        '_blank'
+      )
     })
 
     return {
       id: 'export-tailwind-copy',
       interpolateParams: {
-        config: toUnicodeVariant('tailwind.config.js', 'm')
+        config: toUnicodeVariant('tailwind.config.js', 'm'),
       },
-      actions: [{
-        id: 'more',
-        action: docEmitter
-      }]
+      actions: [
+        {
+          id: 'more',
+          action: docEmitter,
+        },
+      ],
     }
   }
-
 }

@@ -3,7 +3,7 @@
 // by davidkonrad
 // v1.0.2
 
-const offsets: any = {
+const offsets: { [key: string]: number[] } = {
   m: [0x1d670, 0x1d7f6],
   b: [0x1d400, 0x1d7ce],
   i: [0x1d434, 0x00030],
@@ -17,64 +17,64 @@ const offsets: any = {
   bs: [0x1d5d4, 0x1d7ec],
   is: [0x1d608, 0x00030],
   bis: [0x1d63c, 0x00030],
-  o: [0x24B6, 0x2460],
+  o: [0x24b6, 0x2460],
   on: [0x0001f150, 0x2460],
   p: [0x249c, 0x2474],
   q: [0x1f130, 0x00030],
-  qn: [0x0001F170, 0x00030],
+  qn: [0x0001f170, 0x00030],
   w: [0xff21, 0xff10],
-  u: [0x2090, 0xff10]
+  u: [0x2090, 0xff10],
 }
 
-const variantOffsets: any = {
-  'monospace': 'm',
-  'bold': 'b',
-  'italic': 'i',
+const variantOffsets: { [key: string]: string } = {
+  monospace: 'm',
+  bold: 'b',
+  italic: 'i',
   'bold italic': 'bi',
-  'script': 'c',
+  script: 'c',
   'bold script': 'bc',
-  'gothic': 'g',
+  gothic: 'g',
   'gothic bold': 'bg',
-  'doublestruck': 'd',
-  'sans': 's',
+  doublestruck: 'd',
+  sans: 's',
   'bold sans': 'bs',
   'italic sans': 'is',
   'bold italic sans': 'bis',
-  'parenthesis': 'p',
-  'circled': 'o',
+  parenthesis: 'p',
+  circled: 'o',
   'circled negative': 'on',
-  'squared': 'q',
+  squared: 'q',
   'squared negative': 'qn',
-  'fullwidth': 'w'
+  fullwidth: 'w',
 }
 
 //special characters (absolute values)
-const special: any = {
+const special: { [key: string]: { [key: string]: number } } = {
   m: {
     ' ': 0x2000,
-    '-': 0x2013
+    '-': 0x2013,
   },
   i: {
-    'h': 0x210e
+    h: 0x210e,
   },
   g: {
-    'C': 0x212d,
-    'H': 0x210c,
-    'I': 0x2111,
-    'R': 0x211c,
-    'Z': 0x2128
+    C: 0x212d,
+    H: 0x210c,
+    I: 0x2111,
+    R: 0x211c,
+    Z: 0x2128,
   },
   d: {
-    'C': 0x2102,
-    'H': 0x210D,
-    'N': 0x2115,
-    'P': 0x2119,
-    'Q': 0x211A,
-    'R': 0x211D,
-    'Z': 0x2124
+    C: 0x2102,
+    H: 0x210d,
+    N: 0x2115,
+    P: 0x2119,
+    Q: 0x211a,
+    R: 0x211d,
+    Z: 0x2124,
   },
   o: {
-    '0': 0x24EA,
+    '0': 0x24ea,
     '1': 0x2460,
     '2': 0x2461,
     '3': 0x2462,
@@ -89,22 +89,21 @@ const special: any = {
   p: {},
   q: {},
   qn: {},
-  w: {}
+  w: {},
 }
 
 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
 const numbers = '0123456789'
 
-
 export function toUnicodeVariant(str: string, variant: string, flags?: string) {
-  if (Object.keys(special.p).length === 0) {
+  if (Object.keys(special['p']).length === 0) {
     //support for parenthesized latin letters small cases
     //support for full width latin letters small cases
     //support for circled negative letters small cases
     //support for squared letters small cases
     //support for squared letters negative small cases
-    ['p', 'w', 'on', 'q', 'qn'].forEach(t => {
+    ;['p', 'w', 'on', 'q', 'qn'].forEach((t) => {
       for (let i = 97; i <= 122; i++) {
         special[t][String.fromCharCode(i)] = offsets[t][0] + (i - 97)
       }
@@ -118,7 +117,8 @@ export function toUnicodeVariant(str: string, variant: string, flags?: string) {
 
   for (let c of str) {
     let index
-    if (special[type] && special[type][c]) c = String.fromCodePoint(special[type][c])
+    if (special[type] && special[type][c])
+      c = String.fromCodePoint(special[type][c])
     if (type && (index = chars.indexOf(c)) > -1) {
       result += String.fromCodePoint(index + offsets[type][0])
     } else if (type && (index = numbers.indexOf(c)) > -1) {
@@ -133,16 +133,12 @@ export function toUnicodeVariant(str: string, variant: string, flags?: string) {
 }
 
 function getType(variant: string) {
-  if (variantOffsets[variant])
-    return variantOffsets[variant]
-  if (offsets[variant])
-    return variant
+  if (variantOffsets[variant]) return variantOffsets[variant]
+  if (offsets[variant]) return variant
   return 'm' //monospace as default
 }
 
 function getFlag(flag: string, flags?: string) {
-  if (!flags)
-    return false
-  return flag.split('|').some(f => flags.split(',').indexOf(f) > -1)
+  if (!flags) return false
+  return flag.split('|').some((f) => flags.split(',').indexOf(f) > -1)
 }
-

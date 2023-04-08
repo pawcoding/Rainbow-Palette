@@ -1,9 +1,8 @@
-import {ColorInterpolater} from "../class/color-interpolater";
-import {Shade} from "./shade.model";
-import {ColorNamer} from "../class/color-namer";
+import { ColorInterpolater } from '../class/color-interpolater'
+import { Shade } from './shade.model'
+import { ColorNamer } from '../class/color-namer'
 
 export class Color {
-
   name: string
   shades: Shade[]
 
@@ -11,6 +10,7 @@ export class Color {
   public constructor(name: string, hexes: string[])
   public constructor(name: string, shades: Shade[])
 
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   constructor(...args: any[]) {
     this.name = args[0].startsWith('#') ? args[0].substring(1) : args[0]
 
@@ -36,7 +36,7 @@ export class Color {
    * @param index
    */
   public getShade(index: number): Shade {
-    return this.shades.find(s => s.index === index) || this.shades[0]
+    return this.shades.find((s) => s.index === index) || this.shades[0]
   }
 
   /**
@@ -44,10 +44,7 @@ export class Color {
    */
   public static generateRandomColor(): Color {
     const shade = Shade.generateRandomShade()
-    return new Color(
-      ColorNamer.nameColor(shade),
-      shade.hex
-    )
+    return new Color(ColorNamer.nameColor(shade), shade.hex)
   }
 
   /**
@@ -56,7 +53,7 @@ export class Color {
   public toString() {
     return JSON.stringify({
       name: this.name,
-      shades: this.shades
+      shades: this.shades,
     })
   }
 
@@ -65,9 +62,9 @@ export class Color {
    * Throws exception if json object is no valid color object.
    * @param json
    */
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   public static parseColor(json: any): Color {
-    if (!json.name)
-      throw 'Color has no name'
+    if (!json.name) throw 'Color has no name'
     if (!json.shades || json.shades.length < 1)
       throw 'Color has not enough shades'
 
@@ -78,5 +75,4 @@ export class Color {
 
     return new Color(json.name, shades)
   }
-
 }

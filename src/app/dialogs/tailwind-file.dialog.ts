@@ -1,12 +1,9 @@
-import {EventEmitter} from "@angular/core";
-import {Dialog} from "../interfaces/dialog.interface";
-import { toUnicodeVariant } from "../utils/to-unicode-variant.util";
+import { EventEmitter } from '@angular/core'
+import { Dialog } from '../interfaces/dialog.interface'
+import { toUnicodeVariant } from '../utils/to-unicode-variant.util'
 
 export class TailwindFileDialog {
-
-  constructor(
-    private notification: EventEmitter<Dialog | undefined>,
-  ) { }
+  constructor(private notification: EventEmitter<Dialog | undefined>) {}
 
   getNotification(): Dialog {
     const closeEmitter = new EventEmitter()
@@ -16,7 +13,10 @@ export class TailwindFileDialog {
 
     const docEmitter = new EventEmitter()
     docEmitter.subscribe(() => {
-      window.open('https://tailwindcss.com/docs/customizing-colors#using-the-default-colors', '_blank')
+      window.open(
+        'https://tailwindcss.com/docs/customizing-colors#using-the-default-colors',
+        '_blank'
+      )
     })
 
     return {
@@ -24,13 +24,14 @@ export class TailwindFileDialog {
       interpolateParams: {
         file: toUnicodeVariant('tailwind.colors.js', 'm'),
         config: toUnicodeVariant('tailwind.config.js', 'm'),
-        'import': toUnicodeVariant('colors: require(\'./tailwind.colors\'),', 'm')
+        import: toUnicodeVariant("colors: require('./tailwind.colors'),", 'm'),
       },
-      actions: [{
-        id: 'more',
-        action: docEmitter
-      }]
+      actions: [
+        {
+          id: 'more',
+          action: docEmitter,
+        },
+      ],
     }
   }
-
 }

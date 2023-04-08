@@ -15,8 +15,9 @@ If you have further ideas for the tool or would like to contribute yourself, ple
 All suggestions are discussed there, tasks are distributed and help is offered.
 
 ## Roadmap
+
 | Status | Version | Features                                       |
-|--------|---------|------------------------------------------------|
+| ------ | ------- | ---------------------------------------------- |
 | 🟩     | `0.1.0` | Export Palette                                 |
 | 🟩     | `0.1.1` | Adjust Color Shades                            |
 | 🟩     | `0.1.2` | Redesign                                       |
@@ -30,6 +31,7 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 | 🟥     | `0.3.2` | Generate color palette from images             |
 
 ### Side features
+
 - [ ] Add [MDX-Stories for Storybook](https://storybook.js.org/docs/react/writing-docs/mdx)
 - [ ] Karma tests for classes
 - [ ] Preview palette in uploaded SVGs
@@ -39,7 +41,7 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 ### Support for color formats
 
 | From \ To | HEX | RGB | HSL | HSV | CMYK |
-|-----------|-----|-----|-----|-----|------|
+| --------- | --- | --- | --- | --- | ---- |
 | **HEX**   |     | 🟩  | 🟨  | 🟨  | 🟨   |
 | **RGB**   | 🟩  |     | 🟩  | 🟨  | 🟩   |
 | **HSL**   | 🟨  | 🟩  |     | 🟩  | 🟨   |
@@ -51,7 +53,9 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 🟥: No conversion implemented
 
 ## License
+
 [MIT](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)
 
 ## Author
+
 Luis Wolf &lt;development@pawcode.de&gt;
