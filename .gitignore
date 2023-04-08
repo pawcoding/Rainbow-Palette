@@ -39,6 +39,7 @@ yarn-error.log
 /libpeerconnection.log
 testem.log
 /typings
+/src/assets/fonts
 
 # System files
 .DS_Store
