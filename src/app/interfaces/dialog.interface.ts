@@ -2,15 +2,15 @@ import {EventEmitter} from "@angular/core";
 
 export interface Dialog {
 
-  message: string
-  actions: Action[]
+  id: string,
+  interpolateParams?: Object,
+  actions?: Action[]
 
 }
 
 export interface Action {
 
-  text: string
-  title: string
+  id: string
   action: EventEmitter<any>
 
 }

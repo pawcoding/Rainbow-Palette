@@ -30,7 +30,7 @@
                 ? 'text-primary-800 bg-primary-200 dark:text-primary-900 dark:bg-primary-500'
                 : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
               [routerLink]="nav.link"
-              [title]="nav.title"
+              [title]="'app.navigation.' + nav.id + '.title' | translate"
             >
               <svg
                 class="w-6 h-6 mr-2 hidden md:block"
@@ -40,8 +40,7 @@
                 [innerHTML]="nav.icon | safeHtml "
               >
               </svg>
-
-              {{nav.text}}
+              {{'app.navigation.' + nav.id + '.label' | translate }}
             </a>
           </li>
         </ul>

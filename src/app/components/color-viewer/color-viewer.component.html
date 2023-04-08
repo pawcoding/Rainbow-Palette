@@ -1,6 +1,6 @@
 <div [class]="dark ? 'dark' : ''">
   <article *ngIf="color"
-    class="my-8 items-center cursor-default overflow-clip
+           class="my-8 items-center cursor-default overflow-clip
            grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 grid-areas-color-square sm:grid-areas-color-semi lg:grid-areas-color-wide"
   >
     <!-- Name of the color -->
@@ -15,7 +15,7 @@
 
       <input *ngIf="editingState"
              type="text" #editName
-             placeholder="Color name"
+             [placeholder]="'color-viewer.name-placeholder' | translate"
              class="bg-transparent p-0 mb-1.5 mt-2 text-lg font-bold
                     border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
              (focusout)="closeEditor()"
@@ -25,10 +25,12 @@
       <span
         *ngIf="!editingState"
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
-        title="Edit color name"
+        [title]="'color-viewer.edit-name' | translate"
         (click)="openEditor()"
       >
-        <img src="/assets/icons/edit.svg" alt="Edit name" class="icon">
+        <img src="/assets/icons/edit.svg"
+             [alt]="'color-viewer.edit-name' | translate"
+             class="icon">
       </span>
     </div>
 
@@ -38,25 +40,25 @@
     >
       <span
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
-        title="Tune color"
+        [title]="'color-viewer.tune' | translate"
         (click)="colorService.loadColor(color)"
       >
         <img
           class="icon"
           src="/assets/icons/tune.svg"
-          alt="Tune color"
+          [alt]="'color-viewer.tune' | translate"
         >
       </span>
 
       <span
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
-        title="Remove color from palette"
+        [title]="'color-viewer.remove' | translate"
         (click)="onRemove.emit(color)"
       >
         <img
           class="icon"
           src="/assets/icons/delete.svg"
-          alt="Remove from palette"
+          [alt]="'color-viewer.remove' | translate"
         >
       </span>
     </div>
@@ -67,7 +69,7 @@
     >
       <span
         *ngFor="let shade of color.shades; index as i"
-        title="Tune shade"
+        [title]="'color-viewer.tune-shade' | translate"
         class="block w-full py-4
                text-center text-lg cursor-pointer sm:rounded"
         [class]="i === 0 ? 'rounded-l' : (i === color.shades.length-1 ? 'rounded-r' : '')"

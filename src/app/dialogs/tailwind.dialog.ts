@@ -4,16 +4,16 @@ import {Palette} from "../models/palette.model";
 import {Dialog} from "../interfaces/dialog.interface";
 import {TailwindCopyDialog} from "./tailwind-copy.dialog";
 import {TailwindFileDialog} from "./tailwind-file.dialog";
-import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
+import {toUnicodeVariant} from "../utils/to-unicode-variant.util";
 
 export class TailwindDialog {
 
   constructor(
     private notification: EventEmitter<Dialog | undefined>,
-    private palette: Palette
+    private palette: Palette,
   ) { }
 
-  getNotification() {
+  getNotification(): Dialog {
     const tailwindCopyEmitter = new EventEmitter()
     tailwindCopyEmitter.subscribe(() => {
       const tailwind = PaletteExporter.exportPaletteToTailwind(this.palette)
@@ -23,8 +23,10 @@ export class TailwindDialog {
         ).getNotification())
       }).catch(e => {
         this.notification.emit({
-          message: `An error occurred while copying to the clipboard\n\n${e}`,
-          actions: []
+          id: 'copy-error',
+          interpolateParams:{
+            error: e
+          }
         })
       })
     })
@@ -45,14 +47,15 @@ export class TailwindDialog {
     })
 
     return {
-      message: `Do you want to copy the colors to your existing ${ToUnicodeVariantUtil.toUnicodeVariant('tailwind.config.js', 'm')} or create an extra file only for your palette?`,
+      id: 'export-tailwind',
+      interpolateParams: {
+        file: toUnicodeVariant('tailwind.colors.js', 'm'),
+      },
       actions: [{
-        text: 'Copy',
-        title: 'Copy content in existing file',
+        id: 'copy',
         action: tailwindCopyEmitter
       }, {
-        text: 'File',
-        title: 'Download a new file',
+        id: 'file',
         action: tailwindFileEmitter
       }]
     }

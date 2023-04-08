@@ -8,19 +8,85 @@
     },
     "navigation": {
       "edit": {
-        "text": "Edit",
+        "label": "Edit",
         "title": "Edit your palette"
       },
-      "preview": {
-        "text": "Preview",
-        "title": "Preview your palette with components"
-      },
-      "regenerate": {
-        "text": "Regenerate",
+      "home": {
+        "label": "Regenerate",
         "title": "Generate a new palette"
+      },
+      "preview": {
+        "label": "Preview",
+        "title": "Preview your palette with components"
       }
     },
     "title": "Get your own color palette from just a single color"
+  },
+  "color-editor": {
+    "cancel": "Cancel",
+    "cancel-title": "Close editor without saving",
+    "edit-shade": "Edit this shade\nRight-click: Interpolate this shade",
+    "hex": "Put your hex code here",
+    "hue": "Hue",
+    "hue-adjust": "Adjust the hue",
+    "luminosity": "Luminosity",
+    "luminosity-adjust": "Adjust the luminosity",
+    "pick": "Pick your color",
+    "saturation": "Saturation",
+    "saturation-adjust": "Adjust the saturation",
+    "save": "Save",
+    "save-title": "Save changes"
+  },
+  "color-viewer": {
+    "edit-name": "Edit the name of this color",
+    "name-placeholder": "Enter a name for this color",
+    "remove": "Remove this color from your palette",
+    "tune": "Tune this color",
+    "tune-shade": "Tune this shade\nRight-click: Copy to clipboard"
+  },
+  "dialog": {
+    "action": {
+      "cancel": {
+        "label": "Cancel",
+        "title": "Cancel deletion"
+      },
+      "copy": {
+        "label": "Copy",
+        "title": "Copy palette to your clipboard"
+      },
+      "css": {
+        "label": "CSS",
+        "title": "Export colors as CSS properties"
+      },
+      "delete": {
+        "label": "Delete",
+        "title": "Delete palette"
+      },
+      "file": {
+        "label": "File",
+        "title": "Download palette as file"
+      },
+      "more": {
+        "label": "Read more",
+        "title": "Open documentation"
+      },
+      "tailwind": {
+        "label": "TailwindCSS",
+        "title": "Export colors as TailwindCSS custom colors"
+      }
+    },
+    "close": "Close dialog",
+    "message": {
+      "copy-error": "An error occurred while copying the palette to your clipboard.\n\n{{ error }}",
+      "delete-palette": "Are you sure you want to delete the palette?\nIt can {{ not }} be restored.",
+      "export-css": "Do you want to copy the CSS properties into your own files or create a new one?",
+      "export-css-copy": "The palette has been copied to your clipboard. To use the colors as CSS properties copy the contents of the clipboard to the {{ root }} of your css file. Now you can use them by referencing them like:\n{{ usage }}",
+      "export-css-file": "Move the downloaded {{ css }} file to the root of your webserver. Then link it in the head of your html file like:\n{{ link }}\n\nNow you can use them by referencing them like:\n{{ usage }}",
+      "export-palette": "How do you want to use your palette?",
+      "export-tailwind": "Do you want to copy the colors to your existing {{ file }} or create an extra file only for your palette?",
+      "export-tailwind-copy": "The palette has been copied to your clipboard. To use the colors copy the contents of the clipboard to the {{ config }} file.\n\nCheck TailwindsCSS's documentation for further instructions.",
+      "export-tailwind-file": "Move the downloaded {{ file }} file to the root of your project. Then import the colors in your {{ config }} file like:\n{{ import }}\n\nCheck TailwindCSS's documentation for further instructions."
+    }
   },
   "home": {
     "additions": {
@@ -44,11 +110,9 @@
       "title": "Additional info & support"
     },
     "generation": {
-      "hex": "Put your hex code here",
       "invalid-hex": "You need to enter a 6-digit hex code.",
       "note": "Note",
       "perfection": "No generator achieves perfect results.<br>Please adjust the colors to your liking.",
-      "pick": "Pick your color",
       "start": "Generate palette"
     },
     "scheme": {
@@ -57,7 +121,7 @@
       "COMPOUND": "Compound",
       "MONOCHROMATIC": "Monochromatic",
       "pick": "Pick a color scheme",
-      "RAINBOW": "RAINBOW",
+      "RAINBOW": "Rainbow",
       "SURPRISE_ME": "Surprise me!",
       "SPLIT": "Split Complementary",
       "TRIADIC": "Triadic"
@@ -83,5 +147,35 @@
       },
       "title": "How it works"
     }
-  }
+  },
+  "light-switch": {
+    "to-dark": "Switch to dark mode",
+    "to-light": "Switch to light mode"
+  },
+  "notification": {
+    "copied": "Copied {{ color }} to your clipboard.",
+    "copy-error": "An error occurred while copying the color to your clipboard.",
+    "close": "Close notification",
+    "saved": "Palette saved"
+  },
+  "palette-viewer": {
+    "add": "Add color",
+    "add-title": "Add a new random color to your palette",
+    "adding": "Generating color...",
+    "adding-title": "A new color is being generated...",
+    "edit-title": "Edit the name of your palette",
+    "export": "Export",
+    "export-title": "Export your palette",
+    "save": "Save",
+    "save-title": "Save the palette in your browser",
+    "saving": "Saving...",
+    "saving-title": "Your palette is being saved in your browser...",
+    "title-placeholder": "Give your palette a name"
+  },
+  "preview": {
+    "description": "Here you will soon be able to try out your palette directly with various components such as cards, buttons, etc.",
+    "more-info": "Feel free to check the repository on {{ github }} or my {{ discord }} for more information.",
+    "title": "Coming soon..."
+  },
+  "random": "Random"
 }

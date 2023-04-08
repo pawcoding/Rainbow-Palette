@@ -1,6 +1,6 @@
 import {EventEmitter} from "@angular/core";
 import {Dialog} from "../interfaces/dialog.interface";
-import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
+import { toUnicodeVariant } from "../utils/to-unicode-variant.util";
 
 export class TailwindFileDialog {
 
@@ -20,13 +20,14 @@ export class TailwindFileDialog {
     })
 
     return {
-      message: 'Move the downloaded tailwind.colors.js file to the root of your project. ' +
-        `Then import the colors in your ${ToUnicodeVariantUtil.toUnicodeVariant('tailwind.config.js', 'm')} file like:\n` +
-        ToUnicodeVariantUtil.toUnicodeVariant('colors: require(\'./tailwind.colors\'),', 'm') + '\n\n' +
-        'Check TailwindsCSS\'s documentation for further instructions.',
+      id: 'export-tailwind-file',
+      interpolateParams: {
+        file: toUnicodeVariant('tailwind.colors.js', 'm'),
+        config: toUnicodeVariant('tailwind.config.js', 'm'),
+        'import': toUnicodeVariant('colors: require(\'./tailwind.colors\'),', 'm')
+      },
       actions: [{
-        text: 'Read more',
-        title: 'Open documentation',
+        id: 'more',
         action: docEmitter
       }]
     }

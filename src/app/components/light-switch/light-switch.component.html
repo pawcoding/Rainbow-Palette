@@ -1,7 +1,7 @@
 <label
   for="light-switch"
   class="inline-flex relative items-center cursor-pointer"
-  title="Toggle the lights"
+  [title]="'light-switch.' + (dark ? 'to-light' : 'to-dark') | translate"
 >
   <input
     type="checkbox"

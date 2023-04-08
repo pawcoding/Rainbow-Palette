@@ -5,6 +5,7 @@ import {PaletteScheme} from "../../class/palette-generator";
 import {PaletteService} from "../../services/palette.service";
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
+import {getGitHubLink, getDiscordLink} from "../../utils/links.util";
 
 @Component({
   selector: 'app-home',
@@ -24,6 +25,9 @@ export class HomeComponent implements OnInit {
   loadContainer: ElementRef<HTMLDivElement> | undefined
   @ViewChild('loadBar')
   loadBar: ElementRef<HTMLSpanElement> | undefined
+
+  getGitHubLink = getGitHubLink(this.translate)
+  getDiscordLink = getDiscordLink(this.translate)
 
   constructor(
     private notificationService: NotificationService,
@@ -80,18 +84,6 @@ export class HomeComponent implements OnInit {
       this.paletteService.generatePalette(this.value, this.scheme)
       this.router.navigate(['edit'])
     }, 5100)
-  }
-
-  public getGitHubLink(): string {
-    return `<a href="https://github.com/pawcoding/rainbow-palette" target="_blank" rel="noreferrer noopener" class="underline" title="${
-      this.translate.instant('app.footer.source-code')
-    }">GitHub</a>`
-  }
-
-  public getDiscordLink(): string {
-    return `<a href="https://discord.gg/GzgTh4hxrx" target="_blank" rel="noreferrer noopener" class="underline" title="${
-      this.translate.instant('home.additions.development.discord')
-    }">Discord</a>`
   }
 
 }

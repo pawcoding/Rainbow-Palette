@@ -11,7 +11,7 @@ export class ExportDialog {
     private palette: Palette
   ) { }
 
-  getNotification() {
+  getNotification(): Dialog {
     const cssEmitter = new EventEmitter()
     cssEmitter.subscribe(() => {
       this.notification
@@ -31,14 +31,12 @@ export class ExportDialog {
     })
 
     return {
-      message: 'How do you want to use the palette?',
+      id: 'export-palette',
       actions: [{
-        text: 'CSS',
-        title: 'CSS Properties',
+        id: 'css',
         action: cssEmitter
       }, {
-        text: 'TailwindCSS',
-        title: 'TailwindCSS custom colors',
+        id: 'tailwind',
         action: tailwindEmitter
       }]
     }

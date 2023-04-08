@@ -16,7 +16,7 @@
         <!-- Palette name input -->
         <input *ngIf="editingState"
                type="text" #editTitle
-               placeholder="Palette title"
+               [placeholder]="'palette-viewer.title-placeholder' | translate"
                class="bg-transparent p-0 text-xl font-bold
                       border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
                (focusout)="closeEditor()"
@@ -26,7 +26,7 @@
         <span
           *ngIf="!editingState"
           class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
-          title="Edit palette title"
+          [title]="'palette-viewer.edit-title' | translate"
           (click)="openEditor()"
         >
           <img src="/assets/icons/edit.svg" alt="Edit title" class="icon !h-8 !w-8">
@@ -38,7 +38,7 @@
         <button
           class="py-2 px-4 inline-flex items-center
                  text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
-          title="Export the palette"
+          [title]="'palette-viewer.export-title' | translate"
           (click)="exportPalette()"
         >
           <svg
@@ -50,14 +50,14 @@
             <path fill="currentColor" fill-rule="evenodd" d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zM12 10.5a.75.75 0 01.75.75v4.94l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 111.06-1.06l1.72 1.72v-4.94a.75.75 0 01.75-.75z" clip-rule="evenodd" />
           </svg>
 
-          Export
+          {{ 'palette-viewer.export' | translate }}
         </button>
 
         <!-- Save Button -->
         <button
           class="py-2 px-4 ml-4 inline-flex items-center
                  text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
-          title="Save the palette"
+          [title]="'palette-viewer.' + (saving ? 'saving' : 'save') + '-title' | translate"
           (click)="savePalette()"
         >
           <svg
@@ -80,7 +80,7 @@
               fill-rule="evenodd" d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z" clip-rule="evenodd" />
           </svg>
 
-          Save
+          {{ 'palette-viewer.' + (saving ? 'saving' : 'save') | translate }}
         </button>
       </div>
     </div>
@@ -96,6 +96,7 @@
     <button
       class="py-2 px-4 mt-4 mx-auto flex items-center
              font-medium text-primary-100 bg-primary-700 rounded transition-all duration-200"
+      [title]="'palette-viewer.' + (adding ? 'adding' : 'add') + '-title' | translate"
       (click)="addRandomColor($event)"
     >
       <svg
@@ -120,7 +121,7 @@
           d="M8.25 30.1q-.6-1.45-.85-2.975Q7.15 25.6 7.15 24q0-6.75 4.9-11.75t11.6-5h2.15l-2.3-2.3q-.45-.45-.45-1.15t.5-1.2q.45-.45 1.175-.45.725 0 1.225.45l5.25 5.35q.35.35.55.775.2.425.2.875t-.2.875q-.2.425-.55.775l-5.25 5.3q-.5.5-1.225.5-.725 0-1.225-.5-.5-.5-.5-1.225 0-.725.5-1.225l2.2-2.15h-1.95q-4.85 0-8.375 3.575Q11.85 19.1 11.85 24q0 1.2.175 2.25t.475 2q.2.65.05 1.325-.15.675-.55 1.125-.95.95-2.125.775Q8.7 31.3 8.25 30.1Zm13.8 15.4-5.35-5.25q-.35-.35-.525-.775Q16 39.05 16 38.6q0-.5.175-.9t.525-.75l5.35-5.35q.45-.45 1.15-.45t1.2.45q.45.5.45 1.175T24.4 33.9l-2.3 2.3h2.15q4.85 0 8.375-3.575Q36.15 29.05 36.15 24.1q0-1.15-.175-2.225Q35.8 20.8 35.5 19.85q-.2-.6-.075-1.25t.525-1.1q.95-.95 2.125-.8 1.175.15 1.675 1.3.55 1.5.825 3.025.275 1.525.275 3.075 0 6.8-4.9 11.825-4.9 5.025-11.55 5.025h-2.3l2.25 2.25q.45.45.45 1.15t-.45 1.15q-.5.5-1.175.5t-1.125-.5Z"/>
       </svg>
 
-      Add color
+      {{ 'palette-viewer.' + (adding ? 'adding' : 'add') | translate }}
     </button>
   </section>
 </div>

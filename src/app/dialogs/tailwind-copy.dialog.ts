@@ -1,6 +1,6 @@
 import {EventEmitter} from "@angular/core";
 import {Dialog} from "../interfaces/dialog.interface";
-import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
+import {toUnicodeVariant} from "../utils/to-unicode-variant.util";
 
 export class TailwindCopyDialog {
 
@@ -20,12 +20,12 @@ export class TailwindCopyDialog {
     })
 
     return {
-      message: 'The palette has been copied to your clipboard. ' +
-        `To use the colors copy the contents of the clipboard to the ${ToUnicodeVariantUtil.toUnicodeVariant('tailwind.config.js', 'm')} file.\n\n` +
-        'Check TailwindsCSS\'s documentation for further instructions.',
+      id: 'export-tailwind-copy',
+      interpolateParams: {
+        config: toUnicodeVariant('tailwind.config.js', 'm')
+      },
       actions: [{
-        text: 'Read more',
-        title: 'Open documentation',
+        id: 'more',
         action: docEmitter
       }]
     }

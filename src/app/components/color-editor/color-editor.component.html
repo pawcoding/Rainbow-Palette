@@ -9,14 +9,14 @@
              font-medium bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded"
       (click)="$event.stopPropagation()"
     >
-      <h2 class="mb-2">{{color.name}}</h2>
+      <h2 class="mb-2">{{ color.name }}</h2>
 
 
       <!-- Edit Hex -->
       <div class="flex">
         <input
           type="color"
-          title="Select a shade"
+          [title]="'color-editor.pick' | translate"
           id="hexInput" #hexInput
           class="w-1/5 h-10 rounded-l rounded-r-none overflow-clip"
           [value]="shade.hex"
@@ -25,7 +25,7 @@
 
         <input
           type="text"
-          title="Put your hex code here"
+          [title]="'color-editor.hex' | translate"
           id="hexCode" #hexCode
           placeholder="#4472C4"
           class="w-4/5 rounded-r
@@ -42,13 +42,13 @@
           for="hueInput"
           class="flex justify-between"
         >
-          <span class="font-semibold">Hue</span>
-          <span id="hueLabel" #hueLabel>{{shade.hue}}</span>
+          <span class="font-semibold">{{ 'color-editor.hue' | translate }}</span>
+          <span id="hueLabel" #hueLabel>{{ shade.hue }}</span>
         </label>
 
         <input
           type="range"
-          title="Adjust the hue"
+          [title]="'color-editor.hue-adjust' | translate"
           id="hueInput" #hueInput
           min=0 max=360 step="1"
           [value]="hueToWheel(shade.hue)"
@@ -62,13 +62,13 @@
           for="saturationInput"
           class="flex justify-between"
         >
-          <span class="font-semibold">Saturation</span>
-          <span id="saturationLabel" #saturationLabel>{{shade.saturation}}</span>
+          <span class="font-semibold">{{ 'color-editor.saturation' | translate }}</span>
+          <span id="saturationLabel" #saturationLabel>{{ shade.saturation }}</span>
         </label>
 
         <input
           type="range"
-          title="Adjust the saturation"
+          [title]="'color-editor.saturation-adjust' | translate"
           id="saturationInput" #saturationInput
           min=0 max=100 step="1"
           [value]="shade.saturation"
@@ -82,13 +82,13 @@
           for="luminosityInput"
           class="flex justify-between"
         >
-          <span class="font-semibold">Luminosity</span>
-          <span id="luminosityLabel" #luminosityLabel>{{shade.luminosity}}</span>
+          <span class="font-semibold">{{ 'color-editor.luminosity' | translate }}</span>
+          <span id="luminosityLabel" #luminosityLabel>{{ shade.luminosity }}</span>
         </label>
 
         <input
           type="range"
-          title="Adjust the luminosity"
+          [title]="'color-editor.luminosity-adjust' | translate"
           id="luminosityInput" #luminosityInput
           min=0 max=100 step="1"
           [value]="100 - shade.luminosity"
@@ -109,7 +109,7 @@
           }"
           [class]="shadeToShow.index === 50 ? 'rounded-l' : (shadeToShow.index === 900 ? 'rounded-r' : '')"
           class="flex w-full h-14 items-center justify-center cursor-pointer border-4"
-          title="Edit this shade&#10;Rightclick: Interpolate this shade"
+          [title]="'color-editor.edit-shade' | translate"
           (click)="changeShade(shadeToShow.index)"
           (contextmenu)="releaseShade(shadeToShow, $event)"
         >
@@ -123,19 +123,19 @@
         <button
           class="py-2 px-4 mt-4
                  font-medium bg-gray-200 dark:bg-gray-800 rounded transition-all duration-200"
-          title="Close editor without saving"
+          [title]="'color-editor.cancel-title' | translate"
           (click)="colorService.closeEditor()"
         >
-          Cancel
+          {{ 'color-editor.cancel' | translate }}
         </button>
 
         <button
           class="py-2 px-4 mt-4 ml-2
                  font-medium text-primary-100 bg-primary-700 dark:bg-primary-600 rounded transition-all duration-200"
-          title="Save changes"
+          [title]="'color-editor.save-title' | translate"
           (click)="colorService.saveColor()"
         >
-          Save
+          {{ 'color-editor.save' | translate }}
         </button>
       </section>
     </article>

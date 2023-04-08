@@ -1,7 +1,7 @@
 <div>
   <article class="px-4 text-center text-lg">
     <div *ngIf="!loading">
-      <div class="flex items-center justify-center" style="min-height: calc(100vh - 170px)">
+      <div class="flex items-center justify-center" style="min-height: calc(100svh - 170px)">
         <section>
           <p class="font-bold">
             {{ 'home.text1' | translate }}
@@ -17,7 +17,7 @@
             >
               <input
                 type="color"
-                [title]="'home.generation.pick' | translate"
+                [title]="'color-editor.pick' | translate"
                 id="color" #color
                 class="h-10 w-1/5 overflow-clip rounded-r-none rounded-l"
                 [value]="value"
@@ -26,7 +26,7 @@
 
               <input
                 type="text"
-                [title]="'home.generation.hex' | translate"
+                [title]="'color-editor.hex' | translate"
                 id="hexCode" #hexCode
                 placeholder="#4472C4"
                 class="w-4/5 rounded-r

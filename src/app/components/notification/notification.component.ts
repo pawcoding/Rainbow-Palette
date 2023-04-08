@@ -11,6 +11,7 @@ export class NotificationComponent implements OnInit {
   dark = false
 
   message: string | undefined
+  complexNotification: { id: string, interpolateParams: Object } | undefined
   timeout: number | undefined
 
   constructor(
@@ -18,7 +19,13 @@ export class NotificationComponent implements OnInit {
   ) {
     notificationService.notification
       .subscribe(notification => {
-        this.message = notification
+        if (typeof notification === 'string') {
+          this.message = notification
+          this.complexNotification = undefined
+        } else {
+          this.complexNotification = notification
+          this.message = undefined
+        }
 
         if (notification) {
           clearTimeout(this.timeout)

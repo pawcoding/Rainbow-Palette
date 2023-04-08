@@ -1,6 +1,6 @@
 import {EventEmitter} from "@angular/core";
 import {Dialog} from "../interfaces/dialog.interface";
-import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
+import {toUnicodeVariant} from "../utils/to-unicode-variant.util";
 
 export class CssFileDialog {
 
@@ -20,14 +20,14 @@ export class CssFileDialog {
     })
 
     return {
-      message: 'Move the downloaded colors.css file to the root of your webserver. ' +
-        'Then link it in the head of your html file like:\n' +
-        ToUnicodeVariantUtil.toUnicodeVariant('<link rel="stylesheet" href="/colors.css">', 'm') + '\n\n' +
-        'Now you can use them by referencing them like:\n' +
-        ToUnicodeVariantUtil.toUnicodeVariant('color: var(--color-100);', 'm'),
+      id: 'export-css-file',
+      interpolateParams: {
+        css: toUnicodeVariant('colors.css', 'm'),
+        link: toUnicodeVariant('<link rel="stylesheet" href="/colors.css">', 'm'),
+        usage: toUnicodeVariant('color: var(--color-100);', 'm')
+      },
       actions: [{
-        text: 'Read more',
-        title: 'Open MDN Web Docs',
+        id: 'more',
         action: docEmitter
       }]
     }

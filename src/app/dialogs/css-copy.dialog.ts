@@ -1,6 +1,6 @@
 import {EventEmitter} from "@angular/core";
 import {Dialog} from "../interfaces/dialog.interface";
-import {ToUnicodeVariantUtil} from "../utils/to-unicode-variant.util";
+import {toUnicodeVariant} from "../utils/to-unicode-variant.util";
 
 export class CssCopyDialog {
 
@@ -20,13 +20,13 @@ export class CssCopyDialog {
     })
 
     return {
-      message: 'The palette has been copied to your clipboard. ' +
-        `To use the colors as CSS properties copy the contents of the clipboard to the ${ToUnicodeVariantUtil.toUnicodeVariant(':root', 'm')} of your css file. ` +
-        'Now you can use them by referencing them like:\n' +
-        ToUnicodeVariantUtil.toUnicodeVariant('color: var(--color-100);', 'm'),
+      id: 'export-css-copy',
+      interpolateParams: {
+        root: toUnicodeVariant(':root', 'm'),
+        usage: toUnicodeVariant('color: var(--color-100);', 'm')
+      },
       actions: [{
-        text: 'Read more',
-        title: 'Open MDN Web Docs',
+        id: 'more',
         action: docEmitter
       }]
     }

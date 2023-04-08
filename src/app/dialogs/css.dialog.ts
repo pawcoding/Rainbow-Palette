@@ -12,7 +12,7 @@ export class CssDialog {
     private palette: Palette
   ) { }
 
-  getNotification() {
+  getNotification(): Dialog {
     const cssCopyEmitter = new EventEmitter()
     cssCopyEmitter.subscribe(() => {
       const css = PaletteExporter.exportPaletteToCSS(this.palette)
@@ -22,8 +22,10 @@ export class CssDialog {
         ).getNotification())
       }).catch(e => {
         this.notification.emit({
-          message: `An error occurred while copying to the clipboard\n\n${e}`,
-          actions: []
+          id: 'copy-error',
+          interpolateParams: {
+            error: e
+          }
         })
       })
     })
@@ -44,14 +46,12 @@ export class CssDialog {
     })
 
     return {
-      message: 'Do you want to copy the CSS properties into your own files or create a new one?',
+      id: 'export-css',
       actions: [{
-        text: 'Copy',
-        title: 'Copy content in own CSS file',
+        id: 'copy',
         action: cssCopyEmitter
       }, {
-        text: 'File',
-        title: 'Download a new file',
+        id: 'file',
         action: cssFileEmitter
       }]
     }

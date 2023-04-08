@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {getGitHubLink, getDiscordLink} from "../../utils/links.util";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-preview',
@@ -6,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreviewComponent implements OnInit {
 
-  constructor() { }
+  getGitHubLink = getGitHubLink(this.translate)
+  getDiscordLink = getDiscordLink(this.translate)
+
+  constructor(
+    private translate: TranslateService
+  ) { }
 
   ngOnInit(): void {
   }

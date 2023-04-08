@@ -1,10 +1,11 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Palette} from "../../models/palette.model";
-import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
+import {toUnicodeVariant} from "../../utils/to-unicode-variant.util";
 import {Color} from "../../models/color.model";
 import {StorageService} from "../../services/storage.service";
 import {NotificationService} from "../../services/notification.service";
 import {ExportDialog} from "../../dialogs/export.dialog";
+import {TranslateService} from "@ngx-translate/core";
 
 
 @Component({
@@ -31,7 +32,8 @@ export class PaletteViewerComponent implements OnInit {
 
   constructor(
     private storage: StorageService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit(): void {
@@ -53,14 +55,15 @@ export class PaletteViewerComponent implements OnInit {
     })
 
     this.notificationService.dialog.emit({
-      message: `Are you sure you want to delete the palette?\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`,
+      id: 'delete-palette',
+      interpolateParams: {
+        not: toUnicodeVariant('not', 'bs')
+      },
       actions: [{
-        text: 'Cancel',
-        title: 'Cancel deletion',
+        id: 'cancel',
         action: closeEmitter
       }, {
-        text: 'Delete',
-        title: 'Delete palette',
+        id: 'delete',
         action: removeEmitter
       }]
     })
@@ -101,7 +104,7 @@ export class PaletteViewerComponent implements OnInit {
     if (this.palette)
       this.storage.savePalette(this.palette)
     setTimeout(() => {
-      this.notificationService.notification.emit('Palette saved')
+      this.notificationService.notification.emit('saved')
       this.saving = false
     }, 2000)
   }
@@ -122,7 +125,7 @@ export class PaletteViewerComponent implements OnInit {
   closeEditor() {
     this.editingState = false
     if (this.palette)
-      this.palette.title = this.editTitle?.nativeElement.value || 'Random'
+      this.palette.title = this.editTitle?.nativeElement.value || this.translate.instant('random')
   }
 
   /**

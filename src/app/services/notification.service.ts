@@ -8,8 +8,9 @@ export class NotificationService {
 
   dialog: EventEmitter<Dialog | undefined> = new EventEmitter<Dialog | undefined>()
 
-  notification: EventEmitter<string | undefined> = new EventEmitter<string | undefined>()
+  notification: EventEmitter<string | { id: string, interpolateParams: Object } | undefined> = new EventEmitter<string | { id: string, interpolateParams: Object } | undefined>()
 
-  constructor() { }
+  constructor() {
+  }
 
 }
