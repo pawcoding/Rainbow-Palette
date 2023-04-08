@@ -1,7 +1,9 @@
 <div>
   <article class="px-4 text-center text-lg">
     <div *ngIf="!loading">
-      <div class="flex items-center justify-center" style="min-height: calc(100svh - 170px)">
+      <div
+        class="flex items-center justify-center"
+        style="min-height: calc(100svh - 170px)">
         <section>
           <p class="font-bold">
             {{ 'home.text1' | translate }}
@@ -12,43 +14,39 @@
           </p>
 
           <div class="relative mx-auto mt-4 flex flex-col max-w-xxs">
-            <span
-              class="flex"
-            >
+            <span class="flex">
               <input
                 type="color"
                 [title]="'color-editor.pick' | translate"
-                id="color" #color
+                id="color"
+                #color
                 class="h-10 w-1/5 overflow-clip rounded-r-none rounded-l"
                 [value]="value"
-                (input)="updateValue(color.value)"
-              >
+                (input)="updateValue(color.value)" />
 
               <input
                 type="text"
                 [title]="'color-editor.hex' | translate"
-                id="hexCode" #hexCode
+                id="hexCode"
+                #hexCode
                 placeholder="#4472C4"
-                class="w-4/5 rounded-r
-                       text-medium text-gray-900 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500
-                       border-0 focus:ring-0"
+                class="w-4/5 rounded-r text-medium text-gray-900 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500 border-0 focus:ring-0"
                 [value]="value"
-                (input)="updateValue(hexCode.value)"
-              >
+                (input)="updateValue(hexCode.value)" />
             </span>
 
             <button
-              class="py-2 px-4 mt-2 inline-flex items-center
-                     text-primary-100 bg-primary-700 font-medium rounded
-                     transition-colors duration-500"
-              [disabled]="invalid"
-            >
+              class="py-2 px-4 mt-2 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded transition-colors duration-500"
+              [disabled]="invalid">
               <span
                 class="grow text-center"
                 [class]="invalid ? 'cursor-not-allowed' : 'cursor-pointer'"
-                [title]="invalid ? 'You need a 6-digit hex code' : 'Generate a color palette'"
-                (click)="generatePalette()"
-              >
+                [title]="
+                  invalid
+                    ? 'You need a 6-digit hex code'
+                    : 'Generate a color palette'
+                "
+                (click)="generatePalette()">
                 {{ 'home.generation.start' | translate }}
               </span>
 
@@ -57,19 +55,16 @@
                 fill="currentColor"
                 viewBox="0 0 48 48"
                 xmlns="http://www.w3.org/2000/svg"
-                (click)="dropdown = !dropdown"
-              >
+                (click)="dropdown = !dropdown">
                 <path
-                  d="M24 30.95q-.45 0-.875-.175t-.775-.525l-9.9-9.9q-.65-.65-.625-1.65.025-1 .675-1.7.75-.75 1.675-.675.925.075 1.625.725l8.2 8.2 8.2-8.2q.7-.65 1.7-.7 1-.05 1.65.7.75.7.675 1.675-.075.975-.725 1.675l-9.85 9.85q-.35.35-.775.525-.425.175-.875.175Z"/>
+                  d="M24 30.95q-.45 0-.875-.175t-.775-.525l-9.9-9.9q-.65-.65-.625-1.65.025-1 .675-1.7.75-.75 1.675-.675.925.075 1.625.725l8.2 8.2 8.2-8.2q.7-.65 1.7-.7 1-.05 1.65.7.75.7.675 1.675-.075.975-.725 1.675l-9.85 9.85q-.35.35-.775.525-.425.175-.875.175Z" />
               </svg>
             </button>
 
             <div
-              class="w-64 mt-1 p-2 absolute top-full
-                     text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded"
+              class="w-64 mt-1 p-2 absolute top-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded"
               [class]="dropdown ? '' : 'hidden'"
-              (mouseleave)="dropdown = false"
-            >
+              (mouseleave)="dropdown = false">
               <span class="mb-1 block p-2 text-left text-base font-medium">
                 {{ 'home.scheme.pick' | translate }}:
               </span>
@@ -78,10 +73,8 @@
                 class="h-32 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600 sm:h-48">
                 <label
                   *ngFor="let schemeToShow of schemes"
-                  class="block p-2 mb-1 mr-4
-                         hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500"
-                  [htmlFor]="schemeToShow.for"
-                >
+                  class="block p-2 mb-1 mr-4 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500"
+                  [htmlFor]="schemeToShow.for">
                   <input
                     type="radio"
                     name="scheme"
@@ -89,10 +82,10 @@
                     [checked]="schemeToShow.index === scheme"
                     [id]="schemeToShow.for"
                     [value]="schemeToShow.name"
-                    (change)="updateScheme(schemeToShow.scheme)"
-                  >
+                    (change)="updateScheme(schemeToShow.scheme)" />
 
-                  <span class="peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500">
+                  <span
+                    class="peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500">
                     {{ 'home.scheme.' + schemeToShow.name | translate }}
                   </span>
                 </label>
@@ -103,18 +96,27 @@
       </div>
 
       <div class="border-t border-t-gray-300 pt-16 dark:border-t-gray-600">
-        <section class="mx-auto max-w-xl text-justify text-base lg:max-w-7xl lg:px-4">
-          <h2 class="mb-8 text-center">{{ 'home.tutorial.title' | translate }}</h2>
+        <section
+          class="mx-auto max-w-xl text-justify text-base lg:max-w-7xl lg:px-4">
+          <h2 class="mb-8 text-center">
+            {{ 'home.tutorial.title' | translate }}
+          </h2>
 
           <div class="grid gap-8 lg:grid-cols-3 lg:gap-16">
             <article class="xs:grid lg:block grid-cols-3 items-center">
-              <div class="text-center text-primary-900 dark:text-primary-300 lg:mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none" viewBox="0 0 24 24"
-                     stroke-width="1.5" stroke="currentColor"
-                     class="mx-auto h-16 w-16">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z"/>
+              <div
+                class="text-center text-primary-900 dark:text-primary-300 lg:mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="mx-auto h-16 w-16">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z" />
                 </svg>
 
                 <h3>{{ 'home.tutorial.generation.title' | translate }}</h3>
@@ -126,13 +128,19 @@
             </article>
 
             <article class="xs:grid lg:block grid-cols-3 items-center">
-              <div class="order-last text-center text-primary-900 dark:text-primary-300 lg:order-1 lg:mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none" viewBox="0 0 24 24"
-                     stroke-width="1.5" stroke="currentColor"
-                     class="mx-auto h-16 w-16">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75"/>
+              <div
+                class="order-last text-center text-primary-900 dark:text-primary-300 lg:order-1 lg:mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="mx-auto h-16 w-16">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75" />
                 </svg>
 
                 <h3>{{ 'home.tutorial.editing.title' | translate }}</h3>
@@ -144,13 +152,19 @@
             </article>
 
             <article class="xs:grid lg:block grid-cols-3 items-center">
-              <div class="text-center text-primary-900 dark:text-primary-300 lg:mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     fill="none" viewBox="0 0 24 24"
-                     stroke-width="1.5" stroke="currentColor"
-                     class="mx-auto h-16 w-16">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/>
+              <div
+                class="text-center text-primary-900 dark:text-primary-300 lg:mb-4">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="mx-auto h-16 w-16">
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
                 </svg>
 
                 <h3>{{ 'home.tutorial.export.title' | translate }}</h3>
@@ -163,7 +177,8 @@
           </div>
 
           <p class="mt-8 text-center">
-            <b>{{ 'home.tutorial.end.title' | translate }}</b><br>
+            <b>{{ 'home.tutorial.end.title' | translate }}</b
+            ><br />
             {{ 'home.tutorial.end.subtitle' | translate }}
           </p>
         </section>
@@ -171,35 +186,74 @@
         <section class="mx-auto mt-16 max-w-xl text-justify text-base">
           <h2>{{ 'home.additions.title' | translate }}</h2>
 
-          <h3 class="pb-0.5">{{ 'home.additions.development.title' | translate }}</h3>
-          <p class="dark:text-gray-200"
-             [innerHtml]="'home.additions.development.text' | translate : { github: getGitHubLink(), discord: getDiscordLink() }">
-          </p>
+          <h3 class="pb-0.5">
+            {{ 'home.additions.development.title' | translate }}
+          </h3>
+          <p
+            class="dark:text-gray-200"
+            [innerHtml]="
+              'home.additions.development.text'
+                | translate
+                  : { github: getGitHubLink(), discord: getDiscordLink() }
+            "></p>
 
-          <h3 class="pb-0.5">{{ 'home.additions.planned.title' | translate }}</h3>
+          <h3 class="pb-0.5">
+            {{ 'home.additions.planned.title' | translate }}
+          </h3>
           <p class="dark:text-gray-200">
             {{ 'home.additions.planned.text' | translate }}
           </p>
-          <ul class="list-inside list-disc space-y-1 md:space-y-0 text-left mt-2 dark:text-gray-200">
-            <li>{{ 'home.additions.planned.list.1' | translate }} (<a
-              href="https://github.com/pawcoding/Rainbow-Palette/issues/15" target="_blank" rel="noreferrer noopener"
-              class="underline" [title]="'home.additions.planned.issue' | translate">#15</a>)
+          <ul
+            class="list-inside list-disc space-y-1 md:space-y-0 text-left mt-2 dark:text-gray-200">
+            <li>
+              {{ 'home.additions.planned.list.1' | translate }} (<a
+                href="https://github.com/pawcoding/Rainbow-Palette/issues/15"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="underline"
+                [title]="'home.additions.planned.issue' | translate"
+                >#15</a
+              >)
             </li>
-            <li>{{ 'home.additions.planned.list.2' | translate }} (<a
-              href="https://github.com/pawcoding/Rainbow-Palette/issues/17" target="_blank" rel="noreferrer noopener"
-              class="underline" [title]="'home.additions.planned.issue' | translate">#17</a>)
+            <li>
+              {{ 'home.additions.planned.list.2' | translate }} (<a
+                href="https://github.com/pawcoding/Rainbow-Palette/issues/17"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="underline"
+                [title]="'home.additions.planned.issue' | translate"
+                >#17</a
+              >)
             </li>
-            <li>{{ 'home.additions.planned.list.3' | translate }} (<a
-              href="https://github.com/pawcoding/Rainbow-Palette/issues/18" target="_blank" rel="noreferrer noopener"
-              class="underline" [title]="'home.additions.planned.issue' | translate">#18</a>)
+            <li>
+              {{ 'home.additions.planned.list.3' | translate }} (<a
+                href="https://github.com/pawcoding/Rainbow-Palette/issues/18"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="underline"
+                [title]="'home.additions.planned.issue' | translate"
+                >#18</a
+              >)
             </li>
-            <li>{{ 'home.additions.planned.list.4' | translate }} (<a
-              href="https://github.com/pawcoding/Rainbow-Palette/issues/19" target="_blank" rel="noreferrer noopener"
-              class="underline" [title]="'home.additions.planned.issue' | translate">#19</a>)
+            <li>
+              {{ 'home.additions.planned.list.4' | translate }} (<a
+                href="https://github.com/pawcoding/Rainbow-Palette/issues/19"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="underline"
+                [title]="'home.additions.planned.issue' | translate"
+                >#19</a
+              >)
             </li>
-            <li>{{ 'home.additions.planned.list.5' | translate }} (<a
-              href="https://github.com/pawcoding/Rainbow-Palette/issues/22" target="_blank" rel="noreferrer noopener"
-              class="underline" [title]="'home.additions.planned.issue' | translate">#22</a>)
+            <li>
+              {{ 'home.additions.planned.list.5' | translate }} (<a
+                href="https://github.com/pawcoding/Rainbow-Palette/issues/22"
+                target="_blank"
+                rel="noreferrer noopener"
+                class="underline"
+                [title]="'home.additions.planned.issue' | translate"
+                >#22</a
+              >)
             </li>
           </ul>
         </section>
@@ -208,17 +262,17 @@
 
     <article class="mx-auto max-w-md" *ngIf="loading">
       <p>
-        <b>{{ 'home.generation.note' | translate }}:</b><br>
+        <b>{{ 'home.generation.note' | translate }}:</b><br />
         <span [innerHtml]="'home.generation.perfection' | translate"></span>
       </p>
 
-      <div #loadContainer
-           class="h-6 w-full mt-10 rounded-full bg-gray-200 dark:bg-gray-800"
-      >
-        <span #loadBar
-              class="flex h-6 items-center justify-center rounded-full text-sm font-bold text-primary-50 bg-primary-700 animate-load"
-        >
-          {{ progress | percent:'2.0' }}
+      <div
+        #loadContainer
+        class="h-6 w-full mt-10 rounded-full bg-gray-200 dark:bg-gray-800">
+        <span
+          #loadBar
+          class="flex h-6 items-center justify-center rounded-full text-sm font-bold text-primary-50 bg-primary-700 animate-load">
+          {{ progress | percent : '2.0' }}
         </span>
       </div>
     </article>

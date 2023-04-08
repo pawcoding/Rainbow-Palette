@@ -1,14 +1,11 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Palette} from "../models/palette.model";
+import { EventEmitter, Injectable } from '@angular/core'
+import { Palette } from '../models/palette.model'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
-  darkEmitter = new EventEmitter<Boolean>()
-
-  constructor() { }
+  darkEmitter = new EventEmitter<boolean>()
 
   /**
    * Load the theme if it is stored in local storage.
@@ -66,5 +63,4 @@ export class StorageService {
   savePalette(palette: Palette) {
     localStorage.setItem('palette', palette.toString())
   }
-
 }

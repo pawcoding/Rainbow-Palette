@@ -29,9 +29,14 @@ jobs:
           node-version: 16
           cache: 'npm'
 
-      - name: 🔬 Test project
+      - name: 🔨 Build project
         run: |
           npm cache clean --force
           npm ci
           npm install -g @angular/cli@14.x > /dev/null
+
+      - name: 🔬 Test project
+        run: |
+          npm run lint
+          npm run prettier:check
           npm run test:headless

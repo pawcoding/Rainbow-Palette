@@ -1,9 +1,7 @@
-import {Color} from "./color.model";
-// @ts-ignore
-import {v4 as uuidv4} from "uuid";
+import { Color } from './color.model'
+import { v4 as uuidv4 } from 'uuid'
 
 export class Palette {
-
   title: string
   id: string
   colors: Color[] = []
@@ -20,13 +18,11 @@ export class Palette {
    * @param front
    */
   public addColor(color: Color, front = true) {
-    if (this.colors.find(c => c.name === color.name)) {
-      this.colors[this.colors.findIndex(c => c.name === color.name)] = color
+    if (this.colors.find((c) => c.name === color.name)) {
+      this.colors[this.colors.findIndex((c) => c.name === color.name)] = color
     } else {
-      if (front)
-        this.colors.unshift(color)
-      else
-        this.colors.push(color)
+      if (front) this.colors.unshift(color)
+      else this.colors.push(color)
     }
 
     this.order = false
@@ -51,11 +47,9 @@ export class Palette {
    * @param color
    */
   replaceColor(color: Color) {
-    let index = this.colors.findIndex(c => c.name === color.name)
-    if (index < 0)
-      this.addColor(color, false)
-    else
-      this.colors[index] = color
+    const index = this.colors.findIndex((c) => c.name === color.name)
+    if (index < 0) this.addColor(color, false)
+    else this.colors[index] = color
   }
 
   /**
@@ -63,10 +57,8 @@ export class Palette {
    */
   public sortColors() {
     this.colors.sort((a, b) => {
-      if (this.order)
-        return a.getShade(500).hue - b.getShade(500).hue
-      else
-        return b.getShade(500).hue - a.getShade(500).hue
+      if (this.order) return a.getShade(500).hue - b.getShade(500).hue
+      else return b.getShade(500).hue - a.getShade(500).hue
     })
     this.order = !this.order
   }
@@ -78,7 +70,7 @@ export class Palette {
     return JSON.stringify({
       id: this.id,
       title: this.title,
-      colors: this.colors
+      colors: this.colors,
     })
   }
 
@@ -87,13 +79,11 @@ export class Palette {
    * Throws exception if not all values are given.
    * @param json
    */
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   public static parsePalette(json: any): Palette {
-    if (!json.title)
-      throw 'Palette has no title'
-    if (!json.id)
-      throw 'Palette has no id'
-    if (!json.colors)
-      throw 'Palette has no colors'
+    if (!json.title) throw 'Palette has no title'
+    if (!json.id) throw 'Palette has no id'
+    if (!json.colors) throw 'Palette has no colors'
 
     const palette = new Palette(json.title, json.id)
 
@@ -104,5 +94,4 @@ export class Palette {
 
     return palette
   }
-
 }

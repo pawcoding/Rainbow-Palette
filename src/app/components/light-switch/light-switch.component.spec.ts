@@ -1,27 +1,24 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { LightSwitchComponent } from './light-switch.component';
-import {TranslateModule} from "@ngx-translate/core";
+import { LightSwitchComponent } from './light-switch.component'
+import { TranslateModule } from '@ngx-translate/core'
 
 describe('LightSwitchComponent', () => {
-  let component: LightSwitchComponent;
-  let fixture: ComponentFixture<LightSwitchComponent>;
+  let component: LightSwitchComponent
+  let fixture: ComponentFixture<LightSwitchComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LightSwitchComponent ],
-      imports: [
-        TranslateModule.forRoot()
-      ]
-    })
-    .compileComponents();
+      declarations: [LightSwitchComponent],
+      imports: [TranslateModule.forRoot()],
+    }).compileComponents()
 
-    fixture = TestBed.createComponent(LightSwitchComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(LightSwitchComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

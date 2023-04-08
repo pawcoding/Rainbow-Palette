@@ -1,10 +1,9 @@
-import {Shade} from "../models/shade.model";
-import {Palette} from "../models/palette.model";
-import {Color} from "../models/color.model";
-import {ColorNamer} from "./color-namer";
+import { Shade } from '../models/shade.model'
+import { Palette } from '../models/palette.model'
+import { Color } from '../models/color.model'
+import { ColorNamer } from './color-namer'
 
 export class PaletteGenerator {
-
   static generatePalette(hex: string, scheme: PaletteScheme): Palette {
     const shade = new Shade(-1, true, hex)
 
@@ -27,23 +26,30 @@ export class PaletteGenerator {
       case PaletteScheme.RAINBOW:
         return this.generateRainbowPalette(shade)
       default:
-        const schemes = Object.keys(PaletteScheme)
-        const index = schemes[Math.floor(Math.random() * schemes.length)]
-        // @ts-ignore
-        return this.generatePalette(hex, PaletteScheme[index])
+        return this.generatePalette(hex, this.getRandomScheme())
     }
+  }
+
+  private static getRandomScheme(): PaletteScheme {
+    const schemes = Object.keys(PaletteScheme)
+    const index = schemes[Math.floor(Math.random() * schemes.length)]
+    // eslint-disable-next-line  @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    return PaletteScheme[index]
   }
 
   private static generateMonochromaticPalette(shade: Shade) {
     const monochromatic = new Palette('Monochrom')
 
     monochromatic.addColor(new Color('primary', [shade]))
-    monochromatic.addColor(new Color('muted', [
-      new Shade(-1, true, shade.hue, 30, 50)
-    ]), false)
-    monochromatic.addColor(new Color('gray', [
-      new Shade(-1, true, shade.hue, 2, 50)
-    ]), false)
+    monochromatic.addColor(
+      new Color('muted', [new Shade(-1, true, shade.hue, 30, 50)]),
+      false
+    )
+    monochromatic.addColor(
+      new Color('gray', [new Shade(-1, true, shade.hue, 2, 50)]),
+      false
+    )
 
     return monochromatic
   }
@@ -53,19 +59,43 @@ export class PaletteGenerator {
 
     analogous.addColor(new Color('primary', [shade]))
 
-    analogous.addColor(new Color('secondary', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 315), Math.max(shade.saturation - 20, 0), 40)
-    ]), false)
-    analogous.addColor(new Color('secondary muted', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 270), 25, 20)
-    ]), false)
+    analogous.addColor(
+      new Color('secondary', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 315),
+          Math.max(shade.saturation - 20, 0),
+          40
+        ),
+      ]),
+      false
+    )
+    analogous.addColor(
+      new Color('secondary muted', [
+        new Shade(-1, true, this.changeHueOnWheel(shade.hue, 270), 25, 20),
+      ]),
+      false
+    )
 
-    analogous.addColor(new Color('accent', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 45), shade.saturation, 50)
-    ]), false)
-    analogous.addColor(new Color('accent muted', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 90) % 360, 25, 20)
-    ]), false)
+    analogous.addColor(
+      new Color('accent', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 45),
+          shade.saturation,
+          50
+        ),
+      ]),
+      false
+    )
+    analogous.addColor(
+      new Color('accent muted', [
+        new Shade(-1, true, this.changeHueOnWheel(shade.hue, 90) % 360, 25, 20),
+      ]),
+      false
+    )
 
     return analogous
   }
@@ -75,13 +105,23 @@ export class PaletteGenerator {
 
     complementary.addColor(new Color('primary', [shade]))
 
-    complementary.addColor(new Color('gray', [
-      new Shade(-1, true, shade.hue, 3, 50)
-    ]), false)
+    complementary.addColor(
+      new Color('gray', [new Shade(-1, true, shade.hue, 3, 50)]),
+      false
+    )
 
-    complementary.addColor(new Color('secondary', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 180), Math.max(shade.saturation - 20, 0), 40)
-    ]), false)
+    complementary.addColor(
+      new Color('secondary', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 180),
+          Math.max(shade.saturation - 20, 0),
+          40
+        ),
+      ]),
+      false
+    )
 
     return complementary
   }
@@ -91,16 +131,37 @@ export class PaletteGenerator {
 
     split.addColor(new Color('primary', [shade]))
 
-    split.addColor(new Color('secondary', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 20), Math.max(shade.saturation - 20, 0), 40)
-    ]), false)
-    split.addColor(new Color('gray', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 20), 3, 50)
-    ]), false)
+    split.addColor(
+      new Color('secondary', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 20),
+          Math.max(shade.saturation - 20, 0),
+          40
+        ),
+      ]),
+      false
+    )
+    split.addColor(
+      new Color('gray', [
+        new Shade(-1, true, this.changeHueOnWheel(shade.hue, 20), 3, 50),
+      ]),
+      false
+    )
 
-    split.addColor(new Color('accent', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 180), shade.saturation, 80)
-    ]), false)
+    split.addColor(
+      new Color('accent', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 180),
+          shade.saturation,
+          80
+        ),
+      ]),
+      false
+    )
 
     return split
   }
@@ -110,20 +171,42 @@ export class PaletteGenerator {
 
     triadic.addColor(new Color('primary', [shade]))
 
-    triadic.addColor(new Color('primary muted', [
-      new Shade(-1, true, shade.hue, 20, 30)
-    ]), false)
+    triadic.addColor(
+      new Color('primary muted', [new Shade(-1, true, shade.hue, 20, 30)]),
+      false
+    )
 
-    triadic.addColor(new Color('secondary', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 120), Math.max(shade.saturation - 20, 0), 40)
-    ]), false)
-    triadic.addColor(new Color('secondary muted', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 120), 20, 30)
-    ]), false)
+    triadic.addColor(
+      new Color('secondary', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 120),
+          Math.max(shade.saturation - 20, 0),
+          40
+        ),
+      ]),
+      false
+    )
+    triadic.addColor(
+      new Color('secondary muted', [
+        new Shade(-1, true, this.changeHueOnWheel(shade.hue, 120), 20, 30),
+      ]),
+      false
+    )
 
-    triadic.addColor(new Color('accent', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 240), shade.saturation, 20)
-    ]), false)
+    triadic.addColor(
+      new Color('accent', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 240),
+          shade.saturation,
+          20
+        ),
+      ]),
+      false
+    )
 
     return triadic
   }
@@ -133,13 +216,31 @@ export class PaletteGenerator {
 
     compound.addColor(new Color('primary', [shade]))
 
-    compound.addColor(new Color('secondary', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 210), Math.max(shade.saturation - 20, 0), 40)
-    ]), false)
+    compound.addColor(
+      new Color('secondary', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 210),
+          Math.max(shade.saturation - 20, 0),
+          40
+        ),
+      ]),
+      false
+    )
 
-    compound.addColor(new Color('accent', [
-      new Shade(-1, true, this.changeHueOnWheel(shade.hue, 150), shade.saturation, 50)
-    ]), false)
+    compound.addColor(
+      new Color('accent', [
+        new Shade(
+          -1,
+          true,
+          this.changeHueOnWheel(shade.hue, 150),
+          shade.saturation,
+          50
+        ),
+      ]),
+      false
+    )
 
     return compound
   }
@@ -151,19 +252,30 @@ export class PaletteGenerator {
 
     const hues = [4, 26, 55, 95, 149, 200, 253]
     let currentHue = hues.reduce((prev, curr) =>
-      (Math.abs(curr - shade.hue) < Math.abs(prev - shade.hue) ? curr : prev))
-    if (currentHue === 253 && shade.hue > 308)
-      currentHue = 4
+      Math.abs(curr - shade.hue) < Math.abs(prev - shade.hue) ? curr : prev
+    )
+    if (currentHue === 253 && shade.hue > 308) currentHue = 4
 
-    hues.forEach(hue => {
+    hues.forEach((hue) => {
       if (hue !== currentHue) {
-        let newHue = (shade.hue + (hue - currentHue) + 360) % 360
-        const newShade = new Shade(-1, true,
+        const newHue = (shade.hue + (hue - currentHue) + 360) % 360
+        const newShade = new Shade(
+          -1,
+          true,
           newHue,
-          Math.min(100, Math.max(0, shade.saturation - 20 + Math.floor(Math.random() * 40))),
-          Math.min(100, Math.max(0, shade.luminosity - 20 + Math.floor(Math.random() * 40)))
+          Math.min(
+            100,
+            Math.max(0, shade.saturation - 20 + Math.floor(Math.random() * 40))
+          ),
+          Math.min(
+            100,
+            Math.max(0, shade.luminosity - 20 + Math.floor(Math.random() * 40))
+          )
         )
-        rainbow.addColor(new Color(ColorNamer.nameColor(newShade), [newShade]), false)
+        rainbow.addColor(
+          new Color(ColorNamer.nameColor(newShade), [newShade]),
+          false
+        )
       }
     })
 
@@ -172,31 +284,22 @@ export class PaletteGenerator {
 
   private static changeHueOnWheel(hue: number, change: number) {
     let wheel
-    if (hue < 60)
-      wheel = 2 * hue
-    else if (hue < 120)
-      wheel = hue + 60
-    else if (hue < 240)
-      wheel = .5 * hue + 120
-    else
-      wheel = hue
+    if (hue < 60) wheel = 2 * hue
+    else if (hue < 120) wheel = hue + 60
+    else if (hue < 240) wheel = 0.5 * hue + 120
+    else wheel = hue
 
     wheel += change
     wheel %= 360
 
     let newHue
-    if (wheel < 120)
-      newHue = .5 * wheel
-    else if (wheel < 180)
-      newHue = wheel + 300
-    else if (wheel < 240)
-      newHue = 2 * wheel + 120
-    else
-      newHue = wheel
+    if (wheel < 120) newHue = 0.5 * wheel
+    else if (wheel < 180) newHue = wheel + 300
+    else if (wheel < 240) newHue = 2 * wheel + 120
+    else newHue = wheel
 
     return newHue % 360
   }
-
 }
 
 export enum PaletteScheme {
@@ -207,5 +310,5 @@ export enum PaletteScheme {
   COMPLEMENTARY,
   SPLIT,
   TRIADIC,
-  COMPOUND
+  COMPOUND,
 }

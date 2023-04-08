@@ -1,91 +1,87 @@
 <div [class]="dark ? 'dark' : ''">
-  <article *ngIf="color"
-           class="my-8 items-center cursor-default overflow-clip
-           grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 grid-areas-color-square sm:grid-areas-color-semi lg:grid-areas-color-wide"
-  >
+  <article
+    *ngIf="color"
+    class="my-8 items-center cursor-default overflow-clip grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 grid-areas-color-square sm:grid-areas-color-semi lg:grid-areas-color-wide">
     <!-- Name of the color -->
     <div class="grid-in-name flex gap-4 items-center mb-2">
       <h3
         *ngIf="!editingState"
         class="inline-block py-2 cursor-pointer"
-        (click)="openEditor()"
-      >
-        {{color.name}}
+        (click)="openEditor()">
+        {{ color.name }}
       </h3>
 
-      <input *ngIf="editingState"
-             type="text" #editName
-             [placeholder]="'color-viewer.name-placeholder' | translate"
-             class="bg-transparent p-0 mb-1.5 mt-2 text-lg font-bold
-                    border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
-             (focusout)="closeEditor()"
-             (keydown.enter)="closeEditor()"
-             [value]="color.name">
+      <input
+        *ngIf="editingState"
+        type="text"
+        #editName
+        [placeholder]="'color-viewer.name-placeholder' | translate"
+        class="bg-transparent p-0 mb-1.5 mt-2 text-lg font-bold border-0 focus:border-b-primary-700 border-b-2 focus:ring-0 transition-all duration-200"
+        (focusout)="closeEditor()"
+        (keydown.enter)="closeEditor()"
+        [value]="color.name" />
 
       <span
         *ngIf="!editingState"
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
         [title]="'color-viewer.edit-name' | translate"
-        (click)="openEditor()"
-      >
-        <img src="/assets/icons/edit.svg"
-             [alt]="'color-viewer.edit-name' | translate"
-             class="icon">
+        (click)="openEditor()">
+        <img
+          src="/assets/icons/edit.svg"
+          [alt]="'color-viewer.edit-name' | translate"
+          class="icon" />
       </span>
     </div>
 
     <!-- Action Buttons -->
-    <div
-      class="grid-in-button flex gap-2 h-full justify-end items-center"
-    >
+    <div class="grid-in-button flex gap-2 h-full justify-end items-center">
       <span
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
         [title]="'color-viewer.tune' | translate"
-        (click)="colorService.loadColor(color)"
-      >
+        (click)="colorService.loadColor(color)">
         <img
           class="icon"
           src="/assets/icons/tune.svg"
-          [alt]="'color-viewer.tune' | translate"
-        >
+          [alt]="'color-viewer.tune' | translate" />
       </span>
 
       <span
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
         [title]="'color-viewer.remove' | translate"
-        (click)="onRemove.emit(color)"
-      >
+        (click)="onRemove.emit(color)">
         <img
           class="icon"
           src="/assets/icons/delete.svg"
-          [alt]="'color-viewer.remove' | translate"
-        >
+          [alt]="'color-viewer.remove' | translate" />
       </span>
     </div>
 
     <!-- Display all shades -->
     <div
-      class="grid-in-shade grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 sm:gap-2"
-    >
+      class="grid-in-shade grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 sm:gap-2">
       <span
         *ngFor="let shade of color.shades; index as i"
         [title]="'color-viewer.tune-shade' | translate"
-        class="block w-full py-4
-               text-center text-lg cursor-pointer sm:rounded"
-        [class]="i === 0 ? 'rounded-l' : (i === color.shades.length-1 ? 'rounded-r' : '')"
+        class="block w-full py-4 text-center text-lg cursor-pointer sm:rounded"
+        [class]="
+          i === 0
+            ? 'rounded-l'
+            : i === color.shades.length - 1
+            ? 'rounded-r'
+            : ''
+        "
         [ngStyle]="{
           'background-color': shade.hex,
-          'color': color.shades[shade.brightness > 51 ? 9 : 0].hex
+          color: color.shades[shade.brightness > 51 ? 9 : 0].hex
         }"
         (click)="editShade(shade.index)"
-        (contextmenu)="copyToClipboard(shade, $event)"
-      >
+        (contextmenu)="copyToClipboard(shade, $event)">
         <span class="opacity-0 sm:opacity-100">
           <span class="font-semibold">
-            {{shade.index}}
+            {{ shade.index }}
           </span>
-          <br>
-          {{shade.hex.toUpperCase().substring(1)}}
+          <br />
+          {{ shade.hex.toUpperCase().substring(1) }}
         </span>
       </span>
     </div>

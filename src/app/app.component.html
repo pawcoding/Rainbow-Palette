@@ -1,104 +1,81 @@
 <div
-  class="min-h-screen grid grid-rows-site content-between py-6
-         text-gray-900 bg-gradient-to-r from-gray-100 to-gray-50 dark:text-gray-100 dark:from-gray-900 dark:to-gray-900
-         transition-colors duration-500"
->
-  <header class="w-full grid grid-cols-1 sm:grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10">
-    <h1
-    class="mx-auto sm:ml-0 col-span-1 sm:col-span-2 lg:col-span-1"
-    >
+  class="min-h-screen grid grid-rows-site content-between py-6 text-gray-900 bg-gradient-to-r from-gray-100 to-gray-50 dark:text-gray-100 dark:from-gray-900 dark:to-gray-900 transition-colors duration-500">
+  <header
+    class="w-full grid grid-cols-1 sm:grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10">
+    <h1 class="mx-auto sm:ml-0 col-span-1 sm:col-span-2 lg:col-span-1">
       <img
         alt="Rainbow Palette"
-        height="50" width="179"
-        [src]="'/assets/rainbow-palette-' + (dark ? 'light' : 'dark') + '.svg'"
-      >
+        height="50"
+        width="179"
+        [src]="
+          '/assets/rainbow-palette-' + (dark ? 'light' : 'dark') + '.svg'
+        " />
     </h1>
 
     <nav class="col-span-1 sm:col-span-4 lg:col-span-2">
-      <div
-        class="mx-auto w-fit"
-      >
+      <div class="mx-auto w-fit">
         <ul
           *ngIf="paletteService.hasPalette()"
-          class="flex flex-wrap gap-2 md:gap-4
-                 font-medium text-gray-700 dark:text-gray-200">
+          class="flex flex-wrap gap-2 md:gap-4 font-medium text-gray-700 dark:text-gray-200">
           <li *ngFor="let nav of navigation">
             <a
-              class="inline-flex py-2 px-4 items-center
-                     rounded cursor-pointer transition-colors duration-500"
-              [class]="(router.url === nav.link)
-                ? 'text-primary-800 bg-primary-200 dark:text-primary-900 dark:bg-primary-500'
-                : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'"
+              class="inline-flex py-2 px-4 items-center rounded cursor-pointer transition-colors duration-500"
+              [class]="
+                router.url === nav.link
+                  ? 'text-primary-800 bg-primary-200 dark:text-primary-900 dark:bg-primary-500'
+                  : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'
+              "
               [routerLink]="nav.link"
-              [title]="'app.navigation.' + nav.id + '.title' | translate"
-            >
+              [title]="'app.navigation.' + nav.id + '.title' | translate">
               <svg
                 class="w-6 h-6 mr-2 hidden md:block"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor"
-                [innerHTML]="nav.icon | safeHtml "
-              >
-              </svg>
-              {{'app.navigation.' + nav.id + '.label' | translate }}
+                [innerHTML]="nav.icon | safeHtml"></svg>
+              {{ 'app.navigation.' + nav.id + '.label' | translate }}
             </a>
           </li>
         </ul>
       </div>
     </nav>
 
-    <light-switch
-      class="mx-auto sm:mr-0"
-      [dark]="dark"
-    >
-    </light-switch>
+    <app-light-switch class="mx-auto sm:mr-0" [dark]="dark"> </app-light-switch>
   </header>
 
-
   <main>
-    <router-outlet>
-    </router-outlet>
+    <router-outlet> </router-outlet>
   </main>
 
-
   <footer
-    class="flex gap-4 flex-col sm:flex-row px-8 pt-16 items-center justify-between
-           text-center w-full max-w-4xl mx-auto mt-10"
-  >
+    class="flex gap-4 flex-col sm:flex-row px-8 pt-16 items-center justify-between text-center w-full max-w-4xl mx-auto mt-10">
     <a
       href="https://github.com/pawcoding/tailwind-color-generator"
       rel="noreferrer noopener"
       target="_blank"
-      [title]="'app.footer.source-code' | translate"
-    >
+      [title]="'app.footer.source-code' | translate">
       {{ 'app.footer.github' | translate }}
     </a>
 
-    <span
-      class="cursor-default"
-    >
+    <span class="cursor-default">
       {{ 'app.footer.version' | translate : { version: version } }}
     </span>
 
     <a
       href="https://pawcode.de"
       target="_blank"
-      [title]="'app.footer.created' | translate : { pawcode: 'pawcode Development' }"
-    >
+      [title]="
+        'app.footer.created' | translate : { pawcode: 'pawcode Development' }
+      ">
       <img
-        height="32" width="139"
+        height="32"
+        width="139"
         alt="pawcode&nbsp;Development"
-        [src]="'/assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'"
-      >
+        [src]="'/assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'" />
     </a>
   </footer>
 
+  <app-custom-dialog class="fixed top-0 left-0"></app-custom-dialog>
 
-  <custom-dialog
-    class="fixed top-0 left-0"
-  ></custom-dialog>
-
-  <notification
-    class="fixed bottom-0 right-0"
-  ></notification>
+  <app-notification class="fixed bottom-0 right-0"></app-notification>
 </div>

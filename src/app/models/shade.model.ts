@@ -1,19 +1,32 @@
-import {ColorConverter} from "../class/color-converter";
+import { ColorConverter } from '../class/color-converter'
 
 export class Shade {
-
   index: number
   hex: string
   hue: number
   saturation: number
   luminosity: number
-  brightness: number = 0
+  brightness = 0
   fixed: boolean
 
   public constructor(index: number, fixed: boolean, hex: string)
-  public constructor(index: number, fixed: boolean, hue: number, saturation: number, luminosity: number)
-  public constructor(index: number, fixed: boolean, hex: string, hue: number, saturation: number, luminosity: number)
+  public constructor(
+    index: number,
+    fixed: boolean,
+    hue: number,
+    saturation: number,
+    luminosity: number
+  )
+  public constructor(
+    index: number,
+    fixed: boolean,
+    hex: string,
+    hue: number,
+    saturation: number,
+    luminosity: number
+  )
 
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   constructor(...args: any[]) {
     this.index = args[0]
     this.fixed = args[1]
@@ -32,7 +45,11 @@ export class Shade {
       this.hue = args[2]
       this.saturation = args[3]
       this.luminosity = args[4]
-      this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
+      this.hex = ColorConverter.HSLtoHEX(
+        this.hue,
+        this.saturation,
+        this.luminosity
+      )
       this.updateBrightness()
     } else {
       if (!args[2].match(/^#[0-9A-Fa-f]{6}$/))
@@ -79,12 +96,21 @@ export class Shade {
    * @param luminosity
    * @param fixed
    */
-  public setHSL(hue: number, saturation: number, luminosity: number, fixed = false) {
+  public setHSL(
+    hue: number,
+    saturation: number,
+    luminosity: number,
+    fixed = false
+  ) {
     this.fixed = fixed
     this.hue = hue
     this.saturation = saturation
     this.luminosity = luminosity
-    this.hex = ColorConverter.HSLtoHEX(this.hue, this.saturation, this.luminosity)
+    this.hex = ColorConverter.HSLtoHEX(
+      this.hue,
+      this.saturation,
+      this.luminosity
+    )
     this.updateBrightness()
   }
 
@@ -96,9 +122,9 @@ export class Shade {
     const rgb = ColorConverter.HEXtoRGB(this.hex)
     this.brightness = Math.round(
       Math.sqrt(
-        .299 * rgb.red * rgb.red +
-        .587 * rgb.green * rgb.green +
-        .114 * rgb.blue * rgb.blue
+        0.299 * rgb.red * rgb.red +
+          0.587 * rgb.green * rgb.green +
+          0.114 * rgb.blue * rgb.blue
       ) / 2.55
     )
   }
@@ -121,15 +147,24 @@ export class Shade {
    * Throws exception if json object is no valid shade object.
    * @param json
    */
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   public static parseShade(json: any): Shade {
-    if ((!json.index && json.index !== 0)
-        || !json.hex
-        || (!json.hue && json.hue !== 0)
-        || (!json.saturation && json.saturation !== 0)
-        || (!json.luminosity && json.luminosity !== 0))
+    if (
+      (!json.index && json.index !== 0) ||
+      !json.hex ||
+      (!json.hue && json.hue !== 0) ||
+      (!json.saturation && json.saturation !== 0) ||
+      (!json.luminosity && json.luminosity !== 0)
+    )
       throw 'Not all parameters for shade are set'
 
-    return new Shade(json.index, json.fixed, json.hex.toUpperCase(), json.hue, json.saturation, json.luminosity)
+    return new Shade(
+      json.index,
+      json.fixed,
+      json.hex.toUpperCase(),
+      json.hue,
+      json.saturation,
+      json.luminosity
+    )
   }
-
 }

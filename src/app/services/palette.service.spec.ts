@@ -1,16 +1,16 @@
-import { TestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing'
 
-import { PaletteService } from './palette.service';
+import { PaletteService } from './palette.service'
 
 describe('PaletteService', () => {
-  let service: PaletteService;
+  let service: PaletteService
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(PaletteService);
-  });
+    TestBed.configureTestingModule({})
+    service = TestBed.inject(PaletteService)
+  })
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-});
+    expect(service).toBeTruthy()
+  })
+})
