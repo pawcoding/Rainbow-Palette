@@ -1,6 +1,7 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ColorViewerComponent } from './color-viewer.component';
+import {ColorViewerComponent} from './color-viewer.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 describe('ColorViewerComponent', () => {
   let component: ColorViewerComponent;
@@ -8,9 +9,12 @@ describe('ColorViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ColorViewerComponent ]
+      declarations: [ColorViewerComponent],
+      imports: [
+        TranslateModule.forRoot()
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(ColorViewerComponent);
     component = fixture.componentInstance;

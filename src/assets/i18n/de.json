@@ -70,9 +70,17 @@
         "label": "Mehr erfahren",
         "title": "Dokumentation öffnen"
       },
+      "next": {
+        "label": "Weiter",
+        "title": "Nächsten Dialog anzeigen"
+      },
       "tailwind": {
         "label": "TailwindCSS",
         "title": "Exportiere deine Palette zur Nutzung mit TailwindCSS"
+      },
+      "wait": {
+        "label": "Warten",
+        "title": "Warte 2 Sekunden auf den nächsten Dialog"
       }
     },
     "close": "Schließen",
@@ -85,7 +93,8 @@
       "export-palette": "Wie / womit willst du deine Palette verwenden?",
       "export-tailwind": "Willst du die Palette in deine bereits bestehende {{ file }} Datei kopieren oder eine eigenständige Datei dafür herunterladen?",
       "export-tailwind-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben zu nutzen, musst du den Inhalt deiner Zwischenablage in der {{ config }} Datei einfügen.<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
-      "export-tailwind-file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS."
+      "export-tailwind-file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
+      "test": "Dies ist ein Testdialog für Storybook.<br><br>Du kannst <b>HTML</b> nutzen, um die Nachricht im Dialog zu formatieren."
     }
   },
   "home": {
@@ -156,7 +165,8 @@
     "copied": "{{ color }} wurde in die Zwischenablage kopiert.",
     "copy-error": "Die Farbe konnte nicht in die Zwischenablage kopiert werden.",
     "close": "Schließen",
-    "saved": "Deine Palette wurde lokal gespeichert."
+    "saved": "Deine Palette wurde lokal gespeichert.",
+    "test": "Dies ist eine Testnachricht."
   },
   "palette-viewer": {
     "add": "Farbe hinzufügen",

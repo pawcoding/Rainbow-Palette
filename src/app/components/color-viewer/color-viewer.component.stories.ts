@@ -3,6 +3,7 @@ import {Meta, Story} from "@storybook/angular";
 import {Color} from "../../models/color.model";
 import {ColorService} from "../../services/color.service";
 import {NotificationService} from "../../services/notification.service";
+import {StorybookTranslateModule} from "../../utils/storybook-translate.module";
 
 export default {
   title: 'Components/Color',
@@ -16,7 +17,10 @@ const Template: Story = (args) => ({
       provide: ColorService
     }, {
       provide: NotificationService
-    }]
+    }],
+    imports: [
+      StorybookTranslateModule
+    ]
   }
 })
 

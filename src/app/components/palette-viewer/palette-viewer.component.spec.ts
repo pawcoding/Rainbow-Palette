@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PaletteViewerComponent } from './palette-viewer.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 describe('PaletteViewerComponent', () => {
   let component: PaletteViewerComponent;
@@ -8,7 +9,10 @@ describe('PaletteViewerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaletteViewerComponent ]
+      declarations: [ PaletteViewerComponent ],
+      imports: [
+        TranslateModule.forRoot()
+      ]
     })
     .compileComponents();
 

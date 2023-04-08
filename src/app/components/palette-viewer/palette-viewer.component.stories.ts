@@ -8,6 +8,7 @@ import {Color} from "../../models/color.model";
 import {StorageService} from "../../services/storage.service";
 import {NotificationService} from "../../services/notification.service";
 import {PaletteGenerator, PaletteScheme} from "../../class/palette-generator";
+import {StorybookTranslateModule} from "../../utils/storybook-translate.module";
 
 export default {
   title: 'Components/Palette',
@@ -27,7 +28,10 @@ const Template: Story = (args) => ({
       provide: StorageService
     }, {
       provide: NotificationService
-    }]
+    }],
+    imports: [
+      StorybookTranslateModule
+    ]
   }
 })
 

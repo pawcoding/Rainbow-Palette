@@ -6,6 +6,7 @@ import {EventEmitter} from "@angular/core";
 import {Color} from "../../models/color.model";
 import {Shade} from "../../models/shade.model";
 import {ColorInterpolater} from "../../class/color-interpolater";
+import {StorybookTranslateModule} from "../../utils/storybook-translate.module";
 
 export default {
   title: 'Components/Color Editor',
@@ -75,7 +76,10 @@ const Template: Story = (args) => ({
       useClass: MockColorService
     }, {
       provide: NotificationService
-    }]
+    }],
+    imports: [
+      StorybookTranslateModule
+    ]
   }
 })
 

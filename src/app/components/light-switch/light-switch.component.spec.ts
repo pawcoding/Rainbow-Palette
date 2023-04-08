@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LightSwitchComponent } from './light-switch.component';
+import {TranslateModule} from "@ngx-translate/core";
 
 describe('LightSwitchComponent', () => {
   let component: LightSwitchComponent;
@@ -8,7 +9,10 @@ describe('LightSwitchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LightSwitchComponent ]
+      declarations: [ LightSwitchComponent ],
+      imports: [
+        TranslateModule.forRoot()
+      ]
     })
     .compileComponents();
 

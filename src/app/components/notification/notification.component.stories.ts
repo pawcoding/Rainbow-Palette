@@ -2,6 +2,7 @@ import {NotificationComponent} from "./notification.component";
 import {Meta, Story} from "@storybook/angular";
 import {NotificationService} from "../../services/notification.service";
 import {EventEmitter} from "@angular/core";
+import {StorybookTranslateModule} from "../../utils/storybook-translate.module";
 
 export default {
   title: 'Components/Notification',
@@ -10,10 +11,10 @@ export default {
 
 class MockNotificationService implements Partial<NotificationService> {
 
-  notification = new EventEmitter<string | undefined>()
+  notification = new EventEmitter<string | { id: string, interpolateParams: Object } | undefined>()
 
   constructor() {
-    const message = 'This is a short notification.'
+    const message = 'test'
 
     setTimeout(() => {
       this.notification.emit(message)
@@ -38,7 +39,10 @@ const Template: Story = (args) => ({
     providers: [{
       provide: NotificationService,
       useClass: MockNotificationService
-    }]
+    }],
+    imports: [
+      StorybookTranslateModule,
+    ]
   }
 })
 

@@ -70,9 +70,17 @@
         "label": "Read more",
         "title": "Open documentation"
       },
+      "next": {
+        "label": "Next",
+        "title": "Show next dialog"
+      },
       "tailwind": {
         "label": "TailwindCSS",
         "title": "Export colors as TailwindCSS custom colors"
+      },
+      "wait": {
+        "label": "Wait",
+        "title": "Wait 2 seconds for the next dialog"
       }
     },
     "close": "Close",
@@ -85,7 +93,8 @@
       "export-palette": "How do you want to use your palette?",
       "export-tailwind": "Do you want to copy the colors to your existing {{ file }} or create an extra file only for your palette?",
       "export-tailwind-copy": "The palette has been copied to your clipboard. To use the colors copy the contents of the clipboard to the {{ config }} file.<br><br>Check TailwindsCSS's documentation for further instructions.",
-      "export-tailwind-file": "Move the downloaded {{ file }} file to the root of your project. Then import the colors in your {{ config }} file like:<br>{{ import }}<br><br>Check TailwindCSS's documentation for further instructions."
+      "export-tailwind-file": "Move the downloaded {{ file }} file to the root of your project. Then import the colors in your {{ config }} file like:<br>{{ import }}<br><br>Check TailwindCSS's documentation for further instructions.",
+      "test": "This is a test message for storybook.<br><br>You can use <b>HTML</b> to format your message."
     }
   },
   "home": {
@@ -156,7 +165,8 @@
     "copied": "Copied {{ color }} to your clipboard.",
     "copy-error": "An error occurred while copying the color to your clipboard.",
     "close": "Close",
-    "saved": "Palette saved"
+    "saved": "Palette saved",
+    "test": "This is a test notification."
   },
   "palette-viewer": {
     "add": "Add color",

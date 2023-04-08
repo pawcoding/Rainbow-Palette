@@ -3,6 +3,7 @@ import {Meta, Story} from "@storybook/angular";
 import {NotificationService} from "../../services/notification.service";
 import {EventEmitter} from "@angular/core";
 import {Dialog} from "../../interfaces/dialog.interface";
+import {StorybookTranslateModule} from "../../utils/storybook-translate.module";
 
 export default {
   title: 'Components/Dialog',
@@ -17,16 +18,13 @@ class MockNotificationService implements Partial<NotificationService> {
     const wait = new EventEmitter()
     const next = new EventEmitter()
 
-    let content = {
-      message: 'This is a test message for storybook.\n\n' +
-        'You can use \\n to create new lines in here.',
+    let content: Dialog = {
+      id: 'test',
       actions: [{
-        text: 'Wait',
-        title: 'Wait 2 seconds for next dialog',
+        id: 'wait',
         action: wait
       }, {
-        text: 'Next',
-        title: 'Show next dialog',
+        id: 'next',
         action: next
       }]
     }
@@ -47,7 +45,7 @@ class MockNotificationService implements Partial<NotificationService> {
 
     this.dialog.subscribe(notification => {
       if (notification)
-        console.log('Show dialog\n', notification.message)
+        console.log('Show dialog\n', notification.id)
       else
         console.log('Close dialog')
     })
@@ -60,7 +58,10 @@ const Template: Story = (args) => ({
     providers: [{
       provide: NotificationService,
       useClass: MockNotificationService
-    }]
+    }],
+    imports: [
+      StorybookTranslateModule
+    ]
   }
 })
 

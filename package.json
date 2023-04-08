@@ -11,6 +11,7 @@
     "build:sitemap": "node scripts/update-sitemap.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
+    "test:headless": "ng test --watch=false --browsers=ChromeHeadless,FirefoxHeadless --code-coverage --progress=false",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook"
@@ -56,6 +57,7 @@
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage": "~2.2.0",
+    "karma-firefox-launcher": "^2.1.2",
     "karma-jasmine": "~5.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "postcss": "^8.4.16",
