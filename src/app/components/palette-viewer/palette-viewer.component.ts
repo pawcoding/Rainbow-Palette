@@ -56,9 +56,6 @@ export class PaletteViewerComponent implements OnInit {
 
     this.notificationService.dialog.emit({
       id: 'delete-palette',
-      interpolateParams: {
-        not: toUnicodeVariant('not', 'bs')
-      },
       actions: [{
         id: 'cancel',
         action: closeEmitter

@@ -22,7 +22,7 @@ export class CssFileDialog {
     return {
       id: 'export-css-file',
       interpolateParams: {
-        css: toUnicodeVariant('colors.css', 'm'),
+        file: toUnicodeVariant('colors.css', 'm'),
         link: toUnicodeVariant('<link rel="stylesheet" href="/colors.css">', 'm'),
         usage: toUnicodeVariant('color: var(--color-100);', 'm')
       },

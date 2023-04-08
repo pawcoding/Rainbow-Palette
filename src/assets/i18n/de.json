@@ -8,25 +8,92 @@
     },
     "navigation": {
       "edit": {
-        "text": "Bearbeiten",
+        "label": "Bearbeiten",
         "title": "Bearbeite deine Palette"
       },
-      "preview": {
-        "text": "Vorschau",
-        "title": "Vorschau deiner Palette mit Webkomponenten"
-      },
-      "regenerate": {
-        "text": "Generieren",
+      "home": {
+        "label": "Generieren",
         "title": "Generiere eine neue Farbpalette"
+      },
+      "preview": {
+        "label": "Vorschau",
+        "title": "Vorschau deiner Palette mit Webkomponenten"
       }
     },
     "title": "Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe"
+  },
+  "color-editor": {
+    "cancel": "Abbrechen",
+    "cancel-title": "Editor ohne Speichern schließen",
+    "edit-shade": "Diesen Farbton bearbeiten\nRechtsklick: Interpoliere diesen Farbton",
+    "hex": "Gebe hier einen Hex-Code ein",
+    "hue": "Farbton (H)",
+    "hue-adjust": "Farbton anpassen",
+    "luminosity": "Helligkeit (L)",
+    "luminosity-adjust": "Helligkeit anpassen",
+    "pick": "Wähle eine Farbe",
+    "saturation": "Sättigung (S)",
+    "saturation-adjust": "Sättigung anpassen",
+    "save": "Speichern",
+    "save-title": "Editor schließen und Farbe speichern"
+  },
+  "color-viewer": {
+    "edit-name": "Name bearbeiten",
+    "name-placeholder": "Name eingeben",
+    "remove": "Farbe entfernen",
+    "tune": "Farbe anpassen",
+    "tune-shade": "Farbton anpassen\nRechtsklick: Farbe in Zwischenablage kopieren"
+  },
+  "dialog": {
+    "action": {
+      "cancel": {
+        "label": "Abbrechen",
+        "title": "Löschen abbrechen"
+      },
+      "copy": {
+        "label": "Kopieren",
+        "title": "Palette in Zwischenablage kopieren"
+      },
+      "css": {
+        "label": "CSS",
+        "title": "Exportiere deine Palette zur Nutzung mit CSS"
+      },
+      "delete": {
+        "label": "Löschen",
+        "title": "Palette löschen"
+      },
+      "file": {
+        "label": "Datei",
+        "title": "Palette als eigenständige Datei exportieren"
+      },
+      "more": {
+        "label": "Mehr erfahren",
+        "title": "Dokumentation öffnen"
+      },
+      "tailwind": {
+        "label": "TailwindCSS",
+        "title": "Exportiere deine Palette zur Nutzung mit TailwindCSS"
+      }
+    },
+    "close": "Schließen",
+    "message": {
+      "copy-error": "Beim Kopieren der Palette in die Zwischenablage ist ein Fehler aufgetreten.\n\n{{ error }}",
+      "delete-palette": "Bist du dir sicher, dass du die Palette löschen möchtest?\nSie kann danach <b>nicht</b> wiederhergestellt werden!",
+      "export-css": "Willst du deine Palette als CSS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
+      "export-css-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als CSS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage in das {{ root }} Element deiner CSS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+      "export-css-file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Webservers. Füge dann folgenden Link in den Kopf deiner HTML Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+      "export-palette": "Wie / womit willst du deine Palette verwenden?",
+      "export-tailwind": "Willst du die Palette in deine bereits bestehende {{ file }} Datei kopieren oder eine eigenständige Datei dafür herunterladen?",
+      "export-tailwind-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben zu nutzen, musst du den Inhalt deiner Zwischenablage in der {{ config }} Datei einfügen.<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
+      "export-tailwind-file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS."
+    }
   },
   "home": {
     "additions": {
       "development": {
         "title": "Entwicklung pausiert",
-        "text": "Leider habe ich im Moment nur wenig Zeit, um das Tool aktiv selbst zu verbessern. Dennoch überwache ich nebenbei die Aktivitäten des {{ github }} Repository. Wenn du also Ideen hast, wie das Tool erweitert werden könnte, selbst neue Benutzeroberflächen implementieren möchtest oder meine Algorithmen verbessern kannst, kannst du mich gerne auf meinem {{ discord }} kontaktieren."
+        "text": "Leider habe ich im Moment nur wenig Zeit, um das Tool aktiv selbst zu verbessern. Dennoch überwache ich nebenbei die Aktivitäten des {{ github }} Repository. Wenn du also Ideen hast, wie das Tool erweitert werden könnte, selbst neue Benutzeroberflächen implementieren möchtest oder meine Algorithmen verbessern kannst, kannst du mich gerne auf meinem {{ discord }} kontaktieren.",
+        "discord": "Hol dir mehr Infos auf Discord"
       },
       "planned": {
         "issue": "Thema auf GitHub ansehen",
@@ -43,11 +110,9 @@
       "title": "Weitere Infos und Support"
     },
     "generation": {
-      "hex": "Gebe einen Hex-Code ein",
       "invalid-hex": "Du musst einen 6 stelligen Hex-Code eingeben.",
       "note": "Hinweis",
       "perfection": "Kein Generator erzielt perfekte Resultate.<br>Bitte passe die Farben nach deinem Geschmack an.",
-      "pick": "Wähle eine Farbe",
       "start": "Palette generieren"
     },
     "scheme": {
@@ -57,7 +122,7 @@
       "MONOCHROMATIC": "Monochrom",
       "pick": "Wähle ein Farbschema",
       "RAINBOW": "Regenbogen",
-      "SURPRISE_ME": "Überrasch mich!",
+      "SURPRISE_ME": "Überrasche mich!",
       "SPLIT": "Geteilte Komplementär",
       "TRIADIC": "Triadisch"
     },
@@ -82,5 +147,35 @@
       },
       "title": "Wie funktioniert's?"
     }
-  }
+  },
+  "light-switch": {
+    "to-dark": "Zum dunklen Modus wechseln",
+    "to-light": "Zum hellen Modus wechseln"
+  },
+  "notification": {
+    "copied": "{{ color }} wurde in die Zwischenablage kopiert.",
+    "copy-error": "Die Farbe konnte nicht in die Zwischenablage kopiert werden.",
+    "close": "Schließen",
+    "saved": "Deine Palette wurde lokal gespeichert."
+  },
+  "palette-viewer": {
+    "add": "Farbe hinzufügen",
+    "add-title": "Neue zufällige Farbe zur Palette hinzufügen",
+    "adding": "Generiere Farbe...",
+    "adding-title": "Neue Farbe wird generiert...",
+    "edit-title": "Name der Palette bearbeiten",
+    "export": "Exportieren",
+    "export-title": "Palette exportieren",
+    "save": "Speichern",
+    "save-title": "Palette im Browser speichern",
+    "saving": "Speichere...",
+    "saving-title": "Palette wird lokal im Browser gespeichert...",
+    "title-placeholder": "Gebe deiner Palette einen namen"
+  },
+  "preview": {
+    "description": "Hier kannst du demnächst deine Palette direkt mit verschiedenen Komponenten wie Karten, Buttons usw. ausprobieren.",
+    "more-info": "Für weitere Informationen kannst du gerne das Repository auf {{ github }} oder meinen {{ discord }} besuchen.",
+    "title": "Bald ist es soweit..."
+  },
+  "random": "Zufällig"
 }
