@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { EditComponent } from './edit.component'
+import { TranslateModule } from '@ngx-translate/core'
 
 describe('EditComponent', () => {
   let component: EditComponent
@@ -9,6 +10,7 @@ describe('EditComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [EditComponent],
+      imports: [TranslateModule.forRoot()],
     }).compileComponents()
 
     fixture = TestBed.createComponent(EditComponent)

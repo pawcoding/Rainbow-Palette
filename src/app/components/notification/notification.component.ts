@@ -27,7 +27,7 @@ export class NotificationComponent {
 
       if (notification) {
         clearTimeout(this.timeout)
-        this.timeout = setTimeout(() => {
+        this.timeout = window.setTimeout(() => {
           this.closeNotification()
         }, 5000)
       } else {

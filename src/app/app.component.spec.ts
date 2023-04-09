@@ -5,6 +5,7 @@ import { LightSwitchComponent } from './components/light-switch/light-switch.com
 import { NotificationComponent } from './components/notification/notification.component'
 import { DialogComponent } from './components/dialog/dialog.component'
 import { RouterModule } from '@angular/router'
+import { LanguageSelectorComponent } from './components/language-selector/language-selector.component'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -12,6 +13,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         LightSwitchComponent,
+        LanguageSelectorComponent,
         NotificationComponent,
         DialogComponent,
       ],
@@ -25,7 +27,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy()
   })
 
-  it(`should have as title 'tailwind-color-generator'`, () => {
+  it(`should have as title 'Rainbow Palette'`, () => {
     const fixture = TestBed.createComponent(AppComponent)
     const app = fixture.componentInstance
     expect(app.title).toMatch(/Rainbow Palette \| /)

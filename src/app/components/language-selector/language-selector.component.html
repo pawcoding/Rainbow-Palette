@@ -3,7 +3,7 @@
     class="block h-7 w-7 cursor-pointer rounded-full fib fis"
     [class]="'fi-' + country"
     [title]="'language-selector.' + language | translate"
-    (click)="showMenu = true">
+    (click)="showMenu = !showMenu">
     <span class="sr-only">{{
       'language-selector.' + language | translate
     }}</span>

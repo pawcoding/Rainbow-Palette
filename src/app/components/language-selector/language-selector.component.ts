@@ -6,7 +6,6 @@ import { LANGUAGES } from '../../constants/languages.constant'
 @Component({
   selector: 'app-language-selector',
   templateUrl: './language-selector.component.html',
-  styleUrls: ['./language-selector.component.css'],
 })
 export class LanguageSelectorComponent {
   LANGUAGES = LANGUAGES
