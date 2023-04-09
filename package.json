@@ -15,6 +15,7 @@
     "prebuild": "npm run build:sitemap",
     "build": "ng build",
     "build:sitemap": "node scripts/update-sitemap.js",
+    "build:storybook": "ng run rainbow-palette:build-storybook",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
     "lint:watch": "nodemon --exec \"npm run lint || exit 1\" --ext ts,html,css",
@@ -24,7 +25,6 @@
     "test:headless": "ng test --watch=false --browsers=ChromeHeadless,FirefoxHeadless --code-coverage --progress=false",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "ng run rainbow-palette:storybook",
-    "build-storybook": "ng run rainbow-palette:build-storybook",
     "prepare": "husky install",
     "pre-commit": "npx lint-staged"
   },

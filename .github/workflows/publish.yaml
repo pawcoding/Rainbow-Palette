@@ -25,12 +25,19 @@ jobs:
           node-version: 16
           cache: 'npm'
 
+      - name: 🗑️ Purge unused storybook files
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.HTTP_PURGE_STORYBOOK }}
+          method: 'GET'
+
       - name: 🔨 Build project
         run: |
           npm cache clean --force
           npm ci
           npm install -g @angular/cli@14.x > /dev/null
           npm run build
+          npm run build:storybook
 
       - name: 📤 Upload to server
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
@@ -39,7 +46,7 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           port: ${{ secrets.FTP_PORT }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_path: './dist/rainbow-palette/*'
+          local_path: './dist/*'
           remote_path: './'
           sftp_only: true
 
