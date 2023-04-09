@@ -1,26 +1,22 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Palette} from "../models/palette.model";
-import {PaletteGenerator, PaletteScheme} from "../class/palette-generator";
-import {StorageService} from "./storage.service";
+import { EventEmitter, Injectable } from '@angular/core'
+import { Palette } from '../models/palette.model'
+import { PaletteGenerator, PaletteScheme } from '../class/palette-generator'
+import { StorageService } from './storage.service'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PaletteService {
-
   hex: string | undefined
   scheme: PaletteScheme = PaletteScheme.RAINBOW
   private palette: Palette | undefined
-  private paletteChangeEmitter: EventEmitter<Palette | undefined> = new EventEmitter()
+  private paletteChangeEmitter: EventEmitter<Palette | undefined> =
+    new EventEmitter()
 
-  constructor(
-    private storageService: StorageService
-  ) {
+  constructor(private storageService: StorageService) {
     const palette = storageService.loadPalette()
-    if (palette)
-      this.loadPalette(palette)
-    else
-      this.clearPalette()
+    if (palette) this.loadPalette(palette)
+    else this.clearPalette()
   }
 
   /**
@@ -29,8 +25,7 @@ export class PaletteService {
    * @param scheme
    */
   generatePalette(hex: string, scheme: PaletteScheme) {
-    if (!hex.match(/^#[0-9A-Fa-f]{6}$/))
-      throw 'Hex must be a 6-digit hex code.'
+    if (!hex.match(/^#[0-9A-Fa-f]{6}$/)) throw 'Hex must be a 6-digit hex code.'
 
     this.hex = hex
     this.scheme = Object.values(PaletteScheme).indexOf(scheme) % 8
@@ -77,5 +72,4 @@ export class PaletteService {
   getPaletteChangeEmitter() {
     return this.paletteChangeEmitter
   }
-
 }

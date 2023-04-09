@@ -1,141 +1,142 @@
 <div [class]="dark ? 'dark' : ''" *ngIf="shade && color" class="w-full">
   <section
-    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20 px-4
-           bg-gray-900/50 dark:bg-gray-900/90"
-    (click)="colorService.closeEditor()"
-  >
+    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20 px-4 bg-gray-900/50 dark:bg-gray-900/90"
+    (click)="colorService.closeEditor()">
     <article
-      class="w-full max-w-sm mx-auto p-4 grid gap-2
-             font-medium bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded"
-      (click)="$event.stopPropagation()"
-    >
-      <h2 class="mb-2">{{color.name}}</h2>
-
+      class="w-full max-w-sm mx-auto p-4 grid gap-2 font-medium bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded"
+      (click)="$event.stopPropagation()">
+      <h2 class="mb-2">{{ color.name }}</h2>
 
       <!-- Edit Hex -->
       <div class="flex">
         <input
           type="color"
-          title="Select a shade"
-          id="hexInput" #hexInput
+          [title]="'color-editor.pick' | translate"
+          id="hexInput"
+          #hexInput
           class="w-1/5 h-10 rounded-l rounded-r-none overflow-clip"
           [value]="shade.hex"
-          (input)="updateColor(0, hexInput.value)"
-        >
+          (input)="updateColor(0, hexInput.value)" />
 
         <input
           type="text"
-          title="Put your hex code here"
-          id="hexCode" #hexCode
+          [title]="'color-editor.hex' | translate"
+          id="hexCode"
+          #hexCode
           placeholder="#4472C4"
-          class="w-4/5 rounded-r
-                 text-medium text-gray-900 bg-gray-200 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500
-                 border-0 focus:ring-0"
+          class="w-4/5 rounded-r text-medium text-gray-900 bg-gray-200 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500 border-0 focus:ring-0"
           [value]="shade.hex"
-          (input)="updateColor(0, hexCode.value)"
-        >
+          (input)="updateColor(0, hexCode.value)" />
       </div>
 
       <!-- Edit Hue -->
       <div>
-        <label
-          for="hueInput"
-          class="flex justify-between"
-        >
-          <span class="font-semibold">Hue</span>
-          <span id="hueLabel" #hueLabel>{{shade.hue}}</span>
+        <label for="hueInput" class="flex justify-between">
+          <span class="font-semibold">{{
+            'color-editor.hue' | translate
+          }}</span>
+          <span id="hueLabel" #hueLabel>{{ shade.hue }}</span>
         </label>
 
         <input
           type="range"
-          title="Adjust the hue"
-          id="hueInput" #hueInput
-          min=0 max=360 step="1"
+          [title]="'color-editor.hue-adjust' | translate"
+          id="hueInput"
+          #hueInput
+          min="0"
+          max="360"
+          step="1"
           [value]="hueToWheel(shade.hue)"
-          (input)="updateColor(1, hueInput.value)"
-        >
+          (input)="updateColor(1, hueInput.value)" />
       </div>
 
       <!-- Edit Saturation -->
       <div>
-        <label
-          for="saturationInput"
-          class="flex justify-between"
-        >
-          <span class="font-semibold">Saturation</span>
-          <span id="saturationLabel" #saturationLabel>{{shade.saturation}}</span>
+        <label for="saturationInput" class="flex justify-between">
+          <span class="font-semibold">{{
+            'color-editor.saturation' | translate
+          }}</span>
+          <span id="saturationLabel" #saturationLabel>{{
+            shade.saturation
+          }}</span>
         </label>
 
         <input
           type="range"
-          title="Adjust the saturation"
-          id="saturationInput" #saturationInput
-          min=0 max=100 step="1"
+          [title]="'color-editor.saturation-adjust' | translate"
+          id="saturationInput"
+          #saturationInput
+          min="0"
+          max="100"
+          step="1"
           [value]="shade.saturation"
-          (input)="updateColor(2, saturationInput.value)"
-        >
+          (input)="updateColor(2, saturationInput.value)" />
       </div>
 
       <!-- Edit Luminosity -->
       <div>
-        <label
-          for="luminosityInput"
-          class="flex justify-between"
-        >
-          <span class="font-semibold">Luminosity</span>
-          <span id="luminosityLabel" #luminosityLabel>{{shade.luminosity}}</span>
+        <label for="luminosityInput" class="flex justify-between">
+          <span class="font-semibold">{{
+            'color-editor.luminosity' | translate
+          }}</span>
+          <span id="luminosityLabel" #luminosityLabel>{{
+            shade.luminosity
+          }}</span>
         </label>
 
         <input
           type="range"
-          title="Adjust the luminosity"
-          id="luminosityInput" #luminosityInput
-          min=0 max=100 step="1"
+          [title]="'color-editor.luminosity-adjust' | translate"
+          id="luminosityInput"
+          #luminosityInput
+          min="0"
+          max="100"
+          step="1"
           [value]="100 - shade.luminosity"
-          (input)="updateColor(3, luminosityInput.value)"
-        >
+          (input)="updateColor(3, luminosityInput.value)" />
       </div>
 
-
       <!-- Preview Color -->
-      <section class="grow grid grid-cols-10 mt-8 text-center overflow-clip cursor-default">
+      <section
+        class="grow grid grid-cols-10 mt-8 text-center overflow-clip cursor-default">
         <span
           *ngFor="let shadeToShow of color.shades"
           [ngStyle]="{
             'background-color': shadeToShow.hex,
-            'border-color': shadeToShow === shade ? 'currentColor' : shadeToShow.hex,
-            'color': color.shades[shadeToShow.brightness > 51 ? 9 : 0].hex,
+            'border-color':
+              shadeToShow === shade ? 'currentColor' : shadeToShow.hex,
+            color: color.shades[shadeToShow.brightness > 51 ? 9 : 0].hex,
             'font-weight': shadeToShow.fixed ? 'bold' : 'inherit'
           }"
-          [class]="shadeToShow.index === 50 ? 'rounded-l' : (shadeToShow.index === 900 ? 'rounded-r' : '')"
+          [class]="
+            shadeToShow.index === 50
+              ? 'rounded-l'
+              : shadeToShow.index === 900
+              ? 'rounded-r'
+              : ''
+          "
           class="flex w-full h-14 items-center justify-center cursor-pointer border-4"
-          title="Edit this shade&#10;Rightclick: Interpolate this shade"
+          [title]="'color-editor.edit-shade' | translate"
           (click)="changeShade(shadeToShow.index)"
-          (contextmenu)="releaseShade(shadeToShow, $event)"
-        >
-          {{shadeToShow.fixed ? '■' : ''}}
+          (contextmenu)="releaseShade(shadeToShow, $event)">
+          {{ shadeToShow.fixed ? '■' : '' }}
         </span>
       </section>
-
 
       <!-- Buttons -->
       <section class="ml-auto">
         <button
-          class="py-2 px-4 mt-4
-                 font-medium bg-gray-200 dark:bg-gray-800 rounded transition-all duration-200"
-          title="Close editor without saving"
-          (click)="colorService.closeEditor()"
-        >
-          Cancel
+          class="py-2 px-4 mt-4 font-medium bg-gray-200 dark:bg-gray-800 rounded transition-all duration-200"
+          [title]="'color-editor.cancel-title' | translate"
+          (click)="colorService.closeEditor()">
+          {{ 'color-editor.cancel' | translate }}
         </button>
 
         <button
-          class="py-2 px-4 mt-4 ml-2
-                 font-medium text-primary-100 bg-primary-700 dark:bg-primary-600 rounded transition-all duration-200"
-          title="Save changes"
-          (click)="colorService.saveColor()"
-        >
-          Save
+          class="py-2 px-4 mt-4 ml-2 font-medium text-primary-100 bg-primary-700 dark:bg-primary-600 rounded transition-all duration-200"
+          [title]="'color-editor.save-title' | translate"
+          (click)="colorService.saveColor()">
+          {{ 'color-editor.save' | translate }}
         </button>
       </section>
     </article>

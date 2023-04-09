@@ -1,18 +1,23 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Palette} from "../../models/palette.model";
-import {ToUnicodeVariantUtil} from "../../utils/to-unicode-variant.util";
-import {Color} from "../../models/color.model";
-import {StorageService} from "../../services/storage.service";
-import {NotificationService} from "../../services/notification.service";
-import {ExportDialog} from "../../dialogs/export.dialog";
-
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core'
+import { Palette } from '../../models/palette.model'
+import { Color } from '../../models/color.model'
+import { StorageService } from '../../services/storage.service'
+import { NotificationService } from '../../services/notification.service'
+import { ExportDialog } from '../../dialogs/export.dialog'
+import { TranslateService } from '@ngx-translate/core'
 
 @Component({
-  selector: 'palette-viewer',
+  selector: 'app-palette-viewer',
   templateUrl: './palette-viewer.component.html',
 })
-export class PaletteViewerComponent implements OnInit {
-
+export class PaletteViewerComponent {
   @Input()
   palette: Palette | undefined
 
@@ -31,11 +36,9 @@ export class PaletteViewerComponent implements OnInit {
 
   constructor(
     private storage: StorageService,
-    private notificationService: NotificationService
-  ) { }
-
-  ngOnInit(): void {
-  }
+    private notificationService: NotificationService,
+    private translate: TranslateService
+  ) {}
 
   /**
    * Ask user for confirmation an trigger onRemove event handler.
@@ -53,16 +56,17 @@ export class PaletteViewerComponent implements OnInit {
     })
 
     this.notificationService.dialog.emit({
-      message: `Are you sure you want to delete the palette?\nIt can ${ToUnicodeVariantUtil.toUnicodeVariant('not', 'bs')} be restored.`,
-      actions: [{
-        text: 'Cancel',
-        title: 'Cancel deletion',
-        action: closeEmitter
-      }, {
-        text: 'Delete',
-        title: 'Delete palette',
-        action: removeEmitter
-      }]
+      id: 'delete-palette',
+      actions: [
+        {
+          id: 'cancel',
+          action: closeEmitter,
+        },
+        {
+          id: 'delete',
+          action: removeEmitter,
+        },
+      ],
     })
   }
 
@@ -79,7 +83,7 @@ export class PaletteViewerComponent implements OnInit {
    * Add a random color to the palette.
    */
   addRandomColor($event: MouseEvent) {
-    const target = ($event.target as HTMLButtonElement)
+    const target = $event.target as HTMLButtonElement
     this.adding = true
     setTimeout(() => {
       this.palette?.addColor(Color.generateRandomColor(), false)
@@ -87,7 +91,11 @@ export class PaletteViewerComponent implements OnInit {
       setTimeout(() => {
         window.scroll({
           behavior: 'smooth',
-          top: window.scrollY + target.getBoundingClientRect().bottom - window.innerHeight + 20
+          top:
+            window.scrollY +
+            target.getBoundingClientRect().bottom -
+            window.innerHeight +
+            20,
         })
       }, 10)
     }, 2000)
@@ -98,10 +106,9 @@ export class PaletteViewerComponent implements OnInit {
    */
   savePalette() {
     this.saving = true
-    if (this.palette)
-      this.storage.savePalette(this.palette)
+    if (this.palette) this.storage.savePalette(this.palette)
     setTimeout(() => {
-      this.notificationService.notification.emit('Palette saved')
+      this.notificationService.notification.emit('saved')
       this.saving = false
     }, 2000)
   }
@@ -122,7 +129,8 @@ export class PaletteViewerComponent implements OnInit {
   closeEditor() {
     this.editingState = false
     if (this.palette)
-      this.palette.title = this.editTitle?.nativeElement.value || 'Random'
+      this.palette.title =
+        this.editTitle?.nativeElement.value || this.translate.instant('random')
   }
 
   /**
@@ -130,12 +138,12 @@ export class PaletteViewerComponent implements OnInit {
    */
   exportPalette() {
     if (this.palette) {
-      this.notificationService.dialog
-        .emit(new ExportDialog(
+      this.notificationService.dialog.emit(
+        new ExportDialog(
           this.notificationService.dialog,
           this.palette
-        ).getNotification())
+        ).getNotification()
+      )
     }
   }
-
 }

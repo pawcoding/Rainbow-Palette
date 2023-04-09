@@ -1,14 +1,15 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Palette} from "../models/palette.model";
+import { EventEmitter, Injectable } from '@angular/core'
+import { Palette } from '../models/palette.model'
+import { TranslateService } from '@ngx-translate/core'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
+  darkEmitter = new EventEmitter<boolean>()
+  languageEmitter = new EventEmitter<string>()
 
-  darkEmitter = new EventEmitter<Boolean>()
-
-  constructor() { }
+  constructor(private translate: TranslateService) {}
 
   /**
    * Load the theme if it is stored in local storage.
@@ -44,6 +45,30 @@ export class StorageService {
   }
 
   /**
+   * Load the language saved in local storage.
+   * If no language is saved, the browser default language is used.
+   * If the browser default language is not supported, english is used.
+   */
+  loadLanguage(): void {
+    if (localStorage.getItem('language')) {
+      this.applyLanguage(localStorage.getItem('language') ?? 'en')
+    } else {
+      this.applyLanguage(this.translate.getBrowserLang() ?? 'en')
+    }
+  }
+
+  /**
+   * Apply language to the app.
+   * @param language
+   */
+  applyLanguage(language: string) {
+    this.translate.use(language).subscribe(() => {
+      localStorage.setItem('language', language)
+      this.languageEmitter.emit(language)
+    })
+  }
+
+  /**
    * Load the palette saved in local storage.
    * If no palette is saved a random one is going to be generated.
    */
@@ -66,5 +91,4 @@ export class StorageService {
   savePalette(palette: Palette) {
     localStorage.setItem('palette', palette.toString())
   }
-
 }

@@ -18,13 +18,10 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/assets",
-              "src/sitemap.xml",
-              "src/.htaccess"
-            ],
+            "assets": ["src/assets", "src/sitemap.xml", "src/.htaccess"],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/flag-icons/css/flag-icons.min.css"
             ],
             "scripts": [],
             "serviceWorker": true,
@@ -88,34 +85,45 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/assets",
-              "src/sitemap.xml",
-              "src/.htaccess"
-            ],
+            "assets": ["src/assets", "src/sitemap.xml", "src/.htaccess"],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/flag-icons/css/flag-icons.min.css"
             ],
             "scripts": []
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "rainbow-palette:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "."],
+            "port": 6006
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": ".storybook",
+            "browserTarget": "rainbow-palette:build",
+            "compodoc": true,
+            "compodocArgs": ["-e", "json", "-d", "."],
+            "outputDir": "dist/storybook"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
           }
         }
       }
     }
   },
   "cli": {
-    "analytics": false
-  },
-  "storybook": {
-    "builder": "@storybook/angular:start-storybook",
-    "options": {
-      "browserTarget": "angular-cli:build",
-      "port": 6006
-    }
-  },
-  "build-storybook": {
-    "builder": "@storybook/angular:build-storybook",
-    "options": {
-      "browserTarget": "angular-cli:build"
-    }
+    "analytics": false,
+    "schematicCollections": ["@angular-eslint/schematics"]
   }
 }

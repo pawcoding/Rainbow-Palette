@@ -1,21 +1,15 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {StorageService} from "../../services/storage.service";
+import { Component, Input } from '@angular/core'
+import { StorageService } from '../../services/storage.service'
 
 @Component({
-  selector: 'light-switch',
+  selector: 'app-light-switch',
   templateUrl: './light-switch.component.html',
 })
-export class LightSwitchComponent implements OnInit {
-
+export class LightSwitchComponent {
   @Input()
   dark: boolean | undefined
 
-  constructor(
-    private storage: StorageService
-  ) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private storage: StorageService) {}
 
   /**
    * Toggle between light and dark theme.
@@ -23,5 +17,4 @@ export class LightSwitchComponent implements OnInit {
   toggleTheme(): void {
     this.dark = this.storage.toggleTheme(!this.dark)
   }
-
 }

@@ -1,21 +1,19 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Color} from "../models/color.model";
-import {ColorInterpolater} from "../class/color-interpolater";
-import {Shade} from "../models/shade.model";
-import {PaletteService} from "./palette.service";
+import { EventEmitter, Injectable } from '@angular/core'
+import { Color } from '../models/color.model'
+import { ColorInterpolater } from '../class/color-interpolater'
+import { Shade } from '../models/shade.model'
+import { PaletteService } from './palette.service'
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ColorService {
-
   private color: Color | undefined
   private shade: Shade | undefined
-  private colorChangeEmitter: EventEmitter<ChangeType> = new EventEmitter<ChangeType>()
+  private colorChangeEmitter: EventEmitter<ChangeType> =
+    new EventEmitter<ChangeType>()
 
-  constructor(
-    private paletteService: PaletteService
-  ) { }
+  constructor(private paletteService: PaletteService) {}
 
   /**
    * Open the editor with a copy of the color and optional a specific shade.
@@ -24,10 +22,8 @@ export class ColorService {
    */
   loadColor(color: Color, shadeIndex?: number) {
     this.color = Color.parseColor(color)
-    if (shadeIndex)
-      this.shade = this.color.getShade(shadeIndex)
-    else
-      this.shade = this.color.shades.find(s => s.fixed)
+    if (shadeIndex) this.shade = this.color.getShade(shadeIndex)
+    else this.shade = this.color.shades.find((s) => s.fixed)
     this.colorChangeEmitter.emit(ChangeType.LOAD)
   }
 
@@ -80,9 +76,9 @@ export class ColorService {
   getColorChangeEmitter() {
     return this.colorChangeEmitter
   }
-
 }
 
 export enum ChangeType {
-  LOAD, ADJUST
+  LOAD,
+  ADJUST,
 }

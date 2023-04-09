@@ -1,7 +1,6 @@
-import { Color } from './color.model';
+import { Color } from './color.model'
 
 describe('Color', () => {
-
   let color: Color
 
   beforeEach(() => {
@@ -12,5 +11,4 @@ describe('Color', () => {
     expect(color).toBeTruthy()
     expect(Color.generateRandomColor).toBeTruthy()
   })
-
 })

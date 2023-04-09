@@ -1,16 +1,13 @@
-import {EventEmitter} from "@angular/core";
+import { EventEmitter } from '@angular/core'
 
 export interface Dialog {
-
-  message: string
-  actions: Action[]
-
+  id: string
+  interpolateParams?: { [key: string]: string }
+  actions?: Action[]
 }
 
 export interface Action {
-
-  text: string
-  title: string
+  id: string
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   action: EventEmitter<any>
-
 }

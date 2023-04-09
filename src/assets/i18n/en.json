@@ -1,0 +1,195 @@
+{
+  "app": {
+    "footer": {
+      "created": "Created by {{ pawcode }}",
+      "github": "View on GitHub",
+      "source-code": "View source code on GitHub",
+      "version": "Version {{ version }}"
+    },
+    "navigation": {
+      "edit": {
+        "label": "Edit",
+        "title": "Edit your palette"
+      },
+      "home": {
+        "label": "Regenerate",
+        "title": "Generate a new palette"
+      },
+      "preview": {
+        "label": "Preview",
+        "title": "Preview your palette with components"
+      }
+    },
+    "title": "Get your own color palette from just a single color"
+  },
+  "color-editor": {
+    "cancel": "Cancel",
+    "cancel-title": "Close editor without saving",
+    "edit-shade": "Edit this shade\nRight-click: Interpolate this shade",
+    "hex": "Put your hex code here",
+    "hue": "Hue",
+    "hue-adjust": "Adjust the hue",
+    "luminosity": "Luminosity",
+    "luminosity-adjust": "Adjust the luminosity",
+    "pick": "Pick your color",
+    "saturation": "Saturation",
+    "saturation-adjust": "Adjust the saturation",
+    "save": "Save",
+    "save-title": "Save changes"
+  },
+  "color-viewer": {
+    "edit-name": "Edit the name of this color",
+    "name-placeholder": "Enter a name for this color",
+    "remove": "Remove this color from your palette",
+    "tune": "Tune this color",
+    "tune-shade": "Tune this shade\nRight-click: Copy to clipboard"
+  },
+  "dialog": {
+    "action": {
+      "cancel": {
+        "label": "Cancel",
+        "title": "Cancel deletion"
+      },
+      "copy": {
+        "label": "Copy",
+        "title": "Copy palette to your clipboard"
+      },
+      "css": {
+        "label": "CSS",
+        "title": "Export colors as CSS properties"
+      },
+      "delete": {
+        "label": "Delete",
+        "title": "Delete palette"
+      },
+      "file": {
+        "label": "File",
+        "title": "Download palette as file"
+      },
+      "more": {
+        "label": "Read more",
+        "title": "Open documentation"
+      },
+      "next": {
+        "label": "Next",
+        "title": "Show next dialog"
+      },
+      "tailwind": {
+        "label": "TailwindCSS",
+        "title": "Export colors as TailwindCSS custom colors"
+      },
+      "wait": {
+        "label": "Wait",
+        "title": "Wait 2 seconds for the next dialog"
+      }
+    },
+    "close": "Close",
+    "message": {
+      "copy-error": "An error occurred while copying the palette to your clipboard.<br><br>{{ error }}",
+      "delete-palette": "Are you sure you want to delete the palette?<br>It can <b>not</b> be restored!",
+      "export-css": "Do you want to copy the CSS properties into your own files or create a new one?",
+      "export-css-copy": "The palette has been copied to your clipboard. To use the colors as CSS properties copy the contents of the clipboard to the {{ root }} of your css file.<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
+      "export-css-file": "Move the downloaded {{ file }} file to the root of your webserver. Then link it in the head of your html file like:<br>{{ link }}<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
+      "export-palette": "How do you want to use your palette?",
+      "export-tailwind": "Do you want to copy the colors to your existing {{ file }} or create an extra file only for your palette?",
+      "export-tailwind-copy": "The palette has been copied to your clipboard. To use the colors copy the contents of the clipboard to the {{ config }} file.<br><br>Check TailwindsCSS's documentation for further instructions.",
+      "export-tailwind-file": "Move the downloaded {{ file }} file to the root of your project. Then import the colors in your {{ config }} file like:<br>{{ import }}<br><br>Check TailwindCSS's documentation for further instructions.",
+      "test": "This is a test message for storybook.<br><br>You can use <b>HTML</b> to format your message."
+    }
+  },
+  "home": {
+    "additions": {
+      "development": {
+        "title": "Development paused",
+        "text": "Unfortunately, at the moment I don't have much time to actively improve the tool myself. Nevertheless, I monitor the activities of the {{ github }} repository on the side. So if you have any ideas on how the tool could be expanded, want to implement new interfaces yourself or can improve my algorithms, feel free to contact me on my {{ discord }}.",
+        "discord": "Get more info on Discord"
+      },
+      "planned": {
+        "issue": "View issue on GitHub",
+        "list": {
+          "1": "Adjust colors in different formats (RGB, HSV)",
+          "2": "Exemplary web components to preview palette",
+          "3": "Provide prefabricated palettes",
+          "4": "Generate color palette from images",
+          "5": "Localization for different regions"
+        },
+        "text": "Even though I can't develop the tool myself at the moment, I have a few features planned. These include:",
+        "title": "Planned features"
+      },
+      "title": "Additional info & support"
+    },
+    "generation": {
+      "invalid-hex": "You need to enter a 6-digit hex code.",
+      "note": "Note",
+      "perfection": "No generator achieves perfect results.<br>Please adjust the colors to your liking.",
+      "start": "Generate palette"
+    },
+    "scheme": {
+      "ANALOGOUS": "Analogous",
+      "COMPLEMENTARY": "Complementary",
+      "COMPOUND": "Compound",
+      "MONOCHROMATIC": "Monochromatic",
+      "pick": "Pick a color scheme",
+      "RAINBOW": "Rainbow",
+      "SURPRISE_ME": "Surprise me!",
+      "SPLIT": "Split Complementary",
+      "TRIADIC": "Triadic"
+    },
+    "text1": "Generate an entire color palette from just a single color.",
+    "text2": "Enter a hex code below or pick a color to get started.",
+    "tutorial": {
+      "editing": {
+        "title": "Editing",
+        "text": "After the algorithm has finished the generation, editing begins. Now you can view your palette and adjust the colors using the \"tune\" icon. If you just want to try it out and complete the palette later, your progress can be saved locally in your browser for later."
+      },
+      "end": {
+        "title": "That's it!",
+        "subtitle": "It's that easy to create your very own color palette."
+      },
+      "export": {
+        "title": "Export",
+        "text": "When you're finished you can export your personal palette in the format of your choice. So far this site supports both CSS variables and TailwindCSS. In addition, with each format you have the choice between the pure code or a file that you can easily integrate into your existing project."
+      },
+      "generation": {
+        "title": "Generation",
+        "text": "Just pick your favorite color or enter your brand color and hit \"generate\". If you want, you can optionally select a specific color scheme, otherwise you will get a rainbow color scheme. The algorithm then starts to add more colors to match yours and generates 10 different shades for each one."
+      },
+      "title": "How it works"
+    }
+  },
+  "language-selector": {
+    "de": "German",
+    "en": "English"
+  },
+  "light-switch": {
+    "to-dark": "Switch to dark mode",
+    "to-light": "Switch to light mode"
+  },
+  "notification": {
+    "copied": "Copied {{ color }} to your clipboard.",
+    "copy-error": "An error occurred while copying the color to your clipboard.",
+    "close": "Close",
+    "saved": "Palette saved",
+    "test": "This is a test notification."
+  },
+  "palette-viewer": {
+    "add": "Add color",
+    "add-title": "Add a new random color to your palette",
+    "adding": "Generating color...",
+    "adding-title": "A new color is being generated...",
+    "edit-title": "Edit the name of your palette",
+    "export": "Export",
+    "export-title": "Export your palette",
+    "save": "Save",
+    "save-title": "Save the palette in your browser",
+    "saving": "Saving...",
+    "saving-title": "Your palette is being saved in your browser...",
+    "title-placeholder": "Give your palette a name"
+  },
+  "preview": {
+    "description": "Here you will soon be able to try out your palette directly with various components such as cards, buttons, etc.",
+    "more-info": "Feel free to check the repository on {{ github }} or my {{ discord }} for more information.",
+    "title": "Coming soon..."
+  },
+  "random": "Random"
+}
