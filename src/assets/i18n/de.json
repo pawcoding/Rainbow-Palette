@@ -157,6 +157,10 @@
       "title": "Wie funktioniert's?"
     }
   },
+  "language-selector": {
+    "de": "Deutsch",
+    "en": "Englisch"
+  },
   "light-switch": {
     "to-dark": "Zum dunklen Modus wechseln",
     "to-light": "Zum hellen Modus wechseln"

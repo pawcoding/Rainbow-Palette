@@ -157,6 +157,10 @@
       "title": "How it works"
     }
   },
+  "language-selector": {
+    "de": "German",
+    "en": "English"
+  },
   "light-switch": {
     "to-dark": "Switch to dark mode",
     "to-light": "Switch to light mode"

@@ -20,6 +20,7 @@ import { environment } from '../environments/environment'
 import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { LanguageSelectorComponent } from './components/language-selector/language-selector.component'
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
     EditComponent,
     SafeHtmlPipe,
     PreviewComponent,
+    LanguageSelectorComponent,
   ],
   imports: [
     AppRoutingModule,

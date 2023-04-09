@@ -40,11 +40,16 @@
       </div>
     </nav>
 
-    <app-light-switch class="mx-auto sm:mr-0" [dark]="dark"> </app-light-switch>
+    <div class="flex items-center gap-4 justify-center md:justify-end">
+      <app-language-selector></app-language-selector>
+      <app-light-switch
+        class="flex items-center"
+        [dark]="dark"></app-light-switch>
+    </div>
   </header>
 
   <main>
-    <router-outlet> </router-outlet>
+    <router-outlet></router-outlet>
   </main>
 
   <footer

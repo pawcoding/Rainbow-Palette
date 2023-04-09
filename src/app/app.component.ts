@@ -54,11 +54,10 @@ export class AppComponent {
 
     // Setup translation pipe
     this.translate.setDefaultLang('en')
-    this.translate
-      .use(this.translate.getBrowserLang() ?? 'en')
-      .subscribe((_) => {
-        this.title = `Rainbow Palette | ${this.translate.instant('app.title')}`
-        this.titleService.setTitle(this.title)
-      })
+    this.storage.languageEmitter.subscribe(() => {
+      this.title = `Rainbow Palette | ${this.translate.instant('app.title')}`
+      this.titleService.setTitle(this.title)
+    })
+    this.storage.loadLanguage()
   }
 }
