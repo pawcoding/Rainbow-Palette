@@ -1,3 +1,16 @@
+2023.04.09, v0.2.0
+
+feature:
+- (color) improved color generation algorithm
+- (i18n) setup internationalization with npx-translate
+- (test) add pipeline for unit tests
+- (test) publish Storybook
+
+improvement:
+- (i18n) add German translation
+- (web) update to Angular 15
+- (web) update to Storybook 7
+
 2022.12.14, v0.1.4
 
 feature:
@@ -6,7 +19,7 @@ feature:
 
 improvement:
 - (schemes) use `Rainbow` as default
-- (theme) load fonts from server
+- (web) load fonts from server
 
 2022.10.13, v0.1.3
 
@@ -25,7 +38,7 @@ improvement:
 
 feature:
 - (palette) palette generation with different schemes
-- (theme) new animaitons
+- (theme) new animations
 - (web) routing
 
 improvement:
