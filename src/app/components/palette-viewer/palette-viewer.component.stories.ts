@@ -8,6 +8,8 @@ import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
 import { PaletteGenerator, PaletteScheme } from '../../class/palette-generator'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
+import { ColorService } from '../../services/color.service'
+import { PaletteService } from '../../services/palette.service'
 
 export default {
   title: 'Components/Palette',
@@ -24,12 +26,10 @@ const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
     providers: [
-      {
-        provide: StorageService,
-      },
-      {
-        provide: NotificationService,
-      },
+      ColorService,
+      PaletteService,
+      StorageService,
+      NotificationService,
     ],
     imports: [StorybookTranslateModule],
   },

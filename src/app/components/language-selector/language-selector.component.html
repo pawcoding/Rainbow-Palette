@@ -11,12 +11,12 @@
 
   <article
     *ngIf="showMenu"
-    class="mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded"
+    class="mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-gray-700 rounded"
     (mouseleave)="showMenu = false">
     <section class="text-sm">
       <label
         *ngFor="let language of LANGUAGES"
-        class="p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center"
+        class="p-2 hover:bg-gray-200 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center"
         (click)="switchLanguage(language)">
         <span
           class="block h-6 w-6 rounded-full fib fis"
