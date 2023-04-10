@@ -3507,12 +3507,12 @@
     },
     {
       "name": "MockColorService",
-      "id": "class-MockColorService-1a961b8cc2ab698b9315a54c15355d20514ef39e7c717b7e87654397184520a701f1ffa4f2d5c8c267d223942893377683bcecb10fca78cdfa5549e4aabdc273",
+      "id": "class-MockColorService-220bcda9624904456276fd2586c8b9beeadf3d481e84c03a95dd1ab94fdcb1dea5309664f84075478d7e939ca10c24a9a63eb67790d7b6c6af98940efa811f45",
       "file": "src/app/components/color-editor/color-editor.component.stories.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { ColorEditorComponent } from './color-editor.component'\r\nimport { Meta, Story } from '@storybook/angular'\r\nimport { ChangeType, ColorService } from '../../services/color.service'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { EventEmitter } from '@angular/core'\r\nimport { Color } from '../../models/color.model'\r\nimport { Shade } from '../../models/shade.model'\r\nimport { ColorInterpolater } from '../../class/color-interpolater'\r\nimport { StorybookTranslateModule } from '../../utils/storybook-translate.module'\r\n\r\nexport default {\r\n  title: 'Components/Color Editor',\r\n  component: ColorEditorComponent,\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n  private color: Color | undefined\r\n  private shade: Shade | undefined\r\n  private colorChangeEmitter: EventEmitter<ChangeType> =\r\n    new EventEmitter<ChangeType>()\r\n\r\n  constructor() {\r\n    setTimeout(() => {\r\n      this.loadColor(Color.generateRandomColor())\r\n    }, 0)\r\n  }\r\n\r\n  loadColor(color: Color, shadeIndex?: number) {\r\n    this.color = Color.parseColor(color)\r\n    if (shadeIndex) this.shade = this.color.getShade(shadeIndex)\r\n    else this.shade = this.color.shades.find((s) => s.fixed)\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  closeEditor() {\r\n    this.color = undefined\r\n    this.shade = undefined\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  adjustShades() {\r\n    if (this.color) {\r\n      ColorInterpolater.regenerateShades(this.color)\r\n      this.colorChangeEmitter.emit(ChangeType.ADJUST)\r\n    }\r\n  }\r\n\r\n  saveColor() {\r\n    if (this.color) {\r\n      console.info('Saving color')\r\n      this.closeEditor()\r\n    }\r\n  }\r\n\r\n  getColor() {\r\n    return this.color\r\n  }\r\n\r\n  getShade() {\r\n    return this.shade\r\n  }\r\n\r\n  getColorChangeEmitter() {\r\n    return this.colorChangeEmitter\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: MockColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false,\r\n}\r\n",
+      "sourceCode": "import { ColorEditorComponent } from './color-editor.component'\r\nimport { Meta, Story } from '@storybook/angular'\r\nimport { ChangeType, ColorService } from '../../services/color.service'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { EventEmitter } from '@angular/core'\r\nimport { Color } from '../../models/color.model'\r\nimport { Shade } from '../../models/shade.model'\r\nimport { ColorInterpolater } from '../../class/color-interpolater'\r\nimport { StorybookTranslateModule } from '../../utils/storybook-translate.module'\r\n\r\nexport default {\r\n  title: 'Components/Color Editor',\r\n  component: ColorEditorComponent,\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n  private color: Color | undefined\r\n  private shade: Shade | undefined\r\n  private colorChangeEmitter: EventEmitter<ChangeType> =\r\n    new EventEmitter<ChangeType>()\r\n\r\n  constructor() {\r\n    setTimeout(() => {\r\n      this.loadColor(new Color('pawcode Blue', '#4472c4'))\r\n    }, 0)\r\n  }\r\n\r\n  loadColor(color: Color, shadeIndex?: number) {\r\n    this.color = Color.parseColor(color)\r\n    if (shadeIndex) this.shade = this.color.getShade(shadeIndex)\r\n    else this.shade = this.color.shades.find((s) => s.fixed)\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  closeEditor() {\r\n    this.color = undefined\r\n    this.shade = undefined\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  adjustShades() {\r\n    if (this.color) {\r\n      ColorInterpolater.regenerateShades(this.color)\r\n      this.colorChangeEmitter.emit(ChangeType.ADJUST)\r\n    }\r\n  }\r\n\r\n  saveColor() {\r\n    if (this.color) {\r\n      console.info('Saving color')\r\n      this.closeEditor()\r\n    }\r\n  }\r\n\r\n  getColor() {\r\n    return this.color\r\n  }\r\n\r\n  getShade() {\r\n    return this.shade\r\n  }\r\n\r\n  getColorChangeEmitter() {\r\n    return this.colorChangeEmitter\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: MockColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false,\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -6983,7 +6983,7 @@
           }
         ]
       },
-      "templateData": "<section class=\"relative\">\r\n  <span\r\n    class=\"block h-7 w-7 cursor-pointer rounded-full fib fis\"\r\n    [class]=\"'fi-' + country\"\r\n    [title]=\"'language-selector.' + language | translate\"\r\n    (click)=\"showMenu = !showMenu\">\r\n    <span class=\"sr-only\">{{\r\n      'language-selector.' + language | translate\r\n    }}</span>\r\n  </span>\r\n\r\n  <article\r\n    *ngIf=\"showMenu\"\r\n    class=\"mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n    (mouseleave)=\"showMenu = false\">\r\n    <section class=\"text-sm\">\r\n      <label\r\n        *ngFor=\"let language of LANGUAGES\"\r\n        class=\"p-2 hover:bg-gray-200 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center\"\r\n        (click)=\"switchLanguage(language)\">\r\n        <span\r\n          class=\"block h-6 w-6 rounded-full fib fis\"\r\n          [class]=\"'fi-' + languageToCountryCode(language)\"></span>\r\n        <span>{{ 'language-selector.' + language | translate }}</span>\r\n      </label>\r\n    </section>\r\n  </article>\r\n</section>\r\n"
+      "templateData": "<section class=\"relative\">\r\n  <span\r\n    class=\"block h-7 w-7 cursor-pointer rounded-full fib fis\"\r\n    [class]=\"'fi-' + country\"\r\n    [title]=\"'language-selector.' + language | translate\"\r\n    (click)=\"showMenu = !showMenu\">\r\n    <span class=\"sr-only\">{{\r\n      'language-selector.' + language | translate\r\n    }}</span>\r\n  </span>\r\n\r\n  <article\r\n    *ngIf=\"showMenu\"\r\n    class=\"mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n    (mouseleave)=\"showMenu = false\">\r\n    <section class=\"text-sm\">\r\n      <label\r\n        *ngFor=\"let language of LANGUAGES\"\r\n        class=\"p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center\"\r\n        (click)=\"switchLanguage(language)\">\r\n        <span\r\n          class=\"block h-6 w-6 rounded-full fib fis\"\r\n          [class]=\"'fi-' + languageToCountryCode(language)\"></span>\r\n        <span>{{ 'language-selector.' + language | translate }}</span>\r\n      </label>\r\n    </section>\r\n  </article>\r\n</section>\r\n"
     },
     {
       "name": "LightSwitchComponent",
@@ -7743,16 +7743,6 @@
   "miscellaneous": {
     "variables": [
       {
-        "name": "Analogous",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
-      },
-      {
         "name": "canEditPalette",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -7771,26 +7761,6 @@
         "deprecationMessage": "",
         "type": "string",
         "defaultValue": "'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'"
-      },
-      {
-        "name": "Complementary",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
-      },
-      {
-        "name": "Compound",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
       },
       {
         "name": "environment",
@@ -7841,16 +7811,6 @@
         "deprecationMessage": "",
         "type": "",
         "defaultValue": "new Palette('media-scope', uuidv4())"
-      },
-      {
-        "name": "Monochromatic",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
       },
       {
         "name": "numbers",
@@ -7926,7 +7886,7 @@
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "",
@@ -7936,7 +7896,7 @@
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "",
@@ -7953,16 +7913,6 @@
         "defaultValue": "Template.bind({})"
       },
       {
-        "name": "Rainbow",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
-      },
-      {
         "name": "special",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -7971,16 +7921,6 @@
         "deprecationMessage": "",
         "type": "literal type",
         "defaultValue": "{\r\n  m: {\r\n    ' ': 0x2000,\r\n    '-': 0x2013,\r\n  },\r\n  i: {\r\n    h: 0x210e,\r\n  },\r\n  g: {\r\n    C: 0x212d,\r\n    H: 0x210c,\r\n    I: 0x2111,\r\n    R: 0x211c,\r\n    Z: 0x2128,\r\n  },\r\n  d: {\r\n    C: 0x2102,\r\n    H: 0x210d,\r\n    N: 0x2115,\r\n    P: 0x2119,\r\n    Q: 0x211a,\r\n    R: 0x211d,\r\n    Z: 0x2124,\r\n  },\r\n  o: {\r\n    '0': 0x24ea,\r\n    '1': 0x2460,\r\n    '2': 0x2461,\r\n    '3': 0x2462,\r\n    '4': 0x2463,\r\n    '5': 0x2464,\r\n    '6': 0x2465,\r\n    '7': 0x2466,\r\n    '8': 0x2467,\r\n    '9': 0x2468,\r\n  },\r\n  on: {},\r\n  p: {},\r\n  q: {},\r\n  qn: {},\r\n  w: {},\r\n}"
-      },
-      {
-        "name": "Split",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
       },
       {
         "name": "Tailwind",
@@ -8016,26 +7956,6 @@
         "name": "Template",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-      },
-      {
-        "name": "Template",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-      },
-      {
-        "name": "Template",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/app/components/color-viewer/color-viewer.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -8046,7 +7966,27 @@
         "name": "Template",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/app/components/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+      },
+      {
+        "name": "Template",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+      },
+      {
+        "name": "Template",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
@@ -8071,16 +8011,6 @@
         "deprecationMessage": "",
         "type": "Story",
         "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      PaletteService,\r\n      StorageService,\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-      },
-      {
-        "name": "Triadic",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
       },
       {
         "name": "variantOffsets",
@@ -8509,148 +8439,6 @@
       }
     ],
     "groupedVariables": {
-      "src/app/components/palette-viewer/palette-viewer.component.stories.ts": [
-        {
-          "name": "Analogous",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Complementary",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Compound",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "MediaScope",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "mediaScopePalette",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "new Palette('media-scope', uuidv4())"
-        },
-        {
-          "name": "Monochromatic",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Pawcode",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "pawcodePalette",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "new Palette('pawcode', uuidv4())"
-        },
-        {
-          "name": "Rainbow",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Split",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Tailwind",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "tailwindPalette",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "new Palette('Tailwind', uuidv4())"
-        },
-        {
-          "name": "Template",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      PaletteService,\r\n      StorageService,\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-        },
-        {
-          "name": "Triadic",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        }
-      ],
       "src/app/guards/palette.guard.ts": [
         {
           "name": "canEditPalette",
@@ -8751,6 +8539,78 @@
           "defaultValue": "['en', 'de']"
         }
       ],
+      "src/app/components/palette-viewer/palette-viewer.component.stories.ts": [
+        {
+          "name": "MediaScope",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "mediaScopePalette",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "new Palette('media-scope', uuidv4())"
+        },
+        {
+          "name": "Pawcode",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "pawcodePalette",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "new Palette('pawcode', uuidv4())"
+        },
+        {
+          "name": "Tailwind",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "tailwindPalette",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "new Palette('Tailwind', uuidv4())"
+        },
+        {
+          "name": "Template",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      PaletteService,\r\n      StorageService,\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        }
+      ],
       "src/app/components/color-viewer/color-viewer.component.stories.ts": [
         {
           "name": "PawcodeBlue",
@@ -8817,28 +8677,6 @@
           "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
-      "src/app/components/language-selector/language-selector.component.stories.ts": [
-        {
-          "name": "Primary",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Template",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-        }
-      ],
       "src/app/components/light-switch/light-switch.component.stories.ts": [
         {
           "name": "Primary",
@@ -8855,6 +8693,28 @@
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        }
+      ],
+      "src/app/components/language-selector/language-selector.component.stories.ts": [
+        {
+          "name": "Primary",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "Template",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
@@ -9353,7 +9213,7 @@
     ]
   },
   "coverage": {
-    "count": 7,
+    "count": 8,
     "status": "low",
     "files": [
       {
@@ -9635,36 +9495,6 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Analogous",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "Complementary",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "Compound",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
         "name": "MediaScope",
         "coveragePercent": 0,
         "coverageCount": "0/1",
@@ -9685,16 +9515,6 @@
         "type": "variable",
         "linktype": "miscellaneous",
         "linksubtype": "variable",
-        "name": "Monochromatic",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
         "name": "Pawcode",
         "coveragePercent": 0,
         "coverageCount": "0/1",
@@ -9706,26 +9526,6 @@
         "linktype": "miscellaneous",
         "linksubtype": "variable",
         "name": "pawcodePalette",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "Rainbow",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "Split",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
@@ -9756,16 +9556,6 @@
         "linktype": "miscellaneous",
         "linksubtype": "variable",
         "name": "Template",
-        "coveragePercent": 0,
-        "coverageCount": "0/1",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/palette-viewer/palette-viewer.component.stories.ts",
-        "type": "variable",
-        "linktype": "miscellaneous",
-        "linksubtype": "variable",
-        "name": "Triadic",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"
