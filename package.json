@@ -1,12 +1,19 @@
 {
   "name": "rainbow-palette",
   "version": "0.2.0",
-  "author": "pawcode Development",
-  "bugs": "https://github.com/pawcoding/Rainbow-Palette/issues",
+  "author": {
+    "name": "pawcode Development"
+  },
+  "bugs": {
+    "url": "https://github.com/pawcoding/Rainbow-Palette/issues"
+  },
   "description": "Rainbow Palette is a color palette generator that allows you to create beautiful color palettes and export them in different formats.",
   "homepage": "https://colos.apps.pawcode.com",
   "license": "MIT",
-  "repository": "https://github.com/pawcoding/Rainbow-Palette.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pawcoding/Rainbow-Palette.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -74,6 +81,7 @@
     "@typescript-eslint/parser": "5.48.2",
     "autoprefixer": "^10.4.8",
     "babel-loader": "^8.2.5",
+    "chromatic": "^6.17.3",
     "eslint": "^8.33.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -95,5 +103,7 @@
     "tailwind-scrollbar": "^2.0.1",
     "tailwindcss": "^3.1.8",
     "typescript": "~4.8.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "rainbow-palette@0.2.0"
 }

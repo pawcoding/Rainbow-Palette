@@ -6983,7 +6983,7 @@
           }
         ]
       },
-      "templateData": "<section class=\"relative\">\r\n  <span\r\n    class=\"block h-7 w-7 cursor-pointer rounded-full fib fis\"\r\n    [class]=\"'fi-' + country\"\r\n    [title]=\"'language-selector.' + language | translate\"\r\n    (click)=\"showMenu = !showMenu\">\r\n    <span class=\"sr-only\">{{\r\n      'language-selector.' + language | translate\r\n    }}</span>\r\n  </span>\r\n\r\n  <article\r\n    *ngIf=\"showMenu\"\r\n    class=\"mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n    (mouseleave)=\"showMenu = false\">\r\n    <section class=\"text-sm\">\r\n      <label\r\n        *ngFor=\"let language of LANGUAGES\"\r\n        class=\"p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center\"\r\n        (click)=\"switchLanguage(language)\">\r\n        <span\r\n          class=\"block h-6 w-6 rounded-full fib fis\"\r\n          [class]=\"'fi-' + languageToCountryCode(language)\"></span>\r\n        <span>{{ 'language-selector.' + language | translate }}</span>\r\n      </label>\r\n    </section>\r\n  </article>\r\n</section>\r\n"
+      "templateData": "<section class=\"relative\">\r\n  <span\r\n    class=\"block h-7 w-7 cursor-pointer rounded-full fib fis\"\r\n    [class]=\"'fi-' + country\"\r\n    [title]=\"'language-selector.' + language | translate\"\r\n    (click)=\"showMenu = !showMenu\">\r\n    <span class=\"sr-only\">{{\r\n      'language-selector.' + language | translate\r\n    }}</span>\r\n  </span>\r\n\r\n  <article\r\n    *ngIf=\"showMenu\"\r\n    class=\"mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-100 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n    (mouseleave)=\"showMenu = false\">\r\n    <section class=\"text-sm\">\r\n      <label\r\n        *ngFor=\"let language of LANGUAGES\"\r\n        class=\"p-2 hover:bg-gray-200 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center\"\r\n        (click)=\"switchLanguage(language)\">\r\n        <span\r\n          class=\"block h-6 w-6 rounded-full fib fis\"\r\n          [class]=\"'fi-' + languageToCountryCode(language)\"></span>\r\n        <span>{{ 'language-selector.' + language | translate }}</span>\r\n      </label>\r\n    </section>\r\n  </article>\r\n</section>\r\n"
     },
     {
       "name": "LightSwitchComponent",
@@ -7796,21 +7796,21 @@
         "name": "environment",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/environments/environment.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "object",
-        "defaultValue": "{\r\n  production: false,\r\n  version: packageJson.version,\r\n}"
-      },
-      {
-        "name": "environment",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/environments/environment.prod.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "object",
         "defaultValue": "{\r\n  production: true,\r\n  version: packageJson.version,\r\n}"
+      },
+      {
+        "name": "environment",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/environments/environment.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "object",
+        "defaultValue": "{\r\n  production: false,\r\n  version: packageJson.version,\r\n}"
       },
       {
         "name": "LANGUAGES",
@@ -7916,6 +7916,16 @@
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/app/components/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "",
+        "defaultValue": "Template.bind({})"
+      },
+      {
+        "name": "Primary",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/app/components/language-selector/language-selector.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -7927,16 +7937,6 @@
         "ctype": "miscellaneous",
         "subtype": "variable",
         "file": "src/app/components/light-switch/light-switch.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
-      },
-      {
-        "name": "Primary",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "",
@@ -8016,17 +8016,17 @@
         "name": "Template",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+        "file": "src/app/components/dialog/dialog.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
       },
       {
         "name": "Template",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
@@ -8040,17 +8040,17 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      NotificationService,\r\n      PaletteService,\r\n      StorageService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
       },
       {
         "name": "Template",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/dialog/dialog.component.stories.ts",
+        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
       },
       {
         "name": "Template",
@@ -8070,7 +8070,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      PaletteService,\r\n      StorageService,\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
       },
       {
         "name": "Triadic",
@@ -8638,7 +8638,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      PaletteService,\r\n      StorageService,\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         },
         {
           "name": "Triadic",
@@ -8715,18 +8715,6 @@
           "defaultValue": "{\r\n  monospace: 'm',\r\n  bold: 'b',\r\n  italic: 'i',\r\n  'bold italic': 'bi',\r\n  script: 'c',\r\n  'bold script': 'bc',\r\n  gothic: 'g',\r\n  'gothic bold': 'bg',\r\n  doublestruck: 'd',\r\n  sans: 's',\r\n  'bold sans': 'bs',\r\n  'italic sans': 'is',\r\n  'bold italic sans': 'bis',\r\n  parenthesis: 'p',\r\n  circled: 'o',\r\n  'circled negative': 'on',\r\n  squared: 'q',\r\n  'squared negative': 'qn',\r\n  fullwidth: 'w',\r\n}"
         }
       ],
-      "src/environments/environment.ts": [
-        {
-          "name": "environment",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/environments/environment.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "object",
-          "defaultValue": "{\r\n  production: false,\r\n  version: packageJson.version,\r\n}"
-        }
-      ],
       "src/environments/environment.prod.ts": [
         {
           "name": "environment",
@@ -8737,6 +8725,18 @@
           "deprecationMessage": "",
           "type": "object",
           "defaultValue": "{\r\n  production: true,\r\n  version: packageJson.version,\r\n}"
+        }
+      ],
+      "src/environments/environment.ts": [
+        {
+          "name": "environment",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/environments/environment.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "object",
+          "defaultValue": "{\r\n  production: false,\r\n  version: packageJson.version,\r\n}"
         }
       ],
       "src/app/constants/languages.constant.ts": [
@@ -8770,7 +8770,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      NotificationService,\r\n      PaletteService,\r\n      StorageService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
       "src/app/components/color-editor/color-editor.component.stories.ts": [
@@ -8793,6 +8793,28 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: MockColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        }
+      ],
+      "src/app/components/dialog/dialog.component.stories.ts": [
+        {
+          "name": "Primary",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "Template",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
       "src/app/components/language-selector/language-selector.component.stories.ts": [
@@ -8837,28 +8859,6 @@
           "deprecationMessage": "",
           "type": "Story",
           "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-        }
-      ],
-      "src/app/components/dialog/dialog.component.stories.ts": [
-        {
-          "name": "Primary",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Template",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/dialog/dialog.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
       "src/app/components/notification/notification.component.stories.ts": [

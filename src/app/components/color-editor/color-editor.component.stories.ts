@@ -21,7 +21,7 @@ class MockColorService implements Partial<ColorService> {
 
   constructor() {
     setTimeout(() => {
-      this.loadColor(Color.generateRandomColor())
+      this.loadColor(new Color('pawcode Blue', '#4472c4'))
     }, 0)
   }
 
