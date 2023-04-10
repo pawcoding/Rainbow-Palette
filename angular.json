@@ -83,10 +83,7 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/assets", "src/sitemap.xml", "src/.htaccess"],
-            "styles": [
-              "src/styles.css",
-              "node_modules/flag-icons/css/flag-icons.min.css"
-            ],
+            "styles": ["src/styles.css"],
             "scripts": []
           }
         },
