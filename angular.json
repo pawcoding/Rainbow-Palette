@@ -19,7 +19,11 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/assets", "src/sitemap.xml", "src/.htaccess"],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css",
+              "src/app/styles/flags.css",
+              "src/app/styles/fonts.css"
+            ],
             "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
@@ -83,7 +87,11 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": ["src/assets", "src/sitemap.xml", "src/.htaccess"],
-            "styles": ["src/styles.css"],
+            "styles": [
+              "src/styles.css",
+              "src/app/styles/flags.css",
+              "src/app/styles/fonts.css"
+            ],
             "scripts": []
           }
         },

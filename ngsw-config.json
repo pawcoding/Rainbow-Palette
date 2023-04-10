@@ -11,12 +11,11 @@
           "/index.html",
           "/assets/favicon/site.webmanifest",
           "/*.css",
+          "/app/styles/*.css",
           "/*.js",
           "/assets/icons/*.svg",
           "/assets/color_dictionary.csv",
-          "/assets/rainbow-palette-*.svg",
-          "/assets/fonts.css",
-          "/assets/flags.css"
+          "/assets/rainbow-palette-*.svg"
         ]
       }
     },

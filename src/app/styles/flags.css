@@ -30,8 +30,8 @@
   Here are all css classes for using the flags.
 */
 .fi-de.fis {
-  background-image: url(/assets/flags/de.svg);
+  background-image: url('/assets/flags/de.svg');
 }
 .fi-us.fis {
-  background-image: url(/assets/flags/us.svg);
+  background-image: url('/assets/flags/us.svg');
 }
