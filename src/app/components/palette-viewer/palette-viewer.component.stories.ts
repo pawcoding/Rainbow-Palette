@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from 'uuid'
 import { Color } from '../../models/color.model'
 import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
-import { PaletteGenerator, PaletteScheme } from '../../class/palette-generator'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { ColorService } from '../../services/color.service'
 import { PaletteService } from '../../services/palette.service'
@@ -452,59 +451,4 @@ mediaScopePalette.addColor(
 MediaScope.args = {
   dark: false,
   palette: mediaScopePalette,
-}
-
-export const Monochromatic = Template.bind({})
-
-Monochromatic.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette(
-    '#da4e44',
-    PaletteScheme.MONOCHROMATIC
-  ),
-}
-
-export const Analogous = Template.bind({})
-
-Analogous.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#77cf97', PaletteScheme.ANALOGOUS),
-}
-
-export const Complementary = Template.bind({})
-
-Complementary.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette(
-    '#ff7231',
-    PaletteScheme.COMPLEMENTARY
-  ),
-}
-
-export const Split = Template.bind({})
-
-Split.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#29cddc', PaletteScheme.SPLIT),
-}
-
-export const Triadic = Template.bind({})
-
-Triadic.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#00ad64', PaletteScheme.TRIADIC),
-}
-
-export const Compound = Template.bind({})
-
-Compound.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#66b032', PaletteScheme.COMPOUND),
-}
-
-export const Rainbow = Template.bind({})
-
-Rainbow.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#ff1100', PaletteScheme.RAINBOW),
 }
