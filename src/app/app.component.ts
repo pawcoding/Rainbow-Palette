@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, OnInit } from '@angular/core'
 import { environment } from '../environments/environment'
 import { StorageService } from './services/storage.service'
 import { PaletteService } from './services/palette.service'
@@ -6,16 +6,23 @@ import { Router } from '@angular/router'
 import { ColorNamer } from './class/color-namer'
 import { TranslateService } from '@ngx-translate/core'
 import { Title } from '@angular/platform-browser'
+import { MatomoTracker } from '@ngx-matomo/tracker'
+import { NotificationService } from './services/notification.service'
+import { getMatomoLink } from './utils/links.util'
+import { SwUpdate } from '@angular/service-worker'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title =
     'Rainbow Palette | Get your own color palette from just a single color'
   version = environment.version
-  dark
+  dark = false
+  showTrackingNotice = false
+
+  getMatomoLink = getMatomoLink(this.translate)
 
   navigation = [
     {
@@ -42,14 +49,16 @@ export class AppComponent {
     public paletteService: PaletteService,
     public router: Router,
     private translate: TranslateService,
-    private titleService: Title
+    private titleService: Title,
+    private notificationService: NotificationService,
+    private tracker: MatomoTracker,
+    private updates: SwUpdate
   ) {
-    this.titleService.setTitle(this.title)
-
     // Load theme from local storage and subscribe to changes
     this.dark = storage.loadTheme()
     this.storage.darkEmitter.subscribe((d) => (this.dark = d.valueOf()))
 
+    // Load color name dictionary
     ColorNamer.loadDictionary()
 
     // Setup translation pipe
@@ -59,5 +68,80 @@ export class AppComponent {
       this.titleService.setTitle(this.title)
     })
     this.storage.loadLanguage()
+  }
+
+  ngOnInit() {
+    // Setup tracking
+    switch (this.storage.hasTrackingAllowed()) {
+      case 1:
+        // Tracking is allowed
+        this.tracker.setConsentGiven()
+        break
+      case 2:
+        // No preference given yet
+        this.showTrackingNotice = true
+        break
+      default:
+        // Tracking is disallowed
+        break
+    }
+
+    // Setup Service Worker update
+    this.updates.versionUpdates.subscribe((event) => {
+      if (event.type === 'VERSION_READY') {
+        const closeEvent = new EventEmitter()
+        closeEvent.subscribe(() => {
+          this.notificationService.dialog.emit(undefined)
+        })
+
+        const updateEvent = new EventEmitter()
+        updateEvent.subscribe(() => {
+          // Save current palette before reload
+          const palette = this.paletteService.getPalette()
+          if (palette) {
+            this.storage.savePalette(palette)
+          }
+
+          this.tracker.trackEvent('pwa', 'update-complete')
+          document.location.reload()
+        })
+
+        this.notificationService.dialog.emit({
+          id: 'update-available',
+          actions: [
+            {
+              id: 'not-now',
+              action: closeEvent,
+            },
+            {
+              id: 'update',
+              action: updateEvent,
+            },
+          ],
+        })
+      } else if (event.type === 'VERSION_INSTALLATION_FAILED') {
+        this.notificationService.notification.emit('update-failed')
+        this.tracker.trackEvent('pwa', 'update-failed')
+      }
+    })
+  }
+
+  /**
+   * Allow tracking and remember the consent for 90 days
+   */
+  allowTracking() {
+    this.showTrackingNotice = false
+    this.storage.rememberTracking(true)
+    this.tracker.setConsentGiven()
+    this.notificationService.notification.emit('tracking-allowed')
+  }
+
+  /**
+   * Disable tracking and remember the choice for 90 days
+   */
+  disableTracking() {
+    this.showTrackingNotice = false
+    this.storage.rememberTracking(false)
+    this.tracker.forgetConsentGiven()
   }
 }

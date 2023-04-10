@@ -6,6 +6,9 @@ import { TranslateService } from '@ngx-translate/core'
   providedIn: 'root',
 })
 export class StorageService {
+  dark = false
+  language = 'en'
+
   darkEmitter = new EventEmitter<boolean>()
   languageEmitter = new EventEmitter<string>()
 
@@ -41,7 +44,7 @@ export class StorageService {
 
     this.darkEmitter.emit(dark)
 
-    return dark
+    return (this.dark = dark)
   }
 
   /**
@@ -64,6 +67,7 @@ export class StorageService {
   applyLanguage(language: string) {
     this.translate.use(language).subscribe(() => {
       localStorage.setItem('language', language)
+      this.language = language
       this.languageEmitter.emit(language)
     })
   }
@@ -90,5 +94,44 @@ export class StorageService {
    */
   savePalette(palette: Palette) {
     localStorage.setItem('palette', palette.toString())
+  }
+
+  /**
+   * Remember if the user has enabled tracking for 90 days.
+   * @param enabled
+   */
+  rememberTracking(enabled: boolean) {
+    const item = {
+      value: enabled,
+      expiry: Date.now() + 1000 * 60 * 60 * 24 * 90,
+    }
+
+    localStorage.setItem('tracking', JSON.stringify(item))
+  }
+
+  /**
+   * Check if the user has disabled tracking.
+   * @returns {number} 0 = disabled, 1 = enabled, 2 = not set
+   */
+  hasTrackingAllowed(): number {
+    const item = localStorage.getItem('tracking')
+    if (item) {
+      try {
+        const parsed = JSON.parse(item)
+        if (parsed.expiry < Date.now()) {
+          localStorage.removeItem('tracking')
+          return 2
+        } else {
+          if (parsed.value) {
+            this.rememberTracking(true)
+          }
+
+          return parsed.value ? 1 : 0
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+    return 2
   }
 }

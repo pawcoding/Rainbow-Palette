@@ -1,5 +1,16 @@
 {
   "app": {
+    "analytics": {
+      "accept": "Activate Analytics",
+      "analytics-link": "More information about Analytics",
+      "decline": "No, thanks",
+      "decline-title": "Keep Analytics deactivated",
+      "description": "This website uses a private {{ matomo }} instance to collect anonymized data about the use of the site. No personally identifiable information is collected, and all data about your usage is anonymized.",
+      "matomo-link": "Visit Matomo",
+      "more-info": "More Information",
+      "more-info-title": "Get mor information about my analytics",
+      "title": "Help me improve the site"
+    },
     "footer": {
       "created": "Created by {{ pawcode }}",
       "github": "View on GitHub",
@@ -74,9 +85,17 @@
         "label": "Next",
         "title": "Show next dialog"
       },
+      "not-now": {
+        "label": "Not now",
+        "title": "New version will be installed on next page load"
+      },
       "tailwind": {
         "label": "TailwindCSS",
         "title": "Export colors as TailwindCSS custom colors"
+      },
+      "update": {
+        "label": "Update",
+        "title": "Update to the latest version"
       },
       "wait": {
         "label": "Wait",
@@ -94,7 +113,8 @@
       "export-tailwind": "Do you want to copy the colors to your existing {{ file }} or create an extra file only for your palette?",
       "export-tailwind-copy": "The palette has been copied to your clipboard. To use the colors copy the contents of the clipboard to the {{ config }} file.<br><br>Check TailwindsCSS's documentation for further instructions.",
       "export-tailwind-file": "Move the downloaded {{ file }} file to the root of your project. Then import the colors in your {{ config }} file like:<br>{{ import }}<br><br>Check TailwindCSS's documentation for further instructions.",
-      "test": "This is a test message for storybook.<br><br>You can use <b>HTML</b> to format your message."
+      "test": "This is a test message for storybook.<br><br>You can use <b>HTML</b> to format your message.",
+      "update-available": "A new version of Rainbow Palette is available. Do you want to update now?"
     }
   },
   "home": {
@@ -170,7 +190,9 @@
     "copy-error": "An error occurred while copying the color to your clipboard.",
     "close": "Close",
     "saved": "Palette saved",
-    "test": "This is a test notification."
+    "test": "This is a test notification.",
+    "tracking-allowed": "Thank you for supporting the project!",
+    "update-failed": "An error occurred while updating the app."
   },
   "palette-viewer": {
     "add": "Add color",

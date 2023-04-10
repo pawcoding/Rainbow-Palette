@@ -52,6 +52,39 @@
     <router-outlet></router-outlet>
   </main>
 
+  <section
+    *ngIf="showTrackingNotice"
+    class="fixed bottom-0 bg-gray-200/95 dark:bg-gray-800/95 p-4 mx-auto max-w-screen-md md:rounded-tr-md md:w-[60vw] text-sm">
+    <span class="font-medium">{{ 'app.analytics.title' | translate }}</span>
+    <p>
+      <span
+        class="inline-block"
+        [innerHtml]="
+          'app.analytics.description' | translate : { matomo: getMatomoLink() }
+        "></span>
+      <a
+        routerLink="/analytics"
+        [title]="'app.analytics.more-info-title' | translate"
+        class="underline block text-right">
+        {{ 'app.analytics.more-info' | translate }}
+      </a>
+    </p>
+    <div class="flex items-center justify-center gap-4 mt-4">
+      <button
+        (click)="disableTracking()"
+        class="py-2 px-4 bg-gray-300 font-medium text-gray-800 rounded cursor-pointer transition-colors duration-500 hover:bg-gray-400 hover:text-gray-900"
+        [title]="'app.analytics.decline-title' | translate">
+        {{ 'app.analytics.decline' | translate }}
+      </button>
+      <button
+        (click)="allowTracking()"
+        class="py-2 px-4 bg-primary-700 font-medium text-primary-100 rounded cursor-pointer transition-colors duration-500 hover:bg-primary-800 hover:text-primary-200 dark:hover:bg-primary-600 dark:hover:text-primary-50"
+        [title]="'app.analytics.accept' | translate">
+        {{ 'app.analytics.accept' | translate }}
+      </button>
+    </div>
+  </section>
+
   <footer
     class="flex gap-4 flex-col sm:flex-row px-8 pt-16 items-center justify-between text-center w-full max-w-4xl mx-auto mt-10">
     <a

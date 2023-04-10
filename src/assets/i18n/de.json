@@ -1,5 +1,16 @@
 {
   "app": {
+    "analytics": {
+      "accept": "Analytics aktivieren",
+      "analytics-link": "Mehr Informationen zu den Analytics",
+      "decline": "Nein, danke",
+      "decline-title": "Analytics deaktiviert lassen",
+      "description": "Diese Webseite verwendet eine private {{ matomo }} Instanz, um anonymisierte Daten über die Nutzung der Seite zu sammeln. Es werden keine personenbezogenen Daten gesammelt und alle Nutzungsdaten werden anonymisiert.",
+      "matomo-link": "Matomo besuchen",
+      "more-info": "Mehr Informationen",
+      "more-info-title": "Mehr Informationen zu den Analytics",
+      "title": "Hilf mir, die Seite zu verbessern"
+    },
     "footer": {
       "created": "Erstellt von {{ pawcode }}",
       "github": "Auf GitHub ansehen",
@@ -74,9 +85,17 @@
         "label": "Weiter",
         "title": "Nächsten Dialog anzeigen"
       },
+      "not-now": {
+        "label": "Nicht jetzt",
+        "title": "Neue Version wird beim Schließen der Seite installiert"
+      },
       "tailwind": {
         "label": "TailwindCSS",
         "title": "Exportiere deine Palette zur Nutzung mit TailwindCSS"
+      },
+      "update": {
+        "label": "Aktualisieren",
+        "title": "Neuste Version installieren"
       },
       "wait": {
         "label": "Warten",
@@ -94,7 +113,8 @@
       "export-tailwind": "Willst du die Palette in deine bereits bestehende {{ file }} Datei kopieren oder eine eigenständige Datei dafür herunterladen?",
       "export-tailwind-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben zu nutzen, musst du den Inhalt deiner Zwischenablage in der {{ config }} Datei einfügen.<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
       "export-tailwind-file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
-      "test": "Dies ist ein Testdialog für Storybook.<br><br>Du kannst <b>HTML</b> nutzen, um die Nachricht im Dialog zu formatieren."
+      "test": "Dies ist ein Testdialog für Storybook.<br><br>Du kannst <b>HTML</b> nutzen, um die Nachricht im Dialog zu formatieren.",
+      "update-available": "Es wurde eine neue Version von Rainbow Palette veröffentlicht. Möchtest du sie jetzt installieren?"
     }
   },
   "home": {
@@ -170,7 +190,9 @@
     "copy-error": "Die Farbe konnte nicht in die Zwischenablage kopiert werden.",
     "close": "Schließen",
     "saved": "Deine Palette wurde lokal gespeichert.",
-    "test": "Dies ist eine Testnachricht."
+    "test": "Dies ist eine Testnachricht.",
+    "tracking-allowed": "Danke, dass du das Projekt unterstützt!",
+    "update-failed": "Die neue Version konnte nicht geladen werden."
   },
   "palette-viewer": {
     "add": "Farbe hinzufügen",
