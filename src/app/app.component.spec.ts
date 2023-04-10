@@ -6,6 +6,8 @@ import { NotificationComponent } from './components/notification/notification.co
 import { DialogComponent } from './components/dialog/dialog.component'
 import { RouterModule } from '@angular/router'
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component'
+import { MatomoMockModule } from './utils/matomo.mock.module'
+import { ServiceWorkerModule } from '@angular/service-worker'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -17,7 +19,12 @@ describe('AppComponent', () => {
         NotificationComponent,
         DialogComponent,
       ],
-      imports: [TranslateModule.forRoot(), RouterModule.forRoot([])],
+      imports: [
+        TranslateModule.forRoot(),
+        RouterModule.forRoot([]),
+        ServiceWorkerModule.register('', { enabled: false }),
+        MatomoMockModule,
+      ],
     }).compileComponents()
   })
 

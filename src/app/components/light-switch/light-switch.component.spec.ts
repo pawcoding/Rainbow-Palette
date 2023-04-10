@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { LightSwitchComponent } from './light-switch.component'
 import { TranslateModule } from '@ngx-translate/core'
+import { MatomoMockModule } from '../../utils/matomo.mock.module'
 
 describe('LightSwitchComponent', () => {
   let component: LightSwitchComponent
@@ -10,7 +11,7 @@ describe('LightSwitchComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LightSwitchComponent],
-      imports: [TranslateModule.forRoot()],
+      imports: [TranslateModule.forRoot(), MatomoMockModule],
     }).compileComponents()
 
     fixture = TestBed.createComponent(LightSwitchComponent)
