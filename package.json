@@ -44,7 +44,6 @@
     "@angular/service-worker": "^15.2.6",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "flag-icons": "^6.6.6",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "uuid": "^8.3.2",

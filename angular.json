@@ -19,10 +19,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/assets", "src/sitemap.xml", "src/.htaccess"],
-            "styles": [
-              "src/styles.css",
-              "node_modules/flag-icons/css/flag-icons.min.css"
-            ],
+            "styles": ["src/styles.css"],
             "scripts": [],
             "serviceWorker": true,
             "ngswConfigPath": "ngsw-config.json"
