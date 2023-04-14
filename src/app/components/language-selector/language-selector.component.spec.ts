@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { LanguageSelectorComponent } from './language-selector.component'
 import { TranslateModule } from '@ngx-translate/core'
-import { MatomoMockModule } from '../../utils/matomo.mock.module'
+import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 
 describe('LanguageSelectorComponent', () => {
   let component: LanguageSelectorComponent
@@ -11,7 +11,8 @@ describe('LanguageSelectorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [LanguageSelectorComponent],
-      imports: [TranslateModule.forRoot(), MatomoMockModule],
+      imports: [TranslateModule.forRoot()],
+      providers: [...matomoProvidersMock],
     }).compileComponents()
 
     fixture = TestBed.createComponent(LanguageSelectorComponent)
