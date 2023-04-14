@@ -171,16 +171,110 @@
   ],
   "injectables": [
     {
+      "name": "AnalyticsInterceptor",
+      "id": "injectable-AnalyticsInterceptor-257077febacf96d7fe9bc28802672443516a6da0389d580bedbaa910edac9998646b9d20f8e97ed3a09ddf16faff9af60f64dc45c9c95de261f505013d22ad03",
+      "file": "src/app/interceptors/analytics.interceptor.ts",
+      "properties": [
+        {
+          "name": "isPWA",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 10
+        }
+      ],
+      "methods": [
+        {
+          "name": "beforePageTrack",
+          "args": [
+            {
+              "name": "event",
+              "type": "NavigationEnd",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "Observable | Promise | void",
+          "typeParameters": [],
+          "line": 29,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "event",
+              "type": "NavigationEnd",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        }
+      ],
+      "deprecated": false,
+      "deprecationMessage": "",
+      "description": "",
+      "rawdescription": "\n",
+      "sourceCode": "import { MatomoRouterInterceptor } from '@ngx-matomo/router'\r\nimport { Injectable } from '@angular/core'\r\nimport { StorageService } from '../services/storage.service'\r\nimport { MatomoTracker } from '@ngx-matomo/tracker'\r\nimport { Observable } from 'rxjs'\r\nimport { NavigationEnd } from '@angular/router'\r\n\r\n@Injectable()\r\nexport class AnalyticsInterceptor implements MatomoRouterInterceptor {\r\n  isPWA = false\r\n\r\n  constructor(private tracker: MatomoTracker, private storage: StorageService) {\r\n    // Check for installed PWA\r\n    if (\r\n      window.matchMedia('(display-mode: standalone)').matches ||\r\n      // eslint-disable-next-line  @typescript-eslint/ban-ts-comment\r\n      // @ts-ignore\r\n      window.navigator.standalone\r\n    ) {\r\n      this.isPWA = true\r\n    }\r\n\r\n    window.addEventListener('appinstalled', () => {\r\n      this.isPWA = true\r\n      this.tracker.trackEvent('pwa', 'installed')\r\n    })\r\n  }\r\n\r\n  beforePageTrack(\r\n    event: NavigationEnd\r\n  ): Observable<void> | Promise<void> | void {\r\n    this.tracker.setDocumentTitle(event.url)\r\n\r\n    this.tracker.setCustomDimension(1, this.storage.language)\r\n    this.tracker.setCustomDimension(2, this.storage.dark ? 'dark' : 'light')\r\n    this.tracker.setCustomDimension(3, this.isPWA ? 'pwa' : 'web')\r\n  }\r\n}\r\n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": ""
+          },
+          {
+            "name": "storage",
+            "type": "StorageService",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 10,
+        "jsdoctags": [
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          },
+          {
+            "name": "storage",
+            "type": "StorageService",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "type": "injectable"
+    },
+    {
       "name": "ColorService",
-      "id": "injectable-ColorService-5e8d8f336442c75564ba7a5c513535c364d4c7bbece745d7b92dcb8f964f6d0114c646641915434ba63278178bbea37551111a90e5148912c20564f2ed6fdc79",
+      "id": "injectable-ColorService-9d8420d4897d3b95f35ae1fa96bb2648523154c7256f88b5c3a94b1c832918be7f4a1e5782efd353ff91ff0fee8617ca4b36affa34f687661a0c8a0b9b4ae8e1",
       "file": "src/app/services/color.service.ts",
       "properties": [
         {
           "name": "color",
           "deprecated": false,
           "deprecationMessage": "",
-          "type": "Color | undefined",
-          "optional": false,
+          "type": "Color",
+          "optional": true,
           "description": "",
           "line": 11,
           "modifierKind": [121]
@@ -190,7 +284,7 @@
           "defaultValue": "new EventEmitter<ChangeType>()",
           "deprecated": false,
           "deprecationMessage": "",
-          "type": "EventEmitter<ChangeType>",
+          "type": "",
           "optional": false,
           "description": "",
           "line": 13,
@@ -200,8 +294,8 @@
           "name": "shade",
           "deprecated": false,
           "deprecationMessage": "",
-          "type": "Shade | undefined",
-          "optional": false,
+          "type": "Shade",
+          "optional": true,
           "description": "",
           "line": 12,
           "modifierKind": [121]
@@ -214,7 +308,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 42,
+          "line": 41,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nAdjust the shades of a color\n",
@@ -226,7 +320,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 33,
+          "line": 32,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nClose the color editor\n",
@@ -236,9 +330,9 @@
           "name": "getColor",
           "args": [],
           "optional": false,
-          "returnType": "any",
+          "returnType": "Color | undefined",
           "typeParameters": [],
-          "line": 62,
+          "line": 61,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nReturn the current color\n",
@@ -250,7 +344,7 @@
           "optional": false,
           "returnType": "EventEmitter<ChangeType>",
           "typeParameters": [],
-          "line": 76,
+          "line": 75,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nReturn the color change event emitter\n",
@@ -260,9 +354,9 @@
           "name": "getShade",
           "args": [],
           "optional": false,
-          "returnType": "any",
+          "returnType": "Shade | undefined",
           "typeParameters": [],
-          "line": 69,
+          "line": 68,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nReturn the current shade\n",
@@ -288,7 +382,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 23,
+          "line": 22,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nOpen the editor with a copy of the color and optional a specific shade.\n",
@@ -296,8 +390,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 667,
-                "end": 672,
+                "pos": 614,
+                "end": 619,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -308,8 +402,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 661,
-                "end": 666,
+                "pos": 608,
+                "end": 613,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -320,8 +414,8 @@
             },
             {
               "name": {
-                "pos": 686,
-                "end": 696,
+                "pos": 633,
+                "end": 643,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -333,8 +427,8 @@
               "deprecationMessage": "",
               "optional": true,
               "tagName": {
-                "pos": 680,
-                "end": 685,
+                "pos": 627,
+                "end": 632,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -351,7 +445,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 52,
+          "line": 51,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nSave all changes made to the color\n",
@@ -362,7 +456,7 @@
       "deprecationMessage": "",
       "description": "",
       "rawdescription": "\n",
-      "sourceCode": "import { EventEmitter, Injectable } from '@angular/core'\r\nimport { Color } from '../models/color.model'\r\nimport { ColorInterpolater } from '../class/color-interpolater'\r\nimport { Shade } from '../models/shade.model'\r\nimport { PaletteService } from './palette.service'\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class ColorService {\r\n  private color: Color | undefined\r\n  private shade: Shade | undefined\r\n  private colorChangeEmitter: EventEmitter<ChangeType> =\r\n    new EventEmitter<ChangeType>()\r\n\r\n  constructor(private paletteService: PaletteService) {}\r\n\r\n  /**\r\n   * Open the editor with a copy of the color and optional a specific shade.\r\n   * @param color\r\n   * @param shadeIndex\r\n   */\r\n  loadColor(color: Color, shadeIndex?: number) {\r\n    this.color = Color.parseColor(color)\r\n    if (shadeIndex) this.shade = this.color.getShade(shadeIndex)\r\n    else this.shade = this.color.shades.find((s) => s.fixed)\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  /**\r\n   * Close the color editor\r\n   */\r\n  closeEditor() {\r\n    this.color = undefined\r\n    this.shade = undefined\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  /**\r\n   * Adjust the shades of a color\r\n   */\r\n  adjustShades() {\r\n    if (this.color) {\r\n      ColorInterpolater.regenerateShades(this.color)\r\n      this.colorChangeEmitter.emit(ChangeType.ADJUST)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Save all changes made to the color\r\n   */\r\n  saveColor() {\r\n    if (this.color) {\r\n      this.paletteService.getPalette()?.replaceColor(this.color)\r\n      this.closeEditor()\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Return the current color\r\n   */\r\n  getColor() {\r\n    return this.color\r\n  }\r\n\r\n  /**\r\n   * Return the current shade\r\n   */\r\n  getShade() {\r\n    return this.shade\r\n  }\r\n\r\n  /**\r\n   * Return the color change event emitter\r\n   */\r\n  getColorChangeEmitter() {\r\n    return this.colorChangeEmitter\r\n  }\r\n}\r\n\r\nexport enum ChangeType {\r\n  LOAD,\r\n  ADJUST,\r\n}\r\n",
+      "sourceCode": "import { EventEmitter, Injectable } from '@angular/core'\r\nimport { Color } from '../models/color.model'\r\nimport { ColorInterpolater } from '../class/color-interpolater'\r\nimport { Shade } from '../models/shade.model'\r\nimport { PaletteService } from './palette.service'\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class ColorService {\r\n  private color?: Color\r\n  private shade?: Shade\r\n  private colorChangeEmitter = new EventEmitter<ChangeType>()\r\n\r\n  constructor(private paletteService: PaletteService) {}\r\n\r\n  /**\r\n   * Open the editor with a copy of the color and optional a specific shade.\r\n   * @param color\r\n   * @param shadeIndex\r\n   */\r\n  loadColor(color: Color, shadeIndex?: number): void {\r\n    this.color = Color.parseColor(color)\r\n    if (shadeIndex) this.shade = this.color.getShade(shadeIndex)\r\n    else this.shade = this.color.shades.find((s) => s.fixed)\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  /**\r\n   * Close the color editor\r\n   */\r\n  closeEditor(): void {\r\n    this.color = undefined\r\n    this.shade = undefined\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  /**\r\n   * Adjust the shades of a color\r\n   */\r\n  adjustShades(): void {\r\n    if (this.color) {\r\n      ColorInterpolater.regenerateShades(this.color)\r\n      this.colorChangeEmitter.emit(ChangeType.ADJUST)\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Save all changes made to the color\r\n   */\r\n  saveColor(): void {\r\n    if (this.color) {\r\n      this.paletteService.getPalette()?.replaceColor(this.color)\r\n      this.closeEditor()\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Return the current color\r\n   */\r\n  getColor(): Color | undefined {\r\n    return this.color\r\n  }\r\n\r\n  /**\r\n   * Return the current shade\r\n   */\r\n  getShade(): Shade | undefined {\r\n    return this.shade\r\n  }\r\n\r\n  /**\r\n   * Return the color change event emitter\r\n   */\r\n  getColorChangeEmitter(): EventEmitter<ChangeType> {\r\n    return this.colorChangeEmitter\r\n  }\r\n}\r\n\r\nexport enum ChangeType {\r\n  LOAD,\r\n  ADJUST,\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -376,7 +470,7 @@
             "deprecationMessage": ""
           }
         ],
-        "line": 14,
+        "line": 13,
         "jsdoctags": [
           {
             "name": "paletteService",
@@ -427,7 +521,7 @@
     },
     {
       "name": "PaletteService",
-      "id": "injectable-PaletteService-86091fa7741fea9229ae7ff845ea61ab487e6fbb3340a3375c26dc96dc42e0eef35d68188ea68984d28d61923078c1c11dd2182cd8bc3b83ac79d8265ae6088d",
+      "id": "injectable-PaletteService-615f4d4e9da3569a869ae1fd880d9f1d2ce633bfca765f5ab875a8e2499206ff16059bfcae3c269b4a68cee087e9ebddd56dfe629d368454a5f3e4198b609b4c",
       "file": "src/app/services/palette.service.ts",
       "properties": [
         {
@@ -616,8 +710,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 1258,
-                "end": 1265,
+                "pos": 1264,
+                "end": 1271,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -628,8 +722,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 1252,
-                "end": 1257,
+                "pos": 1258,
+                "end": 1263,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -645,7 +739,7 @@
       "deprecationMessage": "",
       "description": "",
       "rawdescription": "\n",
-      "sourceCode": "import { EventEmitter, Injectable } from '@angular/core'\r\nimport { Palette } from '../models/palette.model'\r\nimport { PaletteGenerator, PaletteScheme } from '../class/palette-generator'\r\nimport { StorageService } from './storage.service'\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class PaletteService {\r\n  hex: string | undefined\r\n  scheme: PaletteScheme = PaletteScheme.RAINBOW\r\n  private palette: Palette | undefined\r\n  private paletteChangeEmitter: EventEmitter<Palette | undefined> =\r\n    new EventEmitter()\r\n\r\n  constructor(private storageService: StorageService) {\r\n    const palette = storageService.loadPalette()\r\n    if (palette) this.loadPalette(palette)\r\n    else this.clearPalette()\r\n  }\r\n\r\n  /**\r\n   * Generate a new color palette with a specific color and scheme\r\n   * @param hex\r\n   * @param scheme\r\n   */\r\n  generatePalette(hex: string, scheme: PaletteScheme) {\r\n    if (!hex.match(/^#[0-9A-Fa-f]{6}$/)) throw 'Hex must be a 6-digit hex code.'\r\n\r\n    this.hex = hex\r\n    this.scheme = Object.values(PaletteScheme).indexOf(scheme) % 8\r\n    const palette = PaletteGenerator.generatePalette(hex, scheme)\r\n    this.palette = palette\r\n    this.paletteChangeEmitter.emit(palette)\r\n  }\r\n\r\n  /**\r\n   * Load an existing palette\r\n   * @param palette\r\n   */\r\n  loadPalette(palette: Palette) {\r\n    this.hex = palette.colors[0].getShade(500).hex\r\n    this.palette = palette\r\n    this.paletteChangeEmitter.emit(palette)\r\n  }\r\n\r\n  /**\r\n   * Unload the current palette\r\n   */\r\n  clearPalette() {\r\n    this.palette = undefined\r\n    this.paletteChangeEmitter.emit(undefined)\r\n  }\r\n\r\n  /**\r\n   * Return the current palette\r\n   */\r\n  getPalette() {\r\n    return this.palette\r\n  }\r\n\r\n  /**\r\n   * Check if a palette is present\r\n   */\r\n  hasPalette() {\r\n    return !!this.palette\r\n  }\r\n\r\n  /**\r\n   * Return the palette change event emitter\r\n   */\r\n  getPaletteChangeEmitter() {\r\n    return this.paletteChangeEmitter\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter, Injectable } from '@angular/core'\r\nimport { Palette } from '../models/palette.model'\r\nimport { PaletteGenerator, PaletteScheme } from '../class/palette-generator'\r\nimport { StorageService } from './storage.service'\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class PaletteService {\r\n  hex: string | undefined\r\n  scheme: PaletteScheme = PaletteScheme.RAINBOW\r\n  private palette: Palette | undefined\r\n  private paletteChangeEmitter: EventEmitter<Palette | undefined> =\r\n    new EventEmitter()\r\n\r\n  constructor(private storageService: StorageService) {\r\n    const palette = storageService.loadPalette()\r\n    if (palette) this.loadPalette(palette)\r\n    else this.clearPalette()\r\n  }\r\n\r\n  /**\r\n   * Generate a new color palette with a specific color and scheme\r\n   * @param hex\r\n   * @param scheme\r\n   */\r\n  generatePalette(hex: string, scheme: PaletteScheme): void {\r\n    if (!hex.match(/^#[0-9A-Fa-f]{6}$/)) throw 'Hex must be a 6-digit hex code.'\r\n\r\n    this.hex = hex\r\n    this.scheme = Object.values(PaletteScheme).indexOf(scheme) % 8\r\n    const palette = PaletteGenerator.generatePalette(hex, scheme)\r\n    this.palette = palette\r\n    this.paletteChangeEmitter.emit(palette)\r\n  }\r\n\r\n  /**\r\n   * Load an existing palette\r\n   * @param palette\r\n   */\r\n  loadPalette(palette: Palette) {\r\n    this.hex = palette.colors[0].getShade(500).hex\r\n    this.palette = palette\r\n    this.paletteChangeEmitter.emit(palette)\r\n  }\r\n\r\n  /**\r\n   * Unload the current palette\r\n   */\r\n  clearPalette() {\r\n    this.palette = undefined\r\n    this.paletteChangeEmitter.emit(undefined)\r\n  }\r\n\r\n  /**\r\n   * Return the current palette\r\n   */\r\n  getPalette() {\r\n    return this.palette\r\n  }\r\n\r\n  /**\r\n   * Check if a palette is present\r\n   */\r\n  hasPalette() {\r\n    return !!this.palette\r\n  }\r\n\r\n  /**\r\n   * Return the palette change event emitter\r\n   */\r\n  getPaletteChangeEmitter() {\r\n    return this.paletteChangeEmitter\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -676,9 +770,19 @@
     },
     {
       "name": "StorageService",
-      "id": "injectable-StorageService-dcad1be35b7758f0abb544382858888895d7f079dc843f47e12f9cc4943c009e0bf0df598be038c71bbc4b16ba9a033d3ba1e4a20f99b6095888f04c82cd895e",
+      "id": "injectable-StorageService-30ded3be18fbdc2f14cfad26f52722da85aac15df108f4d0ec4f5d616335e2e744e18a35610a5cfa51974bf9fc51da6767ce6c32590035ae803ed3d7ee63d5ba",
       "file": "src/app/services/storage.service.ts",
       "properties": [
+        {
+          "name": "dark",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 9
+        },
         {
           "name": "darkEmitter",
           "defaultValue": "new EventEmitter<boolean>()",
@@ -687,7 +791,17 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 9
+          "line": 12
+        },
+        {
+          "name": "language",
+          "defaultValue": "'en'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "optional": false,
+          "description": "",
+          "line": 10
         },
         {
           "name": "languageEmitter",
@@ -697,7 +811,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 10
+          "line": 13
         }
       ],
       "methods": [
@@ -722,8 +836,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 1751,
-                "end": 1759,
+                "pos": 1745,
+                "end": 1753,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -734,8 +848,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 1745,
-                "end": 1750,
+                "pos": 1739,
+                "end": 1744,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -743,6 +857,33 @@
                 "escapedText": "param"
               },
               "comment": ""
+            }
+          ]
+        },
+        {
+          "name": "hasTrackingAllowed",
+          "args": [],
+          "optional": false,
+          "returnType": "number",
+          "typeParameters": [],
+          "line": 113,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nCheck if the user has disabled tracking.\n",
+          "description": "<p>Check if the user has disabled tracking.</p>\n",
+          "jsdoctags": [
+            {
+              "tagName": {
+                "pos": 2945,
+                "end": 2952,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "returns"
+              },
+              "comment": "<p>0 = disabled, 1 = enabled, 2 = not set</p>\n",
+              "returnType": "number"
             }
           ]
         },
@@ -764,7 +905,7 @@
           "optional": false,
           "returnType": "Palette | undefined",
           "typeParameters": [],
-          "line": 75,
+          "line": 76,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nLoad the palette saved in local storage.\nIf no palette is saved a random one is going to be generated.\n",
@@ -776,11 +917,56 @@
           "optional": false,
           "returnType": "boolean",
           "typeParameters": [],
-          "line": 18,
+          "line": 21,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nLoad the theme if it is stored in local storage.\nIf no theme was saved, the browser default theme is used.\n",
           "description": "<p>Load the theme if it is stored in local storage.\nIf no theme was saved, the browser default theme is used.</p>\n"
+        },
+        {
+          "name": "rememberTracking",
+          "args": [
+            {
+              "name": "enabled",
+              "type": "boolean",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 100,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nRemember if the user has enabled tracking for 90 days.\n",
+          "description": "<p>Remember if the user has enabled tracking for 90 days.</p>\n",
+          "jsdoctags": [
+            {
+              "name": {
+                "pos": 2650,
+                "end": 2657,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "enabled"
+              },
+              "type": "boolean",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "pos": 2644,
+                "end": 2649,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "param"
+              },
+              "comment": ""
+            }
+          ]
         },
         {
           "name": "savePalette",
@@ -795,7 +981,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 91,
+          "line": 92,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nSave palette in local storage.\n",
@@ -803,8 +989,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 2423,
-                "end": 2430,
+                "pos": 2449,
+                "end": 2456,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -815,8 +1001,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 2417,
-                "end": 2422,
+                "pos": 2443,
+                "end": 2448,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -848,8 +1034,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 978,
-                "end": 982,
+                "pos": 949,
+                "end": 953,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -860,8 +1046,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 972,
-                "end": 977,
+                "pos": 943,
+                "end": 948,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -877,7 +1063,7 @@
       "deprecationMessage": "",
       "description": "",
       "rawdescription": "\n",
-      "sourceCode": "import { EventEmitter, Injectable } from '@angular/core'\r\nimport { Palette } from '../models/palette.model'\r\nimport { TranslateService } from '@ngx-translate/core'\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class StorageService {\r\n  darkEmitter = new EventEmitter<boolean>()\r\n  languageEmitter = new EventEmitter<string>()\r\n\r\n  constructor(private translate: TranslateService) {}\r\n\r\n  /**\r\n   * Load the theme if it is stored in local storage.\r\n   * If no theme was saved, the browser default theme is used.\r\n   */\r\n  loadTheme() {\r\n    if (!localStorage.getItem('theme')) {\r\n      if (window.matchMedia('(prefers-color-scheme: dark)'))\r\n        return this.toggleTheme(true)\r\n      else {\r\n        this.darkEmitter.emit(true)\r\n        return false\r\n      }\r\n    } else {\r\n      return this.toggleTheme(localStorage.getItem('theme') === 'dark')\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Toggle between dark and light theme.\r\n   * Force dark or light mode with parameter.\r\n   * @param dark\r\n   */\r\n  toggleTheme(dark: boolean | undefined) {\r\n    document.body.classList.toggle('dark', dark)\r\n\r\n    dark = document.body.classList.contains('dark')\r\n    localStorage.setItem('theme', dark ? 'dark' : 'light')\r\n\r\n    this.darkEmitter.emit(dark)\r\n\r\n    return dark\r\n  }\r\n\r\n  /**\r\n   * Load the language saved in local storage.\r\n   * If no language is saved, the browser default language is used.\r\n   * If the browser default language is not supported, english is used.\r\n   */\r\n  loadLanguage(): void {\r\n    if (localStorage.getItem('language')) {\r\n      this.applyLanguage(localStorage.getItem('language') ?? 'en')\r\n    } else {\r\n      this.applyLanguage(this.translate.getBrowserLang() ?? 'en')\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Apply language to the app.\r\n   * @param language\r\n   */\r\n  applyLanguage(language: string) {\r\n    this.translate.use(language).subscribe(() => {\r\n      localStorage.setItem('language', language)\r\n      this.languageEmitter.emit(language)\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Load the palette saved in local storage.\r\n   * If no palette is saved a random one is going to be generated.\r\n   */\r\n  loadPalette(): Palette | undefined {\r\n    const stored = localStorage.getItem('palette')\r\n    if (stored) {\r\n      try {\r\n        return Palette.parsePalette(JSON.parse(stored))\r\n      } catch (e) {\r\n        console.error(e)\r\n      }\r\n    }\r\n    return undefined\r\n  }\r\n\r\n  /**\r\n   * Save palette in local storage.\r\n   * @param palette\r\n   */\r\n  savePalette(palette: Palette) {\r\n    localStorage.setItem('palette', palette.toString())\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter, Injectable } from '@angular/core'\r\nimport { Palette } from '../models/palette.model'\r\nimport { TranslateService } from '@ngx-translate/core'\r\n\r\n@Injectable({\r\n  providedIn: 'root',\r\n})\r\nexport class StorageService {\r\n  dark = false\r\n  language = 'en'\r\n\r\n  darkEmitter = new EventEmitter<boolean>()\r\n  languageEmitter = new EventEmitter<string>()\r\n\r\n  constructor(private translate: TranslateService) {}\r\n\r\n  /**\r\n   * Load the theme if it is stored in local storage.\r\n   * If no theme was saved, the browser default theme is used.\r\n   */\r\n  loadTheme(): boolean {\r\n    if (!localStorage.getItem('theme')) {\r\n      return this.toggleTheme(\r\n        window.matchMedia('(prefers-color-scheme: dark)').matches\r\n      )\r\n    } else {\r\n      return this.toggleTheme(localStorage.getItem('theme') === 'dark')\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Toggle between dark and light theme.\r\n   * Force dark or light mode with parameter.\r\n   * @param dark\r\n   */\r\n  toggleTheme(dark: boolean | undefined): boolean {\r\n    document.body.classList.toggle('dark', dark)\r\n\r\n    dark = document.body.classList.contains('dark')\r\n    localStorage.setItem('theme', dark ? 'dark' : 'light')\r\n\r\n    this.darkEmitter.emit(dark)\r\n\r\n    return (this.dark = dark)\r\n  }\r\n\r\n  /**\r\n   * Load the language saved in local storage.\r\n   * If no language is saved, the browser default language is used.\r\n   * If the browser default language is not supported, english is used.\r\n   */\r\n  loadLanguage(): void {\r\n    if (localStorage.getItem('language')) {\r\n      this.applyLanguage(localStorage.getItem('language') ?? 'en')\r\n    } else {\r\n      this.applyLanguage(this.translate.getBrowserLang() ?? 'en')\r\n    }\r\n  }\r\n\r\n  /**\r\n   * Apply language to the app.\r\n   * @param language\r\n   */\r\n  applyLanguage(language: string) {\r\n    this.translate.use(language).subscribe(() => {\r\n      localStorage.setItem('language', language)\r\n      this.language = language\r\n      this.languageEmitter.emit(language)\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Load the palette saved in local storage.\r\n   * If no palette is saved a random one is going to be generated.\r\n   */\r\n  loadPalette(): Palette | undefined {\r\n    const stored = localStorage.getItem('palette')\r\n    if (stored) {\r\n      try {\r\n        return Palette.parsePalette(JSON.parse(stored))\r\n      } catch (e) {\r\n        console.error(e)\r\n      }\r\n    }\r\n    return undefined\r\n  }\r\n\r\n  /**\r\n   * Save palette in local storage.\r\n   * @param palette\r\n   */\r\n  savePalette(palette: Palette): void {\r\n    localStorage.setItem('palette', palette.toString())\r\n  }\r\n\r\n  /**\r\n   * Remember if the user has enabled tracking for 90 days.\r\n   * @param enabled\r\n   */\r\n  rememberTracking(enabled: boolean): void {\r\n    const item = {\r\n      value: enabled,\r\n      expiry: Date.now() + 1000 * 60 * 60 * 24 * 90,\r\n    }\r\n\r\n    localStorage.setItem('tracking', JSON.stringify(item))\r\n  }\r\n\r\n  /**\r\n   * Check if the user has disabled tracking.\r\n   * @returns {number} 0 = disabled, 1 = enabled, 2 = not set\r\n   */\r\n  hasTrackingAllowed(): number {\r\n    const item = localStorage.getItem('tracking')\r\n    if (item) {\r\n      try {\r\n        const parsed = JSON.parse(item)\r\n        if (parsed.expiry < Date.now()) {\r\n          localStorage.removeItem('tracking')\r\n          return 2\r\n        } else {\r\n          if (parsed.value) {\r\n            this.rememberTracking(true)\r\n          }\r\n\r\n          return parsed.value ? 1 : 0\r\n        }\r\n      } catch (e) {\r\n        console.error(e)\r\n      }\r\n    }\r\n    return 2\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -891,7 +1077,7 @@
             "deprecationMessage": ""
           }
         ],
-        "line": 10,
+        "line": 13,
         "jsdoctags": [
           {
             "name": "translate",
@@ -3264,6 +3450,179 @@
       "hostListeners": []
     },
     {
+      "name": "ColorServiceMock",
+      "id": "class-ColorServiceMock-e8edb03dddf1c6f17b829688f228efb9a51c5aa3895c256f247edf9ae0111430ee99a0605198ede566215e4de1726cea8266444f246e7d5c95499e88eeecb63c",
+      "file": "src/app/mocks/color.service.mock.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "class",
+      "sourceCode": "import { Color } from '../models/color.model'\r\nimport { EventEmitter } from '@angular/core'\r\nimport { ChangeType, ColorService } from '../services/color.service'\r\nimport { Shade } from '../models/shade.model'\r\n\r\nexport class ColorServiceMock implements Partial<ColorService> {\r\n  private color?: Color\r\n  private shade?: Shade\r\n  private colorChangeEmitter = new EventEmitter<ChangeType>()\r\n\r\n  constructor() {\r\n    this.initColor()\r\n  }\r\n\r\n  initColor(): void {\r\n    window.setTimeout(() => {\r\n      this.loadColor(new Color('pawcode Blue', '#4472c4'))\r\n    }, 500)\r\n  }\r\n\r\n  loadColor(color: Color, shadeIndex?: number): void {\r\n    console.log(`ColorServiceMock.loadColor(${color.name}, ${shadeIndex})`)\r\n    this.color = Color.parseColor(color)\r\n    const newShadeIndex =\r\n      shadeIndex ?? this.color.shades.find((s) => s.fixed)?.index ?? 500\r\n    this.shade = this.color.getShade(newShadeIndex)\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  closeEditor(): void {\r\n    console.log('ColorServiceMock.closeEditor()')\r\n    this.color = undefined\r\n    this.shade = undefined\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n\r\n    this.initColor()\r\n  }\r\n\r\n  adjustShades(): void {\r\n    console.log('ColorServiceMock.adjustShades()')\r\n    this.colorChangeEmitter.emit(ChangeType.ADJUST)\r\n  }\r\n\r\n  saveColor(): void {\r\n    console.log('ColorServiceMock.saveColor()')\r\n    this.color = undefined\r\n    this.shade = undefined\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n\r\n    this.initColor()\r\n  }\r\n\r\n  getColor(): Color | undefined {\r\n    console.log('ColorServiceMock.getColor()')\r\n    return this.color\r\n  }\r\n\r\n  getShade(): Shade | undefined {\r\n    console.log('ColorServiceMock.getShade()')\r\n    return this.shade\r\n  }\r\n\r\n  getColorChangeEmitter(): EventEmitter<ChangeType> {\r\n    console.log('ColorServiceMock.getColorChangeEmitter()')\r\n    return this.colorChangeEmitter\r\n  }\r\n}\r\n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [],
+        "line": 9
+      },
+      "properties": [
+        {
+          "name": "color",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Color",
+          "optional": true,
+          "description": "",
+          "line": 7,
+          "modifierKind": [121]
+        },
+        {
+          "name": "colorChangeEmitter",
+          "defaultValue": "new EventEmitter<ChangeType>()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 9,
+          "modifierKind": [121]
+        },
+        {
+          "name": "shade",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Shade",
+          "optional": true,
+          "description": "",
+          "line": 8,
+          "modifierKind": [121]
+        }
+      ],
+      "methods": [
+        {
+          "name": "adjustShades",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 39,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "closeEditor",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 30,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "getColor",
+          "args": [],
+          "optional": false,
+          "returnType": "Color | undefined",
+          "typeParameters": [],
+          "line": 53,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "getColorChangeEmitter",
+          "args": [],
+          "optional": false,
+          "returnType": "EventEmitter<ChangeType>",
+          "typeParameters": [],
+          "line": 63,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "getShade",
+          "args": [],
+          "optional": false,
+          "returnType": "Shade | undefined",
+          "typeParameters": [],
+          "line": 58,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "initColor",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 15,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "loadColor",
+          "args": [
+            {
+              "name": "color",
+              "type": "Color",
+              "deprecated": false,
+              "deprecationMessage": ""
+            },
+            {
+              "name": "shadeIndex",
+              "type": "number",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "optional": true
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 21,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "color",
+              "type": "Color",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            },
+            {
+              "name": "shadeIndex",
+              "type": "number",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "optional": true,
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "saveColor",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 44,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "indexSignatures": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "hostBindings": [],
+      "hostListeners": [],
+      "implements": ["Partial"]
+    },
+    {
       "name": "CssCopyDialog",
       "id": "class-CssCopyDialog-af29a8d36b9e5326df0aac05c1282fbbc01edab852067831d6f6135743bd7384ebf9ad99860e70dbf4a1d7a0b6e7cba830e05987cfd694d8853731f3bae69804",
       "file": "src/app/dialogs/css-copy.dialog.ts",
@@ -3506,183 +3865,20 @@
       "hostListeners": []
     },
     {
-      "name": "MockColorService",
-      "id": "class-MockColorService-220bcda9624904456276fd2586c8b9beeadf3d481e84c03a95dd1ab94fdcb1dea5309664f84075478d7e939ca10c24a9a63eb67790d7b6c6af98940efa811f45",
-      "file": "src/app/components/color-editor/color-editor.component.stories.ts",
-      "deprecated": false,
-      "deprecationMessage": "",
-      "type": "class",
-      "sourceCode": "import { ColorEditorComponent } from './color-editor.component'\r\nimport { Meta, Story } from '@storybook/angular'\r\nimport { ChangeType, ColorService } from '../../services/color.service'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { EventEmitter } from '@angular/core'\r\nimport { Color } from '../../models/color.model'\r\nimport { Shade } from '../../models/shade.model'\r\nimport { ColorInterpolater } from '../../class/color-interpolater'\r\nimport { StorybookTranslateModule } from '../../utils/storybook-translate.module'\r\n\r\nexport default {\r\n  title: 'Components/Color Editor',\r\n  component: ColorEditorComponent,\r\n} as Meta\r\n\r\nclass MockColorService implements Partial<ColorService> {\r\n  private color: Color | undefined\r\n  private shade: Shade | undefined\r\n  private colorChangeEmitter: EventEmitter<ChangeType> =\r\n    new EventEmitter<ChangeType>()\r\n\r\n  constructor() {\r\n    setTimeout(() => {\r\n      this.loadColor(new Color('pawcode Blue', '#4472c4'))\r\n    }, 0)\r\n  }\r\n\r\n  loadColor(color: Color, shadeIndex?: number) {\r\n    this.color = Color.parseColor(color)\r\n    if (shadeIndex) this.shade = this.color.getShade(shadeIndex)\r\n    else this.shade = this.color.shades.find((s) => s.fixed)\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  closeEditor() {\r\n    this.color = undefined\r\n    this.shade = undefined\r\n    this.colorChangeEmitter.emit(ChangeType.LOAD)\r\n  }\r\n\r\n  adjustShades() {\r\n    if (this.color) {\r\n      ColorInterpolater.regenerateShades(this.color)\r\n      this.colorChangeEmitter.emit(ChangeType.ADJUST)\r\n    }\r\n  }\r\n\r\n  saveColor() {\r\n    if (this.color) {\r\n      console.info('Saving color')\r\n      this.closeEditor()\r\n    }\r\n  }\r\n\r\n  getColor() {\r\n    return this.color\r\n  }\r\n\r\n  getShade() {\r\n    return this.shade\r\n  }\r\n\r\n  getColorChangeEmitter() {\r\n    return this.colorChangeEmitter\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: MockColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false,\r\n}\r\n",
-      "constructorObj": {
-        "name": "constructor",
-        "description": "",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "args": [],
-        "line": 20
-      },
-      "properties": [
-        {
-          "name": "color",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Color | undefined",
-          "optional": false,
-          "description": "",
-          "line": 17,
-          "modifierKind": [121]
-        },
-        {
-          "name": "colorChangeEmitter",
-          "defaultValue": "new EventEmitter<ChangeType>()",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "EventEmitter<ChangeType>",
-          "optional": false,
-          "description": "",
-          "line": 19,
-          "modifierKind": [121]
-        },
-        {
-          "name": "shade",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Shade | undefined",
-          "optional": false,
-          "description": "",
-          "line": 18,
-          "modifierKind": [121]
-        }
-      ],
-      "methods": [
-        {
-          "name": "adjustShades",
-          "args": [],
-          "optional": false,
-          "returnType": "void",
-          "typeParameters": [],
-          "line": 41,
-          "deprecated": false,
-          "deprecationMessage": ""
-        },
-        {
-          "name": "closeEditor",
-          "args": [],
-          "optional": false,
-          "returnType": "void",
-          "typeParameters": [],
-          "line": 35,
-          "deprecated": false,
-          "deprecationMessage": ""
-        },
-        {
-          "name": "getColor",
-          "args": [],
-          "optional": false,
-          "returnType": "any",
-          "typeParameters": [],
-          "line": 55,
-          "deprecated": false,
-          "deprecationMessage": ""
-        },
-        {
-          "name": "getColorChangeEmitter",
-          "args": [],
-          "optional": false,
-          "returnType": "EventEmitter<ChangeType>",
-          "typeParameters": [],
-          "line": 63,
-          "deprecated": false,
-          "deprecationMessage": ""
-        },
-        {
-          "name": "getShade",
-          "args": [],
-          "optional": false,
-          "returnType": "any",
-          "typeParameters": [],
-          "line": 59,
-          "deprecated": false,
-          "deprecationMessage": ""
-        },
-        {
-          "name": "loadColor",
-          "args": [
-            {
-              "name": "color",
-              "type": "Color",
-              "deprecated": false,
-              "deprecationMessage": ""
-            },
-            {
-              "name": "shadeIndex",
-              "type": "number",
-              "deprecated": false,
-              "deprecationMessage": "",
-              "optional": true
-            }
-          ],
-          "optional": false,
-          "returnType": "void",
-          "typeParameters": [],
-          "line": 28,
-          "deprecated": false,
-          "deprecationMessage": "",
-          "jsdoctags": [
-            {
-              "name": "color",
-              "type": "Color",
-              "deprecated": false,
-              "deprecationMessage": "",
-              "tagName": {
-                "text": "param"
-              }
-            },
-            {
-              "name": "shadeIndex",
-              "type": "number",
-              "deprecated": false,
-              "deprecationMessage": "",
-              "optional": true,
-              "tagName": {
-                "text": "param"
-              }
-            }
-          ]
-        },
-        {
-          "name": "saveColor",
-          "args": [],
-          "optional": false,
-          "returnType": "void",
-          "typeParameters": [],
-          "line": 48,
-          "deprecated": false,
-          "deprecationMessage": ""
-        }
-      ],
-      "indexSignatures": [],
-      "inputsClass": [],
-      "outputsClass": [],
-      "hostBindings": [],
-      "hostListeners": [],
-      "implements": ["Partial"]
-    },
-    {
       "name": "MockNotificationService",
-      "id": "class-MockNotificationService-f6f09e7a7c59dc80f732de1f707dc89495b015a995e6d487fb6343edffba69a0f83a46f2ce3ed43f6804fdea48bb56ad8fb803522c7afb303134771772997cac",
+      "id": "class-MockNotificationService-f5141e11532e16ae7244322497b8583af2bee67c575daa12596ad089807bda5df725dae9f6664256b17bfa6a234d1063376110f496d3aaa32c409a257ed32e1d",
       "file": "src/app/components/dialog/dialog.component.stories.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { DialogComponent } from './dialog.component'\r\nimport { Meta, Story } from '@storybook/angular'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { StorybookTranslateModule } from '../../utils/storybook-translate.module'\r\n\r\nexport default {\r\n  title: 'Components/Dialog',\r\n  component: DialogComponent,\r\n} as Meta\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n  dialog = new EventEmitter<Dialog | undefined>()\r\n\r\n  constructor() {\r\n    const wait = new EventEmitter()\r\n    const next = new EventEmitter()\r\n\r\n    const content: Dialog = {\r\n      id: 'test',\r\n      actions: [\r\n        {\r\n          id: 'wait',\r\n          action: wait,\r\n        },\r\n        {\r\n          id: 'next',\r\n          action: next,\r\n        },\r\n      ],\r\n    }\r\n\r\n    wait.subscribe(() => {\r\n      this.dialog.emit(undefined)\r\n      setTimeout(() => {\r\n        this.dialog.emit(content)\r\n      }, 2000)\r\n    })\r\n    next.subscribe(() => {\r\n      this.dialog.emit(content)\r\n    })\r\n\r\n    setTimeout(() => {\r\n      this.dialog.emit(content)\r\n    }, 0)\r\n\r\n    this.dialog.subscribe((notification) => {\r\n      if (notification) console.log('Show dialog\\n', notification.id)\r\n      else console.log('Close dialog')\r\n    })\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false,\r\n}\r\n",
+      "sourceCode": "import { DialogComponent } from './dialog.component'\r\nimport { Meta, Story } from '@storybook/angular'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { StorybookTranslateModule } from '../../utils/storybook-translate.module'\r\nimport { NgxMatomoTrackerModule } from '@ngx-matomo/tracker'\r\nimport { NgxMatomoRouterModule } from '@ngx-matomo/router'\r\n\r\nexport default {\r\n  title: 'Components/Dialog',\r\n  component: DialogComponent,\r\n} as Meta\r\n\r\nclass MockNotificationService implements Partial<NotificationService> {\r\n  dialog = new EventEmitter<Dialog | undefined>()\r\n\r\n  constructor() {\r\n    const wait = new EventEmitter()\r\n    const next = new EventEmitter()\r\n\r\n    const content: Dialog = {\r\n      id: 'test',\r\n      actions: [\r\n        {\r\n          id: 'wait',\r\n          action: wait,\r\n        },\r\n        {\r\n          id: 'next',\r\n          action: next,\r\n        },\r\n      ],\r\n    }\r\n\r\n    wait.subscribe(() => {\r\n      this.dialog.emit(undefined)\r\n      setTimeout(() => {\r\n        this.dialog.emit(content)\r\n      }, 2000)\r\n    })\r\n    next.subscribe(() => {\r\n      this.dialog.emit(content)\r\n    })\r\n\r\n    setTimeout(() => {\r\n      this.dialog.emit(content)\r\n    }, 0)\r\n\r\n    this.dialog.subscribe((notification) => {\r\n      if (notification) console.log('Show dialog\\n', notification.id)\r\n      else console.log('Close dialog')\r\n    })\r\n  }\r\n}\r\n\r\nconst Template: Story = (args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [\r\n      StorybookTranslateModule,\r\n      NgxMatomoTrackerModule.forRoot({\r\n        siteId: 1,\r\n        trackerUrl: 'https://analytics.apps.pawcode.de',\r\n        disabled: true,\r\n      }),\r\n      NgxMatomoRouterModule.forRoot({}),\r\n    ],\r\n  },\r\n})\r\n\r\nexport const Primary = Template.bind({})\r\n\r\nPrimary.args = {\r\n  dark: false,\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
         "deprecated": false,
         "deprecationMessage": "",
         "args": [],
-        "line": 14
+        "line": 16
       },
       "properties": [
         {
@@ -3693,7 +3889,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 14
+          "line": 16
         }
       ],
       "methods": [],
@@ -4870,6 +5066,192 @@
       "hostListeners": []
     },
     {
+      "name": "PaletteServiceMock",
+      "id": "class-PaletteServiceMock-cc09092cd3eae0f2346bdc06e2c63244fab0886cdd44739b2436322c981b9b220c481fbf2a77b37689bfd2e5d684ca8b8cc1d24f6efcaed34d2a0364485e0bde",
+      "file": "src/app/mocks/palette.service.mock.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "class",
+      "sourceCode": "import { PaletteGenerator, PaletteScheme } from '../class/palette-generator'\r\nimport { Palette } from '../models/palette.model'\r\nimport { EventEmitter } from '@angular/core'\r\n\r\nexport class PaletteServiceMock {\r\n  hex: string | undefined\r\n  scheme: PaletteScheme = PaletteScheme.RAINBOW\r\n  private palette: Palette | undefined\r\n  private paletteChangeEmitter: EventEmitter<Palette | undefined> =\r\n    new EventEmitter()\r\n\r\n  generatePalette(hex: string, scheme: PaletteScheme): void {\r\n    console.log(`PaletteServiceMock.generatePalette(${hex}, ${scheme})`)\r\n    this.hex = hex\r\n    this.scheme = Object.values(PaletteScheme).indexOf(scheme) % 8\r\n    this.palette = PaletteGenerator.generatePalette(hex, scheme)\r\n    this.paletteChangeEmitter.emit(this.palette)\r\n  }\r\n\r\n  /**\r\n   * Load an existing palette\r\n   * @param palette\r\n   */\r\n  loadPalette(palette: Palette) {\r\n    this.hex = palette.colors[0].getShade(500).hex\r\n    this.palette = palette\r\n    this.paletteChangeEmitter.emit(palette)\r\n  }\r\n\r\n  clearPalette() {\r\n    this.palette = undefined\r\n    this.paletteChangeEmitter.emit(undefined)\r\n  }\r\n\r\n  getPalette() {\r\n    return this.palette\r\n  }\r\n\r\n  hasPalette() {\r\n    return !!this.palette\r\n  }\r\n\r\n  getPaletteChangeEmitter() {\r\n    return this.paletteChangeEmitter\r\n  }\r\n}\r\n",
+      "properties": [
+        {
+          "name": "hex",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string | undefined",
+          "optional": false,
+          "description": "",
+          "line": 6
+        },
+        {
+          "name": "palette",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Palette | undefined",
+          "optional": false,
+          "description": "",
+          "line": 8,
+          "modifierKind": [121]
+        },
+        {
+          "name": "paletteChangeEmitter",
+          "defaultValue": "new EventEmitter()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "EventEmitter<Palette | undefined>",
+          "optional": false,
+          "description": "",
+          "line": 9,
+          "modifierKind": [121]
+        },
+        {
+          "name": "scheme",
+          "defaultValue": "PaletteScheme.RAINBOW",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "PaletteScheme",
+          "optional": false,
+          "description": "",
+          "line": 7
+        }
+      ],
+      "methods": [
+        {
+          "name": "clearPalette",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 30,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "generatePalette",
+          "args": [
+            {
+              "name": "hex",
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": ""
+            },
+            {
+              "name": "scheme",
+              "type": "PaletteScheme",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 12,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "hex",
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            },
+            {
+              "name": "scheme",
+              "type": "PaletteScheme",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "getPalette",
+          "args": [],
+          "optional": false,
+          "returnType": "any",
+          "typeParameters": [],
+          "line": 35,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "getPaletteChangeEmitter",
+          "args": [],
+          "optional": false,
+          "returnType": "EventEmitter<any>",
+          "typeParameters": [],
+          "line": 43,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "hasPalette",
+          "args": [],
+          "optional": false,
+          "returnType": "boolean",
+          "typeParameters": [],
+          "line": 39,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "loadPalette",
+          "args": [
+            {
+              "name": "palette",
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 24,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nLoad an existing palette\n",
+          "description": "<p>Load an existing palette</p>\n",
+          "jsdoctags": [
+            {
+              "name": {
+                "pos": 821,
+                "end": 828,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "palette"
+              },
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "pos": 815,
+                "end": 820,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "param"
+              },
+              "comment": ""
+            }
+          ]
+        }
+      ],
+      "indexSignatures": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "hostBindings": [],
+      "hostListeners": []
+    },
+    {
       "name": "Shade",
       "id": "class-Shade-c1047f83ccd7f3204cb6dc4f930faa3ae8f69fa65f559407c64f528116df9564bf736e657d52dd25fc821e98bc5a0e76a15813e52356858b212380e11cb2f890",
       "file": "src/app/models/shade.model.ts",
@@ -5329,6 +5711,217 @@
       "hostListeners": []
     },
     {
+      "name": "StorageServiceMock",
+      "id": "class-StorageServiceMock-d50aa83acad4e279c5e1d2becb09848d9818d6ea6e60fd25f0207b32295518616181d7f337132d87aee478107e4e1faa4a3c9796d3914933606feea4893d5f54",
+      "file": "src/app/mocks/storage.service.mock.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "class",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Palette } from '../models/palette.model'\r\nimport { Color } from '../models/color.model'\r\nimport { StorageService } from '../services/storage.service'\r\n\r\nexport class StorageServiceMock implements Partial<StorageService> {\r\n  dark = false\r\n  language = 'en'\r\n\r\n  darkEmitter = new EventEmitter<boolean>()\r\n  languageEmitter = new EventEmitter<string>()\r\n\r\n  loadTheme(): boolean {\r\n    console.log('StorageServiceMock.loadTheme()')\r\n    this.dark = false\r\n    this.darkEmitter.emit(false)\r\n    return false\r\n  }\r\n\r\n  toggleTheme(dark: boolean | undefined): boolean {\r\n    console.log(`StorageServiceMock.toggleTheme(${dark})`)\r\n    this.dark = dark ?? true\r\n    this.darkEmitter.emit(dark ?? true)\r\n    return dark ?? true\r\n  }\r\n\r\n  loadLanguage(): void {\r\n    console.log('StorageServiceMock.loadLanguage()')\r\n    this.language = 'en'\r\n    this.languageEmitter.emit('en')\r\n  }\r\n\r\n  applyLanguage(language: string): void {\r\n    console.log(`StorageServiceMock.applyLanguage(${language})`)\r\n    this.language = language\r\n    this.languageEmitter.emit(language)\r\n  }\r\n\r\n  loadPalette(): Palette | undefined {\r\n    console.log('StorageServiceMock.loadPalette()')\r\n    const palette = new Palette('loadedPalette')\r\n    palette.addColor(new Color('pawcode Blue', '#4472c4'))\r\n    return palette\r\n  }\r\n\r\n  savePalette(palette: Palette): void {\r\n    console.log(`StorageServiceMock.savePalette(${palette.title})`)\r\n  }\r\n\r\n  rememberTracking(enabled: boolean): void {\r\n    console.log(`StorageServiceMock.rememberTracking(${enabled})`)\r\n  }\r\n\r\n  hasTrackingAllowed(): number {\r\n    console.log('StorageServiceMock.hasTrackingAllowed()')\r\n    return 2\r\n  }\r\n}\r\n",
+      "properties": [
+        {
+          "name": "dark",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 7
+        },
+        {
+          "name": "darkEmitter",
+          "defaultValue": "new EventEmitter<boolean>()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 10
+        },
+        {
+          "name": "language",
+          "defaultValue": "'en'",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "string",
+          "optional": false,
+          "description": "",
+          "line": 8
+        },
+        {
+          "name": "languageEmitter",
+          "defaultValue": "new EventEmitter<string>()",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 11
+        }
+      ],
+      "methods": [
+        {
+          "name": "applyLanguage",
+          "args": [
+            {
+              "name": "language",
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 33,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "language",
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "hasTrackingAllowed",
+          "args": [],
+          "optional": false,
+          "returnType": "number",
+          "typeParameters": [],
+          "line": 54,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "loadLanguage",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 27,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "loadPalette",
+          "args": [],
+          "optional": false,
+          "returnType": "Palette | undefined",
+          "typeParameters": [],
+          "line": 39,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "loadTheme",
+          "args": [],
+          "optional": false,
+          "returnType": "boolean",
+          "typeParameters": [],
+          "line": 13,
+          "deprecated": false,
+          "deprecationMessage": ""
+        },
+        {
+          "name": "rememberTracking",
+          "args": [
+            {
+              "name": "enabled",
+              "type": "boolean",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 50,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "enabled",
+              "type": "boolean",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "savePalette",
+          "args": [
+            {
+              "name": "palette",
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 46,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "palette",
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "toggleTheme",
+          "args": [
+            {
+              "name": "dark",
+              "type": "boolean | undefined",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "boolean",
+          "typeParameters": [],
+          "line": 20,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "jsdoctags": [
+            {
+              "name": "dark",
+              "type": "boolean | undefined",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        }
+      ],
+      "indexSignatures": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "hostBindings": [],
+      "hostListeners": [],
+      "implements": ["Partial"]
+    },
+    {
       "name": "TailwindCopyDialog",
       "id": "class-TailwindCopyDialog-498c073f3c3a0030834ae6bd0f463f85f39576e9977ee000a5fc57a20bc459b0beb12c2573b5db4cb2aa8592523f992fec42a296d6837628e0638587a47eee17",
       "file": "src/app/dialogs/tailwind-copy.dialog.ts",
@@ -5507,7 +6100,7 @@
   "components": [
     {
       "name": "AppComponent",
-      "id": "component-AppComponent-dfd7058fb11ad2e3ef61a5dcc038d84ee53dc7a27d611d697e2a8b10481fe0ac1f16bc7f08b08db38538dfa8adb0992412b2d4f3ed52ab237b3f115ee39e80b3",
+      "id": "component-AppComponent-7407493eb3be9c79d0b4e9e0837ec870403f1ce447f43a005ffe2878ac3a0522c35fd70858aa82a416ae9199382c9e523dc1b9d9f4139efc46d83408b349be8c",
       "file": "src/app/app.component.ts",
       "encapsulation": [],
       "entryComponents": [],
@@ -5524,12 +6117,23 @@
       "propertiesClass": [
         {
           "name": "dark",
+          "defaultValue": "false",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "",
           "optional": false,
           "description": "",
-          "line": 18
+          "line": 22
+        },
+        {
+          "name": "getMatomoLink",
+          "defaultValue": "getMatomoLink(this.translate)",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 25
         },
         {
           "name": "navigation",
@@ -5539,7 +6143,7 @@
           "type": "[]",
           "optional": false,
           "description": "",
-          "line": 20
+          "line": 27
         },
         {
           "name": "paletteService",
@@ -5548,7 +6152,7 @@
           "type": "PaletteService",
           "optional": false,
           "description": "",
-          "line": 42,
+          "line": 49,
           "modifierKind": [123]
         },
         {
@@ -5558,8 +6162,18 @@
           "type": "Router",
           "optional": false,
           "description": "",
-          "line": 43,
+          "line": 50,
           "modifierKind": [123]
+        },
+        {
+          "name": "showTrackingNotice",
+          "defaultValue": "false",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "optional": false,
+          "description": "",
+          "line": 23
         },
         {
           "name": "title",
@@ -5569,7 +6183,7 @@
           "type": "string",
           "optional": false,
           "description": "",
-          "line": 15
+          "line": 19
         },
         {
           "name": "version",
@@ -5579,10 +6193,45 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 17
+          "line": 21
         }
       ],
-      "methodsClass": [],
+      "methodsClass": [
+        {
+          "name": "allowTracking",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 132,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nAllow tracking and remember the consent for 90 days\n",
+          "description": "<p>Allow tracking and remember the consent for 90 days</p>\n"
+        },
+        {
+          "name": "disableTracking",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 142,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nDisable tracking and remember the choice for 90 days\n",
+          "description": "<p>Disable tracking and remember the choice for 90 days</p>\n"
+        },
+        {
+          "name": "ngOnInit",
+          "args": [],
+          "optional": false,
+          "returnType": "void",
+          "typeParameters": [],
+          "line": 73,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
       "deprecated": false,
       "deprecationMessage": "",
       "hostBindings": [],
@@ -5590,7 +6239,7 @@
       "description": "",
       "rawdescription": "\n",
       "type": "component",
-      "sourceCode": "import { Component } from '@angular/core'\r\nimport { environment } from '../environments/environment'\r\nimport { StorageService } from './services/storage.service'\r\nimport { PaletteService } from './services/palette.service'\r\nimport { Router } from '@angular/router'\r\nimport { ColorNamer } from './class/color-namer'\r\nimport { TranslateService } from '@ngx-translate/core'\r\nimport { Title } from '@angular/platform-browser'\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n})\r\nexport class AppComponent {\r\n  title =\r\n    'Rainbow Palette | Get your own color palette from just a single color'\r\n  version = environment.version\r\n  dark\r\n\r\n  navigation = [\r\n    {\r\n      link: '/',\r\n      id: 'home',\r\n      icon:\r\n        '<path d=\"M2.25 4.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875V17.25a4.5 4.5 0 11-9 0V4.125zm4.5 14.25a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z\" />' +\r\n        '<path d=\"M10.719 21.75h9.156c1.036 0 1.875-.84 1.875-1.875v-5.25c0-1.036-.84-1.875-1.875-1.875h-.14l-8.742 8.743c-.09.089-.18.175-.274.257zM12.738 17.625l6.474-6.474a1.875 1.875 0 000-2.651L15.5 4.787a1.875 1.875 0 00-2.651 0l-.1.099V17.25c0 .126-.003.251-.01.375z\" />',\r\n    },\r\n    {\r\n      link: '/edit',\r\n      id: 'edit',\r\n      icon: '<path d=\"M18.75 12.75h1.5a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5zM12 6a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 0112 6zM12 18a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 0112 18zM3.75 6.75h1.5a.75.75 0 100-1.5h-1.5a.75.75 0 000 1.5zM5.25 18.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 010 1.5zM3 12a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 013 12zM9 3.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM12.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0zM9 15.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z\" />',\r\n    },\r\n    {\r\n      link: '/preview',\r\n      id: 'preview',\r\n      icon: '<path fill-rule=\"evenodd\" d=\"M1.5 7.125c0-1.036.84-1.875 1.875-1.875h6c1.036 0 1.875.84 1.875 1.875v3.75c0 1.036-.84 1.875-1.875 1.875h-6A1.875 1.875 0 011.5 10.875v-3.75zm12 1.5c0-1.036.84-1.875 1.875-1.875h5.25c1.035 0 1.875.84 1.875 1.875v8.25c0 1.035-.84 1.875-1.875 1.875h-5.25a1.875 1.875 0 01-1.875-1.875v-8.25zM3 16.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875v2.25c0 1.035-.84 1.875-1.875 1.875h-5.25A1.875 1.875 0 013 18.375v-2.25z\" clip-rule=\"evenodd\" />',\r\n    },\r\n  ]\r\n\r\n  constructor(\r\n    private storage: StorageService,\r\n    public paletteService: PaletteService,\r\n    public router: Router,\r\n    private translate: TranslateService,\r\n    private titleService: Title\r\n  ) {\r\n    this.titleService.setTitle(this.title)\r\n\r\n    // Load theme from local storage and subscribe to changes\r\n    this.dark = storage.loadTheme()\r\n    this.storage.darkEmitter.subscribe((d) => (this.dark = d.valueOf()))\r\n\r\n    ColorNamer.loadDictionary()\r\n\r\n    // Setup translation pipe\r\n    this.translate.setDefaultLang('en')\r\n    this.storage.languageEmitter.subscribe(() => {\r\n      this.title = `Rainbow Palette | ${this.translate.instant('app.title')}`\r\n      this.titleService.setTitle(this.title)\r\n    })\r\n    this.storage.loadLanguage()\r\n  }\r\n}\r\n",
+      "sourceCode": "import { Component, EventEmitter, OnInit } from '@angular/core'\r\nimport { environment } from '../environments/environment'\r\nimport { StorageService } from './services/storage.service'\r\nimport { PaletteService } from './services/palette.service'\r\nimport { Router } from '@angular/router'\r\nimport { ColorNamer } from './class/color-namer'\r\nimport { TranslateService } from '@ngx-translate/core'\r\nimport { Title } from '@angular/platform-browser'\r\nimport { MatomoTracker } from '@ngx-matomo/tracker'\r\nimport { NotificationService } from './services/notification.service'\r\nimport { getMatomoLink } from './utils/links.util'\r\nimport { SwUpdate } from '@angular/service-worker'\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n})\r\nexport class AppComponent implements OnInit {\r\n  title =\r\n    'Rainbow Palette | Get your own color palette from just a single color'\r\n  version = environment.version\r\n  dark = false\r\n  showTrackingNotice = false\r\n\r\n  getMatomoLink = getMatomoLink(this.translate)\r\n\r\n  navigation = [\r\n    {\r\n      link: '/',\r\n      id: 'home',\r\n      icon:\r\n        '<path d=\"M2.25 4.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875V17.25a4.5 4.5 0 11-9 0V4.125zm4.5 14.25a1.125 1.125 0 100-2.25 1.125 1.125 0 000 2.25z\" />' +\r\n        '<path d=\"M10.719 21.75h9.156c1.036 0 1.875-.84 1.875-1.875v-5.25c0-1.036-.84-1.875-1.875-1.875h-.14l-8.742 8.743c-.09.089-.18.175-.274.257zM12.738 17.625l6.474-6.474a1.875 1.875 0 000-2.651L15.5 4.787a1.875 1.875 0 00-2.651 0l-.1.099V17.25c0 .126-.003.251-.01.375z\" />',\r\n    },\r\n    {\r\n      link: '/edit',\r\n      id: 'edit',\r\n      icon: '<path d=\"M18.75 12.75h1.5a.75.75 0 000-1.5h-1.5a.75.75 0 000 1.5zM12 6a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 0112 6zM12 18a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 0112 18zM3.75 6.75h1.5a.75.75 0 100-1.5h-1.5a.75.75 0 000 1.5zM5.25 18.75h-1.5a.75.75 0 010-1.5h1.5a.75.75 0 010 1.5zM3 12a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 013 12zM9 3.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5zM12.75 12a2.25 2.25 0 114.5 0 2.25 2.25 0 01-4.5 0zM9 15.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z\" />',\r\n    },\r\n    {\r\n      link: '/preview',\r\n      id: 'preview',\r\n      icon: '<path fill-rule=\"evenodd\" d=\"M1.5 7.125c0-1.036.84-1.875 1.875-1.875h6c1.036 0 1.875.84 1.875 1.875v3.75c0 1.036-.84 1.875-1.875 1.875h-6A1.875 1.875 0 011.5 10.875v-3.75zm12 1.5c0-1.036.84-1.875 1.875-1.875h5.25c1.035 0 1.875.84 1.875 1.875v8.25c0 1.035-.84 1.875-1.875 1.875h-5.25a1.875 1.875 0 01-1.875-1.875v-8.25zM3 16.125c0-1.036.84-1.875 1.875-1.875h5.25c1.036 0 1.875.84 1.875 1.875v2.25c0 1.035-.84 1.875-1.875 1.875h-5.25A1.875 1.875 0 013 18.375v-2.25z\" clip-rule=\"evenodd\" />',\r\n    },\r\n  ]\r\n\r\n  constructor(\r\n    private storage: StorageService,\r\n    public paletteService: PaletteService,\r\n    public router: Router,\r\n    private translate: TranslateService,\r\n    private titleService: Title,\r\n    private notificationService: NotificationService,\r\n    private tracker: MatomoTracker,\r\n    private updates: SwUpdate\r\n  ) {\r\n    // Load theme from local storage and subscribe to changes\r\n    this.dark = storage.loadTheme()\r\n    this.storage.darkEmitter.subscribe((d) => (this.dark = d.valueOf()))\r\n\r\n    // Load color name dictionary\r\n    ColorNamer.loadDictionary()\r\n\r\n    // Setup translation pipe\r\n    this.translate.setDefaultLang('en')\r\n    this.storage.languageEmitter.subscribe(() => {\r\n      this.title = `Rainbow Palette | ${this.translate.instant('app.title')}`\r\n      this.titleService.setTitle(this.title)\r\n    })\r\n    this.storage.loadLanguage()\r\n  }\r\n\r\n  ngOnInit() {\r\n    // Setup tracking\r\n    switch (this.storage.hasTrackingAllowed()) {\r\n      case 1:\r\n        // Tracking is allowed\r\n        this.tracker.setConsentGiven()\r\n        break\r\n      case 2:\r\n        // No preference given yet\r\n        this.showTrackingNotice = true\r\n        break\r\n      default:\r\n        // Tracking is disallowed\r\n        break\r\n    }\r\n\r\n    // Setup Service Worker update\r\n    this.updates.versionUpdates.subscribe((event) => {\r\n      if (event.type === 'VERSION_READY') {\r\n        const closeEvent = new EventEmitter()\r\n        closeEvent.subscribe(() => {\r\n          this.notificationService.dialog.emit(undefined)\r\n        })\r\n\r\n        const updateEvent = new EventEmitter()\r\n        updateEvent.subscribe(() => {\r\n          // Save current palette before reload\r\n          const palette = this.paletteService.getPalette()\r\n          if (palette) {\r\n            this.storage.savePalette(palette)\r\n          }\r\n\r\n          this.tracker.trackEvent('pwa', 'update-complete')\r\n          document.location.reload()\r\n        })\r\n\r\n        this.notificationService.dialog.emit({\r\n          id: 'update-available',\r\n          actions: [\r\n            {\r\n              id: 'not-now',\r\n              action: closeEvent,\r\n            },\r\n            {\r\n              id: 'update',\r\n              action: updateEvent,\r\n            },\r\n          ],\r\n        })\r\n      } else if (event.type === 'VERSION_INSTALLATION_FAILED') {\r\n        this.notificationService.notification.emit('update-failed')\r\n        this.tracker.trackEvent('pwa', 'update-failed')\r\n      }\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Allow tracking and remember the consent for 90 days\r\n   */\r\n  allowTracking() {\r\n    this.showTrackingNotice = false\r\n    this.storage.rememberTracking(true)\r\n    this.tracker.setConsentGiven()\r\n    this.notificationService.notification.emit('tracking-allowed')\r\n  }\r\n\r\n  /**\r\n   * Disable tracking and remember the choice for 90 days\r\n   */\r\n  disableTracking() {\r\n    this.showTrackingNotice = false\r\n    this.storage.rememberTracking(false)\r\n    this.tracker.forgetConsentGiven()\r\n  }\r\n}\r\n",
       "assetsDirs": [],
       "styleUrlsData": "",
       "stylesData": "",
@@ -5629,9 +6278,27 @@
             "type": "Title",
             "deprecated": false,
             "deprecationMessage": ""
+          },
+          {
+            "name": "notificationService",
+            "type": "NotificationService",
+            "deprecated": false,
+            "deprecationMessage": ""
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": ""
+          },
+          {
+            "name": "updates",
+            "type": "SwUpdate",
+            "deprecated": false,
+            "deprecationMessage": ""
           }
         ],
-        "line": 38,
+        "line": 45,
         "jsdoctags": [
           {
             "name": "storage",
@@ -5677,10 +6344,38 @@
             "tagName": {
               "text": "param"
             }
+          },
+          {
+            "name": "notificationService",
+            "type": "NotificationService",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          },
+          {
+            "name": "updates",
+            "type": "SwUpdate",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
           }
         ]
       },
-      "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between py-6 text-gray-900 bg-gradient-to-r from-gray-100 to-gray-50 dark:text-gray-100 dark:from-gray-900 dark:to-gray-900 transition-colors duration-500\">\r\n  <header\r\n    class=\"w-full grid grid-cols-1 sm:grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10\">\r\n    <h1 class=\"mx-auto sm:ml-0 col-span-1 sm:col-span-2 lg:col-span-1\">\r\n      <img\r\n        alt=\"Rainbow Palette\"\r\n        height=\"50\"\r\n        width=\"179\"\r\n        [src]=\"\r\n          '/assets/rainbow-palette-' + (dark ? 'light' : 'dark') + '.svg'\r\n        \" />\r\n    </h1>\r\n\r\n    <nav class=\"col-span-1 sm:col-span-4 lg:col-span-2\">\r\n      <div class=\"mx-auto w-fit\">\r\n        <ul\r\n          *ngIf=\"paletteService.hasPalette()\"\r\n          class=\"flex flex-wrap gap-2 md:gap-4 font-medium text-gray-700 dark:text-gray-200\">\r\n          <li *ngFor=\"let nav of navigation\">\r\n            <a\r\n              class=\"inline-flex py-2 px-4 items-center rounded cursor-pointer transition-colors duration-500\"\r\n              [class]=\"\r\n                router.url === nav.link\r\n                  ? 'text-primary-800 bg-primary-200 dark:text-primary-900 dark:bg-primary-500'\r\n                  : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'\r\n              \"\r\n              [routerLink]=\"nav.link\"\r\n              [title]=\"'app.navigation.' + nav.id + '.title' | translate\">\r\n              <svg\r\n                class=\"w-6 h-6 mr-2 hidden md:block\"\r\n                viewBox=\"0 0 24 24\"\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                fill=\"currentColor\"\r\n                [innerHTML]=\"nav.icon | safeHtml\"></svg>\r\n              {{ 'app.navigation.' + nav.id + '.label' | translate }}\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </nav>\r\n\r\n    <div class=\"flex items-center gap-4 justify-center md:justify-end\">\r\n      <app-language-selector></app-language-selector>\r\n      <app-light-switch\r\n        class=\"flex items-center\"\r\n        [dark]=\"dark\"></app-light-switch>\r\n    </div>\r\n  </header>\r\n\r\n  <main>\r\n    <router-outlet></router-outlet>\r\n  </main>\r\n\r\n  <footer\r\n    class=\"flex gap-4 flex-col sm:flex-row px-8 pt-16 items-center justify-between text-center w-full max-w-4xl mx-auto mt-10\">\r\n    <a\r\n      href=\"https://github.com/pawcoding/tailwind-color-generator\"\r\n      rel=\"noreferrer noopener\"\r\n      target=\"_blank\"\r\n      [title]=\"'app.footer.source-code' | translate\">\r\n      {{ 'app.footer.github' | translate }}\r\n    </a>\r\n\r\n    <span class=\"cursor-default\">\r\n      {{ 'app.footer.version' | translate : { version: version } }}\r\n    </span>\r\n\r\n    <a\r\n      href=\"https://pawcode.de\"\r\n      target=\"_blank\"\r\n      [title]=\"\r\n        'app.footer.created' | translate : { pawcode: 'pawcode Development' }\r\n      \">\r\n      <img\r\n        height=\"32\"\r\n        width=\"139\"\r\n        alt=\"pawcode&nbsp;Development\"\r\n        [src]=\"'/assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" />\r\n    </a>\r\n  </footer>\r\n\r\n  <app-custom-dialog class=\"fixed top-0 left-0\"></app-custom-dialog>\r\n\r\n  <app-notification class=\"fixed bottom-0 right-0\"></app-notification>\r\n</div>\r\n"
+      "implements": ["OnInit"],
+      "templateData": "<div\r\n  class=\"min-h-screen grid grid-rows-site content-between py-6 text-gray-900 bg-gradient-to-r from-gray-100 to-gray-50 dark:text-gray-100 dark:from-gray-900 dark:to-gray-900 transition-colors duration-500\">\r\n  <header\r\n    class=\"w-full grid grid-cols-1 sm:grid-cols-7 lg:grid-cols-4 gap-4 px-8 items-center mb-10\">\r\n    <h1 class=\"mx-auto sm:ml-0 col-span-1 sm:col-span-2 lg:col-span-1\">\r\n      <img\r\n        alt=\"Rainbow Palette\"\r\n        height=\"50\"\r\n        width=\"179\"\r\n        [src]=\"\r\n          '/assets/rainbow-palette-' + (dark ? 'light' : 'dark') + '.svg'\r\n        \" />\r\n    </h1>\r\n\r\n    <nav class=\"col-span-1 sm:col-span-4 lg:col-span-2\">\r\n      <div class=\"mx-auto w-fit\">\r\n        <ul\r\n          *ngIf=\"paletteService.hasPalette()\"\r\n          class=\"flex flex-wrap gap-2 md:gap-4 font-medium text-gray-700 dark:text-gray-200\">\r\n          <li *ngFor=\"let nav of navigation\">\r\n            <a\r\n              class=\"inline-flex py-2 px-4 items-center rounded cursor-pointer transition-colors duration-500\"\r\n              [class]=\"\r\n                router.url === nav.link\r\n                  ? 'text-primary-800 bg-primary-200 dark:text-primary-900 dark:bg-primary-500'\r\n                  : 'hover:text-gray-900 hover:bg-gray-100 dark:hover:text-gray-50 dark:hover:bg-gray-800'\r\n              \"\r\n              [routerLink]=\"nav.link\"\r\n              [title]=\"'app.navigation.' + nav.id + '.title' | translate\">\r\n              <svg\r\n                class=\"w-6 h-6 mr-2 hidden md:block\"\r\n                viewBox=\"0 0 24 24\"\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                fill=\"currentColor\"\r\n                [innerHTML]=\"nav.icon | safeHtml\"></svg>\r\n              {{ 'app.navigation.' + nav.id + '.label' | translate }}\r\n            </a>\r\n          </li>\r\n        </ul>\r\n      </div>\r\n    </nav>\r\n\r\n    <div class=\"flex items-center gap-4 justify-center md:justify-end\">\r\n      <app-language-selector></app-language-selector>\r\n      <app-light-switch\r\n        class=\"flex items-center\"\r\n        [dark]=\"dark\"></app-light-switch>\r\n    </div>\r\n  </header>\r\n\r\n  <main>\r\n    <router-outlet></router-outlet>\r\n  </main>\r\n\r\n  <section\r\n    *ngIf=\"showTrackingNotice\"\r\n    class=\"fixed bottom-0 bg-gray-200/95 dark:bg-gray-800/95 p-4 mx-auto max-w-screen-md md:rounded-tr-md md:w-[60vw] text-sm\">\r\n    <span class=\"font-medium\">{{ 'app.analytics.title' | translate }}</span>\r\n    <p>\r\n      <span\r\n        class=\"inline-block\"\r\n        [innerHtml]=\"\r\n          'app.analytics.description' | translate : { matomo: getMatomoLink() }\r\n        \"></span>\r\n      <a\r\n        routerLink=\"/analytics\"\r\n        [title]=\"'app.analytics.more-info-title' | translate\"\r\n        class=\"underline block text-right\">\r\n        {{ 'app.analytics.more-info' | translate }}\r\n      </a>\r\n    </p>\r\n    <div class=\"flex items-center justify-center gap-4 mt-4\">\r\n      <button\r\n        (click)=\"disableTracking()\"\r\n        class=\"py-2 px-4 bg-gray-300 font-medium text-gray-800 rounded cursor-pointer transition-colors duration-500 hover:bg-gray-400 hover:text-gray-900\"\r\n        [title]=\"'app.analytics.decline-title' | translate\">\r\n        {{ 'app.analytics.decline' | translate }}\r\n      </button>\r\n      <button\r\n        (click)=\"allowTracking()\"\r\n        class=\"py-2 px-4 bg-primary-700 font-medium text-primary-100 rounded cursor-pointer transition-colors duration-500 hover:bg-primary-800 hover:text-primary-200 dark:hover:bg-primary-600 dark:hover:text-primary-50\"\r\n        [title]=\"'app.analytics.accept' | translate\">\r\n        {{ 'app.analytics.accept' | translate }}\r\n      </button>\r\n    </div>\r\n  </section>\r\n\r\n  <footer\r\n    class=\"flex gap-4 flex-col sm:flex-row px-8 pt-16 items-center justify-between text-center w-full max-w-4xl mx-auto mt-10\">\r\n    <a\r\n      href=\"https://github.com/pawcoding/tailwind-color-generator\"\r\n      rel=\"noreferrer noopener\"\r\n      target=\"_blank\"\r\n      [title]=\"'app.footer.source-code' | translate\">\r\n      {{ 'app.footer.github' | translate }}\r\n    </a>\r\n\r\n    <span class=\"cursor-default\">\r\n      {{ 'app.footer.version' | translate : { version: version } }}\r\n    </span>\r\n\r\n    <a\r\n      href=\"https://pawcode.de\"\r\n      target=\"_blank\"\r\n      [title]=\"\r\n        'app.footer.created' | translate : { pawcode: 'pawcode Development' }\r\n      \">\r\n      <img\r\n        height=\"32\"\r\n        width=\"139\"\r\n        alt=\"pawcode&nbsp;Development\"\r\n        [src]=\"'/assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'\" />\r\n    </a>\r\n  </footer>\r\n\r\n  <app-custom-dialog class=\"fixed top-0 left-0\"></app-custom-dialog>\r\n\r\n  <app-notification class=\"fixed bottom-0 right-0\"></app-notification>\r\n</div>\r\n"
     },
     {
       "name": "ColorEditorComponent",
@@ -6390,7 +7085,7 @@
     },
     {
       "name": "DialogComponent",
-      "id": "component-DialogComponent-9059402e4f1b0000d4b7a18e48e04711e17221a364f04b4a487f111c5b5105694a166e86daaad30c6575141afe8bec37e37a0c085fc1c653dd06beb696a5a633",
+      "id": "component-DialogComponent-e99013c22f31a38c34eef913514709a991a685748eec40d7136b62fc619f8b075e7270d9bb032da39ef6539aab16054389fb33011b709e2797dc529839cc7079",
       "file": "src/app/components/dialog/dialog.component.ts",
       "encapsulation": [],
       "entryComponents": [],
@@ -6408,7 +7103,7 @@
           "defaultValue": "false",
           "deprecated": false,
           "deprecationMessage": "",
-          "line": 11,
+          "line": 12,
           "type": "boolean",
           "decorators": []
         }
@@ -6422,7 +7117,7 @@
           "type": "Dialog | undefined",
           "optional": false,
           "description": "",
-          "line": 13
+          "line": 14
         }
       ],
       "methodsClass": [
@@ -6432,7 +7127,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 21,
+          "line": 27,
           "deprecated": false,
           "deprecationMessage": ""
         }
@@ -6444,7 +7139,7 @@
       "description": "",
       "rawdescription": "\n",
       "type": "component",
-      "sourceCode": "import { Component, Input } from '@angular/core'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\n\r\n@Component({\r\n  selector: 'app-custom-dialog',\r\n  templateUrl: './dialog.component.html',\r\n})\r\nexport class DialogComponent {\r\n  @Input()\r\n  dark = false\r\n\r\n  content: Dialog | undefined\r\n\r\n  constructor(private notificationService: NotificationService) {\r\n    notificationService.dialog.subscribe(\r\n      (dialogContent) => (this.content = dialogContent)\r\n    )\r\n  }\r\n\r\n  closeNotification() {\r\n    this.notificationService.dialog.emit(undefined)\r\n  }\r\n}\r\n",
+      "sourceCode": "import { Component, Input } from '@angular/core'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { MatomoTracker } from '@ngx-matomo/tracker'\r\n\r\n@Component({\r\n  selector: 'app-custom-dialog',\r\n  templateUrl: './dialog.component.html',\r\n})\r\nexport class DialogComponent {\r\n  @Input()\r\n  dark = false\r\n\r\n  content: Dialog | undefined\r\n\r\n  constructor(\r\n    private notificationService: NotificationService,\r\n    private tracker: MatomoTracker\r\n  ) {\r\n    notificationService.dialog.subscribe((dialogContent) => {\r\n      this.content = dialogContent\r\n\r\n      if (dialogContent) this.tracker.trackEvent('dialog', dialogContent?.id)\r\n    })\r\n  }\r\n\r\n  closeNotification() {\r\n    this.notificationService.dialog.emit(undefined)\r\n  }\r\n}\r\n",
       "assetsDirs": [],
       "styleUrlsData": "",
       "stylesData": "",
@@ -6459,13 +7154,28 @@
             "type": "NotificationService",
             "deprecated": false,
             "deprecationMessage": ""
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": ""
           }
         ],
-        "line": 13,
+        "line": 14,
         "jsdoctags": [
           {
             "name": "notificationService",
             "type": "NotificationService",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
             "deprecated": false,
             "deprecationMessage": "",
             "tagName": {
@@ -6545,7 +7255,7 @@
     },
     {
       "name": "HomeComponent",
-      "id": "component-HomeComponent-63b00087f86e5592c8e68bc1862658456f5b0f023a092d5ed749e118a592b79b0d339eab256ef860a9aaccc0269f12162a1e6503c06a4a2b2296e1d43555894c",
+      "id": "component-HomeComponent-7731d78eca43df127a6e410df704bf3bb0d7e690455adeadeaff5e9ef5067ecb49dcb7282bf851db1345fb1010bcce3853b2844d62f766e90e55d588fecade13",
       "file": "src/app/pages/home/home.component.ts",
       "encapsulation": [],
       "entryComponents": [],
@@ -6568,7 +7278,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 19
+          "line": 20
         },
         {
           "name": "getDiscordLink",
@@ -6578,7 +7288,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 29
+          "line": 30
         },
         {
           "name": "getGitHubLink",
@@ -6588,7 +7298,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 28
+          "line": 29
         },
         {
           "name": "invalid",
@@ -6598,7 +7308,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 18
+          "line": 19
         },
         {
           "name": "loadBar",
@@ -6607,7 +7317,7 @@
           "type": "ElementRef<HTMLSpanElement> | undefined",
           "optional": false,
           "description": "",
-          "line": 26,
+          "line": 27,
           "decorators": [
             {
               "name": "ViewChild",
@@ -6622,7 +7332,7 @@
           "type": "ElementRef<HTMLDivElement> | undefined",
           "optional": false,
           "description": "",
-          "line": 24,
+          "line": 25,
           "decorators": [
             {
               "name": "ViewChild",
@@ -6638,7 +7348,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 20
+          "line": 21
         },
         {
           "name": "progress",
@@ -6648,7 +7358,7 @@
           "type": "number",
           "optional": false,
           "description": "",
-          "line": 21
+          "line": 22
         },
         {
           "name": "scheme",
@@ -6657,7 +7367,7 @@
           "type": "PaletteScheme",
           "optional": false,
           "description": "",
-          "line": 16
+          "line": 17
         },
         {
           "name": "schemes",
@@ -6666,7 +7376,7 @@
           "type": "literal type[]",
           "optional": false,
           "description": "",
-          "line": 17
+          "line": 18
         },
         {
           "name": "value",
@@ -6675,7 +7385,7 @@
           "type": "string",
           "optional": false,
           "description": "",
-          "line": 15
+          "line": 16
         }
       ],
       "methodsClass": [
@@ -6685,7 +7395,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 71,
+          "line": 73,
           "deprecated": false,
           "deprecationMessage": ""
         },
@@ -6702,7 +7412,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 66,
+          "line": 68,
           "deprecated": false,
           "deprecationMessage": "",
           "jsdoctags": [
@@ -6730,7 +7440,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 61,
+          "line": 63,
           "deprecated": false,
           "deprecationMessage": "",
           "jsdoctags": [
@@ -6753,7 +7463,7 @@
       "description": "",
       "rawdescription": "\n",
       "type": "component",
-      "sourceCode": "import { Component, ElementRef, ViewChild } from '@angular/core'\r\nimport { Shade } from '../../models/shade.model'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { PaletteScheme } from '../../class/palette-generator'\r\nimport { PaletteService } from '../../services/palette.service'\r\nimport { Router } from '@angular/router'\r\nimport { TranslateService } from '@ngx-translate/core'\r\nimport { getDiscordLink, getGitHubLink } from '../../utils/links.util'\r\n\r\n@Component({\r\n  selector: 'app-home',\r\n  templateUrl: './home.component.html',\r\n})\r\nexport class HomeComponent {\r\n  value: string\r\n  scheme: PaletteScheme\r\n  schemes: { index: number; for: string; name: string; scheme: PaletteScheme }[]\r\n  invalid = false\r\n  dropdown = false\r\n  loading = false\r\n  progress = 0\r\n\r\n  @ViewChild('loadContainer')\r\n  loadContainer: ElementRef<HTMLDivElement> | undefined\r\n  @ViewChild('loadBar')\r\n  loadBar: ElementRef<HTMLSpanElement> | undefined\r\n\r\n  getGitHubLink = getGitHubLink(this.translate)\r\n  getDiscordLink = getDiscordLink(this.translate)\r\n\r\n  constructor(\r\n    private notificationService: NotificationService,\r\n    private paletteService: PaletteService,\r\n    private router: Router,\r\n    private translate: TranslateService\r\n  ) {\r\n    this.value =\r\n      paletteService.hex || Shade.generateRandomShade().hex.toUpperCase()\r\n    let i = 0\r\n    this.schemes = Object.values(PaletteScheme)\r\n      .filter((s) => s.toString().length > 1)\r\n      .map((s) => ({\r\n        index: i++,\r\n        for:\r\n          'scheme' +\r\n          s\r\n            .toString()\r\n            .replace('_', ' ')\r\n            .replace(\r\n              /(\\w)(\\w*)/g,\r\n              (g0, g1, g2) => g1.toUpperCase() + g2.toLowerCase()\r\n            )\r\n            .replace(' ', ''),\r\n        name: s.toString(),\r\n        scheme: s as PaletteScheme,\r\n      }))\r\n\r\n    this.scheme = paletteService.scheme % this.schemes.length\r\n  }\r\n\r\n  updateValue(value: string) {\r\n    this.invalid = !value.match(/^#[0-9A-Fa-f]{6}$/)\r\n    if (!this.invalid) this.value = value.toUpperCase()\r\n  }\r\n\r\n  updateScheme(scheme: PaletteScheme) {\r\n    this.scheme = scheme\r\n    this.dropdown = false\r\n  }\r\n\r\n  generatePalette() {\r\n    if (this.invalid) {\r\n      this.notificationService.notification.emit(\r\n        this.translate.instant('home.generation.invalid-hex')\r\n      )\r\n      return\r\n    }\r\n\r\n    this.loading = true\r\n    const interval = setInterval(() => {\r\n      this.progress =\r\n        (this.loadBar?.nativeElement.clientWidth || 0) /\r\n        (this.loadContainer?.nativeElement.clientWidth || 100)\r\n    }, 50)\r\n\r\n    setTimeout(async () => {\r\n      clearInterval(interval)\r\n      this.paletteService.generatePalette(this.value, this.scheme)\r\n      await this.router.navigate(['edit'])\r\n    }, 5100)\r\n  }\r\n}\r\n",
+      "sourceCode": "import { Component, ElementRef, ViewChild } from '@angular/core'\r\nimport { Shade } from '../../models/shade.model'\r\nimport { NotificationService } from '../../services/notification.service'\r\nimport { PaletteScheme } from '../../class/palette-generator'\r\nimport { PaletteService } from '../../services/palette.service'\r\nimport { Router } from '@angular/router'\r\nimport { TranslateService } from '@ngx-translate/core'\r\nimport { getDiscordLink, getGitHubLink } from '../../utils/links.util'\r\nimport { MatomoTracker } from '@ngx-matomo/tracker'\r\n\r\n@Component({\r\n  selector: 'app-home',\r\n  templateUrl: './home.component.html',\r\n})\r\nexport class HomeComponent {\r\n  value: string\r\n  scheme: PaletteScheme\r\n  schemes: { index: number; for: string; name: string; scheme: PaletteScheme }[]\r\n  invalid = false\r\n  dropdown = false\r\n  loading = false\r\n  progress = 0\r\n\r\n  @ViewChild('loadContainer')\r\n  loadContainer: ElementRef<HTMLDivElement> | undefined\r\n  @ViewChild('loadBar')\r\n  loadBar: ElementRef<HTMLSpanElement> | undefined\r\n\r\n  getGitHubLink = getGitHubLink(this.translate)\r\n  getDiscordLink = getDiscordLink(this.translate)\r\n\r\n  constructor(\r\n    private notificationService: NotificationService,\r\n    private paletteService: PaletteService,\r\n    private router: Router,\r\n    private translate: TranslateService,\r\n    private tracker: MatomoTracker\r\n  ) {\r\n    this.value =\r\n      paletteService.hex || Shade.generateRandomShade().hex.toUpperCase()\r\n    let i = 0\r\n    this.schemes = Object.values(PaletteScheme)\r\n      .filter((s) => s.toString().length > 1)\r\n      .map((s) => ({\r\n        index: i++,\r\n        for:\r\n          'scheme' +\r\n          s\r\n            .toString()\r\n            .replace('_', ' ')\r\n            .replace(\r\n              /(\\w)(\\w*)/g,\r\n              (g0, g1, g2) => g1.toUpperCase() + g2.toLowerCase()\r\n            )\r\n            .replace(' ', ''),\r\n        name: s.toString(),\r\n        scheme: s as PaletteScheme,\r\n      }))\r\n\r\n    this.scheme = paletteService.scheme % this.schemes.length\r\n  }\r\n\r\n  updateValue(value: string) {\r\n    this.invalid = !value.match(/^#[0-9A-Fa-f]{6}$/)\r\n    if (!this.invalid) this.value = value.toUpperCase()\r\n  }\r\n\r\n  updateScheme(scheme: PaletteScheme) {\r\n    this.scheme = scheme\r\n    this.dropdown = false\r\n  }\r\n\r\n  generatePalette() {\r\n    if (this.invalid) {\r\n      this.notificationService.notification.emit(\r\n        this.translate.instant('home.generation.invalid-hex')\r\n      )\r\n      return\r\n    }\r\n\r\n    this.tracker.trackEvent('palette', 'generate', this.scheme.toString())\r\n\r\n    this.loading = true\r\n    const interval = window.setInterval(() => {\r\n      this.progress =\r\n        (this.loadBar?.nativeElement.clientWidth || 0) /\r\n        (this.loadContainer?.nativeElement.clientWidth || 100)\r\n    }, 50)\r\n\r\n    setTimeout(async () => {\r\n      clearInterval(interval)\r\n      this.paletteService.generatePalette(this.value, this.scheme)\r\n      await this.router.navigate(['edit'])\r\n    }, 5100)\r\n  }\r\n}\r\n",
       "assetsDirs": [],
       "styleUrlsData": "",
       "stylesData": "",
@@ -6786,9 +7496,15 @@
             "type": "TranslateService",
             "deprecated": false,
             "deprecationMessage": ""
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": ""
           }
         ],
-        "line": 29,
+        "line": 30,
         "jsdoctags": [
           {
             "name": "notificationService",
@@ -6825,14 +7541,23 @@
             "tagName": {
               "text": "param"
             }
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
           }
         ]
       },
-      "templateData": "<div>\r\n  <article class=\"px-4 text-center text-lg\">\r\n    <div *ngIf=\"!loading\">\r\n      <div\r\n        class=\"flex items-center justify-center\"\r\n        style=\"min-height: calc(100svh - 170px)\">\r\n        <section>\r\n          <p class=\"font-bold\">\r\n            {{ 'home.text1' | translate }}\r\n          </p>\r\n\r\n          <p>\r\n            {{ 'home.text2' | translate }}\r\n          </p>\r\n\r\n          <div class=\"relative mx-auto mt-4 flex flex-col max-w-xxs\">\r\n            <span class=\"flex\">\r\n              <input\r\n                type=\"color\"\r\n                [title]=\"'color-editor.pick' | translate\"\r\n                id=\"color\"\r\n                #color\r\n                class=\"h-10 w-1/5 overflow-clip rounded-r-none rounded-l\"\r\n                [value]=\"value\"\r\n                (input)=\"updateValue(color.value)\" />\r\n\r\n              <input\r\n                type=\"text\"\r\n                [title]=\"'color-editor.hex' | translate\"\r\n                id=\"hexCode\"\r\n                #hexCode\r\n                placeholder=\"#4472C4\"\r\n                class=\"w-4/5 rounded-r text-medium text-gray-900 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500 border-0 focus:ring-0\"\r\n                [value]=\"value\"\r\n                (input)=\"updateValue(hexCode.value)\" />\r\n            </span>\r\n\r\n            <button\r\n              class=\"py-2 px-4 mt-2 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded transition-colors duration-500\"\r\n              [disabled]=\"invalid\">\r\n              <span\r\n                class=\"grow text-center\"\r\n                [class]=\"invalid ? 'cursor-not-allowed' : 'cursor-pointer'\"\r\n                [title]=\"\r\n                  invalid\r\n                    ? 'You need a 6-digit hex code'\r\n                    : 'Generate a color palette'\r\n                \"\r\n                (click)=\"generatePalette()\">\r\n                {{ 'home.generation.start' | translate }}\r\n              </span>\r\n\r\n              <svg\r\n                class=\"ml-4 h-6 w-6 cursor-pointer\"\r\n                fill=\"currentColor\"\r\n                viewBox=\"0 0 48 48\"\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                (click)=\"dropdown = !dropdown\">\r\n                <path\r\n                  d=\"M24 30.95q-.45 0-.875-.175t-.775-.525l-9.9-9.9q-.65-.65-.625-1.65.025-1 .675-1.7.75-.75 1.675-.675.925.075 1.625.725l8.2 8.2 8.2-8.2q.7-.65 1.7-.7 1-.05 1.65.7.75.7.675 1.675-.075.975-.725 1.675l-9.85 9.85q-.35.35-.775.525-.425.175-.875.175Z\" />\r\n              </svg>\r\n            </button>\r\n\r\n            <div\r\n              class=\"w-64 mt-1 p-2 absolute top-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n              [class]=\"dropdown ? '' : 'hidden'\"\r\n              (mouseleave)=\"dropdown = false\">\r\n              <span class=\"mb-1 block p-2 text-left text-base font-medium\">\r\n                {{ 'home.scheme.pick' | translate }}:\r\n              </span>\r\n\r\n              <section\r\n                class=\"h-32 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600 sm:h-48\">\r\n                <label\r\n                  *ngFor=\"let schemeToShow of schemes\"\r\n                  class=\"block p-2 mb-1 mr-4 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500\"\r\n                  [htmlFor]=\"schemeToShow.for\">\r\n                  <input\r\n                    type=\"radio\"\r\n                    name=\"scheme\"\r\n                    class=\"hidden peer\"\r\n                    [checked]=\"schemeToShow.index === scheme\"\r\n                    [id]=\"schemeToShow.for\"\r\n                    [value]=\"schemeToShow.name\"\r\n                    (change)=\"updateScheme(schemeToShow.scheme)\" />\r\n\r\n                  <span\r\n                    class=\"peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500\">\r\n                    {{ 'home.scheme.' + schemeToShow.name | translate }}\r\n                  </span>\r\n                </label>\r\n              </section>\r\n            </div>\r\n          </div>\r\n        </section>\r\n      </div>\r\n\r\n      <div class=\"border-t border-t-gray-300 pt-16 dark:border-t-gray-600\">\r\n        <section\r\n          class=\"mx-auto max-w-xl text-justify text-base lg:max-w-7xl lg:px-4\">\r\n          <h2 class=\"mb-8 text-center\">\r\n            {{ 'home.tutorial.title' | translate }}\r\n          </h2>\r\n\r\n          <div class=\"grid gap-8 lg:grid-cols-3 lg:gap-16\">\r\n            <article class=\"xs:grid lg:block grid-cols-3 items-center\">\r\n              <div\r\n                class=\"text-center text-primary-900 dark:text-primary-300 lg:mb-4\">\r\n                <svg\r\n                  xmlns=\"http://www.w3.org/2000/svg\"\r\n                  fill=\"none\"\r\n                  viewBox=\"0 0 24 24\"\r\n                  stroke-width=\"1.5\"\r\n                  stroke=\"currentColor\"\r\n                  class=\"mx-auto h-16 w-16\">\r\n                  <path\r\n                    stroke-linecap=\"round\"\r\n                    stroke-linejoin=\"round\"\r\n                    d=\"M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z\" />\r\n                </svg>\r\n\r\n                <h3>{{ 'home.tutorial.generation.title' | translate }}</h3>\r\n              </div>\r\n\r\n              <p class=\"col-span-2\">\r\n                {{ 'home.tutorial.generation.text' | translate }}\r\n              </p>\r\n            </article>\r\n\r\n            <article class=\"xs:grid lg:block grid-cols-3 items-center\">\r\n              <div\r\n                class=\"order-last text-center text-primary-900 dark:text-primary-300 lg:order-1 lg:mb-4\">\r\n                <svg\r\n                  xmlns=\"http://www.w3.org/2000/svg\"\r\n                  fill=\"none\"\r\n                  viewBox=\"0 0 24 24\"\r\n                  stroke-width=\"1.5\"\r\n                  stroke=\"currentColor\"\r\n                  class=\"mx-auto h-16 w-16\">\r\n                  <path\r\n                    stroke-linecap=\"round\"\r\n                    stroke-linejoin=\"round\"\r\n                    d=\"M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75\" />\r\n                </svg>\r\n\r\n                <h3>{{ 'home.tutorial.editing.title' | translate }}</h3>\r\n              </div>\r\n\r\n              <p class=\"col-span-2 lg:order-last\">\r\n                {{ 'home.tutorial.editing.text' | translate }}\r\n              </p>\r\n            </article>\r\n\r\n            <article class=\"xs:grid lg:block grid-cols-3 items-center\">\r\n              <div\r\n                class=\"text-center text-primary-900 dark:text-primary-300 lg:mb-4\">\r\n                <svg\r\n                  xmlns=\"http://www.w3.org/2000/svg\"\r\n                  fill=\"none\"\r\n                  viewBox=\"0 0 24 24\"\r\n                  stroke-width=\"1.5\"\r\n                  stroke=\"currentColor\"\r\n                  class=\"mx-auto h-16 w-16\">\r\n                  <path\r\n                    stroke-linecap=\"round\"\r\n                    stroke-linejoin=\"round\"\r\n                    d=\"M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z\" />\r\n                </svg>\r\n\r\n                <h3>{{ 'home.tutorial.export.title' | translate }}</h3>\r\n              </div>\r\n\r\n              <p class=\"col-span-2\">\r\n                {{ 'home.tutorial.export.text' | translate }}\r\n              </p>\r\n            </article>\r\n          </div>\r\n\r\n          <p class=\"mt-8 text-center\">\r\n            <b>{{ 'home.tutorial.end.title' | translate }}</b\r\n            ><br />\r\n            {{ 'home.tutorial.end.subtitle' | translate }}\r\n          </p>\r\n        </section>\r\n\r\n        <section class=\"mx-auto mt-16 max-w-xl text-justify text-base\">\r\n          <h2>{{ 'home.additions.title' | translate }}</h2>\r\n\r\n          <h3 class=\"pb-0.5\">\r\n            {{ 'home.additions.development.title' | translate }}\r\n          </h3>\r\n          <p\r\n            class=\"dark:text-gray-200\"\r\n            [innerHtml]=\"\r\n              'home.additions.development.text'\r\n                | translate\r\n                  : { github: getGitHubLink(), discord: getDiscordLink() }\r\n            \"></p>\r\n\r\n          <h3 class=\"pb-0.5\">\r\n            {{ 'home.additions.planned.title' | translate }}\r\n          </h3>\r\n          <p class=\"dark:text-gray-200\">\r\n            {{ 'home.additions.planned.text' | translate }}\r\n          </p>\r\n          <ul\r\n            class=\"list-inside list-disc space-y-1 md:space-y-0 text-left mt-2 dark:text-gray-200\">\r\n            <li>\r\n              {{ 'home.additions.planned.list.1' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/15\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#15</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.2' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/17\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#17</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.3' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/18\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#18</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.4' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/19\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#19</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.5' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/22\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#22</a\r\n              >)\r\n            </li>\r\n          </ul>\r\n        </section>\r\n      </div>\r\n    </div>\r\n\r\n    <article class=\"mx-auto max-w-md\" *ngIf=\"loading\">\r\n      <p>\r\n        <b>{{ 'home.generation.note' | translate }}:</b><br />\r\n        <span [innerHtml]=\"'home.generation.perfection' | translate\"></span>\r\n      </p>\r\n\r\n      <div\r\n        #loadContainer\r\n        class=\"h-6 w-full mt-10 rounded-full bg-gray-200 dark:bg-gray-800\">\r\n        <span\r\n          #loadBar\r\n          class=\"flex h-6 items-center justify-center rounded-full text-sm font-bold text-primary-50 bg-primary-700 animate-load\">\r\n          {{ progress | percent : '2.0' }}\r\n        </span>\r\n      </div>\r\n    </article>\r\n  </article>\r\n</div>\r\n"
+      "templateData": "<div>\r\n  <article class=\"px-4 text-center text-lg\">\r\n    <div *ngIf=\"!loading\">\r\n      <div\r\n        class=\"flex items-center justify-center\"\r\n        style=\"min-height: calc(80svh - 170px)\">\r\n        <section>\r\n          <p class=\"font-bold\">\r\n            {{ 'home.text1' | translate }}\r\n          </p>\r\n\r\n          <p>\r\n            {{ 'home.text2' | translate }}\r\n          </p>\r\n\r\n          <div class=\"relative mx-auto mt-4 flex flex-col max-w-xxs\">\r\n            <span class=\"flex\">\r\n              <input\r\n                type=\"color\"\r\n                [title]=\"'color-editor.pick' | translate\"\r\n                id=\"color\"\r\n                #color\r\n                class=\"h-10 w-1/5 overflow-clip rounded-r-none rounded-l\"\r\n                [value]=\"value\"\r\n                (input)=\"updateValue(color.value)\" />\r\n\r\n              <input\r\n                type=\"text\"\r\n                [title]=\"'color-editor.hex' | translate\"\r\n                id=\"hexCode\"\r\n                #hexCode\r\n                placeholder=\"#4472C4\"\r\n                class=\"w-4/5 rounded-r text-medium text-gray-900 bg-gray-100 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500 border-0 focus:ring-0\"\r\n                [value]=\"value\"\r\n                (input)=\"updateValue(hexCode.value)\" />\r\n            </span>\r\n\r\n            <button\r\n              class=\"py-2 px-4 mt-2 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded transition-colors duration-500\"\r\n              [disabled]=\"invalid\">\r\n              <span\r\n                class=\"grow text-center\"\r\n                [class]=\"invalid ? 'cursor-not-allowed' : 'cursor-pointer'\"\r\n                [title]=\"\r\n                  invalid\r\n                    ? 'You need a 6-digit hex code'\r\n                    : 'Generate a color palette'\r\n                \"\r\n                (click)=\"generatePalette()\">\r\n                {{ 'home.generation.start' | translate }}\r\n              </span>\r\n\r\n              <svg\r\n                class=\"ml-4 h-6 w-6 cursor-pointer\"\r\n                fill=\"currentColor\"\r\n                viewBox=\"0 0 48 48\"\r\n                xmlns=\"http://www.w3.org/2000/svg\"\r\n                (click)=\"dropdown = !dropdown\">\r\n                <path\r\n                  d=\"M24 30.95q-.45 0-.875-.175t-.775-.525l-9.9-9.9q-.65-.65-.625-1.65.025-1 .675-1.7.75-.75 1.675-.675.925.075 1.625.725l8.2 8.2 8.2-8.2q.7-.65 1.7-.7 1-.05 1.65.7.75.7.675 1.675-.075.975-.725 1.675l-9.85 9.85q-.35.35-.775.525-.425.175-.875.175Z\" />\r\n              </svg>\r\n            </button>\r\n\r\n            <div\r\n              class=\"w-64 mt-1 p-2 absolute top-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n              [class]=\"dropdown ? '' : 'hidden'\"\r\n              (mouseleave)=\"dropdown = false\">\r\n              <span class=\"mb-1 block p-2 text-left text-base font-medium\">\r\n                {{ 'home.scheme.pick' | translate }}:\r\n              </span>\r\n\r\n              <section\r\n                class=\"h-32 overflow-y-auto text-sm scrollbar-thin scrollbar-thumb-primary-600 scrollbar-track-gray-300 dark:scrollbar-track-gray-600 sm:h-48\">\r\n                <label\r\n                  *ngFor=\"let schemeToShow of schemes\"\r\n                  class=\"block p-2 mb-1 mr-4 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500\"\r\n                  [htmlFor]=\"schemeToShow.for\">\r\n                  <input\r\n                    type=\"radio\"\r\n                    name=\"scheme\"\r\n                    class=\"hidden peer\"\r\n                    [checked]=\"schemeToShow.index === scheme\"\r\n                    [id]=\"schemeToShow.for\"\r\n                    [value]=\"schemeToShow.name\"\r\n                    (change)=\"updateScheme(schemeToShow.scheme)\" />\r\n\r\n                  <span\r\n                    class=\"peer-checked:font-bold peer-checked:text-primary-700 dark:peer-checked:text-primary-500\">\r\n                    {{ 'home.scheme.' + schemeToShow.name | translate }}\r\n                  </span>\r\n                </label>\r\n              </section>\r\n            </div>\r\n          </div>\r\n        </section>\r\n      </div>\r\n\r\n      <div class=\"border-t border-t-gray-300 pt-16 dark:border-t-gray-600\">\r\n        <section\r\n          class=\"mx-auto max-w-xl text-justify text-base lg:max-w-7xl lg:px-4\">\r\n          <h2 class=\"mb-8 text-center\">\r\n            {{ 'home.tutorial.title' | translate }}\r\n          </h2>\r\n\r\n          <div class=\"grid gap-8 lg:grid-cols-3 lg:gap-16\">\r\n            <article class=\"xs:grid lg:block grid-cols-3 items-center\">\r\n              <div\r\n                class=\"text-center text-primary-900 dark:text-primary-300 lg:mb-4\">\r\n                <svg\r\n                  xmlns=\"http://www.w3.org/2000/svg\"\r\n                  fill=\"none\"\r\n                  viewBox=\"0 0 24 24\"\r\n                  stroke-width=\"1.5\"\r\n                  stroke=\"currentColor\"\r\n                  class=\"mx-auto h-16 w-16\">\r\n                  <path\r\n                    stroke-linecap=\"round\"\r\n                    stroke-linejoin=\"round\"\r\n                    d=\"M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402M6.75 21A3.75 3.75 0 013 17.25V4.125C3 3.504 3.504 3 4.125 3h5.25c.621 0 1.125.504 1.125 1.125v4.072M6.75 21a3.75 3.75 0 003.75-3.75V8.197M6.75 21h13.125c.621 0 1.125-.504 1.125-1.125v-5.25c0-.621-.504-1.125-1.125-1.125h-4.072M10.5 8.197l2.88-2.88c.438-.439 1.15-.439 1.59 0l3.712 3.713c.44.44.44 1.152 0 1.59l-2.879 2.88M6.75 17.25h.008v.008H6.75v-.008z\" />\r\n                </svg>\r\n\r\n                <h3>{{ 'home.tutorial.generation.title' | translate }}</h3>\r\n              </div>\r\n\r\n              <p class=\"col-span-2\">\r\n                {{ 'home.tutorial.generation.text' | translate }}\r\n              </p>\r\n            </article>\r\n\r\n            <article class=\"xs:grid lg:block grid-cols-3 items-center\">\r\n              <div\r\n                class=\"order-last text-center text-primary-900 dark:text-primary-300 lg:order-1 lg:mb-4\">\r\n                <svg\r\n                  xmlns=\"http://www.w3.org/2000/svg\"\r\n                  fill=\"none\"\r\n                  viewBox=\"0 0 24 24\"\r\n                  stroke-width=\"1.5\"\r\n                  stroke=\"currentColor\"\r\n                  class=\"mx-auto h-16 w-16\">\r\n                  <path\r\n                    stroke-linecap=\"round\"\r\n                    stroke-linejoin=\"round\"\r\n                    d=\"M10.5 6h9.75M10.5 6a1.5 1.5 0 11-3 0m3 0a1.5 1.5 0 10-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m-9.75 0h9.75\" />\r\n                </svg>\r\n\r\n                <h3>{{ 'home.tutorial.editing.title' | translate }}</h3>\r\n              </div>\r\n\r\n              <p class=\"col-span-2 lg:order-last\">\r\n                {{ 'home.tutorial.editing.text' | translate }}\r\n              </p>\r\n            </article>\r\n\r\n            <article class=\"xs:grid lg:block grid-cols-3 items-center\">\r\n              <div\r\n                class=\"text-center text-primary-900 dark:text-primary-300 lg:mb-4\">\r\n                <svg\r\n                  xmlns=\"http://www.w3.org/2000/svg\"\r\n                  fill=\"none\"\r\n                  viewBox=\"0 0 24 24\"\r\n                  stroke-width=\"1.5\"\r\n                  stroke=\"currentColor\"\r\n                  class=\"mx-auto h-16 w-16\">\r\n                  <path\r\n                    stroke-linecap=\"round\"\r\n                    stroke-linejoin=\"round\"\r\n                    d=\"M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z\" />\r\n                </svg>\r\n\r\n                <h3>{{ 'home.tutorial.export.title' | translate }}</h3>\r\n              </div>\r\n\r\n              <p class=\"col-span-2\">\r\n                {{ 'home.tutorial.export.text' | translate }}\r\n              </p>\r\n            </article>\r\n          </div>\r\n\r\n          <p class=\"mt-8 text-center\">\r\n            <b>{{ 'home.tutorial.end.title' | translate }}</b\r\n            ><br />\r\n            {{ 'home.tutorial.end.subtitle' | translate }}\r\n          </p>\r\n        </section>\r\n\r\n        <section class=\"mx-auto mt-16 max-w-xl text-justify text-base\">\r\n          <h2>{{ 'home.additions.title' | translate }}</h2>\r\n\r\n          <h3 class=\"pb-0.5\">\r\n            {{ 'home.additions.development.title' | translate }}\r\n          </h3>\r\n          <p\r\n            class=\"dark:text-gray-200\"\r\n            [innerHtml]=\"\r\n              'home.additions.development.text'\r\n                | translate\r\n                  : { github: getGitHubLink(), discord: getDiscordLink() }\r\n            \"></p>\r\n\r\n          <h3 class=\"pb-0.5\">\r\n            {{ 'home.additions.planned.title' | translate }}\r\n          </h3>\r\n          <p class=\"dark:text-gray-200\">\r\n            {{ 'home.additions.planned.text' | translate }}\r\n          </p>\r\n          <ul\r\n            class=\"list-inside list-disc space-y-1 md:space-y-0 text-left mt-2 dark:text-gray-200\">\r\n            <li>\r\n              {{ 'home.additions.planned.list.1' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/15\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#15</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.2' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/17\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#17</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.3' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/18\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#18</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.4' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/19\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#19</a\r\n              >)\r\n            </li>\r\n            <li>\r\n              {{ 'home.additions.planned.list.5' | translate }} (<a\r\n                href=\"https://github.com/pawcoding/Rainbow-Palette/issues/22\"\r\n                target=\"_blank\"\r\n                rel=\"noreferrer noopener\"\r\n                class=\"underline\"\r\n                [title]=\"'home.additions.planned.issue' | translate\"\r\n                >#22</a\r\n              >)\r\n            </li>\r\n          </ul>\r\n        </section>\r\n      </div>\r\n    </div>\r\n\r\n    <article class=\"mx-auto max-w-md\" *ngIf=\"loading\">\r\n      <p>\r\n        <b>{{ 'home.generation.note' | translate }}:</b><br />\r\n        <span [innerHtml]=\"'home.generation.perfection' | translate\"></span>\r\n      </p>\r\n\r\n      <div\r\n        #loadContainer\r\n        class=\"h-6 w-full mt-10 rounded-full bg-gray-200 dark:bg-gray-800\">\r\n        <span\r\n          #loadBar\r\n          class=\"flex h-6 items-center justify-center rounded-full text-sm font-bold text-primary-50 bg-primary-700 animate-load\">\r\n          {{ progress | percent : '2.0' }}\r\n        </span>\r\n      </div>\r\n    </article>\r\n  </article>\r\n</div>\r\n"
     },
     {
       "name": "LanguageSelectorComponent",
-      "id": "component-LanguageSelectorComponent-c84cb9fa824b09a6a88a28777b1e0005e18230658a6ad27432912d28b57349a40f18311fedefe257a80465c4adadead70f7485d263bb6f3d87c0153778c99a75",
+      "id": "component-LanguageSelectorComponent-0dd3e40e80acc0a966a51a9a1227192e2a9e375217059200dc0485eb105ea882e0a7045cf8e9b1cd4965fc214b54dfda73f964f1fedf50c68d39bfc9f7540e24",
       "file": "src/app/components/language-selector/language-selector.component.ts",
       "encapsulation": [],
       "entryComponents": [],
@@ -6848,16 +7573,6 @@
       "outputsClass": [],
       "propertiesClass": [
         {
-          "name": "country",
-          "defaultValue": "'us'",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "string",
-          "optional": false,
-          "description": "",
-          "line": 14
-        },
-        {
           "name": "language",
           "defaultValue": "'en'",
           "deprecated": false,
@@ -6865,7 +7580,7 @@
           "type": "string",
           "optional": false,
           "description": "",
-          "line": 13
+          "line": 14
         },
         {
           "name": "LANGUAGES",
@@ -6875,7 +7590,7 @@
           "type": "",
           "optional": false,
           "description": "",
-          "line": 11
+          "line": 12
         },
         {
           "name": "languageToCountryCode",
@@ -6913,7 +7628,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 28,
+          "line": 27,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nSwitch the language of the app.\n",
@@ -6921,8 +7636,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 762,
-                "end": 770,
+                "pos": 775,
+                "end": 783,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -6933,8 +7648,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 756,
-                "end": 761,
+                "pos": 769,
+                "end": 774,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -6953,7 +7668,7 @@
       "description": "",
       "rawdescription": "\n",
       "type": "component",
-      "sourceCode": "import { Component } from '@angular/core'\r\nimport { StorageService } from '../../services/storage.service'\r\nimport { languageToCountryCode } from '../../utils/language-to-countrycode.util'\r\nimport { LANGUAGES } from '../../constants/languages.constant'\r\n\r\n@Component({\r\n  selector: 'app-language-selector',\r\n  templateUrl: './language-selector.component.html',\r\n})\r\nexport class LanguageSelectorComponent {\r\n  LANGUAGES = LANGUAGES\r\n\r\n  language = 'en'\r\n  country = 'us'\r\n  showMenu = false\r\n\r\n  constructor(private storage: StorageService) {\r\n    this.storage.languageEmitter.subscribe((language) => {\r\n      this.language = language\r\n      this.country = languageToCountryCode(language)\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Switch the language of the app.\r\n   * @param language\r\n   */\r\n  switchLanguage(language: string) {\r\n    this.storage.applyLanguage(language)\r\n    this.showMenu = false\r\n  }\r\n\r\n  protected readonly languageToCountryCode = languageToCountryCode\r\n}\r\n",
+      "sourceCode": "import { Component } from '@angular/core'\r\nimport { StorageService } from '../../services/storage.service'\r\nimport { languageToCountryCode } from '../../utils/language-to-countrycode.util'\r\nimport { LANGUAGES } from '../../constants/languages.constant'\r\nimport { MatomoTracker } from '@ngx-matomo/tracker'\r\n\r\n@Component({\r\n  selector: 'app-language-selector',\r\n  templateUrl: './language-selector.component.html',\r\n})\r\nexport class LanguageSelectorComponent {\r\n  LANGUAGES = LANGUAGES\r\n\r\n  language = 'en'\r\n  showMenu = false\r\n\r\n  constructor(private storage: StorageService, private tracker: MatomoTracker) {\r\n    this.storage.languageEmitter.subscribe((language) => {\r\n      this.language = language\r\n    })\r\n  }\r\n\r\n  /**\r\n   * Switch the language of the app.\r\n   * @param language\r\n   */\r\n  switchLanguage(language: string) {\r\n    this.storage.applyLanguage(language)\r\n    this.showMenu = false\r\n    this.tracker.trackPageView()\r\n  }\r\n\r\n  protected readonly languageToCountryCode = languageToCountryCode\r\n}\r\n",
       "assetsDirs": [],
       "styleUrlsData": "",
       "stylesData": "",
@@ -6968,6 +7683,12 @@
             "type": "StorageService",
             "deprecated": false,
             "deprecationMessage": ""
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": ""
           }
         ],
         "line": 15,
@@ -6980,14 +7701,23 @@
             "tagName": {
               "text": "param"
             }
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
           }
         ]
       },
-      "templateData": "<section class=\"relative\">\r\n  <span\r\n    class=\"block h-7 w-7 cursor-pointer rounded-full fib fis\"\r\n    [class]=\"'fi-' + country\"\r\n    [title]=\"'language-selector.' + language | translate\"\r\n    (click)=\"showMenu = !showMenu\">\r\n    <span class=\"sr-only\">{{\r\n      'language-selector.' + language | translate\r\n    }}</span>\r\n  </span>\r\n\r\n  <article\r\n    *ngIf=\"showMenu\"\r\n    class=\"mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n    (mouseleave)=\"showMenu = false\">\r\n    <section class=\"text-sm\">\r\n      <label\r\n        *ngFor=\"let language of LANGUAGES\"\r\n        class=\"p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center\"\r\n        (click)=\"switchLanguage(language)\">\r\n        <span\r\n          class=\"block h-6 w-6 rounded-full fib fis\"\r\n          [class]=\"'fi-' + languageToCountryCode(language)\"></span>\r\n        <span>{{ 'language-selector.' + language | translate }}</span>\r\n      </label>\r\n    </section>\r\n  </article>\r\n</section>\r\n"
+      "templateData": "<section class=\"relative w-7 mx-auto\">\r\n  <span\r\n    class=\"block h-7 w-7 cursor-pointer rounded-full fib fis\"\r\n    [class]=\"'fi-' + languageToCountryCode(language)\"\r\n    [title]=\"'language-selector.' + language | translate\"\r\n    (click)=\"showMenu = !showMenu\">\r\n    <span class=\"sr-only\">{{\r\n      'language-selector.' + language | translate\r\n    }}</span>\r\n  </span>\r\n\r\n  <article\r\n    *ngIf=\"showMenu\"\r\n    class=\"mt-2 p-2 absolute top-full left-1/2 -translate-x-1/2 md:left-full md:-translate-x-full text-gray-800 bg-gray-200 dark:text-gray-100 dark:bg-gray-700 rounded\"\r\n    (mouseleave)=\"showMenu = false\">\r\n    <section class=\"text-sm\">\r\n      <label\r\n        *ngFor=\"let language of LANGUAGES\"\r\n        class=\"p-2 hover:bg-gray-300 dark:hover:bg-gray-600 rounded cursor-pointer transition-colors duration-500 flex gap-2 items-center\"\r\n        (click)=\"switchLanguage(language)\">\r\n        <span\r\n          class=\"block h-6 w-6 rounded-full fib fis\"\r\n          [class]=\"'fi-' + languageToCountryCode(language)\"></span>\r\n        <span>{{ 'language-selector.' + language | translate }}</span>\r\n      </label>\r\n    </section>\r\n  </article>\r\n</section>\r\n"
     },
     {
       "name": "LightSwitchComponent",
-      "id": "component-LightSwitchComponent-db41537ecfa20c7ef35fc4dd196a3de39ea604f8c9beafd6c979dd68a3c515b7262a417415c1655ae604b40d82e9d811e40ec9eabdbaee2cced703fd751a9d91",
+      "id": "component-LightSwitchComponent-e4c2ea50ae5bbea0e7ed827e84e6e35e9367039554dcb5ad1e9c4573a192753cf5ac2305ff77cd822ea59f946f33c5588f763e2f78b6e3fcd89dd8a8e7890173",
       "file": "src/app/components/light-switch/light-switch.component.ts",
       "encapsulation": [],
       "entryComponents": [],
@@ -7004,7 +7734,7 @@
           "name": "dark",
           "deprecated": false,
           "deprecationMessage": "",
-          "line": 10,
+          "line": 11,
           "type": "boolean | undefined",
           "decorators": []
         }
@@ -7018,7 +7748,7 @@
           "optional": false,
           "returnType": "void",
           "typeParameters": [],
-          "line": 17,
+          "line": 21,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nToggle between light and dark theme.\n",
@@ -7032,7 +7762,7 @@
       "description": "",
       "rawdescription": "\n",
       "type": "component",
-      "sourceCode": "import { Component, Input } from '@angular/core'\r\nimport { StorageService } from '../../services/storage.service'\r\n\r\n@Component({\r\n  selector: 'app-light-switch',\r\n  templateUrl: './light-switch.component.html',\r\n})\r\nexport class LightSwitchComponent {\r\n  @Input()\r\n  dark: boolean | undefined\r\n\r\n  constructor(private storage: StorageService) {}\r\n\r\n  /**\r\n   * Toggle between light and dark theme.\r\n   */\r\n  toggleTheme(): void {\r\n    this.dark = this.storage.toggleTheme(!this.dark)\r\n  }\r\n}\r\n",
+      "sourceCode": "import { Component, Input } from '@angular/core'\r\nimport { StorageService } from '../../services/storage.service'\r\nimport { MatomoTracker } from '@ngx-matomo/tracker'\r\n\r\n@Component({\r\n  selector: 'app-light-switch',\r\n  templateUrl: './light-switch.component.html',\r\n})\r\nexport class LightSwitchComponent {\r\n  @Input()\r\n  dark: boolean | undefined\r\n\r\n  constructor(\r\n    private storage: StorageService,\r\n    private tracker: MatomoTracker\r\n  ) {}\r\n\r\n  /**\r\n   * Toggle between light and dark theme.\r\n   */\r\n  toggleTheme(): void {\r\n    this.dark = this.storage.toggleTheme(!this.dark)\r\n    this.tracker.trackPageView()\r\n  }\r\n}\r\n",
       "assetsDirs": [],
       "styleUrlsData": "",
       "stylesData": "",
@@ -7047,13 +7777,28 @@
             "type": "StorageService",
             "deprecated": false,
             "deprecationMessage": ""
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
+            "deprecated": false,
+            "deprecationMessage": ""
           }
         ],
-        "line": 10,
+        "line": 11,
         "jsdoctags": [
           {
             "name": "storage",
             "type": "StorageService",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          },
+          {
+            "name": "tracker",
+            "type": "MatomoTracker",
             "deprecated": false,
             "deprecationMessage": "",
             "tagName": {
@@ -7581,13 +8326,13 @@
   "modules": [
     {
       "name": "AppModule",
-      "id": "module-AppModule-07de93eebb5b96f039f1f532b2d27cd382b3659858a44993e763530256125ebcd897b0c2be000c96982b5c49af55fec1ae23af42325316a9d6dd0af2569d7895",
+      "id": "module-AppModule-71ad871df67f258af2fca20b5386a72ccd7e787eb35d72274b8c1ed116954c7b75b8524dcd91f04ef297bfa2c29aac4efdc2b1ea1a4a8bfe5d820702a3706cdc",
       "description": "",
       "deprecationMessage": "",
       "deprecated": false,
       "file": "src/app/app.module.ts",
       "methods": [],
-      "sourceCode": "import { NgModule } from '@angular/core'\r\nimport { BrowserModule } from '@angular/platform-browser'\r\n\r\nimport { AppComponent } from './app.component'\r\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component'\r\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component'\r\nimport { StorageService } from './services/storage.service'\r\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component'\r\nimport { ColorEditorComponent } from './components/color-editor/color-editor.component'\r\nimport { ColorService } from './services/color.service'\r\nimport { DialogComponent } from './components/dialog/dialog.component'\r\nimport { NotificationComponent } from './components/notification/notification.component'\r\nimport { HomeComponent } from './pages/home/home.component'\r\nimport { AppRoutingModule } from './app-routing.module'\r\nimport { EditComponent } from './pages/edit/edit.component'\r\nimport { SafeHtmlPipe } from './pipes/safe-html.pipe'\r\nimport { PreviewComponent } from './pages/preview/preview.component'\r\nimport { ServiceWorkerModule } from '@angular/service-worker'\r\nimport { environment } from '../environments/environment'\r\nimport { HttpClient, HttpClientModule } from '@angular/common/http'\r\nimport { TranslateLoader, TranslateModule } from '@ngx-translate/core'\r\nimport { TranslateHttpLoader } from '@ngx-translate/http-loader'\r\nimport { LanguageSelectorComponent } from './components/language-selector/language-selector.component'\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    ColorEditorComponent,\r\n    ColorViewerComponent,\r\n    DialogComponent,\r\n    HomeComponent,\r\n    LightSwitchComponent,\r\n    NotificationComponent,\r\n    PaletteViewerComponent,\r\n    EditComponent,\r\n    SafeHtmlPipe,\r\n    PreviewComponent,\r\n    LanguageSelectorComponent,\r\n  ],\r\n  imports: [\r\n    AppRoutingModule,\r\n    BrowserModule,\r\n    HttpClientModule,\r\n    TranslateModule.forRoot({\r\n      loader: {\r\n        provide: TranslateLoader,\r\n        useFactory: HttpLoaderFactory,\r\n        deps: [HttpClient],\r\n      },\r\n    }),\r\n    ServiceWorkerModule.register('ngsw-worker.js', {\r\n      enabled: environment.production,\r\n      // Register the ServiceWorker as soon as the application is stable\r\n      // or after 30 seconds (whichever comes first).\r\n      registrationStrategy: 'registerWhenStable:30000',\r\n    }),\r\n  ],\r\n  providers: [ColorService, StorageService],\r\n  bootstrap: [AppComponent],\r\n})\r\nexport class AppModule {}\r\n\r\nexport function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {\r\n  return new TranslateHttpLoader(http)\r\n}\r\n",
+      "sourceCode": "import { NgModule } from '@angular/core'\r\nimport { BrowserModule } from '@angular/platform-browser'\r\n\r\nimport { AppComponent } from './app.component'\r\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component'\r\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component'\r\nimport { StorageService } from './services/storage.service'\r\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component'\r\nimport { ColorEditorComponent } from './components/color-editor/color-editor.component'\r\nimport { ColorService } from './services/color.service'\r\nimport { DialogComponent } from './components/dialog/dialog.component'\r\nimport { NotificationComponent } from './components/notification/notification.component'\r\nimport { HomeComponent } from './pages/home/home.component'\r\nimport { AppRoutingModule } from './app-routing.module'\r\nimport { EditComponent } from './pages/edit/edit.component'\r\nimport { SafeHtmlPipe } from './pipes/safe-html.pipe'\r\nimport { PreviewComponent } from './pages/preview/preview.component'\r\nimport { ServiceWorkerModule } from '@angular/service-worker'\r\nimport { environment } from '../environments/environment'\r\nimport { HttpClient, HttpClientModule } from '@angular/common/http'\r\nimport { TranslateLoader, TranslateModule } from '@ngx-translate/core'\r\nimport { TranslateHttpLoader } from '@ngx-translate/http-loader'\r\nimport { LanguageSelectorComponent } from './components/language-selector/language-selector.component'\r\nimport { MatomoConsentMode, NgxMatomoTrackerModule } from '@ngx-matomo/tracker'\r\nimport { NgxMatomoRouterModule } from '@ngx-matomo/router'\r\nimport { AnalyticsInterceptor } from './interceptors/analytics.interceptor'\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    ColorEditorComponent,\r\n    ColorViewerComponent,\r\n    DialogComponent,\r\n    HomeComponent,\r\n    LightSwitchComponent,\r\n    NotificationComponent,\r\n    PaletteViewerComponent,\r\n    EditComponent,\r\n    SafeHtmlPipe,\r\n    PreviewComponent,\r\n    LanguageSelectorComponent,\r\n  ],\r\n  imports: [\r\n    AppRoutingModule,\r\n    BrowserModule,\r\n    HttpClientModule,\r\n    TranslateModule.forRoot({\r\n      loader: {\r\n        provide: TranslateLoader,\r\n        useFactory: HttpLoaderFactory,\r\n        deps: [HttpClient],\r\n      },\r\n    }),\r\n    ServiceWorkerModule.register('ngsw-worker.js', {\r\n      enabled: environment.production,\r\n      // Register the ServiceWorker as soon as the application is stable\r\n      // or after 30 seconds (whichever comes first).\r\n      registrationStrategy: 'registerWhenStable:30000',\r\n    }),\r\n    NgxMatomoTrackerModule.forRoot({\r\n      siteId: 1,\r\n      trackerUrl: 'https://analytics.apps.pawcode.de/',\r\n      enableJSErrorTracking: true,\r\n      acceptDoNotTrack: true,\r\n      requireConsent: MatomoConsentMode.TRACKING,\r\n      disabled: !environment.production,\r\n    }),\r\n    NgxMatomoRouterModule.forRoot({\r\n      interceptors: [AnalyticsInterceptor],\r\n      trackPageTitle: false,\r\n    }),\r\n  ],\r\n  providers: [ColorService, StorageService],\r\n  bootstrap: [AppComponent],\r\n})\r\nexport class AppModule {}\r\n\r\nexport function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {\r\n  return new TranslateHttpLoader(http)\r\n}\r\n",
       "children": [
         {
           "type": "providers",
@@ -7676,6 +8421,42 @@
       "file": "src/app/app-routing.module.ts",
       "methods": [],
       "sourceCode": "import { RouterModule, Routes } from '@angular/router'\r\nimport { HomeComponent } from './pages/home/home.component'\r\nimport { NgModule } from '@angular/core'\r\nimport { canEditPalette } from './guards/palette.guard'\r\nimport { EditComponent } from './pages/edit/edit.component'\r\nimport { PreviewComponent } from './pages/preview/preview.component'\r\n\r\nconst routes: Routes = [\r\n  { path: '', pathMatch: 'full', component: HomeComponent },\r\n  {\r\n    path: 'edit',\r\n    pathMatch: 'full',\r\n    canActivate: [canEditPalette],\r\n    component: EditComponent,\r\n  },\r\n  {\r\n    path: 'preview',\r\n    pathMatch: 'full',\r\n    canActivate: [canEditPalette],\r\n    component: PreviewComponent,\r\n  },\r\n  { path: '**', redirectTo: '' },\r\n]\r\n\r\n@NgModule({\r\n  imports: [RouterModule.forRoot(routes)],\r\n  exports: [RouterModule],\r\n})\r\nexport class AppRoutingModule {}\r\n",
+      "children": [
+        {
+          "type": "providers",
+          "elements": []
+        },
+        {
+          "type": "declarations",
+          "elements": []
+        },
+        {
+          "type": "imports",
+          "elements": []
+        },
+        {
+          "type": "exports",
+          "elements": []
+        },
+        {
+          "type": "bootstrap",
+          "elements": []
+        },
+        {
+          "type": "classes",
+          "elements": []
+        }
+      ]
+    },
+    {
+      "name": "MatomoMockModule",
+      "id": "module-MatomoMockModule-19619ad1236a84feada03eef5904da368c17367ff12c88f4dd372bce7f3441dc650556d1e4509bf707311bb35d23b3b9fd48a4654720819b94c2bb034045a4c9",
+      "description": "",
+      "deprecationMessage": "",
+      "deprecated": false,
+      "file": "src/app/utils/matomo.mock.module.ts",
+      "methods": [],
+      "sourceCode": "import { NgModule } from '@angular/core'\r\nimport { NgxMatomoTrackerModule } from '@ngx-matomo/tracker'\r\nimport { NgxMatomoRouterModule } from '@ngx-matomo/router'\r\n\r\n@NgModule({\r\n  imports: [\r\n    NgxMatomoTrackerModule.forRoot({\r\n      siteId: 1,\r\n      trackerUrl: 'https://analytics.apps.pawcode.de',\r\n      disabled: true,\r\n    }),\r\n    NgxMatomoRouterModule.forRoot({}),\r\n  ],\r\n  exports: [NgxMatomoTrackerModule, NgxMatomoRouterModule],\r\n})\r\nexport class MatomoMockModule {}\r\n",
       "children": [
         {
           "type": "providers",
@@ -7876,26 +8657,6 @@
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
-      },
-      {
-        "name": "Primary",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "",
-        "defaultValue": "Template.bind({})"
-      },
-      {
-        "name": "Primary",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
         "file": "src/app/components/language-selector/language-selector.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
@@ -7906,7 +8667,27 @@
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
+        "file": "src/app/components/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "",
+        "defaultValue": "Template.bind({})"
+      },
+      {
+        "name": "Primary",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
         "file": "src/app/components/notification/notification.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "",
+        "defaultValue": "Template.bind({})"
+      },
+      {
+        "name": "Primary",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "",
@@ -7950,7 +8731,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: MockColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: ColorServiceMock,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
       },
       {
         "name": "Template",
@@ -7960,27 +8741,7 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      NotificationService,\r\n      PaletteService,\r\n      StorageService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-      },
-      {
-        "name": "Template",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/dialog/dialog.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-      },
-      {
-        "name": "Template",
-        "ctype": "miscellaneous",
-        "subtype": "variable",
-        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
-        "deprecated": false,
-        "deprecationMessage": "",
-        "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: ColorServiceMock,\r\n      },\r\n      NotificationService,\r\n      {\r\n        provide: PaletteService,\r\n        useClass: PaletteServiceMock,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
       },
       {
         "name": "Template",
@@ -7990,7 +8751,17 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n    ],\r\n    imports: [\r\n      StorybookTranslateModule,\r\n      NgxMatomoTrackerModule.forRoot({\r\n        siteId: 1,\r\n        trackerUrl: 'https://analytics.apps.pawcode.de',\r\n        disabled: true,\r\n      }),\r\n      NgxMatomoRouterModule.forRoot({}),\r\n    ],\r\n  },\r\n})"
+      },
+      {
+        "name": "Template",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/app/components/dialog/dialog.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [\r\n      StorybookTranslateModule,\r\n      NgxMatomoTrackerModule.forRoot({\r\n        siteId: 1,\r\n        trackerUrl: 'https://analytics.apps.pawcode.de',\r\n        disabled: true,\r\n      }),\r\n      NgxMatomoRouterModule.forRoot({}),\r\n    ],\r\n  },\r\n})"
       },
       {
         "name": "Template",
@@ -8010,7 +8781,17 @@
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
-        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      PaletteService,\r\n      StorageService,\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: ColorServiceMock,\r\n      },\r\n      {\r\n        provide: PaletteService,\r\n        useClass: PaletteServiceMock,\r\n      },\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+      },
+      {
+        "name": "Template",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Story",
+        "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n    ],\r\n    imports: [\r\n      StorybookTranslateModule,\r\n      NgxMatomoTrackerModule.forRoot({\r\n        siteId: 1,\r\n        trackerUrl: 'https://analytics.apps.pawcode.de',\r\n        disabled: true,\r\n      }),\r\n      NgxMatomoRouterModule.forRoot({}),\r\n    ],\r\n  },\r\n})"
       },
       {
         "name": "variantOffsets",
@@ -8129,6 +8910,35 @@
       },
       {
         "name": "getGitHubLink",
+        "file": "src/app/utils/links.util.ts",
+        "ctype": "miscellaneous",
+        "subtype": "function",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "description": "",
+        "args": [
+          {
+            "name": "translate",
+            "type": "TranslateService",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "returnType": "string",
+        "jsdoctags": [
+          {
+            "name": "translate",
+            "type": "TranslateService",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      {
+        "name": "getMatomoLink",
         "file": "src/app/utils/links.util.ts",
         "ctype": "miscellaneous",
         "subtype": "function",
@@ -8608,7 +9418,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      PaletteService,\r\n      StorageService,\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: ColorServiceMock,\r\n      },\r\n      {\r\n        provide: PaletteService,\r\n        useClass: PaletteServiceMock,\r\n      },\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
       "src/app/components/color-viewer/color-viewer.component.stories.ts": [
@@ -8630,7 +9440,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      ColorService,\r\n      NotificationService,\r\n      PaletteService,\r\n      StorageService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: ColorServiceMock,\r\n      },\r\n      NotificationService,\r\n      {\r\n        provide: PaletteService,\r\n        useClass: PaletteServiceMock,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
       "src/app/components/color-editor/color-editor.component.stories.ts": [
@@ -8652,7 +9462,29 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: MockColorService,\r\n      },\r\n      {\r\n        provide: NotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: ColorServiceMock,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        }
+      ],
+      "src/app/components/language-selector/language-selector.component.stories.ts": [
+        {
+          "name": "Primary",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "Template",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n    ],\r\n    imports: [\r\n      StorybookTranslateModule,\r\n      NgxMatomoTrackerModule.forRoot({\r\n        siteId: 1,\r\n        trackerUrl: 'https://analytics.apps.pawcode.de',\r\n        disabled: true,\r\n      }),\r\n      NgxMatomoRouterModule.forRoot({}),\r\n    ],\r\n  },\r\n})"
         }
       ],
       "src/app/components/dialog/dialog.component.stories.ts": [
@@ -8671,6 +9503,28 @@
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/app/components/dialog/dialog.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [\r\n      StorybookTranslateModule,\r\n      NgxMatomoTrackerModule.forRoot({\r\n        siteId: 1,\r\n        trackerUrl: 'https://analytics.apps.pawcode.de',\r\n        disabled: true,\r\n      }),\r\n      NgxMatomoRouterModule.forRoot({}),\r\n    ],\r\n  },\r\n})"
+        }
+      ],
+      "src/app/components/notification/notification.component.stories.ts": [
+        {
+          "name": "Primary",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/notification/notification.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "Template",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/notification/notification.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
@@ -8696,51 +9550,7 @@
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-        }
-      ],
-      "src/app/components/language-selector/language-selector.component.stories.ts": [
-        {
-          "name": "Primary",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Template",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/language-selector/language-selector.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-        }
-      ],
-      "src/app/components/notification/notification.component.stories.ts": [
-        {
-          "name": "Primary",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/notification/notification.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Template",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/notification/notification.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: MockNotificationService,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n    ],\r\n    imports: [\r\n      StorybookTranslateModule,\r\n      NgxMatomoTrackerModule.forRoot({\r\n        siteId: 1,\r\n        trackerUrl: 'https://analytics.apps.pawcode.de',\r\n        disabled: true,\r\n      }),\r\n      NgxMatomoRouterModule.forRoot({}),\r\n    ],\r\n  },\r\n})"
         }
       ]
     },
@@ -8837,6 +9647,35 @@
         },
         {
           "name": "getGitHubLink",
+          "file": "src/app/utils/links.util.ts",
+          "ctype": "miscellaneous",
+          "subtype": "function",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "description": "",
+          "args": [
+            {
+              "name": "translate",
+              "type": "TranslateService",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "returnType": "string",
+          "jsdoctags": [
+            {
+              "name": "translate",
+              "type": "TranslateService",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "text": "param"
+              }
+            }
+          ]
+        },
+        {
+          "name": "getMatomoLink",
           "file": "src/app/utils/links.util.ts",
           "ctype": "miscellaneous",
           "subtype": "function",
@@ -9221,8 +10060,8 @@
         "type": "component",
         "linktype": "component",
         "name": "AppComponent",
-        "coveragePercent": 0,
-        "coverageCount": "0/8",
+        "coveragePercent": 15,
+        "coverageCount": "2/13",
         "status": "low"
       },
       {
@@ -9287,15 +10126,6 @@
         "name": "PaletteGenerator",
         "coveragePercent": 0,
         "coverageCount": "0/11",
-        "status": "low"
-      },
-      {
-        "filePath": "src/app/components/color-editor/color-editor.component.stories.ts",
-        "type": "class",
-        "linktype": "classe",
-        "name": "MockColorService",
-        "coveragePercent": 0,
-        "coverageCount": "0/12",
         "status": "low"
       },
       {
@@ -9419,8 +10249,8 @@
         "type": "component",
         "linktype": "component",
         "name": "LanguageSelectorComponent",
-        "coveragePercent": 12,
-        "coverageCount": "1/8",
+        "coveragePercent": 14,
+        "coverageCount": "1/7",
         "status": "low"
       },
       {
@@ -9653,6 +10483,15 @@
         "status": "low"
       },
       {
+        "filePath": "src/app/interceptors/analytics.interceptor.ts",
+        "type": "injectable",
+        "linktype": "injectable",
+        "name": "AnalyticsInterceptor",
+        "coveragePercent": 0,
+        "coverageCount": "0/4",
+        "status": "low"
+      },
+      {
         "filePath": "src/app/interfaces/dialog.interface.ts",
         "type": "interface",
         "linktype": "interface",
@@ -9668,6 +10507,33 @@
         "name": "Dialog",
         "coveragePercent": 0,
         "coverageCount": "0/4",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/mocks/color.service.mock.ts",
+        "type": "class",
+        "linktype": "classe",
+        "name": "ColorServiceMock",
+        "coveragePercent": 0,
+        "coverageCount": "0/13",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/mocks/palette.service.mock.ts",
+        "type": "class",
+        "linktype": "classe",
+        "name": "PaletteServiceMock",
+        "coveragePercent": 9,
+        "coverageCount": "1/11",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/mocks/storage.service.mock.ts",
+        "type": "class",
+        "linktype": "classe",
+        "name": "StorageServiceMock",
+        "coveragePercent": 0,
+        "coverageCount": "0/13",
         "status": "low"
       },
       {
@@ -9765,8 +10631,8 @@
         "type": "injectable",
         "linktype": "injectable",
         "name": "StorageService",
-        "coveragePercent": 60,
-        "coverageCount": "6/10",
+        "coveragePercent": 57,
+        "coverageCount": "8/14",
         "status": "good"
       },
       {
@@ -9805,6 +10671,16 @@
         "linktype": "miscellaneous",
         "linksubtype": "function",
         "name": "getGitHubLink",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/utils/links.util.ts",
+        "type": "function",
+        "linktype": "miscellaneous",
+        "linksubtype": "function",
+        "name": "getMatomoLink",
         "coveragePercent": 0,
         "coverageCount": "0/1",
         "status": "low"

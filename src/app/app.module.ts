@@ -67,6 +67,7 @@ import { AnalyticsInterceptor } from './interceptors/analytics.interceptor'
     }),
     NgxMatomoRouterModule.forRoot({
       interceptors: [AnalyticsInterceptor],
+      trackPageTitle: false,
     }),
   ],
   providers: [ColorService, StorageService],

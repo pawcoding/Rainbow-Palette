@@ -18,14 +18,11 @@ export class StorageService {
    * Load the theme if it is stored in local storage.
    * If no theme was saved, the browser default theme is used.
    */
-  loadTheme() {
+  loadTheme(): boolean {
     if (!localStorage.getItem('theme')) {
-      if (window.matchMedia('(prefers-color-scheme: dark)'))
-        return this.toggleTheme(true)
-      else {
-        this.darkEmitter.emit(true)
-        return false
-      }
+      return this.toggleTheme(
+        window.matchMedia('(prefers-color-scheme: dark)').matches
+      )
     } else {
       return this.toggleTheme(localStorage.getItem('theme') === 'dark')
     }
@@ -36,7 +33,7 @@ export class StorageService {
    * Force dark or light mode with parameter.
    * @param dark
    */
-  toggleTheme(dark: boolean | undefined) {
+  toggleTheme(dark: boolean | undefined): boolean {
     document.body.classList.toggle('dark', dark)
 
     dark = document.body.classList.contains('dark')
@@ -92,7 +89,7 @@ export class StorageService {
    * Save palette in local storage.
    * @param palette
    */
-  savePalette(palette: Palette) {
+  savePalette(palette: Palette): void {
     localStorage.setItem('palette', palette.toString())
   }
 
@@ -100,7 +97,7 @@ export class StorageService {
    * Remember if the user has enabled tracking for 90 days.
    * @param enabled
    */
-  rememberTracking(enabled: boolean) {
+  rememberTracking(enabled: boolean): void {
     const item = {
       value: enabled,
       expiry: Date.now() + 1000 * 60 * 60 * 24 * 90,
