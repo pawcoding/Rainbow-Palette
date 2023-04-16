@@ -1,5 +1,10 @@
 import { PaletteViewerComponent } from './palette-viewer.component'
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  Story,
+} from '@storybook/angular'
 import { Palette } from '../../models/palette.model'
 import { ColorViewerComponent } from '../color-viewer/color-viewer.component'
 import { v4 as uuidv4 } from 'uuid'
@@ -12,6 +17,7 @@ import { PaletteService } from '../../services/palette.service'
 import { StorageServiceMock } from '../../mocks/storage.service.mock'
 import { ColorServiceMock } from '../../mocks/color.service.mock'
 import { PaletteServiceMock } from '../../mocks/palette.service.mock'
+import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 
 export default {
   title: 'Components/Palette',
@@ -20,6 +26,9 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [ColorViewerComponent],
+    }),
+    applicationConfig({
+      providers: [...matomoProvidersMock],
     }),
   ],
 } as Meta

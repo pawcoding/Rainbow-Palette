@@ -20,7 +20,13 @@ export class DialogComponent {
     notificationService.dialog.subscribe((dialogContent) => {
       this.content = dialogContent
 
-      if (dialogContent) this.tracker.trackEvent('dialog', dialogContent?.id)
+      if (
+        dialogContent &&
+        /export-(css|tailwind)-(copy|file)/.test(dialogContent.id)
+      ) {
+        const [category, action, name] = dialogContent.id.split('-')
+        this.tracker.trackEvent(category, action, name)
+      }
     })
   }
 

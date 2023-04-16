@@ -1,17 +1,83 @@
 {
+  "analytics": {
+    "analytics": {
+      "info": {
+        "description": "I use a private {{ matomo }} instance to collect some data about the usage of this site. This data is only used to improve the site and get some statistics. I plan to share these statistics regularly here on the site and on my website. Beyond that, the data <b>will not be shared</b> with any third parties.",
+        "title": "General info about the analytics I use"
+      },
+      "title": "Analytics"
+    },
+    "statistics": {
+      "description": "Here you will soon find some statistics about the site. Since I only recently started to collect some usage data, there is not much to show yet. However, I am planning to release some statistics about the site every couple of months.",
+      "title": "Statistics"
+    },
+    "support": {
+      "disable": {
+        "button": "Disable analytics",
+        "text": "Thank you for your support by allowing me to collect some data about your usage of the site.",
+        "title": "Disable analytics"
+      },
+      "enable": {
+        "button": "Enable analytics",
+        "text": "If you want to help me improve the site, you can enable analytics here, allowing me to collect some data about site usage. No personal data will be collected, profiled or shared with third parties.",
+        "title": "Enable analytics and support the site"
+      }
+    },
+    "tracking": {
+      "feature": {
+        "export": {
+          "label": "Export formats",
+          "reason": "Depending on the usage of the export feature we can try to support these formats even better. Also, if a new export format is added, we can observe how much usage changes and if that has a significant impact."
+        },
+        "language": {
+          "label": "Language selection",
+          "reason": "If I know which languages are most commonly used, I can ensure that new features are translated into those languages as quickly as possible."
+        },
+        "pwa": {
+          "label": "PWA installation",
+          "reason": "If a lot of people are using the site as a PWA, we know that those people are happy enough to have Rainbow Palette integrated into their workflow."
+        },
+        "save": {
+          "label": "Save palette",
+          "reason": "Until now you have to save your palette manually, if you want to keep it in the browser. However, if a lot of users save their palette regularly, an auto-save feature could be considered."
+        },
+        "scheme": {
+          "label": "Color scheme",
+          "reason": "Once we know which color schemes are used the most, we focus on optimizing the algorithm for them even further."
+        },
+        "theme": {
+          "label": "Theme",
+          "reason": "Depending on which theme is most used, we mainly focus on that during development. However, both themes will still be supported."
+        }
+      },
+      "other": {
+        "data": {
+          "browser": "Browser",
+          "country": "Country",
+          "device": "Device type",
+          "duration": "Time spent on the site",
+          "ip": "IP address (first 2 bytes)",
+          "os": "Operating system"
+        },
+        "title": "Other data includes"
+      },
+      "title": "What / why is captured?"
+    }
+  },
   "app": {
     "analytics": {
-      "accept": "Activate Analytics",
-      "analytics-link": "More information about Analytics",
+      "accept": "Activate analytics",
+      "analytics-link": "More information about analytics",
       "decline": "No, thanks",
-      "decline-title": "Keep Analytics deactivated",
+      "decline-title": "Keep analytics deactivated",
       "description": "This website uses a private {{ matomo }} instance to collect anonymized data about the use of the site. No personally identifiable information is collected, and all data about your usage is anonymized.",
       "matomo-link": "Visit Matomo",
-      "more-info": "More Information",
+      "more-info": "More information",
       "more-info-title": "Get mor information about my analytics",
       "title": "Help me improve the site"
     },
     "footer": {
+      "analytics": "Analytics & statistics",
       "created": "Created by {{ pawcode }}",
       "github": "View on GitHub",
       "source-code": "View source code on GitHub",
@@ -127,11 +193,11 @@
       "planned": {
         "issue": "View issue on GitHub",
         "list": {
-          "1": "Adjust colors in different formats (RGB, HSV)",
-          "2": "Exemplary web components to preview palette",
-          "3": "Provide prefabricated palettes",
-          "4": "Generate color palette from images",
-          "5": "Localization for different regions"
+          "15": "Adjust colors in different formats (RGB, HSV)",
+          "17": "Exemplary web components to preview palette",
+          "18": "Provide prefabricated palettes",
+          "19": "Generate color palette from images",
+          "22": "Localization for different regions"
         },
         "text": "Even though I can't develop the tool myself at the moment, I have a few features planned. These include:",
         "title": "Planned features"

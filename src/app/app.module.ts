@@ -24,6 +24,7 @@ import { LanguageSelectorComponent } from './components/language-selector/langua
 import { MatomoConsentMode, NgxMatomoTrackerModule } from '@ngx-matomo/tracker'
 import { NgxMatomoRouterModule } from '@ngx-matomo/router'
 import { AnalyticsInterceptor } from './interceptors/analytics.interceptor'
+import { AnalyticsComponent } from './pages/analytics/analytics.component'
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { AnalyticsInterceptor } from './interceptors/analytics.interceptor'
     SafeHtmlPipe,
     PreviewComponent,
     LanguageSelectorComponent,
+    AnalyticsComponent,
   ],
   imports: [
     AppRoutingModule,

@@ -16,6 +16,10 @@
     @apply text-xl font-bold py-2 lg:py-3 cursor-default;
   }
 
+  h4 {
+    @apply text-lg font-medium py-1 lg:py-2 cursor-default;
+  }
+
   input[type='color'] {
     @apply outline-none appearance-none cursor-pointer;
     -webkit-appearance: none;

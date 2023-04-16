@@ -88,11 +88,19 @@
   <footer
     class="flex gap-4 flex-col sm:flex-row px-8 pt-16 items-center justify-between text-center w-full max-w-4xl mx-auto mt-10">
     <a
+      class="underline"
       href="https://github.com/pawcoding/tailwind-color-generator"
       rel="noreferrer noopener"
       target="_blank"
       [title]="'app.footer.source-code' | translate">
       {{ 'app.footer.github' | translate }}
+    </a>
+
+    <a
+      routerLink="/analytics"
+      class="underline"
+      [title]="'app.analytics.analytics-link' | translate">
+      {{ 'app.footer.analytics' | translate }}
     </a>
 
     <span class="cursor-default">

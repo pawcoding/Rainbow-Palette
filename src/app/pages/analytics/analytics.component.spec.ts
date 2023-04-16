@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { PaletteViewerComponent } from './palette-viewer.component'
+import { AnalyticsComponent } from './analytics.component'
 import { TranslateModule } from '@ngx-translate/core'
 import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 
-describe('PaletteViewerComponent', () => {
-  let component: PaletteViewerComponent
-  let fixture: ComponentFixture<PaletteViewerComponent>
+describe('AnalyticsComponent', () => {
+  let component: AnalyticsComponent
+  let fixture: ComponentFixture<AnalyticsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PaletteViewerComponent],
+      declarations: [AnalyticsComponent],
       imports: [TranslateModule.forRoot()],
       providers: [...matomoProvidersMock],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(PaletteViewerComponent)
+    fixture = TestBed.createComponent(AnalyticsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })
