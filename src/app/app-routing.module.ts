@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core'
 import { canEditPalette } from './guards/palette.guard'
 import { EditComponent } from './pages/edit/edit.component'
 import { PreviewComponent } from './pages/preview/preview.component'
+import { AnalyticsComponent } from './pages/analytics/analytics.component'
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent },
@@ -18,6 +19,11 @@ const routes: Routes = [
     pathMatch: 'full',
     canActivate: [canEditPalette],
     component: PreviewComponent,
+  },
+  {
+    path: 'analytics',
+    pathMatch: 'full',
+    component: AnalyticsComponent,
   },
   { path: '**', redirectTo: '' },
 ]

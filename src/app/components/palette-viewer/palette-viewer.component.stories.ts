@@ -1,5 +1,10 @@
 import { PaletteViewerComponent } from './palette-viewer.component'
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  Story,
+} from '@storybook/angular'
 import { Palette } from '../../models/palette.model'
 import { ColorViewerComponent } from '../color-viewer/color-viewer.component'
 import { v4 as uuidv4 } from 'uuid'
@@ -9,6 +14,10 @@ import { NotificationService } from '../../services/notification.service'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { ColorService } from '../../services/color.service'
 import { PaletteService } from '../../services/palette.service'
+import { StorageServiceMock } from '../../mocks/storage.service.mock'
+import { ColorServiceMock } from '../../mocks/color.service.mock'
+import { PaletteServiceMock } from '../../mocks/palette.service.mock'
+import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 
 export default {
   title: 'Components/Palette',
@@ -18,6 +27,9 @@ export default {
     moduleMetadata({
       declarations: [ColorViewerComponent],
     }),
+    applicationConfig({
+      providers: [...matomoProvidersMock],
+    }),
   ],
 } as Meta
 
@@ -25,9 +37,18 @@ const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
     providers: [
-      ColorService,
-      PaletteService,
-      StorageService,
+      {
+        provide: ColorService,
+        useClass: ColorServiceMock,
+      },
+      {
+        provide: PaletteService,
+        useClass: PaletteServiceMock,
+      },
+      {
+        provide: StorageService,
+        useClass: StorageServiceMock,
+      },
       NotificationService,
     ],
     imports: [StorybookTranslateModule],

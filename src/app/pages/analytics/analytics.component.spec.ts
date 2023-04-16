@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { HomeComponent } from './home.component'
+import { AnalyticsComponent } from './analytics.component'
 import { TranslateModule } from '@ngx-translate/core'
 import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 
-describe('HomeComponent', () => {
-  let component: HomeComponent
-  let fixture: ComponentFixture<HomeComponent>
+describe('AnalyticsComponent', () => {
+  let component: AnalyticsComponent
+  let fixture: ComponentFixture<AnalyticsComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HomeComponent],
+      declarations: [AnalyticsComponent],
       imports: [TranslateModule.forRoot()],
       providers: [...matomoProvidersMock],
     }).compileComponents()
 
-    fixture = TestBed.createComponent(HomeComponent)
+    fixture = TestBed.createComponent(AnalyticsComponent)
     component = fixture.componentInstance
     fixture.detectChanges()
   })

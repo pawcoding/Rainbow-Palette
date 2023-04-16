@@ -21,6 +21,10 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component'
+import { MatomoConsentMode, NgxMatomoTrackerModule } from '@ngx-matomo/tracker'
+import { NgxMatomoRouterModule } from '@ngx-matomo/router'
+import { AnalyticsInterceptor } from './interceptors/analytics.interceptor'
+import { AnalyticsComponent } from './pages/analytics/analytics.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +40,7 @@ import { LanguageSelectorComponent } from './components/language-selector/langua
     SafeHtmlPipe,
     PreviewComponent,
     LanguageSelectorComponent,
+    AnalyticsComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -53,6 +58,18 @@ import { LanguageSelectorComponent } from './components/language-selector/langua
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
+    }),
+    NgxMatomoTrackerModule.forRoot({
+      siteId: 1,
+      trackerUrl: 'https://analytics.apps.pawcode.de/',
+      enableJSErrorTracking: true,
+      acceptDoNotTrack: true,
+      requireConsent: MatomoConsentMode.TRACKING,
+      disabled: !environment.production,
+    }),
+    NgxMatomoRouterModule.forRoot({
+      interceptors: [AnalyticsInterceptor],
+      trackPageTitle: false,
     }),
   ],
   providers: [ColorService, StorageService],

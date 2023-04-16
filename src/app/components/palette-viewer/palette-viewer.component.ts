@@ -12,6 +12,7 @@ import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
 import { ExportDialog } from '../../dialogs/export.dialog'
 import { TranslateService } from '@ngx-translate/core'
+import { MatomoTracker } from '@ngx-matomo/tracker'
 
 @Component({
   selector: 'app-palette-viewer',
@@ -37,7 +38,8 @@ export class PaletteViewerComponent {
   constructor(
     private storage: StorageService,
     private notificationService: NotificationService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private tracker: MatomoTracker
   ) {}
 
   /**
@@ -106,7 +108,12 @@ export class PaletteViewerComponent {
    */
   savePalette() {
     this.saving = true
-    if (this.palette) this.storage.savePalette(this.palette)
+
+    if (this.palette) {
+      this.storage.savePalette(this.palette)
+      this.tracker.trackEvent('palette', 'save')
+    }
+
     setTimeout(() => {
       this.notificationService.notification.emit('saved')
       this.saving = false

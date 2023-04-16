@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { StorageService } from '../../services/storage.service'
 import { languageToCountryCode } from '../../utils/language-to-countrycode.util'
 import { LANGUAGES } from '../../constants/languages.constant'
+import { MatomoTracker } from '@ngx-matomo/tracker'
 
 @Component({
   selector: 'app-language-selector',
@@ -11,13 +12,11 @@ export class LanguageSelectorComponent {
   LANGUAGES = LANGUAGES
 
   language = 'en'
-  country = 'us'
   showMenu = false
 
-  constructor(private storage: StorageService) {
+  constructor(private storage: StorageService, private tracker: MatomoTracker) {
     this.storage.languageEmitter.subscribe((language) => {
       this.language = language
-      this.country = languageToCountryCode(language)
     })
   }
 
@@ -28,6 +27,7 @@ export class LanguageSelectorComponent {
   switchLanguage(language: string) {
     this.storage.applyLanguage(language)
     this.showMenu = false
+    this.tracker.trackPageView()
   }
 
   protected readonly languageToCountryCode = languageToCountryCode

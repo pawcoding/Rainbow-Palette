@@ -8,10 +8,9 @@ import { PaletteService } from './palette.service'
   providedIn: 'root',
 })
 export class ColorService {
-  private color: Color | undefined
-  private shade: Shade | undefined
-  private colorChangeEmitter: EventEmitter<ChangeType> =
-    new EventEmitter<ChangeType>()
+  private color?: Color
+  private shade?: Shade
+  private colorChangeEmitter = new EventEmitter<ChangeType>()
 
   constructor(private paletteService: PaletteService) {}
 
@@ -20,7 +19,7 @@ export class ColorService {
    * @param color
    * @param shadeIndex
    */
-  loadColor(color: Color, shadeIndex?: number) {
+  loadColor(color: Color, shadeIndex?: number): void {
     this.color = Color.parseColor(color)
     if (shadeIndex) this.shade = this.color.getShade(shadeIndex)
     else this.shade = this.color.shades.find((s) => s.fixed)
@@ -30,7 +29,7 @@ export class ColorService {
   /**
    * Close the color editor
    */
-  closeEditor() {
+  closeEditor(): void {
     this.color = undefined
     this.shade = undefined
     this.colorChangeEmitter.emit(ChangeType.LOAD)
@@ -39,7 +38,7 @@ export class ColorService {
   /**
    * Adjust the shades of a color
    */
-  adjustShades() {
+  adjustShades(): void {
     if (this.color) {
       ColorInterpolater.regenerateShades(this.color)
       this.colorChangeEmitter.emit(ChangeType.ADJUST)
@@ -49,7 +48,7 @@ export class ColorService {
   /**
    * Save all changes made to the color
    */
-  saveColor() {
+  saveColor(): void {
     if (this.color) {
       this.paletteService.getPalette()?.replaceColor(this.color)
       this.closeEditor()
@@ -59,21 +58,21 @@ export class ColorService {
   /**
    * Return the current color
    */
-  getColor() {
+  getColor(): Color | undefined {
     return this.color
   }
 
   /**
    * Return the current shade
    */
-  getShade() {
+  getShade(): Shade | undefined {
     return this.shade
   }
 
   /**
    * Return the color change event emitter
    */
-  getColorChangeEmitter() {
+  getColorChangeEmitter(): EventEmitter<ChangeType> {
     return this.colorChangeEmitter
   }
 }

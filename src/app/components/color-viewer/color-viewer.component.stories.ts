@@ -5,7 +5,8 @@ import { ColorService } from '../../services/color.service'
 import { NotificationService } from '../../services/notification.service'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { PaletteService } from '../../services/palette.service'
-import { StorageService } from '../../services/storage.service'
+import { ColorServiceMock } from '../../mocks/color.service.mock'
+import { PaletteServiceMock } from '../../mocks/palette.service.mock'
 
 export default {
   title: 'Components/Color',
@@ -16,10 +17,15 @@ const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
     providers: [
-      ColorService,
+      {
+        provide: ColorService,
+        useClass: ColorServiceMock,
+      },
       NotificationService,
-      PaletteService,
-      StorageService,
+      {
+        provide: PaletteService,
+        useClass: PaletteServiceMock,
+      },
     ],
     imports: [StorybookTranslateModule],
   },

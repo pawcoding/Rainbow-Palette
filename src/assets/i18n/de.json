@@ -1,6 +1,83 @@
 {
+  "analytics": {
+    "analytics": {
+      "info": {
+        "description": "Ich verwende eine private {{ matomo }} Instanz, um einige Daten über die Nutzung dieser Seite zu sammeln. Diese daten werden nur verwendet, um die Webseite zu verbessern und einige Statistiken zu erstellen. Ich plane, diese Statistiken regelmäßig hier auf der Webseite und auf meiner eigenen Webseite zu veröffentlichen. Darüber hinaus werden die Daten <b>nicht an Dritte weitergegeben</b>.",
+        "title": "Was passiert mit meinen Daten?"
+      },
+      "title": "Analytics"
+    },
+    "statistics": {
+      "description": "Hier findest du bald einige Statistiken über die Nutzung die Website. Da ich erst vor kurzem begonnen habe, einige Nutzungsdaten zu sammeln, gibt es noch nicht viel zu zeigen. Ich plane jedoch, alle paar Monate einige Statistiken über die Website zu veröffentlichen.",
+      "title": "Statistiken"
+    },
+    "support": {
+      "disable": {
+        "button": "Analytics deaktivieren",
+        "text": "Danke, dass du die Verbesserung der Webseite unterstützt, indem du mir erlaubst einige Daten über die Nutzung der Seite zu sammeln.",
+        "title": "Analytics deaktivieren"
+      },
+      "enable": {
+        "button": "Analytics aktivieren",
+        "text": "Wenn du mir helfen willst, die Seite zu verbessern, kannst du hier die Analytics aktivieren und mir damit erlauben einige Daten über die Nutzung der Seite zu sammeln. Es werden keine personenbezogenen Daten gesammelt, Profile erstellt oder Daten an Dritte weitergegeben.",
+        "title": "Analytics aktivieren und Projekt unterstützen"
+      }
+    },
+    "tracking": {
+      "feature": {
+        "export": {
+          "label": "Export Formate",
+          "reason": "Abhängig von der Nutzung der Exportfunktion können wir versuchen, diese Formate noch besser zu unterstützen. Wenn ein neues Exportformat hinzugefügt wird, können wir außerdem beobachten, wie sich die Nutzung ändert und ob dies einen wesentlichen Einfluss hat."
+        },
+        "language": {
+          "label": "Sprache",
+          "reason": "Wenn ich weiß, welche Sprachen am häufigsten verwendet werden, kann ich sicherstellen, dass neue Funktionen so schnell wie möglich in diese Sprachen übersetzt werden."
+        },
+        "pwa": {
+          "label": "PWA-Installation",
+          "reason": "Wenn viele Leute die Website als PWA nutzen, wissen wir, dass diese Leute zufrieden genug sind, um die Rainbow Palette in ihren Arbeitsablauf zu integrieren."
+        },
+        "save": {
+          "label": "Palette speichern",
+          "reason": "Bislang müssen Nutzer ihre Palette manuell speichern, wenn sie diese im Browser behalten wollen. Wenn jedoch viele Benutzer ihre Palette regelmäßig speichern, können wir über eine automatische Speicherfunktion nachdenken."
+        },
+        "scheme": {
+          "label": "Farbschema",
+          "reason": "Sobald wir wissen, welche Farbschemata am häufigsten verwendet werden, konzentrieren wir uns darauf, den Algorithmus für diese Schemata noch weiter zu optimieren."
+        },
+        "theme": {
+          "label": "Design",
+          "reason": "Je nachdem, welches Design am häufigsten verwendet wird, konzentrieren wir uns bei der Entwicklung hauptsächlich auf dieses. Es werden aber weiterhin beide Themen unterstützt."
+        }
+      },
+      "other": {
+        "data": {
+          "browser": "Browser",
+          "country": "Land",
+          "device": "Gerätetyp",
+          "duration": "Nutzungsdauer der Seite",
+          "ip": "IP-Adresse",
+          "os": "Betriebssystem"
+        },
+        "title": "Andere Daten beinhalten"
+      },
+      "title": "Was / warum wird erfasst?"
+    }
+  },
   "app": {
+    "analytics": {
+      "accept": "Analytics aktivieren",
+      "analytics-link": "Mehr Informationen zu den Analytics",
+      "decline": "Nein, danke",
+      "decline-title": "Analytics deaktiviert lassen",
+      "description": "Diese Webseite verwendet eine private {{ matomo }} Instanz, um anonymisierte Daten über die Nutzung der Seite zu sammeln. Es werden keine personenbezogenen Daten gesammelt und alle Nutzungsdaten werden anonymisiert.",
+      "matomo-link": "Matomo besuchen",
+      "more-info": "Mehr Informationen",
+      "more-info-title": "Mehr Informationen zu den Analytics",
+      "title": "Hilf mir, die Seite zu verbessern"
+    },
     "footer": {
+      "analytics": "Analytics & Statistiken",
       "created": "Erstellt von {{ pawcode }}",
       "github": "Auf GitHub ansehen",
       "source-code": "Quellcode auf GitHub ansehen",
@@ -74,9 +151,17 @@
         "label": "Weiter",
         "title": "Nächsten Dialog anzeigen"
       },
+      "not-now": {
+        "label": "Nicht jetzt",
+        "title": "Neue Version wird beim Schließen der Seite installiert"
+      },
       "tailwind": {
         "label": "TailwindCSS",
         "title": "Exportiere deine Palette zur Nutzung mit TailwindCSS"
+      },
+      "update": {
+        "label": "Aktualisieren",
+        "title": "Neuste Version installieren"
       },
       "wait": {
         "label": "Warten",
@@ -94,7 +179,8 @@
       "export-tailwind": "Willst du die Palette in deine bereits bestehende {{ file }} Datei kopieren oder eine eigenständige Datei dafür herunterladen?",
       "export-tailwind-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben zu nutzen, musst du den Inhalt deiner Zwischenablage in der {{ config }} Datei einfügen.<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
       "export-tailwind-file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
-      "test": "Dies ist ein Testdialog für Storybook.<br><br>Du kannst <b>HTML</b> nutzen, um die Nachricht im Dialog zu formatieren."
+      "test": "Dies ist ein Testdialog für Storybook.<br><br>Du kannst <b>HTML</b> nutzen, um die Nachricht im Dialog zu formatieren.",
+      "update-available": "Es wurde eine neue Version von Rainbow Palette veröffentlicht. Möchtest du sie jetzt installieren?"
     }
   },
   "home": {
@@ -107,11 +193,11 @@
       "planned": {
         "issue": "Thema auf GitHub ansehen",
         "list": {
-          "1": "Anpassen von Farben in verschiedenen Formaten (RGB, HSV)",
-          "2": "Beispielhafte Webkomponenten zur Vorschau von Paletten",
-          "3": "Bereitstellen von vorgefertigten Paletten",
-          "4": "Erzeugen von Farbpaletten aus Bildern",
-          "5": "Lokalisierung für verschiedene Regionen"
+          "15": "Anpassen von Farben in verschiedenen Formaten (RGB, HSV)",
+          "17": "Beispielhafte Webkomponenten zur Vorschau von Paletten",
+          "18": "Bereitstellen von vorgefertigten Paletten",
+          "19": "Erzeugen von Farbpaletten aus Bildern",
+          "22": "Lokalisierung für verschiedene Regionen"
         },
         "text": "Auch wenn ich das Tool im Moment nicht selbst entwickeln kann, habe ich einige Funktionen geplant. Dazu gehören:",
         "title": "Geplante Features"
@@ -170,7 +256,9 @@
     "copy-error": "Die Farbe konnte nicht in die Zwischenablage kopiert werden.",
     "close": "Schließen",
     "saved": "Deine Palette wurde lokal gespeichert.",
-    "test": "Dies ist eine Testnachricht."
+    "test": "Dies ist eine Testnachricht.",
+    "tracking-allowed": "Danke, dass du das Projekt unterstützt!",
+    "update-failed": "Die neue Version konnte nicht geladen werden."
   },
   "palette-viewer": {
     "add": "Farbe hinzufügen",

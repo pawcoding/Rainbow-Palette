@@ -24,7 +24,7 @@ export class PaletteService {
    * @param hex
    * @param scheme
    */
-  generatePalette(hex: string, scheme: PaletteScheme) {
+  generatePalette(hex: string, scheme: PaletteScheme): void {
     if (!hex.match(/^#[0-9A-Fa-f]{6}$/)) throw 'Hex must be a 6-digit hex code.'
 
     this.hex = hex
@@ -38,7 +38,7 @@ export class PaletteService {
    * Load an existing palette
    * @param palette
    */
-  loadPalette(palette: Palette) {
+  loadPalette(palette: Palette): void {
     this.hex = palette.colors[0].getShade(500).hex
     this.palette = palette
     this.paletteChangeEmitter.emit(palette)
@@ -47,7 +47,7 @@ export class PaletteService {
   /**
    * Unload the current palette
    */
-  clearPalette() {
+  clearPalette(): void {
     this.palette = undefined
     this.paletteChangeEmitter.emit(undefined)
   }
@@ -55,21 +55,21 @@ export class PaletteService {
   /**
    * Return the current palette
    */
-  getPalette() {
+  getPalette(): Palette | undefined {
     return this.palette
   }
 
   /**
    * Check if a palette is present
    */
-  hasPalette() {
+  hasPalette(): boolean {
     return !!this.palette
   }
 
   /**
    * Return the palette change event emitter
    */
-  getPaletteChangeEmitter() {
+  getPaletteChangeEmitter(): EventEmitter<Palette | undefined> {
     return this.paletteChangeEmitter
   }
 }

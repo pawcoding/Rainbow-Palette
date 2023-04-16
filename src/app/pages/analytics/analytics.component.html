@@ -1,0 +1,126 @@
+<div>
+  <article class="mx-auto max-w-lg px-4 text-justify">
+    <h2 id="statistics">{{ 'analytics.statistics.title' | translate }}</h2>
+
+    <p class="dark:text-gray-300 mb-2">
+      {{ 'analytics.statistics.description' | translate }}
+    </p>
+
+    <section *ngIf="trackingAllowed === 0">
+      <p class="dark:text-gray-300">
+        {{ 'analytics.support.enable.text' | translate }}
+      </p>
+
+      <div class="flex items-center justify-center mt-4">
+        <button
+          (click)="allowTracking()"
+          class="py-2 px-4 bg-primary-700 font-medium text-primary-100 rounded cursor-pointer transition-colors duration-500 hover:bg-primary-800 hover:text-primary-200 dark:hover:bg-primary-600 dark:hover:text-primary-50"
+          [title]="'analytics.support.enable.title' | translate">
+          {{ 'analytics.support.enable.button' | translate }}
+        </button>
+      </div>
+    </section>
+  </article>
+
+  <article
+    class="mx-auto max-w-3xl px-4 text-justify mt-20 pt-10 border-t border-t-gray-300 dark:border-t-gray-600">
+    <h2>
+      {{ 'analytics.analytics.title' | translate }}
+    </h2>
+
+    <div>
+      <h3>
+        {{ 'analytics.analytics.info.title' | translate }}
+      </h3>
+
+      <p
+        class="dark:text-gray-300 mb-2"
+        [innerHtml]="
+          'analytics.analytics.info.description'
+            | translate
+              : {
+                  matomo: getMatomoLink()
+                }
+        "></p>
+    </div>
+
+    <div>
+      <h3 class="pb-0">
+        {{ 'analytics.tracking.title' | translate }}
+      </h3>
+
+      <section
+        class="grid sm:grid-cols-[12rem_1fr] gap-y-2 gap-x-1 items-baseline">
+        <ng-container
+          *ngFor="
+            let feature of [
+              'language',
+              'theme',
+              'pwa',
+              'export',
+              'scheme',
+              'save'
+            ]
+          ">
+          <h4 class="pb-0 -mb-1">
+            {{ 'analytics.tracking.feature.' + feature + '.label' | translate }}
+          </h4>
+          <p class="dark:text-gray-300">
+            {{
+              'analytics.tracking.feature.' + feature + '.reason' | translate
+            }}
+          </p>
+        </ng-container>
+      </section>
+    </div>
+
+    <div>
+      <h3>
+        {{ 'analytics.tracking.other.title' | translate }}
+      </h3>
+
+      <ul class="list-disc list-inside dark:text-gray-300">
+        <ng-container
+          *ngFor="
+            let data of ['ip', 'country', 'device', 'os', 'browser', 'duration']
+          ">
+          <li>
+            {{ 'analytics.tracking.other.data.' + data | translate }}
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </article>
+
+  <article class="mx-auto max-w-lg p-4 text-justify">
+    <section *ngIf="trackingAllowed === 1">
+      <p class="dark:text-gray-300">
+        {{ 'analytics.support.disable.text' | translate }}
+      </p>
+
+      <div class="flex items-center justify-center mt-4">
+        <button
+          (click)="disableTracking()"
+          class="py-2 px-4 bg-gray-300 font-medium text-gray-800 rounded cursor-pointer transition-colors duration-500 hover:bg-gray-400 hover:text-gray-900"
+          [title]="'analytics.support.disable.title' | translate">
+          {{ 'analytics.support.disable.button' | translate }}
+        </button>
+      </div>
+    </section>
+
+    <section *ngIf="trackingAllowed === 0">
+      <p class="dark:text-gray-300">
+        {{ 'analytics.support.enable.text' | translate }}
+      </p>
+
+      <div class="flex items-center justify-center mt-4">
+        <button
+          (click)="allowTracking()"
+          class="py-2 px-4 bg-primary-700 font-medium text-primary-100 rounded cursor-pointer transition-colors duration-500 hover:bg-primary-800 hover:text-primary-200 dark:hover:bg-primary-600 dark:hover:text-primary-50"
+          [title]="'analytics.support.enable.title' | translate">
+          {{ 'analytics.support.enable.button' | translate }}
+        </button>
+      </div>
+    </section>
+  </article>
+</div>
