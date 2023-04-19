@@ -21,14 +21,15 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 
 | Status | Version | Features                                       |
 | ------ | ------- | ---------------------------------------------- |
-| 🟩     | `0.1.0` | Export Palette                                 |
-| 🟩     | `0.1.1` | Adjust Color Shades                            |
+| 🟩     | `0.1.0` | Export palette                                 |
+| 🟩     | `0.1.1` | Adjust color shades                            |
 | 🟩     | `0.1.2` | Redesign                                       |
 | 🟩     | `0.1.3` | Progressive Web App                            |
-| 🟩     | `0.1.4` | Instructions & New Icons                       |
-| 🟩     | `0.2.0` | Improved Algorithms                            |
-| 🟥     | `0.2.1` | Adjust colors in other formats (RGB, HSV, ...) |
-| 🟥     | `0.2.2` | Import existing palettes from files            |
+| 🟩     | `0.1.4` | Instructions & new icons                       |
+| 🟩     | `0.2.0` | Improved algorithms                            |
+| 🟩     | `0.2.1` | Enable analytics                               |
+| 🟥     | `0.2.2` | Adjust colors in other formats (RGB, HSV, ...) |
+| 🟥     | `0.2.3` | Import existing palettes from files            |
 | 🟥     | `0.3.0` | Exemplary web components to preview palette    |
 | 🟥     | `0.3.1` | Provide prefabricated color palettes           |
 | 🟥     | `0.3.2` | Generate color palette from images             |

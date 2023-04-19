@@ -65,7 +65,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component'
       enableJSErrorTracking: true,
       acceptDoNotTrack: true,
       requireConsent: MatomoConsentMode.TRACKING,
-      disabled: environment.production,
+      disabled: !environment.production,
     }),
     NgxMatomoRouterModule.forRoot({
       interceptors: [AnalyticsInterceptor],

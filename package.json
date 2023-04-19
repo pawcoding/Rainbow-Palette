@@ -1,6 +1,6 @@
 {
   "name": "rainbow-palette",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "pawcode Development"
   },
@@ -106,5 +106,6 @@
     "tailwindcss": "^3.3.1",
     "typescript": "~4.8.0"
   },
-  "readme": "https://github.com/pawcoding/Rainbow-Palette#readme"
+  "readme": "https://github.com/pawcoding/Rainbow-Palette#readme",
+  "_id": "rainbow-palette@0.2.1"
 }
