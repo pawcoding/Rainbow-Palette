@@ -65,6 +65,7 @@ export class StorageService {
     this.translate.use(language).subscribe(() => {
       localStorage.setItem('language', language)
       this.language = language
+      document.documentElement.setAttribute('lang', language)
       this.languageEmitter.emit(language)
     })
   }
