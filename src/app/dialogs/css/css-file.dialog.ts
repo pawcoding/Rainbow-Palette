@@ -1,8 +1,8 @@
 import { EventEmitter } from '@angular/core'
-import { Dialog } from '../interfaces/dialog.interface'
-import { toUnicodeVariant } from '../utils/to-unicode-variant.util'
+import { Dialog } from '../../interfaces/dialog.interface'
+import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'
 
-export class CssCopyDialog {
+export class CssFileDialog {
   constructor(private notification: EventEmitter<Dialog | undefined>) {}
 
   getNotification(): Dialog {
@@ -20,9 +20,13 @@ export class CssCopyDialog {
     })
 
     return {
-      id: 'export-css-copy',
+      id: 'export-css-file',
       interpolateParams: {
-        root: toUnicodeVariant(':root', 'm'),
+        file: toUnicodeVariant('colors.css', 'm'),
+        link: toUnicodeVariant(
+          '<link rel="stylesheet" href="/colors.css">',
+          'm'
+        ),
         usage: toUnicodeVariant('color: var(--color-100);', 'm'),
       },
       actions: [

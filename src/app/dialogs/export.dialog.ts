@@ -1,8 +1,9 @@
 import { EventEmitter } from '@angular/core'
 import { Palette } from '../models/palette.model'
 import { Dialog } from '../interfaces/dialog.interface'
-import { CssDialog } from './css.dialog'
-import { TailwindDialog } from './tailwind.dialog'
+import { CssDialog } from './css/css.dialog'
+import { TailwindDialog } from './tailwind/tailwind.dialog'
+import { ScssDialog } from './scss/scss.dialog'
 
 export class ExportDialog {
   constructor(
@@ -15,6 +16,13 @@ export class ExportDialog {
     cssEmitter.subscribe(() => {
       this.notification.emit(
         new CssDialog(this.notification, this.palette).getNotification()
+      )
+    })
+
+    const scssEmitter = new EventEmitter()
+    scssEmitter.subscribe(() => {
+      this.notification.emit(
+        new ScssDialog(this.notification, this.palette).getNotification()
       )
     })
 
@@ -31,6 +39,10 @@ export class ExportDialog {
         {
           id: 'css',
           action: cssEmitter,
+        },
+        {
+          id: 'scss',
+          action: scssEmitter,
         },
         {
           id: 'tailwind',

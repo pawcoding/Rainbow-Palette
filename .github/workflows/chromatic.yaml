@@ -1,0 +1,49 @@
+name: 🎨 Publish Storybook
+
+# Controls when the action will run.
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+      - 'version/**'
+
+jobs:
+  chromatic-deploy:
+    name: 🧑🏽‍🎨 Deploy to Chromatic
+    # using Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout repository
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # Setup Node v16
+      - name: 💻 Use node 16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+
+      # Install dependencies and build project
+      - name: 🔨 Build project
+        run: |
+          npm cache clean --force
+          npm ci
+          npm install -g @angular/cli@14.x > /dev/null
+
+      # Upload to Chromatic
+      - name: 📤 Upload to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: 'build:storybook'
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
+        env:
+          CI: true

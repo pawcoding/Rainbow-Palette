@@ -1,10 +1,10 @@
 import { EventEmitter } from '@angular/core'
-import { PaletteExporter } from '../class/palette-exporter'
-import { Palette } from '../models/palette.model'
-import { Dialog } from '../interfaces/dialog.interface'
+import { PaletteExporter } from '../../class/palette-exporter'
+import { Palette } from '../../models/palette.model'
+import { Dialog } from '../../interfaces/dialog.interface'
 import { TailwindCopyDialog } from './tailwind-copy.dialog'
 import { TailwindFileDialog } from './tailwind-file.dialog'
-import { toUnicodeVariant } from '../utils/to-unicode-variant.util'
+import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'
 
 export class TailwindDialog {
   constructor(

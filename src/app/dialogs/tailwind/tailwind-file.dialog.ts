@@ -1,8 +1,8 @@
 import { EventEmitter } from '@angular/core'
-import { Dialog } from '../interfaces/dialog.interface'
-import { toUnicodeVariant } from '../utils/to-unicode-variant.util'
+import { Dialog } from '../../interfaces/dialog.interface'
+import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'
 
-export class CssFileDialog {
+export class TailwindFileDialog {
   constructor(private notification: EventEmitter<Dialog | undefined>) {}
 
   getNotification(): Dialog {
@@ -14,20 +14,17 @@ export class CssFileDialog {
     const docEmitter = new EventEmitter()
     docEmitter.subscribe(() => {
       window.open(
-        'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',
+        'https://tailwindcss.com/docs/customizing-colors#using-the-default-colors',
         '_blank'
       )
     })
 
     return {
-      id: 'export-css-file',
+      id: 'export-tailwind-file',
       interpolateParams: {
-        file: toUnicodeVariant('colors.css', 'm'),
-        link: toUnicodeVariant(
-          '<link rel="stylesheet" href="/colors.css">',
-          'm'
-        ),
-        usage: toUnicodeVariant('color: var(--color-100);', 'm'),
+        file: toUnicodeVariant('tailwind.colors.js', 'm'),
+        config: toUnicodeVariant('tailwind.config.js', 'm'),
+        import: toUnicodeVariant("colors: require('./tailwind.colors'),", 'm'),
       },
       actions: [
         {

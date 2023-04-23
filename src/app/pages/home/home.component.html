@@ -3,7 +3,7 @@
     <div *ngIf="!loading">
       <div
         class="flex items-center justify-center"
-        style="min-height: calc(100svh - 170px)">
+        style="min-height: calc(80svh - 170px)">
         <section>
           <p class="font-bold">
             {{ 'home.text1' | translate }}
@@ -37,6 +37,7 @@
 
             <button
               class="py-2 px-4 mt-2 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded transition-colors duration-500"
+              type="submit"
               [disabled]="invalid">
               <span
                 class="grow text-center"
@@ -205,56 +206,21 @@
           </p>
           <ul
             class="list-inside list-disc space-y-1 md:space-y-0 text-left mt-2 dark:text-gray-200">
-            <li>
-              {{ 'home.additions.planned.list.1' | translate }} (<a
-                href="https://github.com/pawcoding/Rainbow-Palette/issues/15"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="underline"
-                [title]="'home.additions.planned.issue' | translate"
-                >#15</a
-              >)
-            </li>
-            <li>
-              {{ 'home.additions.planned.list.2' | translate }} (<a
-                href="https://github.com/pawcoding/Rainbow-Palette/issues/17"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="underline"
-                [title]="'home.additions.planned.issue' | translate"
-                >#17</a
-              >)
-            </li>
-            <li>
-              {{ 'home.additions.planned.list.3' | translate }} (<a
-                href="https://github.com/pawcoding/Rainbow-Palette/issues/18"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="underline"
-                [title]="'home.additions.planned.issue' | translate"
-                >#18</a
-              >)
-            </li>
-            <li>
-              {{ 'home.additions.planned.list.4' | translate }} (<a
-                href="https://github.com/pawcoding/Rainbow-Palette/issues/19"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="underline"
-                [title]="'home.additions.planned.issue' | translate"
-                >#19</a
-              >)
-            </li>
-            <li>
-              {{ 'home.additions.planned.list.5' | translate }} (<a
-                href="https://github.com/pawcoding/Rainbow-Palette/issues/22"
-                target="_blank"
-                rel="noreferrer noopener"
-                class="underline"
-                [title]="'home.additions.planned.issue' | translate"
-                >#22</a
-              >)
-            </li>
+            <ng-container *ngFor="let issue of ['15', '17', '18', '19', '22']">
+              <li>
+                {{ 'home.additions.planned.list.' + issue | translate }} (<a
+                  [href]="
+                    'https://github.com/pawcoding/Rainbow-Palette/issues/' +
+                    issue
+                  "
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  class="underline"
+                  [title]="'home.additions.planned.issue' | translate"
+                  >#{{ issue }}</a
+                >)
+              </li>
+            </ng-container>
           </ul>
         </section>
       </div>

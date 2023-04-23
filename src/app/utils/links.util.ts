@@ -13,3 +13,10 @@ export function getDiscordLink(translate: TranslateService): () => string {
       'home.additions.development.discord'
     )}">Discord</a>`
 }
+
+export function getMatomoLink(translate: TranslateService): () => string {
+  return () =>
+    `<a href="https://matomo.org/" target="_blank" rel="noreferrer noopener" class="underline" title="${translate.instant(
+      'app.analytics.matomo-link'
+    )}">Matomo</a>`
+}

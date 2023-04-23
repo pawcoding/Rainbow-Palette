@@ -1,14 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { DialogComponent } from './dialog.component'
+import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 
-describe('ExportDialogComponent', () => {
+describe('DialogComponent', () => {
   let component: DialogComponent
   let fixture: ComponentFixture<DialogComponent>
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DialogComponent],
+      providers: [...matomoProvidersMock],
     }).compileComponents()
 
     fixture = TestBed.createComponent(DialogComponent)

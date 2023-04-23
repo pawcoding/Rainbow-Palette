@@ -1,0 +1,37 @@
+/*
+  Flags and styles imported from flag-icons:
+  https://github.com/lipis/flag-icons
+
+  To prevent the dist folder from being cluttered with flags,
+  they are stored in /assets/flags rather than installing the package via npm.
+ */
+.fib {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+.fi {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  position: relative;
+  display: inline-block;
+  width: 1.33333333em;
+  line-height: 1em;
+}
+.fi:before {
+  content: '\00a0';
+}
+.fi.fis {
+  width: 1em;
+}
+
+/*
+  Here are all css classes for using the flags.
+*/
+.fi-de.fis {
+  background-image: url('/assets/flags/de.svg');
+}
+.fi-us.fis {
+  background-image: url('/assets/flags/us.svg');
+}

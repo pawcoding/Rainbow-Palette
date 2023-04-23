@@ -10,6 +10,7 @@ on:
   pull_request:
     branches:
       - main
+      - 'version/**'
 
 jobs:
   unit-tests:

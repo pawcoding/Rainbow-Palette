@@ -1,13 +1,23 @@
 import { PaletteViewerComponent } from './palette-viewer.component'
-import { Meta, moduleMetadata, Story } from '@storybook/angular'
+import {
+  applicationConfig,
+  Meta,
+  moduleMetadata,
+  Story,
+} from '@storybook/angular'
 import { Palette } from '../../models/palette.model'
 import { ColorViewerComponent } from '../color-viewer/color-viewer.component'
 import { v4 as uuidv4 } from 'uuid'
 import { Color } from '../../models/color.model'
 import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
-import { PaletteGenerator, PaletteScheme } from '../../class/palette-generator'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
+import { ColorService } from '../../services/color.service'
+import { PaletteService } from '../../services/palette.service'
+import { StorageServiceMock } from '../../mocks/storage.service.mock'
+import { ColorServiceMock } from '../../mocks/color.service.mock'
+import { PaletteServiceMock } from '../../mocks/palette.service.mock'
+import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 
 export default {
   title: 'Components/Palette',
@@ -17,6 +27,9 @@ export default {
     moduleMetadata({
       declarations: [ColorViewerComponent],
     }),
+    applicationConfig({
+      providers: [...matomoProvidersMock],
+    }),
   ],
 } as Meta
 
@@ -25,11 +38,18 @@ const Template: Story = (args) => ({
   moduleMetadata: {
     providers: [
       {
-        provide: StorageService,
+        provide: ColorService,
+        useClass: ColorServiceMock,
       },
       {
-        provide: NotificationService,
+        provide: PaletteService,
+        useClass: PaletteServiceMock,
       },
+      {
+        provide: StorageService,
+        useClass: StorageServiceMock,
+      },
+      NotificationService,
     ],
     imports: [StorybookTranslateModule],
   },
@@ -452,59 +472,4 @@ mediaScopePalette.addColor(
 MediaScope.args = {
   dark: false,
   palette: mediaScopePalette,
-}
-
-export const Monochromatic = Template.bind({})
-
-Monochromatic.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette(
-    '#da4e44',
-    PaletteScheme.MONOCHROMATIC
-  ),
-}
-
-export const Analogous = Template.bind({})
-
-Analogous.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#77cf97', PaletteScheme.ANALOGOUS),
-}
-
-export const Complementary = Template.bind({})
-
-Complementary.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette(
-    '#ff7231',
-    PaletteScheme.COMPLEMENTARY
-  ),
-}
-
-export const Split = Template.bind({})
-
-Split.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#29cddc', PaletteScheme.SPLIT),
-}
-
-export const Triadic = Template.bind({})
-
-Triadic.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#00ad64', PaletteScheme.TRIADIC),
-}
-
-export const Compound = Template.bind({})
-
-Compound.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#66b032', PaletteScheme.COMPOUND),
-}
-
-export const Rainbow = Template.bind({})
-
-Rainbow.args = {
-  dark: false,
-  palette: PaletteGenerator.generatePalette('#ff1100', PaletteScheme.RAINBOW),
 }

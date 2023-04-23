@@ -37,6 +37,7 @@
       <div class="sm:ml-auto">
         <button
           class="py-2 px-4 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
+          type="button"
           [title]="'palette-viewer.export-title' | translate"
           (click)="exportPalette()">
           <svg
@@ -59,6 +60,7 @@
         <!-- Save Button -->
         <button
           class="py-2 px-4 ml-4 inline-flex items-center text-primary-100 bg-primary-700 font-medium rounded cursor-pointer"
+          type="button"
           [title]="
             'palette-viewer.' + (saving ? 'saving' : 'save') + '-title'
               | translate
@@ -102,6 +104,7 @@
     <!-- Add random color to palette -->
     <button
       class="py-2 px-4 mt-4 mx-auto flex items-center font-medium text-primary-100 bg-primary-700 rounded transition-all duration-200"
+      type="button"
       [title]="
         'palette-viewer.' + (adding ? 'adding' : 'add') + '-title' | translate
       "

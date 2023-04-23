@@ -6,6 +6,7 @@ import { PaletteService } from '../../services/palette.service'
 import { Router } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
 import { getDiscordLink, getGitHubLink } from '../../utils/links.util'
+import { MatomoTracker } from '@ngx-matomo/tracker'
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,8 @@ export class HomeComponent {
     private notificationService: NotificationService,
     private paletteService: PaletteService,
     private router: Router,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private tracker: MatomoTracker
   ) {
     this.value =
       paletteService.hex || Shade.generateRandomShade().hex.toUpperCase()
@@ -76,8 +78,10 @@ export class HomeComponent {
       return
     }
 
+    this.tracker.trackEvent('palette', 'generate', this.scheme.toString())
+
     this.loading = true
-    const interval = setInterval(() => {
+    const interval = window.setInterval(() => {
       this.progress =
         (this.loadBar?.nativeElement.clientWidth || 0) /
         (this.loadContainer?.nativeElement.clientWidth || 100)
