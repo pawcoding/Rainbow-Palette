@@ -12,7 +12,7 @@ describe('PaletteExporter', () => {
     let css = PaletteExporter.exportPaletteToCSS(palette)
     expect((css.match(cssRegEx) || []).length).toBe(10)
 
-    css = PaletteExporter.exportCssFile(palette)
+    css = PaletteExporter.exportCSSFile(palette)
     expect(css).toMatch(/^:root {[^}]*}$/)
     expect((css.match(cssRegEx) || []).length).toBe(10)
   })

@@ -155,6 +155,10 @@
         "label": "Nicht jetzt",
         "title": "Neue Version wird beim Schließen der Seite installiert"
       },
+      "scss": {
+        "label": "SCSS",
+        "title": "Exportiere deine Palette zur Nutzung mit SCSS"
+      },
       "tailwind": {
         "label": "TailwindCSS",
         "title": "Exportiere deine Palette zur Nutzung mit TailwindCSS"
@@ -176,6 +180,9 @@
       "export-css-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als CSS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage in das {{ root }} Element deiner CSS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
       "export-css-file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Webservers. Füge dann folgenden Link in den Kopf deiner HTML Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
       "export-palette": "Wie / womit willst du deine Palette verwenden?",
+      "export-scss": "Willst du deine Palette als SCSS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
+      "export-scss-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als SCSS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage ganz oben in deiner SCSS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+      "export-scss-file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Projekts. Füge dann folgendes in den Kopf deiner SCSS Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
       "export-tailwind": "Willst du die Palette in deine bereits bestehende {{ file }} Datei kopieren oder eine eigenständige Datei dafür herunterladen?",
       "export-tailwind-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben zu nutzen, musst du den Inhalt deiner Zwischenablage in der {{ config }} Datei einfügen.<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
       "export-tailwind-file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
