@@ -55,9 +55,6 @@ export class NotificationServiceMock implements Partial<NotificationService> {
 
     wait.subscribe(() => {
       this.dialog.emit(undefined)
-      setTimeout(() => {
-        this.dialog.emit(content)
-      }, 2000)
     })
     next.subscribe(() => {
       this.dialog.emit(content)
@@ -68,8 +65,14 @@ export class NotificationServiceMock implements Partial<NotificationService> {
     }, 0)
 
     this.dialog.subscribe((notification) => {
-      if (notification) console.log('Show dialog\n', notification.id)
-      else console.log('Close dialog')
+      if (notification) {
+        console.log('Show dialog\n', notification.id)
+      } else {
+        console.log('Close dialog')
+        setTimeout(() => {
+          this.dialog.emit(content)
+        }, 2000)
+      }
     })
   }
 }

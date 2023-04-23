@@ -10,9 +10,9 @@ import { Palette } from '../../models/palette.model'
 import { Color } from '../../models/color.model'
 import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
-import { ExportDialog } from '../../dialogs/export.dialog'
 import { TranslateService } from '@ngx-translate/core'
 import { MatomoTracker } from '@ngx-matomo/tracker'
+import { ExportDialog } from '../../dialogs/export.dialog'
 
 @Component({
   selector: 'app-palette-viewer',

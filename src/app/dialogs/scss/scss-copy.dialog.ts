@@ -27,6 +27,9 @@ export class ScssCopyDialog {
           action: docEmitter,
         },
       ],
+      style: {
+        width: 'large',
+      },
     }
   }
 }

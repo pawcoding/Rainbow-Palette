@@ -32,6 +32,9 @@ export class TailwindFileDialog {
           action: docEmitter,
         },
       ],
+      style: {
+        width: 'large',
+      },
     }
   }
 }

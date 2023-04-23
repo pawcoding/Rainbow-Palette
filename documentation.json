@@ -3624,12 +3624,12 @@
     },
     {
       "name": "CssCopyDialog",
-      "id": "class-CssCopyDialog-af29a8d36b9e5326df0aac05c1282fbbc01edab852067831d6f6135743bd7384ebf9ad99860e70dbf4a1d7a0b6e7cba830e05987cfd694d8853731f3bae69804",
-      "file": "src/app/dialogs/css-copy.dialog.ts",
+      "id": "class-CssCopyDialog-a315c3438132a5468270b4cf068d67a44308e51dfa6749aa2cde3148c24ae9a315c78c6911b362006d27b1eb05b3b5aba3f2cad323f758985608a8e0a388cc0a",
+      "file": "src/app/dialogs/css/css-copy.dialog.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../utils/to-unicode-variant.util'\r\n\r\nexport class CssCopyDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-css-copy',\r\n      interpolateParams: {\r\n        root: toUnicodeVariant(':root', 'm'),\r\n        usage: toUnicodeVariant('color: var(--color-100);', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../../utils/to-unicode-variant.util'\r\n\r\nexport class CssCopyDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-css-copy',\r\n      interpolateParams: {\r\n        root: toUnicodeVariant(':root', 'm'),\r\n        usage: toUnicodeVariant('color: var(--color-100);', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -3677,12 +3677,12 @@
     },
     {
       "name": "CssDialog",
-      "id": "class-CssDialog-b09c847807b5a4fb228ad77d916e1db65b2fbf0a543f94434fa922e49c5885859e1131081c69359e7f0cc06043e8b0abcfd7c0c107433ddee7444638638f76c8",
-      "file": "src/app/dialogs/css.dialog.ts",
+      "id": "class-CssDialog-6ec1f1e5abeddf2a7c9632e44a888369c1e8929fe7405cbe37135411bdd1433f0546a91271cb9e582644845cbbfd26585a9ac1ea2134e0c6d38320ca36d59a48",
+      "file": "src/app/dialogs/css/css.dialog.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { PaletteExporter } from '../class/palette-exporter'\r\nimport { Palette } from '../models/palette.model'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { CssCopyDialog } from './css-copy.dialog'\r\nimport { CssFileDialog } from './css-file.dialog'\r\n\r\nexport class CssDialog {\r\n  constructor(\r\n    private notification: EventEmitter<Dialog | undefined>,\r\n    private palette: Palette\r\n  ) {}\r\n\r\n  getNotification(): Dialog {\r\n    const cssCopyEmitter = new EventEmitter()\r\n    cssCopyEmitter.subscribe(() => {\r\n      const css = PaletteExporter.exportPaletteToCSS(this.palette)\r\n      navigator.clipboard\r\n        .writeText(css)\r\n        .then(() => {\r\n          this.notification.emit(\r\n            new CssCopyDialog(this.notification).getNotification()\r\n          )\r\n        })\r\n        .catch((e) => {\r\n          this.notification.emit({\r\n            id: 'copy-error',\r\n            interpolateParams: {\r\n              error: e,\r\n            },\r\n          })\r\n        })\r\n    })\r\n\r\n    const cssFileEmitter = new EventEmitter()\r\n    cssFileEmitter.subscribe(() => {\r\n      const css = PaletteExporter.exportCssFile(this.palette)\r\n      const blob = new Blob([css], { type: 'text/css' })\r\n\r\n      const a = document.createElement('a')\r\n      a.href = URL.createObjectURL(blob)\r\n      a.download = 'colors.css'\r\n      a.click()\r\n\r\n      this.notification.emit(\r\n        new CssFileDialog(this.notification).getNotification()\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-css',\r\n      actions: [\r\n        {\r\n          id: 'copy',\r\n          action: cssCopyEmitter,\r\n        },\r\n        {\r\n          id: 'file',\r\n          action: cssFileEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { PaletteExporter } from '../../class/palette-exporter'\r\nimport { Palette } from '../../models/palette.model'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { CssCopyDialog } from './css-copy.dialog'\r\nimport { CssFileDialog } from './css-file.dialog'\r\n\r\nexport class CssDialog {\r\n  constructor(\r\n    private notification: EventEmitter<Dialog | undefined>,\r\n    private palette: Palette\r\n  ) {}\r\n\r\n  getNotification(): Dialog {\r\n    const cssCopyEmitter = new EventEmitter()\r\n    cssCopyEmitter.subscribe(() => {\r\n      const css = PaletteExporter.exportPaletteToCSS(this.palette)\r\n      navigator.clipboard\r\n        .writeText(css)\r\n        .then(() => {\r\n          this.notification.emit(\r\n            new CssCopyDialog(this.notification).getNotification()\r\n          )\r\n        })\r\n        .catch((e) => {\r\n          this.notification.emit({\r\n            id: 'copy-error',\r\n            interpolateParams: {\r\n              error: e,\r\n            },\r\n          })\r\n        })\r\n    })\r\n\r\n    const cssFileEmitter = new EventEmitter()\r\n    cssFileEmitter.subscribe(() => {\r\n      const css = PaletteExporter.exportCSSFile(this.palette)\r\n      const blob = new Blob([css], { type: 'text/css' })\r\n\r\n      const a = document.createElement('a')\r\n      a.href = URL.createObjectURL(blob)\r\n      a.download = 'colors.css'\r\n      a.click()\r\n\r\n      this.notification.emit(\r\n        new CssFileDialog(this.notification).getNotification()\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-css',\r\n      actions: [\r\n        {\r\n          id: 'copy',\r\n          action: cssCopyEmitter,\r\n        },\r\n        {\r\n          id: 'file',\r\n          action: cssFileEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -3745,12 +3745,12 @@
     },
     {
       "name": "CssFileDialog",
-      "id": "class-CssFileDialog-92b711a56fa2e312a011e810cc23c7be028fba13e2631ee8e10a3caaae3bdc1100494490757cd47b10d7ac892e26bda768e4eb7f2bcdd9dac1f9f1459f05d218",
-      "file": "src/app/dialogs/css-file.dialog.ts",
+      "id": "class-CssFileDialog-6fd46bac9eda2a492f957e81a7221ced03664e39be0ba9951bd69c0a80b50175816c5af4c7720570d41a581eb17ea3f426933120b9d8940d1add87684a29393d",
+      "file": "src/app/dialogs/css/css-file.dialog.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../utils/to-unicode-variant.util'\r\n\r\nexport class CssFileDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-css-file',\r\n      interpolateParams: {\r\n        file: toUnicodeVariant('colors.css', 'm'),\r\n        link: toUnicodeVariant(\r\n          '<link rel=\"stylesheet\" href=\"/colors.css\">',\r\n          'm'\r\n        ),\r\n        usage: toUnicodeVariant('color: var(--color-100);', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../../utils/to-unicode-variant.util'\r\n\r\nexport class CssFileDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-css-file',\r\n      interpolateParams: {\r\n        file: toUnicodeVariant('colors.css', 'm'),\r\n        link: toUnicodeVariant(\r\n          '<link rel=\"stylesheet\" href=\"/colors.css\">',\r\n          'm'\r\n        ),\r\n        usage: toUnicodeVariant('color: var(--color-100);', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -3798,12 +3798,12 @@
     },
     {
       "name": "ExportDialog",
-      "id": "class-ExportDialog-fdeb0ac4f5eb965928c71dc3b88bccc76dd5914831e418a7342752ed9bfd638732129b97afb4bae82c055754c45b2382188e940fe79069039d1c1f70c9db4971",
+      "id": "class-ExportDialog-e08ef501285bd3d6f4daa43b28607a972825c0d85087fbdcf7dfd73a616f8118ac181e0fdcb448726e495022b2b8438db1989e4368f7bdb4ed4887770901e0db",
       "file": "src/app/dialogs/export.dialog.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Palette } from '../models/palette.model'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { CssDialog } from './css.dialog'\r\nimport { TailwindDialog } from './tailwind.dialog'\r\n\r\nexport class ExportDialog {\r\n  constructor(\r\n    private notification: EventEmitter<Dialog | undefined>,\r\n    private palette: Palette\r\n  ) {}\r\n\r\n  getNotification(): Dialog {\r\n    const cssEmitter = new EventEmitter()\r\n    cssEmitter.subscribe(() => {\r\n      this.notification.emit(\r\n        new CssDialog(this.notification, this.palette).getNotification()\r\n      )\r\n    })\r\n\r\n    const tailwindEmitter = new EventEmitter()\r\n    tailwindEmitter.subscribe(() => {\r\n      this.notification.emit(\r\n        new TailwindDialog(this.notification, this.palette).getNotification()\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-palette',\r\n      actions: [\r\n        {\r\n          id: 'css',\r\n          action: cssEmitter,\r\n        },\r\n        {\r\n          id: 'tailwind',\r\n          action: tailwindEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Palette } from '../models/palette.model'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { CssDialog } from './css/css.dialog'\r\nimport { TailwindDialog } from './tailwind/tailwind.dialog'\r\nimport { ScssDialog } from './scss/scss.dialog'\r\n\r\nexport class ExportDialog {\r\n  constructor(\r\n    private notification: EventEmitter<Dialog | undefined>,\r\n    private palette: Palette\r\n  ) {}\r\n\r\n  getNotification(): Dialog {\r\n    const cssEmitter = new EventEmitter()\r\n    cssEmitter.subscribe(() => {\r\n      this.notification.emit(\r\n        new CssDialog(this.notification, this.palette).getNotification()\r\n      )\r\n    })\r\n\r\n    const scssEmitter = new EventEmitter()\r\n    scssEmitter.subscribe(() => {\r\n      this.notification.emit(\r\n        new ScssDialog(this.notification, this.palette).getNotification()\r\n      )\r\n    })\r\n\r\n    const tailwindEmitter = new EventEmitter()\r\n    tailwindEmitter.subscribe(() => {\r\n      this.notification.emit(\r\n        new TailwindDialog(this.notification, this.palette).getNotification()\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-palette',\r\n      actions: [\r\n        {\r\n          id: 'css',\r\n          action: cssEmitter,\r\n        },\r\n        {\r\n          id: 'scss',\r\n          action: scssEmitter,\r\n        },\r\n        {\r\n          id: 'tailwind',\r\n          action: tailwindEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -3823,7 +3823,7 @@
             "deprecationMessage": ""
           }
         ],
-        "line": 7,
+        "line": 8,
         "jsdoctags": [
           {
             "name": "notification",
@@ -3853,7 +3853,7 @@
           "optional": false,
           "returnType": "Dialog",
           "typeParameters": [],
-          "line": 13,
+          "line": 14,
           "deprecated": false,
           "deprecationMessage": ""
         }
@@ -4273,12 +4273,12 @@
     },
     {
       "name": "PaletteExporter",
-      "id": "class-PaletteExporter-a6e65678b1441ef692f45270eb98974a43dad689a9f976dd7cf042d77cdc4b2c2acb3ebe95e6e3de819fd40981a444af467f21280b8af5e6bf45766d6c6c0dab",
+      "id": "class-PaletteExporter-398822ce8403a0171a273f301d86deb2d63b3c6f82135e8e18f4e1d6e7241f10c102cdd4481627bc7f2b1c346392b30bc0ed7676b6758712e566315858322cfd",
       "file": "src/app/class/palette-exporter.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { Palette } from '../models/palette.model'\r\nimport { Color } from '../models/color.model'\r\nimport { Shade } from '../models/shade.model'\r\n\r\nexport class PaletteExporter {\r\n  /**\r\n   * Export a palette for usage in a separate colors.css file.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportCssFile(palette: Palette) {\r\n    return `:root {\\n\\t${this.exportPaletteToCSS(palette).replace(\r\n      /\\n/g,\r\n      '\\n\\t'\r\n    )}\\n}`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in plain CSS as CSS properties.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportPaletteToCSS(palette: Palette) {\r\n    return `/* Color palette generated by ${\r\n      window.location.origin\r\n    } */\\n\\n${palette.colors.map((c) => this.exportColorToCSS(c)).join('\\n\\n')}`\r\n  }\r\n\r\n  /**\r\n   * Export a color for usage in plain CSS as CSS properties.\r\n   * @param color Color to export\r\n   * @private\r\n   */\r\n  private static exportColorToCSS(color: Color) {\r\n    const name = color.name.replace(/\\s+/g, '-').toLowerCase()\r\n    return color.shades.map((s) => this.exportShadeToCSS(s, name)).join('\\n')\r\n  }\r\n\r\n  /**\r\n   * Export a shade for usage in plain CSS as CSS property.\r\n   * @param shade Shade to export\r\n   * @param name Name of the color\r\n   * @private\r\n   */\r\n  private static exportShadeToCSS(shade: Shade, name: string) {\r\n    return `--${name}-${shade.index}:${shade.index < 100 ? ' ' : ''} ${\r\n      shade.hex\r\n    };`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in a separate tailwind.colors.js file.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportTailwindFile(palette: Palette) {\r\n    return `module.exports = {\\n\\t${this.exportPaletteToTailwind(\r\n      palette\r\n    ).replace(/\\n/g, '\\n\\t')}\\n}`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in TailwindCSS.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportPaletteToTailwind(palette: Palette) {\r\n    return palette.colors.map((c) => this.exportColorToTailwind(c)).join(',\\n')\r\n  }\r\n\r\n  /**\r\n   * Export a color for usage in TailwindCSS.\r\n   * @param color Color to export\r\n   * @private\r\n   */\r\n  private static exportColorToTailwind(color: Color) {\r\n    const name = color.name.replace(/\\s+/g, '-').toLowerCase()\r\n    return `'${name}': {\\n${color.shades\r\n      .map((s) => this.exportShadeToTailwind(s))\r\n      .join(',\\n')}\\n}`\r\n  }\r\n\r\n  /**\r\n   * Export a shade for usage in TailwindCSS.\r\n   * @param shade Shade to export\r\n   * @private\r\n   */\r\n  private static exportShadeToTailwind(shade: Shade) {\r\n    return `\\t${shade.index}:${shade.index < 100 ? ' ' : ''} '${shade.hex}'`\r\n  }\r\n}\r\n",
+      "sourceCode": "import { Palette } from '../models/palette.model'\r\nimport { Color } from '../models/color.model'\r\nimport { Shade } from '../models/shade.model'\r\n\r\nexport class PaletteExporter {\r\n  /**\r\n   * Export a palette for usage in a separate colors.css file.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportCSSFile(palette: Palette) {\r\n    return `:root {\\n\\t${this.exportPaletteToCSS(palette).replace(\r\n      /\\n/g,\r\n      '\\n\\t'\r\n    )}\\n}`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in plain CSS as CSS properties.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportPaletteToCSS(palette: Palette) {\r\n    return `/* Color palette generated by ${\r\n      window.location.origin\r\n    } */\\n\\n${palette.colors.map((c) => this.exportColorToCSS(c)).join('\\n\\n')}`\r\n  }\r\n\r\n  /**\r\n   * Export a color for usage in plain CSS as CSS properties.\r\n   * @param color Color to export\r\n   * @private\r\n   */\r\n  private static exportColorToCSS(color: Color) {\r\n    const name = color.name.replace(/\\s+/g, '-').toLowerCase()\r\n    return color.shades.map((s) => this.exportShadeToCSS(s, name)).join('\\n')\r\n  }\r\n\r\n  /**\r\n   * Export a shade for usage in plain CSS as CSS property.\r\n   * @param shade Shade to export\r\n   * @param name Name of the color\r\n   * @private\r\n   */\r\n  private static exportShadeToCSS(shade: Shade, name: string) {\r\n    return `--${name}-${shade.index}:${shade.index < 100 ? ' ' : ''} ${\r\n      shade.hex\r\n    };`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in a separate _colors.scss file.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportSCSSFile(palette: Palette) {\r\n    return `/* Import the variables into your SCSS files with\\n\\t@use 'colors';\\n*/\\n\\n${this.exportPaletteToSCSS(\r\n      palette\r\n    )}`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in SCSS as variables.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportPaletteToSCSS(palette: Palette) {\r\n    return `/* Color palette generated by ${\r\n      window.location.origin\r\n    } */\\n\\n${palette.colors\r\n      .map((c) => this.exportColorToSCSS(c))\r\n      .join('\\n\\n')}`\r\n  }\r\n\r\n  /**\r\n   * Export a color for usage in SCSS as variables.\r\n   * @param color Color to export\r\n   */\r\n  private static exportColorToSCSS(color: Color) {\r\n    const name = color.name.replace(/\\s+/g, '-').toLowerCase()\r\n    return color.shades.map((s) => this.exportShadeToSCSS(s, name)).join('\\n')\r\n  }\r\n\r\n  /**\r\n   * Export a shade for usage in SCSS as variable.\r\n   * @param shade Shade to export\r\n   * @param name Name of the color\r\n   */\r\n  private static exportShadeToSCSS(shade: Shade, name: string) {\r\n    return `$${name}-${shade.index}:${shade.index < 100 ? ' ' : ''} ${\r\n      shade.hex\r\n    };`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in a separate tailwind.colors.js file.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportTailwindFile(palette: Palette) {\r\n    return `module.exports = {\\n\\t${this.exportPaletteToTailwind(\r\n      palette\r\n    ).replace(/\\n/g, '\\n\\t')}\\n}`\r\n  }\r\n\r\n  /**\r\n   * Export a palette for usage in TailwindCSS.\r\n   * @param palette Palette to export\r\n   */\r\n  static exportPaletteToTailwind(palette: Palette) {\r\n    return palette.colors.map((c) => this.exportColorToTailwind(c)).join(',\\n')\r\n  }\r\n\r\n  /**\r\n   * Export a color for usage in TailwindCSS.\r\n   * @param color Color to export\r\n   * @private\r\n   */\r\n  private static exportColorToTailwind(color: Color) {\r\n    const name = color.name.replace(/\\s+/g, '-').toLowerCase()\r\n    return `'${name}': {\\n${color.shades\r\n      .map((s) => this.exportShadeToTailwind(s))\r\n      .join(',\\n')}\\n}`\r\n  }\r\n\r\n  /**\r\n   * Export a shade for usage in TailwindCSS.\r\n   * @param shade Shade to export\r\n   * @private\r\n   */\r\n  private static exportShadeToTailwind(shade: Shade) {\r\n    return `\\t${shade.index}:${shade.index < 100 ? ' ' : ''} '${shade.hex}'`\r\n  }\r\n}\r\n",
       "properties": [],
       "methods": [
         {
@@ -4341,6 +4341,52 @@
           ]
         },
         {
+          "name": "exportColorToSCSS",
+          "args": [
+            {
+              "name": "color",
+              "type": "Color",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "any",
+          "typeParameters": [],
+          "line": 75,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nExport a color for usage in SCSS as variables.\n",
+          "description": "<p>Export a color for usage in SCSS as variables.</p>\n",
+          "modifierKind": [121, 124],
+          "jsdoctags": [
+            {
+              "name": {
+                "pos": 2170,
+                "end": 2175,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "color"
+              },
+              "type": "Color",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "pos": 2164,
+                "end": 2169,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "param"
+              },
+              "comment": "<p>Color to export</p>\n"
+            }
+          ]
+        },
+        {
           "name": "exportColorToTailwind",
           "args": [
             {
@@ -4353,7 +4399,7 @@
           "optional": false,
           "returnType": "string",
           "typeParameters": [],
-          "line": 72,
+          "line": 114,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nExport a color for usage in TailwindCSS.\n",
@@ -4362,8 +4408,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 2055,
-                "end": 2060,
+                "pos": 3319,
+                "end": 3324,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4374,8 +4420,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 2049,
-                "end": 2054,
+                "pos": 3313,
+                "end": 3318,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4386,8 +4432,8 @@
             },
             {
               "tagName": {
-                "pos": 2084,
-                "end": 2091,
+                "pos": 3348,
+                "end": 3355,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4400,7 +4446,7 @@
           ]
         },
         {
-          "name": "exportCssFile",
+          "name": "exportCSSFile",
           "args": [
             {
               "name": "palette",
@@ -4492,6 +4538,52 @@
           ]
         },
         {
+          "name": "exportPaletteToSCSS",
+          "args": [
+            {
+              "name": "palette",
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "string",
+          "typeParameters": [],
+          "line": 63,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nExport a palette for usage in SCSS as variables.\n",
+          "description": "<p>Export a palette for usage in SCSS as variables.</p>\n",
+          "modifierKind": [124],
+          "jsdoctags": [
+            {
+              "name": {
+                "pos": 1832,
+                "end": 1839,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "palette"
+              },
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "pos": 1826,
+                "end": 1831,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "param"
+              },
+              "comment": "<p>Palette to export</p>\n"
+            }
+          ]
+        },
+        {
           "name": "exportPaletteToTailwind",
           "args": [
             {
@@ -4504,7 +4596,7 @@
           "optional": false,
           "returnType": "any",
           "typeParameters": [],
-          "line": 63,
+          "line": 105,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nExport a palette for usage in TailwindCSS.\n",
@@ -4513,8 +4605,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 1813,
-                "end": 1820,
+                "pos": 3077,
+                "end": 3084,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4525,8 +4617,54 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 1807,
-                "end": 1812,
+                "pos": 3071,
+                "end": 3076,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "param"
+              },
+              "comment": "<p>Palette to export</p>\n"
+            }
+          ]
+        },
+        {
+          "name": "exportSCSSFile",
+          "args": [
+            {
+              "name": "palette",
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "string",
+          "typeParameters": [],
+          "line": 53,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nExport a palette for usage in a separate _colors.scss file.\n",
+          "description": "<p>Export a palette for usage in a separate _colors.scss file.</p>\n",
+          "modifierKind": [124],
+          "jsdoctags": [
+            {
+              "name": {
+                "pos": 1532,
+                "end": 1539,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "palette"
+              },
+              "type": "Palette",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "pos": 1526,
+                "end": 1531,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4627,6 +4765,82 @@
           ]
         },
         {
+          "name": "exportShadeToSCSS",
+          "args": [
+            {
+              "name": "shade",
+              "type": "Shade",
+              "deprecated": false,
+              "deprecationMessage": ""
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": ""
+            }
+          ],
+          "optional": false,
+          "returnType": "string",
+          "typeParameters": [],
+          "line": 85,
+          "deprecated": false,
+          "deprecationMessage": "",
+          "rawdescription": "\n\nExport a shade for usage in SCSS as variable.\n",
+          "description": "<p>Export a shade for usage in SCSS as variable.</p>\n",
+          "modifierKind": [121, 124],
+          "jsdoctags": [
+            {
+              "name": {
+                "pos": 2474,
+                "end": 2479,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "shade"
+              },
+              "type": "Shade",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "pos": 2468,
+                "end": 2473,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "param"
+              },
+              "comment": "<p>Shade to export</p>\n"
+            },
+            {
+              "name": {
+                "pos": 2509,
+                "end": 2513,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "name"
+              },
+              "type": "string",
+              "deprecated": false,
+              "deprecationMessage": "",
+              "tagName": {
+                "pos": 2503,
+                "end": 2508,
+                "flags": 4227072,
+                "modifierFlagsCache": 0,
+                "transformFlags": 0,
+                "kind": 79,
+                "escapedText": "param"
+              },
+              "comment": "<p>Name of the color</p>\n"
+            }
+          ]
+        },
+        {
           "name": "exportShadeToTailwind",
           "args": [
             {
@@ -4639,7 +4853,7 @@
           "optional": false,
           "returnType": "string",
           "typeParameters": [],
-          "line": 84,
+          "line": 126,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nExport a shade for usage in TailwindCSS.\n",
@@ -4648,8 +4862,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 2410,
-                "end": 2415,
+                "pos": 3674,
+                "end": 3679,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4660,8 +4874,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 2404,
-                "end": 2409,
+                "pos": 3668,
+                "end": 3673,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4672,8 +4886,8 @@
             },
             {
               "tagName": {
-                "pos": 2439,
-                "end": 2446,
+                "pos": 3703,
+                "end": 3710,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4698,7 +4912,7 @@
           "optional": false,
           "returnType": "string",
           "typeParameters": [],
-          "line": 53,
+          "line": 95,
           "deprecated": false,
           "deprecationMessage": "",
           "rawdescription": "\n\nExport a palette for usage in a separate tailwind.colors.js file.\n",
@@ -4707,8 +4921,8 @@
           "jsdoctags": [
             {
               "name": {
-                "pos": 1538,
-                "end": 1545,
+                "pos": 2802,
+                "end": 2809,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -4719,8 +4933,8 @@
               "deprecated": false,
               "deprecationMessage": "",
               "tagName": {
-                "pos": 1532,
-                "end": 1537,
+                "pos": 2796,
+                "end": 2801,
                 "flags": 4227072,
                 "modifierFlagsCache": 0,
                 "transformFlags": 0,
@@ -5226,6 +5440,180 @@
       "hostBindings": [],
       "hostListeners": [],
       "implements": ["Partial"]
+    },
+    {
+      "name": "ScssCopyDialog",
+      "id": "class-ScssCopyDialog-6c7d2232849edc916210d220a2d114d780d39de1cfe06104c8f1a66220d556cd25f35ad5363d2554c770bd24ce212174f6a15d2a5cd920dd02053a3017d138fc",
+      "file": "src/app/dialogs/scss/scss-copy.dialog.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "class",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../../utils/to-unicode-variant.util'\r\n\r\nexport class ScssCopyDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open('https://sass-lang.com/documentation/variables', '_blank')\r\n    })\r\n\r\n    return {\r\n      id: 'export-scss-copy',\r\n      interpolateParams: {\r\n        usage: toUnicodeVariant('color: $color-500;', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "notification",
+            "type": "EventEmitter<Dialog | undefined>",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 5,
+        "jsdoctags": [
+          {
+            "name": "notification",
+            "type": "EventEmitter<Dialog | undefined>",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "properties": [],
+      "methods": [
+        {
+          "name": "getNotification",
+          "args": [],
+          "optional": false,
+          "returnType": "Dialog",
+          "typeParameters": [],
+          "line": 8,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "indexSignatures": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "hostBindings": [],
+      "hostListeners": []
+    },
+    {
+      "name": "ScssDialog",
+      "id": "class-ScssDialog-1d4075c7abcd7b657724ee1bf1de0e46a73a41244c62e7ff87ffc703e9f146f8b71f34e8bd2c45ea32f5bae61e7c1fc16d6ffda895e356c93f549fb683c583fe",
+      "file": "src/app/dialogs/scss/scss.dialog.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "class",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { PaletteExporter } from '../../class/palette-exporter'\r\nimport { Palette } from '../../models/palette.model'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { ScssCopyDialog } from './scss-copy.dialog'\r\nimport { ScssFileDialog } from './scss-file.dialog'\r\n\r\nexport class ScssDialog {\r\n  constructor(\r\n    private notification: EventEmitter<Dialog | undefined>,\r\n    private palette: Palette\r\n  ) {}\r\n\r\n  getNotification(): Dialog {\r\n    const scssCopyEmitter = new EventEmitter()\r\n    scssCopyEmitter.subscribe(() => {\r\n      const scss = PaletteExporter.exportPaletteToSCSS(this.palette)\r\n      navigator.clipboard\r\n        .writeText(scss)\r\n        .then(() => {\r\n          this.notification.emit(\r\n            new ScssCopyDialog(this.notification).getNotification()\r\n          )\r\n        })\r\n        .catch((e) => {\r\n          this.notification.emit({\r\n            id: 'copy-error',\r\n            interpolateParams: {\r\n              error: e,\r\n            },\r\n          })\r\n        })\r\n    })\r\n\r\n    const scssFileEmitter = new EventEmitter()\r\n    scssFileEmitter.subscribe(() => {\r\n      const scss = PaletteExporter.exportSCSSFile(this.palette)\r\n      const blob = new Blob([scss], { type: 'text/scss' })\r\n\r\n      const a = document.createElement('a')\r\n      a.href = URL.createObjectURL(blob)\r\n      a.download = '_colors.scss'\r\n      a.click()\r\n\r\n      this.notification.emit(\r\n        new ScssFileDialog(this.notification).getNotification()\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-scss',\r\n      actions: [\r\n        {\r\n          id: 'copy',\r\n          action: scssCopyEmitter,\r\n        },\r\n        {\r\n          id: 'file',\r\n          action: scssFileEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "notification",
+            "type": "EventEmitter<Dialog | undefined>",
+            "deprecated": false,
+            "deprecationMessage": ""
+          },
+          {
+            "name": "palette",
+            "type": "Palette",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 8,
+        "jsdoctags": [
+          {
+            "name": "notification",
+            "type": "EventEmitter<Dialog | undefined>",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          },
+          {
+            "name": "palette",
+            "type": "Palette",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "properties": [],
+      "methods": [
+        {
+          "name": "getNotification",
+          "args": [],
+          "optional": false,
+          "returnType": "Dialog",
+          "typeParameters": [],
+          "line": 14,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "indexSignatures": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "hostBindings": [],
+      "hostListeners": []
+    },
+    {
+      "name": "ScssFileDialog",
+      "id": "class-ScssFileDialog-dc5883a06b2965163bcd260ca195aaed8a804af88deec375dc14186b179b7c757289d0a04feaecd78d4a9397938b1e2ee4a2f398e2fe15b834209cefa96ec3e2",
+      "file": "src/app/dialogs/scss/scss-file.dialog.ts",
+      "deprecated": false,
+      "deprecationMessage": "",
+      "type": "class",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../../utils/to-unicode-variant.util'\r\n\r\nexport class ScssFileDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open('https://sass-lang.com/documentation/at-rules/use', '_blank')\r\n    })\r\n\r\n    return {\r\n      id: 'export-scss-file',\r\n      interpolateParams: {\r\n        file: toUnicodeVariant('_colors.scss', 'm'),\r\n        link: toUnicodeVariant(\"@use 'colors'\", 'm'),\r\n        usage: toUnicodeVariant('color: $color-500;', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "constructorObj": {
+        "name": "constructor",
+        "description": "",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "args": [
+          {
+            "name": "notification",
+            "type": "EventEmitter<Dialog | undefined>",
+            "deprecated": false,
+            "deprecationMessage": ""
+          }
+        ],
+        "line": 5,
+        "jsdoctags": [
+          {
+            "name": "notification",
+            "type": "EventEmitter<Dialog | undefined>",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "tagName": {
+              "text": "param"
+            }
+          }
+        ]
+      },
+      "properties": [],
+      "methods": [
+        {
+          "name": "getNotification",
+          "args": [],
+          "optional": false,
+          "returnType": "Dialog",
+          "typeParameters": [],
+          "line": 8,
+          "deprecated": false,
+          "deprecationMessage": ""
+        }
+      ],
+      "indexSignatures": [],
+      "inputsClass": [],
+      "outputsClass": [],
+      "hostBindings": [],
+      "hostListeners": []
     },
     {
       "name": "Shade",
@@ -5899,12 +6287,12 @@
     },
     {
       "name": "TailwindCopyDialog",
-      "id": "class-TailwindCopyDialog-498c073f3c3a0030834ae6bd0f463f85f39576e9977ee000a5fc57a20bc459b0beb12c2573b5db4cb2aa8592523f992fec42a296d6837628e0638587a47eee17",
-      "file": "src/app/dialogs/tailwind-copy.dialog.ts",
+      "id": "class-TailwindCopyDialog-27d7588f6c7bf2d091d50d0eba4ccd4ecb2b0c5220278afa14e25c053499d4b26700f13960b2a5a1d132ea22ccfd05125c69f4bc7f1a98883ea770c328e8ac38",
+      "file": "src/app/dialogs/tailwind/tailwind-copy.dialog.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../utils/to-unicode-variant.util'\r\n\r\nexport class TailwindCopyDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://tailwindcss.com/docs/customizing-colors#color-object-syntax',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-tailwind-copy',\r\n      interpolateParams: {\r\n        config: toUnicodeVariant('tailwind.config.js', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../../utils/to-unicode-variant.util'\r\n\r\nexport class TailwindCopyDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://tailwindcss.com/docs/customizing-colors#color-object-syntax',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-tailwind-copy',\r\n      interpolateParams: {\r\n        config: toUnicodeVariant('tailwind.config.js', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -5952,12 +6340,12 @@
     },
     {
       "name": "TailwindDialog",
-      "id": "class-TailwindDialog-d08c4f1ca9ad1a7138b4f241a50c1a4313b455e7feea813aa9406e18e15edafe0616dd6a731517e23a25a4bafa30da17776d2a0ec8eb0ebc7ee7a14d2759b568",
-      "file": "src/app/dialogs/tailwind.dialog.ts",
+      "id": "class-TailwindDialog-6ee41278910c22149969c7be7adb9124a506afa322f0e0d34cdd01fb5cb828a0719a7450d3152fb4ec0bd947fa1ea3c15046c8720216ea204627e609335ce75d",
+      "file": "src/app/dialogs/tailwind/tailwind.dialog.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { PaletteExporter } from '../class/palette-exporter'\r\nimport { Palette } from '../models/palette.model'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { TailwindCopyDialog } from './tailwind-copy.dialog'\r\nimport { TailwindFileDialog } from './tailwind-file.dialog'\r\nimport { toUnicodeVariant } from '../utils/to-unicode-variant.util'\r\n\r\nexport class TailwindDialog {\r\n  constructor(\r\n    private notification: EventEmitter<Dialog | undefined>,\r\n    private palette: Palette\r\n  ) {}\r\n\r\n  getNotification(): Dialog {\r\n    const tailwindCopyEmitter = new EventEmitter()\r\n    tailwindCopyEmitter.subscribe(() => {\r\n      const tailwind = PaletteExporter.exportPaletteToTailwind(this.palette)\r\n      navigator.clipboard\r\n        .writeText(tailwind)\r\n        .then(() => {\r\n          this.notification.emit(\r\n            new TailwindCopyDialog(this.notification).getNotification()\r\n          )\r\n        })\r\n        .catch((e) => {\r\n          this.notification.emit({\r\n            id: 'copy-error',\r\n            interpolateParams: {\r\n              error: e,\r\n            },\r\n          })\r\n        })\r\n    })\r\n\r\n    const tailwindFileEmitter = new EventEmitter()\r\n    tailwindFileEmitter.subscribe(() => {\r\n      const tailwind = PaletteExporter.exportTailwindFile(this.palette)\r\n      const blob = new Blob([tailwind], { type: 'text/javascript' })\r\n\r\n      const a = document.createElement('a')\r\n      a.href = URL.createObjectURL(blob)\r\n      a.download = 'tailwind.colors.js'\r\n      a.click()\r\n\r\n      this.notification.emit(\r\n        new TailwindFileDialog(this.notification).getNotification()\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-tailwind',\r\n      interpolateParams: {\r\n        file: toUnicodeVariant('tailwind.colors.js', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'copy',\r\n          action: tailwindCopyEmitter,\r\n        },\r\n        {\r\n          id: 'file',\r\n          action: tailwindFileEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { PaletteExporter } from '../../class/palette-exporter'\r\nimport { Palette } from '../../models/palette.model'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { TailwindCopyDialog } from './tailwind-copy.dialog'\r\nimport { TailwindFileDialog } from './tailwind-file.dialog'\r\nimport { toUnicodeVariant } from '../../utils/to-unicode-variant.util'\r\n\r\nexport class TailwindDialog {\r\n  constructor(\r\n    private notification: EventEmitter<Dialog | undefined>,\r\n    private palette: Palette\r\n  ) {}\r\n\r\n  getNotification(): Dialog {\r\n    const tailwindCopyEmitter = new EventEmitter()\r\n    tailwindCopyEmitter.subscribe(() => {\r\n      const tailwind = PaletteExporter.exportPaletteToTailwind(this.palette)\r\n      navigator.clipboard\r\n        .writeText(tailwind)\r\n        .then(() => {\r\n          this.notification.emit(\r\n            new TailwindCopyDialog(this.notification).getNotification()\r\n          )\r\n        })\r\n        .catch((e) => {\r\n          this.notification.emit({\r\n            id: 'copy-error',\r\n            interpolateParams: {\r\n              error: e,\r\n            },\r\n          })\r\n        })\r\n    })\r\n\r\n    const tailwindFileEmitter = new EventEmitter()\r\n    tailwindFileEmitter.subscribe(() => {\r\n      const tailwind = PaletteExporter.exportTailwindFile(this.palette)\r\n      const blob = new Blob([tailwind], { type: 'text/javascript' })\r\n\r\n      const a = document.createElement('a')\r\n      a.href = URL.createObjectURL(blob)\r\n      a.download = 'tailwind.colors.js'\r\n      a.click()\r\n\r\n      this.notification.emit(\r\n        new TailwindFileDialog(this.notification).getNotification()\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-tailwind',\r\n      interpolateParams: {\r\n        file: toUnicodeVariant('tailwind.colors.js', 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'copy',\r\n          action: tailwindCopyEmitter,\r\n        },\r\n        {\r\n          id: 'file',\r\n          action: tailwindFileEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -6020,12 +6408,12 @@
     },
     {
       "name": "TailwindFileDialog",
-      "id": "class-TailwindFileDialog-741ed3748831fed7b491856950a92effb6373ac2afbc9ee653651fb62a7bed1708e9c0544d98c0d90c029c4171ffde92124afca8500dbbb80a038351a3282bae",
-      "file": "src/app/dialogs/tailwind-file.dialog.ts",
+      "id": "class-TailwindFileDialog-8c4191fe59401e8329ee6a655dc790bec8139935cb2eaf0acd23b009cb1c484a50f5aeba0581ede17794c58ac14208298ed54d41e180f725937b5e37bac3d861",
+      "file": "src/app/dialogs/tailwind/tailwind-file.dialog.ts",
       "deprecated": false,
       "deprecationMessage": "",
       "type": "class",
-      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../utils/to-unicode-variant.util'\r\n\r\nexport class TailwindFileDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://tailwindcss.com/docs/customizing-colors#using-the-default-colors',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-tailwind-file',\r\n      interpolateParams: {\r\n        file: toUnicodeVariant('tailwind.colors.js', 'm'),\r\n        config: toUnicodeVariant('tailwind.config.js', 'm'),\r\n        import: toUnicodeVariant(\"colors: require('./tailwind.colors'),\", 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
+      "sourceCode": "import { EventEmitter } from '@angular/core'\r\nimport { Dialog } from '../../interfaces/dialog.interface'\r\nimport { toUnicodeVariant } from '../../utils/to-unicode-variant.util'\r\n\r\nexport class TailwindFileDialog {\r\n  constructor(private notification: EventEmitter<Dialog | undefined>) {}\r\n\r\n  getNotification(): Dialog {\r\n    const closeEmitter = new EventEmitter()\r\n    closeEmitter.subscribe(() => {\r\n      this.notification.emit(undefined)\r\n    })\r\n\r\n    const docEmitter = new EventEmitter()\r\n    docEmitter.subscribe(() => {\r\n      window.open(\r\n        'https://tailwindcss.com/docs/customizing-colors#using-the-default-colors',\r\n        '_blank'\r\n      )\r\n    })\r\n\r\n    return {\r\n      id: 'export-tailwind-file',\r\n      interpolateParams: {\r\n        file: toUnicodeVariant('tailwind.colors.js', 'm'),\r\n        config: toUnicodeVariant('tailwind.config.js', 'm'),\r\n        import: toUnicodeVariant(\"colors: require('./tailwind.colors'),\", 'm'),\r\n      },\r\n      actions: [\r\n        {\r\n          id: 'more',\r\n          action: docEmitter,\r\n        },\r\n      ],\r\n    }\r\n  }\r\n}\r\n",
       "constructorObj": {
         "name": "constructor",
         "description": "",
@@ -8465,13 +8853,13 @@
   "modules": [
     {
       "name": "AppModule",
-      "id": "module-AppModule-a9c1690d386573bbb3124b7c966383288be9d316c47be6904c4b2057b0cf3089413ec545e7f72e01c7aecbba892fe41f5d383e690febc7cb33ab3ebf4785c850",
+      "id": "module-AppModule-eacbcaa883052ed4dc199252b8a57f8bbced4de125a682dd8b6df765a2504f12467a1b115567dff08f9e62f5a015031101c12baf62cc14bbfdc0ffc893425be5",
       "description": "",
       "deprecationMessage": "",
       "deprecated": false,
       "file": "src/app/app.module.ts",
       "methods": [],
-      "sourceCode": "import { NgModule } from '@angular/core'\r\nimport { BrowserModule } from '@angular/platform-browser'\r\n\r\nimport { AppComponent } from './app.component'\r\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component'\r\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component'\r\nimport { StorageService } from './services/storage.service'\r\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component'\r\nimport { ColorEditorComponent } from './components/color-editor/color-editor.component'\r\nimport { ColorService } from './services/color.service'\r\nimport { DialogComponent } from './components/dialog/dialog.component'\r\nimport { NotificationComponent } from './components/notification/notification.component'\r\nimport { HomeComponent } from './pages/home/home.component'\r\nimport { AppRoutingModule } from './app-routing.module'\r\nimport { EditComponent } from './pages/edit/edit.component'\r\nimport { SafeHtmlPipe } from './pipes/safe-html.pipe'\r\nimport { PreviewComponent } from './pages/preview/preview.component'\r\nimport { ServiceWorkerModule } from '@angular/service-worker'\r\nimport { environment } from '../environments/environment'\r\nimport { HttpClient, HttpClientModule } from '@angular/common/http'\r\nimport { TranslateLoader, TranslateModule } from '@ngx-translate/core'\r\nimport { TranslateHttpLoader } from '@ngx-translate/http-loader'\r\nimport { LanguageSelectorComponent } from './components/language-selector/language-selector.component'\r\nimport { MatomoConsentMode, NgxMatomoTrackerModule } from '@ngx-matomo/tracker'\r\nimport { NgxMatomoRouterModule } from '@ngx-matomo/router'\r\nimport { AnalyticsInterceptor } from './interceptors/analytics.interceptor'\r\nimport { AnalyticsComponent } from './pages/analytics/analytics.component'\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    ColorEditorComponent,\r\n    ColorViewerComponent,\r\n    DialogComponent,\r\n    HomeComponent,\r\n    LightSwitchComponent,\r\n    NotificationComponent,\r\n    PaletteViewerComponent,\r\n    EditComponent,\r\n    SafeHtmlPipe,\r\n    PreviewComponent,\r\n    LanguageSelectorComponent,\r\n    AnalyticsComponent,\r\n  ],\r\n  imports: [\r\n    AppRoutingModule,\r\n    BrowserModule,\r\n    HttpClientModule,\r\n    TranslateModule.forRoot({\r\n      loader: {\r\n        provide: TranslateLoader,\r\n        useFactory: HttpLoaderFactory,\r\n        deps: [HttpClient],\r\n      },\r\n    }),\r\n    ServiceWorkerModule.register('ngsw-worker.js', {\r\n      enabled: environment.production,\r\n      // Register the ServiceWorker as soon as the application is stable\r\n      // or after 30 seconds (whichever comes first).\r\n      registrationStrategy: 'registerWhenStable:30000',\r\n    }),\r\n    NgxMatomoTrackerModule.forRoot({\r\n      siteId: 1,\r\n      trackerUrl: 'https://analytics.apps.pawcode.de/',\r\n      enableJSErrorTracking: true,\r\n      acceptDoNotTrack: true,\r\n      requireConsent: MatomoConsentMode.TRACKING,\r\n      disabled: environment.production,\r\n    }),\r\n    NgxMatomoRouterModule.forRoot({\r\n      interceptors: [AnalyticsInterceptor],\r\n      trackPageTitle: false,\r\n    }),\r\n  ],\r\n  providers: [ColorService, StorageService],\r\n  bootstrap: [AppComponent],\r\n})\r\nexport class AppModule {}\r\n\r\nexport function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {\r\n  return new TranslateHttpLoader(http)\r\n}\r\n",
+      "sourceCode": "import { NgModule } from '@angular/core'\r\nimport { BrowserModule } from '@angular/platform-browser'\r\n\r\nimport { AppComponent } from './app.component'\r\nimport { ColorViewerComponent } from './components/color-viewer/color-viewer.component'\r\nimport { PaletteViewerComponent } from './components/palette-viewer/palette-viewer.component'\r\nimport { StorageService } from './services/storage.service'\r\nimport { LightSwitchComponent } from './components/light-switch/light-switch.component'\r\nimport { ColorEditorComponent } from './components/color-editor/color-editor.component'\r\nimport { ColorService } from './services/color.service'\r\nimport { DialogComponent } from './components/dialog/dialog.component'\r\nimport { NotificationComponent } from './components/notification/notification.component'\r\nimport { HomeComponent } from './pages/home/home.component'\r\nimport { AppRoutingModule } from './app-routing.module'\r\nimport { EditComponent } from './pages/edit/edit.component'\r\nimport { SafeHtmlPipe } from './pipes/safe-html.pipe'\r\nimport { PreviewComponent } from './pages/preview/preview.component'\r\nimport { ServiceWorkerModule } from '@angular/service-worker'\r\nimport { environment } from '../environments/environment'\r\nimport { HttpClient, HttpClientModule } from '@angular/common/http'\r\nimport { TranslateLoader, TranslateModule } from '@ngx-translate/core'\r\nimport { TranslateHttpLoader } from '@ngx-translate/http-loader'\r\nimport { LanguageSelectorComponent } from './components/language-selector/language-selector.component'\r\nimport { MatomoConsentMode, NgxMatomoTrackerModule } from '@ngx-matomo/tracker'\r\nimport { NgxMatomoRouterModule } from '@ngx-matomo/router'\r\nimport { AnalyticsInterceptor } from './interceptors/analytics.interceptor'\r\nimport { AnalyticsComponent } from './pages/analytics/analytics.component'\r\n\r\n@NgModule({\r\n  declarations: [\r\n    AppComponent,\r\n    ColorEditorComponent,\r\n    ColorViewerComponent,\r\n    DialogComponent,\r\n    HomeComponent,\r\n    LightSwitchComponent,\r\n    NotificationComponent,\r\n    PaletteViewerComponent,\r\n    EditComponent,\r\n    SafeHtmlPipe,\r\n    PreviewComponent,\r\n    LanguageSelectorComponent,\r\n    AnalyticsComponent,\r\n  ],\r\n  imports: [\r\n    AppRoutingModule,\r\n    BrowserModule,\r\n    HttpClientModule,\r\n    TranslateModule.forRoot({\r\n      loader: {\r\n        provide: TranslateLoader,\r\n        useFactory: HttpLoaderFactory,\r\n        deps: [HttpClient],\r\n      },\r\n    }),\r\n    ServiceWorkerModule.register('ngsw-worker.js', {\r\n      enabled: environment.production,\r\n      // Register the ServiceWorker as soon as the application is stable\r\n      // or after 30 seconds (whichever comes first).\r\n      registrationStrategy: 'registerWhenStable:30000',\r\n    }),\r\n    NgxMatomoTrackerModule.forRoot({\r\n      siteId: 1,\r\n      trackerUrl: 'https://analytics.apps.pawcode.de/',\r\n      enableJSErrorTracking: true,\r\n      acceptDoNotTrack: true,\r\n      requireConsent: MatomoConsentMode.TRACKING,\r\n      disabled: !environment.production,\r\n    }),\r\n    NgxMatomoRouterModule.forRoot({\r\n      interceptors: [AnalyticsInterceptor],\r\n      trackPageTitle: false,\r\n    }),\r\n  ],\r\n  providers: [ColorService, StorageService],\r\n  bootstrap: [AppComponent],\r\n})\r\nexport class AppModule {}\r\n\r\nexport function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {\r\n  return new TranslateHttpLoader(http)\r\n}\r\n",
       "children": [
         {
           "type": "providers",
@@ -8650,14 +9038,14 @@
         "defaultValue": "'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'"
       },
       {
-        "name": "environment",
+        "name": "config",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/environments/environment.prod.ts",
+        "file": ".storybook/main.ts",
         "deprecated": false,
         "deprecationMessage": "",
-        "type": "object",
-        "defaultValue": "{\r\n  production: true,\r\n  version: packageJson.version,\r\n}"
+        "type": "StorybookConfig",
+        "defaultValue": "{\r\n  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],\r\n  addons: [\r\n    '@storybook/addon-links',\r\n    '@storybook/addon-essentials',\r\n    '@storybook/addon-interactions',\r\n  ],\r\n  framework: '@storybook/angular',\r\n  core: {\r\n    builder: '@storybook/builder-webpack5',\r\n  },\r\n  staticDirs: [\r\n    {\r\n      from: '../src/assets',\r\n      to: '/assets',\r\n    },\r\n  ],\r\n}"
       },
       {
         "name": "environment",
@@ -8668,6 +9056,16 @@
         "deprecationMessage": "",
         "type": "object",
         "defaultValue": "{\r\n  production: false,\r\n  version: packageJson.version,\r\n}"
+      },
+      {
+        "name": "environment",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": "src/environments/environment.prod.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "object",
+        "defaultValue": "{\r\n  production: true,\r\n  version: packageJson.version,\r\n}"
       },
       {
         "name": "LANGUAGES",
@@ -8730,6 +9128,16 @@
         "defaultValue": "{\r\n  m: [0x1d670, 0x1d7f6],\r\n  b: [0x1d400, 0x1d7ce],\r\n  i: [0x1d434, 0x00030],\r\n  bi: [0x1d468, 0x00030],\r\n  c: [0x0001d49c, 0x00030],\r\n  bc: [0x1d4d0, 0x00030],\r\n  g: [0x1d504, 0x00030],\r\n  d: [0x1d538, 0x1d7d8],\r\n  bg: [0x1d56c, 0x00030],\r\n  s: [0x1d5a0, 0x1d7e2],\r\n  bs: [0x1d5d4, 0x1d7ec],\r\n  is: [0x1d608, 0x00030],\r\n  bis: [0x1d63c, 0x00030],\r\n  o: [0x24b6, 0x2460],\r\n  on: [0x0001f150, 0x2460],\r\n  p: [0x249c, 0x2474],\r\n  q: [0x1f130, 0x00030],\r\n  qn: [0x0001f170, 0x00030],\r\n  w: [0xff21, 0xff10],\r\n  u: [0x2090, 0xff10],\r\n}"
       },
       {
+        "name": "parameters",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": ".storybook/preview.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Parameters",
+        "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n  docs: { inlineStories: true },\r\n}"
+      },
+      {
         "name": "Pawcode",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -8760,6 +9168,16 @@
         "defaultValue": "new Palette('pawcode', uuidv4())"
       },
       {
+        "name": "preview",
+        "ctype": "miscellaneous",
+        "subtype": "variable",
+        "file": ".storybook/preview.ts",
+        "deprecated": false,
+        "deprecationMessage": "",
+        "type": "Preview",
+        "defaultValue": "{\r\n  parameters: {\r\n    layout: 'centered',\r\n  },\r\n}"
+      },
+      {
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
@@ -8783,7 +9201,7 @@
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "",
@@ -8793,7 +9211,7 @@
         "name": "Primary",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "",
@@ -8873,7 +9291,7 @@
         "name": "Template",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
@@ -8883,7 +9301,7 @@
         "name": "Template",
         "ctype": "miscellaneous",
         "subtype": "variable",
-        "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+        "file": "src/app/components/light-switch/light-switch.component.stories.ts",
         "deprecated": false,
         "deprecationMessage": "",
         "type": "Story",
@@ -9429,16 +9847,16 @@
           "defaultValue": "{\r\n  monospace: 'm',\r\n  bold: 'b',\r\n  italic: 'i',\r\n  'bold italic': 'bi',\r\n  script: 'c',\r\n  'bold script': 'bc',\r\n  gothic: 'g',\r\n  'gothic bold': 'bg',\r\n  doublestruck: 'd',\r\n  sans: 's',\r\n  'bold sans': 'bs',\r\n  'italic sans': 'is',\r\n  'bold italic sans': 'bis',\r\n  parenthesis: 'p',\r\n  circled: 'o',\r\n  'circled negative': 'on',\r\n  squared: 'q',\r\n  'squared negative': 'qn',\r\n  fullwidth: 'w',\r\n}"
         }
       ],
-      "src/environments/environment.prod.ts": [
+      ".storybook/main.ts": [
         {
-          "name": "environment",
+          "name": "config",
           "ctype": "miscellaneous",
           "subtype": "variable",
-          "file": "src/environments/environment.prod.ts",
+          "file": ".storybook/main.ts",
           "deprecated": false,
           "deprecationMessage": "",
-          "type": "object",
-          "defaultValue": "{\r\n  production: true,\r\n  version: packageJson.version,\r\n}"
+          "type": "StorybookConfig",
+          "defaultValue": "{\r\n  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],\r\n  addons: [\r\n    '@storybook/addon-links',\r\n    '@storybook/addon-essentials',\r\n    '@storybook/addon-interactions',\r\n  ],\r\n  framework: '@storybook/angular',\r\n  core: {\r\n    builder: '@storybook/builder-webpack5',\r\n  },\r\n  staticDirs: [\r\n    {\r\n      from: '../src/assets',\r\n      to: '/assets',\r\n    },\r\n  ],\r\n}"
         }
       ],
       "src/environments/environment.ts": [
@@ -9451,6 +9869,18 @@
           "deprecationMessage": "",
           "type": "object",
           "defaultValue": "{\r\n  production: false,\r\n  version: packageJson.version,\r\n}"
+        }
+      ],
+      "src/environments/environment.prod.ts": [
+        {
+          "name": "environment",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/environments/environment.prod.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "object",
+          "defaultValue": "{\r\n  production: true,\r\n  version: packageJson.version,\r\n}"
         }
       ],
       "src/app/constants/languages.constant.ts": [
@@ -9549,6 +9979,28 @@
           "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: ColorService,\r\n        useClass: ColorServiceMock,\r\n      },\r\n      {\r\n        provide: PaletteService,\r\n        useClass: PaletteServiceMock,\r\n      },\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n      NotificationService,\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
+      ".storybook/preview.ts": [
+        {
+          "name": "parameters",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": ".storybook/preview.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Parameters",
+          "defaultValue": "{\r\n  actions: { argTypesRegex: '^on[A-Z].*' },\r\n  controls: {\r\n    matchers: {\r\n      color: /(background|color)$/i,\r\n      date: /Date$/,\r\n    },\r\n  },\r\n  docs: { inlineStories: true },\r\n}"
+        },
+        {
+          "name": "preview",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": ".storybook/preview.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Preview",
+          "defaultValue": "{\r\n  parameters: {\r\n    layout: 'centered',\r\n  },\r\n}"
+        }
+      ],
       "src/app/components/color-viewer/color-viewer.component.stories.ts": [
         {
           "name": "PawcodeBlue",
@@ -9615,28 +10067,6 @@
           "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: NotificationService,\r\n        useClass: NotificationServiceMock,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
         }
       ],
-      "src/app/components/light-switch/light-switch.component.stories.ts": [
-        {
-          "name": "Primary",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/light-switch/light-switch.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "",
-          "defaultValue": "Template.bind({})"
-        },
-        {
-          "name": "Template",
-          "ctype": "miscellaneous",
-          "subtype": "variable",
-          "file": "src/app/components/light-switch/light-switch.component.stories.ts",
-          "deprecated": false,
-          "deprecationMessage": "",
-          "type": "Story",
-          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
-        }
-      ],
       "src/app/components/language-selector/language-selector.component.stories.ts": [
         {
           "name": "Primary",
@@ -9653,6 +10083,28 @@
           "ctype": "miscellaneous",
           "subtype": "variable",
           "file": "src/app/components/language-selector/language-selector.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "Story",
+          "defaultValue": "(args) => ({\r\n  props: args,\r\n  moduleMetadata: {\r\n    providers: [\r\n      {\r\n        provide: StorageService,\r\n        useClass: StorageServiceMock,\r\n      },\r\n    ],\r\n    imports: [StorybookTranslateModule],\r\n  },\r\n})"
+        }
+      ],
+      "src/app/components/light-switch/light-switch.component.stories.ts": [
+        {
+          "name": "Primary",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/light-switch/light-switch.component.stories.ts",
+          "deprecated": false,
+          "deprecationMessage": "",
+          "type": "",
+          "defaultValue": "Template.bind({})"
+        },
+        {
+          "name": "Template",
+          "ctype": "miscellaneous",
+          "subtype": "variable",
+          "file": "src/app/components/light-switch/light-switch.component.stories.ts",
           "deprecated": false,
           "deprecationMessage": "",
           "type": "Story",
@@ -10189,6 +10641,36 @@
     "status": "low",
     "files": [
       {
+        "filePath": ".storybook/main.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "config",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": ".storybook/preview.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "parameters",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
+        "filePath": ".storybook/preview.ts",
+        "type": "variable",
+        "linktype": "miscellaneous",
+        "linksubtype": "variable",
+        "name": "preview",
+        "coveragePercent": 0,
+        "coverageCount": "0/1",
+        "status": "low"
+      },
+      {
         "filePath": "src/app/app.component.ts",
         "type": "component",
         "linktype": "component",
@@ -10248,8 +10730,8 @@
         "type": "class",
         "linktype": "classe",
         "name": "PaletteExporter",
-        "coveragePercent": 88,
-        "coverageCount": "8/9",
+        "coveragePercent": 92,
+        "coverageCount": "12/13",
         "status": "very-good"
       },
       {
@@ -10525,7 +11007,7 @@
         "status": "low"
       },
       {
-        "filePath": "src/app/dialogs/css-copy.dialog.ts",
+        "filePath": "src/app/dialogs/css/css-copy.dialog.ts",
         "type": "class",
         "linktype": "classe",
         "name": "CssCopyDialog",
@@ -10534,7 +11016,7 @@
         "status": "low"
       },
       {
-        "filePath": "src/app/dialogs/css-file.dialog.ts",
+        "filePath": "src/app/dialogs/css/css-file.dialog.ts",
         "type": "class",
         "linktype": "classe",
         "name": "CssFileDialog",
@@ -10543,7 +11025,7 @@
         "status": "low"
       },
       {
-        "filePath": "src/app/dialogs/css.dialog.ts",
+        "filePath": "src/app/dialogs/css/css.dialog.ts",
         "type": "class",
         "linktype": "classe",
         "name": "CssDialog",
@@ -10561,7 +11043,34 @@
         "status": "low"
       },
       {
-        "filePath": "src/app/dialogs/tailwind-copy.dialog.ts",
+        "filePath": "src/app/dialogs/scss/scss-copy.dialog.ts",
+        "type": "class",
+        "linktype": "classe",
+        "name": "ScssCopyDialog",
+        "coveragePercent": 0,
+        "coverageCount": "0/3",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/dialogs/scss/scss-file.dialog.ts",
+        "type": "class",
+        "linktype": "classe",
+        "name": "ScssFileDialog",
+        "coveragePercent": 0,
+        "coverageCount": "0/3",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/dialogs/scss/scss.dialog.ts",
+        "type": "class",
+        "linktype": "classe",
+        "name": "ScssDialog",
+        "coveragePercent": 0,
+        "coverageCount": "0/3",
+        "status": "low"
+      },
+      {
+        "filePath": "src/app/dialogs/tailwind/tailwind-copy.dialog.ts",
         "type": "class",
         "linktype": "classe",
         "name": "TailwindCopyDialog",
@@ -10570,7 +11079,7 @@
         "status": "low"
       },
       {
-        "filePath": "src/app/dialogs/tailwind-file.dialog.ts",
+        "filePath": "src/app/dialogs/tailwind/tailwind-file.dialog.ts",
         "type": "class",
         "linktype": "classe",
         "name": "TailwindFileDialog",
@@ -10579,7 +11088,7 @@
         "status": "low"
       },
       {
-        "filePath": "src/app/dialogs/tailwind.dialog.ts",
+        "filePath": "src/app/dialogs/tailwind/tailwind.dialog.ts",
         "type": "class",
         "linktype": "classe",
         "name": "TailwindDialog",

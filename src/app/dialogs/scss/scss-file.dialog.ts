@@ -29,6 +29,9 @@ export class ScssFileDialog {
           action: docEmitter,
         },
       ],
+      style: {
+        width: 'large',
+      },
     }
   }
 }

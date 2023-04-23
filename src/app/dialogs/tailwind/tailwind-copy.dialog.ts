@@ -30,6 +30,9 @@ export class TailwindCopyDialog {
           action: docEmitter,
         },
       ],
+      style: {
+        width: 'large',
+      },
     }
   }
 }

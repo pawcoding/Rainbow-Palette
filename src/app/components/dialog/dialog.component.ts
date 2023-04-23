@@ -11,26 +11,53 @@ export class DialogComponent {
   @Input()
   dark = false
 
-  content: Dialog | undefined
+  dialog: Dialog | undefined
 
   constructor(
     private notificationService: NotificationService,
     private tracker: MatomoTracker
   ) {
-    notificationService.dialog.subscribe((dialogContent) => {
-      this.content = dialogContent
+    notificationService.dialog.subscribe((dialog) => {
+      this.dialog = dialog
 
-      if (
-        dialogContent &&
-        /export-(css|tailwind)-(copy|file)/.test(dialogContent.id)
-      ) {
-        const [category, action, name] = dialogContent.id.split('-')
+      if (this.dialog) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = 'auto'
+      }
+
+      if (dialog && /export-(css|tailwind)-(copy|file)/.test(dialog.id)) {
+        const [category, action, name] = dialog.id.split('-')
         this.tracker.trackEvent(category, action, name)
       }
     })
   }
 
-  closeNotification() {
+  protected getWidth(): string {
+    switch (this.dialog?.style?.width) {
+      case 'small':
+        return 'max-w-md'
+      case 'large':
+        return 'max-w-2xl'
+      default:
+        return 'max-w-lg'
+    }
+  }
+
+  protected getAlign(): string {
+    switch (this.dialog?.style?.align) {
+      case 'justify':
+        return 'text-justify'
+      case 'right':
+        return 'text-right'
+      case 'left':
+        return 'text-left'
+      default:
+        return 'text-center'
+    }
+  }
+
+  protected closeNotification(): void {
     this.notificationService.dialog.emit(undefined)
   }
 }

@@ -33,3 +33,7 @@ export const Primary = Template.bind({})
 Primary.args = {
   dark: false,
 }
+
+Primary.parameters = {
+  layout: 'fullscreen',
+}

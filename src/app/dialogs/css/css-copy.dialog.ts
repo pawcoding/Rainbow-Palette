@@ -31,6 +31,9 @@ export class CssCopyDialog {
           action: docEmitter,
         },
       ],
+      style: {
+        width: 'large',
+      },
     }
   }
 }

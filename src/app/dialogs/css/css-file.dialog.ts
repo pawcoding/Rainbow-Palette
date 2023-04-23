@@ -35,6 +35,9 @@ export class CssFileDialog {
           action: docEmitter,
         },
       ],
+      style: {
+        width: 'large',
+      },
     }
   }
 }
