@@ -1,7 +1,7 @@
 import { EventEmitter } from '@angular/core'
-import { PaletteExporter } from '../class/palette-exporter'
-import { Palette } from '../models/palette.model'
-import { Dialog } from '../interfaces/dialog.interface'
+import { PaletteExporter } from '../../class/palette-exporter'
+import { Palette } from '../../models/palette.model'
+import { Dialog } from '../../interfaces/dialog.interface'
 import { CssCopyDialog } from './css-copy.dialog'
 import { CssFileDialog } from './css-file.dialog'
 
@@ -34,7 +34,7 @@ export class CssDialog {
 
     const cssFileEmitter = new EventEmitter()
     cssFileEmitter.subscribe(() => {
-      const css = PaletteExporter.exportCssFile(this.palette)
+      const css = PaletteExporter.exportCSSFile(this.palette)
       const blob = new Blob([css], { type: 'text/css' })
 
       const a = document.createElement('a')

@@ -1,6 +1,6 @@
 import { EventEmitter } from '@angular/core'
-import { Dialog } from '../interfaces/dialog.interface'
-import { toUnicodeVariant } from '../utils/to-unicode-variant.util'
+import { Dialog } from '../../interfaces/dialog.interface'
+import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'
 
 export class TailwindCopyDialog {
   constructor(private notification: EventEmitter<Dialog | undefined>) {}
