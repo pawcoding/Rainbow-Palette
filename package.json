@@ -17,15 +17,15 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "prepwa": "npm run build",
+    "prepwa": "pnpm run build",
     "pwa": "npx http-server -p 4242 -c-1 dist/rainbow-palette",
-    "prebuild": "npm run build:sitemap",
+    "prebuild": "pnpm run build:sitemap",
     "build": "ng build",
     "build:sitemap": "node scripts/update-sitemap.js",
     "build:storybook": "ng run rainbow-palette:build-storybook",
     "watch": "ng build --watch --configuration development",
     "lint": "ng lint",
-    "lint:watch": "nodemon --exec \"npm run lint || exit 1\" --ext ts,html,css",
+    "lint:watch": "nodemon --exec \"pnpm run lint || exit 1\" --ext ts,html,css",
     "prettier": "npx prettier --write src/",
     "prettier:check": "npx prettier --check src/",
     "test": "ng test",
@@ -33,7 +33,8 @@
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "ng run rainbow-palette:storybook",
     "prepare": "husky install",
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "npx lint-staged",
+    "preinstall": "npx only-allow pnpm"
   },
   "private": true,
   "lint-staged": {
