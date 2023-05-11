@@ -23,7 +23,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component'
 import {
   MatomoConsentMode,
-  NgxMatomoTrackerModule,
+  NgxMatomoModule,
   NgxMatomoRouterModule,
 } from 'ngx-matomo-client'
 import { AnalyticsInterceptor } from './interceptors/analytics.interceptor'
@@ -62,7 +62,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component'
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
-    NgxMatomoTrackerModule.forRoot({
+    NgxMatomoModule.forRoot({
       siteId: 1,
       trackerUrl: 'https://analytics.apps.pawcode.de/',
       enableJSErrorTracking: true,
