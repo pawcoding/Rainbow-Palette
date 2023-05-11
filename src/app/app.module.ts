@@ -21,8 +21,11 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core'
 import { TranslateHttpLoader } from '@ngx-translate/http-loader'
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component'
-import { MatomoConsentMode, NgxMatomoTrackerModule } from '@ngx-matomo/tracker'
-import { NgxMatomoRouterModule } from '@ngx-matomo/router'
+import {
+  MatomoConsentMode,
+  NgxMatomoTrackerModule,
+  NgxMatomoRouterModule,
+} from 'ngx-matomo-client'
 import { AnalyticsInterceptor } from './interceptors/analytics.interceptor'
 import { AnalyticsComponent } from './pages/analytics/analytics.component'
 

@@ -1,7 +1,6 @@
-import { MatomoRouterInterceptor } from '@ngx-matomo/router'
 import { Injectable } from '@angular/core'
 import { StorageService } from '../services/storage.service'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker, MatomoRouterInterceptor } from 'ngx-matomo-client'
 import { Observable } from 'rxjs'
 import { NavigationEnd } from '@angular/router'
 

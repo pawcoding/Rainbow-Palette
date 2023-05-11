@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core'
 import { NotificationService } from '../../services/notification.service'
 import { Dialog } from '../../interfaces/dialog.interface'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 
 @Component({
   selector: 'app-custom-dialog',
