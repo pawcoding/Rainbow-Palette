@@ -113,7 +113,7 @@ export class AppComponent implements OnInit {
           ],
         })
       } else if (event.type === 'VERSION_INSTALLATION_FAILED') {
-        this.notificationService.notification.emit('update-failed')
+        this.notificationService.openNotification('update-failed')
         this.tracker.trackEvent('pwa', 'update-failed')
       }
     })
@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
     this.showTrackingNotice = false
     this.storage.rememberTracking(true)
     this.tracker.setConsentGiven()
-    this.notificationService.notification.emit('tracking-allowed')
+    this.notificationService.openNotification('tracking-allowed')
   }
 
   /**

@@ -107,7 +107,7 @@ export class PaletteViewerComponent {
     }
 
     setTimeout(() => {
-      this.notificationService.notification.emit('saved')
+      this.notificationService.openNotification('saved')
       this.saving = false
     }, 2000)
   }

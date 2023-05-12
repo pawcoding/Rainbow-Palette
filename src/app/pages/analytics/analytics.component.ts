@@ -29,7 +29,7 @@ export class AnalyticsComponent {
   allowTracking() {
     this.storage.rememberTracking(true)
     this.tracker.setConsentGiven()
-    this.notificationService.notification.emit('tracking-allowed')
+    this.notificationService.openNotification('tracking-allowed')
     this.trackingAllowed = 1
   }
 

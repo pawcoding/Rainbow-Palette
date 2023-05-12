@@ -75,7 +75,7 @@ export class ColorViewerComponent {
     navigator.clipboard
       .writeText(shade.hex)
       .then(() => {
-        this.notificationService.notification.emit({
+        this.notificationService.openNotification({
           id: 'copied',
           interpolateParams: {
             color: toUnicodeVariant(shade.hex, 'm'),
@@ -84,7 +84,7 @@ export class ColorViewerComponent {
       })
       .catch((e) => {
         console.error('Error while copying to clipboard: ', e)
-        this.notificationService.notification.emit('copy-error')
+        this.notificationService.openNotification('copy-error')
       })
   }
 }

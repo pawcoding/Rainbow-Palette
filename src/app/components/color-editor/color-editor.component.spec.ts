@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ColorEditorComponent } from './color-editor.component'
 import { TranslateModule } from '@ngx-translate/core'
+import { StorageServiceMock } from 'src/app/mocks/storage.service.mock'
+import { StorageService } from 'src/app/services/storage.service'
 
 describe('ColorEditorComponent', () => {
   let component: ColorEditorComponent
@@ -11,6 +13,7 @@ describe('ColorEditorComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ColorEditorComponent],
       imports: [TranslateModule.forRoot()],
+      providers: [{ provide: StorageService, useClass: StorageServiceMock }],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ColorEditorComponent)

@@ -1,38 +1,33 @@
 import { NotificationService } from '../services/notification.service'
-import { EventEmitter } from '@angular/core'
+import { EventEmitter, Signal, signal } from '@angular/core'
 import { Dialog } from '../interfaces/dialog.interface'
+import { Notification } from '../types/notification.type'
 
 export class NotificationServiceMock implements Partial<NotificationService> {
-  notification = new EventEmitter<
-    | string
-    | { id: string; interpolateParams: { [key: string]: string } }
-    | undefined
-  >()
+  private _notification = signal<Notification>('test')
+
+  public async openNotification(
+    notification: Notification,
+    duration?: number
+  ): Promise<void> {
+    console.log(
+      `NotificationService.openNotification(${notification}, ${duration})`
+    )
+  }
+
+  public closeNotification(): void {
+    console.log('NotificationService.closeNotification()')
+  }
+
+  public get notification(): Signal<Notification> {
+    console.log('NotificationService.notification')
+    return this._notification.asReadonly()
+  }
 
   dialog = new EventEmitter<Dialog | undefined>()
 
   constructor() {
-    this.initNotification()
     this.initDialog()
-  }
-
-  initNotification() {
-    const message = 'test'
-
-    setTimeout(() => {
-      this.notification.emit(message)
-    }, 0)
-
-    this.notification.subscribe((nextMessage) => {
-      if (nextMessage) {
-        console.log('Show Notification\n', nextMessage)
-      } else {
-        console.log('Close Notification')
-        setTimeout(() => {
-          this.notification.emit(message)
-        }, 1000)
-      }
-    })
   }
 
   initDialog() {

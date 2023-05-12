@@ -1,19 +1,19 @@
 <div
-  *ngIf="message || complexNotification"
+  *ngIf="message() || complexNotification()"
   [class]="dark ? 'dark' : ''"
   class="mb-6 mr-6 z-50">
   <article
     class="flex items-center p-4 w-full max-w-xs bg-gray-100 rounded dark:bg-gray-800 text-gray-800 dark:text-gray-100"
     role="alert">
     <p class="mr-4 text-sm cursor-default">
-      <ng-template [ngIf]="complexNotification">
+      <ng-template [ngIf]="complexNotification()">
         {{
-          'notification.' + complexNotification.id
-            | translate : complexNotification.interpolateParams
+          'notification.' + complexNotification()!.id
+            | translate : complexNotification()!.interpolateParams
         }}
       </ng-template>
-      <ng-template [ngIf]="message">
-        {{ 'notification.' + message | translate }}
+      <ng-template [ngIf]="message()">
+        {{ 'notification.' + message() | translate }}
       </ng-template>
     </p>
 
