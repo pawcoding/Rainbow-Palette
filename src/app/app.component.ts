@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { environment } from '../environments/environment'
 import { StorageService } from './services/storage.service'
 import { PaletteService } from './services/palette.service'
@@ -89,33 +89,26 @@ export class AppComponent implements OnInit {
     // Setup Service Worker update
     this.updates.versionUpdates.subscribe((event) => {
       if (event.type === 'VERSION_READY') {
-        const closeEvent = new EventEmitter()
-        closeEvent.subscribe(() => {
-          this.notificationService.dialog.emit(undefined)
-        })
-
-        const updateEvent = new EventEmitter()
-        updateEvent.subscribe(() => {
-          // Save current palette before reload
-          const palette = this.paletteService.getPalette()
-          if (palette) {
-            this.storage.savePalette(palette)
-          }
-
-          this.tracker.trackEvent('pwa', 'update-complete')
-          document.location.reload()
-        })
-
         this.notificationService.dialog.emit({
           id: 'update-available',
           actions: [
             {
               id: 'not-now',
-              action: closeEvent,
             },
             {
               id: 'update',
-              action: updateEvent,
+              callback: async () => {
+                // Save current palette before reload
+                const palette = this.paletteService.getPalette()
+                if (palette) {
+                  this.storage.savePalette(palette)
+                }
+
+                this.tracker.trackEvent('pwa', 'update-complete')
+                document.location.reload()
+
+                return undefined
+              },
             },
           ],
         })

@@ -44,7 +44,7 @@
         type="button"
         class="text-primary-700 max-sm:w-full hocus:bg-primary-200 focus:ring-0 focus:outline-none rounded text-sm font-medium px-5 py-2.5 dark:text-primary-500 dark:hocus:text-primary-400 dark:hocus:bg-primary-900 transition-colors duration-200"
         [title]="'dialog.action.' + action.id + '.title' | translate"
-        (click)="action.action.emit()">
+        (click)="triggerCallback(action.id)">
         {{ 'dialog.action.' + action.id + '.label' | translate }}
       </button>
     </section>

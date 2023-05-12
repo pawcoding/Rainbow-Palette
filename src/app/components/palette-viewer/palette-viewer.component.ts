@@ -47,26 +47,18 @@ export class PaletteViewerComponent {
    * @param $event MouseEvent
    */
   removePalette($event: MouseEvent) {
-    const removeEmitter = new EventEmitter()
-    removeEmitter.subscribe(() => {
-      this.notificationService.dialog.emit(undefined)
-      this.onRemove.emit($event)
-    })
-    const closeEmitter = new EventEmitter()
-    closeEmitter.subscribe(() => {
-      this.notificationService.dialog.emit(undefined)
-    })
-
     this.notificationService.dialog.emit({
       id: 'delete-palette',
       actions: [
         {
           id: 'cancel',
-          action: closeEmitter,
         },
         {
           id: 'delete',
-          action: removeEmitter,
+          callback: async () => {
+            this.onRemove.emit($event)
+            return undefined
+          },
         },
       ],
     })
@@ -146,10 +138,7 @@ export class PaletteViewerComponent {
   exportPalette() {
     if (this.palette) {
       this.notificationService.dialog.emit(
-        new ExportDialog(
-          this.notificationService.dialog,
-          this.palette
-        ).getNotification()
+        new ExportDialog(this.palette).getNotification()
       )
     }
   }

@@ -60,4 +60,16 @@ export class DialogComponent {
   protected closeNotification(): void {
     this.notificationService.dialog.emit(undefined)
   }
+
+  protected async triggerCallback(actionId: string): Promise<void> {
+    const action = this.dialog?.actions?.find(
+      (action) => action.id === actionId
+    )
+
+    if (action?.callback) {
+      this.notificationService.dialog.emit(await action.callback())
+    } else {
+      this.closeNotification()
+    }
+  }
 }

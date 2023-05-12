@@ -36,29 +36,20 @@ export class NotificationServiceMock implements Partial<NotificationService> {
   }
 
   initDialog() {
-    const wait = new EventEmitter()
-    const next = new EventEmitter()
-
     const content: Dialog = {
       id: 'test',
       actions: [
         {
           id: 'wait',
-          action: wait,
         },
         {
           id: 'next',
-          action: next,
+          callback: async () => {
+            return content
+          },
         },
       ],
     }
-
-    wait.subscribe(() => {
-      this.dialog.emit(undefined)
-    })
-    next.subscribe(() => {
-      this.dialog.emit(content)
-    })
 
     setTimeout(() => {
       this.dialog.emit(content)

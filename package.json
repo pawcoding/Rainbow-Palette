@@ -72,6 +72,7 @@
     "@compodoc/compodoc": "^1.1.19",
     "@savvywombat/tailwindcss-grid-areas": "^3.0.1",
     "@storybook/addon-actions": "^7.0.10",
+    "@storybook/addon-docs": "^7.0.10",
     "@storybook/addon-essentials": "^7.0.10",
     "@storybook/addon-interactions": "^7.0.10",
     "@storybook/addon-links": "^7.0.10",
