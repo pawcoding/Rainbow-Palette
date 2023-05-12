@@ -6,7 +6,7 @@ import { PaletteService } from '../../services/palette.service'
 import { Router } from '@angular/router'
 import { TranslateService } from '@ngx-translate/core'
 import { getDiscordLink, getGitHubLink } from '../../utils/links.util'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 
 @Component({
   selector: 'app-home',

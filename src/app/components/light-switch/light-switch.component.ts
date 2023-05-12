@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core'
 import { StorageService } from '../../services/storage.service'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 
 @Component({
   selector: 'app-light-switch',

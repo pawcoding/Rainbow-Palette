@@ -11,7 +11,7 @@ import { Color } from '../../models/color.model'
 import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
 import { TranslateService } from '@ngx-translate/core'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 import { ExportDialog } from '../../dialogs/export.dialog'
 
 @Component({

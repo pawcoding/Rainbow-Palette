@@ -28,14 +28,35 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16
-          cache: 'npm'
 
-      # Install dependencies and build project
-      - name: 🔨 Build project
+      # Install pnpm
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v2
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      # Get pnpm store directory
+      - name: 📦 Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
         run: |
-          npm cache clean --force
-          npm ci
-          npm install -g @angular/cli@14.x > /dev/null
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 📦 Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # Install dependencies
+      - name: 🔨 Install dependencies
+        run: |
+          pnpm install --frozen-lockfile --prefer-frozen-lockfile
+          pnpm install -g @angular/cli@16.0.0 > /dev/null
 
       # Upload to Chromatic
       - name: 📤 Upload to Chromatic
