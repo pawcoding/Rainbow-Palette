@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { StorageService } from '../../services/storage.service'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 import { NotificationService } from '../../services/notification.service'
 import { getMatomoLink } from '../../utils/links.util'
 import { TranslateService } from '@ngx-translate/core'

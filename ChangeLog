@@ -1,3 +1,16 @@
+2023.04.19, v0.2.1
+
+feature:
+- (analytics): add analytics with matomo
+- (analytics): add page about analytics
+- (export): add export to scss
+
+fix:
+- (i18n): import only needed flags
+- (test): setup chromatic as ui pipeline
+- (test): dependency injection for tests
+- (*): minor lighthouse fixes
+
 2023.04.09, v0.2.0
 
 feature:

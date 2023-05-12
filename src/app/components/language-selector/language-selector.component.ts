@@ -2,7 +2,7 @@ import { Component } from '@angular/core'
 import { StorageService } from '../../services/storage.service'
 import { languageToCountryCode } from '../../utils/language-to-countrycode.util'
 import { LANGUAGES } from '../../constants/languages.constant'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 
 @Component({
   selector: 'app-language-selector',
