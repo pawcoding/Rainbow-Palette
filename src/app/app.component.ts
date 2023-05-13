@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { environment } from '../environments/environment'
 import { StorageService } from './services/storage.service'
 import { PaletteService } from './services/palette.service'
@@ -17,10 +17,12 @@ import { DialogService } from './services/dialog.service'
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  private readonly _storage = inject(StorageService)
+
   title =
     'Rainbow Palette | Get your own color palette from just a single color'
   version = environment.version
-  dark = false
+  protected readonly dark = this._storage.dark
   showTrackingNotice = false
 
   getMatomoLink = getMatomoLink(this.translate)
@@ -56,10 +58,6 @@ export class AppComponent implements OnInit {
     private tracker: MatomoTracker,
     private updates: SwUpdate
   ) {
-    // Load theme from local storage and subscribe to changes
-    this.dark = storage.loadTheme()
-    this.storage.darkEmitter.subscribe((d) => (this.dark = d.valueOf()))
-
     // Load color name dictionary
     ColorNamer.loadDictionary()
 

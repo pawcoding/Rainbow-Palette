@@ -5,7 +5,7 @@ import { Dialog } from '../types/dialog.type'
   providedIn: 'root',
 })
 export class DialogService {
-  private _dialog = signal<Dialog | undefined>(undefined)
+  private readonly _dialog = signal<Dialog | undefined>(undefined)
 
   /**
    * Open a dialog

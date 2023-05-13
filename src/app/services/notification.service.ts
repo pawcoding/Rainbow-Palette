@@ -8,7 +8,7 @@ const NOTIFICATION_TIMEOUT = 'NOTIFICATION'
   providedIn: 'root',
 })
 export class NotificationService {
-  private _notification = signal<Notification | undefined>(undefined)
+  private readonly _notification = signal<Notification | undefined>(undefined)
 
   /**
    * Open a notification

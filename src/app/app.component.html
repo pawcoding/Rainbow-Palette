@@ -8,7 +8,7 @@
         height="50"
         width="179"
         [src]="
-          '/assets/rainbow-palette-' + (dark ? 'light' : 'dark') + '.svg'
+          '/assets/rainbow-palette-' + (dark() ? 'light' : 'dark') + '.svg'
         " />
     </h1>
 
@@ -44,7 +44,7 @@
       <app-language-selector></app-language-selector>
       <app-light-switch
         class="flex items-center"
-        [dark]="dark"></app-light-switch>
+        [dark]="dark()"></app-light-switch>
     </div>
   </header>
 
@@ -119,7 +119,7 @@
         height="32"
         width="139"
         alt="pawcode&nbsp;Development"
-        [src]="'/assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'" />
+        [src]="'/assets/pawcode-' + (dark() ? 'light' : 'dark') + '.svg'" />
     </a>
   </footer>
 
