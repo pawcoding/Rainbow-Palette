@@ -4,13 +4,18 @@ import { NotificationService } from '../../services/notification.service'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
 import { NotificationServiceMock } from '../../mocks/notification.service.mock'
+import { DialogService } from 'src/app/services/dialog.service'
+import { DialogServiceMock } from 'src/app/mocks/dialog.service.mock'
 
 export default {
   title: 'Components/Dialog',
   component: DialogComponent,
   decorators: [
     applicationConfig({
-      providers: [...matomoProvidersMock],
+      providers: [
+        ...matomoProvidersMock,
+        { provide: DialogService, useClass: DialogServiceMock },
+      ],
     }),
   ],
 } as Meta

@@ -5,4 +5,3 @@ export type Notification =
       interpolateParams: { [key: string]: string }
     }
   | string
-  | undefined

@@ -1,5 +1,5 @@
 import { Palette } from '../models/palette.model'
-import { Dialog } from '../interfaces/dialog.interface'
+import { Dialog } from '../types/dialog.type'
 import { CssDialog } from './css/css.dialog'
 import { TailwindDialog } from './tailwind/tailwind.dialog'
 import { ScssDialog } from './scss/scss.dialog'

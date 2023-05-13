@@ -1,4 +1,4 @@
-import { Dialog } from '../../interfaces/dialog.interface'
+import { Dialog } from 'src/app/types/dialog.type'
 import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'
 
 export class TailwindCopyDialog {

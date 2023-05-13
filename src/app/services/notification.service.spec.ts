@@ -11,7 +11,7 @@ describe('NotificationService', () => {
     service = TestBed.inject(NotificationService)
   })
 
-  it('Create Service with initial state', () => {
+  it('Create service with initial state', () => {
     expect(service).toBeTruthy()
     expect(service.notification()).toBeUndefined()
   })

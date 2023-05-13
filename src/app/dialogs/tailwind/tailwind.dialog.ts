@@ -1,6 +1,6 @@
 import { PaletteExporter } from '../../class/palette-exporter'
 import { Palette } from '../../models/palette.model'
-import { Dialog } from '../../interfaces/dialog.interface'
+import { Dialog } from 'src/app/types/dialog.type'
 import { TailwindCopyDialog } from './tailwind-copy.dialog'
 import { TailwindFileDialog } from './tailwind-file.dialog'
 import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'

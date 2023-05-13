@@ -1,17 +1,17 @@
 <div
   tabindex="-1"
-  *ngIf="dialog"
-  (click)="closeNotification()"
+  *ngIf="dialog()"
+  (click)="closeDialog()"
   class="p-4 flex overflow-y-auto overflow-x-hidden z-40 h-modal h-screen w-screen justify-center items-center backdrop-blur-sm bg-gray-900/20 dark:bg-gray-800/75 cursor-pointer"
   [class]="dark ? 'dark' : ''"
   aria-hidden="true">
   <article
     class="flex flex-col gap-6 relative w-full cursor-default bg-gray-100 text-gray-900 rounded dark:bg-gray-900 dark:text-gray-100 p-4 shadow"
-    [class]="getWidth()"
+    [class]="width()"
     (click)="$event.stopPropagation()">
     <button
       type="button"
-      (click)="closeNotification()"
+      (click)="closeDialog()"
       [title]="'dialog.close' | translate"
       class="absolute bottom-full right-0 mb-2 bg-transparent hocus:text-primary-900 hocus:bg-primary-400 rounded-md text-sm p-1.5 ml-auto inline-flex items-center dark:hocus:text-primary-300 dark:hocus:bg-primary-700 focus:ring-0 focus:outline-none transition-colors duration-200">
       <svg
@@ -30,17 +30,18 @@
     <section class="mt-8">
       <p
         class="text-lg font-normal"
-        [class]="getAlign()"
+        [class]="align()"
         [innerHtml]="
-          'dialog.message.' + dialog.id | translate : dialog.interpolateParams
+          'dialog.message.' + dialog()!.id
+            | translate : dialog()!.interpolateParams
         "></p>
     </section>
 
     <section
-      *ngIf="dialog.actions && dialog.actions.length > 0"
+      *ngIf="dialog()!.actions && dialog()!.actions!.length > 0"
       class="flex flex-col sm:flex-row justify-end items-center gap-2">
       <button
-        *ngFor="let action of dialog.actions"
+        *ngFor="let action of dialog()!.actions"
         type="button"
         class="text-primary-700 max-sm:w-full hocus:bg-primary-200 focus:ring-0 focus:outline-none rounded text-sm font-medium px-5 py-2.5 dark:text-primary-500 dark:hocus:text-primary-400 dark:hocus:bg-primary-900 transition-colors duration-200"
         [title]="'dialog.action.' + action.id + '.title' | translate"

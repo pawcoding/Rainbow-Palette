@@ -9,21 +9,21 @@ export class NotificationComponent {
   @Input()
   dark = false
 
-  private readonly notificationService = inject(NotificationService)
+  private readonly _notificationService = inject(NotificationService)
 
   protected readonly message = computed(() => {
-    const notification = this.notificationService.notification()
+    const notification = this._notificationService.notification()
     if (typeof notification === 'string') return notification
     else return undefined
   })
 
   protected readonly complexNotification = computed(() => {
-    const notification = this.notificationService.notification()
+    const notification = this._notificationService.notification()
     if (typeof notification === 'string') return undefined
     else return notification
   })
 
   closeNotification() {
-    this.notificationService.closeNotification()
+    this._notificationService.closeNotification()
   }
 }

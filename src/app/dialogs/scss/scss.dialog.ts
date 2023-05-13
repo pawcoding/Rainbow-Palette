@@ -1,6 +1,6 @@
 import { PaletteExporter } from '../../class/palette-exporter'
 import { Palette } from '../../models/palette.model'
-import { Dialog } from '../../interfaces/dialog.interface'
+import { Dialog } from 'src/app/types/dialog.type'
 import { ScssCopyDialog } from './scss-copy.dialog'
 import { ScssFileDialog } from './scss-file.dialog'
 

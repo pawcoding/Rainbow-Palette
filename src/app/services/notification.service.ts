@@ -1,5 +1,4 @@
-import { EventEmitter, Injectable, Signal, signal } from '@angular/core'
-import { Dialog } from '../interfaces/dialog.interface'
+import { Injectable, Signal, signal } from '@angular/core'
 import { Notification } from '../types/notification.type'
 import { sleep, wake } from '../utils/sleep.util'
 
@@ -9,11 +8,7 @@ const NOTIFICATION_TIMEOUT = 'NOTIFICATION'
   providedIn: 'root',
 })
 export class NotificationService {
-  dialog: EventEmitter<Dialog | undefined> = new EventEmitter<
-    Dialog | undefined
-  >()
-
-  private _notification = signal<Notification>(undefined)
+  private _notification = signal<Notification | undefined>(undefined)
 
   /**
    * Open a notification
@@ -23,13 +18,9 @@ export class NotificationService {
     notification: Notification,
     duration = 5000
   ): Promise<void> {
-    if (notification) {
-      this._notification.set(notification)
-      await sleep(duration, NOTIFICATION_TIMEOUT)
-      this.closeNotification()
-    } else {
-      this.closeNotification()
-    }
+    this._notification.set(notification)
+    await sleep(duration, NOTIFICATION_TIMEOUT)
+    this.closeNotification()
   }
 
   /**
@@ -43,7 +34,7 @@ export class NotificationService {
   /**
    * Readonly notification signal
    */
-  public get notification(): Signal<Notification> {
+  public get notification(): Signal<Notification | undefined> {
     return this._notification.asReadonly()
   }
 }

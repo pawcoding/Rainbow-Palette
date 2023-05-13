@@ -1,4 +1,4 @@
-export interface Dialog {
+export type Dialog = {
   id: string
   interpolateParams?: { [key: string]: string }
   actions?: Action[]
@@ -8,7 +8,7 @@ export interface Dialog {
   }
 }
 
-export interface Action {
+export type Action = {
   id: string
   callback?: () => Promise<Dialog | undefined>
 }

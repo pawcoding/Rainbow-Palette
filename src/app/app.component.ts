@@ -10,6 +10,7 @@ import { MatomoTracker } from 'ngx-matomo-client'
 import { NotificationService } from './services/notification.service'
 import { getMatomoLink } from './utils/links.util'
 import { SwUpdate } from '@angular/service-worker'
+import { DialogService } from './services/dialog.service'
 
 @Component({
   selector: 'app-root',
@@ -51,6 +52,7 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private titleService: Title,
     private notificationService: NotificationService,
+    private dialogService: DialogService,
     private tracker: MatomoTracker,
     private updates: SwUpdate
   ) {
@@ -89,7 +91,7 @@ export class AppComponent implements OnInit {
     // Setup Service Worker update
     this.updates.versionUpdates.subscribe((event) => {
       if (event.type === 'VERSION_READY') {
-        this.notificationService.dialog.emit({
+        this.dialogService.openDialog({
           id: 'update-available',
           actions: [
             {
