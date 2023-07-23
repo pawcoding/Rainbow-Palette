@@ -2,6 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { ColorViewerComponent } from './color-viewer.component'
 import { TranslateModule } from '@ngx-translate/core'
+import { StorageServiceMock } from 'src/app/mocks/storage.service.mock'
+import { StorageService } from 'src/app/services/storage.service'
 
 describe('ColorViewerComponent', () => {
   let component: ColorViewerComponent
@@ -11,6 +13,7 @@ describe('ColorViewerComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ColorViewerComponent],
       imports: [TranslateModule.forRoot()],
+      providers: [{ provide: StorageService, useClass: StorageServiceMock }],
     }).compileComponents()
 
     fixture = TestBed.createComponent(ColorViewerComponent)

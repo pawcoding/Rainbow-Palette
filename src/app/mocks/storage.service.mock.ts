@@ -1,28 +1,22 @@
-import { EventEmitter } from '@angular/core'
+import { EventEmitter, Signal, signal } from '@angular/core'
 import { Palette } from '../models/palette.model'
 import { Color } from '../models/color.model'
 import { StorageService } from '../services/storage.service'
 
 export class StorageServiceMock implements Partial<StorageService> {
-  dark = false
-  language = 'en'
-
-  darkEmitter = new EventEmitter<boolean>()
-  languageEmitter = new EventEmitter<string>()
-
-  loadTheme(): boolean {
-    console.log('StorageServiceMock.loadTheme()')
-    this.dark = false
-    this.darkEmitter.emit(false)
-    return false
-  }
-
-  toggleTheme(dark: boolean | undefined): boolean {
+  public toggleTheme(dark: boolean | undefined): boolean {
     console.log(`StorageServiceMock.toggleTheme(${dark})`)
-    this.dark = dark ?? true
-    this.darkEmitter.emit(dark ?? true)
     return dark ?? true
   }
+
+  public get dark(): Signal<boolean> {
+    console.log('StorageServiceMock.dark()')
+    return signal(false).asReadonly()
+  }
+
+  language = 'en'
+
+  languageEmitter = new EventEmitter<string>()
 
   loadLanguage(): void {
     console.log('StorageServiceMock.loadLanguage()')

@@ -8,7 +8,7 @@
         height="50"
         width="179"
         [src]="
-          '/assets/rainbow-palette-' + (dark ? 'light' : 'dark') + '.svg'
+          '/assets/rainbow-palette-' + (dark() ? 'light' : 'dark') + '.svg'
         " />
     </h1>
 
@@ -44,7 +44,7 @@
       <app-language-selector></app-language-selector>
       <app-light-switch
         class="flex items-center"
-        [dark]="dark"></app-light-switch>
+        [dark]="dark()"></app-light-switch>
     </div>
   </header>
 
@@ -60,7 +60,7 @@
       <span
         class="inline-block"
         [innerHtml]="
-          'app.analytics.description' | translate : { matomo: getMatomoLink() }
+          'app.analytics.description' | translate: { matomo: getMatomoLink() }
         "></span>
       <a
         routerLink="/analytics"
@@ -106,20 +106,20 @@
     </a>
 
     <span class="cursor-default">
-      {{ 'app.footer.version' | translate : { version: version } }}
+      {{ 'app.footer.version' | translate: { version: version } }}
     </span>
 
     <a
       href="https://pawcode.de"
       target="_blank"
       [title]="
-        'app.footer.created' | translate : { pawcode: 'pawcode Development' }
+        'app.footer.created' | translate: { pawcode: 'pawcode Development' }
       ">
       <img
         height="32"
         width="139"
         alt="pawcode&nbsp;Development"
-        [src]="'/assets/pawcode-' + (dark ? 'light' : 'dark') + '.svg'" />
+        [src]="'/assets/pawcode-' + (dark() ? 'light' : 'dark') + '.svg'" />
     </a>
   </footer>
 

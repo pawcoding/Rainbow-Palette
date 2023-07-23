@@ -262,6 +262,7 @@
     "copied": "{{ color }} wurde in die Zwischenablage kopiert.",
     "copy-error": "Die Farbe konnte nicht in die Zwischenablage kopiert werden.",
     "close": "Schließen",
+    "invalid-hex": "Du musst einen 6 stelligen Hex-Code eingeben.",
     "saved": "Deine Palette wurde lokal gespeichert.",
     "test": "Dies ist eine Testnachricht.",
     "tracking-allowed": "Danke, dass du das Projekt unterstützt!",

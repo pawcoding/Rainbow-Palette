@@ -1,62 +1,44 @@
-import { EventEmitter } from '@angular/core'
 import { PaletteExporter } from '../../class/palette-exporter'
 import { Palette } from '../../models/palette.model'
-import { Dialog } from '../../interfaces/dialog.interface'
+import { Dialog } from 'src/app/types/dialog.type'
 import { CssCopyDialog } from './css-copy.dialog'
 import { CssFileDialog } from './css-file.dialog'
 
 export class CssDialog {
-  constructor(
-    private notification: EventEmitter<Dialog | undefined>,
-    private palette: Palette
-  ) {}
-
-  getNotification(): Dialog {
-    const cssCopyEmitter = new EventEmitter()
-    cssCopyEmitter.subscribe(() => {
-      const css = PaletteExporter.exportPaletteToCSS(this.palette)
-      navigator.clipboard
-        .writeText(css)
-        .then(() => {
-          this.notification.emit(
-            new CssCopyDialog(this.notification).getNotification()
-          )
-        })
-        .catch((e) => {
-          this.notification.emit({
-            id: 'copy-error',
-            interpolateParams: {
-              error: e,
-            },
-          })
-        })
-    })
-
-    const cssFileEmitter = new EventEmitter()
-    cssFileEmitter.subscribe(() => {
-      const css = PaletteExporter.exportCSSFile(this.palette)
-      const blob = new Blob([css], { type: 'text/css' })
-
-      const a = document.createElement('a')
-      a.href = URL.createObjectURL(blob)
-      a.download = 'colors.css'
-      a.click()
-
-      this.notification.emit(
-        new CssFileDialog(this.notification).getNotification()
-      )
-    })
-
+  static getNotification(palette: Palette): Dialog {
     return {
       id: 'export-css',
       actions: [
         {
           id: 'copy',
-          action: cssCopyEmitter,
+          callback: async () => {
+            const css = PaletteExporter.exportPaletteToCSS(palette)
+            try {
+              await navigator.clipboard.writeText(css)
+              return CssCopyDialog.getNotification()
+            } catch (e) {
+              return {
+                id: 'copy-error',
+                interpolateParams: {
+                  error: e,
+                },
+              } as Dialog
+            }
+          },
         },
         {
           id: 'file',
-          action: cssFileEmitter,
+          callback: async () => {
+            const css = PaletteExporter.exportCSSFile(palette)
+            const blob = new Blob([css], { type: 'text/css' })
+
+            const a = document.createElement('a')
+            a.href = URL.createObjectURL(blob)
+            a.download = 'colors.css'
+            a.click()
+
+            return CssFileDialog.getNotification()
+          },
         },
       ],
     }

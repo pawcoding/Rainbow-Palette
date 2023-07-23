@@ -8,6 +8,8 @@ import { RouterModule } from '@angular/router'
 import { LanguageSelectorComponent } from './components/language-selector/language-selector.component'
 import { ServiceWorkerModule } from '@angular/service-worker'
 import { matomoProvidersMock } from './mocks/matomo.providers.mock'
+import { StorageService } from './services/storage.service'
+import { StorageServiceMock } from './mocks/storage.service.mock'
 
 describe('AppComponent', () => {
   beforeEach(async () => {
@@ -24,7 +26,10 @@ describe('AppComponent', () => {
         RouterModule.forRoot([]),
         ServiceWorkerModule.register('', { enabled: false }),
       ],
-      providers: [...matomoProvidersMock],
+      providers: [
+        ...matomoProvidersMock,
+        { provide: StorageService, useClass: StorageServiceMock },
+      ],
     }).compileComponents()
   })
 

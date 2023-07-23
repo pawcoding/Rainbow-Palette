@@ -72,9 +72,7 @@ export class HomeComponent {
 
   generatePalette() {
     if (this.invalid) {
-      this.notificationService.notification.emit(
-        this.translate.instant('home.generation.invalid-hex')
-      )
+      this.notificationService.openNotification('invalid-hex')
       return
     }
 

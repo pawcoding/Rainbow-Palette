@@ -1,16 +1,8 @@
 name: 📝 Run unit tests
 
 # Controls when the action will run.
-# Triggers the workflow on push on master branch
-# and on pull requests on master branch
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
-      - 'version/**'
+# Triggers the workflow on all push events
+on: [push]
 
 jobs:
   unit-tests:

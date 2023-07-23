@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit } from '@angular/core'
+import { Component, OnInit, inject } from '@angular/core'
 import { environment } from '../environments/environment'
 import { StorageService } from './services/storage.service'
 import { PaletteService } from './services/palette.service'
@@ -10,16 +10,19 @@ import { MatomoTracker } from 'ngx-matomo-client'
 import { NotificationService } from './services/notification.service'
 import { getMatomoLink } from './utils/links.util'
 import { SwUpdate } from '@angular/service-worker'
+import { DialogService } from './services/dialog.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  private readonly _storage = inject(StorageService)
+
   title =
     'Rainbow Palette | Get your own color palette from just a single color'
   version = environment.version
-  dark = false
+  protected readonly dark = this._storage.dark
   showTrackingNotice = false
 
   getMatomoLink = getMatomoLink(this.translate)
@@ -51,13 +54,10 @@ export class AppComponent implements OnInit {
     private translate: TranslateService,
     private titleService: Title,
     private notificationService: NotificationService,
+    private dialogService: DialogService,
     private tracker: MatomoTracker,
     private updates: SwUpdate
   ) {
-    // Load theme from local storage and subscribe to changes
-    this.dark = storage.loadTheme()
-    this.storage.darkEmitter.subscribe((d) => (this.dark = d.valueOf()))
-
     // Load color name dictionary
     ColorNamer.loadDictionary()
 
@@ -89,38 +89,31 @@ export class AppComponent implements OnInit {
     // Setup Service Worker update
     this.updates.versionUpdates.subscribe((event) => {
       if (event.type === 'VERSION_READY') {
-        const closeEvent = new EventEmitter()
-        closeEvent.subscribe(() => {
-          this.notificationService.dialog.emit(undefined)
-        })
-
-        const updateEvent = new EventEmitter()
-        updateEvent.subscribe(() => {
-          // Save current palette before reload
-          const palette = this.paletteService.getPalette()
-          if (palette) {
-            this.storage.savePalette(palette)
-          }
-
-          this.tracker.trackEvent('pwa', 'update-complete')
-          document.location.reload()
-        })
-
-        this.notificationService.dialog.emit({
+        this.dialogService.openDialog({
           id: 'update-available',
           actions: [
             {
               id: 'not-now',
-              action: closeEvent,
             },
             {
               id: 'update',
-              action: updateEvent,
+              callback: async () => {
+                // Save current palette before reload
+                const palette = this.paletteService.getPalette()
+                if (palette) {
+                  this.storage.savePalette(palette)
+                }
+
+                this.tracker.trackEvent('pwa', 'update-complete')
+                document.location.reload()
+
+                return undefined
+              },
             },
           ],
         })
       } else if (event.type === 'VERSION_INSTALLATION_FAILED') {
-        this.notificationService.notification.emit('update-failed')
+        this.notificationService.openNotification('update-failed')
         this.tracker.trackEvent('pwa', 'update-failed')
       }
     })
@@ -133,7 +126,7 @@ export class AppComponent implements OnInit {
     this.showTrackingNotice = false
     this.storage.rememberTracking(true)
     this.tracker.setConsentGiven()
-    this.notificationService.notification.emit('tracking-allowed')
+    this.notificationService.openNotification('tracking-allowed')
   }
 
   /**

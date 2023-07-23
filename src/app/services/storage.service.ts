@@ -1,4 +1,11 @@
-import { EventEmitter, Injectable } from '@angular/core'
+import {
+  EventEmitter,
+  Injectable,
+  Signal,
+  effect,
+  inject,
+  signal,
+} from '@angular/core'
 import { Palette } from '../models/palette.model'
 import { TranslateService } from '@ngx-translate/core'
 
@@ -6,42 +13,52 @@ import { TranslateService } from '@ngx-translate/core'
   providedIn: 'root',
 })
 export class StorageService {
-  dark = false
+  private readonly _translator = inject(TranslateService)
+
+  private readonly _dark = signal(false)
+
+  constructor() {
+    // load theme
+    let initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
+
+    try {
+      const savedTheme = localStorage.getItem('theme')
+      if (savedTheme) {
+        initialTheme = savedTheme === 'dark'
+      }
+    } catch (e) {
+      console.error('Could not load theme from local storage.', e)
+    }
+    this._dark.set(initialTheme)
+
+    // apply theme and sync with local storage
+    effect(() => {
+      document.body.classList.toggle('dark', this._dark())
+      localStorage.setItem('theme', this._dark() ? 'dark' : 'light')
+    })
+  }
+
   language = 'en'
 
-  darkEmitter = new EventEmitter<boolean>()
   languageEmitter = new EventEmitter<string>()
-
-  constructor(private translate: TranslateService) {}
-
-  /**
-   * Load the theme if it is stored in local storage.
-   * If no theme was saved, the browser default theme is used.
-   */
-  loadTheme(): boolean {
-    if (!localStorage.getItem('theme')) {
-      return this.toggleTheme(
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-      )
-    } else {
-      return this.toggleTheme(localStorage.getItem('theme') === 'dark')
-    }
-  }
 
   /**
    * Toggle between dark and light theme.
    * Force dark or light mode with parameter.
    * @param dark
    */
-  toggleTheme(dark: boolean | undefined): boolean {
-    document.body.classList.toggle('dark', dark)
+  public toggleTheme(dark: boolean | undefined): boolean {
+    if (dark !== undefined) {
+      this._dark.set(dark)
+    } else {
+      this._dark.set(!this._dark())
+    }
 
-    dark = document.body.classList.contains('dark')
-    localStorage.setItem('theme', dark ? 'dark' : 'light')
+    return this._dark()
+  }
 
-    this.darkEmitter.emit(dark)
-
-    return (this.dark = dark)
+  public get dark(): Signal<boolean> {
+    return this._dark.asReadonly()
   }
 
   /**
@@ -53,7 +70,7 @@ export class StorageService {
     if (localStorage.getItem('language')) {
       this.applyLanguage(localStorage.getItem('language') ?? 'en')
     } else {
-      this.applyLanguage(this.translate.getBrowserLang() ?? 'en')
+      this.applyLanguage(this._translator.getBrowserLang() ?? 'en')
     }
   }
 
@@ -62,7 +79,7 @@ export class StorageService {
    * @param language
    */
   applyLanguage(language: string) {
-    this.translate.use(language).subscribe(() => {
+    this._translator.use(language).subscribe(() => {
       localStorage.setItem('language', language)
       this.language = language
       document.documentElement.setAttribute('lang', language)

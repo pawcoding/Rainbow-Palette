@@ -262,6 +262,7 @@
     "copied": "Copied {{ color }} to your clipboard.",
     "copy-error": "An error occurred while copying the color to your clipboard.",
     "close": "Close",
+    "invalid-hex": "You need to enter a 6-digit hex code.",
     "saved": "Palette saved",
     "test": "This is a test notification.",
     "tracking-allowed": "Thank you for supporting the project!",

@@ -20,6 +20,12 @@ export class ColorEditorComponent implements OnInit {
       if (changeType === ChangeType.LOAD) {
         this.color = this.colorService.getColor()
         this.shade = this.colorService.getShade()
+
+        if (this.color) {
+          document.body.style.overflow = 'hidden'
+        } else {
+          document.body.style.overflow = 'auto'
+        }
       }
 
       this.updateProperties()

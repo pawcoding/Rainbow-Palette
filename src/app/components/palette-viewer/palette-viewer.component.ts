@@ -10,9 +10,10 @@ import { Palette } from '../../models/palette.model'
 import { Color } from '../../models/color.model'
 import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
-import { ExportDialog } from '../../dialogs/export.dialog'
 import { TranslateService } from '@ngx-translate/core'
 import { MatomoTracker } from 'ngx-matomo-client'
+import { ExportDialog } from '../../dialogs/export.dialog'
+import { DialogService } from 'src/app/services/dialog.service'
 
 @Component({
   selector: 'app-palette-viewer',
@@ -38,6 +39,7 @@ export class PaletteViewerComponent {
   constructor(
     private storage: StorageService,
     private notificationService: NotificationService,
+    private dialogService: DialogService,
     private translate: TranslateService,
     private tracker: MatomoTracker
   ) {}
@@ -47,26 +49,18 @@ export class PaletteViewerComponent {
    * @param $event MouseEvent
    */
   removePalette($event: MouseEvent) {
-    const removeEmitter = new EventEmitter()
-    removeEmitter.subscribe(() => {
-      this.notificationService.dialog.emit(undefined)
-      this.onRemove.emit($event)
-    })
-    const closeEmitter = new EventEmitter()
-    closeEmitter.subscribe(() => {
-      this.notificationService.dialog.emit(undefined)
-    })
-
-    this.notificationService.dialog.emit({
+    this.dialogService.openDialog({
       id: 'delete-palette',
       actions: [
         {
           id: 'cancel',
-          action: closeEmitter,
         },
         {
           id: 'delete',
-          action: removeEmitter,
+          callback: async () => {
+            this.onRemove.emit($event)
+            return undefined
+          },
         },
       ],
     })
@@ -115,7 +109,7 @@ export class PaletteViewerComponent {
     }
 
     setTimeout(() => {
-      this.notificationService.notification.emit('saved')
+      this.notificationService.openNotification('saved')
       this.saving = false
     }, 2000)
   }
@@ -145,11 +139,8 @@ export class PaletteViewerComponent {
    */
   exportPalette() {
     if (this.palette) {
-      this.notificationService.dialog.emit(
-        new ExportDialog(
-          this.notificationService.dialog,
-          this.palette
-        ).getNotification()
+      this.dialogService.openDialog(
+        new ExportDialog(this.palette).getNotification()
       )
     }
   }
