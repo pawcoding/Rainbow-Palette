@@ -5,7 +5,13 @@ import { sleep } from '../utils/sleep.util'
 
 const DIALOG_MOCK_TIMEOUT = 'DIALOG_MOCK_TIMEOUT'
 
-export class DialogServiceMock implements Partial<DialogService> {
+class DialogServiceMock implements Partial<DialogService> {
+  private readonly _isExportDialog: boolean
+
+  constructor(isExportDialog: boolean = false) {
+    this._isExportDialog = isExportDialog
+  }
+
   public openDialog(dialog: Dialog): void {
     console.log(`DialogService.openDialog(${dialog})`)
   }
@@ -18,6 +24,22 @@ export class DialogServiceMock implements Partial<DialogService> {
     console.log('DialogService.dialog')
 
     const dialog = signal<Dialog | undefined>(undefined)
+
+    const exportDialog: Dialog = {
+      id: 'export-palette',
+      custom: true,
+      actions: [
+        {
+          id: 'css',
+        },
+        {
+          id: 'scss',
+        },
+        {
+          id: 'tailwind',
+        },
+      ],
+    }
 
     const dialogContent: Dialog = {
       id: 'test',
@@ -40,8 +62,12 @@ export class DialogServiceMock implements Partial<DialogService> {
       ],
     }
 
-    dialog.set(dialogContent)
+    dialog.set(this._isExportDialog ? exportDialog : dialogContent)
 
     return dialog.asReadonly()
   }
+}
+
+export const dialogServiceMockFactory = (isExportDialog: boolean = false) => {
+  return () => new DialogServiceMock(isExportDialog)
 }
