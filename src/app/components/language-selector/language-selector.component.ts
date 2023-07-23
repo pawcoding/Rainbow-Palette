@@ -14,7 +14,10 @@ export class LanguageSelectorComponent {
   language = 'en'
   showMenu = false
 
-  constructor(private storage: StorageService, private tracker: MatomoTracker) {
+  constructor(
+    private storage: StorageService,
+    private tracker: MatomoTracker
+  ) {
     this.storage.languageEmitter.subscribe((language) => {
       this.language = language
     })

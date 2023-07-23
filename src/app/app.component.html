@@ -60,7 +60,7 @@
       <span
         class="inline-block"
         [innerHtml]="
-          'app.analytics.description' | translate : { matomo: getMatomoLink() }
+          'app.analytics.description' | translate: { matomo: getMatomoLink() }
         "></span>
       <a
         routerLink="/analytics"
@@ -106,14 +106,14 @@
     </a>
 
     <span class="cursor-default">
-      {{ 'app.footer.version' | translate : { version: version } }}
+      {{ 'app.footer.version' | translate: { version: version } }}
     </span>
 
     <a
       href="https://pawcode.de"
       target="_blank"
       [title]="
-        'app.footer.created' | translate : { pawcode: 'pawcode Development' }
+        'app.footer.created' | translate: { pawcode: 'pawcode Development' }
       ">
       <img
         height="32"

@@ -9,7 +9,7 @@
       <ng-template [ngIf]="complexNotification()">
         {{
           'notification.' + complexNotification()!.id
-            | translate : complexNotification()!.interpolateParams
+            | translate: complexNotification()!.interpolateParams
         }}
       </ng-template>
       <ng-template [ngIf]="message()">
