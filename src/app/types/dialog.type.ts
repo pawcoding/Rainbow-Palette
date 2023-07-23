@@ -6,6 +6,7 @@ export type Dialog = {
     align?: 'left' | 'center' | 'justify' | 'right'
     width?: 'small' | 'medium' | 'large'
   }
+  custom?: boolean
 }
 
 export type Action = {

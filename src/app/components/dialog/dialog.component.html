@@ -37,17 +37,51 @@
         "></p>
     </section>
 
-    <section
-      *ngIf="dialog()!.actions && dialog()!.actions!.length > 0"
-      class="flex flex-col sm:flex-row justify-end items-center gap-2">
-      <button
-        *ngFor="let action of dialog()!.actions"
-        type="button"
-        class="text-primary-700 max-sm:w-full hocus:bg-primary-200 focus:ring-0 focus:outline-none rounded text-sm font-medium px-5 py-2.5 dark:text-primary-500 dark:hocus:text-primary-400 dark:hocus:bg-primary-900 transition-colors duration-200"
-        [title]="'dialog.action.' + action.id + '.title' | translate"
-        (click)="triggerCallback(action.id)">
-        {{ 'dialog.action.' + action.id + '.label' | translate }}
-      </button>
+    <section>
+      <ng-container [ngSwitch]="customId()">
+        <div *ngSwitchCase="'export-palette'">
+          <!-- Custom dialog action buttuns with icons for selecting the export format -->
+          <div
+            class="grid xs:grid-cols-3 gap-2 xs:gap-4 items-center justify-center">
+            <button
+              *ngFor="let exportFormat of dialog()!.actions"
+              type="button"
+              class="flex xs:flex-col gap-4 xs:gap-2 items-center justify-start xs:justify-center rounded font-medium focus:ring-0 focus-outline-none transition-colors duration-200 p-2 hocus:bg-primary-200 dark:text-primary-500 text-primary-700 dark:hocus:text-primary-400 dark:hocus:bg-primary-900"
+              [title]="
+                'dialog.action.' + exportFormat.id + '.title' | translate
+              "
+              (click)="triggerCallback(exportFormat.id)">
+              <img
+                class="h-10 xs:16 w-10 xs:w-16 xs:mx-auto"
+                [src]="'/assets/icons/' + exportFormat.id + '.svg'"
+                [alt]="
+                  'dialog.action.' + exportFormat.id + '.label' | translate
+                "
+                height="64"
+                width="64" />
+              <p>
+                {{ 'dialog.action.' + exportFormat.id + '.label' | translate }}
+              </p>
+            </button>
+          </div>
+        </div>
+
+        <div *ngSwitchDefault>
+          <!-- Default dialog action buttons -->
+          <div
+            *ngIf="dialog()!.actions && dialog()!.actions!.length > 0"
+            class="flex flex-col sm:flex-row justify-end items-center gap-2">
+            <button
+              *ngFor="let action of dialog()!.actions"
+              type="button"
+              class="text-primary-700 max-sm:w-full hocus:bg-primary-200 focus:ring-0 focus:outline-none rounded text-sm font-medium px-5 py-2.5 dark:text-primary-500 dark:hocus:text-primary-400 dark:hocus:bg-primary-900 transition-colors duration-200"
+              [title]="'dialog.action.' + action.id + '.title' | translate"
+              (click)="triggerCallback(action.id)">
+              {{ 'dialog.action.' + action.id + '.label' | translate }}
+            </button>
+          </div>
+        </div>
+      </ng-container>
     </section>
   </article>
 </div>

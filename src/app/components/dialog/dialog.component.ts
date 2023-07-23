@@ -39,6 +39,9 @@ export class DialogComponent {
         return 'text-center'
     }
   })
+  protected readonly customId = computed(() =>
+    this.dialog()?.custom ? this.dialog()?.id : undefined
+  )
 
   constructor() {
     // watch for new dialogs

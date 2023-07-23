@@ -32,6 +32,15 @@ dependencies:
   '@angular/service-worker':
     specifier: ^16.1.6
     version: 16.1.6(@angular/common@16.1.6)(@angular/core@16.1.6)
+  '@ng-icons/core':
+    specifier: ^25.1.0
+    version: 25.1.0
+  '@ng-icons/heroicons':
+    specifier: ^25.1.0
+    version: 25.1.0
+  '@ng-icons/simple-icons':
+    specifier: ^25.1.0
+    version: 25.1.0
   '@ngx-translate/core':
     specifier: ^15.0.0
     version: 15.0.0(@angular/common@16.1.6)(@angular/core@16.1.6)(rxjs@7.8.1)
@@ -5722,6 +5731,33 @@ packages:
       pump: 3.0.0
       tar-fs: 2.1.1
     dev: true
+
+  /@ng-icons/core@25.1.0:
+    resolution:
+      {
+        integrity: sha512-odZhHaIv/AtZBpkQI3RHgZwpPAfUD55bDche4fADfQmUbF8vWUCHJp81G4wk7pi57IajJTm095a1xjn4CFK6yw==,
+      }
+    dependencies:
+      tslib: 2.6.0
+    dev: false
+
+  /@ng-icons/heroicons@25.1.0:
+    resolution:
+      {
+        integrity: sha512-m4lFu44MbNx8yEy3EUuOTUH0X3e+SJF/6Qt3b3gMz43sDEihZCGMQJxynDWxM8lpaaGjA0dU0lyMwZdEAsU2Ww==,
+      }
+    dependencies:
+      tslib: 2.6.0
+    dev: false
+
+  /@ng-icons/simple-icons@25.1.0:
+    resolution:
+      {
+        integrity: sha512-e4QwcONCph+/QhcLK8anY6Q1Oe7QHLVhkD7stn90VF4c+YECezZ5OFTuVpHQEk43uzbg2bMA8BS4ZHh9SX38Zg==,
+      }
+    dependencies:
+      tslib: 2.6.0
+    dev: false
 
   /@ngtools/webpack@16.1.5(@angular/compiler-cli@16.1.6)(typescript@5.0.4)(webpack@5.86.0):
     resolution:

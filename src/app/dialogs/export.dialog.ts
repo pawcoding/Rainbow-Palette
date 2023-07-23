@@ -24,6 +24,7 @@ export class ExportDialog {
           callback: async () => TailwindDialog.getNotification(this.palette),
         },
       ],
+      custom: true,
     }
   }
 }
