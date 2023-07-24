@@ -55,6 +55,13 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 🟨: Indirect conversion  
 🟥: No conversion implemented
 
+### Support for export formats
+
+- CSS
+- TailwindCSS
+- SCSS
+- LESS
+
 ## License
 
 [MIT](https://github.com/pawcoding/tailwind-color-generator/blob/main/LICENSE)

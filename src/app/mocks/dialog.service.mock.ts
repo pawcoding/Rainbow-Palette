@@ -36,7 +36,13 @@ class DialogServiceMock implements Partial<DialogService> {
           id: 'scss',
         },
         {
+          id: 'less',
+        },
+        {
           id: 'tailwind',
+        },
+        {
+          id: 'request-format',
         },
       ],
     }

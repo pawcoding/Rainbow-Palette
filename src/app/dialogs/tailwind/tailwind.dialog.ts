@@ -1,12 +1,14 @@
-import { PaletteExporter } from '../../class/palette-exporter'
 import { Palette } from '../../models/palette.model'
 import { Dialog } from 'src/app/types/dialog.type'
 import { TailwindCopyDialog } from './tailwind-copy.dialog'
 import { TailwindFileDialog } from './tailwind-file.dialog'
 import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'
+import { TailwindExporter } from 'src/app/exporter/tailwind.exporter'
 
 export class TailwindDialog {
   static getNotification(palette: Palette): Dialog {
+    const exporter = new TailwindExporter()
+
     return {
       id: 'export-tailwind',
       interpolateParams: {
@@ -16,7 +18,7 @@ export class TailwindDialog {
         {
           id: 'copy',
           callback: async () => {
-            const tailwind = PaletteExporter.exportPaletteToTailwind(palette)
+            const tailwind = exporter.exportContent(palette)
             try {
               await navigator.clipboard.writeText(tailwind)
               return TailwindCopyDialog.getNotification()
@@ -33,7 +35,7 @@ export class TailwindDialog {
         {
           id: 'file',
           callback: async () => {
-            const tailwind = PaletteExporter.exportTailwindFile(palette)
+            const tailwind = exporter.exportFile(palette)
             const blob = new Blob([tailwind], { type: 'text/javascript' })
 
             const a = document.createElement('a')

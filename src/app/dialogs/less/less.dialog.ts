@@ -1,23 +1,23 @@
 import { Palette } from '../../models/palette.model'
 import { Dialog } from 'src/app/types/dialog.type'
-import { CssCopyDialog } from './css-copy.dialog'
-import { CssFileDialog } from './css-file.dialog'
-import { CssExporter } from 'src/app/exporter/css.exporter'
+import { LessExporter } from 'src/app/exporter/less.exporter'
+import { LessCopyDialog } from './less-copy.dialog'
+import { LessFileDialog } from './less-file.dialog'
 
-export class CssDialog {
+export class LessDialog {
   static getNotification(palette: Palette): Dialog {
-    const exporter = new CssExporter()
+    const exporter = new LessExporter()
 
     return {
-      id: 'export-css',
+      id: 'export-less',
       actions: [
         {
           id: 'copy',
           callback: async () => {
-            const css = exporter.exportContent(palette)
+            const less = exporter.exportContent(palette)
             try {
-              await navigator.clipboard.writeText(css)
-              return CssCopyDialog.getNotification()
+              await navigator.clipboard.writeText(less)
+              return LessCopyDialog.getNotification()
             } catch (e) {
               return {
                 id: 'copy-error',
@@ -31,15 +31,15 @@ export class CssDialog {
         {
           id: 'file',
           callback: async () => {
-            const css = exporter.exportFile(palette)
-            const blob = new Blob([css], { type: 'text/css' })
+            const less = exporter.exportFile(palette)
+            const blob = new Blob([less], { type: 'text/less' })
 
             const a = document.createElement('a')
             a.href = URL.createObjectURL(blob)
-            a.download = 'colors.css'
+            a.download = 'colors.less'
             a.click()
 
-            return CssFileDialog.getNotification()
+            return LessFileDialog.getNotification()
           },
         },
       ],
