@@ -89,7 +89,7 @@
         "title": "Edit your palette"
       },
       "home": {
-        "label": "Regenerate",
+        "label": "Generate",
         "title": "Generate a new palette"
       },
       "preview": {
