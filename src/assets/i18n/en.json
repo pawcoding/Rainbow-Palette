@@ -131,6 +131,10 @@
         "label": "Copy",
         "title": "Copy palette to your clipboard"
       },
+      "create-github-issue": {
+        "label": "Create issue",
+        "title": "Create a new issue on GitHub"
+      },
       "css": {
         "label": "CSS",
         "title": "Export colors as CSS properties"
@@ -143,6 +147,10 @@
         "label": "File",
         "title": "Download palette as separate file"
       },
+      "less": {
+        "label": "LESS",
+        "title": "Export colors as LESS variables"
+      },
       "more": {
         "label": "Read more",
         "title": "Open documentation"
@@ -154,6 +162,10 @@
       "not-now": {
         "label": "Not now",
         "title": "New version will be installed on next page load"
+      },
+      "request-format": {
+        "label": "Other format",
+        "title": "Request a new export format"
       },
       "scss": {
         "label": "SCSS",
@@ -179,6 +191,9 @@
       "export-css": "Do you want to copy the CSS properties into your own files or create a new one?",
       "export-css-copy": "The palette has been copied to your clipboard. To use the colors as CSS properties copy the contents of the clipboard to the {{ root }} of your css file.<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
       "export-css-file": "Move the downloaded {{ file }} file to the root of your webserver. Then link it in the head of your html file like:<br>{{ link }}<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
+      "export-less": "Do you want to copy the LESS variables into your own files or create a new one?",
+      "export-less-copy": "The palette has been copied to your clipboard. To use the colors as LESS variables copy the contents of the clipboard to the top of your less file.<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
+      "export-less-file": "Move the downloaded {{ file }} file to the root of your project. Then link it in the head of your less files like:<br>{{ link }}<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
       "export-palette": "How do you want to use your palette?",
       "export-scss": "Do you want to copy the SCSS variables into your own files or create a new one?",
       "export-scss-copy": "The palette has been copied to your clipboard. To use the colors as SCSS variables copy the contents of the clipboard to the top of your scss file.<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
@@ -186,6 +201,7 @@
       "export-tailwind": "Do you want to copy the colors to your existing {{ file }} or create an extra file only for your palette?",
       "export-tailwind-copy": "The palette has been copied to your clipboard. To use the colors copy the contents of the clipboard to the {{ config }} file.<br><br>Check TailwindsCSS's documentation for further instructions.",
       "export-tailwind-file": "Move the downloaded {{ file }} file to the root of your project. Then import the colors in your {{ config }} file like:<br>{{ import }}<br><br>Check TailwindCSS's documentation for further instructions.",
+      "request-export-format": "If you find a format missing, please check if it is already requested on GitHub. If not, you can create a new issue there and I will try to add it as soon as possible.",
       "test": "This is a test message for storybook.<br><br>You can use <b>HTML</b> to format your message.",
       "update-available": "A new version of Rainbow Palette is available. Do you want to update now?"
     }
