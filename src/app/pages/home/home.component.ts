@@ -37,7 +37,8 @@ export class HomeComponent {
     private tracker: MatomoTracker
   ) {
     this.value =
-      paletteService.hex || Shade.generateRandomShade().hex.toUpperCase()
+      paletteService.latestHex() ||
+      Shade.generateRandomShade().hex.toUpperCase()
     let i = 0
     this.schemes = Object.values(PaletteScheme)
       .filter((s) => s.toString().length > 1)
@@ -57,7 +58,7 @@ export class HomeComponent {
         scheme: s as PaletteScheme,
       }))
 
-    this.scheme = paletteService.scheme % this.schemes.length
+    this.scheme = paletteService.latestScheme() % this.schemes.length
   }
 
   updateValue(value: string) {

@@ -101,7 +101,7 @@ export class AppComponent implements OnInit {
               id: 'update',
               callback: async () => {
                 // Save current palette before reload
-                const palette = this.paletteService.getPalette()
+                const palette = this.paletteService.palette()
                 if (palette) {
                   this.storage.savePalette(palette)
                 }

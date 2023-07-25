@@ -12,7 +12,6 @@ export class ColorService {
 
   private readonly _color = signal<Color | undefined>(undefined)
   private readonly _shade = signal<Shade | undefined>(undefined)
-  private readonly _state = signal<ChangeType>(ChangeType.EXIT)
 
   public get color(): Signal<Color | undefined> {
     return this._color.asReadonly()
@@ -20,10 +19,6 @@ export class ColorService {
 
   public get shade(): Signal<Shade | undefined> {
     return this._shade.asReadonly()
-  }
-
-  public get state(): Signal<ChangeType> {
-    return this._state.asReadonly()
   }
 
   /**
@@ -38,7 +33,6 @@ export class ColorService {
     } else {
       this._shade.set(this._color()?.shades.find((s) => s.fixed))
     }
-    this._state.set(ChangeType.LOAD)
   }
 
   /**
@@ -47,7 +41,6 @@ export class ColorService {
   public closeEditor(): void {
     this._color.set(undefined)
     this._shade.set(undefined)
-    this._state.set(ChangeType.EXIT)
   }
 
   public updateShade(
@@ -79,7 +72,6 @@ export class ColorService {
           color.shades.find((s) => s.fixed) ?? color.getShade(500)
         )
       }
-      this._state.set(ChangeType.ADJUST)
     }
   }
 
@@ -89,14 +81,8 @@ export class ColorService {
   public saveColor(): void {
     const color = this.color()
     if (color) {
-      this._paletteService.getPalette()?.replaceColor(color)
+      this._paletteService.palette()?.replaceColor(color)
       this.closeEditor()
     }
   }
-}
-
-export enum ChangeType {
-  LOAD,
-  ADJUST,
-  EXIT,
 }
