@@ -1,9 +1,31 @@
-import { Signal, signal } from '@angular/core'
+import { Signal, computed, signal } from '@angular/core'
 import { DialogService } from '../services/dialog.service'
 import { Dialog } from '../types/dialog.type'
 import { sleep } from '../utils/sleep.util'
 
 const DIALOG_MOCK_TIMEOUT = 'DIALOG_MOCK_TIMEOUT'
+
+const EXPORT_DIALOG: Dialog = {
+  id: 'export-palette',
+  custom: true,
+  actions: [
+    {
+      id: 'css',
+    },
+    {
+      id: 'scss',
+    },
+    {
+      id: 'less',
+    },
+    {
+      id: 'tailwind',
+    },
+    {
+      id: 'request-format',
+    },
+  ],
+}
 
 class DialogServiceMock implements Partial<DialogService> {
   private readonly _isExportDialog: boolean
@@ -23,30 +45,11 @@ class DialogServiceMock implements Partial<DialogService> {
   public get dialog(): Signal<Dialog | undefined> {
     console.log('DialogService.dialog')
 
-    const dialog = signal<Dialog | undefined>(undefined)
-
-    const exportDialog: Dialog = {
-      id: 'export-palette',
-      custom: true,
-      actions: [
-        {
-          id: 'css',
-        },
-        {
-          id: 'scss',
-        },
-        {
-          id: 'less',
-        },
-        {
-          id: 'tailwind',
-        },
-        {
-          id: 'request-format',
-        },
-      ],
+    if (this._isExportDialog) {
+      return computed(() => EXPORT_DIALOG)
     }
 
+    const dialog = signal<Dialog | undefined>(undefined)
     const dialogContent: Dialog = {
       id: 'test',
       actions: [
@@ -67,9 +70,7 @@ class DialogServiceMock implements Partial<DialogService> {
         },
       ],
     }
-
-    dialog.set(this._isExportDialog ? exportDialog : dialogContent)
-
+    dialog.set(dialogContent)
     return dialog.asReadonly()
   }
 }

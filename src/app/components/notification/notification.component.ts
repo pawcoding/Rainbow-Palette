@@ -23,7 +23,7 @@ export class NotificationComponent {
     else return notification
   })
 
-  closeNotification() {
+  protected closeNotification() {
     this._notificationService.closeNotification()
   }
 }

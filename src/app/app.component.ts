@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, effect, inject } from '@angular/core'
 import { environment } from '../environments/environment'
 import { StorageService } from './services/storage.service'
 import { PaletteService } from './services/palette.service'
@@ -17,17 +17,25 @@ import { DialogService } from './services/dialog.service'
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
+  private readonly _translate = inject(TranslateService)
   private readonly _storage = inject(StorageService)
+  private readonly _notificationService = inject(NotificationService)
+  private readonly _dialogService = inject(DialogService)
+  private readonly _tracker = inject(MatomoTracker)
+  private readonly _titleService = inject(Title)
+  private readonly _updates = inject(SwUpdate)
+  protected readonly router = inject(Router)
+  protected readonly paletteService = inject(PaletteService)
 
-  title =
+  public title =
     'Rainbow Palette | Get your own color palette from just a single color'
-  version = environment.version
+  protected readonly version = environment.version
   protected readonly dark = this._storage.dark
-  showTrackingNotice = false
+  protected showTrackingNotice = false
 
-  getMatomoLink = getMatomoLink(this.translate)
+  protected getMatomoLink = getMatomoLink(this._translate)
 
-  navigation = [
+  protected navigation = [
     {
       link: '/',
       id: 'home',
@@ -47,35 +55,27 @@ export class AppComponent implements OnInit {
     },
   ]
 
-  constructor(
-    private storage: StorageService,
-    public paletteService: PaletteService,
-    public router: Router,
-    private translate: TranslateService,
-    private titleService: Title,
-    private notificationService: NotificationService,
-    private dialogService: DialogService,
-    private tracker: MatomoTracker,
-    private updates: SwUpdate
-  ) {
+  constructor() {
     // Load color name dictionary
     ColorNamer.loadDictionary()
 
     // Setup translation pipe
-    this.translate.setDefaultLang('en')
-    this.storage.languageEmitter.subscribe(() => {
-      this.title = `Rainbow Palette | ${this.translate.instant('app.title')}`
-      this.titleService.setTitle(this.title)
+    this._translate.setDefaultLang('en')
+    effect(() => {
+      this._storage.language()
+      this._translate.get('app.title').subscribe((title) => {
+        this.title = `Rainbow Palette | ${title}`
+        this._titleService.setTitle(this.title)
+      })
     })
-    this.storage.loadLanguage()
   }
 
-  ngOnInit() {
+  public ngOnInit() {
     // Setup tracking
-    switch (this.storage.hasTrackingAllowed()) {
+    switch (this._storage.hasTrackingAllowed()) {
       case 1:
         // Tracking is allowed
-        this.tracker.setConsentGiven()
+        this._tracker.setConsentGiven()
         break
       case 2:
         // No preference given yet
@@ -87,9 +87,9 @@ export class AppComponent implements OnInit {
     }
 
     // Setup Service Worker update
-    this.updates.versionUpdates.subscribe((event) => {
+    this._updates.versionUpdates.subscribe((event) => {
       if (event.type === 'VERSION_READY') {
-        this.dialogService.openDialog({
+        this._dialogService.openDialog({
           id: 'update-available',
           actions: [
             {
@@ -99,12 +99,12 @@ export class AppComponent implements OnInit {
               id: 'update',
               callback: async () => {
                 // Save current palette before reload
-                const palette = this.paletteService.getPalette()
+                const palette = this.paletteService.palette()
                 if (palette) {
-                  this.storage.savePalette(palette)
+                  this._storage.savePalette(palette)
                 }
 
-                this.tracker.trackEvent('pwa', 'update-complete')
+                this._tracker.trackEvent('pwa', 'update-complete')
                 document.location.reload()
 
                 return undefined
@@ -113,8 +113,8 @@ export class AppComponent implements OnInit {
           ],
         })
       } else if (event.type === 'VERSION_INSTALLATION_FAILED') {
-        this.notificationService.openNotification('update-failed')
-        this.tracker.trackEvent('pwa', 'update-failed')
+        this._notificationService.openNotification('update-failed')
+        this._tracker.trackEvent('pwa', 'update-failed')
       }
     })
   }
@@ -122,19 +122,19 @@ export class AppComponent implements OnInit {
   /**
    * Allow tracking and remember the consent for 90 days
    */
-  allowTracking() {
+  protected allowTracking() {
     this.showTrackingNotice = false
-    this.storage.rememberTracking(true)
-    this.tracker.setConsentGiven()
-    this.notificationService.openNotification('tracking-allowed')
+    this._storage.rememberTracking(true)
+    this._tracker.setConsentGiven()
+    this._notificationService.openNotification('tracking-allowed')
   }
 
   /**
    * Disable tracking and remember the choice for 90 days
    */
-  disableTracking() {
+  protected disableTracking() {
     this.showTrackingNotice = false
-    this.storage.rememberTracking(false)
-    this.tracker.forgetConsentGiven()
+    this._storage.rememberTracking(false)
+    this._tracker.forgetConsentGiven()
   }
 }

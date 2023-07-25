@@ -14,7 +14,7 @@ export class LightSwitchComponent {
   /**
    * Toggle between light and dark theme.
    */
-  toggleTheme(): void {
+  protected toggleTheme(): void {
     this.dark = this._storage.toggleTheme(!this.dark)
   }
 }

@@ -43,7 +43,7 @@ export class AnalyticsInterceptor implements MatomoRouterInterceptor {
   ): Observable<void> | Promise<void> | void {
     this._tracker.setDocumentTitle(event.url)
 
-    this._tracker.setCustomDimension(1, this._storage.language)
+    this._tracker.setCustomDimension(1, this._storage.language())
     this._tracker.setCustomDimension(2, this._storage.dark() ? 'dark' : 'light')
     this._tracker.setCustomDimension(3, this.isPWA ? 'pwa' : 'web')
   }
