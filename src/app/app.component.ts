@@ -65,8 +65,10 @@ export class AppComponent implements OnInit {
     this.translate.setDefaultLang('en')
     effect(() => {
       this.storage.language()
-      this.title = `Rainbow Palette | ${this.translate.instant('app.title')}`
-      this.titleService.setTitle(this.title)
+      this.translate.get('app.title').subscribe((title) => {
+        this.title = `Rainbow Palette | ${title}`
+        this.titleService.setTitle(this.title)
+      })
     })
   }
 

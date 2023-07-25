@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { StorageService } from '../../services/storage.service'
 import { languageToCountryCode } from '../../utils/language-to-countrycode.util'
 import { LANGUAGES } from '../../constants/languages.constant'
@@ -15,14 +15,8 @@ export class LanguageSelectorComponent {
   private readonly _storage = inject(StorageService)
   private readonly _tracker = inject(MatomoTracker)
 
-  protected language = 'en'
+  protected readonly language = this._storage.language
   protected showMenu = false
-
-  constructor() {
-    effect(() => {
-      this.language = this._storage.language()
-    })
-  }
 
   /**
    * Switch the language of the app.
