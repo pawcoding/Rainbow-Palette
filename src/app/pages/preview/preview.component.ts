@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { getGitHubLink, getDiscordLink } from '../../utils/links.util'
 import { TranslateService } from '@ngx-translate/core'
 
@@ -7,8 +7,8 @@ import { TranslateService } from '@ngx-translate/core'
   templateUrl: './preview.component.html',
 })
 export class PreviewComponent {
-  getGitHubLink = getGitHubLink(this.translate)
-  getDiscordLink = getDiscordLink(this.translate)
+  private readonly _translate = inject(TranslateService)
 
-  constructor(private translate: TranslateService) {}
+  protected readonly getGitHubLink = getGitHubLink(this._translate)
+  protected readonly getDiscordLink = getDiscordLink(this._translate)
 }

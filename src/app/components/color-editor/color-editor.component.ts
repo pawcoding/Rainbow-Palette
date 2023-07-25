@@ -11,7 +11,7 @@ export class ColorEditorComponent {
   protected readonly colorService = inject(ColorService)
 
   @Input()
-  dark = false
+  public dark = false
 
   protected readonly shade = this.colorService.shade
   protected readonly color = this.colorService.color

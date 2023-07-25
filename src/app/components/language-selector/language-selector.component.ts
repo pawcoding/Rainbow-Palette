@@ -22,7 +22,7 @@ export class LanguageSelectorComponent {
    * Switch the language of the app.
    * @param language
    */
-  switchLanguage(language: string) {
+  protected switchLanguage(language: string) {
     this._storage.setLanguage(language)
     this.showMenu = false
     this._tracker.trackPageView()

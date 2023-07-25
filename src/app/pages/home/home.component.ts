@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core'
+import { Component, ElementRef, ViewChild, inject } from '@angular/core'
 import { Shade } from '../../models/shade.model'
 import { NotificationService } from '../../services/notification.service'
 import { PaletteScheme } from '../../class/palette-generator'
@@ -13,31 +13,36 @@ import { MatomoTracker } from 'ngx-matomo-client'
   templateUrl: './home.component.html',
 })
 export class HomeComponent {
-  value: string
-  scheme: PaletteScheme
-  schemes: { index: number; for: string; name: string; scheme: PaletteScheme }[]
-  invalid = false
-  dropdown = false
-  loading = false
-  progress = 0
+  private readonly _translate = inject(TranslateService)
+  private readonly _notificationService = inject(NotificationService)
+  private readonly _paletteService = inject(PaletteService)
+  private readonly _router = inject(Router)
+  private readonly _tracker = inject(MatomoTracker)
+
+  protected value: string
+  protected scheme: PaletteScheme
+  protected schemes: {
+    index: number
+    for: string
+    name: string
+    scheme: PaletteScheme
+  }[]
+  protected invalid = false
+  protected dropdown = false
+  protected loading = false
+  protected progress = 0
 
   @ViewChild('loadContainer')
   loadContainer: ElementRef<HTMLDivElement> | undefined
   @ViewChild('loadBar')
   loadBar: ElementRef<HTMLSpanElement> | undefined
 
-  getGitHubLink = getGitHubLink(this.translate)
-  getDiscordLink = getDiscordLink(this.translate)
+  protected getGitHubLink = getGitHubLink(this._translate)
+  protected getDiscordLink = getDiscordLink(this._translate)
 
-  constructor(
-    private notificationService: NotificationService,
-    private paletteService: PaletteService,
-    private router: Router,
-    private translate: TranslateService,
-    private tracker: MatomoTracker
-  ) {
+  constructor() {
     this.value =
-      paletteService.latestHex() ||
+      this._paletteService.latestHex() ||
       Shade.generateRandomShade().hex.toUpperCase()
     let i = 0
     this.schemes = Object.values(PaletteScheme)
@@ -58,26 +63,26 @@ export class HomeComponent {
         scheme: s as PaletteScheme,
       }))
 
-    this.scheme = paletteService.latestScheme() % this.schemes.length
+    this.scheme = this._paletteService.latestScheme() % this.schemes.length
   }
 
-  updateValue(value: string) {
+  protected updateValue(value: string) {
     this.invalid = !value.match(/^#[0-9A-Fa-f]{6}$/)
     if (!this.invalid) this.value = value.toUpperCase()
   }
 
-  updateScheme(scheme: PaletteScheme) {
+  protected updateScheme(scheme: PaletteScheme) {
     this.scheme = scheme
     this.dropdown = false
   }
 
-  generatePalette() {
+  protected generatePalette() {
     if (this.invalid) {
-      this.notificationService.openNotification('invalid-hex')
+      this._notificationService.openNotification('invalid-hex')
       return
     }
 
-    this.tracker.trackEvent('palette', 'generate', this.scheme.toString())
+    this._tracker.trackEvent('palette', 'generate', this.scheme.toString())
 
     this.loading = true
     const interval = window.setInterval(() => {
@@ -88,8 +93,8 @@ export class HomeComponent {
 
     setTimeout(async () => {
       clearInterval(interval)
-      this.paletteService.generatePalette(this.value, this.scheme)
-      await this.router.navigate(['edit'])
+      this._paletteService.generatePalette(this.value, this.scheme)
+      await this._router.navigate(['edit'])
     }, 5100)
   }
 }
