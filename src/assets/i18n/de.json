@@ -131,6 +131,10 @@
         "label": "Kopieren",
         "title": "Palette in Zwischenablage kopieren"
       },
+      "create-github-issue": {
+        "label": "Ticket erstellen",
+        "title": "Erstelle ein neues Ticket auf GitHub"
+      },
       "css": {
         "label": "CSS",
         "title": "Exportiere deine Palette zur Nutzung mit CSS"
@@ -143,6 +147,10 @@
         "label": "Datei",
         "title": "Palette als eigenständige Datei exportieren"
       },
+      "less": {
+        "label": "LESS",
+        "title": "Exportiere deine Palette zur Nutzung mit LESS"
+      },
       "more": {
         "label": "Mehr erfahren",
         "title": "Dokumentation öffnen"
@@ -154,6 +162,10 @@
       "not-now": {
         "label": "Nicht jetzt",
         "title": "Neue Version wird beim Schließen der Seite installiert"
+      },
+      "request-format": {
+        "label": "Anderes Format",
+        "title": "Fehlt dir ein Format? Lass es mich wissen!"
       },
       "scss": {
         "label": "SCSS",
@@ -179,6 +191,9 @@
       "export-css": "Willst du deine Palette als CSS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
       "export-css-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als CSS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage in das {{ root }} Element deiner CSS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
       "export-css-file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Webservers. Füge dann folgenden Link in den Kopf deiner HTML Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+      "export-less": "Willst du deine Palette als LESS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
+      "export-less-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als LESS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage ganz oben in deiner LESS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+      "export-less-file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Projekts. Füge dann folgendes in den Kopf deiner LESS Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
       "export-palette": "Wie / womit willst du deine Palette verwenden?",
       "export-scss": "Willst du deine Palette als SCSS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
       "export-scss-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als SCSS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage ganz oben in deiner SCSS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
@@ -186,6 +201,7 @@
       "export-tailwind": "Willst du die Palette in deine bereits bestehende {{ file }} Datei kopieren oder eine eigenständige Datei dafür herunterladen?",
       "export-tailwind-copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben zu nutzen, musst du den Inhalt deiner Zwischenablage in der {{ config }} Datei einfügen.<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
       "export-tailwind-file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
+      "request-export-format": "Wenn dein gewünschtes Format nicht verfügbar ist, prüfe bitte, ob es bereits auf GitHub angefragt wurde. Falls nicht, kannst du gerne ein neues Ticket erstellen und ich werde versuchen, es so schnell wie möglich hinzuzufügen.",
       "test": "Dies ist ein Testdialog für Storybook.<br><br>Du kannst <b>HTML</b> nutzen, um die Nachricht im Dialog zu formatieren.",
       "update-available": "Es wurde eine neue Version von Rainbow Palette veröffentlicht. Möchtest du sie jetzt installieren?"
     }
@@ -262,6 +278,7 @@
     "copied": "{{ color }} wurde in die Zwischenablage kopiert.",
     "copy-error": "Die Farbe konnte nicht in die Zwischenablage kopiert werden.",
     "close": "Schließen",
+    "invalid-hex": "Du musst einen 6 stelligen Hex-Code eingeben.",
     "saved": "Deine Palette wurde lokal gespeichert.",
     "test": "Dies ist eine Testnachricht.",
     "tracking-allowed": "Danke, dass du das Projekt unterstützt!",

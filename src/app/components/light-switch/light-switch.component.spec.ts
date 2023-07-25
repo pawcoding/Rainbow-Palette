@@ -2,7 +2,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing'
 
 import { LightSwitchComponent } from './light-switch.component'
 import { TranslateModule } from '@ngx-translate/core'
-import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
+import { StorageService } from 'src/app/services/storage.service'
+import { StorageServiceMock } from 'src/app/mocks/storage.service.mock'
 
 describe('LightSwitchComponent', () => {
   let component: LightSwitchComponent
@@ -12,7 +13,7 @@ describe('LightSwitchComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [LightSwitchComponent],
       imports: [TranslateModule.forRoot()],
-      providers: [...matomoProvidersMock],
+      providers: [{ provide: StorageService, useClass: StorageServiceMock }],
     }).compileComponents()
 
     fixture = TestBed.createComponent(LightSwitchComponent)

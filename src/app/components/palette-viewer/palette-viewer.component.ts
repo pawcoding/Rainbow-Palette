@@ -5,68 +5,61 @@ import {
   Input,
   Output,
   ViewChild,
+  inject,
 } from '@angular/core'
 import { Palette } from '../../models/palette.model'
 import { Color } from '../../models/color.model'
 import { StorageService } from '../../services/storage.service'
 import { NotificationService } from '../../services/notification.service'
-import { ExportDialog } from '../../dialogs/export.dialog'
 import { TranslateService } from '@ngx-translate/core'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
+import { ExportDialog } from '../../dialogs/export.dialog'
+import { DialogService } from 'src/app/services/dialog.service'
 
 @Component({
   selector: 'app-palette-viewer',
   templateUrl: './palette-viewer.component.html',
 })
 export class PaletteViewerComponent {
-  @Input()
-  palette: Palette | undefined
+  private readonly _translate = inject(TranslateService)
+  private readonly _storage = inject(StorageService)
+  private readonly _notificationService = inject(NotificationService)
+  private readonly _dialogService = inject(DialogService)
+  private readonly _tracker = inject(MatomoTracker)
 
   @Input()
-  dark = false
+  public palette: Palette | undefined
+
+  @Input()
+  public dark = false
 
   @Output()
-  onRemove = new EventEmitter<Event>()
+  public onRemove = new EventEmitter<Event>()
 
-  editingState = false
-  saving = false
-  adding = false
+  protected editingState = false
+  protected saving = false
+  protected adding = false
 
   @ViewChild('editTitle')
   editTitle: ElementRef<HTMLInputElement> | undefined
-
-  constructor(
-    private storage: StorageService,
-    private notificationService: NotificationService,
-    private translate: TranslateService,
-    private tracker: MatomoTracker
-  ) {}
 
   /**
    * Ask user for confirmation an trigger onRemove event handler.
    * @param $event MouseEvent
    */
-  removePalette($event: MouseEvent) {
-    const removeEmitter = new EventEmitter()
-    removeEmitter.subscribe(() => {
-      this.notificationService.dialog.emit(undefined)
-      this.onRemove.emit($event)
-    })
-    const closeEmitter = new EventEmitter()
-    closeEmitter.subscribe(() => {
-      this.notificationService.dialog.emit(undefined)
-    })
-
-    this.notificationService.dialog.emit({
+  protected removePalette($event: MouseEvent) {
+    this._dialogService.openDialog({
       id: 'delete-palette',
       actions: [
         {
           id: 'cancel',
-          action: closeEmitter,
         },
         {
           id: 'delete',
-          action: removeEmitter,
+          callback: async () => {
+            this.onRemove.emit($event)
+            return undefined
+          },
         },
       ],
     })
@@ -77,14 +70,14 @@ export class PaletteViewerComponent {
    * If color is not present in palette nothing happens.
    * @param color Color to remove from palette
    */
-  removeColor(color: Color) {
+  protected removeColor(color: Color) {
     this.palette?.removeColor(color)
   }
 
   /**
    * Add a random color to the palette.
    */
-  addRandomColor($event: MouseEvent) {
+  protected addRandomColor($event: MouseEvent) {
     const target = $event.target as HTMLButtonElement
     this.adding = true
     setTimeout(() => {
@@ -106,16 +99,16 @@ export class PaletteViewerComponent {
   /**
    * Save current palette to local storage.
    */
-  savePalette() {
+  protected savePalette() {
     this.saving = true
 
     if (this.palette) {
-      this.storage.savePalette(this.palette)
-      this.tracker.trackEvent('palette', 'save')
+      this._storage.savePalette(this.palette)
+      this._tracker.trackEvent('palette', 'save')
     }
 
     setTimeout(() => {
-      this.notificationService.notification.emit('saved')
+      this._notificationService.openNotification('saved')
       this.saving = false
     }, 2000)
   }
@@ -123,7 +116,7 @@ export class PaletteViewerComponent {
   /**
    * Open editor for palette name.
    */
-  openEditor() {
+  protected openEditor() {
     this.editingState = true
     setTimeout(() => {
       this.editTitle?.nativeElement.focus()
@@ -133,23 +126,20 @@ export class PaletteViewerComponent {
   /**
    * Close editor for palette name.
    */
-  closeEditor() {
+  protected closeEditor() {
     this.editingState = false
     if (this.palette)
       this.palette.title =
-        this.editTitle?.nativeElement.value || this.translate.instant('random')
+        this.editTitle?.nativeElement.value || this._translate.instant('random')
   }
 
   /**
    * Export a palette for download and usage as plain CSS or Tailwind config.
    */
-  exportPalette() {
+  protected exportPalette() {
     if (this.palette) {
-      this.notificationService.dialog.emit(
-        new ExportDialog(
-          this.notificationService.dialog,
-          this.palette
-        ).getNotification()
+      this._dialogService.openDialog(
+        new ExportDialog(this.palette).getNotification()
       )
     }
   }

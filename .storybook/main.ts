@@ -1,7 +1,6 @@
-/**
- * @type {import('@storybook/core/types').StorybookConfig}
- */
-module.exports = {
+import { StorybookConfig } from '@storybook/angular'
+
+const config: StorybookConfig = {
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
@@ -19,3 +18,5 @@ module.exports = {
     },
   ],
 }
+
+export default config

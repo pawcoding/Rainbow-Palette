@@ -1,11 +1,10 @@
-<div [class]="dark ? 'dark' : ''" *ngIf="shade && color" class="w-full">
+<div [class]="dark ? 'dark' : ''" *ngIf="shade() && color()" class="w-full">
   <section
-    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20 px-4 bg-gray-900/50 dark:bg-gray-900/90"
-    (click)="colorService.closeEditor()">
+    class="fixed w-full h-full top-0 left-0 flex items-center justify-center z-20 px-4 backdrop-blur-sm bg-gray-900/20 dark:bg-gray-900/75">
     <article
       class="w-full max-w-sm mx-auto p-4 grid gap-2 font-medium bg-gray-100 text-gray-900 dark:bg-gray-700 dark:text-gray-100 rounded"
       (click)="$event.stopPropagation()">
-      <h2 class="mb-2">{{ color.name }}</h2>
+      <h2 class="mb-2">{{ color()!.name }}</h2>
 
       <!-- Edit Hex -->
       <div class="flex">
@@ -15,7 +14,7 @@
           id="hexInput"
           #hexInput
           class="w-1/5 h-10 rounded-l rounded-r-none overflow-clip"
-          [value]="shade.hex"
+          [value]="shade()!.hex"
           (input)="updateColor(0, hexInput.value)" />
 
         <input
@@ -25,7 +24,7 @@
           #hexCode
           placeholder="#4472C4"
           class="w-4/5 rounded-r text-medium text-gray-900 bg-gray-200 dark:text-gray-200 dark:bg-gray-800 transition-colors duration-500 border-0 focus:ring-0"
-          [value]="shade.hex"
+          [value]="shade()!.hex"
           (input)="updateColor(0, hexCode.value)" />
       </div>
 
@@ -35,7 +34,7 @@
           <span class="font-semibold">{{
             'color-editor.hue' | translate
           }}</span>
-          <span id="hueLabel" #hueLabel>{{ shade.hue }}</span>
+          <span id="hueLabel" #hueLabel>{{ shade()!.hue }}</span>
         </label>
 
         <input
@@ -46,7 +45,7 @@
           min="0"
           max="360"
           step="1"
-          [value]="hueToWheel(shade.hue)"
+          [value]="hue()"
           (input)="updateColor(1, hueInput.value)" />
       </div>
 
@@ -57,7 +56,7 @@
             'color-editor.saturation' | translate
           }}</span>
           <span id="saturationLabel" #saturationLabel>{{
-            shade.saturation
+            shade()!.saturation
           }}</span>
         </label>
 
@@ -69,7 +68,7 @@
           min="0"
           max="100"
           step="1"
-          [value]="shade.saturation"
+          [value]="shade()!.saturation"
           (input)="updateColor(2, saturationInput.value)" />
       </div>
 
@@ -80,7 +79,7 @@
             'color-editor.luminosity' | translate
           }}</span>
           <span id="luminosityLabel" #luminosityLabel>{{
-            shade.luminosity
+            shade()!.luminosity
           }}</span>
         </label>
 
@@ -92,7 +91,7 @@
           min="0"
           max="100"
           step="1"
-          [value]="100 - shade.luminosity"
+          [value]="100 - shade()!.luminosity"
           (input)="updateColor(3, luminosityInput.value)" />
       </div>
 
@@ -100,12 +99,12 @@
       <section
         class="grow grid grid-cols-10 mt-8 text-center overflow-clip cursor-default">
         <span
-          *ngFor="let shadeToShow of color.shades"
+          *ngFor="let shadeToShow of color()!.shades"
           [ngStyle]="{
             'background-color': shadeToShow.hex,
             'border-color':
-              shadeToShow === shade ? 'currentColor' : shadeToShow.hex,
-            color: color.shades[shadeToShow.brightness > 51 ? 9 : 0].hex,
+              shadeToShow === shade() ? 'currentColor' : shadeToShow.hex,
+            color: color()!.shades[shadeToShow.brightness > 51 ? 9 : 0].hex,
             'font-weight': shadeToShow.fixed ? 'bold' : 'inherit'
           }"
           [class]="

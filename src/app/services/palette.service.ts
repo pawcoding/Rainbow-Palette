@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core'
+import { Injectable, Signal, computed, inject, signal } from '@angular/core'
 import { Palette } from '../models/palette.model'
 import { PaletteGenerator, PaletteScheme } from '../class/palette-generator'
 import { StorageService } from './storage.service'
@@ -7,16 +7,25 @@ import { StorageService } from './storage.service'
   providedIn: 'root',
 })
 export class PaletteService {
-  hex: string | undefined
-  scheme: PaletteScheme = PaletteScheme.RAINBOW
-  private palette: Palette | undefined
-  private paletteChangeEmitter: EventEmitter<Palette | undefined> =
-    new EventEmitter()
+  private readonly _storageService = inject(StorageService)
 
-  constructor(private storageService: StorageService) {
-    const palette = storageService.loadPalette()
-    if (palette) this.loadPalette(palette)
-    else this.clearPalette()
+  private readonly _latestScheme = signal<PaletteScheme>(PaletteScheme.RAINBOW)
+  private readonly _palette = signal<Palette | undefined>(undefined)
+
+  public readonly latestHex = computed(
+    () => this._palette()?.colors[0].getShade(500).hex
+  )
+
+  public get palette(): Signal<Palette | undefined> {
+    return this._palette.asReadonly()
+  }
+
+  public get latestScheme(): Signal<PaletteScheme> {
+    return this._latestScheme.asReadonly()
+  }
+
+  constructor() {
+    this._palette.set(this._storageService.loadPalette())
   }
 
   /**
@@ -24,52 +33,21 @@ export class PaletteService {
    * @param hex
    * @param scheme
    */
-  generatePalette(hex: string, scheme: PaletteScheme): void {
-    if (!hex.match(/^#[0-9A-Fa-f]{6}$/)) throw 'Hex must be a 6-digit hex code.'
+  public generatePalette(hex: string, scheme: PaletteScheme): void {
+    if (!hex.match(/^#[0-9A-Fa-f]{6}$/)) {
+      throw 'Hex must be a 6-digit hex code.'
+    }
 
-    this.hex = hex
-    this.scheme = Object.values(PaletteScheme).indexOf(scheme) % 8
-    const palette = PaletteGenerator.generatePalette(hex, scheme)
-    this.palette = palette
-    this.paletteChangeEmitter.emit(palette)
-  }
-
-  /**
-   * Load an existing palette
-   * @param palette
-   */
-  loadPalette(palette: Palette): void {
-    this.hex = palette.colors[0].getShade(500).hex
-    this.palette = palette
-    this.paletteChangeEmitter.emit(palette)
-  }
-
-  /**
-   * Unload the current palette
-   */
-  clearPalette(): void {
-    this.palette = undefined
-    this.paletteChangeEmitter.emit(undefined)
-  }
-
-  /**
-   * Return the current palette
-   */
-  getPalette(): Palette | undefined {
-    return this.palette
+    const schemes = Object.values(PaletteScheme)
+    const schemeProxy = schemes.indexOf(scheme) % (schemes.length / 2)
+    this._latestScheme.set(schemeProxy)
+    this._palette.set(PaletteGenerator.generatePalette(hex, scheme))
   }
 
   /**
    * Check if a palette is present
    */
-  hasPalette(): boolean {
-    return !!this.palette
-  }
-
-  /**
-   * Return the palette change event emitter
-   */
-  getPaletteChangeEmitter(): EventEmitter<Palette | undefined> {
-    return this.paletteChangeEmitter
+  public hasPalette(): boolean {
+    return !!this._palette()
   }
 }

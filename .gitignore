@@ -6,6 +6,8 @@
 /out-tsc
 /bazel-out
 /reports
+/documentation
+documentation.json
 /src/sitemap.xml
 
 # Node

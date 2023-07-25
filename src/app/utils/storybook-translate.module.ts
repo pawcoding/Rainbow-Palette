@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core'
+import { NgModule, inject } from '@angular/core'
 import {
   TranslateLoader,
   TranslateModule,
@@ -21,9 +21,11 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader'
   exports: [TranslateModule],
 })
 export class StorybookTranslateModule {
-  constructor(private translate: TranslateService) {
-    translate.setDefaultLang('en')
-    translate.use(translate.getBrowserLang() ?? 'en')
+  private readonly _translate = inject(TranslateService)
+
+  constructor() {
+    this._translate.setDefaultLang('en')
+    this._translate.use(this._translate.getBrowserLang() ?? 'en')
   }
 }
 

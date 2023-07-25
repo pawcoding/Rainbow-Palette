@@ -5,6 +5,7 @@ import {
   Input,
   Output,
   ViewChild,
+  inject,
 } from '@angular/core'
 import { Color } from '../../models/color.model'
 import { ColorService } from '../../services/color.service'
@@ -18,37 +19,35 @@ import { TranslateService } from '@ngx-translate/core'
   templateUrl: './color-viewer.component.html',
 })
 export class ColorViewerComponent {
+  private readonly _translate = inject(TranslateService)
+  private readonly _notificationService = inject(NotificationService)
+  protected readonly colorService = inject(ColorService)
+
   @Input()
-  color: Color | undefined
+  public color: Color | undefined
   @Input()
-  dark = false
+  public dark = false
 
   @Output()
-  onRemove = new EventEmitter<Color>()
+  public onRemove = new EventEmitter<Color>()
 
-  editingState = false
+  protected editingState = false
 
   @ViewChild('editName')
-  editName: ElementRef<HTMLInputElement> | undefined
-
-  constructor(
-    public colorService: ColorService,
-    private notificationService: NotificationService,
-    private translate: TranslateService
-  ) {}
+  protected editName: ElementRef<HTMLInputElement> | undefined
 
   /**
    * Open editor with the shade with the given index
    * @param shadeIndex
    */
-  editShade(shadeIndex: number) {
+  protected editShade(shadeIndex: number) {
     if (this.color) this.colorService.loadColor(this.color, shadeIndex)
   }
 
   /**
    * Open color name editor
    */
-  openEditor() {
+  protected openEditor() {
     this.editingState = true
     setTimeout(() => {
       this.editName?.nativeElement.focus()
@@ -58,11 +57,11 @@ export class ColorViewerComponent {
   /**
    * Close color name editor
    */
-  closeEditor() {
+  protected closeEditor() {
     this.editingState = false
     if (this.color)
       this.color.name =
-        this.editName?.nativeElement.value || this.translate.instant('random')
+        this.editName?.nativeElement.value || this._translate.instant('random')
   }
 
   /**
@@ -70,12 +69,12 @@ export class ColorViewerComponent {
    * @param shade
    * @param $event
    */
-  copyToClipboard(shade: Shade, $event: MouseEvent) {
+  protected copyToClipboard(shade: Shade, $event: MouseEvent) {
     $event.preventDefault()
     navigator.clipboard
       .writeText(shade.hex)
       .then(() => {
-        this.notificationService.notification.emit({
+        this._notificationService.openNotification({
           id: 'copied',
           interpolateParams: {
             color: toUnicodeVariant(shade.hex, 'm'),
@@ -84,7 +83,7 @@ export class ColorViewerComponent {
       })
       .catch((e) => {
         console.error('Error while copying to clipboard: ', e)
-        this.notificationService.notification.emit('copy-error')
+        this._notificationService.openNotification('copy-error')
       })
   }
 }

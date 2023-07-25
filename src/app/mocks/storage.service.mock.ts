@@ -1,57 +1,44 @@
-import { EventEmitter } from '@angular/core'
+import { Signal, signal } from '@angular/core'
 import { Palette } from '../models/palette.model'
 import { Color } from '../models/color.model'
 import { StorageService } from '../services/storage.service'
 
 export class StorageServiceMock implements Partial<StorageService> {
-  dark = false
-  language = 'en'
-
-  darkEmitter = new EventEmitter<boolean>()
-  languageEmitter = new EventEmitter<string>()
-
-  loadTheme(): boolean {
-    console.log('StorageServiceMock.loadTheme()')
-    this.dark = false
-    this.darkEmitter.emit(false)
-    return false
+  public get dark(): Signal<boolean> {
+    console.log('StorageServiceMock.dark()')
+    return signal(false).asReadonly()
   }
 
-  toggleTheme(dark: boolean | undefined): boolean {
+  public get language(): Signal<string> {
+    console.log('StorageServiceMock.language()')
+    return signal('en').asReadonly()
+  }
+
+  public toggleTheme(dark: boolean | undefined): boolean {
     console.log(`StorageServiceMock.toggleTheme(${dark})`)
-    this.dark = dark ?? true
-    this.darkEmitter.emit(dark ?? true)
     return dark ?? true
   }
 
-  loadLanguage(): void {
-    console.log('StorageServiceMock.loadLanguage()')
-    this.language = 'en'
-    this.languageEmitter.emit('en')
+  public setLanguage(language: string): void {
+    console.log(`StorageServiceMock.setLanguage(${language})`)
   }
 
-  applyLanguage(language: string): void {
-    console.log(`StorageServiceMock.applyLanguage(${language})`)
-    this.language = language
-    this.languageEmitter.emit(language)
-  }
-
-  loadPalette(): Palette | undefined {
+  public loadPalette(): Palette | undefined {
     console.log('StorageServiceMock.loadPalette()')
     const palette = new Palette('loadedPalette')
     palette.addColor(new Color('pawcode Blue', '#4472c4'))
     return palette
   }
 
-  savePalette(palette: Palette): void {
+  public savePalette(palette: Palette): void {
     console.log(`StorageServiceMock.savePalette(${palette.title})`)
   }
 
-  rememberTracking(enabled: boolean): void {
+  public rememberTracking(enabled: boolean): void {
     console.log(`StorageServiceMock.rememberTracking(${enabled})`)
   }
 
-  hasTrackingAllowed(): number {
+  public hasTrackingAllowed(): number {
     console.log('StorageServiceMock.hasTrackingAllowed()')
     return 2
   }

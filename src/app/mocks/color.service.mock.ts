@@ -1,67 +1,60 @@
 import { Color } from '../models/color.model'
-import { EventEmitter } from '@angular/core'
-import { ChangeType, ColorService } from '../services/color.service'
+import { Signal, signal } from '@angular/core'
+import { ColorService } from '../services/color.service'
 import { Shade } from '../models/shade.model'
 
 export class ColorServiceMock implements Partial<ColorService> {
-  private color?: Color
-  private shade?: Shade
-  private colorChangeEmitter = new EventEmitter<ChangeType>()
+  private readonly _color = signal<Color | undefined>(undefined)
+  private readonly _shade = signal<Shade | undefined>(undefined)
 
-  constructor() {
-    this.initColor()
+  public get color(): Signal<Color | undefined> {
+    return this._color.asReadonly()
   }
 
-  initColor(): void {
+  public get shade(): Signal<Shade | undefined> {
+    return this._shade.asReadonly()
+  }
+
+  constructor() {
+    this._initColor()
+  }
+
+  private _initColor(): void {
     window.setTimeout(() => {
       this.loadColor(new Color('pawcode Blue', '#4472c4'))
     }, 500)
   }
 
-  loadColor(color: Color, shadeIndex?: number): void {
+  public loadColor(color: Color, shadeIndex?: number): void {
     console.log(`ColorServiceMock.loadColor(${color.name}, ${shadeIndex})`)
-    this.color = Color.parseColor(color)
-    const newShadeIndex =
-      shadeIndex ?? this.color.shades.find((s) => s.fixed)?.index ?? 500
-    this.shade = this.color.getShade(newShadeIndex)
-    this.colorChangeEmitter.emit(ChangeType.LOAD)
+    this._color.set(Color.parseColor(color))
+    if (shadeIndex) {
+      this._shade.set(this._color()?.getShade(shadeIndex))
+    } else {
+      this._shade.set(
+        this._color()?.shades.find((s) => s.fixed) ??
+          this._color()?.getShade(500)
+      )
+    }
   }
 
-  closeEditor(): void {
+  public closeEditor(): void {
     console.log('ColorServiceMock.closeEditor()')
-    this.color = undefined
-    this.shade = undefined
-    this.colorChangeEmitter.emit(ChangeType.LOAD)
+    this._color.set(undefined)
+    this._shade.set(undefined)
 
-    this.initColor()
+    this._initColor()
   }
 
-  adjustShades(): void {
+  public adjustShades(): void {
     console.log('ColorServiceMock.adjustShades()')
-    this.colorChangeEmitter.emit(ChangeType.ADJUST)
   }
 
-  saveColor(): void {
+  public saveColor(): void {
     console.log('ColorServiceMock.saveColor()')
-    this.color = undefined
-    this.shade = undefined
-    this.colorChangeEmitter.emit(ChangeType.LOAD)
+    this._color.set(undefined)
+    this._shade.set(undefined)
 
-    this.initColor()
-  }
-
-  getColor(): Color | undefined {
-    console.log('ColorServiceMock.getColor()')
-    return this.color
-  }
-
-  getShade(): Shade | undefined {
-    console.log('ColorServiceMock.getShade()')
-    return this.shade
-  }
-
-  getColorChangeEmitter(): EventEmitter<ChangeType> {
-    console.log('ColorServiceMock.getColorChangeEmitter()')
-    return this.colorChangeEmitter
+    this._initColor()
   }
 }

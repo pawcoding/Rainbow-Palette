@@ -1,24 +1,8 @@
-import { EventEmitter } from '@angular/core'
-import { Dialog } from '../../interfaces/dialog.interface'
+import { Dialog } from 'src/app/types/dialog.type'
 import { toUnicodeVariant } from '../../utils/to-unicode-variant.util'
 
 export class CssFileDialog {
-  constructor(private notification: EventEmitter<Dialog | undefined>) {}
-
-  getNotification(): Dialog {
-    const closeEmitter = new EventEmitter()
-    closeEmitter.subscribe(() => {
-      this.notification.emit(undefined)
-    })
-
-    const docEmitter = new EventEmitter()
-    docEmitter.subscribe(() => {
-      window.open(
-        'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',
-        '_blank'
-      )
-    })
-
+  static getNotification(): Dialog {
     return {
       id: 'export-css-file',
       interpolateParams: {
@@ -32,9 +16,18 @@ export class CssFileDialog {
       actions: [
         {
           id: 'more',
-          action: docEmitter,
+          callback: async () => {
+            window.open(
+              'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',
+              '_blank'
+            )
+            return undefined
+          },
         },
       ],
+      style: {
+        width: 'large',
+      },
     }
   }
 }

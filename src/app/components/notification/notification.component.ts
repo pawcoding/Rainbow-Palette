@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core'
+import { Component, Input, computed, inject } from '@angular/core'
 import { NotificationService } from '../../services/notification.service'
 
 @Component({
@@ -9,35 +9,21 @@ export class NotificationComponent {
   @Input()
   dark = false
 
-  message: string | undefined
-  complexNotification:
-    | { id: string; interpolateParams: { [key: string]: string } }
-    | undefined
-  timeout: number | undefined
+  private readonly _notificationService = inject(NotificationService)
 
-  constructor(private notificationService: NotificationService) {
-    notificationService.notification.subscribe((notification) => {
-      if (typeof notification === 'string') {
-        this.message = notification
-        this.complexNotification = undefined
-      } else {
-        this.complexNotification = notification
-        this.message = undefined
-      }
+  protected readonly message = computed(() => {
+    const notification = this._notificationService.notification()
+    if (typeof notification === 'string') return notification
+    else return undefined
+  })
 
-      if (notification) {
-        clearTimeout(this.timeout)
-        this.timeout = window.setTimeout(() => {
-          this.closeNotification()
-        }, 5000)
-      } else {
-        clearTimeout(this.timeout)
-        this.timeout = undefined
-      }
-    })
-  }
+  protected readonly complexNotification = computed(() => {
+    const notification = this._notificationService.notification()
+    if (typeof notification === 'string') return undefined
+    else return notification
+  })
 
-  closeNotification() {
-    this.notificationService.notification.emit(undefined)
+  protected closeNotification() {
+    this._notificationService.closeNotification()
   }
 }

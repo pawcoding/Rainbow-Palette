@@ -1,54 +1,40 @@
-import { EventEmitter } from '@angular/core'
 import { Palette } from '../models/palette.model'
-import { Dialog } from '../interfaces/dialog.interface'
+import { Dialog } from '../types/dialog.type'
 import { CssDialog } from './css/css.dialog'
 import { TailwindDialog } from './tailwind/tailwind.dialog'
 import { ScssDialog } from './scss/scss.dialog'
+import { LessDialog } from './less/less.dialog'
+import { RequestFormatDialog } from './request-format.dialog'
 
 export class ExportDialog {
-  constructor(
-    private notification: EventEmitter<Dialog | undefined>,
-    private palette: Palette
-  ) {}
+  constructor(private palette: Palette) {}
 
   getNotification(): Dialog {
-    const cssEmitter = new EventEmitter()
-    cssEmitter.subscribe(() => {
-      this.notification.emit(
-        new CssDialog(this.notification, this.palette).getNotification()
-      )
-    })
-
-    const scssEmitter = new EventEmitter()
-    scssEmitter.subscribe(() => {
-      this.notification.emit(
-        new ScssDialog(this.notification, this.palette).getNotification()
-      )
-    })
-
-    const tailwindEmitter = new EventEmitter()
-    tailwindEmitter.subscribe(() => {
-      this.notification.emit(
-        new TailwindDialog(this.notification, this.palette).getNotification()
-      )
-    })
-
     return {
       id: 'export-palette',
       actions: [
         {
           id: 'css',
-          action: cssEmitter,
+          callback: async () => CssDialog.getNotification(this.palette),
         },
         {
           id: 'scss',
-          action: scssEmitter,
+          callback: async () => ScssDialog.getNotification(this.palette),
+        },
+        {
+          id: 'less',
+          callback: async () => LessDialog.getNotification(this.palette),
         },
         {
           id: 'tailwind',
-          action: tailwindEmitter,
+          callback: async () => TailwindDialog.getNotification(this.palette),
+        },
+        {
+          id: 'request-format',
+          callback: async () => RequestFormatDialog.getNotification(),
         },
       ],
+      custom: true,
     }
   }
 }

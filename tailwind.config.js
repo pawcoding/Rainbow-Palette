@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin')
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -55,6 +56,12 @@ module.exports = {
       maxWidth: {
         xxs: '16rem',
       },
+      height: {
+        screen: '100dvh',
+      },
+      width: {
+        screen: '100dvw',
+      },
     },
     screens: {
       xs: '425px',
@@ -65,5 +72,8 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@savvywombat/tailwindcss-grid-areas'),
     require('tailwind-scrollbar'),
+    plugin(({ addVariant }) => {
+      addVariant('hocus', ['&:hover', '&:focus'])
+    }),
   ],
 }

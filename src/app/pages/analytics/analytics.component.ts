@@ -1,6 +1,6 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { StorageService } from '../../services/storage.service'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 import { NotificationService } from '../../services/notification.service'
 import { getMatomoLink } from '../../utils/links.util'
 import { TranslateService } from '@ngx-translate/core'
@@ -10,35 +10,35 @@ import { TranslateService } from '@ngx-translate/core'
   templateUrl: './analytics.component.html',
 })
 export class AnalyticsComponent {
-  getMatomoLink = getMatomoLink(this.translate)
+  private readonly _translate = inject(TranslateService)
+  private readonly _storage = inject(StorageService)
+  private readonly _notificationService = inject(NotificationService)
+  private readonly _tracker = inject(MatomoTracker)
 
-  trackingAllowed = 2
+  protected readonly getMatomoLink = getMatomoLink(this._translate)
 
-  constructor(
-    private readonly storage: StorageService,
-    private readonly notificationService: NotificationService,
-    private readonly translate: TranslateService,
-    private readonly tracker: MatomoTracker
-  ) {
-    this.trackingAllowed = this.storage.hasTrackingAllowed()
+  protected trackingAllowed = 2
+
+  constructor() {
+    this.trackingAllowed = this._storage.hasTrackingAllowed()
   }
 
   /**
    * Allow tracking and remember the consent for 90 days
    */
-  allowTracking() {
-    this.storage.rememberTracking(true)
-    this.tracker.setConsentGiven()
-    this.notificationService.notification.emit('tracking-allowed')
+  protected allowTracking() {
+    this._storage.rememberTracking(true)
+    this._tracker.setConsentGiven()
+    this._notificationService.openNotification('tracking-allowed')
     this.trackingAllowed = 1
   }
 
   /**
    * Disable tracking and remember the choice for 90 days
    */
-  disableTracking() {
-    this.storage.rememberTracking(false)
-    this.tracker.forgetConsentGiven()
+  protected disableTracking() {
+    this._storage.rememberTracking(false)
+    this._tracker.forgetConsentGiven()
     this.trackingAllowed = 0
   }
 }

@@ -1,33 +1,57 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { Color } from '../../models/color.model'
+import { Component, Input, computed, effect, inject } from '@angular/core'
 import { Shade } from '../../models/shade.model'
-import { ChangeType, ColorService } from '../../services/color.service'
+import { ColorService } from '../../services/color.service'
 
 @Component({
   selector: 'app-color-editor',
   templateUrl: './color-editor.component.html',
   styleUrls: ['./color-editor.component.css'],
 })
-export class ColorEditorComponent implements OnInit {
+export class ColorEditorComponent {
+  protected readonly colorService = inject(ColorService)
+
   @Input()
-  dark = false
+  public dark = false
 
-  shade: Shade | undefined
-  color: Color | undefined
+  protected readonly shade = this.colorService.shade
+  protected readonly color = this.colorService.color
 
-  constructor(public colorService: ColorService) {
-    this.colorService.getColorChangeEmitter().subscribe((changeType) => {
-      if (changeType === ChangeType.LOAD) {
-        this.color = this.colorService.getColor()
-        this.shade = this.colorService.getShade()
+  protected readonly hue = computed(() => {
+    const shade = this.shade()
+    if (!shade) return 0
+
+    return this.hueToWheel(shade.hue)
+  })
+
+  constructor() {
+    // Prevent scrolling when the editor is open
+    effect(() => {
+      if (this.color()) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = 'auto'
       }
-
-      this.updateProperties()
     })
-  }
 
-  ngOnInit(): void {
-    this.updateProperties()
+    // Update CSS variables when the shade changes
+    effect(() => {
+      const shade = this.shade()
+      if (!shade) return
+
+      document.documentElement.style.setProperty('--selected-hex', shade.hex)
+      document.documentElement.style.setProperty(
+        '--selected-hue',
+        String(shade.hue)
+      )
+      document.documentElement.style.setProperty(
+        '--selected-saturation',
+        shade.saturation + '%'
+      )
+      document.documentElement.style.setProperty(
+        '--selected-luminosity',
+        shade.luminosity + '%'
+      )
+    })
   }
 
   /**
@@ -35,63 +59,45 @@ export class ColorEditorComponent implements OnInit {
    * @param type Property to change
    * @param value Value to change to
    */
-  updateColor(type: UpdateType, value: string | number) {
-    if (!this.shade) return
+  protected updateColor(type: UpdateType, value: string | number) {
+    if (!this.shade()) return
 
     if (type === UpdateType.HEX && isNaN(+value)) {
-      if (`${value}`.match(/^#[0-9A-Fa-f]{6}$/))
-        this.shade.setHEX(`${value}`, true)
-      else return
+      if (`${value}`.match(/^#[0-9A-Fa-f]{6}$/)) {
+        this.colorService.updateShade(`${value}`)
+      } else {
+        return
+      }
     } else if (!isNaN(+value)) {
+      const oldShade = this.shade()!
       value = parseInt(`${value}`)
-      if (type === UpdateType.HUE)
-        this.shade.setHSL(
+      if (type === UpdateType.HUE) {
+        this.colorService.updateShade(
           this.wheelToHue(value),
-          this.shade.saturation,
-          this.shade.luminosity,
-          true
+          oldShade.saturation,
+          oldShade.luminosity
         )
-      else if (type === UpdateType.SATURATION)
-        this.shade.setHSL(this.shade.hue, value, this.shade.luminosity, true)
-      else if (type === UpdateType.LUMINOSITY)
-        this.shade.setHSL(
-          this.shade.hue,
-          this.shade.saturation,
-          100 - value,
-          true
+      } else if (type === UpdateType.SATURATION) {
+        this.colorService.updateShade(oldShade.hue, value, oldShade.luminosity)
+      } else if (type === UpdateType.LUMINOSITY) {
+        this.colorService.updateShade(
+          oldShade.hue,
+          oldShade.saturation,
+          100 - value
         )
+      }
     }
-
-    this.colorService.adjustShades()
-  }
-
-  /**
-   * Update all css properties to the values of the current selected shade.
-   */
-  updateProperties() {
-    if (!this.shade) return
-
-    document.documentElement.style.setProperty('--selected-hex', this.shade.hex)
-    document.documentElement.style.setProperty(
-      '--selected-hue',
-      String(this.shade.hue)
-    )
-    document.documentElement.style.setProperty(
-      '--selected-saturation',
-      this.shade.saturation + '%'
-    )
-    document.documentElement.style.setProperty(
-      '--selected-luminosity',
-      this.shade.luminosity + '%'
-    )
   }
 
   /**
    * Change a shade to be edited
    * @param shadeIndex
    */
-  changeShade(shadeIndex: number) {
-    if (this.color) this.colorService.loadColor(this.color, shadeIndex)
+  protected changeShade(shadeIndex: number) {
+    const color = this.color()
+    if (color) {
+      this.colorService.loadColor(color, shadeIndex)
+    }
   }
 
   /**
@@ -99,13 +105,14 @@ export class ColorEditorComponent implements OnInit {
    * @param shade
    * @param $event
    */
-  releaseShade(shade: Shade, $event: MouseEvent) {
+  protected releaseShade(shade: Shade, $event: MouseEvent) {
     $event.preventDefault()
-    if (!this.color) return
+    const color = this.color()
+    if (!color) return
 
-    if (this.color.shades.filter((s) => s.fixed).length > 1) {
+    if (color.shades.filter((s) => s.fixed).length > 1) {
       shade.fixed = false
-      this.colorService.adjustShades()
+      this.colorService.adjustShades(true)
     }
   }
 
@@ -113,7 +120,7 @@ export class ColorEditorComponent implements OnInit {
    * Calculate from color wheel degree to hue
    * @param wheel
    */
-  wheelToHue(wheel: number) {
+  private wheelToHue(wheel: number) {
     let newHue
     if (wheel < 120) newHue = 0.5 * wheel
     else if (wheel < 180) newHue = wheel + 300
@@ -127,7 +134,7 @@ export class ColorEditorComponent implements OnInit {
    * Calculate from hue to color wheel degree
    * @param hue
    */
-  hueToWheel(hue: number) {
+  private hueToWheel(hue: number) {
     let wheel
     if (hue < 60) wheel = 2 * hue
     else if (hue < 120) wheel = hue + 60

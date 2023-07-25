@@ -1,9 +1,9 @@
 import { DialogComponent } from './dialog.component'
 import { applicationConfig, Meta, Story } from '@storybook/angular'
-import { NotificationService } from '../../services/notification.service'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
-import { NotificationServiceMock } from '../../mocks/notification.service.mock'
+import { DialogService } from 'src/app/services/dialog.service'
+import { dialogServiceMockFactory } from 'src/app/mocks/dialog.service.mock'
 
 export default {
   title: 'Components/Dialog',
@@ -18,13 +18,10 @@ export default {
 const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
-    providers: [
-      {
-        provide: NotificationService,
-        useClass: NotificationServiceMock,
-      },
-    ],
     imports: [StorybookTranslateModule],
+    providers: [
+      { provide: DialogService, useFactory: dialogServiceMockFactory(false) },
+    ],
   },
 })
 
@@ -32,4 +29,26 @@ export const Primary = Template.bind({})
 
 Primary.args = {
   dark: false,
+}
+Primary.parameters = {
+  layout: 'fullscreen',
+}
+
+const ExportTemplate: Story = (args) => ({
+  props: args,
+  moduleMetadata: {
+    imports: [StorybookTranslateModule],
+    providers: [
+      { provide: DialogService, useFactory: dialogServiceMockFactory(true) },
+    ],
+  },
+})
+
+export const ExportDialog = ExportTemplate.bind({})
+
+ExportDialog.args = {
+  dark: false,
+}
+ExportDialog.parameters = {
+  layout: 'fullscreen',
 }

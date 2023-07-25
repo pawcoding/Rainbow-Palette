@@ -1,34 +1,30 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { StorageService } from '../../services/storage.service'
 import { languageToCountryCode } from '../../utils/language-to-countrycode.util'
 import { LANGUAGES } from '../../constants/languages.constant'
-import { MatomoTracker } from '@ngx-matomo/tracker'
+import { MatomoTracker } from 'ngx-matomo-client'
 
 @Component({
   selector: 'app-language-selector',
   templateUrl: './language-selector.component.html',
 })
 export class LanguageSelectorComponent {
-  LANGUAGES = LANGUAGES
+  protected readonly LANGUAGES = LANGUAGES
+  protected readonly languageToCountryCode = languageToCountryCode
 
-  language = 'en'
-  showMenu = false
+  private readonly _storage = inject(StorageService)
+  private readonly _tracker = inject(MatomoTracker)
 
-  constructor(private storage: StorageService, private tracker: MatomoTracker) {
-    this.storage.languageEmitter.subscribe((language) => {
-      this.language = language
-    })
-  }
+  protected readonly language = this._storage.language
+  protected showMenu = false
 
   /**
    * Switch the language of the app.
    * @param language
    */
-  switchLanguage(language: string) {
-    this.storage.applyLanguage(language)
+  protected switchLanguage(language: string) {
+    this._storage.setLanguage(language)
     this.showMenu = false
-    this.tracker.trackPageView()
+    this._tracker.trackPageView()
   }
-
-  protected readonly languageToCountryCode = languageToCountryCode
 }

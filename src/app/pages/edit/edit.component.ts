@@ -1,5 +1,4 @@
-import { Component } from '@angular/core'
-import { Palette } from '../../models/palette.model'
+import { Component, inject } from '@angular/core'
 import { PaletteService } from '../../services/palette.service'
 
 @Component({
@@ -7,12 +6,7 @@ import { PaletteService } from '../../services/palette.service'
   templateUrl: './edit.component.html',
 })
 export class EditComponent {
-  palette: Palette | undefined
+  private readonly _paletteService = inject(PaletteService)
 
-  constructor(private paletteService: PaletteService) {
-    paletteService.getPaletteChangeEmitter().subscribe((palette) => {
-      this.palette = palette
-    })
-    this.palette = paletteService.getPalette()
-  }
+  protected readonly palette = this._paletteService.palette
 }

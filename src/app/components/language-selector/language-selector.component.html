@@ -1,11 +1,11 @@
 <section class="relative w-7 mx-auto">
   <span
     class="block h-7 w-7 cursor-pointer rounded-full fib fis"
-    [class]="'fi-' + languageToCountryCode(language)"
-    [title]="'language-selector.' + language | translate"
+    [class]="'fi-' + languageToCountryCode(language())"
+    [title]="'language-selector.' + language() | translate"
     (click)="showMenu = !showMenu">
     <span class="sr-only">{{
-      'language-selector.' + language | translate
+      'language-selector.' + language() | translate
     }}</span>
   </span>
 

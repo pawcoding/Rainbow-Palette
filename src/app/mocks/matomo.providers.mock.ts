@@ -1,10 +1,9 @@
 import { importProvidersFrom } from '@angular/core'
-import { NgxMatomoTrackerModule } from '@ngx-matomo/tracker'
-import { NgxMatomoRouterModule } from '@ngx-matomo/router'
+import { NgxMatomoModule, NgxMatomoRouterModule } from 'ngx-matomo-client'
 
 export const matomoProvidersMock = [
   importProvidersFrom(
-    NgxMatomoTrackerModule.forRoot({
+    NgxMatomoModule.forRoot({
       siteId: 1,
       trackerUrl: 'https://analytics.apps.pawcode.de',
       disabled: true,
