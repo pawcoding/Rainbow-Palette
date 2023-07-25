@@ -1,11 +1,4 @@
-import {
-  EventEmitter,
-  Injectable,
-  Signal,
-  effect,
-  inject,
-  signal,
-} from '@angular/core'
+import { Injectable, Signal, effect, inject, signal } from '@angular/core'
 import { Palette } from '../models/palette.model'
 import { TranslateService } from '@ngx-translate/core'
 
@@ -16,9 +9,40 @@ export class StorageService {
   private readonly _translator = inject(TranslateService)
 
   private readonly _dark = signal(false)
+  private readonly _language = signal('en')
+
+  public get dark(): Signal<boolean> {
+    return this._dark.asReadonly()
+  }
+
+  public get language(): Signal<string> {
+    return this._language.asReadonly()
+  }
 
   constructor() {
-    // load theme
+    // apply theme and sync with local storage
+    effect(() => {
+      document.body.classList.toggle('dark', this._dark())
+      localStorage.setItem('theme', this._dark() ? 'dark' : 'light')
+    })
+
+    // apply language and sync with local storage
+    effect(() => {
+      this._translator.use(this._language()).subscribe(() => {
+        localStorage.setItem('language', this._language())
+        document.documentElement.setAttribute('lang', this._language())
+      })
+    })
+
+    this._initTheme()
+    this._initLanguage()
+  }
+
+  /**
+   * Load the theme saved in local storage.
+   * If no theme is saved, the browser preferred theme is used.
+   */
+  private _initTheme(): void {
     let initialTheme = window.matchMedia('(prefers-color-scheme: dark)').matches
 
     try {
@@ -30,17 +54,26 @@ export class StorageService {
       console.error('Could not load theme from local storage.', e)
     }
     this._dark.set(initialTheme)
-
-    // apply theme and sync with local storage
-    effect(() => {
-      document.body.classList.toggle('dark', this._dark())
-      localStorage.setItem('theme', this._dark() ? 'dark' : 'light')
-    })
   }
 
-  language = 'en'
+  /**
+   * Load the language saved in local storage.
+   * If no language is saved, the browser default language is used.
+   * If the browser default language is not supported, english is used.
+   */
+  private _initLanguage(): void {
+    let initialLanguage = this._translator.getBrowserLang() ?? 'en'
 
-  languageEmitter = new EventEmitter<string>()
+    try {
+      const savedLanguage = localStorage.getItem('language')
+      if (savedLanguage) {
+        initialLanguage = savedLanguage
+      }
+    } catch (e) {
+      console.error('Could not load language from local storage.', e)
+    }
+    this._language.set(initialLanguage)
+  }
 
   /**
    * Toggle between dark and light theme.
@@ -57,41 +90,19 @@ export class StorageService {
     return this._dark()
   }
 
-  public get dark(): Signal<boolean> {
-    return this._dark.asReadonly()
-  }
-
   /**
-   * Load the language saved in local storage.
-   * If no language is saved, the browser default language is used.
-   * If the browser default language is not supported, english is used.
+   * Update the current language of the website.
+   * @param language The language to set. If the language is not supported, english is used.
    */
-  loadLanguage(): void {
-    if (localStorage.getItem('language')) {
-      this.applyLanguage(localStorage.getItem('language') ?? 'en')
-    } else {
-      this.applyLanguage(this._translator.getBrowserLang() ?? 'en')
-    }
-  }
-
-  /**
-   * Apply language to the app.
-   * @param language
-   */
-  applyLanguage(language: string) {
-    this._translator.use(language).subscribe(() => {
-      localStorage.setItem('language', language)
-      this.language = language
-      document.documentElement.setAttribute('lang', language)
-      this.languageEmitter.emit(language)
-    })
+  public setLanguage(language: string): void {
+    this._language.set(language)
   }
 
   /**
    * Load the palette saved in local storage.
    * If no palette is saved a random one is going to be generated.
    */
-  loadPalette(): Palette | undefined {
+  public loadPalette(): Palette | undefined {
     const stored = localStorage.getItem('palette')
     if (stored) {
       try {
@@ -107,7 +118,7 @@ export class StorageService {
    * Save palette in local storage.
    * @param palette
    */
-  savePalette(palette: Palette): void {
+  public savePalette(palette: Palette): void {
     localStorage.setItem('palette', palette.toString())
   }
 
@@ -115,7 +126,7 @@ export class StorageService {
    * Remember if the user has enabled tracking for 90 days.
    * @param enabled
    */
-  rememberTracking(enabled: boolean): void {
+  public rememberTracking(enabled: boolean): void {
     const item = {
       value: enabled,
       expiry: Date.now() + 1000 * 60 * 60 * 24 * 90,
@@ -128,7 +139,7 @@ export class StorageService {
    * Check if the user has disabled tracking.
    * @returns {number} 0 = disabled, 1 = enabled, 2 = not set
    */
-  hasTrackingAllowed(): number {
+  public hasTrackingAllowed(): number {
     const item = localStorage.getItem('tracking')
     if (item) {
       try {

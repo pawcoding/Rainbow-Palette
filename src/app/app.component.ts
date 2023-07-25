@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core'
+import { Component, OnInit, effect, inject } from '@angular/core'
 import { environment } from '../environments/environment'
 import { StorageService } from './services/storage.service'
 import { PaletteService } from './services/palette.service'
@@ -63,11 +63,11 @@ export class AppComponent implements OnInit {
 
     // Setup translation pipe
     this.translate.setDefaultLang('en')
-    this.storage.languageEmitter.subscribe(() => {
+    effect(() => {
+      this.storage.language()
       this.title = `Rainbow Palette | ${this.translate.instant('app.title')}`
       this.titleService.setTitle(this.title)
     })
-    this.storage.loadLanguage()
   }
 
   ngOnInit() {
