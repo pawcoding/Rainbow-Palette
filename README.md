@@ -1,7 +1,7 @@
 # Rainbow Palette
 
 [![GitHub](https://img.shields.io/github/license/pawcoding/rainbow-palette?color=brightgreen)](https://github.com/pawcoding/rainbow-palette/blob/main/LICENSE)
-![Version](https://img.shields.io/badge/version-0.2.0-orange)
+![Version](https://img.shields.io/badge/version-0.2.2-orange)
 ![Pipeline Checks](https://img.shields.io/github/actions/workflow/status/pawcoding/rainbow-palette/test.yaml?branch=main)
 [![Discord](https://badgen.net/discord/members/GzgTh4hxrx)](https://discord.gg/GzgTh4hxrx)
 
@@ -28,8 +28,9 @@ All suggestions are discussed there, tasks are distributed and help is offered.
 | 🟩     | `0.1.4` | Instructions & new icons                       |
 | 🟩     | `0.2.0` | Improved algorithms                            |
 | 🟩     | `0.2.1` | Enable analytics                               |
-| 🟥     | `0.2.2` | Adjust colors in other formats (RGB, HSV, ...) |
+| 🟥     | `0.2.2` | Add custom dialogs                             |
 | 🟥     | `0.2.3` | Import existing palettes from files            |
+| 🟥     | `0.2.4` | Adjust colors in other formats (RGB, HSV, ...) |
 | 🟥     | `0.3.0` | Exemplary web components to preview palette    |
 | 🟥     | `0.3.1` | Provide prefabricated color palettes           |
 | 🟥     | `0.3.2` | Generate color palette from images             |
