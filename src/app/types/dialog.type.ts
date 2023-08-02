@@ -11,5 +11,7 @@ export type Dialog = {
 
 export type Action = {
   id: string
+  icon?: string
+  color?: string
   callback?: () => Promise<Dialog | undefined>
 }

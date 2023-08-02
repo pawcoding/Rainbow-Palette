@@ -26,10 +26,7 @@
           class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
           [title]="'palette-viewer.edit-title' | translate"
           (click)="openEditor()">
-          <img
-            src="/assets/icons/edit.svg"
-            alt="Edit title"
-            class="icon !h-8 !w-8" />
+          <ng-icon name="heroPencilSolid" size="2rem" />
         </span>
       </div>
 
@@ -40,19 +37,9 @@
           type="button"
           [title]="'palette-viewer.export-title' | translate"
           (click)="exportPalette()">
-          <svg
-            class="w-6 h-6 mr-2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill="currentColor"
-              d="M3.375 3C2.339 3 1.5 3.84 1.5 4.875v.75c0 1.036.84 1.875 1.875 1.875h17.25c1.035 0 1.875-.84 1.875-1.875v-.75C22.5 3.839 21.66 3 20.625 3H3.375z" />
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M3.087 9l.54 9.176A3 3 0 006.62 21h10.757a3 3 0 002.995-2.824L20.913 9H3.087zM12 10.5a.75.75 0 01.75.75v4.94l1.72-1.72a.75.75 0 111.06 1.06l-3 3a.75.75 0 01-1.06 0l-3-3a.75.75 0 111.06-1.06l1.72 1.72v-4.94a.75.75 0 01.75-.75z"
-              clip-rule="evenodd" />
-          </svg>
+          <span class="mr-2 h-6">
+            <ng-icon name="heroArchiveBoxArrowDownSolid" size="1.5rem" />
+          </span>
 
           {{ 'palette-viewer.export' | translate }}
         </button>
@@ -66,29 +53,12 @@
               | translate
           "
           (click)="savePalette()">
-          <svg
-            *ngIf="!saving"
-            class="w-6 h-6 mr-2"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M6.32 2.577a49.255 49.255 0 0111.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 01-1.085.67L12 18.089l-7.165 3.583A.75.75 0 013.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93z"
-              clip-rule="evenodd" />
-          </svg>
-
-          <svg
-            *ngIf="saving"
-            class="w-6 h-6 mr-2 animate-processing"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              fill="currentColor"
-              fill-rule="evenodd"
-              d="M4.755 10.059a7.5 7.5 0 0112.548-3.364l1.903 1.903h-3.183a.75.75 0 100 1.5h4.992a.75.75 0 00.75-.75V4.356a.75.75 0 00-1.5 0v3.18l-1.9-1.9A9 9 0 003.306 9.67a.75.75 0 101.45.388zm15.408 3.352a.75.75 0 00-.919.53 7.5 7.5 0 01-12.548 3.364l-1.902-1.903h3.183a.75.75 0 000-1.5H2.984a.75.75 0 00-.75.75v4.992a.75.75 0 001.5 0v-3.18l1.9 1.9a9 9 0 0015.059-4.035.75.75 0 00-.53-.918z"
-              clip-rule="evenodd" />
-          </svg>
+          <span class="mr-2 h-6">
+            <ng-icon
+              [class.animate-processing]="saving"
+              [name]="saving ? 'heroArrowPathSolid' : 'heroBookmarkSolid'"
+              size="1.5rem" />
+          </span>
 
           {{ 'palette-viewer.' + (saving ? 'saving' : 'save') | translate }}
         </button>

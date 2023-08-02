@@ -2,6 +2,7 @@ import { Signal, computed, signal } from '@angular/core'
 import { DialogService } from '../services/dialog.service'
 import { Dialog } from '../types/dialog.type'
 import { sleep } from '../utils/sleep.util'
+import { match } from 'assert'
 
 const DIALOG_MOCK_TIMEOUT = 'DIALOG_MOCK_TIMEOUT'
 
@@ -11,18 +12,27 @@ const EXPORT_DIALOG: Dialog = {
   actions: [
     {
       id: 'css',
+      icon: 'simpleCss3',
+      color: '#1572B6',
     },
     {
       id: 'scss',
+      icon: 'simpleSass',
+      color: '#CC6699',
     },
     {
       id: 'less',
+      icon: 'simpleLess',
+      color: '#1D365D',
     },
     {
       id: 'tailwind',
+      icon: 'simpleTailwindcss',
+      color: '#06B5D4',
     },
     {
       id: 'request-format',
+      icon: 'heroPlusCircle',
     },
   ],
 }

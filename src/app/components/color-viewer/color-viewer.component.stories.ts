@@ -7,6 +7,7 @@ import { StorybookTranslateModule } from '../../utils/storybook-translate.module
 import { PaletteService } from '../../services/palette.service'
 import { ColorServiceMock } from '../../mocks/color.service.mock'
 import { PaletteServiceMock } from '../../mocks/palette.service.mock'
+import { IconsModule } from 'src/app/icons.module'
 
 export default {
   title: 'Components/Color',
@@ -27,7 +28,7 @@ const Template: Story = (args) => ({
         useClass: PaletteServiceMock,
       },
     ],
-    imports: [StorybookTranslateModule],
+    imports: [StorybookTranslateModule, IconsModule],
   },
 })
 

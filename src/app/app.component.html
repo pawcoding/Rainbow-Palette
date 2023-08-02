@@ -29,12 +29,9 @@
               "
               [routerLink]="nav.link"
               [title]="'app.navigation.' + nav.id + '.title' | translate">
-              <svg
-                class="w-6 h-6 mr-2 hidden md:block"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                [innerHTML]="nav.icon | safeHtml"></svg>
+              <span class="mr-2 h-6 hidden md:block">
+                <ng-icon [name]="nav.icon" size="1.5rem" />
+              </span>
               {{ 'app.navigation.' + nav.id + '.label' | translate }}
             </a>
           </li>
