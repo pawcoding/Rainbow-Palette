@@ -26,10 +26,7 @@
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
         [title]="'color-viewer.edit-name' | translate"
         (click)="openEditor()">
-        <img
-          src="/assets/icons/edit.svg"
-          [alt]="'color-viewer.edit-name' | translate"
-          class="icon" />
+        <ng-icon name="heroPencilSolid" size="1.5rem" />
       </span>
     </div>
 
@@ -39,20 +36,14 @@
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
         [title]="'color-viewer.tune' | translate"
         (click)="colorService.loadColor(color)">
-        <img
-          class="icon"
-          src="/assets/icons/tune.svg"
-          [alt]="'color-viewer.tune' | translate" />
+        <ng-icon name="heroAdjustmentsHorizontalSolid" size="1.5rem" />
       </span>
 
       <span
         class="p-1 hover:bg-gray-100 dark:hover:bg-gray-800 rounded transition-colors duration-500"
         [title]="'color-viewer.remove' | translate"
         (click)="onRemove.emit(color)">
-        <img
-          class="icon"
-          src="/assets/icons/delete.svg"
-          [alt]="'color-viewer.remove' | translate" />
+        <ng-icon name="heroTrashSolid" size="1.5rem" />
       </span>
     </div>
 

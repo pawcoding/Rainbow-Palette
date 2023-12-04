@@ -2,8 +2,9 @@ import { DialogComponent } from './dialog.component'
 import { applicationConfig, Meta, Story } from '@storybook/angular'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
-import { DialogService } from 'src/app/services/dialog.service'
-import { dialogServiceMockFactory } from 'src/app/mocks/dialog.service.mock'
+import { DialogService } from '../../services/dialog.service'
+import { dialogServiceMockFactory } from '../../mocks/dialog.service.mock'
+import { IconsModule } from '../../icons.module'
 
 export default {
   title: 'Components/Dialog',
@@ -18,7 +19,7 @@ export default {
 const Template: Story = (args) => ({
   props: args,
   moduleMetadata: {
-    imports: [StorybookTranslateModule],
+    imports: [StorybookTranslateModule, IconsModule],
     providers: [
       { provide: DialogService, useFactory: dialogServiceMockFactory(false) },
     ],
@@ -37,7 +38,7 @@ Primary.parameters = {
 const ExportTemplate: Story = (args) => ({
   props: args,
   moduleMetadata: {
-    imports: [StorybookTranslateModule],
+    imports: [StorybookTranslateModule, IconsModule],
     providers: [
       { provide: DialogService, useFactory: dialogServiceMockFactory(true) },
     ],

@@ -28,6 +28,7 @@ import {
 } from 'ngx-matomo-client'
 import { AnalyticsInterceptor } from './interceptors/analytics.interceptor'
 import { AnalyticsComponent } from './pages/analytics/analytics.component'
+import { IconsModule } from './icons.module'
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component'
     AppRoutingModule,
     BrowserModule,
     HttpClientModule,
+    IconsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
