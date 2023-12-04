@@ -2,9 +2,9 @@ import { DialogComponent } from './dialog.component'
 import { applicationConfig, Meta, Story } from '@storybook/angular'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
-import { DialogService } from 'src/app/services/dialog.service'
-import { dialogServiceMockFactory } from 'src/app/mocks/dialog.service.mock'
-import { IconsModule } from 'src/app/icons.module'
+import { DialogService } from '../../services/dialog.service'
+import { dialogServiceMockFactory } from '../../mocks/dialog.service.mock'
+import { IconsModule } from '../../icons.module'
 
 export default {
   title: 'Components/Dialog',

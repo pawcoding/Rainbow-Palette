@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/angular'
 import { NotificationService } from '../../services/notification.service'
 import { StorybookTranslateModule } from '../../utils/storybook-translate.module'
 import { NotificationServiceMock } from '../../mocks/notification.service.mock'
-import { IconsModule } from 'src/app/icons.module'
+import { IconsModule } from '../../icons.module'
 
 export default {
   title: 'Components/Notification',

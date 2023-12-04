@@ -18,7 +18,7 @@ import { StorageServiceMock } from '../../mocks/storage.service.mock'
 import { ColorServiceMock } from '../../mocks/color.service.mock'
 import { PaletteServiceMock } from '../../mocks/palette.service.mock'
 import { matomoProvidersMock } from '../../mocks/matomo.providers.mock'
-import { IconsModule } from 'src/app/icons.module'
+import { IconsModule } from '../../icons.module'
 
 export default {
   title: 'Components/Palette',

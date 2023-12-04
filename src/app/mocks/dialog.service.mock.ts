@@ -2,7 +2,6 @@ import { Signal, computed, signal } from '@angular/core'
 import { DialogService } from '../services/dialog.service'
 import { Dialog } from '../types/dialog.type'
 import { sleep } from '../utils/sleep.util'
-import { match } from 'assert'
 
 const DIALOG_MOCK_TIMEOUT = 'DIALOG_MOCK_TIMEOUT'
 

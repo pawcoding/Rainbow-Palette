@@ -23,7 +23,7 @@ import {
   heroBookmarkSolid,
   heroArrowPathSolid,
 } from '@ng-icons/heroicons/solid'
-import { heroChevronDownMini } from '@ng-icons/heroicons/mini'
+import { heroChevronDownMini, heroPlusMini } from '@ng-icons/heroicons/mini'
 
 @NgModule({
   imports: [
@@ -46,6 +46,7 @@ import { heroChevronDownMini } from '@ng-icons/heroicons/mini'
       heroArchiveBoxArrowDownSolid,
       heroBookmarkSolid,
       heroArrowPathSolid,
+      heroPlusMini,
     }),
   ],
   exports: [NgIconsModule],
