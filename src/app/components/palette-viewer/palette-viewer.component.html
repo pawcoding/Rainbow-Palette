@@ -79,11 +79,7 @@
         'palette-viewer.' + (adding ? 'adding' : 'add') + '-title' | translate
       "
       (click)="addRandomColor($event)">
-      <ng-icon
-        *ngIf="!adding"
-        name="heroPlusMini"
-        size="1.5rem"
-        class="mr-2" />
+      <ng-icon *ngIf="!adding" name="heroPlusMini" size="1.5rem" class="mr-2" />
 
       <ng-icon
         *ngIf="adding"
