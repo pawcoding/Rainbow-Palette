@@ -1,4 +1,5 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   simpleDiscord,
@@ -12,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'rp-layout-footer',
   standalone: true,
-  imports: [TranslateModule, NgIconComponent],
+  imports: [TranslateModule, NgIconComponent, RouterLink],
   templateUrl: './layout-footer.component.html',
   providers: [
     provideIcons({

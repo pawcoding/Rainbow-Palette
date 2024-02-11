@@ -6,6 +6,7 @@
   >
     <button
       class="flex items-center justify-center overflow-hidden rounded-full shadow-sm h-9 w-9 dark:shadow-none"
+      [title]="'layout.options.language' | translate"
     >
       <img
         [src]="'/assets/flags/' + currentLanguage().flag + '.svg'"
@@ -41,6 +42,7 @@
   >
     <button
       class="flex items-center justify-center overflow-hidden rounded-full shadow-sm bg-neutral-200 h-9 w-9 dark:bg-neutral-700 dark:shadow-none"
+      [title]="'layout.options.theme' | translate"
     >
       <ng-icon [name]="currentTheme().icon" [size]="'1rem'" />
 

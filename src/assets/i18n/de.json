@@ -1,22 +1,33 @@
 {
   "layout": {
+    "footer": {
+      "analytics": "Analytics",
+      "description": "Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe.",
+      "github": "GitHub",
+      "imprint": "Impressum",
+      "website": "Meine Website"
+    },
     "navigation": {
       "edit": {
-        "description": "Edit your palette",
-        "title": "Edit"
+        "description": "Bearbeite deine Palette",
+        "title": "Bearbeiten"
       },
       "generate": {
-        "description": "Generate a new palette",
-        "title": "Generate"
+        "description": "Generiere eine neue Farbpalette",
+        "title": "Generieren"
       },
       "preview": {
-        "description": "Preview your palette with components",
-        "title": "Preview"
+        "description": "Vorschau deiner Palette mit Webkomponenten",
+        "title": "Vorschau"
       }
     },
     "options": {
-      "language": "Pick your language",
-      "theme": "Pick a theme"
+      "language": "Wähle deine Sprache",
+      "theme": "Wähle ein Design"
     }
+  },
+  "theme": {
+    "dark": "Dunkel",
+    "light": "Hell"
   }
 }

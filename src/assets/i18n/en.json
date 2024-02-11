@@ -25,5 +25,9 @@
       "language": "Pick your language",
       "theme": "Pick a theme"
     }
+  },
+  "theme": {
+    "dark": "Dark",
+    "light": "Light"
   }
 }
