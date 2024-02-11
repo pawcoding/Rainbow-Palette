@@ -1,0 +1,64 @@
+<div class="flex items-center gap-2">
+  <rp-dropdown-menu
+    [items]="languageOptions"
+    title="layout.options.language"
+    (selectItem)="changeLanguage($event.value)"
+  >
+    <button
+      class="flex items-center justify-center overflow-hidden rounded-full shadow-sm h-9 w-9 dark:shadow-none"
+    >
+      <img
+        [src]="'/assets/flags/' + currentLanguage().flag + '.svg'"
+        [alt]="currentLanguage().label"
+        width="36"
+        height="36"
+      />
+
+      <span class="sr-only">
+        {{ currentLanguage().label }}
+      </span>
+    </button>
+
+    <ng-template #itemTemplate let-language="item">
+      <img
+        [src]="'/assets/flags/' + language.flag + '.svg'"
+        [alt]="language.label"
+        width="24"
+        height="24"
+        class="rounded-full shadow-sm"
+      />
+
+      <span>
+        {{ language.label }}
+      </span>
+    </ng-template>
+  </rp-dropdown-menu>
+
+  <rp-dropdown-menu
+    [items]="themeOptions"
+    title="layout.options.theme"
+    (selectItem)="changeTheme($event.value)"
+  >
+    <button
+      class="flex items-center justify-center overflow-hidden rounded-full shadow-sm bg-neutral-200 h-9 w-9 dark:bg-neutral-700 dark:shadow-none"
+    >
+      <ng-icon [name]="currentTheme().icon" [size]="'1rem'" />
+
+      <span class="sr-only">
+        {{ currentTheme().label | translate }}
+      </span>
+    </button>
+
+    <ng-template #itemTemplate let-theme="item">
+      <span
+        class="flex items-center justify-center p-1 rounded-full shadow-sm bg-neutral-300 dark:bg-neutral-500 dark:shadow-none"
+      >
+        <ng-icon [name]="theme.icon" [size]="'1rem'" />
+      </span>
+
+      <span>
+        {{ theme.label | translate }}
+      </span>
+    </ng-template>
+  </rp-dropdown-menu>
+</div>

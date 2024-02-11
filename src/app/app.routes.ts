@@ -1,3 +1,22 @@
+import { Component } from '@angular/core';
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+@Component({
+  template: '',
+})
+class DummyComponent {}
+
+export const routes: Routes = [
+  {
+    path: '',
+    component: DummyComponent,
+  },
+  {
+    path: 'edit',
+    component: DummyComponent,
+  },
+  {
+    path: 'preview',
+    component: DummyComponent,
+  },
+];

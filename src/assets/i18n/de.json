@@ -1,0 +1,22 @@
+{
+  "layout": {
+    "navigation": {
+      "edit": {
+        "description": "Edit your palette",
+        "title": "Edit"
+      },
+      "generate": {
+        "description": "Generate a new palette",
+        "title": "Generate"
+      },
+      "preview": {
+        "description": "Preview your palette with components",
+        "title": "Preview"
+      }
+    },
+    "options": {
+      "language": "Pick your language",
+      "theme": "Pick a theme"
+    }
+  }
+}

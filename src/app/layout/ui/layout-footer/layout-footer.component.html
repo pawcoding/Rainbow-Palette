@@ -1,0 +1,119 @@
+<footer
+  class="w-full px-4 py-8 border-t bg-neutral-100 border-neutral-200 dark:bg-neutral-800 dark:border-neutral-700 sm:px-6 lg:px-8"
+>
+  <div class="w-full max-w-5xl mx-auto">
+    <div class="flex justify-center">
+      <img [src]="logoAsset()" alt="Rainbow Palette" width="200" />
+    </div>
+
+    <p
+      class="max-w-md mx-auto mt-6 leading-relaxed text-center text-neutral-500 dark:text-neutral-400"
+    >
+      {{ "layout.footer.description" | translate }}
+    </p>
+
+    <ul
+      class="flex flex-wrap justify-center gap-6 mt-12 md:gap-8 lg:gap-12 text-neutral-700 dark:text-neutral-50"
+    >
+      <li>
+        <a
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+          href="/"
+        >
+          {{ "layout.footer.github" | translate }}
+        </a>
+      </li>
+
+      <li>
+        <a
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+          href="/"
+        >
+          {{ "layout.footer.website" | translate }}
+        </a>
+      </li>
+
+      <li>
+        <a
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+          href="/"
+        >
+          {{ "layout.footer.imprint" | translate }}
+        </a>
+      </li>
+
+      <li>
+        <a
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+          href="/"
+        >
+          {{ "layout.footer.analytics" | translate }}
+        </a>
+      </li>
+    </ul>
+
+    <ul
+      class="flex justify-center gap-6 mt-12 md:gap-8 text-neutral-700 dark:text-neutral-50"
+    >
+      <li>
+        <a
+          href="/"
+          rel="noreferrer"
+          target="_blank"
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+        >
+          <span class="sr-only">GitHub</span>
+          <ng-icon name="simpleGithub" size="1.5rem" />
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/"
+          rel="noreferrer"
+          target="_blank"
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+        >
+          <span class="sr-only">Instagram</span>
+          <ng-icon name="simpleInstagram" size="1.5rem" />
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/"
+          rel="noreferrer"
+          target="_blank"
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+        >
+          <span class="sr-only">Discord</span>
+          <ng-icon name="simpleDiscord" size="1.5rem" />
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/"
+          rel="noreferrer"
+          target="_blank"
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+        >
+          <span class="sr-only">Twitter</span>
+          <ng-icon name="simpleTwitter" size="1.5rem" />
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="/"
+          rel="noreferrer"
+          target="_blank"
+          class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+        >
+          <span class="sr-only">YouTube</span>
+          <ng-icon name="simpleYoutube" size="1.5rem" />
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>

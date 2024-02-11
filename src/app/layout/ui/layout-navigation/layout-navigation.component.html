@@ -1,0 +1,21 @@
+<nav
+  class="flex items-center justify-around w-full p-2 mx-auto border-t text-neutral-700 border-neutral-200 sm:max-w-80 sm:gap-2 sm:border-t-0"
+>
+  @for (navEntry of navigationEntries(); track navEntry.path) {
+  <a
+    [routerLink]="navEntry.path"
+    [title]="navEntry.description | translate"
+    [class]="
+      navEntry.path === currentPath
+        ? 'text-blue-500 font-semibold scale-105 sm:scale-100 sm:font-medium sm:bg-blue-200 sm:text-blue-700'
+        : 'sm:hover:bg-neutral-100 sm:hover:text-neutral-900'
+    "
+    class="flex flex-col sm:flex-row items-center justify-center w-full sm:w-fit gap-0.5 sm:gap-1 rounded sm:px-4 sm:py-2 transition-all duration-200 ease-in-out"
+  >
+    <ng-icon [name]="navEntry.icon" size="1.1rem" />
+    <span>
+      {{ navEntry.title | translate }}
+    </span>
+  </a>
+  }
+</nav>

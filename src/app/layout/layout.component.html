@@ -1,0 +1,39 @@
+<div class="w-[100dvw] h-[100dvh] grid grid-rows-[auto_1fr_auto]">
+  <header class="flex items-center justify-between w-full gap-2 p-4">
+    <h1>
+      <span class="sr-only">Rainbow Palette</span>
+      <img [src]="logoAsset()" alt="Rainbow Palette" width="200" />
+    </h1>
+
+    @if (!isMobile()) {
+    <ng-container *ngTemplateOutlet="navigationTemplate" />
+    }
+
+    <rp-layout-options
+      [language]="language()"
+      [theme]="theme()"
+      (languageChange)="changeLanguage($event)"
+      (themeChange)="changeTheme($event)"
+    />
+  </header>
+
+  <main class="flex flex-col items-center justify-between w-full overflow-auto">
+    <div>
+      <router-outlet />
+    </div>
+
+    <footer class="w-full">
+      <rp-layout-footer [logoAsset]="logoAsset()" />
+    </footer>
+  </main>
+
+  @if (isMobile()) {
+  <div>
+    <ng-container *ngTemplateOutlet="navigationTemplate" />
+  </div>
+  }
+</div>
+
+<ng-template #navigationTemplate>
+  <rp-layout-navigation [navigationEntries]="navigationEntries" />
+</ng-template>

@@ -1,0 +1,29 @@
+{
+  "layout": {
+    "footer": {
+      "analytics": "Analytics",
+      "description": "Generate an entire color palette from just a single color.",
+      "github": "GitHub",
+      "imprint": "Imprint",
+      "website": "My website"
+    },
+    "navigation": {
+      "edit": {
+        "description": "Edit your palette",
+        "title": "Edit"
+      },
+      "generate": {
+        "description": "Generate a new palette",
+        "title": "Generate"
+      },
+      "preview": {
+        "description": "Preview your palette with components",
+        "title": "Preview"
+      }
+    },
+    "options": {
+      "language": "Pick your language",
+      "theme": "Pick a theme"
+    }
+  }
+}
