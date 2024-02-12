@@ -9,7 +9,7 @@ import {
 } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageService } from '../shared/data-access/language.service';
-import { MobileService } from './data-access/mobile.service';
+import { MobileService } from '../shared/data-access/mobile.service';
 import { ThemeService } from './data-access/theme.service';
 import { Language } from './types/language';
 import { NavigationEntry } from './types/navigation-entry';

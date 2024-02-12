@@ -10,5 +10,5 @@ import { VersionService } from './shared/data-access/version.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  private readonly _versionService = inject(VersionService)
+  private readonly _versionService = inject(VersionService);
 }

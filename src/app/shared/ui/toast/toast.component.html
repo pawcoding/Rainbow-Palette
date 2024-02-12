@@ -1,0 +1,18 @@
+@if (toast(); as toast) {
+<div
+  class="inline-flex items-start justify-between w-full gap-1 p-2 border rounded shadow-md sm:max-w-80 bg-neutral-100 min-w-48 dark:bg-neutral-700 dark:shadow-none"
+  [class]="colors()"
+>
+  <span>
+    {{ toast.message | translate : toast.parameters }}
+  </span>
+
+  <button
+    type="button"
+    class="flex items-center justify-center w-6 h-6 focus:outline-none"
+    (click)="closeToast()"
+  >
+    <ng-icon name="heroXMarkMini" />
+  </button>
+</div>
+}
