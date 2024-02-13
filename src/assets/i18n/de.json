@@ -16,6 +16,24 @@
         "title": "Generieren"
       },
       "title": "Wie funktioniert's?"
+    },
+    "support": {
+      "development": {
+        "description": "Leider habe ich im Moment nur wenig Zeit, um das Tool aktiv selbst zu verbessern. Dennoch überwache ich nebenbei die Aktivitäten auf {{ github }}. Wenn du also Ideen hast, wie das Tool erweitert werden könnte, selbst neue Benutzeroberflächen implementieren möchtest oder meine Algorithmen verbessern kannst, kannst du mich gerne auf meinem {{ discord }} kontaktieren.",
+        "title": "Entwicklung"
+      },
+      "roadmap": {
+        "description": "Auch wenn ich das Tool im Moment nicht selbst entwickeln kann, habe ich einige Funktionen geplant. Dazu gehören:",
+        "issue": {
+          "15": "Anpassen von Farben in verschiedenen Formaten (RGB, HSV)",
+          "17": "Beispielhafte Webkomponenten zur Vorschau von Paletten",
+          "18": "Bereitstellen von vorgefertigten Paletten",
+          "19": "Erzeugen von Farbpaletten aus Bildern",
+          "22": "Lokalisierung für verschiedene Regionen"
+        },
+        "title": "Roadmap"
+      },
+      "title": "Weitere Infos & Support"
     }
   },
   "layout": {

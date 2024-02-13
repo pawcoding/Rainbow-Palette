@@ -15,7 +15,7 @@
     class="grid grid-cols-1 gap-4 mt-8 lg:gap-8 md:grid-cols-2 lg:grid-cols-3"
   >
     <article
-      class="block p-6 bg-gray-100 border border-gray-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+      class="block p-6 bg-neutral-100 border border-neutral-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
     >
       <ng-icon
         [svg]="heroSwatch"
@@ -27,13 +27,13 @@
         {{ "home.manual.generate.title" | translate }}
       </h3>
 
-      <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+      <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
         {{ "home.manual.generate.description" | translate }}
       </p>
     </article>
 
     <article
-      class="block p-6 bg-gray-100 border border-gray-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+      class="block p-6 bg-neutral-100 border border-neutral-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
     >
       <ng-icon
         [svg]="heroAdjustmentsHorizontal"
@@ -45,13 +45,13 @@
         {{ "home.manual.edit.title" | translate }}
       </h3>
 
-      <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+      <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
         {{ "home.manual.edit.description" | translate }}
       </p>
     </article>
 
     <article
-      class="block p-6 bg-gray-100 border border-gray-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+      class="block p-6 bg-neutral-100 border border-neutral-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
     >
       <ng-icon
         [svg]="heroArchiveBoxArrowDown"
@@ -63,16 +63,13 @@
         {{ "home.manual.download.title" | translate }}
       </h3>
 
-      <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+      <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
         {{ "home.manual.download.description" | translate }}
       </p>
     </article>
   </div>
 
   <div class="mt-12 text-center">
-    <p
-      class="mt-4 text-neutral-700 dark:text-neutral-400"
-      [innerHTML]="'home.manual.cta' | translate"
-    ></p>
+    <p class="mt-4 text-lg" [innerHTML]="'home.manual.cta' | translate"></p>
   </div>
 </section>

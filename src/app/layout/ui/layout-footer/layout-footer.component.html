@@ -2,8 +2,13 @@
   class="w-full px-4 py-8 mt-2 border-t bg-neutral-200 border-neutral-300 dark:bg-neutral-800 dark:border-neutral-700 sm:px-6 lg:px-8"
 >
   <div class="w-full max-w-5xl mx-auto">
-    <div class="flex justify-center">
+    <div class="flex items-start justify-center gap-2">
       <img [src]="logoAsset()" alt="Rainbow Palette" width="200" />
+      <span
+        class="whitespace-nowrap font-semibold rounded-full bg-neutral-300 border border-neutral-400 shadow-sm px-1.5 py-0.5 text-xs text-neutral-800 dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none dark:text-neutral-200"
+      >
+        {{ version }}
+      </span>
     </div>
 
     <p

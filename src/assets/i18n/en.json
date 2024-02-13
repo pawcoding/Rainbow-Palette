@@ -16,6 +16,24 @@
         "title": "Generation"
       },
       "title": "How it works"
+    },
+    "support": {
+      "development": {
+        "description": "Unfortunately, at the moment I don't have much time to actively improve the tool myself. Nevertheless, I monitor the activities of the {{ github }} repository on the side. So if you have any ideas on how the tool could be expanded, want to implement new interfaces yourself or can improve my algorithms, feel free to contact me on my {{ discord }}.",
+        "title": "Development"
+      },
+      "roadmap": {
+        "description": "Even though I can't develop the tool myself at the moment, I have a few features planned. These include:",
+        "issue": {
+          "15": "Adjust colors in different formats (RGB, HSV)",
+          "17": "Exemplary web components to preview palette",
+          "18": "Provide prefabricated palettes",
+          "19": "Generate color palette from images",
+          "22": "Localization for different regions"
+        },
+        "title": "Roadmap"
+      },
+      "title": "Additional information & support"
     }
   },
   "layout": {

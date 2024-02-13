@@ -1,0 +1,80 @@
+<section
+  class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+>
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="text-3xl font-bold sm:text-4xl">
+      {{ "home.support.title" | translate }}
+    </h2>
+  </div>
+
+  <div class="max-w-2xl p-4 mx-auto space-y-4">
+    <details
+      class="group rounded-lg p-6 [&_summary::-webkit-details-marker]:hidden bg-neutral-100 border border-neutral-200 shadow-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    >
+      <summary class="flex cursor-pointer items-center justify-between gap-1.5">
+        <h3 class="text-xl font-semibold">
+          {{ "home.support.development.title" | translate }}
+        </h3>
+
+        <span class="size-5 shrink-0">
+          <ng-icon
+            [svg]="heroPlus"
+            class="inset-0 transition group-open:rotate-45"
+            size="1.25rem"
+          />
+        </span>
+      </summary>
+
+      <p
+        class="mt-4 leading-relaxed text-justify text-neutral-700 dark:text-neutral-300"
+        [innerHTML]="
+          'home.support.development.description'
+            | translate : { github: githubLink, discord: discordLink }
+        "
+      ></p>
+    </details>
+
+    <details
+      class="group rounded-lg p-6 [&_summary::-webkit-details-marker]:hidden bg-neutral-100 border border-neutral-200 shadow-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    >
+      <summary class="flex cursor-pointer items-center justify-between gap-1.5">
+        <h3 class="text-xl font-semibold">
+          {{ "home.support.roadmap.title" | translate }}
+        </h3>
+
+        <span class="size-5 shrink-0">
+          <ng-icon
+            [svg]="heroPlus"
+            class="inset-0 transition group-open:rotate-45"
+            size="1.25rem"
+          />
+        </span>
+      </summary>
+
+      <p
+        class="mt-4 leading-relaxed text-justify text-neutral-700 dark:text-neutral-300"
+      >
+        {{ "home.support.roadmap.description" | translate }}
+      </p>
+
+      <div class="mt-2 leading-relaxed text-neutral-700 dark:text-neutral-300">
+        <ul class="list-disc list-inside ps-2">
+          @for (issue of roadmapFeatures; track issue) {
+          <li>
+            {{ "home.support.roadmap.issue." + issue | translate }}
+            (<a
+              [href]="
+                'https://github.com/pawcoding/Rainbow-Palette/issues/' + issue
+              "
+              rel="noreferrer"
+              target="_blank"
+              class="underline transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+              >#{{ issue }}</a
+            >)
+          </li>
+          }
+        </ul>
+      </div>
+    </details>
+  </div>
+</section>
