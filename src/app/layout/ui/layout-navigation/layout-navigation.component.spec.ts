@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
 import {
   heroHomeSolid,
   heroQuestionMarkCircleSolid,
@@ -23,25 +22,19 @@ describe('LayoutNavigationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LayoutNavigationComponent, TranslateModule.forRoot()],
-      providers: [
-        provideRouter([{ path: '', component: DummyComponent }]),
-        provideIcons({
-          heroHomeSolid,
-          heroQuestionMarkCircleSolid,
-        }),
-      ],
+      providers: [provideRouter([{ path: '', component: DummyComponent }])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutNavigationComponent);
     component = fixture.componentInstance;
     //@ts-ignore
     component.navigationEntries = signal<Array<NavigationEntry>>([
-      { path: '/', title: 'Home', description: 'Home', icon: 'heroHomeSolid' },
+      { path: '/', title: 'Home', description: 'Home', icon: heroHomeSolid },
       {
         path: '/test',
         title: 'Test',
         description: 'Test',
-        icon: 'heroQuestionMarkCircleSolid',
+        icon: heroQuestionMarkCircleSolid,
       },
     ]);
     fixture.detectChanges();

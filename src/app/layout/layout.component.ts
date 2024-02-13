@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
 import {
   heroAdjustmentsHorizontalSolid,
   heroRectangleGroupSolid,
@@ -29,13 +28,6 @@ import { LayoutOptionsComponent } from './ui/layout-options/layout-options.compo
     LayoutFooterComponent,
     RouterOutlet,
   ],
-  providers: [
-    provideIcons({
-      heroSwatchSolid,
-      heroAdjustmentsHorizontalSolid,
-      heroRectangleGroupSolid,
-    }),
-  ],
   templateUrl: './layout.component.html',
 })
 export class LayoutComponent {
@@ -47,19 +39,19 @@ export class LayoutComponent {
     {
       title: 'layout.navigation.generate.title',
       path: '/',
-      icon: 'heroSwatchSolid',
+      icon: heroSwatchSolid,
       description: 'layout.navigation.generate.description',
     },
     {
       title: 'layout.navigation.edit.title',
       path: '/edit',
-      icon: 'heroAdjustmentsHorizontalSolid',
+      icon: heroAdjustmentsHorizontalSolid,
       description: 'layout.navigation.edit.description',
     },
     {
       title: 'layout.navigation.preview.title',
       path: '/preview',
-      icon: 'heroRectangleGroupSolid',
+      icon: heroRectangleGroupSolid,
       description: 'layout.navigation.preview.description',
     },
   ];

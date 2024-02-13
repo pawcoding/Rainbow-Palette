@@ -1,5 +1,3 @@
-import { IconType } from '@ng-icons/core';
-
 /**
  * A navigation entry for the layout navigation.
  */
@@ -17,9 +15,9 @@ export interface NavigationEntry {
 
   /**
    * The icon to display next to the title.
-   * This has to be an icon from an `@ng-icons` integration.
+   * This has to be an icon from an `@ng-icons` integration or a custom SVG.
    */
-  icon: IconType;
+  icon: string;
 
   /**
    * The description of the navigation entry.

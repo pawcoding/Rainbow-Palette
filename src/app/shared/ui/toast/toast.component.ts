@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Component, computed, inject } from '@angular/core';
-import { NgIconComponent, provideIcons } from '@ng-icons/core';
+import { NgIconComponent } from '@ng-icons/core';
 import { heroXMarkMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import { ToastService } from '../../data-access/toast.service';
@@ -10,14 +10,11 @@ import { ToastService } from '../../data-access/toast.service';
   standalone: true,
   imports: [OverlayModule, TranslateModule, NgIconComponent],
   templateUrl: './toast.component.html',
-  providers: [
-    provideIcons({
-      heroXMarkMini,
-    }),
-  ],
 })
 export class ToastComponent {
   private readonly _toastService = inject(ToastService);
+
+  protected readonly heroXMarkMini = heroXMarkMini;
 
   protected readonly toast = this._toastService.toast;
 
