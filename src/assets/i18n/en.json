@@ -1,4 +1,23 @@
 {
+  "home": {
+    "manual": {
+      "cta": "<b>That's it!</b></br>It's that easy to create your very own color palette.",
+      "description": "You can create your very own color palette in just 3 simple steps.",
+      "download": {
+        "description": "When you're finished you can export your personal palette in the format of your choice. So far this site supports both CSS variables and TailwindCSS. In addition, with each format you have the choice between the pure code or a file that you can easily integrate into your existing project.",
+        "title": "Export"
+      },
+      "edit": {
+        "description": "After the algorithm has finished the generation, editing begins. Now you can view your palette and adjust the colors using the \"tune\" icon. If you just want to try it out and complete the palette later, your progress can be saved locally in your browser for later.",
+        "title": "Editing"
+      },
+      "generate": {
+        "description": "Just pick your favorite color or enter your brand color and hit \"generate\". If you want, you can optionally select a specific color scheme, otherwise you will get a rainbow color scheme. The algorithm then starts to add more colors to match yours and generates 10 different shades for each one.",
+        "title": "Generation"
+      },
+      "title": "How it works"
+    }
+  },
   "layout": {
     "footer": {
       "analytics": "Analytics",

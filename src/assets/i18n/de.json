@@ -1,4 +1,23 @@
 {
+  "home": {
+    "manual": {
+      "cta": "<b>Das war's!</b><br>So einfach kannst du deine ganz eigene Farbpalette erstellen.",
+      "description": "Du kannst deine ganz eigene Farbpalette in nur 3 einfachen Schritten erstellen.",
+      "download": {
+        "description": "Wenn du fertig bist, kannst du deine persönliche Palette in einem Format deiner Wahl exportieren. Bislang unterstützt diese Seite sowohl CSS-Variablen als auch TailwindCSS. Außerdem hast du bei jedem Format die Wahl zwischen dem reinen Code oder einer Datei, die du leicht in dein bestehendes Projekt integrieren kannst.",
+        "title": "Exportieren"
+      },
+      "edit": {
+        "description": "Nachdem der Algorithmus die Erstellung abgeschlossen hat, beginnt die Bearbeitung. Jetzt kannst du deine Palette anschauen und die Farben mit dem \"Tune\"-Symbol anpassen. Wenn du das Ganze erstmal nur ausprobieren und die Palette später vervollständigen möchtest, kannst du deinen Fortschritt lokal im Browser für später speichern.",
+        "title": "Bearbeiten"
+      },
+      "generate": {
+        "description": "Wähle einfach eine Farbe aus und klicke auf \"Palette generieren\". Wenn du willst, kannst du optional ein spezielles Farbschema auswählen, ansonsten wird dir eine zufällige Palette generiert. Der Algorithmus beginnt dann, weitere Farben hinzuzufügen, die zu deiner Farbe passen, und erzeugt für jede Farbe 10 verschiedene Schattierungen.",
+        "title": "Generieren"
+      },
+      "title": "Wie funktioniert's?"
+    }
+  },
   "layout": {
     "footer": {
       "analytics": "Analytics",

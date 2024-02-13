@@ -1,0 +1,78 @@
+<section
+  class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+>
+  <div class="max-w-lg mx-auto text-center">
+    <h2 class="text-3xl font-bold sm:text-4xl">
+      {{ "home.manual.title" | translate }}
+    </h2>
+
+    <p class="mt-4 text-neutral-700 dark:text-neutral-400">
+      {{ "home.manual.description" | translate }}
+    </p>
+  </div>
+
+  <div
+    class="grid grid-cols-1 gap-4 mt-8 lg:gap-8 md:grid-cols-2 lg:grid-cols-3"
+  >
+    <article
+      class="block p-6 bg-gray-100 border border-gray-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    >
+      <ng-icon
+        [svg]="heroSwatch"
+        size="2.5rem"
+        class="text-blue-900 dark:text-blue-500"
+      />
+
+      <h3 class="mt-4 text-xl font-bold">
+        {{ "home.manual.generate.title" | translate }}
+      </h3>
+
+      <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+        {{ "home.manual.generate.description" | translate }}
+      </p>
+    </article>
+
+    <article
+      class="block p-6 bg-gray-100 border border-gray-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    >
+      <ng-icon
+        [svg]="heroAdjustmentsHorizontal"
+        size="2.5rem"
+        class="text-blue-900 dark:text-blue-500"
+      />
+
+      <h3 class="mt-4 text-xl font-bold">
+        {{ "home.manual.edit.title" | translate }}
+      </h3>
+
+      <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+        {{ "home.manual.edit.description" | translate }}
+      </p>
+    </article>
+
+    <article
+      class="block p-6 bg-gray-100 border border-gray-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    >
+      <ng-icon
+        [svg]="heroArchiveBoxArrowDown"
+        size="2.5rem"
+        class="text-blue-900 dark:text-blue-500"
+      />
+
+      <h3 class="mt-4 text-xl font-bold">
+        {{ "home.manual.download.title" | translate }}
+      </h3>
+
+      <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">
+        {{ "home.manual.download.description" | translate }}
+      </p>
+    </article>
+  </div>
+
+  <div class="mt-12 text-center">
+    <p
+      class="mt-4 text-neutral-700 dark:text-neutral-400"
+      [innerHTML]="'home.manual.cta' | translate"
+    ></p>
+  </div>
+</section>

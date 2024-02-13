@@ -9,7 +9,7 @@ class DummyComponent {}
 export const routes: Routes = [
   {
     path: '',
-    component: DummyComponent,
+    loadComponent: () => import('./home/home.component')
   },
   {
     path: 'edit',
