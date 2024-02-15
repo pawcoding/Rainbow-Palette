@@ -32,7 +32,7 @@ export class DropdownMenuComponent<T> {
   public readonly items = input.required<Array<T>>();
   public readonly title = input<string | undefined>();
 
-  public itemTemplate =
+  public readonly itemTemplate =
     contentChild.required<TemplateRef<{ item: T }>>('itemTemplate');
 
   public readonly selectedItem = model<T | undefined>(undefined);

@@ -1,0 +1,32 @@
+<details
+  #detailsElement
+  class="group cursor-pointer rounded-lg p-6 [&_summary::-webkit-details-marker]:hidden bg-neutral-100 border border-neutral-200 shadow-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+  (click)="toggleAccordion($event)"
+>
+  <summary #summaryElement class="flex items-center justify-between gap-1.5">
+    <h3 class="text-xl font-semibold">
+      {{ summary() | translate }}
+    </h3>
+
+    <span class="size-5 shrink-0">
+      <ng-icon
+        [svg]="heroPlus"
+        class="inset-0 transition group-open:rotate-45"
+        size="1.25rem"
+      />
+    </span>
+  </summary>
+
+  @if (details()) {
+  <div
+    #contentElement
+    class="mt-4 leading-relaxed text-justify text-neutral-700 dark:text-neutral-300"
+  >
+    <p [innerHTML]="details()"></p>
+  </div>
+  } @else {
+  <div #contentElement class="mt-4 text-neutral-700 dark:text-neutral-300">
+    <ng-content />
+  </div>
+  }
+</details>

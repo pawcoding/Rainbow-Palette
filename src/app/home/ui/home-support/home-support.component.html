@@ -8,56 +8,20 @@
   </div>
 
   <div class="max-w-2xl p-4 mx-auto space-y-4">
-    <details
-      class="group rounded-lg p-6 [&_summary::-webkit-details-marker]:hidden bg-neutral-100 border border-neutral-200 shadow-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
-    >
-      <summary class="flex cursor-pointer items-center justify-between gap-1.5">
-        <h3 class="text-xl font-semibold">
-          {{ "home.support.development.title" | translate }}
-        </h3>
+    <rp-accordion
+      [details]="
+        'home.support.development.description'
+          | translate : { github: githubLink, discord: discordLink }
+      "
+      summary="home.support.development.title"
+    />
 
-        <span class="size-5 shrink-0">
-          <ng-icon
-            [svg]="heroPlus"
-            class="inset-0 transition group-open:rotate-45"
-            size="1.25rem"
-          />
-        </span>
-      </summary>
-
-      <p
-        class="mt-4 leading-relaxed text-justify text-neutral-700 dark:text-neutral-300"
-        [innerHTML]="
-          'home.support.development.description'
-            | translate : { github: githubLink, discord: discordLink }
-        "
-      ></p>
-    </details>
-
-    <details
-      class="group rounded-lg p-6 [&_summary::-webkit-details-marker]:hidden bg-neutral-100 border border-neutral-200 shadow-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
-    >
-      <summary class="flex cursor-pointer items-center justify-between gap-1.5">
-        <h3 class="text-xl font-semibold">
-          {{ "home.support.roadmap.title" | translate }}
-        </h3>
-
-        <span class="size-5 shrink-0">
-          <ng-icon
-            [svg]="heroPlus"
-            class="inset-0 transition group-open:rotate-45"
-            size="1.25rem"
-          />
-        </span>
-      </summary>
-
-      <p
-        class="mt-4 leading-relaxed text-justify text-neutral-700 dark:text-neutral-300"
-      >
+    <rp-accordion summary="home.support.roadmap.title">
+      <p class="leading-relaxed text-justify">
         {{ "home.support.roadmap.description" | translate }}
       </p>
 
-      <div class="mt-2 leading-relaxed text-neutral-700 dark:text-neutral-300">
+      <div class="mt-2 leading-relaxed">
         <ul class="list-disc list-inside ps-2">
           @for (issue of roadmapFeatures; track issue) {
           <li>
@@ -75,6 +39,6 @@
           }
         </ul>
       </div>
-    </details>
+    </rp-accordion>
   </div>
 </section>

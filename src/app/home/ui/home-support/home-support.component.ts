@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroChevronDown, heroPlus } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
+import { AccordionComponent } from '../../../shared/ui/accordion/accordion.component';
 
 @Component({
   selector: 'rp-home-support',
   standalone: true,
-  imports: [TranslateModule, NgIconComponent],
+  imports: [TranslateModule, NgIconComponent, AccordionComponent],
   templateUrl: './home-support.component.html',
 })
 export class HomeSupportComponent {
