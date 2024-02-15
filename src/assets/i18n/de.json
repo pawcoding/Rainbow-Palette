@@ -1,5 +1,12 @@
 {
   "home": {
+    "generator": {
+      "color": "Wähle eine Farbe",
+      "description": "Gebe einen Hex-Code ein oder wähle eine Farbe, um loszulegen.",
+      "generate": "Palette generieren",
+      "scheme": "Wähle ein Farbschema",
+      "title": "Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe. "
+    },
     "manual": {
       "cta": "<b>Das war's!</b><br>So einfach kannst du deine ganz eigene Farbpalette erstellen.",
       "description": "Du kannst deine ganz eigene Farbpalette in nur 3 einfachen Schritten erstellen.",

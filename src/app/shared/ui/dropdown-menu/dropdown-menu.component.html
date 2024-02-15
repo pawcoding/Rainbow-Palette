@@ -1,11 +1,17 @@
-<div [cdkMenuTriggerFor]="menu" [cdkMenuPosition]="menuPositions">
+<div
+  [cdkMenuTriggerFor]="disabled() ? undefined : menu"
+  [cdkMenuPosition]="menuPositions"
+  [class]="!disabled() ? 'cursor-pointer' : 'cursor-default'"
+>
   <ng-content />
 </div>
 
 <ng-template #menu>
   <div
     cdkMenu
-    class="inline-flex flex-col w-full max-w-screen-sm gap-1 p-2 border rounded shadow-md bg-neutral-100 border-neutral-200 min-w-48 dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    class="inline-flex flex-col w-full gap-1 p-2 border rounded shadow-md bg-neutral-100 border-neutral-200 dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    [style.minWidth]="minWidth()"
+    [style.maxWidth]="maxWidth()"
   >
     @if (title()) {
     <section>
@@ -17,20 +23,31 @@
     </section>
     }
 
-    <section cdkMenuGroup class="overflow-auto max-h-64">
+    <section
+      #menuGroup
+      cdkMenuGroup
+      class="overflow-auto"
+      [style.minHeight]="minHeight()"
+      [style.maxHeight]="maxHeight()"
+    >
       @for (item of items(); track $index) {
 
       <button
         class="flex items-center justify-start w-full gap-2 p-2 transition-all duration-200 ease-in-out rounded-sm hover:shadow-sm hover:bg-neutral-200 dark:hover:shadow-none dark:hover:bg-neutral-600"
         cdkMenuItemRadio
+        [cdkMenuItemChecked]="selectedItem() === item"
         (cdkMenuItemTriggered)="select(item)"
       >
         <ng-container
-          [ngTemplateOutlet]="itemTemplate()"
+          [ngTemplateOutlet]="itemTemplate() ?? stringTemplate"
           [ngTemplateOutletContext]="{ item: item }"
         />
       </button>
       }
     </section>
   </div>
+</ng-template>
+
+<ng-template #stringTemplate let-item="item">
+  {{ item | translate }}
 </ng-template>

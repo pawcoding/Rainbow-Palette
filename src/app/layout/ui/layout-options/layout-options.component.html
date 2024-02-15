@@ -2,6 +2,7 @@
   <rp-dropdown-menu
     [items]="languageOptions"
     title="layout.options.language"
+    closeOnScroll="false"
     (selectedItemChange)="changeLanguage($event.value)"
   >
     <button
@@ -38,6 +39,7 @@
   <rp-dropdown-menu
     [items]="themeOptions"
     title="layout.options.theme"
+    closeOnScroll="false"
     (selectedItemChange)="changeTheme($event.value)"
   >
     <button

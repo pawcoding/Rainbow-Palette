@@ -1,0 +1,85 @@
+<section
+  class="px-4 py-8 flex-col sm:px-6 sm:py-12 lg:px-8 lg:py-16 min-h-[60svh] flex items-center justify-center"
+>
+  <div class="max-w-lg mx-auto text-center">
+    <h2 class="text-2xl font-bold md:text-3xl">
+      {{ "home.generator.title" | translate }}
+    </h2>
+
+    <p class="mt-4 text-neutral-700 dark:text-neutral-400">
+      {{ "home.generator.description" | translate }}
+    </p>
+  </div>
+
+  <div class="w-full mx-auto mt-8 max-w-80">
+    <div>
+      <span
+        class="flex overflow-hidden border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-neutral-600"
+      >
+        <label for="color">
+          <span
+            [style.backgroundColor]="color()"
+            class="block w-10 h-full cursor-pointer"
+          ></span>
+
+          <span class="sr-only">
+            {{ "home.generator.color" | translate }}
+          </span>
+        </label>
+
+        <input
+          #colorInput
+          type="color"
+          id="color"
+          class="hidden"
+          [value]="color()"
+          (input)="setColor(colorInput.value, $event)"
+        />
+
+        <input
+          #hexInput
+          type="text"
+          class="w-full min-w-0 px-4 py-2 border-none focus:ring-0 focus:outline-none grow bg-neutral-100 dark:bg-neutral-600"
+          [value]="color()"
+          [placeholder]="'home.generator.color' | translate"
+          (input)="setColor(hexInput.value, $event)"
+        />
+      </span>
+    </div>
+
+    <span
+      class="flex mt-2 overflow-hidden font-semibold rounded-md text-neutral-50"
+      [class]="
+        isValid()
+          ? 'bg-blue-500 dark:bg-blue-600'
+          : 'bg-neutral-400 dark:bg-neutral-700'
+      "
+    >
+      <button
+        class="px-4 py-2 grow"
+        [class]="isValid() ? 'cursor-pointer' : 'cursor-default'"
+        [disabled]="!isValid()"
+      >
+        {{ "home.generator.generate" | translate }}
+      </button>
+
+      <rp-dropdown-menu
+        [items]="schemeOptions"
+        title="home.generator.scheme"
+        minWidth="20rem"
+        [disabled]="!isValid()"
+      >
+        <button class="flex items-center justify-center p-2">
+          <ng-icon [svg]="heroChevronDownMini" size="1.75rem" />
+          <span class="sr-only">
+            {{ "home.generator.scheme" | translate }}
+          </span>
+        </button>
+
+        <ng-template #itemTemplate let-scheme="item">
+          {{ scheme.label | translate }}
+        </ng-template>
+      </rp-dropdown-menu>
+    </span>
+  </div>
+</section>

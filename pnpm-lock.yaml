@@ -9,7 +9,7 @@ dependencies:
     specifier: ^17.2.1
     version: 17.2.1(@angular/core@17.2.1)
   '@angular/cdk':
-    specifier: 17.1.2
+    specifier: ^17.1.2
     version: 17.1.2(@angular/common@17.2.1)(@angular/core@17.2.1)(rxjs@7.8.1)
   '@angular/common':
     specifier: ^17.2.1
