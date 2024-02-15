@@ -8,11 +8,10 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
   Component,
-  ContentChild,
-  EventEmitter,
-  Output,
   TemplateRef,
+  contentChild,
   input,
+  model,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -33,11 +32,10 @@ export class DropdownMenuComponent<T> {
   public readonly items = input.required<Array<T>>();
   public readonly title = input<string | undefined>();
 
-  @ContentChild('itemTemplate')
-  public itemTemplate!: TemplateRef<unknown>;
+  public itemTemplate =
+    contentChild.required<TemplateRef<{ item: T }>>('itemTemplate');
 
-  @Output()
-  public readonly selectItem = new EventEmitter<T>();
+  public readonly selectedItem = model<T | undefined>(undefined);
 
   protected readonly menuPositions: Array<ConnectedPosition> = [
     {
@@ -69,4 +67,8 @@ export class DropdownMenuComponent<T> {
       offsetY: -8,
     },
   ];
+
+  protected select(item: T): void {
+    this.selectedItem.set(item);
+  }
 }

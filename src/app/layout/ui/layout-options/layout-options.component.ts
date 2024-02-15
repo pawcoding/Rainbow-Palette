@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  computed,
-  input,
-} from '@angular/core';
+import { Component, computed, model } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroMoonSolid, heroSunSolid } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,13 +21,8 @@ import { Theme, ThemeOption } from '../../types/theme';
   ],
 })
 export class LayoutOptionsComponent {
-  public readonly language = input.required<Language>();
-  public readonly theme = input.required<Theme>();
-
-  @Output()
-  protected readonly languageChange = new EventEmitter<Language>();
-  @Output()
-  protected readonly themeChange = new EventEmitter<Theme>();
+  public readonly language = model.required<Language>();
+  public readonly theme = model.required<Theme>();
 
   protected readonly currentLanguage = computed<LanguageOption>(() => {
     return (
@@ -58,10 +47,10 @@ export class LayoutOptionsComponent {
   }
 
   protected changeLanguage(language: Language): void {
-    this.languageChange.emit(language);
+    this.language.set(language);
   }
 
   protected changeTheme(theme: Theme): void {
-    this.themeChange.emit(theme);
+    this.theme.set(theme);
   }
 }

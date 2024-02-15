@@ -2,7 +2,7 @@
   <rp-dropdown-menu
     [items]="languageOptions"
     title="layout.options.language"
-    (selectItem)="changeLanguage($event.value)"
+    (selectedItemChange)="changeLanguage($event.value)"
   >
     <button
       class="flex items-center justify-center overflow-hidden rounded-full shadow-sm h-9 w-9 dark:shadow-none"
@@ -38,7 +38,7 @@
   <rp-dropdown-menu
     [items]="themeOptions"
     title="layout.options.theme"
-    (selectItem)="changeTheme($event.value)"
+    (selectedItemChange)="changeTheme($event.value)"
   >
     <button
       class="flex items-center justify-center overflow-hidden rounded-full shadow-sm bg-neutral-200 h-9 w-9 dark:bg-neutral-700 dark:shadow-none"

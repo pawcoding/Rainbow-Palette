@@ -23,10 +23,10 @@
       <button
         class="flex items-center justify-start w-full gap-2 p-2 transition-all duration-200 ease-in-out rounded-sm hover:shadow-sm hover:bg-neutral-200 dark:hover:shadow-none dark:hover:bg-neutral-600"
         cdkMenuItemRadio
-        (cdkMenuItemTriggered)="selectItem.emit(item)"
+        (cdkMenuItemTriggered)="select(item)"
       >
         <ng-container
-          [ngTemplateOutlet]="itemTemplate"
+          [ngTemplateOutlet]="itemTemplate()"
           [ngTemplateOutletContext]="{ item: item }"
         />
       </button>
