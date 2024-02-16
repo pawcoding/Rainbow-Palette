@@ -1,6 +1,6 @@
 {
   "name": "rainbow-palette",
-  "version": "2.0.0",
+  "version": "2.0.0-alpha",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -24,6 +24,7 @@
     "@ng-icons/simple-icons": "^26.5.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "colortranslator": "^4.1.0",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.2",
     "zone.js": "~0.14.4"

@@ -9,11 +9,12 @@ class DummyComponent {}
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./home/home.component')
+    loadComponent: () => import('./home/home.component'),
   },
   {
     path: 'edit',
     component: DummyComponent,
+    // loadComponent: () => import('./editor/editor.component'),
   },
   {
     path: 'preview',
