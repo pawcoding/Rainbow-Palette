@@ -9,6 +9,10 @@ export class MobileService {
   private readonly _resize: Signal<Event | undefined>;
   private readonly _isMobile = signal(false);
 
+  public get resize(): Signal<Event | undefined> {
+    return this._resize;
+  }
+
   public get isMobile(): Signal<boolean> {
     return this._isMobile.asReadonly();
   }
@@ -19,15 +23,12 @@ export class MobileService {
 
     effect(
       () => {
-        if (!this._resize) {
+        // Reference resize signal to trigger computation on window resize
+        if (!this._resize()) {
           return;
         }
 
-        if (this._resize()?.target) {
-          const target = this._resize()?.target as Window;
-
-          this._isMobile.set(target.innerWidth < 640);
-        }
+        this._isMobile.set(window.innerWidth < 640);
       },
       {
         allowSignalWrites: true,

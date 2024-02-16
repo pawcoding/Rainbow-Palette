@@ -1,7 +1,8 @@
-<div
-  class="w-full h-[100dvh] grid grid-rows-[auto_1fr] sm:grid-rows-[auto_1fr_auto]"
->
-  <header class="flex items-center justify-between w-full gap-2 p-4">
+<div class="w-full">
+  <header
+    #header
+    class="fixed flex items-center justify-between w-full gap-2 p-4 bg-neutral-50 dark:bg-neutral-900"
+  >
     <h1>
       <span class="sr-only">Rainbow Palette</span>
       <img [src]="logoAsset()" alt="Rainbow Palette" width="200" />
@@ -19,7 +20,12 @@
     />
   </header>
 
-  <main class="flex flex-col items-center justify-between w-full overflow-auto">
+  @if (initialized()) {
+  <main
+    class="flex flex-col items-center justify-between w-full"
+    [style.paddingTop]="headerHeight()"
+    [style.paddingBottom]="footerHeight()"
+  >
     <div>
       <router-outlet />
     </div>
@@ -28,9 +34,8 @@
       <rp-layout-footer [logoAsset]="logoAsset()" />
     </footer>
   </main>
-
-  @if (isMobile()) {
-  <div>
+  } @if (isMobile()) {
+  <div #footer class="fixed bottom-0 w-full bg-neutral-50 dark:bg-neutral-900">
     <ng-container *ngTemplateOutlet="navigationTemplate" />
   </div>
   }
