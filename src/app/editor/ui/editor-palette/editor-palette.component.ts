@@ -1,13 +1,11 @@
 import { Component, model } from '@angular/core';
-import { ColorComponent } from '../color/color.component';
 import { Palette } from '../../../shared/model/palette.model';
 
 @Component({
-  selector: 'rp-palette',
+  selector: 'rp-editor-palette',
   standalone: true,
-  imports: [ColorComponent],
-  templateUrl: './palette.component.html',
+  templateUrl: './editor-palette.component.html',
 })
-export class PaletteComponent {
+export class EditorPaletteComponent {
   public readonly palette = model.required<Palette>();
 }

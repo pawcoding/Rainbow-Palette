@@ -8,6 +8,7 @@ import { ConnectedPosition } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  ElementRef,
   TemplateRef,
   booleanAttribute,
   contentChild,
@@ -17,7 +18,6 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
@@ -58,9 +58,7 @@ export class DropdownMenuComponent<T> {
 
   // View Child Signals
   private readonly _trigger = viewChild(CdkMenuTrigger);
-  private readonly _menu = viewChild<{ nativeElement: HTMLElement }>(
-    'menuGroup'
-  );
+  private readonly _menu = viewChild<ElementRef<HTMLElement>>('menuGroup');
 
   // Internal Signals and Properties
   private readonly _isOpen = signal(false);

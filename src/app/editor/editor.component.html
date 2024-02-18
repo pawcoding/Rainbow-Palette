@@ -1,1 +1,7 @@
-<rp-palette [(palette)]="palette" />
+@if (palette()) {
+<rp-editor-palette [palette]="palette()!" />
+
+<button (click)="openColorEditor(palette()!.colors[0])">
+  Open Color Editor
+</button>
+}

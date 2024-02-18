@@ -18,7 +18,7 @@ describe('LayoutFooterComponent', () => {
 
     fixture = TestBed.createComponent(LayoutFooterComponent);
     component = fixture.componentInstance;
-    //@ts-ignore
+    //@ts-expect-error
     component.logoAsset = signal(logoAsset);
     fixture.detectChanges();
   });

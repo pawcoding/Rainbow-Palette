@@ -13,8 +13,8 @@ export const routes: Routes = [
   },
   {
     path: 'edit',
-    component: DummyComponent,
-    // loadComponent: () => import('./editor/editor.component'),
+    // component: DummyComponent,
+    loadComponent: () => import('./editor/editor.component'),
   },
   {
     path: 'preview',

@@ -1,0 +1,42 @@
+<div>
+  <span
+    class="flex overflow-hidden border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-neutral-600"
+  >
+    <label for="color">
+      <div
+        [class]="isColorLight() ? 'text-neutral-900' : 'text-neutral-100'"
+        [style.backgroundColor]="hex()"
+        class="flex items-center justify-center w-10 h-full cursor-pointer"
+      >
+        <ng-icon
+          [svg]="heroEyeDropperMini"
+          size="1.3rem"
+          strokeWidth="0.2rem"
+        />
+      </div>
+
+      <span class="sr-only">
+        {{ placeholder() | translate }}
+      </span>
+    </label>
+
+    <input
+      #colorInput
+      type="color"
+      id="color"
+      class="hidden"
+      [value]="hex()"
+      (input)="updateHex(colorInput.value)"
+      (change)="updateHex(colorInput.value)"
+    />
+
+    <input
+      #hexInput
+      type="text"
+      class="w-full min-w-0 px-4 py-2 font-semibold border-none focus:ring-0 focus:outline-none grow bg-neutral-100 dark:bg-neutral-600"
+      [value]="hex()"
+      [placeholder]="placeholder() | translate"
+      (input)="updateHex(hexInput.value)"
+    />
+  </span>
+</div>

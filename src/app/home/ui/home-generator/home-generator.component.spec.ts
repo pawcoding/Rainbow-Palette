@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { HomeGeneratorComponent } from './home-generator.component';
 
 describe('HomeGeneratorComponent', () => {
@@ -8,10 +8,10 @@ describe('HomeGeneratorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeGeneratorComponent]
+      imports: [HomeGeneratorComponent, TranslateModule.forRoot()]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(HomeGeneratorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

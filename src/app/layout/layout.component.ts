@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  ElementRef,
   computed,
   inject,
   signal,
@@ -43,12 +44,9 @@ export class LayoutComponent implements AfterViewInit {
   private readonly _languageService = inject(LanguageService);
   private readonly _themeService = inject(ThemeService);
 
-  private readonly _header = viewChild.required<{ nativeElement: HTMLElement }>(
-    'header'
-  );
-  private readonly _footer = viewChild<{ nativeElement: HTMLElement }>(
-    'footer'
-  );
+  private readonly _header =
+    viewChild.required<ElementRef<HTMLElement>>('header');
+  private readonly _footer = viewChild<ElementRef<HTMLElement>>('footer');
 
   protected readonly navigationEntries: Array<NavigationEntry> = [
     {

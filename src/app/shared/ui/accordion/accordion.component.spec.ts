@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { AccordionComponent } from './accordion.component';
+import { signal } from '@angular/core';
 
 describe('AccordionComponent', () => {
   let component: AccordionComponent;
@@ -8,12 +9,15 @@ describe('AccordionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AccordionComponent]
-    })
-    .compileComponents();
-    
+      imports: [AccordionComponent, TranslateModule.forRoot()],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(AccordionComponent);
     component = fixture.componentInstance;
+
+    // @ts-expect-error
+    component.summary = signal('Summary');
+
     fixture.detectChanges();
   });
 

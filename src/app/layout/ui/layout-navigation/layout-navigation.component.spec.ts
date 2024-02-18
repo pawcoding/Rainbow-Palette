@@ -27,7 +27,7 @@ describe('LayoutNavigationComponent', () => {
 
     fixture = TestBed.createComponent(LayoutNavigationComponent);
     component = fixture.componentInstance;
-    //@ts-ignore
+    //@ts-expect-error
     component.navigationEntries = signal<Array<NavigationEntry>>([
       { path: '/', title: 'Home', description: 'Home', icon: heroHomeSolid },
       {

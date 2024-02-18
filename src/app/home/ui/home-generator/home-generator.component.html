@@ -12,40 +12,11 @@
   </div>
 
   <div class="w-full mx-auto mt-8 max-w-80">
-    <div>
-      <span
-        class="flex overflow-hidden border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-neutral-600"
-      >
-        <label for="color">
-          <span
-            [style.backgroundColor]="color()"
-            class="block w-10 h-full cursor-pointer"
-          ></span>
-
-          <span class="sr-only">
-            {{ "home.generator.color" | translate }}
-          </span>
-        </label>
-
-        <input
-          #colorInput
-          type="color"
-          id="color"
-          class="hidden"
-          [value]="color()"
-          (input)="setColor(colorInput.value, $event)"
-        />
-
-        <input
-          #hexInput
-          type="text"
-          class="w-full min-w-0 px-4 py-2 border-none focus:ring-0 focus:outline-none grow bg-neutral-100 dark:bg-neutral-600"
-          [value]="color()"
-          [placeholder]="'home.generator.color' | translate"
-          (input)="setColor(hexInput.value, $event)"
-        />
-      </span>
-    </div>
+    <rp-color-input
+      [(hex)]="hex"
+      [(isValid)]="isValid"
+      placeholder="home.generator.color"
+    />
 
     <span
       class="flex mt-2 overflow-hidden font-semibold rounded-md text-neutral-50"
@@ -59,6 +30,7 @@
         class="px-4 py-2 grow"
         [class]="isValid() ? 'cursor-pointer' : 'cursor-default'"
         [disabled]="!isValid()"
+        (click)="generatePalette()"
       >
         {{ "home.generator.generate" | translate }}
       </button>

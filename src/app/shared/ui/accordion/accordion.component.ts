@@ -1,4 +1,4 @@
-import { Component, input, viewChild } from '@angular/core';
+import { Component, ElementRef, input, viewChild } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroPlus } from '@ng-icons/heroicons/outline';
@@ -17,21 +17,23 @@ export class AccordionComponent {
 
   protected readonly heroPlus = heroPlus;
 
-  private readonly _details = viewChild.required<{
-    nativeElement: HTMLDetailsElement;
-  }>('detailsElement');
-  private readonly _summary = viewChild.required<{
-    nativeElement: HTMLElement;
-  }>('summaryElement');
-  private readonly _content = viewChild.required<{
-    nativeElement: HTMLDivElement;
-  }>('contentElement');
+  private readonly _details =
+    viewChild.required<ElementRef<HTMLDetailsElement>>('detailsElement');
+  private readonly _summary =
+    viewChild.required<ElementRef<HTMLElement>>('summaryElement');
+  private readonly _content =
+    viewChild.required<ElementRef<HTMLDivElement>>('contentElement');
 
   private _animation?: Animation;
   private _isClosing = false;
   private _isExpanding = false;
 
   public toggleAccordion($event: MouseEvent) {
+    const htmlElement = $event.target as HTMLElement | null;
+    if (htmlElement?.tagName === 'A') {
+      return;
+    }
+
     $event.preventDefault();
 
     this._details().nativeElement.style.overflow = 'hidden';

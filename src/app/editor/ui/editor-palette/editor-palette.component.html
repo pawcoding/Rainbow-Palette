@@ -1,6 +1,7 @@
+@for (color of palette().colors; track $index) {
 <section class="w-full">
   <div class="grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 sm:gap-2">
-    @for (shade of color().shades; track shade.index) {
+    @for (shade of color.shades; track shade.index) {
     <button
       [class.rounded-l]="$first"
       [class.rounded-r]="$last"
@@ -20,3 +21,4 @@
     }
   </div>
 </section>
+}

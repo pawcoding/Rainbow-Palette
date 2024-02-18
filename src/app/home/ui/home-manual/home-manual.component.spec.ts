@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { HomeManualComponent } from './home-manual.component';
 
 describe('HomeManualComponent', () => {
@@ -8,10 +8,10 @@ describe('HomeManualComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeManualComponent]
+      imports: [HomeManualComponent, TranslateModule.forRoot()]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(HomeManualComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
