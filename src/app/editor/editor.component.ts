@@ -1,8 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
-import { ColorService } from '../shared/data-access/color.service';
+import { PaletteScheme } from '../shared/constants/palette-scheme';
 import { ModalService } from '../shared/data-access/modal.service';
+import { PaletteService } from '../shared/data-access/palette.service';
 import { Color } from '../shared/model/color.model';
 import { Palette } from '../shared/model/palette.model';
+import { Shade } from '../shared/model/shade.model';
 import { ModalComponent } from '../shared/ui/modal/modal.component';
 import { EditorColorComponent } from './ui/editor-color/editor-color.component';
 import { EditorPaletteComponent } from './ui/editor-palette/editor-palette.component';
@@ -15,20 +17,15 @@ import { EditorPaletteComponent } from './ui/editor-palette/editor-palette.compo
 })
 export default class EditorComponent {
   private readonly _modalService = inject(ModalService);
-  private readonly _colorService = inject(ColorService);
+  private readonly _paletteService = inject(PaletteService);
 
   protected readonly palette = signal<Palette | undefined>(undefined);
 
   constructor() {
-    const palette = new Palette();
-
-    for (let i = 0; i < 5; i++) {
-      const color = Color.random();
-
-      this._colorService.regenerateShades(color);
-
-      palette.colors.push(color);
-    }
+    const palette = this._paletteService.generatePalette(
+      Shade.random().hex,
+      PaletteScheme.RAINBOW
+    );
 
     this.palette.set(palette);
   }

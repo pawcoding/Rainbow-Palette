@@ -6,10 +6,6 @@ describe('Color', () => {
     expect(new Color([])).toBeTruthy();
   });
 
-  it('should generate random color', () => {
-    expect(Color.random()).toBeInstanceOf(Color);
-  });
-
   it('should parse color from string', () => {
     const color = Color.parse(`{"shades":[${Shade.random().toString()}]}`);
 

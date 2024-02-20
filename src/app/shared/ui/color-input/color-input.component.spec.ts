@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TranslateModule } from '@ngx-translate/core';
 import { ColorInputComponent } from './color-input.component';
+import { signal } from '@angular/core';
 
 describe('ColorInputComponent', () => {
   let component: ColorInputComponent;
@@ -8,12 +9,17 @@ describe('ColorInputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ColorInputComponent]
-    })
-    .compileComponents();
-    
+      imports: [ColorInputComponent, TranslateModule.forRoot()],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ColorInputComponent);
     component = fixture.componentInstance;
+
+    //@ts-expect-error
+    component.placeholder = signal('test');
+    //@ts-expect-error
+    component.hex = signal('#000000');
+
     fixture.detectChanges();
   });
 

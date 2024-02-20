@@ -1,9 +1,4 @@
-import {
-  Component,
-  booleanAttribute,
-  input,
-  signal
-} from '@angular/core';
+import { Component, booleanAttribute, input, signal } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroXMarkMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,12 +22,10 @@ export class ModalComponent {
   protected readonly isOpen = signal(false);
 
   public open(): void {
-    console.log('open');
     this.isOpen.set(true);
   }
 
   public close(): void {
-    console.log('close');
     this.isOpen.set(false);
   }
 }

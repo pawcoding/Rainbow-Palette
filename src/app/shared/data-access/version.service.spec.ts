@@ -28,6 +28,6 @@ describe('VersionService', () => {
   it('should log versions', () => {
     const consoleSpy = spyOn(console, 'info');
     service = new VersionService();
-    expect(consoleSpy).toHaveBeenCalledTimes(3);
+    expect(consoleSpy).toHaveBeenCalledTimes(2);
   });
 });

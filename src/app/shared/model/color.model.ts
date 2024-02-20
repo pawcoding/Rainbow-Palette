@@ -8,11 +8,17 @@ export class Color {
     this.shades = shades;
     if (name) {
       this.name = name;
+    } else {
+      this.name = 'Blue';
     }
   }
 
-  public static random(): Color {
-    return new Color([Shade.random()]);
+  public get hue(): number {
+    return this.shades
+      .map((shade) => shade.hsl)
+      .reduce((hue, hsl) => {
+        return hue + hsl.H / this.shades.length;
+      }, 0);
   }
 
   public static parse(color: string | object): Color {
@@ -48,7 +54,6 @@ export class Color {
     }
 
     for (const shade of color.shades) {
-      console.log(shade);
       try {
         shades.push(Shade.parse(shade));
       } catch (e) {

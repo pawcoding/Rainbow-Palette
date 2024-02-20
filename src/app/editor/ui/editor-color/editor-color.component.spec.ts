@@ -1,7 +1,9 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditorColorComponent } from './editor-color.component';
 import { DIALOG_DATA } from '@angular/cdk/dialog';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { Color } from '../../../shared/model/color.model';
+import { Shade } from '../../../shared/model/shade.model';
+import { EditorColorComponent } from './editor-color.component';
 
 describe('EditorColorComponent', () => {
   let component: EditorColorComponent;
@@ -9,12 +11,13 @@ describe('EditorColorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditorColorComponent],
+      imports: [EditorColorComponent, TranslateModule.forRoot()],
       providers: [
         {
           provide: DIALOG_DATA,
           useValue: {
-            color: Color.random(),
+            color: new Color([Shade.random()]),
+            shadeIndex: 0,
           },
         },
       ],
