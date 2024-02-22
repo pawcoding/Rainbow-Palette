@@ -1,7 +1,18 @@
-import { Component, EventEmitter, Output, model, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  computed,
+  model,
+  signal,
+} from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  PALETTE_SCHEMES,
+  PaletteScheme,
+} from '../../../shared/constants/palette-scheme';
 import { ColorInputComponent } from '../../../shared/ui/color-input/color-input.component';
 import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown-menu.component';
 
@@ -18,6 +29,7 @@ import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown
 })
 export class HomeGeneratorComponent {
   public readonly hex = model('#3B82F6');
+  public readonly scheme = model(PaletteScheme.RAINBOW);
 
   protected readonly isValid = signal(true);
 
@@ -30,13 +42,18 @@ export class HomeGeneratorComponent {
   protected readonly heroChevronDownMini = heroChevronDownMini;
 
   protected get schemeOptions() {
-    return [
-      { value: 'rainbow', label: 'scheme.rainbow' },
-      { value: 'random', label: 'scheme.random' },
-    ];
+    return PALETTE_SCHEMES;
+  }
+
+  protected readonly selectedScheme = computed(() => {
+    return this.schemeOptions.find((option) => option.value === this.scheme());
+  });
+
+  protected setScheme(value: PaletteScheme) {
+    this.scheme.set(value);
   }
 
   protected generatePalette(): void {
-    this.generate.emit({ hex: this.hex(), schema: 'random' });
+    this.generate.emit({ hex: this.hex(), schema: this.scheme() });
   }
 }

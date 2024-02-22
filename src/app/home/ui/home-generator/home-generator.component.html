@@ -37,6 +37,8 @@
 
       <rp-dropdown-menu
         [items]="schemeOptions"
+        [selectedItem]="selectedScheme()"
+        (selectedItemChange)="setScheme($event.value)"
         title="home.generator.scheme"
         minWidth="20rem"
         [disabled]="!isValid()"

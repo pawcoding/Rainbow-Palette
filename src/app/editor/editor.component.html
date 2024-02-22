@@ -4,4 +4,6 @@
 <button (click)="openColorEditor(palette()!.colors[0])">
   Open Color Editor
 </button>
+} @else {
+<rp-no-palette [parent]="'editor'" />
 }

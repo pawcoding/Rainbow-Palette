@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { ColorTranslator, Harmony } from 'colortranslator';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { Color } from '../model/color.model';
@@ -11,6 +11,12 @@ import { ColorService } from './color.service';
 })
 export class PaletteService {
   private readonly _colorService = inject(ColorService);
+
+  private readonly _palette = signal<Palette | undefined>(undefined);
+
+  public get palette() {
+    return this._palette.asReadonly();
+  }
 
   public generatePalette(hex: string, scheme: PaletteScheme): Palette {
     const palette = this._generatePalette(hex, scheme);

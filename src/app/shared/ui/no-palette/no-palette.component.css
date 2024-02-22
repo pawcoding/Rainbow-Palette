@@ -1,0 +1,9 @@
+#no-palette {
+  min-height: calc(
+    100dvh -
+      (
+        var(--header-height) + var(--bottom-navigation-height) +
+          var(--footer-height)
+      )
+  );
+}

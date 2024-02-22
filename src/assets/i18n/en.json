@@ -70,6 +70,14 @@
       "theme": "Pick a theme"
     }
   },
+  "no-palette": {
+    "description": {
+      "editor": "You don't have a palette yet. You have to generate one first before you can edit it.",
+      "preview": "You don't have a palette yet. You have to generate one first before you can preview it."
+    },
+    "link": "Back to generation",
+    "title": "No palette available"
+  },
   "theme": {
     "dark": "Dark",
     "light": "Light"
