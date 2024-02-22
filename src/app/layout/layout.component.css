@@ -1,0 +1,4 @@
+#main {
+  padding-top: var(--header-height);
+  padding-bottom: var(--bottom-navigation-height);
+}

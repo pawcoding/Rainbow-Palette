@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   computed,
+  effect,
   inject,
   signal,
   viewChild,
@@ -38,6 +39,7 @@ import { LayoutOptionsComponent } from './ui/layout-options/layout-options.compo
     RouterOutlet,
   ],
   templateUrl: './layout.component.html',
+  styleUrl: './layout.component.css',
 })
 export class LayoutComponent implements AfterViewInit {
   private readonly _mobileService = inject(MobileService);
@@ -47,6 +49,8 @@ export class LayoutComponent implements AfterViewInit {
   private readonly _header =
     viewChild.required<ElementRef<HTMLElement>>('header');
   private readonly _footer = viewChild<ElementRef<HTMLElement>>('footer');
+  private readonly _bottomNavigation =
+    viewChild<ElementRef<HTMLElement>>('bottomNavigation');
 
   protected readonly navigationEntries: Array<NavigationEntry> = [
     {
@@ -81,19 +85,34 @@ export class LayoutComponent implements AfterViewInit {
       : '/assets/rainbow-palette-dark.svg';
   });
 
-  protected readonly headerHeight = computed(() => {
-    // Reference resize signal to trigger computation on window resize
-    this._resize();
+  constructor() {
+    effect(() => {
+      if (!this.initialized()) {
+        return;
+      }
 
-    return `${this._header().nativeElement.offsetHeight}px`;
-  });
-  protected readonly footerHeight = computed(() => {
-    // Reference resize signal to trigger computation on window resize
-    this._resize();
+      // Reference resize signal to trigger computation on window resize
+      this._resize();
 
-    const footerHeight = this._footer()?.nativeElement.offsetHeight;
-    return footerHeight ? `${footerHeight}px` : '0';
-  });
+      document.documentElement.style.setProperty(
+        '--header-height',
+        `${this._header().nativeElement.offsetHeight}px`
+      );
+
+      const footerHeight = this._footer()?.nativeElement.offsetHeight;
+      document.documentElement.style.setProperty(
+        '--footer-height',
+        footerHeight ? `${footerHeight}px` : '0px'
+      );
+
+      const bottomNavigationHeight =
+        this._bottomNavigation()?.nativeElement.offsetHeight;
+      document.documentElement.style.setProperty(
+        '--bottom-navigation-height',
+        bottomNavigationHeight ? `${bottomNavigationHeight}px` : '0px'
+      );
+    });
+  }
 
   public async ngAfterViewInit(): Promise<void> {
     /*
