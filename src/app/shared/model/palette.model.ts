@@ -25,7 +25,6 @@ export class Palette {
       try {
         palette = JSON.parse(palette);
       } catch (e) {
-        console.error(e);
         throw new Error(
           `Could not parse palette (not a valid JSON): "${palette}"`
         );
@@ -58,7 +57,6 @@ export class Palette {
       try {
         colors.push(Color.parse(color));
       } catch (e) {
-        console.error(e);
         throw new Error(`Could not parse palette (invalid color): "${color}"`);
       }
     }

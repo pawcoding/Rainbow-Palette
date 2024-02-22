@@ -26,7 +26,6 @@ export class PaletteService {
       try {
         this._palette.set(Palette.parse(palette));
       } catch (e) {
-        console.error(e);
         this._toastService.showToast({
           type: 'error',
           message: 'toast.error.palette-load',
