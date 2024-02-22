@@ -78,6 +78,17 @@
     "link": "Back to generation",
     "title": "No palette available"
   },
+  "scheme": {
+    "analogous": "Analogous",
+    "complementary": "Complementary",
+    "monochrome": "Monochrome",
+    "rainbow": "Rainbow",
+    "split-complementary": "Split complementary",
+    "square": "Square",
+    "surprise": "Surprise me",
+    "tetradic": "Tetradic",
+    "triadic": "Triadic"
+  },
   "theme": {
     "dark": "Dark",
     "light": "Light"

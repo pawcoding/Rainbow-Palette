@@ -42,9 +42,9 @@ export class HomeGeneratorComponent {
     return PALETTE_SCHEMES;
   }
 
-  protected readonly selectedScheme = computed(() => {
-    return this.schemeOptions.find((option) => option.value === this.scheme());
-  });
+  protected readonly selectedScheme = computed(() =>
+    this.schemeOptions.find((option) => option.value === this.scheme())
+  );
 
   protected setScheme(value: PaletteScheme) {
     this.scheme.set(value);

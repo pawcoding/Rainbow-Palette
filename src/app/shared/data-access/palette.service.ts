@@ -1,4 +1,4 @@
-import { Injectable, inject, signal } from '@angular/core';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { ColorTranslator, Harmony } from 'colortranslator';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { Color } from '../model/color.model';
@@ -18,6 +18,12 @@ export class PaletteService {
 
   public get palette() {
     return this._palette.asReadonly();
+  }
+
+  constructor() {
+    effect(() => {
+      this._updateVariables();
+    });
   }
 
   public loadPaletteFromLocalStorage(): void {
@@ -183,5 +189,36 @@ export class PaletteService {
     );
 
     return new Palette(name, colors);
+  }
+
+  private _updateVariables(): void {
+    const root = document.documentElement;
+    const activeProperties: Array<string> = [];
+    const palette = this._palette();
+
+    if (palette) {
+      for (const color of palette.colors) {
+        const name = color.name.replace(/\s+/g, '-').toLowerCase();
+
+        for (const shade of color.shades) {
+          const variable = `--color-${name}-${shade.index}`;
+          const value = shade.hex;
+
+          root.style.setProperty(variable, value);
+          activeProperties.push(variable);
+        }
+      }
+    }
+
+    const allProperties = Array.from(root.style);
+    for (const property of allProperties) {
+      if (!property.startsWith('--color')) {
+        continue;
+      }
+
+      if (!activeProperties.includes(property)) {
+        root.style.removeProperty(property);
+      }
+    }
   }
 }
