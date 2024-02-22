@@ -19,4 +19,61 @@ export class Palette {
       this.colors.splice(index, 1);
     }
   }
+
+  public static parse(palette: string | object): Palette {
+    if (typeof palette === 'string') {
+      try {
+        palette = JSON.parse(palette);
+      } catch (e) {
+        console.error(e);
+        throw new Error(
+          `Could not parse palette (not a valid JSON): "${palette}"`
+        );
+      }
+    }
+
+    if (!(palette instanceof Object)) {
+      throw new Error(`Could not parse palette (not an object): "${palette}"`);
+    }
+
+    if (!('colors' in palette)) {
+      throw new Error(
+        `Could not parse palette (missing "colors" property): "${palette}"`
+      );
+    }
+
+    let name: string | undefined;
+    if ('name' in palette && typeof palette.name === 'string') {
+      name = palette.name;
+    }
+
+    let colors: Array<Color> = [];
+    if (!Array.isArray(palette.colors)) {
+      throw new Error(
+        `Could not parse palette (invalid "colors" property): "${palette.colors}"`
+      );
+    }
+
+    for (const color of palette.colors) {
+      try {
+        colors.push(Color.parse(color));
+      } catch (e) {
+        console.error(e);
+        throw new Error(`Could not parse palette (invalid color): "${color}"`);
+      }
+    }
+
+    return new Palette(name || 'Palette', colors);
+  }
+
+  public toJSON(): object {
+    return {
+      name: this.name,
+      colors: this.colors.map((color) => color.toJSON()),
+    };
+  }
+
+  public toString(): string {
+    return JSON.stringify(this.toJSON());
+  }
 }

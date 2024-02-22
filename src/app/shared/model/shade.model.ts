@@ -135,11 +135,15 @@ export class Shade {
     return new Shade(index, value, fixed);
   }
 
-  public toString(): string {
-    return JSON.stringify({
+  public toJSON(): object {
+    return {
       index: this.index,
       fixed: this.fixed,
       value: this._value.HSLObject,
-    });
+    };
+  }
+
+  public toString(): string {
+    return JSON.stringify(this.toJSON());
   }
 }

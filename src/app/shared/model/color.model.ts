@@ -65,10 +65,14 @@ export class Color {
     return new Color(shades, name);
   }
 
-  public toString(): string {
-    return JSON.stringify({
+  public toJSON(): object {
+    return {
       name: this.name,
-      shades: this.shades.map((shade) => shade.toString()),
-    });
+      shades: this.shades.map((shade) => shade.toJSON()),
+    };
+  }
+
+  public toString(): string {
+    return JSON.stringify(this.toJSON());
   }
 }

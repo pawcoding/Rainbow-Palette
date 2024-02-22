@@ -100,4 +100,14 @@ describe('Shade', () => {
     expect(parsed.index).toBe(1);
     expect(parsed.fixed).toBe(true);
   });
+
+  it('should JSON and string are equal', () => {
+    const shade = new Shade(
+      1,
+      new ColorTranslator('#000000', { decimals: 2 }),
+      true
+    );
+
+    expect(shade.toString()).toBe(JSON.stringify(shade.toJSON()));
+  });
 });

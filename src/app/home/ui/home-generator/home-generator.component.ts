@@ -34,10 +34,7 @@ export class HomeGeneratorComponent {
   protected readonly isValid = signal(true);
 
   @Output()
-  public readonly generate = new EventEmitter<{
-    hex: string;
-    schema: unknown;
-  }>();
+  public readonly generate = new EventEmitter<void>();
 
   protected readonly heroChevronDownMini = heroChevronDownMini;
 
@@ -54,6 +51,6 @@ export class HomeGeneratorComponent {
   }
 
   protected generatePalette(): void {
-    this.generate.emit({ hex: this.hex(), schema: this.scheme() });
+    this.generate.emit();
   }
 }

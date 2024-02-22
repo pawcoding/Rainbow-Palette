@@ -5,12 +5,14 @@ import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
 import { ColorService } from './color.service';
+import { ToastService } from './toast.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PaletteService {
   private readonly _colorService = inject(ColorService);
+  private readonly _toastService = inject(ToastService);
 
   private readonly _palette = signal<Palette | undefined>(undefined);
 
@@ -18,14 +20,36 @@ export class PaletteService {
     return this._palette.asReadonly();
   }
 
-  public generatePalette(hex: string, scheme: PaletteScheme): Palette {
+  public loadPaletteFromLocalStorage(): void {
+    const palette = localStorage.getItem('palette');
+    if (palette) {
+      try {
+        this._palette.set(Palette.parse(palette));
+      } catch (e) {
+        console.error(e);
+        this._toastService.showToast({
+          type: 'error',
+          message: 'toast.error.palette-load',
+        });
+      }
+    }
+  }
+
+  public savePaletteToLocalStorage(): void {
+    const palette = this._palette();
+    if (palette) {
+      localStorage.setItem('palette', palette.toString());
+    }
+  }
+
+  public generatePalette(hex: string, scheme: PaletteScheme): void {
     const palette = this._generatePalette(hex, scheme);
 
     palette.colors.forEach((color) => {
       this._colorService.regenerateShades(color);
     });
 
-    return palette;
+    this._palette.set(palette);
   }
 
   private _generatePalette(hex: string, scheme: PaletteScheme): Palette {

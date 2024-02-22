@@ -14,23 +14,28 @@ describe('Color', () => {
   });
 
   it('should parse color from object', () => {
-    debugger;
     const color = Color.parse({
-      name: 'Red',
+      name: 'Test',
       shades: [Shade.random()],
     });
 
     expect(color).toBeInstanceOf(Color);
-    expect(color.name).toBe('Red');
+    expect(color.name).toBe('Test');
     expect(color.shades.length).toBe(1);
   });
 
   it('should stringify and re-parse color', () => {
-    const color = new Color([Shade.random()], 'Red');
+    const color = new Color([Shade.random()], 'Test');
     const parsed = Color.parse(color.toString());
 
     expect(parsed).toBeInstanceOf(Color);
-    expect(parsed.name).toBe('Red');
+    expect(parsed.name).toBe('Test');
     expect(parsed.shades.length).toBe(1);
+  });
+
+  it('should JSON and string are equal', () => {
+    const color = new Color([Shade.random()], 'Test');
+
+    expect(color.toString()).toBe(JSON.stringify(color.toJSON()));
   });
 });

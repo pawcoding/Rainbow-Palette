@@ -1,6 +1,7 @@
 <rp-home-generator
-  [hex]="shade.hex"
-  (generate)="generatePalette($event.hex, $event.schema)"
+  [(hex)]="hex"
+  [(scheme)]="scheme"
+  (generate)="generatePalette()"
 />
 
 <div class="max-w-screen-md px-4 mx-auto sm:px-6 lg:px-8">
