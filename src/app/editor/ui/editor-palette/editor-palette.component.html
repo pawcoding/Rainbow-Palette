@@ -1,24 +1,82 @@
-@for (color of palette().colors; track $index) {
-<section class="w-full">
-  <div class="grid grid-cols-10 sm:grid-cols-5 lg:grid-cols-10 sm:gap-2">
-    @for (shade of color.shades; track shade.index) {
-    <button
-      [class.rounded-l]="$first"
-      [class.rounded-r]="$last"
-      [style.background-color]="shade.hslValue"
-      class="block w-full px-2 py-4 text-lg text-center cursor-pointer sm:rounded"
+<div class="w-full space-y-4 sm:space-y-8">
+  @for (color of palette().colors; track $index) {
+  <section class="space-y-2">
+    <div class="flex items-end justify-between">
+      <h2 class="text-xl font-bold select-none">
+        {{ color.name }}
+      </h2>
+
+      <div
+        class="inline-flex overflow-hidden bg-white border rounded-md shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
+      >
+        <button
+          class="flex items-center justify-center size-8 sm:size-10 border-e text-neutral-700 hover:bg-neutral-50 dark:border-e-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800"
+          (click)="rename(color)"
+        >
+          <span class="sr-only">
+            {{ "common.rename" | translate }}
+          </span>
+          <ng-icon
+            [svg]="heroPencilSquareMini"
+            size="1.25rem"
+            class="scale-90 sm:scale-100"
+          />
+        </button>
+
+        <button
+          class="flex items-center justify-center size-8 sm:size-10 border-e text-neutral-700 hover:bg-neutral-50 dark:border-e-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800"
+          (click)="edit(color)"
+        >
+          <span class="sr-only">
+            {{ "common.edit" | translate }}
+          </span>
+          <ng-icon
+            [svg]="heroAdjustmentsHorizontalMin"
+            size="1.25rem"
+            class="scale-90 sm:scale-100"
+          />
+        </button>
+
+        <button
+          class="flex items-center justify-center size-8 sm:size-10 text-neutral-700 hover:bg-neutral-50 dark:text-neutral-200 dark:hover:bg-neutral-800"
+          (click)="remove(color)"
+        >
+          <span class="sr-only">
+            {{ "common.delete" | translate }}
+          </span>
+          <ng-icon
+            [svg]="heroTrashMini"
+            size="1.25rem"
+            class="scale-90 sm:scale-100"
+          />
+        </button>
+      </div>
+    </div>
+
+    <div
+      class="grid grid-cols-10 xs:grid-cols-5 lg:grid-cols-10 xs:gap-1 sm:gap-2"
     >
-      <span class="opacity-0 sm:opacity-100">
-        <span class="font-semibold">
-          {{ shade.index }}
+      @for (shade of color.shades; track shade.index) {
+      <button
+        [class.rounded-l]="$first"
+        [class.rounded-r]="$last"
+        [style.background-color]="shade.hslValue"
+        class="block w-full px-2 py-4 text-center cursor-pointer sm:text-lg xs:rounded"
+        (click)="edit(color, shade.index)"
+        (contextmenu)="copyToClipboard(shade, $event)"
+      >
+        <span class="opacity-0 xs:opacity-100">
+          <span class="font-semibold">
+            {{ shade.index }}
+          </span>
+          <br />
+          <span>
+            {{ shade.hex.toUpperCase().substring(1) }}
+          </span>
         </span>
-        <br />
-        <span>
-          {{ shade.hex.toUpperCase().substring(1) }}
-        </span>
-      </span>
-    </button>
-    }
-  </div>
-</section>
-}
+      </button>
+      }
+    </div>
+  </section>
+  }
+</div>

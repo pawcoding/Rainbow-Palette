@@ -1,4 +1,12 @@
 {
+  "common": {
+    "delete": "Delete",
+    "edit": "Edit",
+    "export": "Export",
+    "rename": "Rename",
+    "save": "Save",
+    "saving": "Saving..."
+  },
   "home": {
     "generator": {
       "color": "Enter your color",

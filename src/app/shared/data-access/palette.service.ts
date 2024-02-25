@@ -29,6 +29,8 @@ export class PaletteService {
   public loadPaletteFromLocalStorage(): void {
     const palette = localStorage.getItem('palette');
     if (palette) {
+      console.info('Found existing palette in local storage. Loading...');
+
       try {
         this._palette.set(Palette.parse(palette));
       } catch (e) {

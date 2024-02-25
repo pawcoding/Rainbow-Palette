@@ -27,8 +27,7 @@
       "
     >
       <button
-        class="px-4 py-2 grow"
-        [class]="isValid() ? 'cursor-pointer' : 'cursor-default'"
+        class="px-4 py-2 cursor-pointer grow disabled:cursor-not-allowed"
         [disabled]="!isValid()"
         (click)="generatePalette()"
       >
@@ -42,6 +41,7 @@
         title="home.generator.scheme"
         minWidth="20rem"
         [disabled]="!isValid()"
+        highlightSelection
       >
         <button class="flex items-center justify-center p-2">
           <ng-icon [svg]="heroChevronDownMini" size="1.75rem" />

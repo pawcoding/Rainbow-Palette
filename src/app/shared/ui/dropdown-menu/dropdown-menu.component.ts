@@ -44,6 +44,9 @@ export class DropdownMenuComponent<T> {
   public readonly closeOnScroll = input(true, {
     transform: booleanAttribute,
   });
+  public readonly highlightSelection = input(false, {
+    transform: booleanAttribute,
+  });
   public readonly minWidth = input('12rem');
   public readonly maxWidth = input('40rem');
   public readonly minHeight = input<string | undefined>();

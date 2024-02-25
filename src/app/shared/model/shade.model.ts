@@ -89,7 +89,25 @@ export class Shade {
       throw new Error(`Could not parse shade (not an object): "${shade}"`);
     }
 
+    let index = 0;
+    if ('index' in shade && typeof shade.index === 'number') {
+      index = shade.index;
+    }
+
+    let fixed = false;
+    if ('fixed' in shade && typeof shade.fixed === 'boolean') {
+      fixed = shade.fixed;
+    }
+
     if (!('value' in shade)) {
+      if ('hex' in shade && typeof shade.hex === 'string') {
+        return new Shade(
+          index,
+          new ColorTranslator(shade.hex, { decimals: 2 }),
+          fixed
+        );
+      }
+
       throw new Error(
         `Could not parse shade (missing "value" property): "${shade}"`
       );
@@ -119,16 +137,6 @@ export class Shade {
       throw new Error(
         `Could not parse shade (invalid "value" property): "${shade.value}"`
       );
-    }
-
-    let index = 0;
-    if ('index' in shade && typeof shade.index === 'number') {
-      index = shade.index;
-    }
-
-    let fixed = false;
-    if ('fixed' in shade && typeof shade.fixed === 'boolean') {
-      fixed = shade.fixed;
     }
 
     return new Shade(index, value, fixed);

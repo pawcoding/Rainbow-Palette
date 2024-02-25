@@ -32,7 +32,12 @@
     >
       @for (item of items(); track $index) {
       <button
-        class="flex items-center justify-start w-full gap-2 p-2 transition-all duration-200 ease-in-out rounded-sm aria-checked:font-bold aria-checked:text-blue-600 dark:aria-checked:text-blue-400 hover:shadow-sm hover:bg-neutral-200 dark:hover:shadow-none dark:hover:bg-neutral-600"
+        [class]="
+          highlightSelection()
+            ? 'aria-checked:font-bold aria-checked:text-blue-600 dark:aria-checked:text-blue-400'
+            : ''
+        "
+        class="flex items-center justify-start w-full gap-2 p-2 transition-all duration-200 ease-in-out rounded-sm hover:shadow-sm hover:bg-neutral-200 dark:hover:shadow-none dark:hover:bg-neutral-600"
         cdkMenuItemRadio
         [cdkMenuItemChecked]="item === selectedItem()"
         (cdkMenuItemTriggered)="select(item)"
