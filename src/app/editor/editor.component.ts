@@ -4,9 +4,11 @@ import {
   heroArrowPathMini,
   heroBookmarkMini,
   heroPencilSquareMini,
+  heroPlusMini,
 } from '@ng-icons/heroicons/mini';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
+import { ColorService } from '../shared/data-access/color.service';
 import { ModalService } from '../shared/data-access/modal.service';
 import { PaletteService } from '../shared/data-access/palette.service';
 import { ToastService } from '../shared/data-access/toast.service';
@@ -33,8 +35,11 @@ export default class EditorComponent {
   private readonly _modalService = inject(ModalService);
   private readonly _toastService = inject(ToastService);
   private readonly _paletteService = inject(PaletteService);
+  private readonly _colorService = inject(ColorService);
+  private readonly _translateService = inject(TranslateService);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
+  protected readonly heroPlusMini = heroPlusMini;
 
   protected readonly palette = this._paletteService.palette;
   protected readonly saving = signal(false);
@@ -54,7 +59,7 @@ export default class EditorComponent {
     }
 
     const newName = window.prompt(
-      'Enter a new name for the palette:',
+      this._translateService.instant('editor.palette.rename'),
       palette.name
     );
 
@@ -69,6 +74,7 @@ export default class EditorComponent {
     this._toastService.showToast({
       type: 'success',
       message: 'editor.palette.renamed',
+      parameters: { name: newName },
     });
   }
 
@@ -92,7 +98,7 @@ export default class EditorComponent {
 
   protected renameColor(color: Color): void {
     const newName = window.prompt(
-      'Enter a new name for the color:',
+      this._translateService.instant('editor.color.rename'),
       color.name
     );
 
@@ -107,6 +113,7 @@ export default class EditorComponent {
     this._toastService.showToast({
       type: 'success',
       message: 'editor.color.renamed',
+      parameters: { name: newName },
     });
   }
 
@@ -118,21 +125,37 @@ export default class EditorComponent {
   }
 
   protected removeColor(color: Color): void {
-    if (window.confirm(`Are you sure you want to remove ${color.name}?`)) {
+    const name = color.name;
+    if (
+      window.confirm(
+        this._translateService.instant('editor.color.remove', {
+          color: name,
+        })
+      )
+    ) {
       this.palette()?.removeColor(color);
 
       this._toastService.showToast({
         type: 'info',
         message: 'editor.color.removed',
+        parameters: { color: name },
       });
     }
+  }
+
+  protected async addColor(): Promise<void> {
+    const palette = this.palette();
+    if (!palette) {
+      return;
+    }
+
+    const color = await this._colorService.randomColor();
+    palette.addColor(color);
   }
 
   protected async copyToClipboard(shade: Shade): Promise<void> {
     try {
       await navigator.clipboard.writeText(shade.hex);
-
-      console.log(toUnicodeVariant(shade.hex, 'm'));
 
       this._toastService.showToast({
         type: 'success',

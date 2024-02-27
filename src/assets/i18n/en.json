@@ -7,6 +7,24 @@
     "save": "Save",
     "saving": "Saving..."
   },
+  "editor": {
+    "color": {
+      "add": "Add color",
+      "copy": {
+        "error": "An error occurred while copying the hex code to your clipboard.",
+        "success": "\"{{ color }}\" has been copied to your clipboard."
+      },
+      "remove": "Are you sure you want to remove the color \"{{ color }}\"?",
+      "removed": "The color \"{{ color }}\" has been removed.",
+      "rename": "Enter a new name for the color:",
+      "renamed": "Your color has been renamed to \"{{ name }}\"."
+    },
+    "palette": {
+      "rename": "Enter a new name for the palette:",
+      "renamed": "Your palette has been renamed to \"{{ name }}\".",
+      "saved": "Your palette has been saved."
+    }
+  },
   "home": {
     "generator": {
       "color": "Enter your color",
@@ -100,5 +118,11 @@
   "theme": {
     "dark": "Dark",
     "light": "Light"
+  },
+  "toast": {
+    "error": {
+      "load-color-map": "An error occurred while loading the list of color names.",
+      "palette-load": "An error occurred while loading your last palette."
+    }
   }
 }

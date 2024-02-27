@@ -46,6 +46,22 @@
     (removeColor)="removeColor($event)"
     (copyShade)="copyToClipboard($event)"
   />
+
+  <section class="flex items-center justify-center gap-2 mt-8">
+    <button
+      class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+      (click)="addColor()"
+    >
+      <ng-icon
+        [svg]="heroPlusMini"
+        size="1.25rem"
+        class="scale-90 sm:scale-100"
+      />
+      <span>
+        {{ "editor.color.add" | translate }}
+      </span>
+    </button>
+  </section>
 </div>
 } @else {
 <rp-no-palette [parent]="'editor'" />

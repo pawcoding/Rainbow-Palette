@@ -51,6 +51,7 @@ export class EditorPaletteComponent {
   protected copyToClipboard(shade: Shade, $event?: MouseEvent): void {
     if ($event) {
       $event.stopPropagation();
+      $event.preventDefault();
     }
 
     this.copyShade.emit(shade);
