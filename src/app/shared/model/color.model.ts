@@ -4,13 +4,9 @@ export class Color {
   public name = 'Blue';
   public shades: Array<Shade>;
 
-  constructor(shades: Array<Shade>, name?: string) {
+  constructor(shades: Array<Shade>, name: string) {
     this.shades = shades;
-    if (name) {
-      this.name = name;
-    } else {
-      this.name = 'Blue';
-    }
+    this.name = name;
   }
 
   public get hue(): number {
@@ -40,10 +36,13 @@ export class Color {
       );
     }
 
-    let name: string | undefined;
-    if ('name' in color && typeof color.name === 'string') {
-      name = color.name;
+    if (!('name' in color) || typeof color.name !== 'string') {
+      throw new Error(
+        `Could not parse color (missing "name" property): "${color}"`
+      );
     }
+
+    const name = color.name;
 
     let shades: Array<Shade> = [];
     if (!Array.isArray(color.shades)) {

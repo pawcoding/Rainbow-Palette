@@ -1,6 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  ColorNameService,
+  ColorNameServiceMock,
+} from '../shared/data-access/color-name.service';
 import EditorComponent from './editor.component';
 
 describe('EditorComponent', () => {
@@ -10,7 +14,10 @@ describe('EditorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [EditorComponent, TranslateModule.forRoot()],
-      providers: [{ provide: ActivatedRoute, useValue: { snapshot: {} } }],
+      providers: [
+        { provide: ActivatedRoute, useValue: { snapshot: {} } },
+        { provide: ColorNameService, useValue: new ColorNameServiceMock() },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditorComponent);

@@ -1,14 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ColorTranslator } from 'colortranslator';
 import { Color } from '../model/color.model';
 import { Shade } from '../model/shade.model';
+import { ColorNameService } from './color-name.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ColorService {
-  public randomColor(): Color {
-    const color = new Color([Shade.random()]);
+  private readonly _colorNameService = inject(ColorNameService);
+
+  public async randomColor(): Promise<Color> {
+    const shade = Shade.random();
+    const name = await this._colorNameService.getColorName(shade);
+    const color = new Color([Shade.random()], name);
 
     this.regenerateShades(color);
 

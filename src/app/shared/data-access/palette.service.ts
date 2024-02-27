@@ -4,6 +4,7 @@ import { PaletteScheme } from '../constants/palette-scheme';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
+import { ColorNameService } from './color-name.service';
 import { ColorService } from './color.service';
 import { ToastService } from './toast.service';
 
@@ -12,6 +13,7 @@ import { ToastService } from './toast.service';
 })
 export class PaletteService {
   private readonly _colorService = inject(ColorService);
+  private readonly _colorNameService = inject(ColorNameService);
   private readonly _toastService = inject(ToastService);
 
   private readonly _palette = signal<Palette | undefined>(undefined);
@@ -49,8 +51,11 @@ export class PaletteService {
     }
   }
 
-  public generatePalette(hex: string, scheme: PaletteScheme): void {
-    const palette = this._generatePalette(hex, scheme);
+  public async generatePalette(
+    hex: string,
+    scheme: PaletteScheme
+  ): Promise<void> {
+    const palette = await this._generatePalette(hex, scheme);
 
     palette.colors.forEach((color) => {
       this._colorService.regenerateShades(color);
@@ -59,10 +64,13 @@ export class PaletteService {
     this._palette.set(palette);
   }
 
-  private _generatePalette(hex: string, scheme: PaletteScheme): Palette {
+  private async _generatePalette(
+    hex: string,
+    scheme: PaletteScheme
+  ): Promise<Palette> {
     switch (scheme) {
       case PaletteScheme.RAINBOW:
-        return this._generateRainbowPalette(hex);
+        return await this._generateRainbowPalette(hex);
       case PaletteScheme.MONOCHROME:
         return this._generateMonochromePalette(hex);
       case PaletteScheme.ANALOGOUS:
@@ -99,9 +107,10 @@ export class PaletteService {
     return schemes[Math.floor(Math.random() * schemes.length)];
   }
 
-  private _generateRainbowPalette(hex: string): Palette {
+  private async _generateRainbowPalette(hex: string): Promise<Palette> {
     const shade = new Shade(-1, new ColorTranslator(hex), true);
-    const color = new Color([shade]);
+    const name = await this._colorNameService.getColorName(shade);
+    const color = new Color([shade], name);
     const rainbow = new Palette('Rainbow', [color]);
 
     /*
@@ -132,14 +141,15 @@ export class PaletteService {
         100,
         Math.max(0, shade.hsl.L - 20 + Math.floor(Math.random() * 40))
       );
-
       const newShade = new Shade(
         -1,
         new ColorTranslator({ H: newHue, S: newSaturation, L: newLightness }),
         true
       );
 
-      rainbow.addColor(new Color([newShade]));
+      const newName = await this._colorNameService.getColorName(newShade);
+
+      rainbow.addColor(new Color([newShade], newName));
     }
 
     return rainbow;
@@ -179,16 +189,20 @@ export class PaletteService {
     return monochrome;
   }
 
-  private _generateHarmonyPalette(
+  private async _generateHarmonyPalette(
     hex: string,
     harmony: Harmony,
     name: string
-  ): Palette {
+  ): Promise<Palette> {
     const harmonyColors = ColorTranslator.getHarmony(hex, harmony);
 
-    const colors = harmonyColors.map(
-      (hex) => new Color([new Shade(-1, new ColorTranslator(hex), true)])
-    );
+    const colors: Array<Color> = [];
+    for (const hex of harmonyColors) {
+      const shade = new Shade(-1, new ColorTranslator(hex), true);
+      const name = await this._colorNameService.getColorName(shade);
+
+      colors.push(new Color([shade], name));
+    }
 
     return new Palette(name, colors);
   }

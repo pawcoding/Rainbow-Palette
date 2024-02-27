@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { Toast } from '../interfaces/toast.interface';
 import { Color } from '../model/color.model';
+import { ColorNameService, ColorNameServiceMock } from './color-name.service';
 import { ColorService } from './color.service';
 import { PaletteService } from './palette.service';
 import { ToastService } from './toast.service';
@@ -24,6 +25,7 @@ describe('PaletteService', () => {
           useValue: toastService,
         },
         { provide: ColorService, useValue: colorService },
+        { provide: ColorNameService, useValue: new ColorNameServiceMock() },
       ],
     });
     service = TestBed.inject(PaletteService);
@@ -36,15 +38,15 @@ describe('PaletteService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should generate a palette', () => {
-    service.generatePalette('#ffffff', PaletteScheme.ANALOGOUS);
+  it('should generate a palette', async () => {
+    await service.generatePalette('#ffffff', PaletteScheme.ANALOGOUS);
 
     expect(service.palette()).toBeTruthy();
     expect(colorService.regenerateShades).toHaveBeenCalledTimes(3);
   });
 
-  it('should save palette to local storage', () => {
-    service.generatePalette('#ffffff', PaletteScheme.COMPLEMENTARY);
+  it('should save palette to local storage', async () => {
+    await service.generatePalette('#ffffff', PaletteScheme.COMPLEMENTARY);
     service.savePaletteToLocalStorage();
 
     expect(localStorage.getItem('palette')).toBeTruthy();

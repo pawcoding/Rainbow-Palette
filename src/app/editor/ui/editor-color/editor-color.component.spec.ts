@@ -16,7 +16,7 @@ describe('EditorColorComponent', () => {
         {
           provide: DIALOG_DATA,
           useValue: {
-            color: new Color([Shade.random()]),
+            color: new Color([Shade.random()], 'TestColor'),
             shadeIndex: 0,
           },
         },
