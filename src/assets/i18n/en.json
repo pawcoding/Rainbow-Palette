@@ -7,24 +7,6 @@
     "save": "Save",
     "saving": "Saving..."
   },
-  "editor": {
-    "color": {
-      "add": "Add color",
-      "copy": {
-        "error": "An error occurred while copying the hex code to your clipboard.",
-        "success": "\"{{ color }}\" has been copied to your clipboard."
-      },
-      "remove": "Are you sure you want to remove the color \"{{ color }}\"?",
-      "removed": "The color \"{{ color }}\" has been removed.",
-      "rename": "Enter a new name for the color:",
-      "renamed": "Your color has been renamed to \"{{ name }}\"."
-    },
-    "palette": {
-      "rename": "Enter a new name for the palette:",
-      "renamed": "Your palette has been renamed to \"{{ name }}\".",
-      "saved": "Your palette has been saved."
-    }
-  },
   "home": {
     "generator": {
       "color": "Enter your color",
@@ -78,10 +60,6 @@
       "website": "My website"
     },
     "navigation": {
-      "edit": {
-        "description": "Edit your palette",
-        "title": "Edit"
-      },
       "generate": {
         "description": "Generate a new palette",
         "title": "Generate"
@@ -89,6 +67,10 @@
       "preview": {
         "description": "Preview your palette with components",
         "title": "Preview"
+      },
+      "view": {
+        "description": "Edit your palette",
+        "title": "Edit"
       }
     },
     "options": {
@@ -98,8 +80,8 @@
   },
   "no-palette": {
     "description": {
-      "editor": "You don't have a palette yet. You have to generate one first before you can edit it.",
-      "preview": "You don't have a palette yet. You have to generate one first before you can preview it."
+      "preview": "You don't have a palette yet. You have to generate one first before you can preview it.",
+      "view": "You don't have a palette yet. You have to generate one first before you can edit it."
     },
     "link": "Back to generation",
     "title": "No palette available"
@@ -123,6 +105,24 @@
     "error": {
       "load-color-map": "An error occurred while loading the list of color names.",
       "palette-load": "An error occurred while loading your last palette."
+    }
+  },
+  "view": {
+    "color": {
+      "add": "Add color",
+      "copy": {
+        "error": "An error occurred while copying the hex code to your clipboard.",
+        "success": "\"{{ color }}\" has been copied to your clipboard."
+      },
+      "remove": "Are you sure you want to remove the color \"{{ color }}\"?",
+      "removed": "The color \"{{ color }}\" has been removed.",
+      "rename": "Enter a new name for the color:",
+      "renamed": "Your color has been renamed to \"{{ name }}\"."
+    },
+    "palette": {
+      "rename": "Enter a new name for the palette:",
+      "renamed": "Your palette has been renamed to \"{{ name }}\".",
+      "saved": "Your palette has been saved."
     }
   }
 }

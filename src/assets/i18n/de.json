@@ -52,10 +52,6 @@
       "website": "Meine Website"
     },
     "navigation": {
-      "edit": {
-        "description": "Bearbeite deine Palette",
-        "title": "Bearbeiten"
-      },
       "generate": {
         "description": "Generiere eine neue Farbpalette",
         "title": "Generieren"
@@ -63,6 +59,10 @@
       "preview": {
         "description": "Vorschau deiner Palette mit Webkomponenten",
         "title": "Vorschau"
+      },
+      "view": {
+        "description": "Bearbeite deine Palette",
+        "title": "Bearbeiten"
       }
     },
     "options": {

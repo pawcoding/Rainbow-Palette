@@ -60,10 +60,10 @@ export class LayoutComponent implements AfterViewInit {
       description: 'layout.navigation.generate.description',
     },
     {
-      title: 'layout.navigation.edit.title',
-      path: '/edit',
+      title: 'layout.navigation.view.title',
+      path: '/view',
       icon: heroAdjustmentsHorizontalSolid,
-      description: 'layout.navigation.edit.description',
+      description: 'layout.navigation.view.description',
     },
     {
       title: 'layout.navigation.preview.title',

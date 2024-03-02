@@ -1,11 +1,9 @@
+import { DIALOG_DATA } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  ColorNameService,
-  ColorNameServiceMock,
-} from '../shared/data-access/color-name.service';
-import EditorComponent from './editor.component';
+import { Color } from '../shared/model/color.model';
+import { Shade } from '../shared/model/shade.model';
+import { EditorComponent } from './editor.component';
 
 describe('EditorComponent', () => {
   let component: EditorComponent;
@@ -15,8 +13,13 @@ describe('EditorComponent', () => {
     await TestBed.configureTestingModule({
       imports: [EditorComponent, TranslateModule.forRoot()],
       providers: [
-        { provide: ActivatedRoute, useValue: { snapshot: {} } },
-        { provide: ColorNameService, useValue: new ColorNameServiceMock() },
+        {
+          provide: DIALOG_DATA,
+          useValue: {
+            color: new Color([Shade.random()], 'TestColor'),
+            shadeIndex: 0,
+          },
+        },
       ],
     }).compileComponents();
 

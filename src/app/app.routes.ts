@@ -12,9 +12,9 @@ export const routes: Routes = [
     loadComponent: () => import('./home/home.component'),
   },
   {
-    path: 'edit',
+    path: 'view',
     // component: DummyComponent,
-    loadComponent: () => import('./editor/editor.component'),
+    loadComponent: () => import('./view/view.component'),
   },
   {
     path: 'preview',

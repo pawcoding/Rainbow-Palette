@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './no-palette.component.css',
 })
 export class NoPaletteComponent {
-  public readonly parent = input.required<'editor' | 'preview'>();
+  public readonly parent = input.required<'view' | 'preview'>();
 
   protected readonly heroArrowUturnLeft = heroArrowUturnLeft;
 }

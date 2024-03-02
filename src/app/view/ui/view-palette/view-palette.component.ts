@@ -11,12 +11,12 @@ import { Palette } from '../../../shared/model/palette.model';
 import { Shade } from '../../../shared/model/shade.model';
 
 @Component({
-  selector: 'rp-editor-palette',
+  selector: 'rp-view-palette',
   standalone: true,
   imports: [NgIconComponent, TranslateModule],
-  templateUrl: './editor-palette.component.html',
+  templateUrl: './view-palette.component.html',
 })
-export class EditorPaletteComponent {
+export class ViewPaletteComponent {
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroAdjustmentsHorizontalMin =
     heroAdjustmentsHorizontalMini;

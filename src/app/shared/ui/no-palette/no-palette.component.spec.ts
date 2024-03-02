@@ -23,7 +23,7 @@ describe('NoPaletteComponent', () => {
     component = fixture.componentInstance;
 
     //@ts-expect-error
-    component.parent = signal('editor');
+    component.parent = signal('view');
 
     fixture.detectChanges();
   });

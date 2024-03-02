@@ -1,0 +1,68 @@
+@if (palette(); as palette) {
+<div class="p-4">
+  <section
+    class="flex flex-col items-center gap-2 mb-4 xs:items-end xs:justify-between xs:flex-row"
+  >
+    <h1 class="text-3xl font-bold select-none xs:text-2xl">
+      {{ palette.name }}
+    </h1>
+
+    <div class="flex gap-2">
+      <button
+        class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+        (click)="renamePalette()"
+      >
+        <ng-icon
+          [svg]="heroPencilSquareMini"
+          size="1.25rem"
+          class="scale-90 sm:scale-100"
+        />
+        <span>
+          {{ "common.rename" | translate }}
+        </span>
+      </button>
+
+      <button
+        [disabled]="saving()"
+        class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer group text-neutral-50 dark:bg-blue-600 disabled:bg-neutral-400 dark:disabled:bg-neutral-700 disabled:cursor-wait"
+        (click)="savePalette()"
+      >
+        <ng-icon
+          [svg]="saveIcon()"
+          size="1.25rem"
+          class="scale-90 sm:scale-100 group-disabled:animate-spin group-disabled:ease-in-out"
+        />
+        <span>
+          {{ (saving() ? "common.saving" : "common.save") | translate }}
+        </span>
+      </button>
+    </div>
+  </section>
+
+  <rp-view-palette
+    [palette]="palette"
+    (renameColor)="renameColor($event)"
+    (editColor)="editColor($event.color, $event.shadeIndex)"
+    (removeColor)="removeColor($event)"
+    (copyShade)="copyToClipboard($event)"
+  />
+
+  <section class="flex items-center justify-center gap-2 mt-8">
+    <button
+      class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+      (click)="addColor()"
+    >
+      <ng-icon
+        [svg]="heroPlusMini"
+        size="1.25rem"
+        class="scale-90 sm:scale-100"
+      />
+      <span>
+        {{ "view.color.add" | translate }}
+      </span>
+    </button>
+  </section>
+</div>
+} @else {
+<rp-no-palette [parent]="'view'" />
+}
