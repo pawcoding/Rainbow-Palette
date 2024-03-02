@@ -5,6 +5,10 @@ import {
   ColorNameService,
   ColorNameServiceMock,
 } from '../shared/data-access/color-name.service';
+import {
+  DialogService,
+  DialogServiceMock,
+} from '../shared/data-access/dialog.service';
 import ViewComponent from './view.component';
 
 describe('ViewComponent', () => {
@@ -17,6 +21,7 @@ describe('ViewComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: {} } },
         { provide: ColorNameService, useValue: new ColorNameServiceMock() },
+        { provide: DialogService, useValue: new DialogServiceMock() },
       ],
     }).compileComponents();
 

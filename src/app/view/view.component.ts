@@ -10,6 +10,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
 import { EditorComponent } from '../editor/editor.component';
 import { ColorService } from '../shared/data-access/color.service';
+import { DialogService } from '../shared/data-access/dialog.service';
 import { ModalService } from '../shared/data-access/modal.service';
 import { PaletteService } from '../shared/data-access/palette.service';
 import { ToastService } from '../shared/data-access/toast.service';
@@ -37,6 +38,7 @@ export default class ViewComponent {
   private readonly _paletteService = inject(PaletteService);
   private readonly _colorService = inject(ColorService);
   private readonly _translateService = inject(TranslateService);
+  private readonly _dialogService = inject(DialogService);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
@@ -52,13 +54,13 @@ export default class ViewComponent {
     }
   });
 
-  protected renamePalette(): void {
+  protected async renamePalette(): Promise<void> {
     const palette = this.palette();
     if (!palette) {
       return;
     }
 
-    const newName = window.prompt(
+    const newName = await this._dialogService.prompt(
       this._translateService.instant('view.palette.rename'),
       palette.name
     );
@@ -96,8 +98,8 @@ export default class ViewComponent {
     }, 3000);
   }
 
-  protected renameColor(color: Color): void {
-    const newName = window.prompt(
+  protected async renameColor(color: Color): Promise<void> {
+    const newName = await this._dialogService.prompt(
       this._translateService.instant('view.color.rename'),
       color.name
     );
@@ -124,15 +126,15 @@ export default class ViewComponent {
     });
   }
 
-  protected removeColor(color: Color): void {
+  protected async removeColor(color: Color): Promise<void> {
     const name = color.name;
-    if (
-      window.confirm(
-        this._translateService.instant('view.color.remove', {
-          color: name,
-        })
-      )
-    ) {
+    const shouldRemove = await this._dialogService.confirm(
+      this._translateService.instant('view.color.remove', {
+        color: name,
+      })
+    );
+
+    if (shouldRemove) {
       this.palette()?.removeColor(color);
 
       this._toastService.showToast({
