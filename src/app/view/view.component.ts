@@ -1,6 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import {
+  heroArrowDownTrayMini,
   heroArrowPathMini,
   heroBookmarkMini,
   heroPencilSquareMini,
@@ -11,6 +12,7 @@ import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode
 import { ColorEditorService } from '../shared/data-access/color-editor.service';
 import { ColorService } from '../shared/data-access/color.service';
 import { DialogService } from '../shared/data-access/dialog.service';
+import { ExportService } from '../shared/data-access/export.service';
 import { PaletteService } from '../shared/data-access/palette.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import { Color } from '../shared/model/color.model';
@@ -38,9 +40,11 @@ export default class ViewComponent {
   private readonly _colorService = inject(ColorService);
   private readonly _translateService = inject(TranslateService);
   private readonly _dialogService = inject(DialogService);
+  private readonly _exportService = inject(ExportService);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
+  protected readonly heroArrowDownTrayMini = heroArrowDownTrayMini;
 
   protected readonly palette = this._paletteService.palette;
   protected readonly saving = signal(false);
@@ -95,6 +99,15 @@ export default class ViewComponent {
         message: 'view.palette.saved',
       });
     }, 3000);
+  }
+
+  protected async exportPalette(): Promise<void> {
+    const palette = this.palette();
+    if (!palette) {
+      return;
+    }
+
+    await this._exportService.openExportModal(palette);
   }
 
   protected async renameColor(color: Color): Promise<void> {

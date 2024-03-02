@@ -1,23 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { PaletteScheme } from '../constants/palette-scheme';
-import { Toast } from '../interfaces/toast.interface';
-import { Color } from '../model/color.model';
 import { ColorNameService, ColorNameServiceMock } from './color-name.service';
-import { ColorService } from './color.service';
+import { ColorService, ColorServiceMock } from './color.service';
 import { PaletteService } from './palette.service';
-import { ToastService } from './toast.service';
+import { ToastService, ToastServiceMock } from './toast.service';
 
 describe('PaletteService', () => {
+  let toastService: ToastServiceMock;
+  let colorService: ColorServiceMock;
   let service: PaletteService;
 
-  const toastService = {
-    showToast(_toast: Toast) {},
-  };
-  const colorService = {
-    regenerateShades(_color: Color) {},
-  };
-
   beforeEach(() => {
+    toastService = new ToastServiceMock();
+    colorService = new ColorServiceMock();
+
     TestBed.configureTestingModule({
       providers: [
         {
@@ -30,8 +26,8 @@ describe('PaletteService', () => {
     });
     service = TestBed.inject(PaletteService);
 
-    spyOn(toastService, 'showToast');
-    spyOn(colorService, 'regenerateShades');
+    spyOn(toastService, 'showToast').and.callThrough();
+    spyOn(colorService, 'regenerateShades').and.callThrough();
   });
 
   it('should be created', () => {

@@ -2,24 +2,23 @@ import { Dialog } from '@angular/cdk/dialog';
 import { TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { Color } from '../model/color.model';
+import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
 import { DialogMock } from '../utils/dialog-mock';
-import { ColorEditorService } from './color-editor.service';
+import { ExportService } from './export.service';
 
-describe('ColorEditorService', () => {
-  let dialog: DialogMock<Color>;
-  let color: Color;
-  let service: ColorEditorService;
+describe('ExportService', () => {
+  let dialog: DialogMock<undefined>;
+  let service: ExportService;
 
   beforeEach(() => {
-    color = new Color([Shade.random()], 'Test');
-    dialog = new DialogMock(color);
+    dialog = new DialogMock(undefined);
 
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
       providers: [{ provide: Dialog, useValue: dialog }],
     });
-    service = TestBed.inject(ColorEditorService);
+    service = TestBed.inject(ExportService);
 
     spyOn(dialog, 'open').and.callThrough();
   });
@@ -28,11 +27,12 @@ describe('ColorEditorService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should open color editor', async () => {
-    const newColor = await service.openColorEditor(color);
+  it('should open export modal', async () => {
+    const palette = new Palette('TestPalette', [
+      new Color([Shade.random()], 'TestColor'),
+    ]);
+    await service.openExportModal(palette);
 
     expect(dialog.open).toHaveBeenCalledTimes(1);
-    expect(newColor).toBeDefined();
-    expect(newColor?.toString()).toBe(color.toString());
   });
 });

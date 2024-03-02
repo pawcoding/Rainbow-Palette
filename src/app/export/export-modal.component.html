@@ -1,0 +1,7 @@
+<article
+  class="flex flex-col w-full max-w-lg gap-4 p-4 mx-auto rounded shadow-md dark:border bg-neutral-100 dark:border-neutral-600 dark:shadow-none dark:bg-neutral-700"
+>
+  @switch (state()) { @case (ExportModalState.FORMAT) {
+  <rp-export-format (choseExportFormat)="choseFormat($event)" />
+  } }
+</article>

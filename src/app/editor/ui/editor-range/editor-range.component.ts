@@ -6,13 +6,12 @@ import {
   model,
   numberAttribute,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
 import { hueToWheel, wheelToHue } from '../../utils/color-wheel';
 
 @Component({
   selector: 'rp-editor-range',
   standalone: true,
-  imports: [TranslateModule, DecimalPipe],
+  imports: [DecimalPipe],
   templateUrl: './editor-range.component.html',
   styleUrl: './editor-range.component.css',
 })

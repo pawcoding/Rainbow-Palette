@@ -392,3 +392,7 @@ export class ColorService {
     return Math.max(Math.min(Math.round(saturation), 100), 0);
   }
 }
+
+export class ColorServiceMock {
+  public regenerateShades(_color: Color): void {}
+}

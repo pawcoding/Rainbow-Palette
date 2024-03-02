@@ -11,6 +11,17 @@
     "save": "Save",
     "saving": "Saving..."
   },
+  "export": {
+    "format": {
+      "css": "CSS",
+      "description": "Choose the format you want to export your palette in.",
+      "less": "LESS",
+      "other": "Other",
+      "scss": "SCSS",
+      "tailwind": "TailwindCSS",
+      "title": "Pick a format"
+    }
+  },
   "home": {
     "generator": {
       "color": "Enter your color",

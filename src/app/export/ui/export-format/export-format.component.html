@@ -1,0 +1,32 @@
+<section>
+  <h1 class="text-lg font-bold">
+    {{ "export.format.title" | translate }}
+  </h1>
+
+  <p>
+    {{ "export.format.description" | translate }}
+  </p>
+
+  <div
+    class="grid items-center justify-center gap-1 pt-4 font-semibold text-neutral-600 dark:text-neutral-300 xs:gap-4 xs:grid-cols-3"
+  >
+    @for (format of formats; track format.format) {
+    <button
+      class="flex items-center justify-start w-full gap-4 p-2 transition-colors duration-200 rounded-md xs:flex-col xs:gap-2 xs:justify-center hover:bg-neutral-200 dark:hover:bg-neutral-800"
+      (click)="choseFormat(format.format)"
+    >
+      <span
+        class="flex items-center justify-center p-1 rounded-full xs:p-2 bg-neutral-100 dark:bg-neutral-200"
+      >
+        <ng-icon
+          [svg]="format.icon"
+          size="2rem"
+          [color]="format.color"
+          class="scale-75 xs:scale-100"
+        />
+      </span>
+      <span>{{ format.label | translate }}</span>
+    </button>
+    }
+  </div>
+</section>

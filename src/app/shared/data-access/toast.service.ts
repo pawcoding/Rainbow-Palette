@@ -96,3 +96,19 @@ export class ToastService {
     this._toast.set(undefined);
   }
 }
+
+export class ToastServiceMock {
+  private readonly _toast = signal<Toast | undefined>(undefined);
+
+  public get toast(): Signal<Toast | undefined> {
+    return this._toast.asReadonly();
+  }
+
+  public showToast(toast: Toast): void {
+    this._toast.set(toast);
+  }
+
+  public hideToast(): void {
+    this._toast.set(undefined);
+  }
+}

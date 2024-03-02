@@ -7,22 +7,8 @@ import { ColorNameService } from './color-name.service';
 
 const testColorDictionary = `name;hue;saturation;luminosity
 Black;-1;0;0
-Cultured;-1;0;96
-Davys grey;-1;0;33
-Dim gray;-1;0;41
-Eerie black;-1;0;11
-Gainsboro;-1;0;86
-Granite gray;-1;0;40
-Gray;-1;0;50
-Gray;-1;0;75
-Jet;-1;0;20
-Light gray;-1;0;83
-Quick Silver;-1;0;65
-Silver;-1;0;75
-Silver chalice;-1;0;67
-Sonic silver;-1;0;46
-Spanish gray;-1;0;60
-White;-1;0;100`;
+White;-1;0;100
+Blue;190;100;34`;
 
 describe('ColorNameService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
