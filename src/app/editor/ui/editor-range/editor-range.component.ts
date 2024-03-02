@@ -17,7 +17,8 @@ import { hueToWheel, wheelToHue } from '../../utils/color-wheel';
   styleUrl: './editor-range.component.css',
 })
 export class EditorRangeComponent {
-  public readonly key = input.required<string>();
+  public readonly label = input.required<string>();
+  public readonly key = input.required<'hue' | 'saturation' | 'lightness'>();
   public readonly value = model.required<number>();
   public readonly min = input(0, {
     transform: numberAttribute,
@@ -27,9 +28,9 @@ export class EditorRangeComponent {
   });
 
   protected readonly transformedValue = computed(() => {
-    if (this.key() === 'common.hue') {
+    if (this.key() === 'hue') {
       return hueToWheel(this.value());
-    } else if (this.key() === 'common.lightness') {
+    } else if (this.key() === 'lightness') {
       return 100 - this.value();
     } else {
       return this.value();
@@ -41,9 +42,9 @@ export class EditorRangeComponent {
       value = parseFloat(value);
     }
 
-    if (this.key() === 'common.hue') {
+    if (this.key() === 'hue') {
       this.value.set(wheelToHue(value));
-    } else if (this.key() === 'common.lightness') {
+    } else if (this.key() === 'lightness') {
       this.value.set(100 - value);
     } else {
       this.value.set(value);

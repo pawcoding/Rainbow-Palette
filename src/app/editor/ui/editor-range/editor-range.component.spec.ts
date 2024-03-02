@@ -1,5 +1,5 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditorRangeComponent } from './editor-range.component';
 
 describe('EditorRangeComponent', () => {
@@ -8,12 +8,19 @@ describe('EditorRangeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditorRangeComponent]
-    })
-    .compileComponents();
-    
+      imports: [EditorRangeComponent],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(EditorRangeComponent);
     component = fixture.componentInstance;
+
+    // @ts-expect-error
+    component.label = signal('Test');
+    // @ts-expect-error
+    component.key = signal('hue');
+    // @ts-expect-error
+    component.value = signal(0);
+
     fixture.detectChanges();
   });
 

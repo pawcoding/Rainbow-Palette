@@ -14,23 +14,26 @@
   <section class="flex flex-col gap-2">
     <rp-editor-range
       id="hue-range"
-      key="common.hue"
+      key="hue"
       min="0"
       max="360"
+      [label]="'common.hue' | translate"
       [value]="shade().hsl.H"
       (valueChange)="update(UpdateType.HUE, $event)"
     />
 
     <rp-editor-range
       id="saturation-range"
-      key="common.saturation"
+      key="saturation"
+      [label]="'common.saturation' | translate"
       [value]="shade().hsl.S"
       (valueChange)="update(UpdateType.SATURATION, $event)"
     />
 
     <rp-editor-range
       id="lightness-range"
-      key="common.lightness"
+      key="lightness"
+      [label]="'common.lightness' | translate"
       [value]="shade().hsl.L"
       (valueChange)="update(UpdateType.LIGHTNESS, $event)"
     />

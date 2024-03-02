@@ -1,7 +1,7 @@
 import { Shade } from './shade.model';
 
 export class Color {
-  public name = 'Blue';
+  public name: string;
   public shades: Array<Shade>;
 
   constructor(shades: Array<Shade>, name: string) {

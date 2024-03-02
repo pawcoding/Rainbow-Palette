@@ -8,10 +8,9 @@ import {
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
-import { EditorComponent } from '../editor/editor.component';
+import { ColorEditorService } from '../shared/data-access/color-editor.service';
 import { ColorService } from '../shared/data-access/color.service';
 import { DialogService } from '../shared/data-access/dialog.service';
-import { ModalService } from '../shared/data-access/modal.service';
 import { PaletteService } from '../shared/data-access/palette.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import { Color } from '../shared/model/color.model';
@@ -33,7 +32,7 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
   templateUrl: './view.component.html',
 })
 export default class ViewComponent {
-  private readonly _modalService = inject(ModalService);
+  private readonly _colorEditorService = inject(ColorEditorService);
   private readonly _toastService = inject(ToastService);
   private readonly _paletteService = inject(PaletteService);
   private readonly _colorService = inject(ColorService);
@@ -120,14 +119,10 @@ export default class ViewComponent {
   }
 
   protected async editColor(color: Color, shadeIndex?: number): Promise<void> {
-    const updatedColor = await this._modalService.openModal<
-      Color | undefined,
-      EditorComponent
-    >(EditorComponent, {
-      // @ts-expect-error
-      data: { color, shadeIndex },
-      disableClose: true,
-    });
+    const updatedColor = await this._colorEditorService.openColorEditor(
+      color,
+      shadeIndex
+    );
 
     if (!updatedColor) {
       return;
