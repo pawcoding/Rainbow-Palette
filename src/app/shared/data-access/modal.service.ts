@@ -16,7 +16,7 @@ export class ModalService {
     return this._modalStack.pipe(map(() => {}));
   }
 
-  public async openModal<TModalData, TModalResult>(
+  public async openModal<TModalResult, TModalData>(
     modal: ComponentType<TModalData>,
     config: DialogConfig<TModalData, DialogRef<TModalResult, TModalData>>
   ): Promise<TModalResult | undefined> {

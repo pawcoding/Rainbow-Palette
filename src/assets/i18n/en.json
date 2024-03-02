@@ -1,5 +1,6 @@
 {
   "common": {
+    "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
     "export": "Export",

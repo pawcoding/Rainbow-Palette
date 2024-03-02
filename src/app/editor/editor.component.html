@@ -1,5 +1,46 @@
-<article>
+<article
+  class="flex flex-col w-full max-w-md gap-2 p-4 mx-auto rounded bg-neutral-100 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-100"
+>
   <h2>{{ color().name }}</h2>
 
-  <rp-color-input [hex]="shade().hex" placeholder="view.color.placeholder" />
+  <!-- Edit hex -->
+  <rp-color-input
+    [hex]="shade().hex"
+    (hexChange)="updateHex($event)"
+    placeholder="view.color.placeholder"
+  />
+
+  <section
+    class="grid grid-cols-10 text-sm border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-none grow"
+  >
+    @for (shadeInRow of color().shades; track shadeInRow.hex) {
+    <button
+      class="flex items-center justify-center w-full border-current h-14"
+      [class.border-4]="shadeInRow.index === shadeIndex()"
+      [class.rounded-l-md]="$first"
+      [class.rounded-r-md]="$last"
+      [style.backgroundColor]="shadeInRow.hex"
+      [style.color]="
+        shadeInRow.perceivedBrightness > 51
+          ? darkestShade().hex
+          : lightestShade().hex
+      "
+      [title]="'editor.shades' | translate"
+      (click)="changeShade(shadeInRow.index)"
+      (contextmenu)="unfixShade(shadeInRow, $event)"
+    >
+      {{ shadeInRow.fixed ? "■" : "" }}
+    </button>
+    }
+  </section>
+
+  <section class="ml-auto">
+    <button (click)="cancel()">
+      {{ "common.cancel" | translate }}
+    </button>
+
+    <button (click)="save()">
+      {{ "common.save" | translate }}
+    </button>
+  </section>
 </article>

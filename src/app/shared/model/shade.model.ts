@@ -42,9 +42,9 @@ export class Shade {
       throw new Error(`Invalid hex color: "${hex}`);
     }
 
-    this._value.setR(parseInt(hex.substring(1, 2), 16));
-    this._value.setG(parseInt(hex.substring(3, 2), 16));
-    this._value.setB(parseInt(hex.substring(5, 2), 16));
+    this._value.setR(parseInt(hex.substring(1, 3), 16));
+    this._value.setG(parseInt(hex.substring(3, 5), 16));
+    this._value.setB(parseInt(hex.substring(5, 7), 16));
 
     this._perceivedBrightness = undefined;
   }

@@ -17,6 +17,13 @@ export class Color {
       }, 0);
   }
 
+  public copy(): Color {
+    return new Color(
+      this.shades.map((shade) => shade.copy()),
+      this.name
+    );
+  }
+
   public static parse(color: string | object): Color {
     if (typeof color === 'string') {
       try {

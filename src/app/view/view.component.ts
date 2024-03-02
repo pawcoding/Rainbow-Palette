@@ -120,10 +120,20 @@ export default class ViewComponent {
   }
 
   protected async editColor(color: Color, shadeIndex?: number): Promise<void> {
-    this._modalService.openModal(EditorComponent, {
+    const updatedColor = await this._modalService.openModal<
+      Color | undefined,
+      EditorComponent
+    >(EditorComponent, {
       // @ts-expect-error
       data: { color, shadeIndex },
+      disableClose: true,
     });
+
+    if (!updatedColor) {
+      return;
+    }
+
+    color.shades = updatedColor.shades;
   }
 
   protected async removeColor(color: Color): Promise<void> {
