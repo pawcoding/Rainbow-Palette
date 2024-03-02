@@ -22,7 +22,10 @@ export class ModalService {
   ): Promise<TModalResult | undefined> {
     const dialogRef = this._dialog.open<TModalResult, TModalData, TModalData>(
       modal,
-      config
+      {
+        backdropClass: 'rp-modal-backdrop',
+        ...config,
+      }
     );
 
     this._modalStack.next([...this._modalStack.value, dialogRef]);

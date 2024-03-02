@@ -25,6 +25,6 @@ export default class HomeComponent {
 
     this._paletteService.generatePalette(this.hex(), this.scheme());
 
-    await this._router.navigate(['/edit']);
+    await this._router.navigate(['/view']);
   }
 }

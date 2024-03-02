@@ -1,18 +1,43 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
-import { Component, computed, inject, signal } from '@angular/core';
+import { DecimalPipe } from '@angular/common';
+import {
+  Component,
+  ElementRef,
+  computed,
+  effect,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { ColorService } from '../shared/data-access/color.service';
 import { Color } from '../shared/model/color.model';
 import { Shade } from '../shared/model/shade.model';
 import { ColorInputComponent } from '../shared/ui/color-input/color-input.component';
+import { EditorRangeComponent } from './ui/editor-range/editor-range.component';
+
+enum UpdateType {
+  HEX = 'hex',
+  HUE = 'hue',
+  SATURATION = 'saturation',
+  LIGHTNESS = 'lightness',
+}
 
 @Component({
   selector: 'rp-editor',
   standalone: true,
-  imports: [ColorInputComponent, TranslateModule],
+  imports: [
+    ColorInputComponent,
+    TranslateModule,
+    DecimalPipe,
+    EditorRangeComponent,
+  ],
   templateUrl: './editor.component.html',
+  styleUrl: './editor.component.css',
 })
 export class EditorComponent {
+  protected readonly UpdateType = UpdateType;
+
   private readonly _data = inject<{ color: Color; shadeIndex?: number }>(
     DIALOG_DATA
   );
@@ -47,6 +72,30 @@ export class EditorComponent {
     return shades[shades.length - 1];
   });
 
+  private readonly _editor =
+    viewChild.required<ElementRef<HTMLElement>>('editor');
+
+  constructor() {
+    effect(() => {
+      this._editor().nativeElement.style.setProperty(
+        '--editor-hex',
+        this.shade().hex
+      );
+      this._editor().nativeElement.style.setProperty(
+        '--editor-hue',
+        `${this.shade().hsl.H}`
+      );
+      this._editor().nativeElement.style.setProperty(
+        '--editor-saturation',
+        `${this.shade().hsl.S}%`
+      );
+      this._editor().nativeElement.style.setProperty(
+        '--editor-lightness',
+        `${this.shade().hsl.L}%`
+      );
+    });
+  }
+
   protected changeShade(index: number) {
     this.shadeIndex.set(index);
   }
@@ -73,15 +122,28 @@ export class EditorComponent {
     this._updateColor();
   }
 
-  protected updateHex(hex: string): void {
+  protected update(type: UpdateType, value: string | number) {
     const shade = this.shade();
-
-    shade.hex = hex;
     shade.fixed = true;
+
+    switch (type) {
+      case UpdateType.HEX:
+        shade.hex = value as string;
+        break;
+      case UpdateType.HUE:
+        shade.hsl = { ...shade.hsl, H: value as number };
+        break;
+      case UpdateType.SATURATION:
+        shade.hsl = { ...shade.hsl, S: value as number };
+        break;
+      case UpdateType.LIGHTNESS:
+        shade.hsl = { ...shade.hsl, L: value as number };
+        break;
+    }
 
     this._updateColor();
 
-    const editedShade = this.color().shades.find((s) => s.hex === hex);
+    const editedShade = this.color().shades.find((s) => s.hex === shade.hex);
     this.shadeIndex.set(editedShade?.index ?? -1);
   }
 

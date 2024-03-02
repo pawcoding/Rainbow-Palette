@@ -3,3 +3,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  input[type="color"] {
+    @apply outline-none appearance-none cursor-pointer;
+    -webkit-appearance: none;
+  }
+
+  input[type="color"]::-webkit-color-swatch-wrapper {
+    @apply p-0;
+  }
+
+  input[type="color"]::-webkit-color-swatch {
+    @apply h-full border-none;
+  }
+
+  input[type="range"] {
+    @apply w-full h-4 mt-2 rounded-md outline-none appearance-none cursor-pointer sm:h-3;
+  }
+
+  input[type="range"]::-webkit-slider-thumb {
+    @apply w-8 h-8 border-none rounded-md outline-none appearance-none sm:w-6 sm:h-6 cursor-grab;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+
+  input[type="range"]::-moz-range-thumb {
+    @apply w-8 h-8 border-none rounded-md outline-none appearance-none sm:w-6 sm:h-6 cursor-grab;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+}
+
+@layer utilities {
+  .rp-modal-backdrop {
+    @apply backdrop-blur-sm bg-neutral-900/20 dark:bg-neutral-900/75;
+  }
+}

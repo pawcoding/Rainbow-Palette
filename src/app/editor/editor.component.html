@@ -1,14 +1,40 @@
 <article
-  class="flex flex-col w-full max-w-md gap-2 p-4 mx-auto rounded bg-neutral-100 text-neutral-900 dark:bg-neutral-700 dark:text-neutral-100"
+  #editor
+  class="flex flex-col w-full max-w-md gap-4 p-4 mx-auto rounded shadow-md dark:border bg-neutral-100 dark:border-neutral-600 dark:shadow-none dark:bg-neutral-700"
 >
-  <h2>{{ color().name }}</h2>
+  <h2 class="font-semibold">{{ color().name }}</h2>
 
   <!-- Edit hex -->
   <rp-color-input
     [hex]="shade().hex"
-    (hexChange)="updateHex($event)"
+    (hexChange)="update(UpdateType.HEX, $event)"
     placeholder="view.color.placeholder"
   />
+
+  <section class="flex flex-col gap-2">
+    <rp-editor-range
+      id="hue-range"
+      key="common.hue"
+      min="0"
+      max="360"
+      [value]="shade().hsl.H"
+      (valueChange)="update(UpdateType.HUE, $event)"
+    />
+
+    <rp-editor-range
+      id="saturation-range"
+      key="common.saturation"
+      [value]="shade().hsl.S"
+      (valueChange)="update(UpdateType.SATURATION, $event)"
+    />
+
+    <rp-editor-range
+      id="lightness-range"
+      key="common.lightness"
+      [value]="shade().hsl.L"
+      (valueChange)="update(UpdateType.LIGHTNESS, $event)"
+    />
+  </section>
 
   <section
     class="grid grid-cols-10 text-sm border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-none grow"
@@ -34,12 +60,18 @@
     }
   </section>
 
-  <section class="ml-auto">
-    <button (click)="cancel()">
+  <section class="flex justify-end gap-2">
+    <button
+      class="px-2 py-1.5 font-semibold rounded cursor-pointer bg-neutral-300 dark:bg-neutral-600"
+      (click)="cancel()"
+    >
       {{ "common.cancel" | translate }}
     </button>
 
-    <button (click)="save()">
+    <button
+      class="px-2 py-1.5 font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+      (click)="save()"
+    >
       {{ "common.save" | translate }}
     </button>
   </section>

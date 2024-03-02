@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  background-color: var(--editor-hex);
+}
+
+input[type="range"]::-moz-range-thumb {
+  background-color: var(--editor-hex);
+}

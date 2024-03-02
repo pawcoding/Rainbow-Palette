@@ -1,0 +1,22 @@
+<div>
+  <label [for]="key()" class="flex justify-between">
+    <span class="font-semibold">
+      {{ key() | translate }}
+    </span>
+
+    <span>
+      {{ value() | number : "1.0-0" }}
+    </span>
+  </label>
+
+  <input
+    type="range"
+    [id]="key()"
+    [min]="min()"
+    [max]="max()"
+    step="1"
+    [value]="transformedValue()"
+    #input
+    (input)="updateValue(input.value)"
+  />
+</div>

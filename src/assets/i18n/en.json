@@ -4,7 +4,10 @@
     "delete": "Delete",
     "edit": "Edit",
     "export": "Export",
+    "hue": "Hue",
+    "lightness": "Lightness",
     "rename": "Rename",
+    "saturation": "Saturation",
     "save": "Save",
     "saving": "Saving..."
   },

@@ -6,7 +6,11 @@ module.exports = {
   content: ["./src/**/*{html,ts}"],
   darkMode: "class",
   theme: {
-    extend: {},
+    extend: {
+      backdropBlur: {
+        xs: "2px",
+      },
+    },
     screens: {
       xs: "425px",
       ...defaultTheme.screens,
