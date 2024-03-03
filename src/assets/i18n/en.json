@@ -1,5 +1,6 @@
 {
   "common": {
+    "back": "Back",
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
@@ -12,6 +13,17 @@
     "saving": "Saving..."
   },
   "export": {
+    "download": {
+      "copy": "Copy to clipboard",
+      "description": {
+        "css": "Do you want to copy the CSS properties into your own files or create a new one?",
+        "less": "Do you want to copy the LESS variables into your own files or create a new one?",
+        "scss": "Do you want to copy the SCSS variables into your own files or create a new one?",
+        "tailwind": "Do you want to copy the colors into your existing TailwindCSS config file or create an extra file for your palette?"
+      },
+      "file": "Download file",
+      "title": "Pick a download option"
+    },
     "format": {
       "css": "CSS",
       "description": "Choose the format you want to export your palette in.",
@@ -20,6 +32,33 @@
       "scss": "SCSS",
       "tailwind": "TailwindCSS",
       "title": "Pick a format"
+    },
+    "request-format": {
+      "description": "If you find a format missing, please check if it is already requested on GitHub. If not, you can create a new issue there and I will try to add it as soon as possible.",
+      "open-issue": "Request format",
+      "title": "Missing a format?"
+    },
+    "success": {
+      "description": {
+        "css": {
+          "copy": "The palette has been copied to your clipboard. To use the colors as CSS properties copy the contents of the clipboard to the {{ root }} of your css file.<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
+          "file": "Move the downloaded {{ file }} file to the root of your webserver. Then link it in the head of your html file like:<br>{{ link }}<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}"
+        },
+        "less": {
+          "copy": "The palette has been copied to your clipboard. To use the colors as LESS variables copy the contents of the clipboard to the top of your less file.<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
+          "file": "Move the downloaded {{ file }} file to the root of your project. Then link it in the head of your less files like:<br>{{ link }}<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}"
+        },
+        "scss": {
+          "copy": "The palette has been copied to your clipboard. To use the colors as SCSS variables copy the contents of the clipboard to the top of your scss file.<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}",
+          "file": "Move the downloaded {{ file }} file to the root of your project. Then link it in the head of your scss files like:<br>{{ link }}<br><br>Now you can use your colors by referencing them like:<br>{{ usage }}"
+        },
+        "tailwind": {
+          "copy": "The palette has been copied to your clipboard. To use the colors copy the contents of the clipboard to the {{ config }} file.<br><br>Check TailwindsCSS's documentation for further instructions.",
+          "file": "Move the downloaded {{ file }} file to the root of your project. Then import the colors in your {{ config }} file like:<br>{{ import }}<br><br>Check TailwindCSS's documentation for further instructions."
+        }
+      },
+      "documentation": "Open documentation",
+      "title": "Successfully exported"
     }
   },
   "home": {

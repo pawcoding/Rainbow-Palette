@@ -24,6 +24,7 @@ export class ExportService {
       data: {
         palette,
       },
+      panelClass: 'rp-modal-panel',
     });
 
     return await firstValueFrom(

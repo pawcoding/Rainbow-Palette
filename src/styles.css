@@ -37,6 +37,10 @@
 
 @layer utilities {
   .rp-modal-backdrop {
-    @apply backdrop-blur-sm bg-neutral-900/20 dark:bg-neutral-900/75;
+    @apply backdrop-blur-sm bg-neutral-900/40 dark:bg-neutral-900/75;
+  }
+
+  .rp-modal-panel {
+    @apply p-4;
   }
 }

@@ -1,0 +1,22 @@
+<section>
+  <h1 class="text-lg font-bold">
+    {{ "export.success.title" | translate }}
+  </h1>
+
+  <p
+    class="text-sm"
+    [innerHTML]="description() | translate : descriptionParams() | safeHtml"
+  ></p>
+
+  <div
+    class="flex items-center justify-end gap-1 pt-4 font-semibold text-neutral-600 dark:text-neutral-300 xs:gap-4"
+  >
+    <a
+      class="p-2 transition-colors duration-200 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-800"
+      [href]="descriptionParams().docs"
+      target="_blank"
+    >
+      {{ "export.success.documentation" | translate }}
+    </a>
+  </div>
+</section>

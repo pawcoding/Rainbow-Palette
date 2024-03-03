@@ -29,6 +29,7 @@ export class ColorEditorService {
         shadeIndex,
       },
       disableClose: true,
+      panelClass: 'rp-modal-panel',
     });
 
     return await firstValueFrom(

@@ -1,0 +1,45 @@
+<section>
+  <h1 class="text-lg font-bold">
+    {{ "export.download.title" | translate }}
+  </h1>
+
+  <p class="text-sm">
+    {{ "export.download.description." + exportFormat() | translate }}
+  </p>
+
+  <div
+    class="grid items-center justify-center gap-1 pt-4 font-semibold text-neutral-600 dark:text-neutral-300 xs:gap-4 xs:grid-cols-2"
+  >
+    <button
+      class="flex items-center justify-start w-full gap-4 p-2 transition-colors duration-200 rounded-md xs:flex-col xs:gap-2 xs:justify-center hover:bg-neutral-200 dark:hover:bg-neutral-800"
+      (click)="copy()"
+    >
+      <span
+        class="flex items-center justify-center p-1 rounded-full xs:p-2 bg-neutral-100 dark:bg-neutral-200 dark:text-neutral-800"
+      >
+        <ng-icon
+          [svg]="heroDocumentDuplicate"
+          size="2rem"
+          class="scale-75 xs:scale-100"
+        />
+      </span>
+      <span>{{ "export.download.copy" | translate }}</span>
+    </button>
+
+    <button
+      class="flex items-center justify-start w-full gap-4 p-2 transition-colors duration-200 rounded-md xs:flex-col xs:gap-2 xs:justify-center hover:bg-neutral-200 dark:hover:bg-neutral-800"
+      (click)="download()"
+    >
+      <span
+        class="flex items-center justify-center p-1 rounded-full xs:p-2 bg-neutral-100 dark:bg-neutral-200 dark:text-neutral-800"
+      >
+        <ng-icon
+          [svg]="heroArrowDownTray"
+          size="2rem"
+          class="scale-75 xs:scale-100"
+        />
+      </span>
+      <span>{{ "export.download.file" | translate }}</span>
+    </button>
+  </div>
+</section>

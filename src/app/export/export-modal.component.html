@@ -1,7 +1,51 @@
 <article
-  class="flex flex-col w-full max-w-lg gap-4 p-4 mx-auto rounded shadow-md dark:border bg-neutral-100 dark:border-neutral-600 dark:shadow-none dark:bg-neutral-700"
+  class="flex flex-col w-full max-w-lg gap-1 p-4 mx-auto rounded shadow-md dark:border bg-neutral-100 dark:border-neutral-600 dark:shadow-none dark:bg-neutral-700"
 >
-  @switch (state()) { @case (ExportModalState.FORMAT) {
-  <rp-export-format (choseExportFormat)="choseFormat($event)" />
-  } }
+  <div class="flex">
+    @if (state() !== ExportModalState.FORMAT) {
+      <button
+        class="flex items-center justify-center p-2 rounded-md cursor-pointer dark:hover:bg-neutral-800 hover:bg-neutral-200"
+        (click)="back()"
+      >
+        <ng-icon [svg]="heroArrowLeftMini" />
+      </button>
+    }
+
+    <button
+      class="flex items-center justify-center p-2 ml-auto rounded-md cursor-pointer dark:hover:bg-neutral-800 hover:bg-neutral-200"
+      (click)="close()"
+    >
+      <ng-icon [svg]="heroXMarkMini" class="size-4" />
+    </button>
+  </div>
+
+  @switch (state()) {
+    @case (ExportModalState.FORMAT) {
+      <rp-export-format (choseExportFormat)="choseFormat($event)" />
+    }
+
+    @case (ExportModalState.DOWNLOAD) {
+      @if(format(); as format) {
+        @if (format === ExportFormat.OTHER) {
+          <rp-request-format />
+        } @else {
+          <rp-export-download
+            [exportFormat]="format"
+            (choseDownloadFormat)="choseDownloadFormat($event)"
+          />
+        }
+      }
+    }
+
+    @case (ExportModalState.SUCCESS) {
+      @if(format(); as format) {
+        @if(downloadOption(); as downloadOption) {
+          <rp-export-success
+            [exportFormat]="format"
+            [exportOption]="downloadOption"
+          />
+        }
+      }
+    }
+  }
 </article>
