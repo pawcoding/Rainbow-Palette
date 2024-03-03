@@ -41,3 +41,11 @@ export class HomeService {
     }
   }
 }
+
+export class HomeServiceMock {
+  public readonly hex = signal('#3B82F6');
+  public readonly scheme = signal(PaletteScheme.RAINBOW);
+
+  public saveGenerationSettings(): void {}
+  public loadGenerationSettings(): void {}
+}

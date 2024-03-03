@@ -40,3 +40,8 @@ export class ThemeService {
     this._theme.set(theme);
   }
 }
+
+export class ThemeServiceMock {
+  public readonly theme = signal<Theme>('light').asReadonly();
+  public setTheme(_theme: Theme): void {}
+}

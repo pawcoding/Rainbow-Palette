@@ -20,7 +20,7 @@ export default class HomeComponent {
   protected readonly hex = this._homeService.hex;
   protected readonly scheme = this._homeService.scheme;
 
-  protected async generatePalette(): Promise<void> {
+  public async generatePalette(): Promise<void> {
     this._homeService.saveGenerationSettings();
 
     this._paletteService.generatePalette(this.hex(), this.scheme());

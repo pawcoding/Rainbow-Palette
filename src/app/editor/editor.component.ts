@@ -16,7 +16,7 @@ import { Shade } from '../shared/model/shade.model';
 import { ColorInputComponent } from '../shared/ui/color-input/color-input.component';
 import { EditorRangeComponent } from './ui/editor-range/editor-range.component';
 
-enum UpdateType {
+export enum UpdateType {
   HEX = 'hex',
   HUE = 'hue',
   SATURATION = 'saturation',
@@ -100,7 +100,7 @@ export class EditorComponent {
     this.shadeIndex.set(index);
   }
 
-  protected unfixShade(shade: Shade, $event?: MouseEvent) {
+  public unfixShade(shade: Shade, $event?: MouseEvent) {
     if ($event) {
       $event.stopPropagation();
       $event.preventDefault();
@@ -122,7 +122,7 @@ export class EditorComponent {
     this._updateColor();
   }
 
-  protected update(type: UpdateType, value: string | number) {
+  public update(type: UpdateType, value: string | number) {
     const shade = this.shade();
     shade.fixed = true;
 

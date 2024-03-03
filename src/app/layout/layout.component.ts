@@ -124,11 +124,11 @@ export class LayoutComponent implements AfterViewInit {
     this.initialized.set(true);
   }
 
-  protected changeLanguage(language: Language): void {
+  public changeLanguage(language: Language): void {
     this._languageService.setLanguage(language);
   }
 
-  protected changeTheme(theme: Theme): void {
+  public changeTheme(theme: Theme): void {
     this._themeService.setTheme(theme);
   }
 }

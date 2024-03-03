@@ -37,7 +37,7 @@ export class ToastComponent {
     }
   });
 
-  protected closeToast(): void {
+  public closeToast(): void {
     this._toastService.hideToast();
   }
 }

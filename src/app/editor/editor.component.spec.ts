@@ -2,18 +2,21 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
-  ColorNameService,
-  ColorNameServiceMock,
-} from '../shared/data-access/color-name.service';
+  ColorService,
+  ColorServiceMock,
+} from '../shared/data-access/color.service';
 import { Color } from '../shared/model/color.model';
 import { Shade } from '../shared/model/shade.model';
-import { EditorComponent } from './editor.component';
+import { EditorComponent, UpdateType } from './editor.component';
 
 describe('EditorComponent', () => {
+  let colorService: ColorServiceMock;
   let component: EditorComponent;
   let fixture: ComponentFixture<EditorComponent>;
 
   beforeEach(async () => {
+    colorService = new ColorServiceMock();
+
     await TestBed.configureTestingModule({
       imports: [EditorComponent, TranslateModule.forRoot()],
       providers: [
@@ -25,7 +28,7 @@ describe('EditorComponent', () => {
           },
         },
         { provide: DialogRef, useValue: {} },
-        { provide: ColorNameService, useValue: new ColorNameServiceMock() },
+        { provide: ColorService, useValue: colorService },
       ],
     }).compileComponents();
 
@@ -36,5 +39,28 @@ describe('EditorComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should regenerate shades on shade release', () => {
+    spyOn(colorService, 'regenerateShades');
+
+    const shade = Shade.random();
+    shade.fixed = true;
+
+    component.unfixShade(shade);
+
+    expect(shade.fixed).toBeFalse();
+    expect(colorService.regenerateShades).toHaveBeenCalledTimes(1);
+  });
+
+  it('should regenerate shades on color update', () => {
+    spyOn(colorService, 'regenerateShades');
+
+    component.update(UpdateType.HEX, '#ffffff');
+    component.update(UpdateType.HUE, 0);
+    component.update(UpdateType.SATURATION, 0);
+    component.update(UpdateType.LIGHTNESS, 0);
+
+    expect(colorService.regenerateShades).toHaveBeenCalledTimes(4);
   });
 });

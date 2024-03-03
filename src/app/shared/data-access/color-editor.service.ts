@@ -2,6 +2,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Injectable, inject, signal } from '@angular/core';
 import { firstValueFrom, tap } from 'rxjs';
 import { Color } from '../model/color.model';
+import { sleep } from '../utils/sleep';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +36,16 @@ export class ColorEditorService {
     return await firstValueFrom(
       dialogRef.closed.pipe(tap(() => this._isModalOpen.set(false)))
     );
+  }
+}
+
+export class ColorEditorServiceMock {
+  public async openColorEditor(
+    color: Color,
+    _shadeIndex?: number
+  ): Promise<Color | undefined> {
+    await sleep(10);
+
+    return color.copy();
   }
 }

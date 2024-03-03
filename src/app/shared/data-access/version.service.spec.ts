@@ -7,6 +7,8 @@ describe('VersionService', () => {
   let service: VersionService;
 
   beforeEach(() => {
+    spyOn(console, 'info');
+
     TestBed.configureTestingModule({});
     service = TestBed.inject(VersionService);
   });
@@ -24,10 +26,15 @@ describe('VersionService', () => {
     expect(service.appVersion).toBeTruthy();
     expect(service.appVersion).toBe(packageJson.version);
   });
+});
 
+describe('VersionService', () => {
   it('should log versions', () => {
-    const consoleSpy = spyOn(console, 'info');
-    service = new VersionService();
-    expect(consoleSpy).toHaveBeenCalledTimes(2);
+    spyOn(console, 'info');
+
+    TestBed.configureTestingModule({});
+    const service = TestBed.inject(VersionService);
+
+    expect(console.info).toHaveBeenCalledTimes(2);
   });
 });

@@ -1,9 +1,12 @@
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ColorTranslator } from 'colortranslator';
-import { of } from 'rxjs';
 import { Shade } from '../model/shade.model';
 import { ColorNameService } from './color-name.service';
+import { ToastService, ToastServiceMock } from './toast.service';
 
 const testColorDictionary = `name;hue;saturation;luminosity
 Black;-1;0;0
@@ -11,19 +14,25 @@ White;-1;0;100
 Blue;190;100;34`;
 
 describe('ColorNameService', () => {
-  let httpClientSpy: jasmine.SpyObj<HttpClient>;
+  let toastService: ToastServiceMock;
+  let http: HttpTestingController;
+
   let service: ColorNameService;
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    toastService = new ToastServiceMock();
+
     TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
       providers: [
         {
-          provide: HttpClient,
-          useValue: httpClientSpy,
+          provide: ToastService,
+          useValue: toastService,
         },
       ],
     });
+
+    http = TestBed.inject(HttpTestingController);
     service = TestBed.inject(ColorNameService);
   });
 
@@ -32,24 +41,31 @@ describe('ColorNameService', () => {
   });
 
   it('should return color name', async () => {
-    httpClientSpy.get.and.returnValue(of(testColorDictionary));
-
-    const colorName = await service.getColorName(
+    const colorNamePromise = service.getColorName(
       new Shade(-1, new ColorTranslator('#FFFFFF', { decimals: 2 }))
     );
 
+    http.expectOne('/assets/color-dictionary.csv').flush(testColorDictionary);
+
+    const colorName = await colorNamePromise;
+
     expect(colorName).toBe('White');
-    expect(httpClientSpy.get.calls.count()).toBe(1);
   });
 
   it('should handle offline', async () => {
-    httpClientSpy.get.and.returnValue(of(null));
+    spyOn(toastService, 'showToast');
 
-    const colorName = await service.getColorName(
+    const colorNamePromise = service.getColorName(
       new Shade(-1, new ColorTranslator('#FFFFFF', { decimals: 2 }))
     );
 
+    http
+      .expectOne('/assets/color-dictionary.csv')
+      .error(new ProgressEvent('offline'));
+
+    const colorName = await colorNamePromise;
+
     expect(colorName).toBe('FFFFFF');
-    expect(httpClientSpy.get.calls.count()).toBe(1);
+    expect(toastService.showToast).toHaveBeenCalled();
   });
 });

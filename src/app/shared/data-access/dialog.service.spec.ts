@@ -17,13 +17,17 @@ describe('DialogService', () => {
     spyOn(window, 'prompt').and.returnValue('Test');
 
     const result = await service.prompt('message', 'default');
+
     expect(result).toBe('Test');
+    expect(window.prompt).toHaveBeenCalledWith('message', 'default');
   });
 
   it('should confirm', async () => {
     spyOn(window, 'confirm').and.returnValue(true);
 
     const result = await service.confirm('message');
+
     expect(result).toBeTrue();
+    expect(window.confirm).toHaveBeenCalledWith('message');
   });
 });

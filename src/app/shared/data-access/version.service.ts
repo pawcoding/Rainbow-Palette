@@ -18,3 +18,8 @@ export class VersionService {
     );
   }
 }
+
+export class VersionServiceMock {
+  public readonly angularVersion = '0.0.0';
+  public readonly appVersion = '0.0.0';
+}

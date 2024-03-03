@@ -5,14 +5,17 @@ import { ColorNameService, ColorNameServiceMock } from './color-name.service';
 import { ColorService } from './color.service';
 
 describe('ColorService', () => {
+  let colorNameService: ColorNameServiceMock;
   let service: ColorService;
 
   beforeEach(() => {
+    colorNameService = new ColorNameServiceMock();
+
     TestBed.configureTestingModule({
       providers: [
         {
           provide: ColorNameService,
-          useValue: new ColorNameServiceMock(),
+          useValue: colorNameService,
         },
       ],
     });
@@ -25,11 +28,13 @@ describe('ColorService', () => {
 
   it('should create random color', async () => {
     spyOn(service, 'regenerateShades');
+    spyOn(colorNameService, 'getColorName').and.callThrough();
 
     const color = await service.randomColor();
 
     expect(color).toBeTruthy();
     expect(service.regenerateShades).toHaveBeenCalledTimes(1);
+    expect(colorNameService.getColorName).toHaveBeenCalledTimes(1);
   });
 
   it('should generate 10 shades', () => {

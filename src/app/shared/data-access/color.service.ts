@@ -394,5 +394,8 @@ export class ColorService {
 }
 
 export class ColorServiceMock {
+  public async randomColor(): Promise<Color> {
+    return new Color([Shade.random()], 'Random');
+  }
   public regenerateShades(_color: Color): void {}
 }

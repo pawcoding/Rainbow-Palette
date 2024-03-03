@@ -57,7 +57,7 @@ export default class ViewComponent {
     }
   });
 
-  protected async renamePalette(): Promise<void> {
+  public async renamePalette(): Promise<void> {
     const palette = this.palette();
     if (!palette) {
       return;
@@ -83,7 +83,7 @@ export default class ViewComponent {
     });
   }
 
-  protected savePalette(): void {
+  public savePalette(): void {
     if (this.saving()) {
       return;
     }
@@ -101,7 +101,7 @@ export default class ViewComponent {
     }, 3000);
   }
 
-  protected async exportPalette(): Promise<void> {
+  public async exportPalette(): Promise<void> {
     const palette = this.palette();
     if (!palette) {
       return;
@@ -110,7 +110,7 @@ export default class ViewComponent {
     await this._exportService.openExportModal(palette);
   }
 
-  protected async renameColor(color: Color): Promise<void> {
+  public async renameColor(color: Color): Promise<void> {
     const newName = await this._dialogService.prompt(
       this._translateService.instant('view.color.rename'),
       color.name
@@ -131,7 +131,7 @@ export default class ViewComponent {
     });
   }
 
-  protected async editColor(color: Color, shadeIndex?: number): Promise<void> {
+  public async editColor(color: Color, shadeIndex?: number): Promise<void> {
     const updatedColor = await this._colorEditorService.openColorEditor(
       color,
       shadeIndex
@@ -144,7 +144,7 @@ export default class ViewComponent {
     color.shades = updatedColor.shades;
   }
 
-  protected async removeColor(color: Color): Promise<void> {
+  public async removeColor(color: Color): Promise<void> {
     const name = color.name;
     const shouldRemove = await this._dialogService.confirm(
       this._translateService.instant('view.color.remove', {
@@ -163,7 +163,7 @@ export default class ViewComponent {
     }
   }
 
-  protected async addColor(): Promise<void> {
+  public async addColor(): Promise<void> {
     const palette = this.palette();
     if (!palette) {
       return;
@@ -173,7 +173,7 @@ export default class ViewComponent {
     palette.addColor(color);
   }
 
-  protected async copyToClipboard(shade: Shade): Promise<void> {
+  public async copyToClipboard(shade: Shade): Promise<void> {
     try {
       await navigator.clipboard.writeText(shade.hex);
 
@@ -183,7 +183,6 @@ export default class ViewComponent {
         parameters: { color: toUnicodeVariant(shade.hex, 'm') },
       });
     } catch (error) {
-      console.error('Error copying to clipboard', error);
       this._toastService.showToast({
         type: 'error',
         message: 'view.color.copy.error',

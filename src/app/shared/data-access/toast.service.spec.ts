@@ -1,13 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { ToastTimeouts } from '../interfaces/toast.interface';
 import { sleep } from '../utils/sleep';
+import { MobileService, MobileServiceMock } from './mobile.service';
 import { ToastService } from './toast.service';
 
 describe('ToastService', () => {
   let service: ToastService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({
+      providers: [{ provide: MobileService, useClass: MobileServiceMock }],
+    });
     service = TestBed.inject(ToastService);
   });
 

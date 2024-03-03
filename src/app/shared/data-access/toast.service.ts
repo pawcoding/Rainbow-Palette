@@ -98,7 +98,10 @@ export class ToastService {
 }
 
 export class ToastServiceMock {
-  private readonly _toast = signal<Toast | undefined>(undefined);
+  private readonly _toast = signal<Toast | undefined>({
+    type: 'test',
+    message: 'test',
+  });
 
   public get toast(): Signal<Toast | undefined> {
     return this._toast.asReadonly();

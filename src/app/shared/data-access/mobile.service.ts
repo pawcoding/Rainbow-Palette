@@ -38,3 +38,8 @@ export class MobileService {
     this._isMobile.set(window.innerWidth < 640);
   }
 }
+
+export class MobileServiceMock {
+  public readonly isMobile = signal(false).asReadonly();
+  public readonly resize = signal<Event | undefined>(undefined).asReadonly();
+}

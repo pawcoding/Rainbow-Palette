@@ -27,7 +27,6 @@ export class ColorNameService {
     }
 
     if (!this.colorDictionary) {
-      console.warn('Color map could not be loaded');
       return shade.hex.substring(1);
     }
 
@@ -75,7 +74,6 @@ export class ColorNameService {
           lightness: parseInt(entry[3], 10),
         }));
     } catch (error) {
-      console.error('Error loading color map', error);
       this._toastService.showToast({
         type: 'error',
         message: 'toast.error.load-color-map',

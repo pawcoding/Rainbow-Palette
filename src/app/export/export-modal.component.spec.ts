@@ -1,6 +1,10 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  ToastService,
+  ToastServiceMock,
+} from '../shared/data-access/toast.service';
 import { Color } from '../shared/model/color.model';
 import { Palette } from '../shared/model/palette.model';
 import { Shade } from '../shared/model/shade.model';
@@ -25,6 +29,10 @@ describe('ExportModalComponent', () => {
         {
           provide: DialogRef,
           useValue: {},
+        },
+        {
+          provide: ToastService,
+          useClass: ToastServiceMock,
         },
       ],
     }).compileComponents();

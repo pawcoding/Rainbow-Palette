@@ -6,28 +6,31 @@ import { PaletteService } from './palette.service';
 import { ToastService, ToastServiceMock } from './toast.service';
 
 describe('PaletteService', () => {
-  let toastService: ToastServiceMock;
   let colorService: ColorServiceMock;
+  let colorNameService: ColorNameServiceMock;
+  let toastService: ToastServiceMock;
   let service: PaletteService;
 
   beforeEach(() => {
-    toastService = new ToastServiceMock();
     colorService = new ColorServiceMock();
+    colorNameService = new ColorNameServiceMock();
+    toastService = new ToastServiceMock();
 
     TestBed.configureTestingModule({
       providers: [
+        { provide: ColorService, useValue: colorService },
+        { provide: ColorNameService, useValue: colorNameService },
         {
           provide: ToastService,
           useValue: toastService,
         },
-        { provide: ColorService, useValue: colorService },
-        { provide: ColorNameService, useValue: new ColorNameServiceMock() },
       ],
     });
     service = TestBed.inject(PaletteService);
 
-    spyOn(toastService, 'showToast').and.callThrough();
     spyOn(colorService, 'regenerateShades').and.callThrough();
+    spyOn(colorNameService, 'getColorName').and.callThrough();
+    spyOn(toastService, 'showToast').and.callThrough();
   });
 
   it('should be created', () => {
@@ -39,6 +42,7 @@ describe('PaletteService', () => {
 
     expect(service.palette()).toBeTruthy();
     expect(colorService.regenerateShades).toHaveBeenCalledTimes(3);
+    expect(colorNameService.getColorName).toHaveBeenCalledTimes(3);
   });
 
   it('should save palette to local storage', async () => {
@@ -49,6 +53,7 @@ describe('PaletteService', () => {
     expect(localStorage.getItem('palette')).toContain('name');
     expect(localStorage.getItem('palette')).toContain('colors');
     expect(colorService.regenerateShades).toHaveBeenCalledTimes(2);
+    expect(colorNameService.getColorName).toHaveBeenCalledTimes(2);
   });
 
   it('should load palette from local storage', () => {

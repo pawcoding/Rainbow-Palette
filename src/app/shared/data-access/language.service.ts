@@ -1,8 +1,8 @@
 import { Injectable, Signal, effect, inject, signal } from '@angular/core';
-import { Language } from '../../layout/types/language';
 import { TranslateService } from '@ngx-translate/core';
 import { firstValueFrom } from 'rxjs';
 import { LANGUAGE_OPTIONS } from '../../layout/constants/languages';
+import { Language } from '../../layout/types/language';
 
 @Injectable({
   providedIn: 'root',
@@ -40,4 +40,9 @@ export class LanguageService {
   public setLanguage(language: Language): void {
     this._language.set(language);
   }
+}
+
+export class LanguageServiceMock {
+  public readonly language = signal<Language>('en').asReadonly();
+  public setLanguage(_language: Language): void {}
 }
