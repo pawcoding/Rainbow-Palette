@@ -1,5 +1,7 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { TranslateModule } from '@ngx-translate/core';
+import { ExportFormat } from '../../constants/export-format';
 import { ExportDownloadComponent } from './export-download.component';
 
 describe('ExportDownloadComponent', () => {
@@ -8,12 +10,15 @@ describe('ExportDownloadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExportDownloadComponent]
-    })
-    .compileComponents();
-    
+      imports: [ExportDownloadComponent, TranslateModule.forRoot()],
+    }).compileComponents();
+
     fixture = TestBed.createComponent(ExportDownloadComponent);
     component = fixture.componentInstance;
+
+    // @ts-expect-error
+    component.exportFormat = signal(ExportFormat.TAILWIND);
+
     fixture.detectChanges();
   });
 
