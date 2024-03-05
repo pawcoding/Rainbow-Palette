@@ -20,6 +20,8 @@ import {
 import { Color, Shade } from '../shared/model';
 import { ModalComponent } from '../shared/ui/modal/modal.component';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
+import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
+import { sleep } from '../shared/utils/sleep';
 import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
 
 @Component({
@@ -35,6 +37,7 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
   templateUrl: './view.component.html',
 })
 export default class ViewComponent {
+  private readonly _isRunningTest = inject(IS_RUNNING_TEST);
   private readonly _colorEditorService = inject(ColorEditorService);
   private readonly _toastService = inject(ToastService);
   private readonly _paletteService = inject(PaletteService);
@@ -84,7 +87,7 @@ export default class ViewComponent {
     });
   }
 
-  public savePalette(): void {
+  public async savePalette(): Promise<void> {
     if (this.saving()) {
       return;
     }
@@ -93,13 +96,16 @@ export default class ViewComponent {
 
     this._paletteService.savePaletteToLocalStorage();
 
-    setTimeout(() => {
-      this.saving.set(false);
-      this._toastService.showToast({
-        type: 'success',
-        message: 'view.palette.saved',
-      });
-    }, 3000);
+    if (!this._isRunningTest) {
+      // Simulate a delay to show the saving icon for a few seconds in production
+      await sleep(3000);
+    }
+
+    this.saving.set(false);
+    this._toastService.showToast({
+      type: 'success',
+      message: 'view.palette.saved',
+    });
   }
 
   public async exportPalette(): Promise<void> {

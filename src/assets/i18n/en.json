@@ -34,7 +34,7 @@
       "title": "Pick a format"
     },
     "request-format": {
-      "description": "If you find a format missing, please check if it is already requested on GitHub. If not, you can create a new issue there and I will try to add it as soon as possible.",
+      "description": "If you find a format missing, please check if it is already requested on GitHub. If not, you can create a new issue there and I will try to add the format as soon as possible.",
       "open-issue": "Request format",
       "title": "Missing a format?"
     },
@@ -141,7 +141,7 @@
     "title": "No palette available"
   },
   "preview": {
-    "description": "Here you will soon be able to try out your palette directly with various components such as cards, buttons, etc.<br><br>Feel free to check the repository on {{ github }} or my {{ discord }} for more information.",
+    "description": "Here you will soon be able to try out your palette directly with various components such as cards, buttons, etc.<br/><br/>Feel free to check the repository on {{ github }} or my {{ discord }} for more information.",
     "link": "Back to the editor",
     "title": "Coming soon..."
   },

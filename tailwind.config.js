@@ -7,6 +7,9 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      animation: {
+        "pulse-spin": "spin 1s ease-in-out infinite",
+      },
       backdropBlur: {
         xs: "2px",
       },

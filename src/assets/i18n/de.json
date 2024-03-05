@@ -1,4 +1,66 @@
 {
+  "common": {
+    "back": "Zurück",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "export": "Exportieren",
+    "hue": "Farbton",
+    "lightness": "Helligkeit",
+    "rename": "Umbenennen",
+    "saturation": "Sättigung",
+    "save": "Speichern",
+    "saving": "Speichern..."
+  },
+  "export": {
+    "download": {
+      "copy": "In die Zwischenablage kopieren",
+      "description": {
+        "css": "Willst du deine Palette als CSS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
+        "less": "Willst du deine Palette als LESS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
+        "scss": "Willst du deine Palette als SCSS Variablen in deinem Stylesheet verwenden oder eine eigenständige Datei herunterladen?",
+        "tailwind": "Willst du die Palette in deine bereits bestehende TailwindCSS Konfigurationsdatei kopieren oder eine eigenständige Datei dafür herunterladen?"
+      },
+      "file": "Als Datei herunterladen",
+      "title": "Wie möchtest du deine Palette exportieren?"
+    },
+    "format": {
+      "css": "CSS",
+      "description": "Wähle ein Format, in dem du deine Farbpalette exportieren möchtest.",
+      "less": "LESS",
+      "other": "Anderes Format",
+      "scss": "SCSS",
+      "tailwind": "TailwindCSS",
+      "title": "Wähle ein Format"
+    },
+    "request-format": {
+      "description": "Wenn du merkst, dass ein Format fehlt, solltest du nachschauen, ob es bereits auf GitHub angefragt ist. Wenn nicht, kannst du dort ein neues Ticket erstellen und ich werde versuchen, das Format so schnell wie möglich hinzuzufügen.",
+      "open-issue": "Format anfragen",
+      "title": "Dein Format ist nicht dabei?"
+    },
+    "success": {
+      "description": {
+        "css": {
+          "copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als CSS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage in das {{ root }} Element deiner CSS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+          "file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Webservers. Füge dann folgenden Link in den Kopf deiner HTML Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}"
+        },
+        "less": {
+          "copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als LESS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage ganz oben in deiner LESS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+          "file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Projekts. Füge dann folgendes in den Kopf deiner LESS Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}"
+        },
+        "scss": {
+          "copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben als SCSS Variablen zu nutzen, füge den Inhalt deiner Zwischenablage ganz oben in deiner SCSS-Datei ein.<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}",
+          "file": "Verschiebe die heruntergeladene {{ file }} Datei in das Wurzelverzeichnis deines Projekts. Füge dann folgendes in den Kopf deiner SCSS Datei ein:<br>{{ link }}<br><br>Jetzt kannst du die Farben so benutzen:<br>{{ usage }}"
+        },
+        "tailwind": {
+          "copy": "Die Palette wurde in deine Zwischenablage kopiert. Um die Farben zu nutzen, musst du den Inhalt deiner Zwischenablage in der {{ config }} Datei einfügen.<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS.",
+          "file": "Verschiebe die heruntergeladene {{ file }} in das Wurzelverzeichnis deines Projekts. Importiere deine Palette dann so in deiner {{ config }} Datei:<br>{{ import }}<br><br>Mehr Informationen findest du in der Dokumentation von TailwindCSS."
+        }
+      },
+      "documentation": "Dokumentation öffnen",
+      "title": "Deine Palette wurde erfolgreich exportiert!"
+    }
+  },
   "home": {
     "generator": {
       "color": "Wähle eine Farbe",
@@ -70,8 +132,56 @@
       "theme": "Wähle ein Design"
     }
   },
+  "no-palette": {
+    "description": {
+      "preview": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du hier eine Vorschau sehen und die Palette ausprobieren.",
+      "view": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du sie hier bearbeiten und anpassen."
+    },
+    "link": "Zurück zum Generator",
+    "title": "Keine Farbpalette vorhanden"
+  },
+  "preview": {
+    "description": "Hier kannst du demnächst deine Palette direkt mit verschiedenen Komponenten wie Karten, Buttons usw. ausprobieren.<br/><br/>Für weitere Informationen kannst du gerne das Repository auf {{ github }} oder meinen {{ discord }} besuchen.",
+    "link": "Zurück zum Editor",
+    "title": "Bald ist es soweit..."
+  },
+  "scheme": {
+    "analogous": "Analog",
+    "complementary": "Komplementär",
+    "monochrome": "Monochrom",
+    "rainbow": "Regenbogen",
+    "split-complementary": "Geteiltes Komplement",
+    "square": "Quadratisch",
+    "surprise": "Überrasche mich",
+    "tetradic": "Tetradisch",
+    "triadic": "Triadisch"
+  },
   "theme": {
     "dark": "Dunkel",
     "light": "Hell"
+  },
+  "toast": {
+    "error": {
+      "load-color-map": "Die Liste mit Namen für Farben konnte nicht geladen werden.",
+      "palette-load": "Deine letzte Farbpalette konnte nicht geladen werden."
+    }
+  },
+  "view": {
+    "color": {
+      "add": "Farbe hinzufügen",
+      "copy": {
+        "error": "Beim Kopieren des Hex-Codes in die Zwischenablage ist ein Fehler aufgetreten.",
+        "success": "\"{{ color }}\" wurde in deine Zwischenablage kopiert."
+      },
+      "remove": "Bust du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
+      "removed": "Die Farbe \"{{ color }}\" wurde entfernt.",
+      "rename": "Bitte gib deiner Farbe einen neuen Namen ein:",
+      "renamed": "Deine Farbe wurde in \"{{ color }}\" umbenannt."
+    },
+    "palette": {
+      "rename": "Bitte gib deiner Palette einen neuen Namen ein:",
+      "renamed": "Deine Palette wurde in \"{{ palette }}\" umbenannt.",
+      "saved": "Deine Palette wurde lokal gespeichert."
+    }
   }
 }

@@ -17,7 +17,7 @@ import {
   ToastServiceMock,
 } from '../shared/data-access';
 import { Color, Shade } from '../shared/model';
-import { sleep } from '../shared/utils/sleep';
+import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import ViewComponent from './view.component';
 
 describe('ViewComponent', () => {
@@ -50,6 +50,7 @@ describe('ViewComponent', () => {
         { provide: ExportModalService, useValue: exportModalService },
         { provide: PaletteService, useValue: paletteService },
         { provide: ToastService, useValue: toastService },
+        { provide: IS_RUNNING_TEST, useValue: true },
       ],
     }).compileComponents();
 
@@ -79,8 +80,6 @@ describe('ViewComponent', () => {
     await component.savePalette();
 
     expect(paletteService.savePaletteToLocalStorage).toHaveBeenCalledTimes(1);
-
-    await sleep(3100);
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
   });
 
