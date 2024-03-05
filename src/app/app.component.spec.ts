@@ -5,11 +5,9 @@ import { AppComponent } from './app.component';
 import {
   PaletteService,
   PaletteServiceMock,
-} from './shared/data-access/palette.service';
-import {
   VersionService,
   VersionServiceMock,
-} from './shared/data-access/version.service';
+} from './shared/data-access';
 
 describe('AppComponent', () => {
   let paletteService: PaletteServiceMock;

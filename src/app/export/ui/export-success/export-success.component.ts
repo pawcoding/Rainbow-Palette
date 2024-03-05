@@ -8,8 +8,8 @@ import {
 import { NgIconComponent } from '@ng-icons/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { SafeHtmlPipe } from '../../../shared/pipes/safe-html.pipe';
-import { ExportFormat } from '../../constants/export-format';
-import { ExportOption } from '../../types/export-option';
+import { ExportFormat } from '../../../shared/constants/export-format';
+import { ExportOption } from '../../../shared/types/export-option';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
 
 @Component({

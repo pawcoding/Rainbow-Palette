@@ -1,38 +1,68 @@
-import { Dialog } from '@angular/cdk/dialog';
 import { TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { ExportFormat } from '../constants/export-format';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
-import { DialogMock } from '../utils/dialog-mock';
 import { ExportService } from './export.service';
+import { ToastService, ToastServiceMock } from './toast.service';
 
 describe('ExportService', () => {
-  let dialog: DialogMock<undefined>;
   let service: ExportService;
 
-  beforeEach(() => {
-    dialog = new DialogMock(undefined);
+  const palette = new Palette('TestPalette', [
+    new Color([Shade.random()], 'TestColor'),
+  ]);
 
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      providers: [{ provide: Dialog, useValue: dialog }],
+      providers: [{ provide: ToastService, useClass: ToastServiceMock }],
     });
     service = TestBed.inject(ExportService);
-
-    spyOn(dialog, 'open').and.callThrough();
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should open export modal', async () => {
-    const palette = new Palette('TestPalette', [
-      new Color([Shade.random()], 'TestColor'),
-    ]);
-    await service.openExportModal(palette);
+  it('should export palette', async () => {
+    spyOn(service, 'copy').and.returnValue(Promise.resolve(true));
+    spyOn(service, 'download').and.returnValue(Promise.resolve(true));
 
-    expect(dialog.open).toHaveBeenCalledTimes(1);
+    const format = ExportFormat.CSS;
+    const result = await service.exportPalette(palette, format, 'copy');
+
+    expect(result).toBe(true);
+    expect(service.copy).toHaveBeenCalled();
+
+    const result2 = await service.exportPalette(palette, format, 'file');
+
+    expect(result2).toBe(true);
+    expect(service.download).toHaveBeenCalled();
+  });
+
+  it('should copy palette to clipboard', async () => {
+    spyOn(navigator.clipboard, 'writeText').and.returnValue(Promise.resolve());
+
+    const format = ExportFormat.CSS;
+    const result = await service.exportPalette(palette, format, 'copy');
+
+    expect(result).toBe(true);
+    expect(navigator.clipboard.writeText).toHaveBeenCalled();
+  });
+
+  it('should download palette as file', async () => {
+    const link = document.createElement('a');
+    spyOn(link, 'click');
+
+    spyOn(document, 'createElement').and.returnValue(link);
+
+    const format = ExportFormat.CSS;
+    const result = await service.exportPalette(palette, format, 'file');
+
+    expect(result).toBe(true);
+    expect(document.createElement).toHaveBeenCalled();
+    expect(link.click).toHaveBeenCalled();
   });
 });

@@ -1,9 +1,9 @@
-import { Color } from '../../shared/model/color.model';
-import { Palette } from '../../shared/model/palette.model';
-import { Shade } from '../../shared/model/shade.model';
-import { Exporter } from '../interface/exporter';
+import { Color } from '../model/color.model';
+import { Palette } from '../model/palette.model';
+import { Shade } from '../model/shade.model';
+import { Formatter } from '../interfaces/formatter.interface';
 
-export class TailwindExporter implements Exporter {
+export class TailwindFormatter implements Formatter {
   filename = 'tailwind.colors.js';
   mimeType = 'text/javascript';
 

@@ -4,26 +4,19 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   ColorEditorService,
   ColorEditorServiceMock,
-} from '../shared/data-access/color-editor.service';
+} from '../editor/data-access/color-editor.service';
+import { ExportModalService } from '../export/data-access/export-modal.service';
 import {
   ColorService,
   ColorServiceMock,
-} from '../shared/data-access/color.service';
-import {
   DialogService,
   DialogServiceMock,
-} from '../shared/data-access/dialog.service';
-import { ExportService } from '../shared/data-access/export.service';
-import {
   PaletteService,
   PaletteServiceMock,
-} from '../shared/data-access/palette.service';
-import {
   ToastService,
   ToastServiceMock,
-} from '../shared/data-access/toast.service';
-import { Color } from '../shared/model/color.model';
-import { Shade } from '../shared/model/shade.model';
+} from '../shared/data-access';
+import { Color, Shade } from '../shared/model';
 import { sleep } from '../shared/utils/sleep';
 import ViewComponent from './view.component';
 
@@ -31,7 +24,7 @@ describe('ViewComponent', () => {
   let colorEditorService: ColorEditorServiceMock;
   let colorService: ColorServiceMock;
   let dialogService: DialogServiceMock;
-  let exportService = jasmine.createSpyObj('ExportService', [
+  let exportModalService = jasmine.createSpyObj('ExportModalService', [
     'openExportModal',
   ]);
   let paletteService: PaletteServiceMock;
@@ -54,7 +47,7 @@ describe('ViewComponent', () => {
         { provide: ColorEditorService, useValue: colorEditorService },
         { provide: ColorService, useValue: colorService },
         { provide: DialogService, useValue: dialogService },
-        { provide: ExportService, useValue: exportService },
+        { provide: ExportModalService, useValue: exportModalService },
         { provide: PaletteService, useValue: paletteService },
         { provide: ToastService, useValue: toastService },
       ],
@@ -135,7 +128,7 @@ describe('ViewComponent', () => {
   it('should open export modal', async () => {
     await component.exportPalette();
 
-    expect(exportService.openExportModal).toHaveBeenCalledTimes(1);
+    expect(exportModalService.openExportModal).toHaveBeenCalledTimes(1);
   });
 
   it('should show toast on clipboard copy', async () => {

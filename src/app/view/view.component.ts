@@ -9,14 +9,15 @@ import {
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
-import { ColorEditorService } from '../shared/data-access/color-editor.service';
-import { ColorService } from '../shared/data-access/color.service';
-import { DialogService } from '../shared/data-access/dialog.service';
-import { ExportService } from '../shared/data-access/export.service';
-import { PaletteService } from '../shared/data-access/palette.service';
-import { ToastService } from '../shared/data-access/toast.service';
-import { Color } from '../shared/model/color.model';
-import { Shade } from '../shared/model/shade.model';
+import { ColorEditorService } from '../editor/data-access/color-editor.service';
+import { ExportModalService } from '../export/data-access/export-modal.service';
+import {
+  ColorService,
+  DialogService,
+  PaletteService,
+  ToastService,
+} from '../shared/data-access';
+import { Color, Shade } from '../shared/model';
 import { ModalComponent } from '../shared/ui/modal/modal.component';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
 import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
@@ -40,7 +41,7 @@ export default class ViewComponent {
   private readonly _colorService = inject(ColorService);
   private readonly _translateService = inject(TranslateService);
   private readonly _dialogService = inject(DialogService);
-  private readonly _exportService = inject(ExportService);
+  private readonly _exportService = inject(ExportModalService);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;

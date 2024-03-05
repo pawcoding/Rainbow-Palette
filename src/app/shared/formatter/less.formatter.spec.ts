@@ -1,18 +1,18 @@
-import { Color } from '../../shared/model/color.model';
-import { Palette } from '../../shared/model/palette.model';
-import { Shade } from '../../shared/model/shade.model';
-import { TailwindExporter } from './tailwind.exporter';
+import { Color } from '../model/color.model';
+import { Palette } from '../model/palette.model';
+import { Shade } from '../model/shade.model';
+import { LessFormatter } from './less.formatter';
 
-const tailwindRegEx = /(5|[1-9]0)0: +'#[0-9A-Fa-f]{6}\b'/g;
+const lessRegEx = /@(.*)-(5|([1-9])0)0: +#[0-9A-Fa-f]{6}\b;/g;
 
-describe('TailwindExporter', () => {
-  let exporter: TailwindExporter;
+describe('LessFormatter', () => {
+  let exporter: LessFormatter;
   let shade: Shade;
   let color: Color;
   let palette: Palette;
 
   beforeEach(() => {
-    exporter = new TailwindExporter();
+    exporter = new LessFormatter();
     shade = Shade.random();
     shade.index = 500;
     const shade2 = Shade.random();
@@ -22,10 +22,11 @@ describe('TailwindExporter', () => {
   });
 
   it('should format shade', () => {
-    const result = exporter.formatShade(shade);
+    const result = exporter.formatShade(shade, 'test-color');
 
-    expect(result).toMatch(tailwindRegEx);
+    expect(result).toMatch(lessRegEx);
     expect(result).toContain(shade.hex);
+    expect(result).toContain('test-color');
   });
 
   it('should format color', () => {
@@ -33,25 +34,22 @@ describe('TailwindExporter', () => {
 
     expect(result).toContain(shade.hex);
     expect(result).toContain('test-color');
-    expect(result.match(tailwindRegEx) ?? []).toHaveSize(2);
+    expect(result.match(lessRegEx) ?? []).toHaveSize(2);
   });
 
   it('should format palette', () => {
     const result = exporter.formatPalette(palette);
 
-    expect(result).toMatch(/^'.*': {[^}]*}$/);
     expect(result).toContain(shade.hex);
     expect(result).toContain('test-color');
-    expect(result.match(tailwindRegEx) ?? []).toHaveSize(2);
+    expect(result.match(lessRegEx) ?? []).toHaveSize(2);
   });
 
   it('should format file', () => {
     const result = exporter.formatFile(palette);
 
-    expect(result).toMatch(/^module.exports = {[^}]*}\n}/);
-    expect(result).toMatch(/'.*': {[^}]*}/);
     expect(result).toContain(shade.hex);
     expect(result).toContain('test-color');
-    expect(result.match(tailwindRegEx) ?? []).toHaveSize(2);
+    expect(result.match(lessRegEx) ?? []).toHaveSize(2);
   });
 });

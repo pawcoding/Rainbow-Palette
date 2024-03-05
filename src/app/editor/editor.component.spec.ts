@@ -1,12 +1,8 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  ColorService,
-  ColorServiceMock,
-} from '../shared/data-access/color.service';
-import { Color } from '../shared/model/color.model';
-import { Shade } from '../shared/model/shade.model';
+import { ColorService, ColorServiceMock } from '../shared/data-access';
+import { Color, Shade } from '../shared/model';
 import { EditorComponent, UpdateType } from './editor.component';
 
 describe('EditorComponent', () => {

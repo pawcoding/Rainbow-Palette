@@ -2,12 +2,12 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  ExportService,
+  ExportServiceMock,
   ToastService,
   ToastServiceMock,
-} from '../shared/data-access/toast.service';
-import { Color } from '../shared/model/color.model';
-import { Palette } from '../shared/model/palette.model';
-import { Shade } from '../shared/model/shade.model';
+} from '../shared/data-access';
+import { Color, Palette, Shade } from '../shared/model';
 import { ExportModalComponent } from './export-modal.component';
 
 describe('ExportModalComponent', () => {
@@ -33,6 +33,10 @@ describe('ExportModalComponent', () => {
         {
           provide: ToastService,
           useClass: ToastServiceMock,
+        },
+        {
+          provide: ExportService,
+          useClass: ExportServiceMock,
         },
       ],
     }).compileComponents();

@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   VersionService,
   VersionServiceMock,
-} from '../../../shared/data-access/version.service';
+} from '../../../shared/data-access';
 import { LayoutFooterComponent } from './layout-footer.component';
 
 describe('LayoutFooterComponent', () => {

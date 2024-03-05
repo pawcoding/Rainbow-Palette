@@ -1,8 +1,8 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { ExportFormat } from '../../constants/export-format';
-import { ExportOption } from '../../types/export-option';
+import { ExportFormat } from '../../../shared/constants/export-format';
+import { ExportOption } from '../../../shared/types/export-option';
 import { ExportSuccessComponent } from './export-success.component';
 
 describe('ExportSuccessComponent', () => {

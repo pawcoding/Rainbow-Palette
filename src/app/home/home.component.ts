@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaletteService } from '../shared/data-access/palette.service';
+import { PaletteService } from '../shared/data-access';
 import { HomeService } from './data-access/home.service';
 import { HomeGeneratorComponent } from './ui/home-generator/home-generator.component';
 import { HomeManualComponent } from './ui/home-manual/home-manual.component';

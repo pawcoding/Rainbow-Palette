@@ -1,18 +1,18 @@
-import { Color } from '../../shared/model/color.model';
-import { Palette } from '../../shared/model/palette.model';
-import { Shade } from '../../shared/model/shade.model';
-import { ScssExporter } from './scss.exporter';
+import { Color } from '../model/color.model';
+import { Palette } from '../model/palette.model';
+import { Shade } from '../model/shade.model';
+import { CssFormatter } from './css.formatter';
 
-const scssRegEx = /\$(.*)-(5|([1-9])0)0: +#[0-9A-Fa-f]{6}\b;/g;
+const cssRegEx = /--(.*)-(5|([1-9])0)0: +#[0-9A-Fa-f]{6}\b;/g;
 
-describe('ScssExporter', () => {
-  let exporter: ScssExporter;
+describe('CssFormatter', () => {
+  let exporter: CssFormatter;
   let shade: Shade;
   let color: Color;
   let palette: Palette;
 
   beforeEach(() => {
-    exporter = new ScssExporter();
+    exporter = new CssFormatter();
     shade = Shade.random();
     shade.index = 500;
     const shade2 = Shade.random();
@@ -24,7 +24,7 @@ describe('ScssExporter', () => {
   it('should format shade', () => {
     const result = exporter.formatShade(shade, 'test-color');
 
-    expect(result).toMatch(scssRegEx);
+    expect(result).toMatch(cssRegEx);
     expect(result).toContain(shade.hex);
     expect(result).toContain('test-color');
   });
@@ -34,7 +34,7 @@ describe('ScssExporter', () => {
 
     expect(result).toContain(shade.hex);
     expect(result).toContain('test-color');
-    expect(result.match(scssRegEx) ?? []).toHaveSize(2);
+    expect(result.match(cssRegEx) ?? []).toHaveSize(2);
   });
 
   it('should format palette', () => {
@@ -42,14 +42,15 @@ describe('ScssExporter', () => {
 
     expect(result).toContain(shade.hex);
     expect(result).toContain('test-color');
-    expect(result.match(scssRegEx) ?? []).toHaveSize(2);
+    expect(result.match(cssRegEx) ?? []).toHaveSize(2);
   });
 
   it('should format file', () => {
     const result = exporter.formatFile(palette);
 
+    expect(result).toMatch(/^:root {[^}]*}$/);
     expect(result).toContain(shade.hex);
     expect(result).toContain('test-color');
-    expect(result.match(scssRegEx) ?? []).toHaveSize(2);
+    expect(result.match(cssRegEx) ?? []).toHaveSize(2);
   });
 });

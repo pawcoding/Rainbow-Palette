@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { EXPORT_FORMATS } from '../../constants/export-format';
+import { EXPORT_FORMATS } from '../../../shared/constants/export-format';
 
 @Component({
   selector: 'rp-request-format',

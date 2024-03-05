@@ -10,9 +10,8 @@ import {
   viewChild,
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
-import { ColorService } from '../shared/data-access/color.service';
-import { Color } from '../shared/model/color.model';
-import { Shade } from '../shared/model/shade.model';
+import { ColorService } from '../shared/data-access';
+import { Color, Shade } from '../shared/model';
 import { ColorInputComponent } from '../shared/ui/color-input/color-input.component';
 import { EditorRangeComponent } from './ui/editor-range/editor-range.component';
 

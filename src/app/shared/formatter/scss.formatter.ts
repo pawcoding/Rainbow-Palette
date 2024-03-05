@@ -1,16 +1,16 @@
-import { Color } from '../../shared/model/color.model';
-import { Palette } from '../../shared/model/palette.model';
-import { Shade } from '../../shared/model/shade.model';
-import { Exporter } from '../interface/exporter';
+import { Color } from '../model/color.model';
+import { Palette } from '../model/palette.model';
+import { Shade } from '../model/shade.model';
+import { Formatter } from '../interfaces/formatter.interface';
 
-export class CssExporter implements Exporter {
-  filename = 'colors.css';
-  mimeType = 'text/css';
+export class ScssFormatter implements Formatter {
+  filename = '_colors.scss';
+  mimeType = 'text/scss';
 
   formatFile(palette: Palette): string {
-    const content = this.formatPalette(palette).replace(/\n/g, '\n\t');
+    const content = this.formatPalette(palette);
 
-    return `:root {\n\t${content}\n}`;
+    return `/* Import the variables into your SCSS files with\n\t@use 'colors';\n*/\n\n${content}`;
   }
 
   formatPalette(palette: Palette): string {
@@ -31,7 +31,7 @@ export class CssExporter implements Exporter {
   }
 
   formatShade(shade: Shade, name: string): string {
-    return `--${name}-${shade.index}:${shade.index < 100 ? ' ' : ''} ${
+    return `$${name}-${shade.index}:${shade.index < 100 ? ' ' : ''} ${
       shade.hex
     };`;
   }

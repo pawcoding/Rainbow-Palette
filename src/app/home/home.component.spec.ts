@@ -1,10 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  PaletteService,
-  PaletteServiceMock,
-} from '../shared/data-access/palette.service';
+import { PaletteService, PaletteServiceMock } from '../shared/data-access';
 import { HomeService, HomeServiceMock } from './data-access/home.service';
 import HomeComponent from './home.component';
 

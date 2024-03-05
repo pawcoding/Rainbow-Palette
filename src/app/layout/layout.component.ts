@@ -16,8 +16,7 @@ import {
   heroSwatchSolid,
 } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageService } from '../shared/data-access/language.service';
-import { MobileService } from '../shared/data-access/mobile.service';
+import { LanguageService, MobileService } from '../shared/data-access';
 import { sleep } from '../shared/utils/sleep';
 import { ThemeService } from './data-access/theme.service';
 import { Language } from './types/language';

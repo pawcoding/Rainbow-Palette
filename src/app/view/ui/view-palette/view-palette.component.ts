@@ -6,9 +6,7 @@ import {
   heroTrashMini,
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
-import { Color } from '../../../shared/model/color.model';
-import { Palette } from '../../../shared/model/palette.model';
-import { Shade } from '../../../shared/model/shade.model';
+import { Color, Palette, Shade } from '../../../shared/model';
 
 @Component({
   selector: 'rp-view-palette',

@@ -1,7 +1,7 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { ExportFormat } from '../../constants/export-format';
+import { ExportFormat } from '../../../shared/constants/export-format';
 import { ExportDownloadComponent } from './export-download.component';
 
 describe('ExportDownloadComponent', () => {

@@ -5,8 +5,8 @@ import {
   heroDocumentDuplicate,
 } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
-import { ExportFormat } from '../../constants/export-format';
-import { ExportOption } from '../../types/export-option';
+import { ExportFormat } from '../../../shared/constants/export-format';
+import { ExportOption } from '../../../shared/types/export-option';
 
 @Component({
   selector: 'rp-export-download',

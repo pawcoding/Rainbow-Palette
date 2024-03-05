@@ -1,9 +1,8 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { Color } from '../model/color.model';
-import { Shade } from '../model/shade.model';
-import { DialogMock } from '../utils/dialog-mock';
+import { Color, Shade } from '../../shared/model';
+import { DialogMock } from '../../shared/utils/dialog-mock';
 import { ColorEditorService } from './color-editor.service';
 
 describe('ColorEditorService', () => {

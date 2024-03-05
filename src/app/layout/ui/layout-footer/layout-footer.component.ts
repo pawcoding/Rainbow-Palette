@@ -9,7 +9,7 @@ import {
   simpleYoutube,
 } from '@ng-icons/simple-icons';
 import { TranslateModule } from '@ngx-translate/core';
-import { VersionService } from '../../../shared/data-access/version.service';
+import { VersionService } from '../../../shared/data-access';
 
 @Component({
   selector: 'rp-layout-footer',

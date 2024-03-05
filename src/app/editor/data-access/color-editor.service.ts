@@ -1,8 +1,8 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { Injectable, inject, signal } from '@angular/core';
 import { firstValueFrom, tap } from 'rxjs';
-import { Color } from '../model/color.model';
-import { sleep } from '../utils/sleep';
+import { Color } from '../../shared/model';
+import { sleep } from '../../shared/utils/sleep';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +20,7 @@ export class ColorEditorService {
     }
     this._isModalOpen.set(true);
 
-    const editor = await import('../../editor/editor.component').then(
+    const editor = await import('../editor.component').then(
       (c) => c.EditorComponent
     );
     const dialogRef = this._dialog.open<Color | undefined>(editor, {

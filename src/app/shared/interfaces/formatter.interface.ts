@@ -1,8 +1,8 @@
-import { Color } from '../../shared/model/color.model';
-import { Palette } from '../../shared/model/palette.model';
-import { Shade } from '../../shared/model/shade.model';
+import { Color } from '../model/color.model';
+import { Palette } from '../model/palette.model';
+import { Shade } from '../model/shade.model';
 
-export interface Exporter {
+export interface Formatter {
   filename: string;
   mimeType: string;
 
