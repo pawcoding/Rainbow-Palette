@@ -140,6 +140,11 @@
     "link": "Back to generation",
     "title": "No palette available"
   },
+  "preview": {
+    "description": "Here you will soon be able to try out your palette directly with various components such as cards, buttons, etc.<br><br>Feel free to check the repository on {{ github }} or my {{ discord }} for more information.",
+    "link": "Back to the editor",
+    "title": "Coming soon..."
+  },
   "scheme": {
     "analogous": "Analogous",
     "complementary": "Complementary",

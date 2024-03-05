@@ -43,4 +43,12 @@
   .rp-modal-panel {
     @apply p-4;
   }
+
+  /**
+    * This class needs to be set here globally because when defined in the
+    * component's styles, it will not be applied to the link.
+    */
+  .underline-inline-links a {
+    text-decoration-line: underline;
+  }
 }

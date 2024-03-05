@@ -1,24 +1,27 @@
 <section
-  id="no-palette"
-  class="flex items-center justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+  id="preview"
+  class="flex items-center justify-center px-4 py-8 sm:px-6 lg:px-8"
 >
   <article
     class="max-w-md p-6 mx-auto space-y-4 text-center border shadow-xl bg-neutral-100 border-neutral-200 lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
   >
+    <ng-icon [svg]="heroWrenchScrewdriver" size="6rem" />
+
     <h2 class="text-2xl font-bold md:text-3xl">
-      {{ "no-palette.title" | translate }}
+      {{ "preview.title" | translate }}
     </h2>
 
-    <p class="text-neutral-700 dark:text-neutral-300">
-      {{ "no-palette.description." + parent() | translate }}
-    </p>
+    <p
+      class="text-left text-neutral-700 dark:text-neutral-300 underline-inline-links"
+      [innerHTML]="'preview.description' | translate : links"
+    ></p>
 
     <a
       class="inline-flex items-center gap-2 px-4 py-2 font-semibold bg-blue-500 rounded-md text-neutral-50 dark:bg-blue-600"
-      [routerLink]="'/'"
+      [routerLink]="'/view'"
     >
       <ng-icon [svg]="heroArrowUturnLeft" strokeWidth="0.15rem" size="1.1rem" />
-      {{ "no-palette.link" | translate }}
+      {{ "preview.link" | translate }}
     </a>
   </article>
 </section>
