@@ -17,6 +17,7 @@ import { hueToWheel, wheelToHue } from '../../utils/color-wheel';
 })
 export class EditorRangeComponent {
   public readonly label = input.required<string>();
+  public readonly tooltip = input.required<string>();
   public readonly key = input.required<'hue' | 'saturation' | 'lightness'>();
   public readonly value = model.required<number>();
   public readonly min = input(0, {

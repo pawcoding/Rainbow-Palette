@@ -2,15 +2,31 @@
   "common": {
     "back": "Zurück",
     "cancel": "Abbrechen",
+    "close": "Schließen",
     "delete": "Löschen",
     "edit": "Bearbeiten",
     "export": "Exportieren",
     "hue": "Farbton",
+    "less": "Weniger anzeigen",
     "lightness": "Helligkeit",
+    "more": "Mehr anzeigen",
     "rename": "Umbenennen",
     "saturation": "Sättigung",
     "save": "Speichern",
     "saving": "Speichern..."
+  },
+  "editor": {
+    "cancel": "Ohne speichern schließen",
+    "properties": {
+      "color": "Wähle eine Farbe",
+      "hex": "Gebe einen Hex-Code ein",
+      "hue": "Passe den Farbton der Schattierung an",
+      "lightness": "Passe die Helligkeit der Schattierung an",
+      "saturation": "Passe die Sättigung der Schattierung an"
+    },
+    "save": "Alle Änderungen an dieser Farbe speichern",
+    "shades": "Click, um diese Schattierung anzupassen",
+    "unfix": "Rechtscklick, um die Schattierung wieder automatisch generieren zu lassen"
   },
   "export": {
     "download": {
@@ -59,14 +75,17 @@
       },
       "documentation": "Dokumentation öffnen",
       "title": "Deine Palette wurde erfolgreich exportiert!"
-    }
+    },
+    "title": "Exportiere deine Palette"
   },
   "home": {
     "generator": {
-      "color": "Wähle eine Farbe",
+      "color": "Wähle eine Farbe um loszulegen",
       "description": "Gebe einen Hex-Code ein oder wähle eine Farbe, um loszulegen.",
       "generate": "Palette generieren",
+      "hex": "Gebe einen Hex-Code ein um loszulegen",
       "scheme": "Wähle ein Farbschema",
+      "start": "Los geht's!",
       "title": "Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe. "
     },
     "manual": {
@@ -169,19 +188,25 @@
   "view": {
     "color": {
       "add": "Farbe hinzufügen",
+      "add-tooltip": "Füge deiner Palette eine neue Farbe hinzu",
+      "click": "Click, um die Schattierung anzupassen\nRechtsclick, um den Hex-Code zu kopieren",
       "copy": {
         "error": "Beim Kopieren des Hex-Codes in die Zwischenablage ist ein Fehler aufgetreten.",
         "success": "\"{{ color }}\" wurde in deine Zwischenablage kopiert."
       },
       "remove": "Bust du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
+      "remove-tooltip": "Entferne diese Farbe aus deiner Palette",
       "removed": "Die Farbe \"{{ color }}\" wurde entfernt.",
-      "rename": "Bitte gib deiner Farbe einen neuen Namen ein:",
-      "renamed": "Deine Farbe wurde in \"{{ color }}\" umbenannt."
+      "rename": "Gebe deiner Farbe einen neuen Namen",
+      "renamed": "Deine Farbe wurde in \"{{ color }}\" umbenannt.",
+      "tune": "Passe die Farbe nach deinem Geschmack an"
     },
     "palette": {
-      "rename": "Bitte gib deiner Palette einen neuen Namen ein:",
+      "rename": "Gebe deiner Palette einen neuen Namen",
       "renamed": "Deine Palette wurde in \"{{ palette }}\" umbenannt.",
-      "saved": "Deine Palette wurde lokal gespeichert."
+      "save": "Speichere die Palette in deinem Browser",
+      "saved": "Deine Palette wurde lokal gespeichert.",
+      "saving": "Deine Palette wird im Browser gespeichert"
     }
   }
 }

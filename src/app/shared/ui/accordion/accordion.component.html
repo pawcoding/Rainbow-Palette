@@ -8,7 +8,10 @@
       {{ summary() | translate }}
     </h3>
 
-    <span class="size-5 shrink-0">
+    <span
+      class="size-5 shrink-0"
+      [title]="(isOpen() ? 'common.less' : 'common.more') | translate"
+    >
       <ng-icon
         [svg]="heroPlus"
         class="inset-0 transition group-open:rotate-45"

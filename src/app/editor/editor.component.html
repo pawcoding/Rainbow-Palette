@@ -8,7 +8,8 @@
   <rp-color-input
     [hex]="shade().hex"
     (hexChange)="update(UpdateType.HEX, $event)"
-    placeholder="view.color.placeholder"
+    [placeholder]="'editor.properties.hex' | translate"
+    [tooltip]="'editor.properties.color' | translate"
   />
 
   <section class="flex flex-col gap-2">
@@ -18,6 +19,7 @@
       min="0"
       max="360"
       [label]="'common.hue' | translate"
+      [tooltip]="'editor.properties.hue' | translate"
       [value]="shade().hsl.H"
       (valueChange)="update(UpdateType.HUE, $event)"
     />
@@ -26,6 +28,7 @@
       id="saturation-range"
       key="saturation"
       [label]="'common.saturation' | translate"
+      [tooltip]="'editor.properties.saturation' | translate"
       [value]="shade().hsl.S"
       (valueChange)="update(UpdateType.SATURATION, $event)"
     />
@@ -34,6 +37,7 @@
       id="lightness-range"
       key="lightness"
       [label]="'common.lightness' | translate"
+      [tooltip]="'editor.properties.lightness' | translate"
       [value]="shade().hsl.L"
       (valueChange)="update(UpdateType.LIGHTNESS, $event)"
     />
@@ -54,7 +58,7 @@
           ? darkestShade().hex
           : lightestShade().hex
       "
-      [title]="'editor.shades' | translate"
+      [title]="getTooltip(shadeInRow, shadeInRow.index === shadeIndex())"
       (click)="changeShade(shadeInRow.index)"
       (contextmenu)="unfixShade(shadeInRow, $event)"
     >
@@ -66,6 +70,7 @@
   <section class="flex justify-end gap-2">
     <button
       class="px-2 py-1.5 font-semibold rounded cursor-pointer bg-neutral-300 dark:bg-neutral-600"
+      [title]="'editor.cancel' | translate"
       (click)="cancel()"
     >
       {{ "common.cancel" | translate }}
@@ -73,6 +78,7 @@
 
     <button
       class="px-2 py-1.5 font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+      [title]="'editor.save' | translate"
       (click)="save()"
     >
       {{ "common.save" | translate }}

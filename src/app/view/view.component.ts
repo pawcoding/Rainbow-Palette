@@ -18,7 +18,6 @@ import {
   ToastService,
 } from '../shared/data-access';
 import { Color, Shade } from '../shared/model';
-import { ModalComponent } from '../shared/ui/modal/modal.component';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import { sleep } from '../shared/utils/sleep';
@@ -29,7 +28,6 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
   standalone: true,
   imports: [
     ViewPaletteComponent,
-    ModalComponent,
     NoPaletteComponent,
     NgIconComponent,
     TranslateModule,

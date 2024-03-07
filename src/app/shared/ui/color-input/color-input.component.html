@@ -2,7 +2,7 @@
   <span
     class="flex overflow-hidden border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-none"
   >
-    <label for="color">
+    <label for="color" [title]="tooltip()">
       <div
         [class]="isColorLight() ? 'text-neutral-900' : 'text-neutral-100'"
         [style.backgroundColor]="hex()"
@@ -16,7 +16,7 @@
       </div>
 
       <span class="sr-only">
-        {{ placeholder() | translate }}
+        {{ placeholder() }}
       </span>
     </label>
 
@@ -35,7 +35,8 @@
       type="text"
       class="w-full min-w-0 px-4 py-2 font-semibold border-none focus:ring-0 focus:outline-none grow bg-neutral-100 dark:bg-neutral-600"
       [value]="hex()"
-      [placeholder]="placeholder() | translate"
+      [placeholder]="placeholder()"
+      [title]="placeholder()"
       (input)="updateHex(hexInput.value)"
     />
   </span>

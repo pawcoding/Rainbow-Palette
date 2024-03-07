@@ -9,7 +9,7 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ColorService } from '../shared/data-access';
 import { Color, Shade } from '../shared/model';
 import { ColorInputComponent } from '../shared/ui/color-input/color-input.component';
@@ -42,6 +42,7 @@ export class EditorComponent {
   );
   private readonly _dialogRef = inject(DialogRef);
   private readonly _colorService = inject(ColorService);
+  private readonly _translateService = inject(TranslateService);
 
   protected readonly color = signal(this._data.color.copy());
   protected readonly shadeIndex = signal(this._data.shadeIndex ?? 0);
@@ -158,5 +159,19 @@ export class EditorComponent {
     const updatedColor = this.color().copy();
     this._colorService.regenerateShades(updatedColor);
     this.color.set(updatedColor);
+  }
+
+  protected getTooltip(shade: Shade, selected: boolean): string {
+    const tooltips: Array<string> = [];
+
+    if (!selected) {
+      tooltips.push(this._translateService.instant('editor.shades'));
+    }
+
+    if (shade.fixed) {
+      tooltips.push(this._translateService.instant('editor.unfix'));
+    }
+
+    return tooltips.join('\n');
   }
 }

@@ -1,4 +1,4 @@
-import { Component, ElementRef, input, viewChild } from '@angular/core';
+import { Component, ElementRef, input, signal, viewChild } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroPlus } from '@ng-icons/heroicons/outline';
@@ -23,6 +23,8 @@ export class AccordionComponent {
     viewChild.required<ElementRef<HTMLElement>>('summaryElement');
   private readonly _content =
     viewChild.required<ElementRef<HTMLDivElement>>('contentElement');
+
+  protected readonly isOpen = signal(false);
 
   private _animation?: Animation;
   private _isClosing = false;
@@ -69,6 +71,8 @@ export class AccordionComponent {
 
     this._animation.onfinish = () => this.onAnimationFinish(false);
     this._animation.oncancel = () => (this._isClosing = false);
+
+    this.isOpen.set(false);
   }
 
   public open() {
@@ -106,6 +110,8 @@ export class AccordionComponent {
 
     this._animation.onfinish = () => this.onAnimationFinish(true);
     this._animation.oncancel = () => (this._isExpanding = false);
+
+    this.isOpen.set(true);
   }
 
   public onAnimationFinish(open: boolean) {

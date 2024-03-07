@@ -5,17 +5,27 @@
     @if (state() !== ExportModalState.FORMAT) {
       <button
         class="flex items-center justify-center p-2 rounded-md cursor-pointer dark:hover:bg-neutral-800 hover:bg-neutral-200"
+        [title]="'common.back' | translate"
         (click)="back()"
       >
         <ng-icon [svg]="heroArrowLeftMini" />
+
+        <span class="sr-only">
+          {{ 'common.back' | translate }}
+        </span>
       </button>
     }
 
     <button
       class="flex items-center justify-center p-2 ml-auto rounded-md cursor-pointer dark:hover:bg-neutral-800 hover:bg-neutral-200"
+      [title]="'common.close' | translate"
       (click)="close()"
     >
       <ng-icon [svg]="heroXMarkMini" class="size-4" />
+
+      <span class="sr-only">
+        {{ 'common.back' | translate }}
+      </span>
     </button>
   </div>
 

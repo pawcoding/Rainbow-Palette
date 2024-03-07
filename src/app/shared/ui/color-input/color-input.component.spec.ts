@@ -16,7 +16,9 @@ describe('ColorInputComponent', () => {
     component = fixture.componentInstance;
 
     //@ts-expect-error
-    component.placeholder = signal('test');
+    component.placeholder = signal('Placeholder');
+    //@ts-expect-error
+    component.tooltip = signal('Tooltip')
     //@ts-expect-error
     component.hex = signal('#000000');
 

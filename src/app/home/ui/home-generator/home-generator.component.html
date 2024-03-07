@@ -15,7 +15,8 @@
     <rp-color-input
       [(hex)]="hex"
       [(isValid)]="isValid"
-      placeholder="home.generator.color"
+      [placeholder]="'home.generator.hex' | translate"
+      [tooltip]="'home.generator.color' | translate"
     />
 
     <span
@@ -29,6 +30,7 @@
       <button
         class="px-4 py-2 cursor-pointer grow disabled:cursor-not-allowed"
         [disabled]="!isValid()"
+        [title]="(isValid() ? 'home.generator.start' : '') | translate"
         (click)="generatePalette()"
       >
         {{ "home.generator.generate" | translate }}
@@ -43,7 +45,10 @@
         [disabled]="!isValid()"
         highlightSelection
       >
-        <button class="flex items-center justify-center p-2">
+        <button
+          class="flex items-center justify-center p-2"
+          [title]="'home.generator.scheme' | translate"
+        >
           <ng-icon [svg]="heroChevronDownMini" size="1.75rem" />
           <span class="sr-only">
             {{ "home.generator.scheme" | translate }}

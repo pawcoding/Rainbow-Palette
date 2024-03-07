@@ -1,15 +1,16 @@
 @if (palette(); as palette) {
-<div class="p-4">
+<div class="p-4 mx-auto sm:max-w-screen-sm lg:max-w-screen-lg">
   <section
-    class="flex flex-col items-center gap-2 mb-4 xs:items-end xs:justify-between xs:flex-row"
+    class="flex flex-col items-center gap-2 mb-4 lg:items-end lg:justify-between lg:flex-row"
   >
-    <h1 class="text-3xl font-bold select-none xs:text-2xl">
+    <h1 class="text-3xl font-bold select-none lg:text-2xl">
       {{ palette.name }}
     </h1>
 
-    <div class="flex gap-2">
+    <div class="flex flex-wrap justify-center gap-2">
       <button
         class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+        [title]="'view.palette.rename' | translate"
         (click)="renamePalette()"
       >
         <ng-icon
@@ -24,6 +25,7 @@
 
       <button
         class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+        [title]="'export.title' | translate"
         (click)="exportPalette()"
       >
         <ng-icon
@@ -38,6 +40,9 @@
 
       <button
         [disabled]="saving()"
+        [title]="
+          (saving() ? 'view.palette.saving' : 'view.palette.save') | translate
+        "
         class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 group overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer group text-neutral-50 dark:bg-blue-600 disabled:bg-neutral-400 dark:disabled:bg-neutral-700 disabled:cursor-wait"
         (click)="savePalette()"
       >
@@ -69,6 +74,7 @@
   <section class="flex items-center justify-center gap-2 mt-8">
     <button
       class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+      [title]="'view.color.add-tooltip' | translate"
       (click)="addColor()"
     >
       <ng-icon

@@ -11,6 +11,7 @@
       >
         <button
           class="flex items-center justify-center size-8 sm:size-10 border-e text-neutral-700 hover:bg-neutral-50 dark:border-e-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800"
+          [title]="'view.color.rename' | translate"
           (click)="rename(color)"
         >
           <span class="sr-only">
@@ -25,6 +26,7 @@
 
         <button
           class="flex items-center justify-center size-8 sm:size-10 border-e text-neutral-700 hover:bg-neutral-50 dark:border-e-neutral-800 dark:text-neutral-200 dark:hover:bg-neutral-800"
+          [title]="'view.color.tune' | translate"
           (click)="edit(color)"
         >
           <span class="sr-only">
@@ -39,6 +41,7 @@
 
         <button
           class="flex items-center justify-center size-8 sm:size-10 text-neutral-700 hover:bg-neutral-50 dark:text-neutral-200 dark:hover:bg-neutral-800"
+          [title]="'view.color.remove-tooltip' | translate"
           (click)="remove(color)"
         >
           <span class="sr-only">
@@ -62,6 +65,7 @@
         [class.rounded-r]="$last"
         [style.background-color]="shade.hslValue"
         class="block w-full px-2 py-4 text-center cursor-pointer sm:text-lg xs:rounded"
+        [title]="'view.color.click' | translate"
         (click)="edit(color, shade.index)"
         (contextmenu)="copyToClipboard(shade, $event)"
       >

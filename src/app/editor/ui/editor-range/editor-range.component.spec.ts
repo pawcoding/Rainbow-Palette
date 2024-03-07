@@ -15,7 +15,9 @@ describe('EditorRangeComponent', () => {
     component = fixture.componentInstance;
 
     // @ts-expect-error
-    component.label = signal('Test');
+    component.label = signal('Label');
+    // @ts-expect-error
+    component.tooltip = signal('Tooltip')
     // @ts-expect-error
     component.key = signal('hue');
     // @ts-expect-error

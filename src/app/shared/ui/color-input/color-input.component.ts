@@ -20,6 +20,7 @@ import { perceivedBrightnessFromHex } from '../../utils/perceived-brightness';
 })
 export class ColorInputComponent {
   public readonly placeholder = input.required<string>();
+  public readonly tooltip = input.required<string>();
   public readonly hex = model.required<string>();
   public readonly isValid = model(true);
 

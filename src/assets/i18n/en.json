@@ -2,15 +2,31 @@
   "common": {
     "back": "Back",
     "cancel": "Cancel",
+    "close": "Close",
     "delete": "Delete",
     "edit": "Edit",
     "export": "Export",
     "hue": "Hue",
+    "less": "Show less",
     "lightness": "Lightness",
+    "more": "Show more",
     "rename": "Rename",
     "saturation": "Saturation",
     "save": "Save",
     "saving": "Saving..."
+  },
+  "editor": {
+    "cancel": "Close editor without saving",
+    "properties": {
+      "color": "Pick a color for your shade",
+      "hex": "Enter a hex code for your shade",
+      "hue": "Adjust the hue of your shade",
+      "lightness": "Adjust the lightness of your shade",
+      "saturation": "Adjust the saturation of your shade"
+    },
+    "save": "Save all changes to this color",
+    "shades": "Click to edit this shade",
+    "unfix": "Right-click to interpolate this shade"
   },
   "export": {
     "download": {
@@ -59,14 +75,17 @@
       },
       "documentation": "Open documentation",
       "title": "Successfully exported"
-    }
+    },
+    "title": "Export your palette"
   },
   "home": {
     "generator": {
-      "color": "Enter your color",
+      "color": "Pick a color to get started",
       "description": "Enter a hex code below or pick a color to get started.",
       "generate": "Generate palette",
+      "hex": "Enter a hex code to get started",
       "scheme": "Pick a color scheme",
+      "start": "Let's go!",
       "title": "Generate an entire color palette from just a single color."
     },
     "manual": {
@@ -169,19 +188,25 @@
   "view": {
     "color": {
       "add": "Add color",
+      "add-tooltip": "Add a new color to your palette",
+      "click": "Click to tune this shade\nRight-click to copy hex code to clipboard",
       "copy": {
         "error": "An error occurred while copying the hex code to your clipboard.",
         "success": "\"{{ color }}\" has been copied to your clipboard."
       },
       "remove": "Are you sure you want to remove the color \"{{ color }}\"?",
+      "remove-tooltip": "Remove the color from your palette",
       "removed": "The color \"{{ color }}\" has been removed.",
-      "rename": "Enter a new name for the color:",
-      "renamed": "Your color has been renamed to \"{{ name }}\"."
+      "rename": "Give your color a new name",
+      "renamed": "Your color has been renamed to \"{{ name }}\".",
+      "tune": "Tune the color to your liking"
     },
     "palette": {
-      "rename": "Enter a new name for the palette:",
+      "rename": "Give your palette a new name",
       "renamed": "Your palette has been renamed to \"{{ name }}\".",
-      "saved": "Your palette has been saved."
+      "save": "Save your palette in your browser",
+      "saved": "Your palette has been saved.",
+      "saving": "Saving your palette in your browser"
     }
   }
 }
