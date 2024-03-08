@@ -50,6 +50,9 @@ dependencies:
   colortranslator:
     specifier: ^4.1.0
     version: 4.1.0
+  ngx-matomo-client:
+    specifier: ^6.0.2
+    version: 6.0.2(@angular/common@17.2.2)(@angular/core@17.2.2)
   rxjs:
     specifier: ~7.8.1
     version: 7.8.1
@@ -5434,6 +5437,17 @@ packages:
   /neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: true
+
+  /ngx-matomo-client@6.0.2(@angular/common@17.2.2)(@angular/core@17.2.2):
+    resolution: {integrity: sha512-bFihbVw29L/gVnTJxU3dFkTzZcUWHJtiveeeQqYKcDnYmjVulLL1+9xLvIFTmdiwB4opUfb8fqhaSOhPWwy2YA==}
+    peerDependencies:
+      '@angular/common': ^17.0.0
+      '@angular/core': ^17.0.0
+    dependencies:
+      '@angular/common': 17.2.2(@angular/core@17.2.2)(rxjs@7.8.1)
+      '@angular/core': 17.2.2(rxjs@7.8.1)(zone.js@0.14.4)
+      tslib: 2.6.2
+    dev: false
 
   /nice-napi@1.0.2:
     resolution: {integrity: sha512-px/KnJAJZf5RuBGcfD+Sp2pAKq0ytz8j+1NehvgIGFkvtvFrDM3T8E4x/JJODXK9WZow8RRGrbA9QQ3hs+pDhA==}

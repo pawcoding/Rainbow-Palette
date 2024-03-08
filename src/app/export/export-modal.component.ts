@@ -4,7 +4,13 @@ import { NgIconComponent } from '@ng-icons/core';
 import { heroArrowLeftMini, heroXMarkMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import { ExportFormat } from '../shared/constants/export-format';
-import { ExportService, ToastService } from '../shared/data-access';
+import { AnalyticsService } from '../shared/data-access/analytics.service';
+import { ExportService } from '../shared/data-access/export.service';
+import { ToastService } from '../shared/data-access/toast.service';
+import {
+  TrackingEventAction,
+  TrackingEventCategory,
+} from '../shared/enums/tracking-event';
 import { Palette } from '../shared/model';
 import { ExportOption } from '../shared/types/export-option';
 import { ExportDownloadComponent } from './ui/export-download/export-download.component';
@@ -39,6 +45,7 @@ export class ExportModalComponent {
   private readonly _dialogRef = inject(DialogRef);
   private readonly _toastService = inject(ToastService);
   private readonly _exportService = inject(ExportService);
+  private readonly _analyticsService = inject(AnalyticsService);
 
   protected readonly palette = signal(this._data.palette);
   protected readonly state = signal(ExportModalState.FORMAT);
@@ -53,6 +60,13 @@ export class ExportModalComponent {
   protected choseFormat(format: ExportFormat): void {
     this.format.set(format);
     this.state.set(ExportModalState.DOWNLOAD);
+
+    if ((format = ExportFormat.OTHER)) {
+      this._analyticsService.trackEvent(
+        TrackingEventCategory.EXPORT_PALETTE,
+        TrackingEventAction.EXPORT_PALETTE_REQUEST_FORMAT
+      );
+    }
   }
 
   protected async choseDownloadFormat(action: ExportOption): Promise<void> {

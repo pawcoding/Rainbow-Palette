@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { sleep } from '../../shared/utils/sleep';
+import { sleep } from '../utils/sleep';
 import { ThemeService } from './theme.service';
 
 describe('ThemeService', () => {

@@ -6,7 +6,7 @@ import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown
 import { LANGUAGE_OPTIONS } from '../../constants/languages';
 import { THEME_OPTIONS } from '../../constants/themes';
 import { Language, LanguageOption } from '../../types/language';
-import { Theme, ThemeOption } from '../../types/theme';
+import { Theme, ThemeOption } from '../../../shared/types/theme';
 
 @Component({
   selector: 'rp-layout-options',

@@ -16,12 +16,13 @@ import {
   heroSwatchSolid,
 } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
-import { LanguageService, MobileService } from '../shared/data-access';
+import { LanguageService } from '../shared/data-access/language.service';
+import { MobileService } from '../shared/data-access/mobile.service';
+import { ThemeService } from '../shared/data-access/theme.service';
+import { Theme } from '../shared/types/theme';
 import { sleep } from '../shared/utils/sleep';
-import { ThemeService } from './data-access/theme.service';
 import { Language } from './types/language';
 import { NavigationEntry } from './types/navigation-entry';
-import { Theme } from './types/theme';
 import { LayoutFooterComponent } from './ui/layout-footer/layout-footer.component';
 import { LayoutNavigationComponent } from './ui/layout-navigation/layout-navigation.component';
 import { LayoutOptionsComponent } from './ui/layout-options/layout-options.component';

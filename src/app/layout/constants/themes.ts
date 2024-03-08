@@ -1,5 +1,5 @@
 import { heroMoonSolid, heroSunSolid } from '@ng-icons/heroicons/solid';
-import { ThemeOption } from '../types/theme';
+import { ThemeOption } from '../../shared/types/theme';
 
 export const THEME_OPTIONS: Array<ThemeOption> = [
   { value: 'light', label: 'theme.light', icon: heroSunSolid },

@@ -1,12 +1,13 @@
 import { Injectable, inject } from '@angular/core';
 import { ExportFormat } from '../constants/export-format';
-import { Formatter } from '../interfaces/formatter.interface';
 import { CssFormatter } from '../formatter/css.formatter';
 import { LessFormatter } from '../formatter/less.formatter';
-import { Palette } from '../model/palette.model';
 import { ScssFormatter } from '../formatter/scss.formatter';
 import { TailwindFormatter } from '../formatter/tailwind.formatter';
+import { Formatter } from '../interfaces/formatter.interface';
+import { Palette } from '../model/palette.model';
 import { ExportOption } from '../types/export-option';
+import { AnalyticsService } from './analytics.service';
 import { ToastService } from './toast.service';
 
 @Injectable({
@@ -14,6 +15,7 @@ import { ToastService } from './toast.service';
 })
 export class ExportService {
   private readonly _toastService = inject(ToastService);
+  private readonly _analyticsService = inject(AnalyticsService);
 
   public async exportPalette(
     palette: Palette,
@@ -29,6 +31,21 @@ export class ExportService {
       return false;
     }
 
+    const success = await this._exportPalette(palette, formatter, option);
+
+    // Track the export event if successful
+    if (success) {
+      this._analyticsService.trackPaletteExport(format, option);
+    }
+
+    return success;
+  }
+
+  private async _exportPalette(
+    palette: Palette,
+    formatter: Formatter,
+    option: ExportOption
+  ): Promise<boolean> {
     if (option === 'copy') {
       return await this.copy(palette, formatter);
     } else if (option === 'file') {

@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
-import { PaletteService, VersionService } from './shared/data-access';
+import { PaletteService } from './shared/data-access/palette.service';
+import { VersionService } from './shared/data-access/version.service';
 
 @Component({
   selector: 'rp-root',
