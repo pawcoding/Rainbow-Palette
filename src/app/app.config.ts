@@ -1,6 +1,11 @@
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
-import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  isDevMode,
+} from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { provideServiceWorker } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import {
@@ -9,7 +14,6 @@ import {
   withRouter,
   withRouterInterceptors,
 } from 'ngx-matomo-client';
-import { environment } from '../environments/environment';
 import { routes } from './app.routes';
 import { MatomoTitleInterceptor } from './shared/utils/matomo-title-interceptor';
 
@@ -34,7 +38,7 @@ export const appConfig: ApplicationConfig = {
         enableJSErrorTracking: true,
         acceptDoNotTrack: true,
         requireConsent: MatomoConsentMode.COOKIE,
-        disabled: !environment.production,
+        disabled: !isDevMode(),
         runOutsideAngularZone: true,
       },
       withRouter({
@@ -43,5 +47,9 @@ export const appConfig: ApplicationConfig = {
       }),
       withRouterInterceptors([MatomoTitleInterceptor])
     ),
+    provideServiceWorker('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
 };

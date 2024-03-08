@@ -29,9 +29,18 @@ export class PaletteService {
   }
 
   public loadPaletteFromLocalStorage(): void {
-    const palette = localStorage.getItem('palette');
-    if (palette) {
+    // Check if there was a palette stored for an app update
+    let palette = localStorage.getItem('palette-upgrade');
 
+    if (palette) {
+      // Palette was stored for an update, remove it now
+      localStorage.removeItem('palette-upgrade');
+    } else {
+      // Load the palette saved by the user
+      palette = localStorage.getItem('palette');
+    }
+
+    if (palette) {
       try {
         this._palette.set(Palette.parse(palette));
       } catch (e) {
@@ -43,10 +52,15 @@ export class PaletteService {
     }
   }
 
-  public savePaletteToLocalStorage(): void {
+  public savePaletteToLocalStorage(upgrade = false): void {
     const palette = this._palette();
     if (palette) {
-      localStorage.setItem('palette', palette.toString());
+      if (upgrade) {
+        // Store the palette in a different key to reload it in the current state after an app update
+        localStorage.setItem('palette-upgrade', palette.toString());
+      } else {
+        localStorage.setItem('palette', palette.toString());
+      }
     }
   }
 

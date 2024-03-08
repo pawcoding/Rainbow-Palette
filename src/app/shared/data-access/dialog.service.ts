@@ -14,6 +14,10 @@ export class DialogService {
   public async confirm(message: string): Promise<boolean> {
     return window.confirm(message);
   }
+
+  public async alert(message: string): Promise<void> {
+    window.alert(message);
+  }
 }
 
 export class DialogServiceMock {
@@ -23,5 +27,9 @@ export class DialogServiceMock {
 
   public async confirm(_: string): Promise<boolean> {
     return true;
+  }
+
+  public async alert(_: string): Promise<void> {
+    return;
   }
 }

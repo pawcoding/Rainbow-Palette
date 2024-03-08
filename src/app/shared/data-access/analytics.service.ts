@@ -9,7 +9,6 @@ import {
 } from '../enums/tracking-event';
 import { ExportOption } from '../types/export-option';
 import { LanguageService } from './language.service';
-import { PwaService } from './pwa.service';
 import { ThemeService } from './theme.service';
 import { VersionService } from './version.service';
 
@@ -25,7 +24,6 @@ enum CustomDimension {
 })
 export class AnalyticsService {
   private readonly _tracker = inject(MatomoTracker);
-  private readonly _pwaService = inject(PwaService);
   private readonly _themeService = inject(ThemeService);
   private readonly _languageService = inject(LanguageService);
   private readonly _versionService = inject(VersionService);
@@ -33,14 +31,6 @@ export class AnalyticsService {
   constructor() {
     // Send a heartbeat every 30 seconds
     this._tracker.enableHeartBeatTimer(30);
-
-    // Track if app is installed as PWA or not
-    effect(() => {
-      this._tracker.setCustomDimension(
-        CustomDimension.PWA,
-        this._pwaService.isPwa() ? 'PWA' : 'Web'
-      );
-    });
 
     // Track current theme
     effect(() => {
@@ -63,14 +53,13 @@ export class AnalyticsService {
       CustomDimension.VERSION,
       this._versionService.appVersion
     );
+  }
 
-    // Track app installation
-    this._pwaService.pwaInstalled.subscribe(() => {
-      this._tracker.trackEvent(
-        TrackingEventCategory.PWA,
-        TrackingEventAction.PWA_INSTALL
-      );
-    });
+  public setIsPwa(isPwa: boolean): void {
+    this._tracker.setCustomDimension(
+      CustomDimension.PWA,
+      isPwa ? 'PWA' : 'Web'
+    );
   }
 
   /**

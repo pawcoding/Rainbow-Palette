@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "postbuild": "node ./scripts/update-ngsw.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -19,6 +20,7 @@
     "@angular/platform-browser": "^17.2.2",
     "@angular/platform-browser-dynamic": "^17.2.2",
     "@angular/router": "^17.2.2",
+    "@angular/service-worker": "^17.2.2",
     "@ng-icons/core": "^26.5.0",
     "@ng-icons/heroicons": "^26.5.0",
     "@ng-icons/simple-icons": "^26.5.0",

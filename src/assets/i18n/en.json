@@ -164,6 +164,12 @@
     "link": "Back to the editor",
     "title": "Coming soon..."
   },
+  "pwa": {
+    "broken": "Unfortunately your current version of Rainbow Palette is not working properly. The app will be reloaded to fix this issue.",
+    "restart": "A new version of Rainbow Palette is available. Do you want to reload the app now to upgrade from version {{ old }} to version {{ new }}?\n\nYour current palette and changes will be restored after the update.",
+    "update-available": "Version {{ version }} is available. Downloading...",
+    "update-failed": "Update to version {{ version }} failed. Please try again later."
+  },
   "scheme": {
     "analogous": "Analogous",
     "complementary": "Complementary",

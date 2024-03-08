@@ -30,4 +30,12 @@ describe('DialogService', () => {
     expect(result).toBeTrue();
     expect(window.confirm).toHaveBeenCalledWith('message');
   });
+
+  it('should alert', async () => {
+    spyOn(window, 'alert');
+
+    await service.alert('message');
+
+    expect(window.alert).toHaveBeenCalledWith('message');
+  });
 });
