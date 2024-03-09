@@ -38,7 +38,7 @@ export const appConfig: ApplicationConfig = {
         enableJSErrorTracking: true,
         acceptDoNotTrack: true,
         requireConsent: MatomoConsentMode.COOKIE,
-        disabled: !isDevMode(),
+        disabled: isDevMode(),
         runOutsideAngularZone: true,
       },
       withRouter({

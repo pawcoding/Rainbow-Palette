@@ -1,6 +1,7 @@
 import { Injectable, effect, inject, signal } from '@angular/core';
 import { ColorTranslator, Harmony } from 'colortranslator';
 import { PaletteScheme } from '../constants/palette-scheme';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
@@ -30,14 +31,14 @@ export class PaletteService {
 
   public loadPaletteFromLocalStorage(): void {
     // Check if there was a palette stored for an app update
-    let palette = localStorage.getItem('palette-upgrade');
+    let palette = localStorage.getItem(LocalStorageKey.PALETTE_TMP);
 
     if (palette) {
       // Palette was stored for an update, remove it now
-      localStorage.removeItem('palette-upgrade');
+      localStorage.removeItem(LocalStorageKey.PALETTE_TMP);
     } else {
       // Load the palette saved by the user
-      palette = localStorage.getItem('palette');
+      palette = localStorage.getItem(LocalStorageKey.PALETTE);
     }
 
     if (palette) {
@@ -57,9 +58,9 @@ export class PaletteService {
     if (palette) {
       if (upgrade) {
         // Store the palette in a different key to reload it in the current state after an app update
-        localStorage.setItem('palette-upgrade', palette.toString());
+        localStorage.setItem(LocalStorageKey.PALETTE_TMP, palette.toString());
       } else {
-        localStorage.setItem('palette', palette.toString());
+        localStorage.setItem(LocalStorageKey.PALETTE, palette.toString());
       }
     }
   }

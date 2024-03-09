@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { PaletteScheme } from '../constants/palette-scheme';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import { ColorNameService, ColorNameServiceMock } from './color-name.service';
 import { ColorService, ColorServiceMock } from './color.service';
 import { PaletteService } from './palette.service';
@@ -49,16 +50,16 @@ describe('PaletteService', () => {
     await service.generatePalette('#ffffff', PaletteScheme.COMPLEMENTARY);
     service.savePaletteToLocalStorage();
 
-    expect(localStorage.getItem('palette')).toBeTruthy();
-    expect(localStorage.getItem('palette')).toContain('name');
-    expect(localStorage.getItem('palette')).toContain('colors');
+    expect(localStorage.getItem(LocalStorageKey.PALETTE)).toBeTruthy();
+    expect(localStorage.getItem(LocalStorageKey.PALETTE)).toContain('name');
+    expect(localStorage.getItem(LocalStorageKey.PALETTE)).toContain('colors');
     expect(colorService.regenerateShades).toHaveBeenCalledTimes(2);
     expect(colorNameService.getColorName).toHaveBeenCalledTimes(2);
   });
 
   it('should load palette from local storage', () => {
     localStorage.setItem(
-      'palette',
+      LocalStorageKey.PALETTE,
       JSON.stringify({ name: 'Test', colors: [] })
     );
     service.loadPaletteFromLocalStorage();
@@ -69,13 +70,13 @@ describe('PaletteService', () => {
   });
 
   it('should show error toast when loading invalid palette', () => {
-    localStorage.setItem('palette', 'invalid');
+    localStorage.setItem(LocalStorageKey.PALETTE, 'invalid');
     service.loadPaletteFromLocalStorage();
 
     expect(toastService.showToast).toHaveBeenCalled();
   });
 
   afterEach(() => {
-    localStorage.removeItem('palette');
+    localStorage.removeItem(LocalStorageKey.PALETTE);
   });
 });

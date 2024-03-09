@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import { sleep } from '../utils/sleep';
 import { LanguageService } from './language.service';
 
@@ -29,17 +30,17 @@ describe('LanguageService', () => {
   it('should save language changes to local storage', async () => {
     service.setLanguage('de');
     await sleep(10);
-    expect(localStorage.getItem('language')).toBe('de');
+    expect(localStorage.getItem(LocalStorageKey.LANGUAGE)).toBe('de');
   });
 
   afterEach(() => {
-    localStorage.removeItem('language');
+    localStorage.removeItem(LocalStorageKey.LANGUAGE);
   });
 });
 
 describe('LanguageService', () => {
   it('should set language from local storage on initialization', async () => {
-    localStorage.setItem('language', 'de');
+    localStorage.setItem(LocalStorageKey.LANGUAGE, 'de');
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
     });
@@ -48,6 +49,6 @@ describe('LanguageService', () => {
     await sleep(10);
     expect(service.language()).toBe('de');
 
-    localStorage.removeItem('language');
+    localStorage.removeItem(LocalStorageKey.LANGUAGE);
   });
 });

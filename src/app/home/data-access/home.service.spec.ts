@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-
-import { HomeService } from './home.service';
 import { PaletteScheme } from '../../shared/constants/palette-scheme';
+import { LocalStorageKey } from '../../shared/enums/local-storage-keys';
+import { HomeService } from './home.service';
 
 describe('HomeService', () => {
   let service: HomeService;
@@ -21,16 +21,16 @@ describe('HomeService', () => {
 
     service.saveGenerationSettings();
 
-    expect(localStorage.getItem('lastGeneration')).toBe(
+    expect(localStorage.getItem(LocalStorageKey.LAST_GENERATION_SETTINGS)).toBe(
       JSON.stringify({ hex: '#000000', scheme: PaletteScheme.SURPRISE })
     );
 
-    localStorage.removeItem('lastGeneration');
+    localStorage.removeItem(LocalStorageKey.LAST_GENERATION_SETTINGS);
   });
 
   it('should load generation settings', () => {
     localStorage.setItem(
-      'lastGeneration',
+      LocalStorageKey.LAST_GENERATION_SETTINGS,
       JSON.stringify({ hex: '#000000', scheme: PaletteScheme.SURPRISE })
     );
 
@@ -39,6 +39,6 @@ describe('HomeService', () => {
     expect(service.hex()).toBe('#000000');
     expect(service.scheme()).toBe(PaletteScheme.SURPRISE);
 
-    localStorage.removeItem('lastGeneration');
+    localStorage.removeItem(LocalStorageKey.LAST_GENERATION_SETTINGS);
   });
 });

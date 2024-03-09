@@ -1,5 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { PaletteScheme } from '../../shared/constants/palette-scheme';
+import { LocalStorageKey } from '../../shared/enums/local-storage-keys';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +15,15 @@ export class HomeService {
 
   public saveGenerationSettings(): void {
     localStorage.setItem(
-      'lastGeneration',
+      LocalStorageKey.LAST_GENERATION_SETTINGS,
       JSON.stringify({ hex: this.hex(), scheme: this.scheme() })
     );
   }
 
   public loadGenerationSettings(): void {
-    const lastGeneration = localStorage.getItem('lastGeneration');
+    const lastGeneration = localStorage.getItem(
+      LocalStorageKey.LAST_GENERATION_SETTINGS
+    );
 
     if (!lastGeneration) {
       return;
@@ -37,7 +40,7 @@ export class HomeService {
         this.scheme.set(scheme);
       }
     } catch {
-      localStorage.removeItem('lastGeneration');
+      localStorage.removeItem(LocalStorageKey.LAST_GENERATION_SETTINGS);
     }
   }
 }

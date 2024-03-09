@@ -7,4 +7,6 @@ export class MatomoTrackerMock {
     _name?: string,
     _value?: number
   ): void {}
+  public setUserId(_userId: string): void {}
+  public setCookieConsentGiven(): void {}
 }

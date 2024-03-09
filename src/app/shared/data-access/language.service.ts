@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { firstValueFrom } from 'rxjs';
 import { LANGUAGE_OPTIONS } from '../../layout/constants/languages';
 import { Language } from '../../layout/types/language';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 
 @Injectable({
   providedIn: 'root',
@@ -19,11 +20,11 @@ export class LanguageService {
   constructor() {
     effect(async () => {
       await firstValueFrom(this._translateService.use(this._language()));
-      localStorage.setItem('language', this._language());
+      localStorage.setItem(LocalStorageKey.LANGUAGE, this._language());
       document.documentElement.setAttribute('lang', this._language());
     });
 
-    const storedLanguage = localStorage.getItem('language');
+    const storedLanguage = localStorage.getItem(LocalStorageKey.LANGUAGE);
     if (storedLanguage) {
       this._language.set(storedLanguage as Language);
       return;

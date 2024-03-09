@@ -1,4 +1,5 @@
 import { Injectable, Signal, effect, signal } from '@angular/core';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Theme } from '../types/theme';
 
 @Injectable({
@@ -13,14 +14,14 @@ export class ThemeService {
 
   constructor() {
     effect(async () => {
-      localStorage.setItem('theme', this._theme());
+      localStorage.setItem(LocalStorageKey.THEME, this._theme());
       document.documentElement.classList.toggle(
         'dark',
         this._theme() === 'dark'
       );
     });
 
-    const storedTheme = localStorage.getItem('theme');
+    const storedTheme = localStorage.getItem(LocalStorageKey.THEME);
     if (storedTheme === 'dark') {
       this._theme.set('dark');
       return;

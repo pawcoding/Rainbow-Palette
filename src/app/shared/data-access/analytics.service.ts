@@ -2,6 +2,7 @@ import { Injectable, effect, inject } from '@angular/core';
 import { MatomoTracker } from 'ngx-matomo-client';
 import { ExportFormat } from '../constants/export-format';
 import { PaletteScheme } from '../constants/palette-scheme';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import {
   TrackingEventAction,
   TrackingEventCategory,
@@ -9,6 +10,7 @@ import {
 } from '../enums/tracking-event';
 import { ExportOption } from '../types/export-option';
 import { LanguageService } from './language.service';
+import { OfflineService } from './offline.service';
 import { ThemeService } from './theme.service';
 import { VersionService } from './version.service';
 
@@ -19,6 +21,13 @@ export enum CustomDimension {
   VERSION = 4,
 }
 
+type OfflineEvent = {
+  category: TrackingEventCategory;
+  action: TrackingEventAction;
+  name?: TrackingEventName;
+  timestamp: number;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -27,8 +36,13 @@ export class AnalyticsService {
   private readonly _themeService = inject(ThemeService);
   private readonly _languageService = inject(LanguageService);
   private readonly _versionService = inject(VersionService);
+  private readonly _offlineService = inject(OfflineService);
 
   constructor() {
+    this._setUserId();
+
+    this._tracker.setCookieConsentGiven();
+
     // Send a heartbeat every 30 seconds
     this._tracker.enableHeartBeatTimer(30);
 
@@ -53,6 +67,48 @@ export class AnalyticsService {
       CustomDimension.VERSION,
       this._versionService.appVersion
     );
+
+    effect(async () => {
+      const isOffline = this._offlineService.isOffline();
+      if (isOffline) {
+        return;
+      }
+
+      const cache = localStorage.getItem(LocalStorageKey.OFFLINE_EVENTS);
+      if (!cache) {
+        return;
+      }
+
+      const events = JSON.parse(cache) as Array<OfflineEvent>;
+      for (const event of events) {
+        // Skip events older than 24 hours
+        if (event.timestamp < Date.now() - 1000 * 60 * 60 * 24) {
+          continue;
+        }
+
+        this._tracker.trackEvent(event.category, event.action, event.name);
+      }
+
+      this._tracker.trackEvent(
+        TrackingEventCategory.OFFLINE_EVENTS,
+        TrackingEventAction.OFFLINE_EVENTS,
+        undefined,
+        events.length
+      );
+      localStorage.removeItem(LocalStorageKey.OFFLINE_EVENTS);
+    });
+  }
+
+  private _setUserId(): void {
+    let userId = localStorage.getItem(LocalStorageKey.USER_ID);
+    if (!userId) {
+      // Generate random user ID with 16 hex characters
+      userId = Array.from({ length: 16 }, () =>
+        Math.floor(Math.random() * 16).toString(16)
+      ).join('');
+      localStorage.setItem(LocalStorageKey.USER_ID, userId);
+    }
+    this._tracker.setUserId(userId);
   }
 
   public setIsPwa(isPwa: boolean): void {
@@ -73,7 +129,20 @@ export class AnalyticsService {
     action: TrackingEventAction,
     name?: TrackingEventName
   ): void {
-    this._tracker.trackEvent(category, action, name);
+    if (this._offlineService.isOffline()) {
+      const events = JSON.parse(
+        localStorage.getItem(LocalStorageKey.OFFLINE_EVENTS) || '[]'
+      ) as Array<OfflineEvent>;
+
+      events.push({ category, action, name, timestamp: Date.now() });
+
+      localStorage.setItem(
+        LocalStorageKey.OFFLINE_EVENTS,
+        JSON.stringify(events)
+      );
+    } else {
+      this._tracker.trackEvent(category, action, name);
+    }
   }
 
   /**

@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import { sleep } from '../utils/sleep';
 import { ThemeService } from './theme.service';
 
@@ -32,38 +33,38 @@ describe('ThemeService', () => {
   it('should save theme changes to local storage', async () => {
     service.setTheme('dark');
     await sleep(10);
-    expect(localStorage.getItem('theme')).toBe('dark');
+    expect(localStorage.getItem(LocalStorageKey.THEME)).toBe('dark');
 
     service.setTheme('light');
     await sleep(10);
-    expect(localStorage.getItem('theme')).toBe('light');
+    expect(localStorage.getItem(LocalStorageKey.THEME)).toBe('light');
   });
 
   afterEach(() => {
-    localStorage.removeItem('theme');
+    localStorage.removeItem(LocalStorageKey.THEME);
   });
 });
 
 describe('ThemeService', () => {
   it('should set dark theme from local storage on initialization', async () => {
-    localStorage.setItem('theme', 'dark');
+    localStorage.setItem(LocalStorageKey.THEME, 'dark');
     TestBed.configureTestingModule({});
 
     const service = TestBed.inject(ThemeService);
     await sleep(10);
     expect(service.theme()).toBe('dark');
 
-    localStorage.removeItem('theme');
+    localStorage.removeItem(LocalStorageKey.THEME);
   });
 
   it('should set light theme from local storage on initialization', async () => {
-    localStorage.setItem('theme', 'light');
+    localStorage.setItem(LocalStorageKey.THEME, 'light');
     TestBed.configureTestingModule({});
 
     const service = TestBed.inject(ThemeService);
     await sleep(10);
     expect(service.theme()).toBe('light');
 
-    localStorage.removeItem('theme');
+    localStorage.removeItem(LocalStorageKey.THEME);
   });
 });

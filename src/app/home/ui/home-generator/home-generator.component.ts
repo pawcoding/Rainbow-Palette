@@ -46,7 +46,11 @@ export class HomeGeneratorComponent {
     this.schemeOptions.find((option) => option.value === this.scheme())
   );
 
-  protected setScheme(value: PaletteScheme) {
+  protected setScheme(value: PaletteScheme | undefined) {
+    if (value === undefined) {
+      return;
+    }
+
     this.scheme.set(value);
   }
 
