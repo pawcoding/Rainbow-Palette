@@ -5,9 +5,12 @@ import { AppComponent } from './app.component';
 import {
   PaletteService,
   PaletteServiceMock,
+} from './shared/data-access/palette.service';
+import { PwaService, PwaServiceMock } from './shared/data-access/pwa.service';
+import {
   VersionService,
   VersionServiceMock,
-} from './shared/data-access';
+} from './shared/data-access/version.service';
 
 describe('AppComponent', () => {
   let paletteService: PaletteServiceMock;
@@ -24,6 +27,7 @@ describe('AppComponent', () => {
         { provide: ActivatedRoute, useValue: {} },
         { provide: PaletteService, useValue: paletteService },
         { provide: VersionService, useClass: VersionServiceMock },
+        { provide: PwaService, useClass: PwaServiceMock },
       ],
     }).compileComponents();
 

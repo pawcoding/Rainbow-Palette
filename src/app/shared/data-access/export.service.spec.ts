@@ -4,10 +4,12 @@ import { ExportFormat } from '../constants/export-format';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
+import { AnalyticsService, AnalyticsServiceMock } from './analytics.service';
 import { ExportService } from './export.service';
 import { ToastService, ToastServiceMock } from './toast.service';
 
 describe('ExportService', () => {
+  let analyticsService: AnalyticsServiceMock;
   let service: ExportService;
 
   const palette = new Palette('TestPalette', [
@@ -15,9 +17,14 @@ describe('ExportService', () => {
   ]);
 
   beforeEach(() => {
+    analyticsService = new AnalyticsServiceMock();
+
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      providers: [{ provide: ToastService, useClass: ToastServiceMock }],
+      providers: [
+        { provide: ToastService, useClass: ToastServiceMock },
+        { provide: AnalyticsService, useValue: analyticsService },
+      ],
     });
     service = TestBed.inject(ExportService);
   });
@@ -27,6 +34,7 @@ describe('ExportService', () => {
   });
 
   it('should export palette', async () => {
+    spyOn(analyticsService, 'trackPaletteExport');
     spyOn(service, 'copy').and.returnValue(Promise.resolve(true));
     spyOn(service, 'download').and.returnValue(Promise.resolve(true));
 
@@ -40,6 +48,7 @@ describe('ExportService', () => {
 
     expect(result2).toBe(true);
     expect(service.download).toHaveBeenCalled();
+    expect(analyticsService.trackPaletteExport).toHaveBeenCalledTimes(2);
   });
 
   it('should copy palette to clipboard', async () => {

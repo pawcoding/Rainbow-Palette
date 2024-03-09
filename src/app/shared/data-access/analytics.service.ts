@@ -12,7 +12,7 @@ import { LanguageService } from './language.service';
 import { ThemeService } from './theme.service';
 import { VersionService } from './version.service';
 
-enum CustomDimension {
+export enum CustomDimension {
   LANGUAGE = 1,
   THEME = 2,
   PWA = 3,
@@ -154,4 +154,21 @@ export class AnalyticsService {
       name
     );
   }
+}
+
+export class AnalyticsServiceMock {
+  public setIsPwa(_isPwa: boolean): void {}
+
+  public trackEvent(
+    _category: TrackingEventCategory,
+    _action: TrackingEventAction,
+    _name?: TrackingEventName
+  ): void {}
+
+  public trackPaletteExport(
+    _format: ExportFormat,
+    _option: ExportOption
+  ): void {}
+
+  public trackPaletteGeneration(_scheme: PaletteScheme): void {}
 }

@@ -3,6 +3,7 @@ export enum TrackingEventCategory {
   SAVE_PALETTE = 'SAVE_PALETTE',
   GENERATE_PALETTE = 'GENERATE_PALETTE',
   PWA = 'PWA',
+  TEST = 'TEST_CATEGORY',
 }
 
 export enum TrackingEventAction {
@@ -14,6 +15,7 @@ export enum TrackingEventAction {
   PWA_INSTALL = 'PWA_INSTALL',
   PWA_UPDATE_COMPLETED = 'PWA_UPDATE_COMPLETED',
   PWA_UPDATE_FAILED = 'PWA_UPDATE_FAILED',
+  TEST = 'TEST_ACTION',
 }
 
 export enum TrackingEventName {
@@ -32,4 +34,5 @@ export enum TrackingEventName {
   GENERATE_PALETTE_TETRADIC = 'GENERATE_PALETTE_TETRADIC',
   GENERATE_PALETTE_TRIADIC = 'GENERATE_PALETTE_TRIADIC',
   GENERATE_PALETTE_UNKNOWN = 'GENERATE_PALETTE_UNKNOWN',
+  TEST = 'TEST_NAME',
 }

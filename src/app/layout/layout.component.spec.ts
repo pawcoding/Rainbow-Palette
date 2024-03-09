@@ -4,10 +4,15 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
   LanguageService,
   LanguageServiceMock,
+} from '../shared/data-access/language.service';
+import {
   MobileService,
   MobileServiceMock,
-} from '../shared/data-access';
-import { ThemeService, ThemeServiceMock } from './data-access/theme.service';
+} from '../shared/data-access/mobile.service';
+import {
+  ThemeService,
+  ThemeServiceMock,
+} from '../shared/data-access/theme.service';
 import { LayoutComponent } from './layout.component';
 
 describe('LayoutComponent', () => {

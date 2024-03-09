@@ -1,13 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import { PaletteService, PaletteServiceMock } from '../shared/data-access';
+import {
+  AnalyticsService,
+  AnalyticsServiceMock,
+} from '../shared/data-access/analytics.service';
+import {
+  PaletteService,
+  PaletteServiceMock,
+} from '../shared/data-access/palette.service';
 import { HomeService, HomeServiceMock } from './data-access/home.service';
 import HomeComponent from './home.component';
 
 describe('HomeComponent', () => {
   let homeService: HomeServiceMock;
   let paletteService: PaletteServiceMock;
+  let analyticsService: AnalyticsServiceMock;
   let router = jasmine.createSpyObj('Router', ['navigate']);
 
   let component: HomeComponent;
@@ -16,12 +24,14 @@ describe('HomeComponent', () => {
   beforeEach(async () => {
     homeService = new HomeServiceMock();
     paletteService = new PaletteServiceMock();
+    analyticsService = new AnalyticsServiceMock();
 
     await TestBed.configureTestingModule({
       imports: [HomeComponent, TranslateModule.forRoot()],
       providers: [
         { provide: HomeService, useValue: homeService },
         { provide: PaletteService, useValue: paletteService },
+        { provide: AnalyticsService, useValue: analyticsService },
         { provide: Router, useValue: router },
       ],
     }).compileComponents();
@@ -52,6 +62,14 @@ describe('HomeComponent', () => {
       homeService.hex(),
       homeService.scheme()
     );
+  });
+
+  it('should track palette generation on palette generation', () => {
+    spyOn(analyticsService, 'trackPaletteGeneration');
+
+    component.generatePalette();
+
+    expect(analyticsService.trackPaletteGeneration).toHaveBeenCalled();
   });
 
   it('should navigate to view on palette generation', async () => {

@@ -7,15 +7,29 @@ import {
 } from '../editor/data-access/color-editor.service';
 import { ExportModalService } from '../export/data-access/export-modal.service';
 import {
+  AnalyticsService,
+  AnalyticsServiceMock,
+} from '../shared/data-access/analytics.service';
+import {
   ColorService,
   ColorServiceMock,
+} from '../shared/data-access/color.service';
+import {
   DialogService,
   DialogServiceMock,
+} from '../shared/data-access/dialog.service';
+import {
   PaletteService,
   PaletteServiceMock,
+} from '../shared/data-access/palette.service';
+import {
   ToastService,
   ToastServiceMock,
-} from '../shared/data-access';
+} from '../shared/data-access/toast.service';
+import {
+  TrackingEventAction,
+  TrackingEventCategory,
+} from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import ViewComponent from './view.component';
@@ -29,6 +43,7 @@ describe('ViewComponent', () => {
   ]);
   let paletteService: PaletteServiceMock;
   let toastService: ToastServiceMock;
+  let analyticsService: AnalyticsServiceMock;
 
   let component: ViewComponent;
   let fixture: ComponentFixture<ViewComponent>;
@@ -39,6 +54,7 @@ describe('ViewComponent', () => {
     dialogService = new DialogServiceMock();
     paletteService = new PaletteServiceMock();
     toastService = new ToastServiceMock();
+    analyticsService = new AnalyticsServiceMock();
 
     await TestBed.configureTestingModule({
       imports: [ViewComponent, TranslateModule.forRoot()],
@@ -50,6 +66,7 @@ describe('ViewComponent', () => {
         { provide: ExportModalService, useValue: exportModalService },
         { provide: PaletteService, useValue: paletteService },
         { provide: ToastService, useValue: toastService },
+        { provide: AnalyticsService, useValue: analyticsService },
         { provide: IS_RUNNING_TEST, useValue: true },
       ],
     }).compileComponents();
@@ -76,11 +93,16 @@ describe('ViewComponent', () => {
   it('should save palette', async () => {
     spyOn(paletteService, 'savePaletteToLocalStorage').and.callThrough();
     spyOn(toastService, 'showToast').and.callThrough();
+    spyOn(analyticsService, 'trackEvent').and.callThrough();
 
     await component.savePalette();
 
     expect(paletteService.savePaletteToLocalStorage).toHaveBeenCalledTimes(1);
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
+    expect(analyticsService.trackEvent).toHaveBeenCalledWith(
+      TrackingEventCategory.SAVE_PALETTE,
+      TrackingEventAction.SAVE_PALETTE_LOCAL_STORAGE
+    );
   });
 
   it('should open color rename dialog', async () => {

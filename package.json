@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "prebuild": "node ./scripts/update-ngsw.js",
     "build": "ng build",
-    "postbuild": "node ./scripts/update-ngsw.js",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
