@@ -35,8 +35,8 @@ describe('ExportService', () => {
 
   it('should export palette', async () => {
     spyOn(analyticsService, 'trackPaletteExport');
-    spyOn(service, 'copy').and.returnValue(Promise.resolve(true));
-    spyOn(service, 'download').and.returnValue(Promise.resolve(true));
+    spyOn(service, 'copy').and.resolveTo(true);
+    spyOn(service, 'download').and.resolveTo(true);
 
     const format = ExportFormat.CSS;
     const result = await service.exportPalette(palette, format, 'copy');
@@ -52,7 +52,7 @@ describe('ExportService', () => {
   });
 
   it('should copy palette to clipboard', async () => {
-    spyOn(navigator.clipboard, 'writeText').and.returnValue(Promise.resolve());
+    spyOn(navigator.clipboard, 'writeText').and.resolveTo();
 
     const format = ExportFormat.CSS;
     const result = await service.exportPalette(palette, format, 'copy');

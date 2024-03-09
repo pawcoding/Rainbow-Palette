@@ -12,6 +12,7 @@ import { DialogService, DialogServiceMock } from './dialog.service';
 import { PaletteService, PaletteServiceMock } from './palette.service';
 import { PwaService } from './pwa.service';
 import { ToastService, ToastServiceMock } from './toast.service';
+import { VersionService, VersionServiceMock } from './version.service';
 
 describe('PwaService', () => {
   let swUpdate: SwUpdateMock;
@@ -38,6 +39,7 @@ describe('PwaService', () => {
         { provide: DialogService, useValue: dialogService },
         { provide: ToastService, useValue: toastService },
         { provide: PaletteService, useValue: paletteService },
+        { provide: VersionService, useClass: VersionServiceMock },
       ],
     });
     service = TestBed.inject(PwaService);
@@ -88,7 +90,7 @@ describe('PwaService', () => {
   });
 
   it('should handle update rejection', async () => {
-    spyOn(dialogService, 'confirm').and.returnValue(Promise.resolve(false));
+    spyOn(dialogService, 'confirm').and.resolveTo(false);
     spyOn(analyticsService, 'trackEvent');
 
     await swUpdate.emitUpdateReady();

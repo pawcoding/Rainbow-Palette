@@ -16,24 +16,18 @@ import { VersionService, VersionServiceMock } from './version.service';
 
 describe('AnalyticsService', () => {
   let tracker: MatomoTrackerMock;
-  let themeService: ThemeServiceMock;
-  let languageService: LanguageServiceMock;
-  let versionService: VersionServiceMock;
 
   let service: AnalyticsService;
 
   beforeEach(() => {
     tracker = new MatomoTrackerMock();
-    themeService = new ThemeServiceMock();
-    languageService = new LanguageServiceMock();
-    versionService = new VersionServiceMock();
 
     TestBed.configureTestingModule({
       providers: [
         { provide: MatomoTracker, useValue: tracker },
-        { provide: ThemeService, useValue: themeService },
-        { provide: LanguageService, useValue: languageService },
-        { provide: VersionService, useValue: versionService },
+        { provide: ThemeService, useClass: ThemeServiceMock },
+        { provide: LanguageService, useClass: LanguageServiceMock },
+        { provide: VersionService, useClass: VersionServiceMock },
       ],
     });
     service = TestBed.inject(AnalyticsService);

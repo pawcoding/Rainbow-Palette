@@ -33,7 +33,7 @@ describe('VersionService', () => {
     spyOn(console, 'info');
 
     TestBed.configureTestingModule({});
-    const service = TestBed.inject(VersionService);
+    TestBed.inject(VersionService);
 
     expect(console.info).toHaveBeenCalledTimes(2);
   });
