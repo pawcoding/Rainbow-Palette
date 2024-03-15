@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { BehaviorSubject, debounceTime, fromEvent, map, merge, of } from 'rxjs';
 
@@ -22,4 +22,8 @@ export class OfflineService {
         this._isOffline.next(!isOnline);
       });
   }
+}
+
+export class OfflineServiceMock {
+  public readonly isOffline = signal(false).asReadonly();
 }

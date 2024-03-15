@@ -2,6 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { MatomoTracker } from 'ngx-matomo-client';
 import { ExportFormat } from '../constants/export-format';
 import { PaletteScheme } from '../constants/palette-scheme';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import {
   TrackingEventAction,
   TrackingEventCategory,
@@ -9,8 +10,13 @@ import {
 } from '../enums/tracking-event';
 import { MatomoTrackerMock } from '../utils/matomo-tracker-mock';
 import { sleep } from '../utils/sleep';
-import { AnalyticsService, CustomDimension } from './analytics.service';
+import {
+  AnalyticsService,
+  AnalyticsStatus,
+  CustomDimension,
+} from './analytics.service';
 import { LanguageService, LanguageServiceMock } from './language.service';
+import { OfflineService, OfflineServiceMock } from './offline.service';
 import { ThemeService, ThemeServiceMock } from './theme.service';
 import { ToastService, ToastServiceMock } from './toast.service';
 import { VersionService, VersionServiceMock } from './version.service';
@@ -23,6 +29,14 @@ describe('AnalyticsService', () => {
   beforeEach(() => {
     tracker = new MatomoTrackerMock();
 
+    localStorage.setItem(
+      LocalStorageKey.ANALYTICS,
+      JSON.stringify({
+        status: AnalyticsStatus.ACCEPTED,
+        expiry: Date.now() + 100000,
+      })
+    );
+
     TestBed.configureTestingModule({
       providers: [
         { provide: MatomoTracker, useValue: tracker },
@@ -30,6 +44,7 @@ describe('AnalyticsService', () => {
         { provide: LanguageService, useClass: LanguageServiceMock },
         { provide: VersionService, useClass: VersionServiceMock },
         { provide: ToastService, useClass: ToastServiceMock },
+        { provide: OfflineService, useClass: OfflineServiceMock },
       ],
     });
     service = TestBed.inject(AnalyticsService);
@@ -45,13 +60,15 @@ describe('AnalyticsService', () => {
     service.trackEvent(
       TrackingEventCategory.TEST,
       TrackingEventAction.TEST,
-      TrackingEventName.TEST
+      TrackingEventName.TEST,
+      1
     );
 
     expect(tracker.trackEvent).toHaveBeenCalledWith(
       TrackingEventCategory.TEST,
       TrackingEventAction.TEST,
-      TrackingEventName.TEST
+      TrackingEventName.TEST,
+      1
     );
   });
 
@@ -63,7 +80,8 @@ describe('AnalyticsService', () => {
     expect(tracker.trackEvent).toHaveBeenCalledWith(
       TrackingEventCategory.EXPORT_PALETTE,
       TrackingEventAction.EXPORT_PALETTE_COPY,
-      TrackingEventName.EXPORT_PALETTE_CSS
+      TrackingEventName.EXPORT_PALETTE_CSS,
+      undefined
     );
   });
 
@@ -75,8 +93,13 @@ describe('AnalyticsService', () => {
     expect(tracker.trackEvent).toHaveBeenCalledWith(
       TrackingEventCategory.GENERATE_PALETTE,
       TrackingEventAction.GENERATE_PALETTE,
-      TrackingEventName.GENERATE_PALETTE_RAINBOW
+      TrackingEventName.GENERATE_PALETTE_RAINBOW,
+      undefined
     );
+  });
+
+  afterEach(() => {
+    localStorage.clear();
   });
 });
 
