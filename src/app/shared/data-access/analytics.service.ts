@@ -1,4 +1,4 @@
-import { Injectable, effect, inject } from '@angular/core';
+import { Injectable, Signal, effect, inject, signal } from '@angular/core';
 import { MatomoTracker } from 'ngx-matomo-client';
 import { ExportFormat } from '../constants/export-format';
 import { PaletteScheme } from '../constants/palette-scheme';
@@ -12,6 +12,7 @@ import { ExportOption } from '../types/export-option';
 import { LanguageService } from './language.service';
 import { OfflineService } from './offline.service';
 import { ThemeService } from './theme.service';
+import { ToastService } from './toast.service';
 import { VersionService } from './version.service';
 
 export enum CustomDimension {
@@ -21,10 +22,17 @@ export enum CustomDimension {
   VERSION = 4,
 }
 
-type OfflineEvent = {
+export enum AnalyticsStatus {
+  UNSET = 'UNSET',
+  ACCEPTED = 'ACCEPTED',
+  DECLINED = 'DECLINED',
+}
+
+type TrackingEvent = {
   category: TrackingEventCategory;
   action: TrackingEventAction;
   name?: TrackingEventName;
+  value?: number;
   timestamp: number;
 };
 
@@ -37,11 +45,36 @@ export class AnalyticsService {
   private readonly _languageService = inject(LanguageService);
   private readonly _versionService = inject(VersionService);
   private readonly _offlineService = inject(OfflineService);
+  private readonly _toastService = inject(ToastService);
+
+  private readonly _status = signal<AnalyticsStatus>(AnalyticsStatus.UNSET);
+
+  public get status(): Signal<AnalyticsStatus> {
+    return this._status.asReadonly();
+  }
 
   constructor() {
-    this._setUserId();
+    this._setup();
 
-    this._tracker.setCookieConsentGiven();
+    effect(() => {
+      const status = this._status();
+      if (status === AnalyticsStatus.UNSET) {
+        return;
+      }
+
+      const analytics = JSON.stringify({
+        status,
+        expiry: Date.now() + 1000 * 60 * 60 * 24 * 90,
+      });
+      localStorage.setItem(LocalStorageKey.ANALYTICS, analytics);
+
+      if (status === AnalyticsStatus.ACCEPTED) {
+        this._tracker.setConsentGiven();
+        this._processEvents('disabled');
+      } else if (status === AnalyticsStatus.DECLINED) {
+        this._tracker.forgetConsentGiven();
+      }
+    });
 
     // Send a heartbeat every 30 seconds
     this._tracker.enableHeartBeatTimer(30);
@@ -69,37 +102,31 @@ export class AnalyticsService {
     );
 
     effect(async () => {
-      const isOffline = this._offlineService.isOffline();
-      if (isOffline) {
-        return;
+      if (!this._offlineService.isOffline()) {
+        this._processEvents('offline');
       }
-
-      const cache = localStorage.getItem(LocalStorageKey.OFFLINE_EVENTS);
-      if (!cache) {
-        return;
-      }
-
-      const events = JSON.parse(cache) as Array<OfflineEvent>;
-      for (const event of events) {
-        // Skip events older than 24 hours
-        if (event.timestamp < Date.now() - 1000 * 60 * 60 * 24) {
-          continue;
-        }
-
-        this._tracker.trackEvent(event.category, event.action, event.name);
-      }
-
-      this._tracker.trackEvent(
-        TrackingEventCategory.OFFLINE_EVENTS,
-        TrackingEventAction.OFFLINE_EVENTS,
-        undefined,
-        events.length
-      );
-      localStorage.removeItem(LocalStorageKey.OFFLINE_EVENTS);
     });
   }
 
-  private _setUserId(): void {
+  private _setup(): void {
+    const analytics = localStorage.getItem(LocalStorageKey.ANALYTICS);
+    if (analytics) {
+      try {
+        const parsed = JSON.parse(analytics);
+        if (parsed.expiry < Date.now()) {
+          localStorage.removeItem(LocalStorageKey.ANALYTICS);
+        } else {
+          if (parsed.status === AnalyticsStatus.ACCEPTED) {
+            this._status.set(AnalyticsStatus.ACCEPTED);
+          } else if (parsed.status === AnalyticsStatus.DECLINED) {
+            this._status.set(AnalyticsStatus.DECLINED);
+          }
+        }
+      } catch (error) {
+        console.error('Failed to parse analytics status', error);
+      }
+    }
+
     let userId = localStorage.getItem(LocalStorageKey.USER_ID);
     if (!userId) {
       // Generate random user ID with 16 hex characters
@@ -111,11 +138,78 @@ export class AnalyticsService {
     this._tracker.setUserId(userId);
   }
 
+  private _queueEvent(
+    event: Omit<TrackingEvent, 'timestamp'>,
+    type: 'disabled' | 'offline'
+  ): void {
+    const key =
+      type === 'disabled'
+        ? LocalStorageKey.EVENTS_DISABLED
+        : LocalStorageKey.EVENTS_OFFLINE;
+    const events = JSON.parse(
+      localStorage.getItem(key) || '[]'
+    ) as Array<TrackingEvent>;
+
+    events.push({ ...event, timestamp: Date.now() });
+    localStorage.setItem(key, JSON.stringify(events));
+  }
+
+  private _processEvents(type: 'disabled' | 'offline'): void {
+    const key =
+      type === 'disabled'
+        ? LocalStorageKey.EVENTS_DISABLED
+        : LocalStorageKey.EVENTS_OFFLINE;
+    const cache = localStorage.getItem(key);
+    if (!cache) {
+      return;
+    }
+
+    const events = JSON.parse(cache) as Array<TrackingEvent>;
+    for (const event of events) {
+      // Skip events older than 24 hours
+      if (event.timestamp < Date.now() - 1000 * 60 * 60 * 24) {
+        continue;
+      }
+
+      this._tracker.trackEvent(event.category, event.action, event.name);
+    }
+
+    if (key === LocalStorageKey.EVENTS_DISABLED) {
+      this.trackEvent(
+        TrackingEventCategory.EVENTS_DISABLED,
+        TrackingEventAction.EVENTS_DISABLED,
+        undefined,
+        events.length
+      );
+    } else {
+      this.trackEvent(
+        TrackingEventCategory.EVENTS_OFFLINE,
+        TrackingEventAction.EVENTS_OFFLINE,
+        undefined,
+        events.length
+      );
+    }
+
+    localStorage.removeItem(key);
+  }
+
   public setIsPwa(isPwa: boolean): void {
     this._tracker.setCustomDimension(
       CustomDimension.PWA,
       isPwa ? 'PWA' : 'Web'
     );
+  }
+
+  public acceptAnalytics(): void {
+    this._status.set(AnalyticsStatus.ACCEPTED);
+    this._toastService.showToast({
+      type: 'info',
+      message: 'toast.info.analytics-accepted',
+    });
+  }
+
+  public declineAnalytics(): void {
+    this._status.set(AnalyticsStatus.DECLINED);
   }
 
   /**
@@ -127,22 +221,28 @@ export class AnalyticsService {
   public trackEvent(
     category: TrackingEventCategory,
     action: TrackingEventAction,
-    name?: TrackingEventName
+    name?: TrackingEventName,
+    value?: number
   ): void {
-    if (this._offlineService.isOffline()) {
-      const events = JSON.parse(
-        localStorage.getItem(LocalStorageKey.OFFLINE_EVENTS) || '[]'
-      ) as Array<OfflineEvent>;
-
-      events.push({ category, action, name, timestamp: Date.now() });
-
-      localStorage.setItem(
-        LocalStorageKey.OFFLINE_EVENTS,
-        JSON.stringify(events)
+    if (this._status() !== AnalyticsStatus.ACCEPTED) {
+      this._queueEvent(
+        {
+          category,
+          action,
+          name,
+          value,
+        },
+        'disabled'
       );
-    } else {
-      this._tracker.trackEvent(category, action, name);
+      return;
     }
+
+    if (this._offlineService.isOffline()) {
+      this._queueEvent({ category, action, name, value }, 'offline');
+      return;
+    }
+
+    this._tracker.trackEvent(category, action, name, value);
   }
 
   /**
@@ -226,7 +326,15 @@ export class AnalyticsService {
 }
 
 export class AnalyticsServiceMock {
+  public readonly status = signal<AnalyticsStatus>(
+    AnalyticsStatus.UNSET
+  ).asReadonly();
+
   public setIsPwa(_isPwa: boolean): void {}
+
+  public acceptAnalytics(): void {}
+
+  public declineAnalytics(): void {}
 
   public trackEvent(
     _category: TrackingEventCategory,

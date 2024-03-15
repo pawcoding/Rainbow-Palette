@@ -125,6 +125,15 @@
     }
   },
   "layout": {
+    "analytics": {
+      "consent": {
+        "accept": "Activate analytics",
+        "decline": "No, thanks",
+        "description": "This website uses a private {{ matomo }} instance to collect anonymized data about the use of the site. No personally identifiable information is collected, and all data about your usage is anonymized.",
+        "more": "More information",
+        "title": "Help me improve the site"
+      }
+    },
     "footer": {
       "analytics": "Analytics",
       "description": "Generate an entire color palette from just a single color.",
@@ -189,6 +198,9 @@
     "error": {
       "load-color-map": "An error occurred while loading the list of color names.",
       "palette-load": "An error occurred while loading your last palette."
+    },
+    "info": {
+      "analytics-accepted": "Thank you for helping me improve the site."
     }
   },
   "view": {

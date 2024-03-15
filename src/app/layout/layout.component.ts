@@ -16,6 +16,10 @@ import {
   heroSwatchSolid,
 } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
+import {
+  AnalyticsService,
+  AnalyticsStatus,
+} from '../shared/data-access/analytics.service';
 import { LanguageService } from '../shared/data-access/language.service';
 import { MobileService } from '../shared/data-access/mobile.service';
 import { ThemeService } from '../shared/data-access/theme.service';
@@ -23,6 +27,7 @@ import { Theme } from '../shared/types/theme';
 import { sleep } from '../shared/utils/sleep';
 import { Language } from './types/language';
 import { NavigationEntry } from './types/navigation-entry';
+import { LayoutAnalyticsConsentComponent } from './ui/layout-analytics-consent/layout-analytics-consent.component';
 import { LayoutFooterComponent } from './ui/layout-footer/layout-footer.component';
 import { LayoutNavigationComponent } from './ui/layout-navigation/layout-navigation.component';
 import { LayoutOptionsComponent } from './ui/layout-options/layout-options.component';
@@ -37,6 +42,7 @@ import { LayoutOptionsComponent } from './ui/layout-options/layout-options.compo
     LayoutOptionsComponent,
     LayoutFooterComponent,
     RouterOutlet,
+    LayoutAnalyticsConsentComponent,
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css',
@@ -45,6 +51,7 @@ export class LayoutComponent implements AfterViewInit {
   private readonly _mobileService = inject(MobileService);
   private readonly _languageService = inject(LanguageService);
   private readonly _themeService = inject(ThemeService);
+  private readonly _analyticsService = inject(AnalyticsService);
 
   private readonly _header =
     viewChild.required<ElementRef<HTMLElement>>('header');
@@ -83,6 +90,10 @@ export class LayoutComponent implements AfterViewInit {
     return this.theme() === 'dark'
       ? '/assets/rainbow-palette-light.svg'
       : '/assets/rainbow-palette-dark.svg';
+  });
+
+  protected readonly showAnalyticsConsent = computed(() => {
+    return this._analyticsService.status() === AnalyticsStatus.UNSET;
   });
 
   constructor() {
@@ -130,5 +141,13 @@ export class LayoutComponent implements AfterViewInit {
 
   public changeTheme(theme: Theme): void {
     this._themeService.setTheme(theme);
+  }
+
+  public analyticsConsent(consent: boolean): void {
+    if (consent) {
+      this._analyticsService.acceptAnalytics();
+    } else {
+      this._analyticsService.declineAnalytics();
+    }
   }
 }

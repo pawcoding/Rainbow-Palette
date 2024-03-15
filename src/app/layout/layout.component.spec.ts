@@ -2,6 +2,10 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
+  AnalyticsService,
+  AnalyticsServiceMock,
+} from '../shared/data-access/analytics.service';
+import {
   LanguageService,
   LanguageServiceMock,
 } from '../shared/data-access/language.service';
@@ -33,6 +37,7 @@ describe('LayoutComponent', () => {
         { provide: ThemeService, useValue: themeService },
         { provide: LanguageService, useValue: languageService },
         { provide: MobileService, useClass: MobileServiceMock },
+        { provide: AnalyticsService, useClass: AnalyticsServiceMock },
       ],
     }).compileComponents();
 

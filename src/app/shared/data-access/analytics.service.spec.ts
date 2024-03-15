@@ -12,6 +12,7 @@ import { sleep } from '../utils/sleep';
 import { AnalyticsService, CustomDimension } from './analytics.service';
 import { LanguageService, LanguageServiceMock } from './language.service';
 import { ThemeService, ThemeServiceMock } from './theme.service';
+import { ToastService, ToastServiceMock } from './toast.service';
 import { VersionService, VersionServiceMock } from './version.service';
 
 describe('AnalyticsService', () => {
@@ -28,6 +29,7 @@ describe('AnalyticsService', () => {
         { provide: ThemeService, useClass: ThemeServiceMock },
         { provide: LanguageService, useClass: LanguageServiceMock },
         { provide: VersionService, useClass: VersionServiceMock },
+        { provide: ToastService, useClass: ToastServiceMock },
       ],
     });
     service = TestBed.inject(AnalyticsService);

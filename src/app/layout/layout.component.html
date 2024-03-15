@@ -37,6 +37,8 @@
   >
     <ng-container *ngTemplateOutlet="navigationTemplate" />
   </div>
+  } @if (showAnalyticsConsent()) {
+  <rp-layout-analytics-consent (consent)="analyticsConsent($event)" />
   }
 </div>
 

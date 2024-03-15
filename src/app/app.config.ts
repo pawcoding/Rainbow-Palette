@@ -37,7 +37,7 @@ export const appConfig: ApplicationConfig = {
         trackerUrl: 'https://analytics.apps.pawcode.de/',
         enableJSErrorTracking: true,
         acceptDoNotTrack: true,
-        requireConsent: MatomoConsentMode.COOKIE,
+        requireConsent: MatomoConsentMode.TRACKING,
         disabled: isDevMode(),
         runOutsideAngularZone: true,
       },

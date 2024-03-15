@@ -1,0 +1,33 @@
+<article
+  class="w-full max-w-screen-sm p-4 backdrop-blur-sm sm:rounded-tr-md bg-neutral-300/90"
+>
+  <strong>
+    {{ "layout.analytics.consent.title" | translate }}
+  </strong>
+
+  <p
+    [innerHTML]="
+      'layout.analytics.consent.description' | translate : { matomo }
+    "
+  ></p>
+
+  <a routerLink="/analytics" class="block mt-2 mb-4 ml-auto underline w-fit">
+    {{ "layout.analytics.consent.more" | translate }}
+  </a>
+
+  <div class="flex gap-2">
+    <button
+      class="grow xs:grow-0 justify-center flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold rounded cursor-pointer text-neutral-50 bg-neutral-400 dark:bg-neutral-700"
+      (click)="decline()"
+    >
+      {{ "layout.analytics.consent.decline" | translate }}
+    </button>
+
+    <button
+      class="grow xs:grow-0 justify-center flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
+      (click)="accept()"
+    >
+      {{ "layout.analytics.consent.accept" | translate }}
+    </button>
+  </div>
+</article>

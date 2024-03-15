@@ -61,7 +61,7 @@ export class ExportModalComponent {
     this.format.set(format);
     this.state.set(ExportModalState.DOWNLOAD);
 
-    if ((format = ExportFormat.OTHER)) {
+    if (format === ExportFormat.OTHER) {
       this._analyticsService.trackEvent(
         TrackingEventCategory.EXPORT_PALETTE,
         TrackingEventAction.EXPORT_PALETTE_REQUEST_FORMAT
