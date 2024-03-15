@@ -13,6 +13,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ColorService } from '../shared/data-access/color.service';
 import { Color, Shade } from '../shared/model';
 import { ColorInputComponent } from '../shared/ui/color-input/color-input.component';
+import { textColor } from '../shared/utils/text-color';
 import { EditorRangeComponent } from './ui/editor-range/editor-range.component';
 
 export enum UpdateType {
@@ -36,6 +37,7 @@ export enum UpdateType {
 })
 export class EditorComponent {
   protected readonly UpdateType = UpdateType;
+  protected readonly textColor = textColor;
 
   private readonly _data = inject<{ color: Color; shadeIndex?: number }>(
     DIALOG_DATA
@@ -61,15 +63,6 @@ export class EditorComponent {
     }
 
     return this.color().shades[0];
-  });
-
-  protected readonly lightestShade = computed(() => {
-    return this.color().shades[0];
-  });
-
-  protected readonly darkestShade = computed(() => {
-    const shades = this.color().shades;
-    return shades[shades.length - 1];
   });
 
   private readonly _editor =

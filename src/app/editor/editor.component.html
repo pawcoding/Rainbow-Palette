@@ -53,11 +53,7 @@
       [class.rounded-l-md]="$first"
       [class.rounded-r-md]="$last"
       [style.backgroundColor]="shadeInRow.hex"
-      [style.color]="
-        shadeInRow.perceivedBrightness > 51
-          ? darkestShade().hex
-          : lightestShade().hex
-      "
+      [style.color]="textColor(shadeInRow, color())"
       [title]="getTooltip(shadeInRow, shadeInRow.index === shadeIndex())"
       (click)="changeShade(shadeInRow.index)"
       (contextmenu)="unfixShade(shadeInRow, $event)"

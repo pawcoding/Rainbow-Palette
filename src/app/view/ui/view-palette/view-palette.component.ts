@@ -7,6 +7,7 @@ import {
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import { Color, Palette, Shade } from '../../../shared/model';
+import { textColor } from '../../../shared/utils/text-color';
 
 @Component({
   selector: 'rp-view-palette',
@@ -15,6 +16,8 @@ import { Color, Palette, Shade } from '../../../shared/model';
   templateUrl: './view-palette.component.html',
 })
 export class ViewPaletteComponent {
+  protected readonly textColor = textColor;
+
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroAdjustmentsHorizontalMin =
     heroAdjustmentsHorizontalMini;
