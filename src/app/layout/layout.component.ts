@@ -58,6 +58,7 @@ export class LayoutComponent implements AfterViewInit {
   private readonly _footer = viewChild<ElementRef<HTMLElement>>('footer');
   private readonly _bottomNavigation =
     viewChild<ElementRef<HTMLElement>>('bottomNavigation');
+  private readonly _analytics = viewChild(LayoutAnalyticsConsentComponent);
 
   protected readonly navigationEntries: Array<NavigationEntry> = [
     {
@@ -110,17 +111,23 @@ export class LayoutComponent implements AfterViewInit {
         `${this._header().nativeElement.offsetHeight}px`
       );
 
-      const footerHeight = this._footer()?.nativeElement.offsetHeight;
+      const footerHeight = this._footer()?.nativeElement.offsetHeight ?? 0;
       document.documentElement.style.setProperty(
         '--footer-height',
-        footerHeight ? `${footerHeight}px` : '0px'
+        `${footerHeight}px`
       );
 
       const bottomNavigationHeight =
-        this._bottomNavigation()?.nativeElement.offsetHeight;
+        this._bottomNavigation()?.nativeElement.offsetHeight ?? 0;
       document.documentElement.style.setProperty(
         '--bottom-navigation-height',
-        bottomNavigationHeight ? `${bottomNavigationHeight}px` : '0px'
+        `${bottomNavigationHeight}px`
+      );
+
+      const analyticsHeight = this._analytics()?.height() ?? 0;
+      document.documentElement.style.setProperty(
+        '--analytics-consent-height',
+        `${analyticsHeight}px`
       );
     });
   }

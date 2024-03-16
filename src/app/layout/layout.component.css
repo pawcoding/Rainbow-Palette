@@ -1,4 +1,6 @@
 #main {
   padding-top: var(--header-height);
-  padding-bottom: var(--bottom-navigation-height);
+  padding-bottom: calc(
+    var(--bottom-navigation-height) + var(--analytics-consent-height)
+  );
 }

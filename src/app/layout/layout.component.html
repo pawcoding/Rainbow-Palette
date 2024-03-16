@@ -30,6 +30,8 @@
       <rp-layout-footer [logoAsset]="logoAsset()" />
     </footer>
   </main>
+  } @if (showAnalyticsConsent()) {
+  <rp-layout-analytics-consent (consent)="analyticsConsent($event)" />
   } @if (isMobile()) {
   <div
     #bottomNavigation
@@ -37,8 +39,6 @@
   >
     <ng-container *ngTemplateOutlet="navigationTemplate" />
   </div>
-  } @if (showAnalyticsConsent()) {
-  <rp-layout-analytics-consent (consent)="analyticsConsent($event)" />
   }
 </div>
 

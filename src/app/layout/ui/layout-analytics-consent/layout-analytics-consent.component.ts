@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  computed,
+  viewChild,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -15,6 +22,13 @@ export class LayoutAnalyticsConsentComponent {
 
   @Output()
   public readonly consent = new EventEmitter<boolean>();
+
+  private readonly _container =
+    viewChild.required<ElementRef<HTMLElement>>('container');
+
+  public readonly height = computed(() => {
+    return this._container().nativeElement.offsetHeight;
+  });
 
   public accept(): void {
     this.consent.emit(true);

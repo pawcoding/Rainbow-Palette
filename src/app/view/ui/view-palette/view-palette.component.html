@@ -65,12 +65,12 @@
         [class.rounded-r]="$last"
         [style.background-color]="shade.hslValue"
         [style.color]="textColor(shade, color)"
-        class="block w-full px-2 py-4 text-center cursor-pointer sm:text-lg xs:rounded"
+        class="flex items-center justify-center w-full h-20 cursor-pointer sm:text-lg xs:rounded"
         [title]="'view.color.click' | translate"
         (click)="edit(color, shade.index)"
         (contextmenu)="copyToClipboard(shade, $event)"
       >
-        <span class="opacity-0 xs:opacity-100">
+        <span class="hidden text-center xs:block">
           <span class="font-semibold">
             {{ shade.index }}
           </span>
