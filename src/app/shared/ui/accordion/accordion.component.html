@@ -20,16 +20,11 @@
     </span>
   </summary>
 
-  @if (details()) {
-  <div
-    #contentElement
-    class="mt-4 leading-relaxed text-justify text-neutral-700 dark:text-neutral-300"
-  >
-    <p [innerHTML]="details()"></p>
-  </div>
-  } @else {
-  <div #contentElement class="mt-4 text-neutral-700 dark:text-neutral-300">
+  <div #contentElement class="mt-6 text-neutral-700 dark:text-neutral-300">
+    @if (!hidden() || isOpen()) { @if (details()) {
+    <p class="leading-relaxed text-justify" [innerHTML]="details()"></p>
+    } @else {
     <ng-content />
+    } }
   </div>
-  }
 </details>

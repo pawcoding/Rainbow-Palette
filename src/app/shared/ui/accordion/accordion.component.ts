@@ -1,8 +1,16 @@
-import { Component, ElementRef, input, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  booleanAttribute,
+  input,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroPlus } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
+import { sleep } from '../../utils/sleep';
 
 @Component({
   selector: 'rp-accordion',
@@ -12,8 +20,23 @@ import { TranslateModule } from '@ngx-translate/core';
   styles: ':host { display: block; }',
 })
 export class AccordionComponent {
+  /**
+   * The summary of the accordion.
+   * This can be a translation key or a string.
+   */
   public readonly summary = input.required<string>();
+  /**
+   * The content of the accordion.
+   * This can be a translation key, a string or a SafeHtml object.
+   * As an alternative, you can project the content into the component instead.
+   */
   public readonly details = input<string | SafeHtml | undefined>();
+  /**
+   * Whether the accordions content should be hidden initially.
+   * When set to true, the content will not be rendered into the DOM until the accordion is opened.
+   * This can be used to hide content like private information from search engines and automated scrapers.
+   */
+  public readonly hidden = input(false, { transform: booleanAttribute });
 
   protected readonly heroPlus = heroPlus;
 
@@ -47,7 +70,7 @@ export class AccordionComponent {
     }
   }
 
-  public shrink() {
+  public async shrink(): Promise<void> {
     this._isClosing = true;
 
     const startHeight = `${this._details().nativeElement.offsetHeight}px`;
@@ -72,6 +95,9 @@ export class AccordionComponent {
     this._animation.onfinish = () => this.onAnimationFinish(false);
     this._animation.oncancel = () => (this._isClosing = false);
 
+    // Wait for animation to finish before hiding the content
+    await sleep(300);
+
     this.isOpen.set(false);
   }
 
@@ -85,8 +111,12 @@ export class AccordionComponent {
     window.requestAnimationFrame(() => this.expand());
   }
 
-  public expand() {
+  public async expand(): Promise<void> {
     this._isExpanding = true;
+    this.isOpen.set(true);
+
+    // Wait for the next frame to ensure the content is rendered
+    await sleep(1);
 
     const startHeight = `${this._details().nativeElement.offsetHeight}px`;
     const endHeight = `calc(${
@@ -110,8 +140,6 @@ export class AccordionComponent {
 
     this._animation.onfinish = () => this.onAnimationFinish(true);
     this._animation.oncancel = () => (this._isExpanding = false);
-
-    this.isOpen.set(true);
   }
 
   public onAnimationFinish(open: boolean) {

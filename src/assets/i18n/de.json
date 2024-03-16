@@ -124,6 +124,54 @@
       "title": "Weitere Infos & Support"
     }
   },
+  "imprint": {
+    "analytics": {
+      "data": {
+        "browser": "Browser",
+        "country": "Land",
+        "device": "Gerätetyp",
+        "events": "Benutzung bestimmter Funktionen",
+        "os": "Betriebssystem",
+        "time": "Nutzungsdauer",
+        "title": "Welche Daten werden gesammelt?"
+      },
+      "disable": {
+        "button": "Analytics deaktivieren",
+        "description": "Du willst nicht, dass anonymisierte Daten über deine Nutzung dieser Seite gesammelt werden? Kein Problem, klicke einfach auf den Button unten und die Datensammlung wird deaktiviert. Wenn du sie wieder aktivieren möchtest, kannst du das auch hier tun.",
+        "title": "Analytics deaktivieren"
+      },
+      "enable": {
+        "button": "Analytics aktivieren",
+        "description": "Du willst mir helfen, die Seite zu verbessern? Dann aktiviere Analytics und erlaube mir, anonymisierte Daten über die Nutzung dieser Seite zu sammeln. Diese Daten werden nur dazu verwendet, die Seite zu verbessern und allgemeine Statistiken zu erstellen.",
+        "title": "Analytics aktivieren"
+      },
+      "title": "Analytics",
+      "usage": {
+        "description": "Ich verwende eine private {{ matomo }} Instanz, um anonymisierte Daten über die Nutzung dieser Seite zu sammeln. Diese Daten werden nur dazu verwendet, die Seite zu verbessern und allgemeine Statistiken zu erstellen.",
+        "note": "Es werden keine personenbezogenen Daten gesammelt.<br/>Die gesammelten Daten werden nicht mit Dritten geteilt.<br/>Es werden keine Cookies verwendet.",
+        "title": "Wie werden die Daten verwendet?"
+      }
+    },
+    "contact": {
+      "email": "E-Mail",
+      "germany": "Deutschland",
+      "hidden": "Diese Information wurde aus Datenschutzgründen versteckt, um Spam von automatisierten Systemen zu vermeiden.",
+      "methods": "Bitte nutze die folgenden Methoden nur für ernsthafte Anfragen. Spam wird gemeldet. Für allgemeine Fragen nutze bitte eine der anderen Plattformen, die im Footer verlinkt sind.",
+      "note": "Angaben gemäß",
+      "telephone": "Tel",
+      "title": "Kontakt"
+    },
+    "copyright": {
+      "design": "Design inspiriert von",
+      "icons": "Icons von",
+      "icons-branded": "Firmenlogos von",
+      "idea": "Originalidee von",
+      "logo": "Logo erstellt von",
+      "title": "Copyright"
+    },
+    "notes": "Hinweise zur Webseite",
+    "title": "Impressum"
+  },
   "layout": {
     "analytics": {
       "consent": {

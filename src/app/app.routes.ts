@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     loadComponent: () => import('./home/home.component'),
   },
   {
@@ -12,5 +13,13 @@ export const routes: Routes = [
   {
     path: 'preview',
     loadComponent: () => import('./preview/preview.component'),
+  },
+  {
+    path: 'imprint',
+    loadComponent: () => import('./imprint/imprint.component'),
+  },
+  {
+    path: '**',
+    redirectTo: '',
   },
 ];

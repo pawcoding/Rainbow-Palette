@@ -4,7 +4,11 @@ import {
   importProvidersFrom,
   isDevMode,
 } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import {
+  provideRouter,
+  withInMemoryScrolling,
+  withRouterConfig,
+} from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -19,7 +23,16 @@ import { MatomoTitleInterceptor } from './shared/utils/matomo-title-interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withInMemoryScrolling({
+        anchorScrolling: 'enabled',
+        scrollPositionRestoration: 'top',
+      }),
+      withRouterConfig({
+        onSameUrlNavigation: 'reload',
+      })
+    ),
     provideHttpClient(withFetch()),
     importProvidersFrom(
       TranslateModule.forRoot({

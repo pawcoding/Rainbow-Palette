@@ -124,6 +124,55 @@
       "title": "Additional information & support"
     }
   },
+  "imprint": {
+    "analytics": {
+      "data": {
+        "browser": "Browser",
+        "country": "Country",
+        "device": "Device type",
+        "events": "Usage of certain features",
+        "os": "Operating system",
+        "time": "Usage duration",
+        "title": "What is being collected?"
+      },
+      "disable": {
+        "button": "Disable analytics",
+        "description": "You don't want anonymous data to be collected about your usage of this site? No problem, just click the button below and the data collection will be disabled. If you want to enable it again, you can also do this here.",
+        "title": "Disable analytics"
+      },
+      "enable": {
+        "button": "Enable analytics",
+        "description": "You want to help me improve the site by providing anonymous data about your usage? Great! Just click the button below and the data collection will be enabled. If you want to disable it again, you can also do this here.",
+        "title": "Enable analytics"
+      },
+      "title": "Analytics",
+      "usage": {
+        "description": "I use a private {{ matomo }} instance to collect anonymized data about the use of this site. This data is only used to improve the site and create some general statistics.",
+        "note": "No personally identifiable information is collected.<br/>The data collected is not shared with third parties.<br/>There are no cookies used to track your behavior.",
+        "title": "What happens with your data?"
+      }
+    },
+    "contact": {
+      "email": "Email",
+      "germany": "Germany",
+      "hidden": "This information was hidden to protect my privacy and avoid spam from automated systems.",
+      "methods": "Please only use the following methods for serious inquiries. Spam will be reported. For general questions, please use one of the other platforms linked in the footer.",
+      "note": "Disclosures according to",
+      "telephone": "Tel",
+      "title": "Contact"
+    },
+    "copyright": {
+      "design": "Design inspired by",
+      "icons": "Icons used from",
+      "icons-branded": "Branded icons used from",
+      "idea": "Original idea by",
+      "logo": "Logo created by",
+      "title": "Copyright"
+    },
+    "notes": "Notes regarding the website",
+    "german-only": "only available in German",
+    "title": "Imprint"
+  },
   "layout": {
     "analytics": {
       "consent": {
