@@ -1,15 +1,16 @@
 @if (toast(); as toast) {
 <div
-  class="inline-flex items-start justify-between w-full gap-1 p-2 border rounded shadow-md sm:max-w-80 bg-neutral-100 min-w-48 dark:bg-neutral-700 dark:shadow-none"
+  role="alert"
+  class="flex items-center gap-1 p-4 rounded shadow-md toast border-s-4 dark:shadow-none max-w-96"
   [class]="colors()"
 >
-  <span>
+  <span class="text-sm">
     {{ toast.message | translate : toast.parameters }}
   </span>
 
   <button
     type="button"
-    class="flex items-center justify-center w-6 h-6 focus:outline-none"
+    class="flex items-center justify-center w-6 h-6 transition-colors duration-200 rounded bg-black/0 shrink-0 focus:outline-none hover:bg-black/10"
     [title]="'common.close' | translate"
     (click)="closeToast()"
   >
