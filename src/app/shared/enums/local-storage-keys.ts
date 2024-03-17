@@ -35,6 +35,10 @@ export enum LocalStorageKey {
    */
   THEME = 'RP_THEME',
   /**
+   * Flag to indicate if the app is currently updating.
+   */
+  UPGRADING = 'RP_UPGRADING',
+  /**
    * Store the user's ID used for analytics.
    */
   USER_ID = 'RP_USER_ID',

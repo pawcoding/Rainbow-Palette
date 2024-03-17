@@ -1,0 +1,30 @@
+<div
+  class="fixed z-50 flex flex-col items-center justify-center w-screen h-screen bg-neutral-50 dark:bg-neutral-900 backdrop-blur-sm"
+>
+  <article>
+    <h1>
+      <span class="sr-only">Rainbow Palette</span>
+      <img
+        [src]="logoAsset()"
+        alt="Rainbow Palette"
+        [width]="isMobile() ? 200 : 300"
+        class="drop-shadow-md"
+      />
+    </h1>
+
+    <section class="mt-4 sm:mt-6">
+      <label id="loading" class="sr-only">Loading Rainbow Palette</label>
+
+      <div
+        role="progressbar"
+        aria-labelledby="loading"
+        class="block overflow-hidden bg-gray-200 rounded-full shadow-md dark:shadow-none"
+      >
+        <span
+          class="block h-3 sm:h-6 progress from-blue-400 to-blue-500"
+          [class.desktop]="!isMobile()"
+        ></span>
+      </div>
+    </section>
+  </article>
+</div>

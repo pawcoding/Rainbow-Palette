@@ -1,0 +1,25 @@
+.desktop {
+  --progress-spacing: 2rem !important;
+}
+
+.progress {
+  --progress-spacing: 1rem;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--tw-gradient-from) 0,
+    var(--tw-gradient-from) var(--progress-spacing),
+    var(--tw-gradient-to) var(--progress-spacing),
+    var(--tw-gradient-to) calc(2 * var(--progress-spacing))
+  );
+
+  animation: loading 2s ease-in-out;
+}
+
+@keyframes loading {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}

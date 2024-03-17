@@ -1,6 +1,7 @@
 import { Injectable, Signal, effect, inject, signal } from '@angular/core';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageKey } from '../enums/local-storage-keys';
 import {
   TrackingEventAction,
   TrackingEventCategory,
@@ -63,6 +64,16 @@ export class PwaService {
     this._SwUpdate.unrecoverable.subscribe(() => {
       this._dialogService.alert(this._translateService.instant('pwa.broken'));
     });
+
+    // Check if the app is currently updating
+    if (localStorage.getItem(LocalStorageKey.UPGRADING)) {
+      localStorage.removeItem(LocalStorageKey.UPGRADING);
+      this._toastService.showToast({
+        type: 'info',
+        message: 'pwa.update-success',
+        parameters: { version: this._versionService.appVersion },
+      });
+    }
   }
 
   private async _handleUpdateEvents(event: VersionEvent): Promise<void> {
@@ -121,6 +132,9 @@ export class PwaService {
 
     // Save the current palette to local storage
     this._paletteService.savePaletteToLocalStorage(true);
+
+    // Set the flag to indicate that the app is currently updating
+    localStorage.setItem(LocalStorageKey.UPGRADING, 'true');
 
     // Track the update
     this._analyticsService.trackEvent(

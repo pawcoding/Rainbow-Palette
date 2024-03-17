@@ -13,8 +13,16 @@ export class VersionService {
       '%cRainbowPalette',
       'font-weight: bold; font-size: 1.1em; text-decoration: underline; margin-top: 1em;'
     );
+
+    const angularVersionLength = this.angularVersion.length;
+    const appVersionLength = this.appVersion.length;
+
+    const length = Math.max(angularVersionLength, appVersionLength);
+    const paddingAngular = ' '.repeat(length - angularVersionLength);
+    const paddingApp = ' '.repeat(length - appVersionLength);
+
     console.info(
-      `    Angular:\t${this.angularVersion}\n    App:\t${this.appVersion}`
+      `    Angular: ${paddingAngular}${this.angularVersion}\n    App:     ${paddingApp}${this.appVersion}`
     );
   }
 }

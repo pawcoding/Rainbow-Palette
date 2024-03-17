@@ -1,1 +1,5 @@
-<rp-layout></rp-layout>
+@defer {
+<rp-layout />
+} @loading (after 100ms; minimum 2s) {
+<rp-loading />
+}
