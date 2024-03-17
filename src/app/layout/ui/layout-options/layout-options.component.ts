@@ -2,11 +2,11 @@ import { Component, computed, model } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { heroMoonSolid, heroSunSolid } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
+import { Theme, ThemeOption } from '../../../shared/types/theme';
 import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown-menu.component';
 import { LANGUAGE_OPTIONS } from '../../constants/languages';
 import { THEME_OPTIONS } from '../../constants/themes';
 import { Language, LanguageOption } from '../../types/language';
-import { Theme, ThemeOption } from '../../../shared/types/theme';
 
 @Component({
   selector: 'rp-layout-options',

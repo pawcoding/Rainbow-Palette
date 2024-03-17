@@ -9,14 +9,15 @@
 <ng-template #menu>
   <div
     cdkMenu
-    class="inline-flex flex-col w-full gap-1 p-2 border rounded shadow-md bg-neutral-100 border-neutral-200 dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    class="p-2 bg-white border divide-y rounded-md shadow-lg divide-neutral-100 dark:divide-neutral-700 border-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-none"
+    role="menu"
     [style.minWidth]="minWidth()"
     [style.maxWidth]="maxWidth()"
   >
     @if (title()) {
     <section>
       <h2
-        class="px-2 py-1 font-semibold border-b border-neutral-200 dark:border-neutral-600"
+        class="block p-2 text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400"
       >
         {{ title()! | translate }}
       </h2>
@@ -26,7 +27,7 @@
     <section
       #menuGroup
       cdkMenuGroup
-      class="overflow-auto"
+      class="pt-2 overflow-auto"
       [style.minHeight]="minHeight()"
       [style.maxHeight]="maxHeight()"
     >
@@ -37,7 +38,8 @@
             ? 'aria-checked:font-bold aria-checked:text-blue-600 dark:aria-checked:text-blue-400'
             : ''
         "
-        class="flex items-center justify-start w-full gap-2 p-2 transition-all duration-200 ease-in-out rounded-sm hover:shadow-sm hover:bg-neutral-200 dark:hover:shadow-none dark:hover:bg-neutral-600"
+        class="block w-full px-4 py-2 text-sm text-left rounded-lg group text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200"
+        role="menuitem"
         cdkMenuItemRadio
         [cdkMenuItemChecked]="item === selectedItem()"
         (cdkMenuItemTriggered)="select(item)"

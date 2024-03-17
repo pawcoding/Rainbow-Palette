@@ -22,17 +22,19 @@
     </button>
 
     <ng-template #itemTemplate let-language="item">
-      <img
-        [src]="'/assets/flags/' + language.flag + '.svg'"
-        [alt]="language.label"
-        width="24"
-        height="24"
-        class="rounded-full shadow-sm"
-      />
+      <div class="flex items-center gap-2">
+        <img
+          [src]="'/assets/flags/' + language.flag + '.svg'"
+          [alt]="language.label"
+          width="24"
+          height="24"
+          class="rounded-full shadow-sm"
+        />
 
-      <span>
-        {{ language.label }}
-      </span>
+        <span>
+          {{ language.label }}
+        </span>
+      </div>
     </ng-template>
   </rp-dropdown-menu>
 
@@ -54,15 +56,17 @@
     </button>
 
     <ng-template #itemTemplate let-theme="item">
-      <span
-        class="flex items-center justify-center p-1 rounded-full shadow-sm bg-neutral-300 dark:bg-neutral-500 dark:shadow-none"
-      >
-        <ng-icon [svg]="theme.icon" [size]="'1rem'" />
-      </span>
+      <div class="flex items-center gap-2">
+        <span
+          class="flex items-center justify-center p-1 rounded-full shadow-sm bg-neutral-300 dark:bg-neutral-700 dark:shadow-none dark:group-hover:bg-neutral-800"
+        >
+          <ng-icon [svg]="theme.icon" [size]="'1rem'" />
+        </span>
 
-      <span>
-        {{ theme.label | translate }}
-      </span>
+        <span>
+          {{ theme.label | translate }}
+        </span>
+      </div>
     </ng-template>
   </rp-dropdown-menu>
 </div>
