@@ -22,6 +22,7 @@ import {
 } from '../shared/data-access/analytics.service';
 import { LanguageService } from '../shared/data-access/language.service';
 import { MobileService } from '../shared/data-access/mobile.service';
+import { PwaService } from '../shared/data-access/pwa.service';
 import { ThemeService } from '../shared/data-access/theme.service';
 import { Theme } from '../shared/types/theme';
 import { sleep } from '../shared/utils/sleep';
@@ -52,6 +53,8 @@ export class LayoutComponent implements AfterViewInit {
   private readonly _languageService = inject(LanguageService);
   private readonly _themeService = inject(ThemeService);
   private readonly _analyticsService = inject(AnalyticsService);
+  // This service gets injected into the layout to initialize the PWA service after the layout has been initialized.
+  private readonly _pwaService = inject(PwaService);
 
   private readonly _header =
     viewChild.required<ElementRef<HTMLElement>>('header');

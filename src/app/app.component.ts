@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { LayoutComponent } from './layout/layout.component';
 import { LoadingComponent } from './loading/loading.component';
-import { PaletteService } from './shared/data-access/palette.service';
-import { PwaService } from './shared/data-access/pwa.service';
+import { VersionService } from './shared/data-access/version.service';
 
 @Component({
   selector: 'rp-root',
@@ -11,10 +10,6 @@ import { PwaService } from './shared/data-access/pwa.service';
   templateUrl: './app.component.html',
 })
 export class AppComponent {
-  private readonly _paletteService = inject(PaletteService);
-  private readonly _pwaService = inject(PwaService);
-
-  constructor() {
-    this._paletteService.loadPaletteFromLocalStorage();
-  }
+  // This service gets injected here to print the version number in the console on startup.
+  private readonly _versionService = inject(VersionService);
 }

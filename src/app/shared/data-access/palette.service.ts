@@ -24,6 +24,8 @@ export class PaletteService {
   }
 
   constructor() {
+    this.loadPaletteFromLocalStorage();
+
     effect(() => {
       this._updateVariables();
     });

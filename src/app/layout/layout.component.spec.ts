@@ -13,6 +13,7 @@ import {
   MobileService,
   MobileServiceMock,
 } from '../shared/data-access/mobile.service';
+import { PwaService, PwaServiceMock } from '../shared/data-access/pwa.service';
 import {
   ThemeService,
   ThemeServiceMock,
@@ -38,6 +39,7 @@ describe('LayoutComponent', () => {
         { provide: LanguageService, useValue: languageService },
         { provide: MobileService, useClass: MobileServiceMock },
         { provide: AnalyticsService, useClass: AnalyticsServiceMock },
+        { provide: PwaService, useClass: PwaServiceMock },
       ],
     }).compileComponents();
 
