@@ -243,6 +243,7 @@
     "dark": "Dunkel",
     "light": "Hell"
   },
+  "title": "Rainbow Palette | Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe",
   "toast": {
     "error": {
       "load-color-map": "Die Liste mit Namen für Farben konnte nicht geladen werden.",

@@ -169,8 +169,8 @@
       "logo": "Logo created by",
       "title": "Copyright"
     },
-    "notes": "Notes regarding the website",
     "german-only": "only available in German",
+    "notes": "Notes regarding the website",
     "title": "Imprint"
   },
   "layout": {
@@ -244,6 +244,7 @@
     "dark": "Dark",
     "light": "Light"
   },
+  "title": "Rainbow Palette | Get your own color palette from just a single color",
   "toast": {
     "error": {
       "load-color-map": "An error occurred while loading the list of color names.",

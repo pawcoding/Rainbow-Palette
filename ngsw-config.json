@@ -11,7 +11,11 @@
           "/index.html",
           "/manifest.webmanifest",
           "/*.css",
-          "/*.js"
+          "/*.js",
+          "/assets/color-dictionary.csv",
+          "/assets/rainbow-palette-*.svg",
+          "/assets/flags/*.svg",
+          "/assets/i18n/en.json"
         ]
       }
     },
