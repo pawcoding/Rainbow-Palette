@@ -9,13 +9,13 @@ describe('AccordionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [AccordionComponent, TranslateModule.forRoot()],
+      imports: [AccordionComponent, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AccordionComponent);
     component = fixture.componentInstance;
 
-    // @ts-expect-error
+    // @ts-expect-error - Bind required input signal
     component.summary = signal('Summary');
 
     fixture.detectChanges();

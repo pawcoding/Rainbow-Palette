@@ -4,24 +4,24 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AppComponent } from './app.component';
 import {
   AnalyticsService,
-  AnalyticsServiceMock,
+  AnalyticsServiceMock
 } from './shared/data-access/analytics.service';
 import {
   LanguageService,
-  LanguageServiceMock,
+  LanguageServiceMock
 } from './shared/data-access/language.service';
 import {
   MobileService,
-  MobileServiceMock,
+  MobileServiceMock
 } from './shared/data-access/mobile.service';
 import { PwaService, PwaServiceMock } from './shared/data-access/pwa.service';
 import {
   ThemeService,
-  ThemeServiceMock,
+  ThemeServiceMock
 } from './shared/data-access/theme.service';
 import {
   VersionService,
-  VersionServiceMock,
+  VersionServiceMock
 } from './shared/data-access/version.service';
 
 describe('AppComponent', () => {
@@ -40,8 +40,8 @@ describe('AppComponent', () => {
         { provide: ThemeService, useClass: ThemeServiceMock },
         { provide: AnalyticsService, useClass: AnalyticsServiceMock },
         { provide: LanguageService, useClass: LanguageServiceMock },
-        { provide: PwaService, useClass: PwaServiceMock },
-      ],
+        { provide: PwaService, useClass: PwaServiceMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(AppComponent);

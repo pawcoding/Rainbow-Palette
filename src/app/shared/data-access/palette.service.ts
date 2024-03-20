@@ -1,4 +1,4 @@
-import { Injectable, effect, inject, signal } from '@angular/core';
+import { Injectable, Signal, effect, inject, signal } from '@angular/core';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Value } from '../model';
@@ -10,7 +10,7 @@ import { ColorService } from './color.service';
 import { ToastService } from './toast.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PaletteService {
   private readonly _colorService = inject(ColorService);
@@ -19,11 +19,11 @@ export class PaletteService {
 
   private readonly _palette = signal<Palette | undefined>(undefined);
 
-  public get palette() {
+  public get palette(): Signal<Palette | undefined> {
     return this._palette.asReadonly();
   }
 
-  constructor() {
+  public constructor() {
     this.loadPaletteFromLocalStorage();
 
     effect(() => {
@@ -49,7 +49,7 @@ export class PaletteService {
       } catch (e) {
         this._toastService.showToast({
           type: 'error',
-          message: 'toast.error.palette-load',
+          message: 'toast.error.palette-load'
         });
       }
     }
@@ -133,7 +133,7 @@ export class PaletteService {
       currentHue = 4;
     }
 
-    for (let hue of rainbowHues) {
+    for (const hue of rainbowHues) {
       if (hue === currentHue) {
         continue;
       }
@@ -196,10 +196,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 315),
               S: Math.max(shade.hsl.S - 20, 0),
-              L: 40,
+              L: 40
             }),
             true
-          ),
+          )
         ],
         'Secondary'
       )
@@ -212,10 +212,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 270),
               S: 25,
-              L: 20,
+              L: 20
             }),
             true
-          ),
+          )
         ],
         'Secondary Muted'
       )
@@ -229,10 +229,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 45),
               S: shade.hsl.S,
-              L: 50,
+              L: 50
             }),
             true
-          ),
+          )
         ],
         'Accent'
       )
@@ -245,10 +245,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 90),
               S: 25,
-              L: 20,
+              L: 20
             }),
             true
-          ),
+          )
         ],
         'Accent Muted'
       )
@@ -272,10 +272,10 @@ export class PaletteService {
             new Value({
               H: shade.hsl.H,
               S: 3,
-              L: 50,
+              L: 50
             }),
             true
-          ),
+          )
         ],
         'Gray'
       )
@@ -289,10 +289,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 180),
               S: Math.max(shade.hsl.S - 20, 0),
-              L: 40,
+              L: 40
             }),
             true
-          ),
+          )
         ],
         'Secondary'
       )
@@ -316,10 +316,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 20),
               S: Math.max(shade.hsl.S - 20, 0),
-              L: 40,
+              L: 40
             }),
             true
-          ),
+          )
         ],
         'Secondary'
       )
@@ -332,10 +332,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 20),
               S: 3,
-              L: 50,
+              L: 50
             }),
             true
-          ),
+          )
         ],
         'Gray'
       )
@@ -349,10 +349,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 180),
               S: shade.hsl.S,
-              L: 80,
+              L: 80
             }),
             true
-          ),
+          )
         ],
         'Accent'
       )
@@ -383,10 +383,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 120),
               S: Math.max(shade.hsl.S - 20, 0),
-              L: 40,
+              L: 40
             }),
             true
-          ),
+          )
         ],
         'Secondary'
       )
@@ -399,10 +399,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 120),
               S: 20,
-              L: 30,
+              L: 30
             }),
             true
-          ),
+          )
         ],
         'Secondary Muted'
       )
@@ -416,10 +416,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 240),
               S: shade.hsl.S,
-              L: 80,
+              L: 80
             }),
             true
-          ),
+          )
         ],
         'Accent'
       )
@@ -443,10 +443,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 210),
               S: Math.max(shade.hsl.S - 20, 0),
-              L: 40,
+              L: 40
             }),
             true
-          ),
+          )
         ],
         'Secondary'
       )
@@ -460,10 +460,10 @@ export class PaletteService {
             new Value({
               H: this._changeHueOnWheel(shade.hsl.H, 150),
               S: shade.hsl.S,
-              L: 50,
+              L: 50
             }),
             true
-          ),
+          )
         ],
         'Accent'
       )
@@ -503,7 +503,7 @@ export class PaletteService {
     }
   }
 
-  private _changeHueOnWheel(hue: number, change: number) {
+  private _changeHueOnWheel(hue: number, change: number): number {
     let wheel;
     if (hue < 60) wheel = 2 * hue;
     else if (hue < 120) wheel = hue + 60;

@@ -1,11 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   MobileService,
-  MobileServiceMock,
+  MobileServiceMock
 } from '../shared/data-access/mobile.service';
 import {
   ThemeService,
-  ThemeServiceMock,
+  ThemeServiceMock
 } from '../shared/data-access/theme.service';
 import { LoadingComponent } from './loading.component';
 
@@ -18,8 +18,8 @@ describe('LoadingComponent', () => {
       imports: [LoadingComponent],
       providers: [
         { provide: ThemeService, useClass: ThemeServiceMock },
-        { provide: MobileService, useClass: MobileServiceMock },
-      ],
+        { provide: MobileService, useClass: MobileServiceMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LoadingComponent);

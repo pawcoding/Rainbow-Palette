@@ -5,7 +5,7 @@ import {
   heroArrowPathMini,
   heroBookmarkMini,
   heroPencilSquareMini,
-  heroPlusMini,
+  heroPlusMini
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
@@ -18,7 +18,7 @@ import { PaletteService } from '../shared/data-access/palette.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import {
   TrackingEventAction,
-  TrackingEventCategory,
+  TrackingEventCategory
 } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
@@ -33,9 +33,9 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
     ViewPaletteComponent,
     NoPaletteComponent,
     NgIconComponent,
-    TranslateModule,
+    TranslateModule
   ],
-  templateUrl: './view.component.html',
+  templateUrl: './view.component.html'
 })
 export default class ViewComponent {
   private readonly _isRunningTest = inject(IS_RUNNING_TEST);
@@ -85,7 +85,7 @@ export default class ViewComponent {
     this._toastService.showToast({
       type: 'success',
       message: 'view.palette.renamed',
-      parameters: { name: newName },
+      parameters: { name: newName }
     });
   }
 
@@ -110,7 +110,7 @@ export default class ViewComponent {
     this.saving.set(false);
     this._toastService.showToast({
       type: 'success',
-      message: 'view.palette.saved',
+      message: 'view.palette.saved'
     });
   }
 
@@ -140,7 +140,7 @@ export default class ViewComponent {
     this._toastService.showToast({
       type: 'success',
       message: 'view.color.renamed',
-      parameters: { name: newName },
+      parameters: { name: newName }
     });
   }
 
@@ -161,7 +161,7 @@ export default class ViewComponent {
     const name = color.name;
     const shouldRemove = await this._dialogService.confirm(
       this._translateService.instant('view.color.remove', {
-        color: name,
+        color: name
       })
     );
 
@@ -171,7 +171,7 @@ export default class ViewComponent {
       this._toastService.showToast({
         type: 'info',
         message: 'view.color.removed',
-        parameters: { color: name },
+        parameters: { color: name }
       });
     }
   }
@@ -193,12 +193,12 @@ export default class ViewComponent {
       this._toastService.showToast({
         type: 'success',
         message: 'view.color.copy.success',
-        parameters: { color: toUnicodeVariant(shade.hex, 'm') },
+        parameters: { color: toUnicodeVariant(shade.hex, 'm') }
       });
     } catch (error) {
       this._toastService.showToast({
         type: 'error',
-        message: 'view.color.copy.error',
+        message: 'view.color.copy.error'
       });
     }
   }

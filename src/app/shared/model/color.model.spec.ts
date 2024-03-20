@@ -23,7 +23,7 @@ describe('Color', () => {
   it('should parse color from object', () => {
     const color = Color.parse({
       name: 'Test',
-      shades: [Shade.random()],
+      shades: [Shade.random()]
     });
 
     expect(color).toBeInstanceOf(Color);

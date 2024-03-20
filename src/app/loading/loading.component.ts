@@ -7,7 +7,7 @@ import { MobileService } from '../shared/data-access/mobile.service';
   standalone: true,
   imports: [],
   templateUrl: './loading.component.html',
-  styleUrl: './loading.component.css',
+  styleUrl: './loading.component.css'
 })
 export class LoadingComponent {
   private readonly _themeService = inject(ThemeService);

@@ -7,7 +7,7 @@ import {
   effect,
   inject,
   signal,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ColorService } from '../shared/data-access/color.service';
@@ -30,10 +30,10 @@ export enum UpdateType {
     ColorInputComponent,
     TranslateModule,
     DecimalPipe,
-    EditorRangeComponent,
+    EditorRangeComponent
   ],
   templateUrl: './editor.component.html',
-  styleUrl: './editor.component.css',
+  styleUrl: './editor.component.css'
 })
 export class EditorComponent {
   protected readonly UpdateType = UpdateType;
@@ -68,7 +68,7 @@ export class EditorComponent {
   private readonly _editor =
     viewChild.required<ElementRef<HTMLElement>>('editor');
 
-  constructor() {
+  public constructor() {
     effect(() => {
       this._editor().nativeElement.style.setProperty(
         '--editor-hex',
@@ -89,11 +89,11 @@ export class EditorComponent {
     });
   }
 
-  protected changeShade(index: number) {
+  protected changeShade(index: number): void {
     this.shadeIndex.set(index);
   }
 
-  public unfixShade(shade: Shade, $event?: MouseEvent) {
+  public unfixShade(shade: Shade, $event?: MouseEvent): void {
     if ($event) {
       $event.stopPropagation();
       $event.preventDefault();
@@ -115,7 +115,7 @@ export class EditorComponent {
     this._updateColor();
   }
 
-  public update(type: UpdateType, value: string | number) {
+  public update(type: UpdateType, value: string | number): void {
     const shade = this.shade();
     shade.fixed = true;
 

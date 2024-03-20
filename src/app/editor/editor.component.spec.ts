@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   ColorService,
-  ColorServiceMock,
+  ColorServiceMock
 } from '../shared/data-access/color.service';
 import { Color, Shade } from '../shared/model';
 import { EditorComponent, UpdateType } from './editor.component';
@@ -23,12 +23,12 @@ describe('EditorComponent', () => {
           provide: DIALOG_DATA,
           useValue: {
             color: new Color([Shade.random()], 'TestColor'),
-            shadeIndex: 0,
-          },
+            shadeIndex: 0
+          }
         },
         { provide: DialogRef, useValue: {} },
-        { provide: ColorService, useValue: colorService },
-      ],
+        { provide: ColorService, useValue: colorService }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditorComponent);

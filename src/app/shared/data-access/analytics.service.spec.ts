@@ -6,14 +6,14 @@ import { LocalStorageKey } from '../enums/local-storage-keys';
 import {
   TrackingEventAction,
   TrackingEventCategory,
-  TrackingEventName,
+  TrackingEventName
 } from '../enums/tracking-event';
 import { MatomoTrackerMock } from '../utils/matomo-tracker-mock';
 import { sleep } from '../utils/sleep';
 import {
   AnalyticsService,
   AnalyticsStatus,
-  CustomDimension,
+  CustomDimension
 } from './analytics.service';
 import { LanguageService, LanguageServiceMock } from './language.service';
 import { OfflineService, OfflineServiceMock } from './offline.service';
@@ -33,7 +33,7 @@ describe('AnalyticsService', () => {
       LocalStorageKey.ANALYTICS,
       JSON.stringify({
         status: AnalyticsStatus.ACCEPTED,
-        expiry: Date.now() + 100000,
+        expiry: Date.now() + 100000
       })
     );
 
@@ -44,8 +44,8 @@ describe('AnalyticsService', () => {
         { provide: LanguageService, useClass: LanguageServiceMock },
         { provide: VersionService, useClass: VersionServiceMock },
         { provide: ToastService, useClass: ToastServiceMock },
-        { provide: OfflineService, useClass: OfflineServiceMock },
-      ],
+        { provide: OfflineService, useClass: OfflineServiceMock }
+      ]
     });
     service = TestBed.inject(AnalyticsService);
   });
@@ -116,8 +116,8 @@ describe('AnalyticsService', () => {
         { provide: MatomoTracker, useValue: tracker },
         { provide: ThemeService, useClass: ThemeServiceMock },
         { provide: LanguageService, useClass: LanguageServiceMock },
-        { provide: VersionService, useValue: versionService },
-      ],
+        { provide: VersionService, useValue: versionService }
+      ]
     });
 
     spyOn(tracker, 'enableHeartBeatTimer');

@@ -8,7 +8,7 @@ export class Shade {
   private _value: Value;
   private _perceivedBrightness?: number;
 
-  constructor(index: number, value: Value, fixed = false) {
+  public constructor(index: number, value: Value, fixed = false) {
     this.index = index;
     this._value = value;
     this.fixed = fixed;
@@ -131,7 +131,7 @@ export class Shade {
     return {
       index: this.index,
       fixed: this.fixed,
-      value: this._value.HSL,
+      value: this._value.HSL
     };
   }
 

@@ -7,7 +7,7 @@ import { Language } from '../../layout/types/language';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class LanguageService {
   private readonly _translateService = inject(TranslateService);
@@ -19,7 +19,7 @@ export class LanguageService {
     return this._language.asReadonly();
   }
 
-  constructor() {
+  public constructor() {
     effect(async () => {
       await firstValueFrom(this._translateService.use(this._language()));
       localStorage.setItem(LocalStorageKey.LANGUAGE, this._language());

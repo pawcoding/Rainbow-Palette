@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 export class DialogMock<T> {
   private readonly _returnValue: T;
 
-  constructor(returnValue: T) {
+  public constructor(returnValue: T) {
     this._returnValue = returnValue;
   }
 
@@ -15,7 +15,7 @@ export class DialogMock<T> {
   ): { closed: Observable<unknown> } {
     const closeSubject = new Subject<T>();
     const dialogRef = {
-      closed: closeSubject.asObservable(),
+      closed: closeSubject.asObservable()
     };
 
     setTimeout(() => {

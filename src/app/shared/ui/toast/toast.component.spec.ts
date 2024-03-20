@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   ToastService,
-  ToastServiceMock,
+  ToastServiceMock
 } from '../../data-access/toast.service';
 import { ToastComponent } from './toast.component';
 
@@ -17,7 +17,7 @@ describe('ToastComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [ToastComponent, TranslateModule.forRoot()],
-      providers: [{ provide: ToastService, useValue: toastService }],
+      providers: [{ provide: ToastService, useValue: toastService }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ToastComponent);

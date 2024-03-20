@@ -10,14 +10,14 @@
   </label>
 
   <input
-    type="range"
-    [id]="key()"
-    [min]="min()"
-    [max]="max()"
-    [title]="tooltip()"
-    step="1"
-    [value]="transformedValue()"
     #input
+    [id]="key()"
+    [max]="max()"
+    [min]="min()"
+    [title]="tooltip()"
+    [value]="transformedValue()"
     (input)="updateValue(input.value)"
+    step="1"
+    type="range"
   />
 </div>

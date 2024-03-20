@@ -1,19 +1,19 @@
 <div class="flex items-center gap-2">
   <rp-dropdown-menu
     [items]="languageOptions"
-    title="layout.options.language"
-    closeOnScroll="false"
     (selectedItemChange)="changeLanguage($event.value)"
+    closeOnScroll="false"
+    title="layout.options.language"
   >
     <button
-      class="flex items-center justify-center overflow-hidden rounded-full shadow-sm h-9 w-9 dark:shadow-none"
       [title]="'layout.options.language' | translate"
+      class="flex size-9 items-center justify-center overflow-hidden rounded-full shadow-sm dark:shadow-none"
     >
       <img
-        [src]="'/assets/flags/' + currentLanguage().flag + '.svg'"
         [alt]="currentLanguage().label"
-        width="36"
+        [src]="'/assets/flags/' + currentLanguage().flag + '.svg'"
         height="36"
+        width="36"
       />
 
       <span class="sr-only">
@@ -24,11 +24,11 @@
     <ng-template #itemTemplate let-language="item">
       <div class="flex items-center gap-2">
         <img
-          [src]="'/assets/flags/' + language.flag + '.svg'"
           [alt]="language.label"
-          width="24"
-          height="24"
+          [src]="'/assets/flags/' + language.flag + '.svg'"
           class="rounded-full shadow-sm"
+          height="24"
+          width="24"
         />
 
         <span>
@@ -40,15 +40,15 @@
 
   <rp-dropdown-menu
     [items]="themeOptions"
-    title="layout.options.theme"
-    closeOnScroll="false"
     (selectedItemChange)="changeTheme($event.value)"
+    closeOnScroll="false"
+    title="layout.options.theme"
   >
     <button
-      class="flex items-center justify-center overflow-hidden rounded-full shadow-sm bg-neutral-200 h-9 w-9 dark:bg-neutral-700 dark:shadow-none"
       [title]="'layout.options.theme' | translate"
+      class="flex size-9 items-center justify-center overflow-hidden rounded-full bg-neutral-200 shadow-sm dark:bg-neutral-700 dark:shadow-none"
     >
-      <ng-icon [svg]="currentTheme().icon" [size]="'1rem'" />
+      <ng-icon [size]="'1rem'" [svg]="currentTheme().icon" />
 
       <span class="sr-only">
         {{ currentTheme().label | translate }}
@@ -58,9 +58,9 @@
     <ng-template #itemTemplate let-theme="item">
       <div class="flex items-center gap-2">
         <span
-          class="flex items-center justify-center p-1 rounded-full shadow-sm bg-neutral-300 dark:bg-neutral-700 dark:shadow-none dark:group-hover:bg-neutral-800"
+          class="flex items-center justify-center rounded-full bg-neutral-300 p-1 shadow-sm dark:bg-neutral-700 dark:shadow-none dark:group-hover:bg-neutral-800"
         >
-          <ng-icon [svg]="theme.icon" [size]="'1rem'" />
+          <ng-icon [size]="'1rem'" [svg]="theme.icon" />
         </span>
 
         <span>

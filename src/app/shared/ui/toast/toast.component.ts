@@ -10,7 +10,7 @@ import { ToastService } from '../../data-access/toast.service';
   standalone: true,
   imports: [OverlayModule, TranslateModule, NgIconComponent],
   templateUrl: './toast.component.html',
-  styleUrl: './toast.component.css',
+  styleUrl: './toast.component.css'
 })
 export class ToastComponent {
   private readonly _toastService = inject(ToastService);

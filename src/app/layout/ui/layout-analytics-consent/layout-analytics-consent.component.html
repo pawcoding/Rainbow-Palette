@@ -1,6 +1,6 @@
 <article
   #container
-  class="w-full max-w-screen-sm p-4 shadow-sm backdrop-blur-sm sm:rounded-tr-md bg-neutral-300/90 dark:bg-neutral-800/90 dark:shadow-none dark:border-t dark:border-neutral-700"
+  class="w-full max-w-screen-sm bg-neutral-300/90 p-4 shadow-sm backdrop-blur-sm dark:border-t dark:border-neutral-700 dark:bg-neutral-800/90 dark:shadow-none sm:rounded-tr-md"
 >
   <strong>
     {{ "layout.analytics.consent.title" | translate }}
@@ -12,21 +12,21 @@
     "
   ></p>
 
-  <a routerLink="/analytics" class="block mt-2 mb-4 ml-auto underline w-fit">
+  <a class="mb-4 ml-auto mt-2 block w-fit underline" routerLink="/analytics">
     {{ "layout.analytics.consent.more" | translate }}
   </a>
 
   <div class="flex gap-2">
     <button
-      class="grow xs:grow-0 justify-center flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold rounded cursor-pointer text-neutral-50 bg-neutral-400 dark:bg-neutral-700"
       (click)="decline()"
+      class="flex grow cursor-pointer items-center justify-center gap-2 overflow-hidden rounded bg-neutral-400 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-neutral-700 xs:grow-0 sm:px-3 sm:py-2"
     >
       {{ "layout.analytics.consent.decline" | translate }}
     </button>
 
     <button
-      class="grow xs:grow-0 justify-center flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
       (click)="accept()"
+      class="flex grow cursor-pointer items-center justify-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 xs:grow-0 sm:px-3 sm:py-2"
     >
       {{ "layout.analytics.consent.accept" | translate }}
     </button>

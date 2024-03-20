@@ -1,6 +1,6 @@
 import {
   HttpClientTestingModule,
-  HttpTestingController,
+  HttpTestingController
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Value } from '../model';
@@ -27,9 +27,9 @@ describe('ColorNameService', () => {
       providers: [
         {
           provide: ToastService,
-          useValue: toastService,
-        },
-      ],
+          useValue: toastService
+        }
+      ]
     });
 
     http = TestBed.inject(HttpTestingController);

@@ -11,15 +11,15 @@ describe('ExportSuccessComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExportSuccessComponent, TranslateModule.forRoot()],
+      imports: [ExportSuccessComponent, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExportSuccessComponent);
     component = fixture.componentInstance;
 
-    // @ts-expect-error
+    // @ts-expect-error - Bind required signal input
     component.exportFormat = signal(ExportFormat.TAILWIND);
-    // @ts-expect-error
+    // @ts-expect-error - Bind required signal input
     component.exportOption = signal<ExportOption>('copy');
 
     fixture.detectChanges();

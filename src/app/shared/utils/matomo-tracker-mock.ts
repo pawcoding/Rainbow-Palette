@@ -1,3 +1,4 @@
+// disable-file @typescript-eslint/no-unused-vars
 export class MatomoTrackerMock {
   public enableHeartBeatTimer(_delay: number): void {}
   public setCustomDimension(_index: number, _value: string): void {}

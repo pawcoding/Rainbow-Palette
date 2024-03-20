@@ -16,7 +16,7 @@ describe('ColorEditorService', () => {
 
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      providers: [{ provide: Dialog, useValue: dialog }],
+      providers: [{ provide: Dialog, useValue: dialog }]
     });
     service = TestBed.inject(ColorEditorService);
 

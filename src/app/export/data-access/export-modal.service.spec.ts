@@ -14,7 +14,7 @@ describe('ExportModalService', () => {
 
     TestBed.configureTestingModule({
       imports: [TranslateModule.forRoot()],
-      providers: [{ provide: Dialog, useValue: dialog }],
+      providers: [{ provide: Dialog, useValue: dialog }]
     });
     service = TestBed.inject(ExportModalService);
 
@@ -27,7 +27,7 @@ describe('ExportModalService', () => {
 
   it('should open export modal', async () => {
     const palette = new Palette('TestPalette', [
-      new Color([Shade.random()], 'TestColor'),
+      new Color([Shade.random()], 'TestColor')
     ]);
     await service.openExportModal(palette);
 

@@ -1,11 +1,11 @@
 <section
-  class="flex flex-col gap-4 px-4 py-8 mx-auto sm:max-w-screen-sm md:max-w-screen-md"
+  class="mx-auto flex flex-col gap-4 px-4 py-8 sm:max-w-screen-sm md:max-w-screen-md"
 >
-  <h1 id="imprint" class="text-3xl font-bold select-none lg:text-2xl">
+  <h1 class="select-none text-3xl font-bold lg:text-2xl" id="imprint">
     {{ "imprint.title" | translate }}
   </h1>
 
-  <rp-accordion summary="pawcode Development" hidden>
+  <rp-accordion hidden summary="pawcode Development">
     <p>
       Luis Wolf <br />
       Johann-von-Korb-Straße 30a <br />
@@ -17,78 +17,78 @@
       {{ "imprint.contact.title" | translate }}
     </h3>
 
-    <p class="mb-2 text-sm text-balance">
+    <p class="mb-2 text-balance text-sm">
       {{ "imprint.contact.methods" | translate }}
     </p>
 
     <p>
       {{ "imprint.contact.telephone" | translate }}: 01523 / 4171102 <br />
       {{ "imprint.contact.email" | translate }}:
-      <a href="mailto:contact@pawcode.de" target="_blank" class="underline">
+      <a class="underline" href="mailto:contact@pawcode.de" target="_blank">
         contact&#64;pawcode.de
       </a>
     </p>
 
-    <p class="mt-2 font-semibold text-right">
+    <p class="mt-2 text-right font-semibold">
       {{ "imprint.contact.note" | translate }}
       <a
-        href="https://www.gesetze-im-internet.de/tmg/__5.html"
-        target="_blank"
-        rel="noopener"
         class="underline"
+        href="https://www.gesetze-im-internet.de/tmg/__5.html"
+        rel="noopener"
+        target="_blank"
       >
         § 5 TMG
       </a>
     </p>
 
-    <p class="mt-2 text-sm text-right text-balance">
+    <p class="mt-2 text-balance text-right text-sm">
       {{ "imprint.contact.hidden" | translate }}
     </p>
   </rp-accordion>
 
-  <h1 class="text-3xl font-bold select-none lg:text-2xl">
+  <h1 class="select-none text-3xl font-bold lg:text-2xl">
     {{ "imprint.notes" | translate }}
   </h1>
 
   <article
-    class="p-6 border rounded-lg shadow-xl bg-neutral-100 border-neutral-200 dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    class="rounded-lg border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
   >
-    <h2 id="copyright" class="mb-6 text-xl font-semibold">
+    <h2 class="mb-6 text-xl font-semibold" id="copyright">
       {{ "imprint.copyright.title" | translate }}
     </h2>
 
-    <ul class="pl-5 list-disc list-outside">
+    <ul class="list-outside list-disc pl-5">
       <li>
         {{ "imprint.copyright.idea" | translate }}
         <a
+          class="underline"
           href="https://pawcode.de/?mtm_campaign=OpenSource&mtm_source=RainbowPalette"
           target="_blank"
-          class="underline"
         >
           pawcode Development
         </a>
       </li>
       <li>
         {{ "imprint.copyright.logo" | translate }}
-        <a href="http://sampeniak.com/" target="_blank" class="underline">
+        <a class="underline" href="http://sampeniak.com/" target="_blank">
           Sam Peniak
         </a>
       </li>
       <li>
         {{ "imprint.copyright.design" | translate }}
-        <a href="https://www.hyperui.dev/" target="_blank" class="underline">
+        <a class="underline" href="https://www.hyperui.dev/" target="_blank">
           HyperUI
         </a>
       </li>
       <li>
         {{ "imprint.copyright.icons" | translate }}
-        <a href="https://heroicons.com/" target="_blank" class="underline">
+        <a class="underline" href="https://heroicons.com/" target="_blank">
           Heroicons
         </a>
       </li>
       <li>
         {{ "imprint.copyright.icons-branded" | translate }}
-        <a href="https://simpleicons.org/" target="_blank" class="underline">
+        <a class="underline" href="https://simpleicons.org/" target="_blank">
           Simple Icons
         </a>
       </li>
@@ -96,7 +96,7 @@
   </article>
 
   <article
-    class="p-6 border rounded-lg shadow-xl bg-neutral-100 border-neutral-200 dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    class="rounded-lg border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
   >
     <h2 class="mb-6 text-xl font-semibold">
       <span class="mr-1">Haftungsausschuss</span>
@@ -110,20 +110,20 @@
       Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch
       keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß
       <a
-        href="https://www.gesetze-im-internet.de/tmg/__7.html"
-        target="_blank"
-        rel="noopener"
         class="underline"
+        href="https://www.gesetze-im-internet.de/tmg/__7.html"
+        rel="noopener"
+        target="_blank"
       >
         § 7 Abs. 1 TMG
       </a>
       für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
       verantwortlich. Nach
       <a
-        href="https://www.gesetze-im-internet.de/tmg/__8.html"
-        target="_blank"
-        rel="noopener"
         class="underline"
+        href="https://www.gesetze-im-internet.de/tmg/__8.html"
+        rel="noopener"
+        target="_blank"
       >
         §§ 8 bis 10 TMG
       </a>
@@ -160,7 +160,7 @@
       privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf
       dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte
       Dritter beachtet. Insbesondere werden Inhalte Dritter oben unter
-      <a routerLink="/imprint" fragment="copyright" class="underline"
+      <a class="underline" fragment="copyright" routerLink="/imprint"
         >Copyright</a
       >
       erwähnt. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam
@@ -200,13 +200,13 @@
       verpflichtet, an Streitbeilegungsverfahren vor einer
       Verbraucherschlichtungsstelle teilzunehmen.
     </p>
-    <p class="mt-4 font-semibold text-right">
+    <p class="mt-4 text-right font-semibold">
       Angaben gemäß
       <a
-        href="https://www.gesetze-im-internet.de/vsbg/__36.html"
-        target="_blank"
-        rel="noopener"
         class="underline"
+        href="https://www.gesetze-im-internet.de/vsbg/__36.html"
+        rel="noopener"
+        target="_blank"
       >
         § 36 VSBG
       </a>
@@ -214,9 +214,9 @@
   </article>
 
   <article
-    class="p-6 border rounded-lg shadow-xl bg-neutral-100 border-neutral-200 dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    class="rounded-lg border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
   >
-    <h2 id="analytics" class="mb-6 text-xl font-semibold">
+    <h2 class="mb-6 text-xl font-semibold" id="analytics">
       {{ "imprint.analytics.title" | translate }}
     </h2>
 
@@ -229,14 +229,14 @@
       "
     ></p>
     <p
-      class="mt-2 font-bold text-center"
       [innerHTML]="'imprint.analytics.usage.note' | translate"
+      class="mt-2 text-center font-bold"
     ></p>
 
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">
       {{ "imprint.analytics.data.title" | translate }}
     </h3>
-    <ul class="pl-5 mb-2 list-disc list-outside">
+    <ul class="mb-2 list-outside list-disc pl-5">
       <li>{{ "imprint.analytics.data.country" | translate }}</li>
       <li>{{ "imprint.analytics.data.device" | translate }}</li>
       <li>{{ "imprint.analytics.data.os" | translate }}</li>
@@ -254,9 +254,9 @@
     </p>
 
     <button
-      type="button"
-      class="mx-auto block gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
       (click)="disableAnalytics()"
+      class="mx-auto block cursor-pointer gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+      type="button"
     >
       {{ "imprint.analytics.disable.button" | translate }}
     </button>
@@ -269,9 +269,9 @@
     </p>
 
     <button
-      type="button"
-      class="mx-auto block gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
       (click)="enableAnalytics()"
+      class="mx-auto block cursor-pointer gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+      type="button"
     >
       {{ "imprint.analytics.enable.button" | translate }}
     </button>

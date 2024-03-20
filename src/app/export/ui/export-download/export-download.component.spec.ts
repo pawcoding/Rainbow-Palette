@@ -10,13 +10,13 @@ describe('ExportDownloadComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExportDownloadComponent, TranslateModule.forRoot()],
+      imports: [ExportDownloadComponent, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExportDownloadComponent);
     component = fixture.componentInstance;
 
-    // @ts-expect-error
+    // @ts-expect-error - Bind required signal input
     component.exportFormat = signal(ExportFormat.TAILWIND);
 
     fixture.detectChanges();

@@ -2,7 +2,7 @@ import {
   GlobalPositionStrategy,
   Overlay,
   OverlayRef,
-  PositionStrategy,
+  PositionStrategy
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Signal, effect, inject, signal } from '@angular/core';
@@ -11,7 +11,7 @@ import { ToastComponent } from '../ui/toast/toast.component';
 import { MobileService } from './mobile.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ToastService {
   private readonly _overlay = inject(Overlay);
@@ -27,7 +27,7 @@ export class ToastService {
   private _positionStrategy: PositionStrategy | undefined;
   private _overlayRef: OverlayRef | undefined;
 
-  constructor() {
+  public constructor() {
     // Create an overlay for the toast.
     this._overlayRef = this._overlay.create();
 
@@ -100,7 +100,7 @@ export class ToastService {
 export class ToastServiceMock {
   private readonly _toast = signal<Toast | undefined>({
     type: 'test',
-    message: 'test',
+    message: 'test'
   });
 
   public get toast(): Signal<Toast | undefined> {

@@ -3,7 +3,7 @@ import { SwUpdate } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   TrackingEventAction,
-  TrackingEventCategory,
+  TrackingEventCategory
 } from '../enums/tracking-event';
 import { IS_RUNNING_TEST } from '../utils/is-running-test';
 import { SwUpdateMock } from '../utils/sw-update-mock';
@@ -39,8 +39,8 @@ describe('PwaService', () => {
         { provide: DialogService, useValue: dialogService },
         { provide: ToastService, useValue: toastService },
         { provide: PaletteService, useValue: paletteService },
-        { provide: VersionService, useClass: VersionServiceMock },
-      ],
+        { provide: VersionService, useClass: VersionServiceMock }
+      ]
     });
     service = TestBed.inject(PwaService);
   });

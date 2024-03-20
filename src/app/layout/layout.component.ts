@@ -7,18 +7,18 @@ import {
   effect,
   inject,
   signal,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {
   heroAdjustmentsHorizontalSolid,
   heroRectangleGroupSolid,
-  heroSwatchSolid,
+  heroSwatchSolid
 } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   AnalyticsService,
-  AnalyticsStatus,
+  AnalyticsStatus
 } from '../shared/data-access/analytics.service';
 import { LanguageService } from '../shared/data-access/language.service';
 import { MobileService } from '../shared/data-access/mobile.service';
@@ -43,10 +43,10 @@ import { LayoutOptionsComponent } from './ui/layout-options/layout-options.compo
     LayoutOptionsComponent,
     LayoutFooterComponent,
     RouterOutlet,
-    LayoutAnalyticsConsentComponent,
+    LayoutAnalyticsConsentComponent
   ],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css',
+  styleUrl: './layout.component.css'
 })
 export class LayoutComponent implements AfterViewInit {
   private readonly _mobileService = inject(MobileService);
@@ -68,20 +68,20 @@ export class LayoutComponent implements AfterViewInit {
       title: 'layout.navigation.generate.title',
       path: '/',
       icon: heroSwatchSolid,
-      description: 'layout.navigation.generate.description',
+      description: 'layout.navigation.generate.description'
     },
     {
       title: 'layout.navigation.view.title',
       path: '/view',
       icon: heroAdjustmentsHorizontalSolid,
-      description: 'layout.navigation.view.description',
+      description: 'layout.navigation.view.description'
     },
     {
       title: 'layout.navigation.preview.title',
       path: '/preview',
       icon: heroRectangleGroupSolid,
-      description: 'layout.navigation.preview.description',
-    },
+      description: 'layout.navigation.preview.description'
+    }
   ];
   protected readonly isMobile = this._mobileService.isMobile;
   protected readonly language = this._languageService.language;
@@ -100,7 +100,7 @@ export class LayoutComponent implements AfterViewInit {
     return this._analyticsService.status() === AnalyticsStatus.UNSET;
   });
 
-  constructor() {
+  public constructor() {
     effect(() => {
       if (!this.initialized()) {
         return;

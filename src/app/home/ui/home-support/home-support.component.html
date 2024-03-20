@@ -1,13 +1,13 @@
 <section
-  class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+  class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
 >
-  <div class="max-w-2xl mx-auto text-center">
+  <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-3xl font-bold sm:text-4xl">
       {{ "home.support.title" | translate }}
     </h2>
   </div>
 
-  <div class="max-w-2xl p-4 mx-auto space-y-4">
+  <div class="mx-auto max-w-2xl space-y-4 p-4">
     <rp-accordion
       [details]="
         'home.support.development.description'
@@ -17,12 +17,12 @@
     />
 
     <rp-accordion summary="home.support.roadmap.title">
-      <p class="leading-relaxed text-justify">
+      <p class="text-justify leading-relaxed">
         {{ "home.support.roadmap.description" | translate }}
       </p>
 
       <div class="mt-2 leading-relaxed">
-        <ul class="pl-5 list-disc list-outside">
+        <ul class="list-outside list-disc pl-5">
           @for (issue of roadmapFeatures; track issue) {
           <li>
             {{ "home.support.roadmap.issue." + issue | translate }}
@@ -30,9 +30,9 @@
               [href]="
                 'https://github.com/pawcoding/Rainbow-Palette/issues/' + issue
               "
+              class="underline transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
               rel="noreferrer"
               target="_blank"
-              class="underline transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
               >#{{ issue }}</a
             >)
           </li>

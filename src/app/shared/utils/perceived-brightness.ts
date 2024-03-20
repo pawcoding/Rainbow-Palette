@@ -13,7 +13,7 @@ export function perceivedBrightnessFromHex(hex: string): number {
   const rgb = {
     R: parseInt(hex.substring(1, 3), 16),
     G: parseInt(hex.substring(3, 5), 16),
-    B: parseInt(hex.substring(5, 7), 16),
+    B: parseInt(hex.substring(5, 7), 16)
   };
 
   return perceivedBrightnessFromRGB(rgb);

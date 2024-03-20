@@ -8,7 +8,7 @@ import { EXPORT_FORMATS } from '../../../shared/constants/export-format';
   standalone: true,
   imports: [TranslateModule, NgIconComponent],
   templateUrl: './request-format.component.html',
-  styles: `:host { display: block; }`,
+  styles: `:host { display: block; }`
 })
 export class RequestFormatComponent {
   protected formats = EXPORT_FORMATS;

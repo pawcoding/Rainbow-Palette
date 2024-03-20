@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslateModule, NgIconComponent, RouterLink],
   templateUrl: './no-palette.component.html',
-  styleUrl: './no-palette.component.css',
+  styleUrl: './no-palette.component.css'
 })
 export class NoPaletteComponent {
   public readonly parent = input.required<'view' | 'preview'>();

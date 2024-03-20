@@ -3,7 +3,7 @@ import { NgIconComponent } from '@ng-icons/core';
 import {
   heroAdjustmentsHorizontalMini,
   heroPencilSquareMini,
-  heroTrashMini,
+  heroTrashMini
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import { Color, Palette, Shade } from '../../../shared/model';
@@ -13,7 +13,7 @@ import { textColor } from '../../../shared/utils/text-color';
   selector: 'rp-view-palette',
   standalone: true,
   imports: [NgIconComponent, TranslateModule],
-  templateUrl: './view-palette.component.html',
+  templateUrl: './view-palette.component.html'
 })
 export class ViewPaletteComponent {
   protected readonly textColor = textColor;

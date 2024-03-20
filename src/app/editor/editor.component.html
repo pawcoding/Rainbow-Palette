@@ -1,54 +1,53 @@
 <article
   #editor
-  class="flex flex-col w-full max-w-md gap-4 p-4 mx-auto rounded shadow-md dark:border bg-neutral-100 dark:border-neutral-600 dark:shadow-none dark:bg-neutral-700"
+  class="mx-auto flex w-full max-w-md flex-col gap-4 rounded bg-neutral-100 p-4 shadow-md dark:border dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
 >
   <h2 class="font-semibold">{{ color().name }}</h2>
 
   <!-- Edit hex -->
   <rp-color-input
     [hex]="shade().hex"
-    (hexChange)="update(UpdateType.HEX, $event)"
     [placeholder]="'editor.properties.hex' | translate"
     [tooltip]="'editor.properties.color' | translate"
+    (hexChange)="update(UpdateType.HEX, $event)"
   />
 
   <section class="flex flex-col gap-2">
     <rp-editor-range
-      id="hue-range"
-      key="hue"
-      min="0"
-      max="360"
       [label]="'common.hue' | translate"
       [tooltip]="'editor.properties.hue' | translate"
       [value]="shade().hsl.H"
       (valueChange)="update(UpdateType.HUE, $event)"
+      id="hue-range"
+      key="hue"
+      max="360"
+      min="0"
     />
 
     <rp-editor-range
-      id="saturation-range"
-      key="saturation"
       [label]="'common.saturation' | translate"
       [tooltip]="'editor.properties.saturation' | translate"
       [value]="shade().hsl.S"
       (valueChange)="update(UpdateType.SATURATION, $event)"
+      id="saturation-range"
+      key="saturation"
     />
 
     <rp-editor-range
-      id="lightness-range"
-      key="lightness"
       [label]="'common.lightness' | translate"
       [tooltip]="'editor.properties.lightness' | translate"
       [value]="shade().hsl.L"
       (valueChange)="update(UpdateType.LIGHTNESS, $event)"
+      id="lightness-range"
+      key="lightness"
     />
   </section>
 
   <section
-    class="grid grid-cols-10 text-sm border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-none grow"
+    class="grid grow grid-cols-10 rounded-md border border-neutral-200 text-sm shadow-sm dark:border-none dark:shadow-none"
   >
     @for (shadeInRow of color().shades; track shadeInRow.hex) {
     <button
-      class="flex items-center justify-center w-full border-current h-14"
       [class.border-4]="shadeInRow.index === shadeIndex()"
       [class.rounded-l-md]="$first"
       [class.rounded-r-md]="$last"
@@ -57,6 +56,7 @@
       [title]="getTooltip(shadeInRow, shadeInRow.index === shadeIndex())"
       (click)="changeShade(shadeInRow.index)"
       (contextmenu)="unfixShade(shadeInRow, $event)"
+      class="flex h-14 w-full items-center justify-center border-current"
     >
       {{ shadeInRow.fixed ? "■" : "" }}
     </button>
@@ -65,17 +65,17 @@
 
   <section class="flex justify-end gap-2">
     <button
-      class="px-2 py-1.5 font-semibold rounded cursor-pointer bg-neutral-300 dark:bg-neutral-600"
       [title]="'editor.cancel' | translate"
       (click)="cancel()"
+      class="cursor-pointer rounded bg-neutral-300 px-2 py-1.5 font-semibold dark:bg-neutral-600"
     >
       {{ "common.cancel" | translate }}
     </button>
 
     <button
-      class="px-2 py-1.5 font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
       [title]="'editor.save' | translate"
       (click)="save()"
+      class="cursor-pointer rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600"
     >
       {{ "common.save" | translate }}
     </button>

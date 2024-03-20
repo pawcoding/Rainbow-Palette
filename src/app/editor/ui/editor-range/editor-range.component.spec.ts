@@ -8,19 +8,19 @@ describe('EditorRangeComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditorRangeComponent],
+      imports: [EditorRangeComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(EditorRangeComponent);
     component = fixture.componentInstance;
 
-    // @ts-expect-error
+    // @ts-expect-error - Bind required input signal
     component.label = signal('Label');
-    // @ts-expect-error
-    component.tooltip = signal('Tooltip')
-    // @ts-expect-error
+    // @ts-expect-error - Bind required input signal
+    component.tooltip = signal('Tooltip');
+    // @ts-expect-error - Bind required input signal
     component.key = signal('hue');
-    // @ts-expect-error
+    // @ts-expect-error - Bind required input signal
     component.value = signal(0);
 
     fixture.detectChanges();

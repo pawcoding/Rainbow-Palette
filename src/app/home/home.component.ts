@@ -11,7 +11,7 @@ import { HomeSupportComponent } from './ui/home-support/home-support.component';
   selector: 'rp-home',
   standalone: true,
   imports: [HomeGeneratorComponent, HomeManualComponent, HomeSupportComponent],
-  templateUrl: './home.component.html',
+  templateUrl: './home.component.html'
 })
 export default class HomeComponent {
   private readonly _homeService = inject(HomeService);

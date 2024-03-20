@@ -8,7 +8,7 @@ describe('ExportFormatComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ExportFormatComponent, TranslateModule.forRoot()],
+      imports: [ExportFormatComponent, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExportFormatComponent);

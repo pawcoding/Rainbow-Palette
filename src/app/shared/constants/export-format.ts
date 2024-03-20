@@ -3,7 +3,7 @@ import {
   simpleCss3,
   simpleLess,
   simpleSass,
-  simpleTailwindcss,
+  simpleTailwindcss
 } from '@ng-icons/simple-icons';
 
 export enum ExportFormat {
@@ -24,30 +24,30 @@ export const EXPORT_FORMATS: Array<{
     format: ExportFormat.CSS,
     label: 'export.format.css',
     icon: simpleCss3,
-    color: '#1572B6',
+    color: '#1572B6'
   },
   {
     format: ExportFormat.SCSS,
     label: 'export.format.scss',
     icon: simpleSass,
-    color: '#CC6699',
+    color: '#CC6699'
   },
   {
     format: ExportFormat.LESS,
     label: 'export.format.less',
     icon: simpleLess,
-    color: '#1D365D',
+    color: '#1D365D'
   },
   {
     format: ExportFormat.TAILWIND,
     label: 'export.format.tailwind',
     icon: simpleTailwindcss,
-    color: '#06B6D4',
+    color: '#06B6D4'
   },
   {
     format: ExportFormat.OTHER,
     label: 'export.format.other',
     icon: heroPlusCircle,
-    color: '#171717',
-  },
+    color: '#171717'
+  }
 ];

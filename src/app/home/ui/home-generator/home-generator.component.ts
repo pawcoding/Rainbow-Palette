@@ -4,14 +4,14 @@ import {
   Output,
   computed,
   model,
-  signal,
+  signal
 } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   PALETTE_SCHEMES,
-  PaletteScheme,
+  PaletteScheme
 } from '../../../shared/constants/palette-scheme';
 import { ColorInputComponent } from '../../../shared/ui/color-input/color-input.component';
 import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown-menu.component';
@@ -23,9 +23,9 @@ import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown
     TranslateModule,
     DropdownMenuComponent,
     NgIconComponent,
-    ColorInputComponent,
+    ColorInputComponent
   ],
-  templateUrl: './home-generator.component.html',
+  templateUrl: './home-generator.component.html'
 })
 export class HomeGeneratorComponent {
   public readonly hex = model('#3B82F6');
@@ -38,7 +38,10 @@ export class HomeGeneratorComponent {
 
   protected readonly heroChevronDownMini = heroChevronDownMini;
 
-  protected get schemeOptions() {
+  protected get schemeOptions(): Array<{
+    value: PaletteScheme;
+    label: string;
+  }> {
     return PALETTE_SCHEMES;
   }
 
@@ -46,7 +49,7 @@ export class HomeGeneratorComponent {
     this.schemeOptions.find((option) => option.value === this.scheme())
   );
 
-  protected setScheme(value: PaletteScheme | undefined) {
+  protected setScheme(value: PaletteScheme | undefined): void {
     if (value === undefined) {
       return;
     }

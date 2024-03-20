@@ -5,7 +5,7 @@ import {
   effect,
   input,
   model,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroEyeDropperMini } from '@ng-icons/heroicons/mini';
@@ -16,7 +16,7 @@ import { perceivedBrightnessFromHex } from '../../utils/perceived-brightness';
   selector: 'rp-color-input',
   standalone: true,
   imports: [TranslateModule, NgIconComponent],
-  templateUrl: './color-input.component.html',
+  templateUrl: './color-input.component.html'
 })
 export class ColorInputComponent {
   public readonly placeholder = input.required<string>();
@@ -33,7 +33,7 @@ export class ColorInputComponent {
     return perceivedBrightnessFromHex(this.hex()) > 51;
   });
 
-  constructor() {
+  public constructor() {
     effect(() => {
       this._hexInput().nativeElement.value = this.hex();
     });

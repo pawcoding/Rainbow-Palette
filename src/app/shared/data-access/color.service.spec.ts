@@ -15,9 +15,9 @@ describe('ColorService', () => {
       providers: [
         {
           provide: ColorNameService,
-          useValue: colorNameService,
-        },
-      ],
+          useValue: colorNameService
+        }
+      ]
     });
     service = TestBed.inject(ColorService);
   });

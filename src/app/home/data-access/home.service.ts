@@ -3,13 +3,13 @@ import { PaletteScheme } from '../../shared/constants/palette-scheme';
 import { LocalStorageKey } from '../../shared/enums/local-storage-keys';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class HomeService {
   public readonly hex = signal('#3B82F6');
   public readonly scheme = signal(PaletteScheme.RAINBOW);
 
-  constructor() {
+  public constructor() {
     this.loadGenerationSettings();
   }
 

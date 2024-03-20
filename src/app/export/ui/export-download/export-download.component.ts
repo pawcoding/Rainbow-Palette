@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, input } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroArrowDownTray,
-  heroDocumentDuplicate,
+  heroDocumentDuplicate
 } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
 import { ExportFormat } from '../../../shared/constants/export-format';
@@ -13,7 +13,7 @@ import { ExportOption } from '../../../shared/types/export-option';
   standalone: true,
   imports: [TranslateModule, NgIconComponent],
   templateUrl: './export-download.component.html',
-  styles: `:host { display: block; }`,
+  styles: `:host { display: block; }`
 })
 export class ExportDownloadComponent {
   public readonly exportFormat = input.required<ExportFormat>();

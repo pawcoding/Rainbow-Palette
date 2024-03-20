@@ -4,7 +4,7 @@ import {
   computed,
   input,
   model,
-  numberAttribute,
+  numberAttribute
 } from '@angular/core';
 import { hueToWheel, wheelToHue } from '../../utils/color-wheel';
 
@@ -13,7 +13,7 @@ import { hueToWheel, wheelToHue } from '../../utils/color-wheel';
   standalone: true,
   imports: [DecimalPipe],
   templateUrl: './editor-range.component.html',
-  styleUrl: './editor-range.component.css',
+  styleUrl: './editor-range.component.css'
 })
 export class EditorRangeComponent {
   public readonly label = input.required<string>();
@@ -21,10 +21,10 @@ export class EditorRangeComponent {
   public readonly key = input.required<'hue' | 'saturation' | 'lightness'>();
   public readonly value = model.required<number>();
   public readonly min = input(0, {
-    transform: numberAttribute,
+    transform: numberAttribute
   });
   public readonly max = input(100, {
-    transform: numberAttribute,
+    transform: numberAttribute
   });
 
   protected readonly transformedValue = computed(() => {
@@ -37,7 +37,7 @@ export class EditorRangeComponent {
     }
   });
 
-  protected updateValue(value: number | string) {
+  protected updateValue(value: number | string): void {
     if (typeof value === 'string') {
       value = parseFloat(value);
     }

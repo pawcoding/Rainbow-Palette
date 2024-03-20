@@ -9,7 +9,7 @@ import { NavigationEntry } from '../../types/navigation-entry';
   standalone: true,
   imports: [TranslateModule, NgIconComponent, RouterLink],
   templateUrl: './layout-navigation.component.html',
-  styles: ':host { display: inline-block; width: 100%; }',
+  styles: ':host { display: inline-block; width: 100%; }'
 })
 export class LayoutNavigationComponent {
   private readonly _router = inject(Router);

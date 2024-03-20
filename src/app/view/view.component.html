@@ -1,22 +1,22 @@
 @if (palette(); as palette) {
-<div class="px-4 py-8 mx-auto sm:max-w-screen-sm lg:max-w-screen-lg">
+<div class="mx-auto px-4 py-8 sm:max-w-screen-sm lg:max-w-screen-lg">
   <section
-    class="flex flex-col items-center gap-2 mb-4 lg:items-end lg:justify-between lg:flex-row"
+    class="mb-4 flex flex-col items-center gap-2 lg:flex-row lg:items-end lg:justify-between"
   >
-    <h1 class="text-3xl font-bold select-none lg:text-2xl">
+    <h1 class="select-none text-3xl font-bold lg:text-2xl">
       {{ palette.name }}
     </h1>
 
     <div class="flex flex-wrap justify-center gap-2">
       <button
-        class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
         [title]="'view.palette.rename' | translate"
         (click)="renamePalette()"
+        class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
       >
         <ng-icon
           [svg]="heroPencilSquareMini"
-          size="1.25rem"
           class="scale-90 sm:scale-100"
+          size="1.25rem"
         />
         <span>
           {{ "common.rename" | translate }}
@@ -24,14 +24,14 @@
       </button>
 
       <button
-        class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
         [title]="'export.title' | translate"
         (click)="exportPalette()"
+        class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
       >
         <ng-icon
           [svg]="heroArrowDownTrayMini"
-          size="1.25rem"
           class="scale-90 sm:scale-100"
+          size="1.25rem"
         />
         <span>
           {{ "common.export" | translate }}
@@ -43,16 +43,16 @@
         [title]="
           (saving() ? 'view.palette.saving' : 'view.palette.save') | translate
         "
-        class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer group text-neutral-50 dark:bg-blue-600 disabled:bg-neutral-400 dark:disabled:bg-neutral-700 disabled:cursor-wait"
         (click)="savePalette()"
+        class="group flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-wait disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700 sm:px-3 sm:py-2"
       >
         <span
           class="flex items-center justify-center group-disabled:animate-pulse-spin"
         >
           <ng-icon
             [svg]="saveIcon()"
-            size="1.25rem"
             class="scale-90 sm:scale-100"
+            size="1.25rem"
           />
         </span>
 
@@ -65,22 +65,22 @@
 
   <rp-view-palette
     [palette]="palette"
-    (renameColor)="renameColor($event)"
+    (copyShade)="copyToClipboard($event)"
     (editColor)="editColor($event.color, $event.shadeIndex)"
     (removeColor)="removeColor($event)"
-    (copyShade)="copyToClipboard($event)"
+    (renameColor)="renameColor($event)"
   />
 
-  <section class="flex items-center justify-center gap-2 mt-8">
+  <section class="mt-8 flex items-center justify-center gap-2">
     <button
-      class="flex items-center gap-2 px-2 sm:px-3 py-1.5 sm:py-2 overflow-hidden font-semibold bg-blue-500 rounded cursor-pointer text-neutral-50 dark:bg-blue-600"
       [title]="'view.color.add-tooltip' | translate"
       (click)="addColor()"
+      class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
     >
       <ng-icon
         [svg]="heroPlusMini"
-        size="1.25rem"
         class="scale-90 sm:scale-100"
+        size="1.25rem"
       />
       <span>
         {{ "view.color.add" | translate }}

@@ -1,12 +1,12 @@
 <article
-  class="flex flex-col w-full max-w-lg gap-1 p-4 mx-auto rounded shadow-md dark:border bg-neutral-100 dark:border-neutral-600 dark:shadow-none dark:bg-neutral-700"
+  class="mx-auto flex w-full max-w-lg flex-col gap-1 rounded bg-neutral-100 p-4 shadow-md dark:border dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
 >
   <div class="flex">
     @if (state() !== ExportModalState.FORMAT) {
       <button
-        class="flex items-center justify-center p-2 rounded-md cursor-pointer dark:hover:bg-neutral-800 hover:bg-neutral-200"
         [title]="'common.back' | translate"
         (click)="back()"
+        class="flex cursor-pointer items-center justify-center rounded-md p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800"
       >
         <ng-icon [svg]="heroArrowLeftMini" />
 
@@ -17,9 +17,9 @@
     }
 
     <button
-      class="flex items-center justify-center p-2 ml-auto rounded-md cursor-pointer dark:hover:bg-neutral-800 hover:bg-neutral-200"
       [title]="'common.close' | translate"
       (click)="close()"
+      class="ml-auto flex cursor-pointer items-center justify-center rounded-md p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800"
     >
       <ng-icon [svg]="heroXMarkMini" class="size-4" />
 

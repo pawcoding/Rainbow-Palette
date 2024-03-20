@@ -16,9 +16,9 @@ import { Language, LanguageOption } from '../../types/language';
   providers: [
     provideIcons({
       heroSunSolid,
-      heroMoonSolid,
-    }),
-  ],
+      heroMoonSolid
+    })
+  ]
 })
 export class LayoutOptionsComponent {
   public readonly language = model.required<Language>();
@@ -38,11 +38,11 @@ export class LayoutOptionsComponent {
     );
   });
 
-  protected get languageOptions() {
+  protected get languageOptions(): Array<LanguageOption> {
     return LANGUAGE_OPTIONS;
   }
 
-  protected get themeOptions() {
+  protected get themeOptions(): Array<ThemeOption> {
     return THEME_OPTIONS;
   }
 

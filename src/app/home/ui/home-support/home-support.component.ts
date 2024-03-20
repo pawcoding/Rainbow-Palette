@@ -8,7 +8,7 @@ import { AccordionComponent } from '../../../shared/ui/accordion/accordion.compo
   selector: 'rp-home-support',
   standalone: true,
   imports: [TranslateModule, NgIconComponent, AccordionComponent],
-  templateUrl: './home-support.component.html',
+  templateUrl: './home-support.component.html'
 })
 export class HomeSupportComponent {
   protected readonly heroChevronDown = heroChevronDown;

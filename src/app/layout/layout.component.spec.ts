@@ -3,20 +3,20 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   AnalyticsService,
-  AnalyticsServiceMock,
+  AnalyticsServiceMock
 } from '../shared/data-access/analytics.service';
 import {
   LanguageService,
-  LanguageServiceMock,
+  LanguageServiceMock
 } from '../shared/data-access/language.service';
 import {
   MobileService,
-  MobileServiceMock,
+  MobileServiceMock
 } from '../shared/data-access/mobile.service';
 import { PwaService, PwaServiceMock } from '../shared/data-access/pwa.service';
 import {
   ThemeService,
-  ThemeServiceMock,
+  ThemeServiceMock
 } from '../shared/data-access/theme.service';
 import { LayoutComponent } from './layout.component';
 
@@ -39,8 +39,8 @@ describe('LayoutComponent', () => {
         { provide: LanguageService, useValue: languageService },
         { provide: MobileService, useClass: MobileServiceMock },
         { provide: AnalyticsService, useClass: AnalyticsServiceMock },
-        { provide: PwaService, useClass: PwaServiceMock },
-      ],
+        { provide: PwaService, useClass: PwaServiceMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutComponent);

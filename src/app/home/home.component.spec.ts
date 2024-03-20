@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   AnalyticsService,
-  AnalyticsServiceMock,
+  AnalyticsServiceMock
 } from '../shared/data-access/analytics.service';
 import {
   PaletteService,
-  PaletteServiceMock,
+  PaletteServiceMock
 } from '../shared/data-access/palette.service';
 import { HomeService, HomeServiceMock } from './data-access/home.service';
 import HomeComponent from './home.component';
@@ -16,7 +16,7 @@ describe('HomeComponent', () => {
   let homeService: HomeServiceMock;
   let paletteService: PaletteServiceMock;
   let analyticsService: AnalyticsServiceMock;
-  let router = jasmine.createSpyObj('Router', ['navigate']);
+  const router = jasmine.createSpyObj('Router', ['navigate']);
 
   let component: HomeComponent;
   let fixture: ComponentFixture<HomeComponent>;
@@ -32,8 +32,8 @@ describe('HomeComponent', () => {
         { provide: HomeService, useValue: homeService },
         { provide: PaletteService, useValue: paletteService },
         { provide: AnalyticsService, useValue: analyticsService },
-        { provide: Router, useValue: router },
-      ],
+        { provide: Router, useValue: router }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeComponent);

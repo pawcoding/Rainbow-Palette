@@ -8,7 +8,7 @@ describe('RequestFormatComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RequestFormatComponent, TranslateModule.forRoot()],
+      imports: [RequestFormatComponent, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RequestFormatComponent);

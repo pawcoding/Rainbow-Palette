@@ -1,42 +1,42 @@
 <section>
-  <div class="relative w-full h-24">
+  <div class="relative h-24 w-full">
     <span
-      class="absolute top-0 flex items-center justify-center p-3 -translate-x-20 translate-y-3 rounded-full shadow-md -rotate-12 left-1/2 bg-neutral-200"
+      class="absolute left-1/2 top-0 flex -translate-x-20 translate-y-3 -rotate-12 items-center justify-center rounded-full bg-neutral-200 p-3 shadow-md"
     >
       <ng-icon
+        [color]="formats[0].color"
         [svg]="formats[0].icon"
         size="2.5rem"
-        [color]="formats[0].color"
       />
     </span>
 
     <span
-      class="absolute top-0 flex items-center justify-center p-3 -translate-x-12 translate-y-1 rounded-full shadow-md -rotate-6 left-1/2 bg-neutral-200"
+      class="absolute left-1/2 top-0 flex -translate-x-12 translate-y-1 -rotate-6 items-center justify-center rounded-full bg-neutral-200 p-3 shadow-md"
     >
       <ng-icon
+        [color]="formats[1].color"
         [svg]="formats[1].icon"
         size="2.5rem"
-        [color]="formats[1].color"
       />
     </span>
 
     <span
-      class="absolute top-0 flex items-center justify-center p-3 translate-x-4 translate-y-2 rounded-full shadow-md rotate-12 left-1/2 bg-neutral-200"
+      class="absolute left-1/2 top-0 flex translate-x-4 translate-y-2 rotate-12 items-center justify-center rounded-full bg-neutral-200 p-3 shadow-md"
     >
       <ng-icon
+        [color]="formats[2].color"
         [svg]="formats[2].icon"
         size="2.5rem"
-        [color]="formats[2].color"
       />
     </span>
 
     <span
-      class="absolute top-0 flex items-center justify-center p-3 -translate-x-4 rounded-full shadow-md rotate-3 left-1/2 bg-neutral-200"
+      class="absolute left-1/2 top-0 flex -translate-x-4 rotate-3 items-center justify-center rounded-full bg-neutral-200 p-3 shadow-md"
     >
       <ng-icon
+        [color]="formats[3].color"
         [svg]="formats[3].icon"
         size="2.5rem"
-        [color]="formats[3].color"
       />
     </span>
   </div>
@@ -53,7 +53,7 @@
     class="flex items-center justify-end gap-1 pt-4 font-semibold text-neutral-600 dark:text-neutral-300 xs:gap-4"
   >
     <a
-      class="p-2 transition-colors duration-200 rounded-md hover:bg-neutral-200 dark:hover:bg-neutral-800"
+      class="rounded-md p-2 transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-neutral-800"
       href="https://github.com/pawcoding/Rainbow-Palette/issues?q=is%3Aissue+is%3Aopen+label%3Atype%2Ffeature-export+"
       target="_blank"
     >

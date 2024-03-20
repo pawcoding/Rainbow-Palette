@@ -13,9 +13,9 @@ describe('PreviewComponent', () => {
       providers: [
         {
           provide: ActivatedRoute,
-          useValue: { snapshot: {} },
-        },
-      ],
+          useValue: { snapshot: {} }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PreviewComponent);

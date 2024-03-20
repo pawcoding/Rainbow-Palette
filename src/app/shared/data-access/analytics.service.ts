@@ -6,7 +6,7 @@ import { LocalStorageKey } from '../enums/local-storage-keys';
 import {
   TrackingEventAction,
   TrackingEventCategory,
-  TrackingEventName,
+  TrackingEventName
 } from '../enums/tracking-event';
 import { ExportOption } from '../types/export-option';
 import { LanguageService } from './language.service';
@@ -37,7 +37,7 @@ type TrackingEvent = {
 };
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AnalyticsService {
   private readonly _tracker = inject(MatomoTracker);
@@ -53,7 +53,7 @@ export class AnalyticsService {
     return this._status.asReadonly();
   }
 
-  constructor() {
+  public constructor() {
     this._setup();
 
     effect(() => {
@@ -64,7 +64,7 @@ export class AnalyticsService {
 
       const analytics = JSON.stringify({
         status,
-        expiry: Date.now() + 1000 * 60 * 60 * 24 * 90,
+        expiry: Date.now() + 1000 * 60 * 60 * 24 * 90
       });
       localStorage.setItem(LocalStorageKey.ANALYTICS, analytics);
 
@@ -204,7 +204,7 @@ export class AnalyticsService {
     this._status.set(AnalyticsStatus.ACCEPTED);
     this._toastService.showToast({
       type: 'info',
-      message: 'toast.info.analytics-accepted',
+      message: 'toast.info.analytics-accepted'
     });
   }
 
@@ -230,7 +230,7 @@ export class AnalyticsService {
           category,
           action,
           name,
-          value,
+          value
         },
         'disabled'
       );

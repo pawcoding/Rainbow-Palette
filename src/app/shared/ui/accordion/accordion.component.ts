@@ -4,7 +4,7 @@ import {
   booleanAttribute,
   input,
   signal,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgIconComponent } from '@ng-icons/core';
@@ -17,7 +17,7 @@ import { sleep } from '../../utils/sleep';
   standalone: true,
   imports: [TranslateModule, NgIconComponent],
   templateUrl: './accordion.component.html',
-  styles: ':host { display: block; }',
+  styles: ':host { display: block; }'
 })
 export class AccordionComponent {
   /**
@@ -53,7 +53,7 @@ export class AccordionComponent {
   private _isClosing = false;
   private _isExpanding = false;
 
-  public toggleAccordion($event: MouseEvent) {
+  public toggleAccordion($event: Event): void {
     const htmlElement = $event.target as HTMLElement | null;
     if (htmlElement?.tagName === 'A') {
       return;
@@ -84,16 +84,16 @@ export class AccordionComponent {
 
     this._animation = this._details().nativeElement.animate(
       {
-        height: [startHeight, endHeight],
+        height: [startHeight, endHeight]
       },
       {
         duration: 300,
-        easing: 'ease-in-out',
+        easing: 'ease-in-out'
       }
     );
 
-    this._animation.onfinish = () => this.onAnimationFinish(false);
-    this._animation.oncancel = () => (this._isClosing = false);
+    this._animation.onfinish = (): void => this.onAnimationFinish(false);
+    this._animation.oncancel = (): boolean => (this._isClosing = false);
 
     // Wait for animation to finish before hiding the content
     await sleep(300);
@@ -101,7 +101,7 @@ export class AccordionComponent {
     this.isOpen.set(false);
   }
 
-  public open() {
+  public open(): void {
     this._details().nativeElement.style.height = `${
       this._details().nativeElement.offsetHeight
     }px`;
@@ -130,19 +130,19 @@ export class AccordionComponent {
 
     this._animation = this._details().nativeElement.animate(
       {
-        height: [startHeight, endHeight],
+        height: [startHeight, endHeight]
       },
       {
         duration: 300,
-        easing: 'ease-in-out',
+        easing: 'ease-in-out'
       }
     );
 
-    this._animation.onfinish = () => this.onAnimationFinish(true);
-    this._animation.oncancel = () => (this._isExpanding = false);
+    this._animation.onfinish = (): void => this.onAnimationFinish(true);
+    this._animation.oncancel = (): boolean => (this._isExpanding = false);
   }
 
-  public onAnimationFinish(open: boolean) {
+  public onAnimationFinish(open: boolean): void {
     this._details().nativeElement.open = open;
 
     this._animation = undefined;

@@ -1,28 +1,28 @@
 <div
-  class="fixed z-50 flex flex-col items-center justify-center w-screen h-screen bg-neutral-50 dark:bg-neutral-900 backdrop-blur-sm"
+  class="fixed z-50 flex h-screen w-screen flex-col items-center justify-center bg-neutral-50 backdrop-blur-sm dark:bg-neutral-900"
 >
   <article>
     <h1>
       <span class="sr-only">Rainbow Palette</span>
       <img
         [src]="logoAsset()"
-        alt="Rainbow Palette"
         [width]="isMobile() ? 200 : 300"
+        alt="Rainbow Palette"
         class="drop-shadow-md"
       />
     </h1>
 
     <section class="mt-4 sm:mt-6">
-      <label id="loading" class="sr-only">Loading Rainbow Palette</label>
+      <span class="sr-only" id="loading">Loading Rainbow Palette</span>
 
       <div
-        role="progressbar"
         aria-labelledby="loading"
-        class="block overflow-hidden bg-gray-200 rounded-full shadow-md dark:shadow-none"
+        class="block overflow-hidden rounded-full bg-gray-200 shadow-md dark:shadow-none"
+        role="progressbar"
       >
         <span
-          class="block h-3 sm:h-6 progress from-blue-400 to-blue-500"
           [class.desktop]="!isMobile()"
+          class="progress block h-3 from-blue-400 to-blue-500 sm:h-6"
         ></span>
       </div>
     </section>

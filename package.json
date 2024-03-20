@@ -1,13 +1,14 @@
 {
   "name": "rainbow-palette",
-  "version": "2.0.0-alpha",
+  "version": "2.0.0-beta",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "prebuild": "node ./scripts/update-ngsw.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -34,11 +35,20 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.2.3",
+    "@angular-eslint/builder": "17.3.0",
+    "@angular-eslint/eslint-plugin": "17.3.0",
+    "@angular-eslint/eslint-plugin-template": "17.3.0",
+    "@angular-eslint/schematics": "17.3.0",
+    "@angular-eslint/template-parser": "17.3.0",
     "@angular/cli": "^17.2.3",
     "@angular/compiler-cli": "^17.2.4",
     "@tailwindcss/forms": "^0.5.7",
     "@types/jasmine": "~5.1.4",
+    "@typescript-eslint/eslint-plugin": "7.2.0",
+    "@typescript-eslint/parser": "7.2.0",
     "autoprefixer": "^10.4.18",
+    "eslint": "^8.57.0",
+    "eslint-plugin-tailwindcss": "^3.15.1",
     "jasmine-core": "~5.1.2",
     "karma": "~6.4.3",
     "karma-chrome-launcher": "~3.2.0",

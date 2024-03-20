@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { HSLObject } from 'colortranslator';
 import { firstValueFrom } from 'rxjs';
 import { Shade } from '../model/shade.model';
+import { HSLObject } from '../types/color-format';
 import { ToastService } from './toast.service';
 
 interface ColorMapEntry {
@@ -13,7 +13,7 @@ interface ColorMapEntry {
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ColorNameService {
   private readonly _http = inject(HttpClient);
@@ -40,7 +40,7 @@ export class ColorNameService {
       })
       .map((entry) => ({
         name: entry.name,
-        distance: this.calculateDistance(shade.hsl, entry),
+        distance: this.calculateDistance(shade.hsl, entry)
       }))
       .sort((a, b) => a.distance - b.distance)
       .map((entry) => entry.name)
@@ -71,12 +71,12 @@ export class ColorNameService {
           name: entry[0],
           hue: parseInt(entry[1], 10),
           saturation: parseInt(entry[2], 10),
-          lightness: parseInt(entry[3], 10),
+          lightness: parseInt(entry[3], 10)
         }));
     } catch (error) {
       this._toastService.showToast({
         type: 'error',
-        message: 'toast.error.load-color-map',
+        message: 'toast.error.load-color-map'
       });
     }
   }

@@ -13,7 +13,7 @@ describe('ExportService', () => {
   let service: ExportService;
 
   const palette = new Palette('TestPalette', [
-    new Color([Shade.random()], 'TestColor'),
+    new Color([Shade.random()], 'TestColor')
   ]);
 
   beforeEach(() => {
@@ -23,8 +23,8 @@ describe('ExportService', () => {
       imports: [TranslateModule.forRoot()],
       providers: [
         { provide: ToastService, useClass: ToastServiceMock },
-        { provide: AnalyticsService, useValue: analyticsService },
-      ],
+        { provide: AnalyticsService, useValue: analyticsService }
+      ]
     });
     service = TestBed.inject(ExportService);
   });

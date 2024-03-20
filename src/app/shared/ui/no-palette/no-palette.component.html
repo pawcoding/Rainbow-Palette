@@ -1,9 +1,9 @@
 <section
-  id="no-palette"
   class="flex items-center justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+  id="no-palette"
 >
   <article
-    class="max-w-md p-6 mx-auto space-y-4 text-center border shadow-xl bg-neutral-100 border-neutral-200 lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+    class="mx-auto max-w-md space-y-4 rounded-xl border border-neutral-200 bg-neutral-100 p-6 text-center shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none lg:p-8"
   >
     <h2 class="text-2xl font-bold md:text-3xl">
       {{ "no-palette.title" | translate }}
@@ -14,10 +14,10 @@
     </p>
 
     <a
-      class="inline-flex items-center gap-2 px-4 py-2 font-semibold bg-blue-500 rounded-md text-neutral-50 dark:bg-blue-600"
       [routerLink]="'/'"
+      class="inline-flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 font-semibold text-neutral-50 dark:bg-blue-600"
     >
-      <ng-icon [svg]="heroArrowUturnLeft" strokeWidth="0.15rem" size="1.1rem" />
+      <ng-icon [svg]="heroArrowUturnLeft" size="1.1rem" strokeWidth="0.15rem" />
       {{ "no-palette.link" | translate }}
     </a>
   </article>

@@ -8,7 +8,7 @@ export class Value {
   private _green!: number;
   private _blue!: number;
 
-  constructor(value: HSLObject | RGBObject | string) {
+  public constructor(value: HSLObject | RGBObject | string) {
     if (typeof value === 'string') {
       this.HEX = value;
     } else if ('R' in value) {
@@ -44,7 +44,7 @@ export class Value {
     return {
       H: this._hue,
       S: this._saturation,
-      L: this._lightness,
+      L: this._lightness
     };
   }
 
@@ -74,7 +74,7 @@ export class Value {
     return {
       R: this._red,
       G: this._green,
-      B: this._blue,
+      B: this._blue
     };
   }
 
@@ -86,7 +86,7 @@ export class Value {
     const rgb = {
       R: parseInt(hex.substring(1, 3), 16),
       G: parseInt(hex.substring(3, 5), 16),
-      B: parseInt(hex.substring(5, 7), 16),
+      B: parseInt(hex.substring(5, 7), 16)
     };
 
     this.RGB = rgb;
@@ -126,7 +126,7 @@ export class Value {
     return {
       H: Math.round(hue),
       S: Math.round(saturation),
-      L: Math.round(lightness),
+      L: Math.round(lightness)
     };
   }
 
@@ -150,7 +150,7 @@ export class Value {
     return {
       R: Math.round((r + m) * 255),
       G: Math.round((g + m) * 255),
-      B: Math.round((b + m) * 255),
+      B: Math.round((b + m) * 255)
     };
   }
 }

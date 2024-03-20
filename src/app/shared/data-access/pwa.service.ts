@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 import {
   TrackingEventAction,
-  TrackingEventCategory,
+  TrackingEventCategory
 } from '../enums/tracking-event';
 import { IS_RUNNING_TEST } from '../utils/is-running-test';
 import { AnalyticsService } from './analytics.service';
@@ -14,7 +14,7 @@ import { ToastService } from './toast.service';
 import { VersionService } from './version.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class PwaService {
   private readonly _SwUpdate = inject(SwUpdate);
@@ -32,7 +32,7 @@ export class PwaService {
     return this._isPwa.asReadonly();
   }
 
-  constructor() {
+  public constructor() {
     effect(() => {
       this._analyticsService.setIsPwa(this._isPwa());
     });
@@ -40,7 +40,7 @@ export class PwaService {
     // Check if the app is currently running as a PWA
     if (
       window.matchMedia('(display-mode: standalone)').matches ||
-      //@ts-expect-error
+      //@ts-expect-error - Navigator standalone is not a standard web api, but we try to use it anyway
       window.navigator.standalone
     ) {
       this._isPwa.set(true);
@@ -71,7 +71,7 @@ export class PwaService {
       this._toastService.showToast({
         type: 'info',
         message: 'pwa.update-success',
-        parameters: { version: this._versionService.appVersion },
+        parameters: { version: this._versionService.appVersion }
       });
     }
   }
@@ -88,9 +88,9 @@ export class PwaService {
         type: 'info',
         message: 'pwa.update-available',
         parameters: {
-          // @ts-expect-error
-          version: event.version.appData?.version,
-        },
+          // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
+          version: event.version.appData?.version
+        }
       });
       return;
     }
@@ -106,9 +106,9 @@ export class PwaService {
         type: 'error',
         message: 'pwa.update-failed',
         parameters: {
-          // @ts-expect-error
-          version: event.version.appData?.version,
-        },
+          // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
+          version: event.version.appData?.version
+        }
       });
       return;
     }
@@ -117,11 +117,11 @@ export class PwaService {
     const restart = await this._dialogService.confirm(
       this._translateService.instant('pwa.restart', {
         old:
-          // @ts-expect-error
+          // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
           event.currentVersion.appData?.version ??
           this._versionService.appVersion,
-        // @ts-expect-error
-        new: event.latestVersion.appData?.version,
+        // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
+        new: event.latestVersion.appData?.version
       })
     );
 

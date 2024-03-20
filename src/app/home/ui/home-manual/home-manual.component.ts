@@ -3,7 +3,7 @@ import { NgIconComponent } from '@ng-icons/core';
 import {
   heroAdjustmentsHorizontal,
   heroArchiveBoxArrowDown,
-  heroSwatch,
+  heroSwatch
 } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   selector: 'rp-home-manual',
   standalone: true,
   imports: [NgIconComponent, TranslateModule],
-  templateUrl: './home-manual.component.html',
+  templateUrl: './home-manual.component.html'
 })
 export class HomeManualComponent {
   protected readonly heroSwatch = heroSwatch;

@@ -17,8 +17,8 @@ export const PALETTE_SCHEMES = [
   { value: PaletteScheme.COMPLEMENTARY, label: 'scheme.complementary' },
   {
     value: PaletteScheme.SPLIT_COMPLEMENTARY,
-    label: 'scheme.split-complementary',
+    label: 'scheme.split-complementary'
   },
   { value: PaletteScheme.TRIADIC, label: 'scheme.triadic' },
-  { value: PaletteScheme.COMPOUND, label: 'scheme.compound' },
+  { value: PaletteScheme.COMPOUND, label: 'scheme.compound' }
 ];

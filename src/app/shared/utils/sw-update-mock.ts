@@ -16,7 +16,7 @@ export class SwUpdateMock {
   public async emitNoUpdateAvailable(): Promise<void> {
     this._versionUpdates.next({
       type: 'NO_NEW_VERSION_DETECTED',
-      version: oldVersion,
+      version: oldVersion
     });
 
     await sleep(10);
@@ -25,7 +25,7 @@ export class SwUpdateMock {
   public async emitUpdateAvailable(): Promise<void> {
     this._versionUpdates.next({
       type: 'VERSION_DETECTED',
-      version: newVersion,
+      version: newVersion
     });
 
     await sleep(10);
@@ -35,7 +35,7 @@ export class SwUpdateMock {
     this._versionUpdates.next({
       type: 'VERSION_INSTALLATION_FAILED',
       version: newVersion,
-      error: 'Installation failed',
+      error: 'Installation failed'
     });
 
     await sleep(10);
@@ -45,7 +45,7 @@ export class SwUpdateMock {
     this._versionUpdates.next({
       type: 'VERSION_READY',
       currentVersion: oldVersion,
-      latestVersion: newVersion,
+      latestVersion: newVersion
     });
 
     await sleep(10);

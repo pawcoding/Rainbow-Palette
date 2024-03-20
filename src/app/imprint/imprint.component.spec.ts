@@ -3,11 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   AnalyticsService,
-  AnalyticsServiceMock,
+  AnalyticsServiceMock
 } from '../shared/data-access/analytics.service';
 import {
   LanguageService,
-  LanguageServiceMock,
+  LanguageServiceMock
 } from '../shared/data-access/language.service';
 import ImprintComponent from './imprint.component';
 
@@ -21,8 +21,8 @@ describe('ImprintComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: {} },
         { provide: AnalyticsService, useClass: AnalyticsServiceMock },
-        { provide: LanguageService, useClass: LanguageServiceMock },
-      ],
+        { provide: LanguageService, useClass: LanguageServiceMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ImprintComponent);

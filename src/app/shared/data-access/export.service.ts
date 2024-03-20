@@ -11,7 +11,7 @@ import { AnalyticsService } from './analytics.service';
 import { ToastService } from './toast.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ExportService {
   private readonly _toastService = inject(ToastService);
@@ -26,7 +26,7 @@ export class ExportService {
     if (!formatter) {
       this._toastService.showToast({
         type: 'error',
-        message: 'export.error.format-not-found',
+        message: 'export.error.format-not-found'
       });
       return false;
     }
@@ -65,7 +65,7 @@ export class ExportService {
       console.error(error);
       this._toastService.showToast({
         type: 'error',
-        message: 'export.error.copy-failed',
+        message: 'export.error.copy-failed'
       });
       return false;
     }

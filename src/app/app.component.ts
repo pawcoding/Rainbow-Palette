@@ -7,7 +7,7 @@ import { VersionService } from './shared/data-access/version.service';
   selector: 'rp-root',
   standalone: true,
   imports: [LayoutComponent, LoadingComponent],
-  templateUrl: './app.component.html',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
   // This service gets injected here to print the version number in the console on startup.

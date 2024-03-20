@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import {
   heroHomeSolid,
-  heroQuestionMarkCircleSolid,
+  heroQuestionMarkCircleSolid
 } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
 import { NavigationEntry } from '../../types/navigation-entry';
@@ -11,7 +11,7 @@ import { LayoutNavigationComponent } from './layout-navigation.component';
 
 @Component({
   selector: 'rp-dummy',
-  template: '',
+  template: ''
 })
 class DummyComponent {}
 
@@ -22,20 +22,20 @@ describe('LayoutNavigationComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LayoutNavigationComponent, TranslateModule.forRoot()],
-      providers: [provideRouter([{ path: '', component: DummyComponent }])],
+      providers: [provideRouter([{ path: '', component: DummyComponent }])]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutNavigationComponent);
     component = fixture.componentInstance;
-    //@ts-expect-error
+    //@ts-expect-error - Bind required input signal
     component.navigationEntries = signal<Array<NavigationEntry>>([
       { path: '/', title: 'Home', description: 'Home', icon: heroHomeSolid },
       {
         path: '/test',
         title: 'Test',
         description: 'Test',
-        icon: heroQuestionMarkCircleSolid,
-      },
+        icon: heroQuestionMarkCircleSolid
+      }
     ]);
     fixture.detectChanges();
   });

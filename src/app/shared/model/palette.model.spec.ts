@@ -18,7 +18,7 @@ describe('Palette', () => {
   it('should parse palette from object', () => {
     const palette = Palette.parse({
       name: 'Test',
-      colors: [new Color([Shade.random()], 'TestColor')],
+      colors: [new Color([Shade.random()], 'TestColor')]
     });
 
     expect(palette).toBeInstanceOf(Palette);
@@ -28,7 +28,7 @@ describe('Palette', () => {
 
   it('should stringify and re-parse palette', () => {
     const palette = new Palette('Test', [
-      new Color([Shade.random()], 'TestColor'),
+      new Color([Shade.random()], 'TestColor')
     ]);
     const parsed = Palette.parse(palette.toString());
 
@@ -39,7 +39,7 @@ describe('Palette', () => {
 
   it('should JSON and string are equal', () => {
     const palette = new Palette('Test', [
-      new Color([Shade.random()], 'TestColor'),
+      new Color([Shade.random()], 'TestColor')
     ]);
 
     expect(palette.toString()).toBe(JSON.stringify(palette.toJSON()));

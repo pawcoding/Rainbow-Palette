@@ -9,7 +9,7 @@ describe('ToastService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: MobileService, useClass: MobileServiceMock }],
+      providers: [{ provide: MobileService, useClass: MobileServiceMock }]
     });
     service = TestBed.inject(ToastService);
   });

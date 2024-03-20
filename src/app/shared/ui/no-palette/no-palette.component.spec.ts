@@ -14,15 +14,15 @@ describe('NoPaletteComponent', () => {
       providers: [
         {
           provide: ActivatedRoute,
-          useValue: { snapshot: {} },
-        },
-      ],
+          useValue: { snapshot: {} }
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(NoPaletteComponent);
     component = fixture.componentInstance;
 
-    //@ts-expect-error
+    //@ts-expect-error - Bind required input signal
     component.parent = signal('view');
 
     fixture.detectChanges();

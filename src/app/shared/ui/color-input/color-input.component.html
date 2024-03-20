@@ -1,12 +1,12 @@
 <div>
   <span
-    class="flex overflow-hidden border rounded-md shadow-sm border-neutral-200 dark:shadow-none dark:border-none"
+    class="flex overflow-hidden rounded-md border border-neutral-200 shadow-sm dark:border-none dark:shadow-none"
   >
-    <label for="color" [title]="tooltip()">
+    <label [title]="tooltip()" for="color">
       <div
         [class]="isColorLight() ? 'text-neutral-900' : 'text-neutral-100'"
         [style.backgroundColor]="hex()"
-        class="flex items-center justify-center w-10 h-full cursor-pointer"
+        class="flex h-full w-10 cursor-pointer items-center justify-center"
       >
         <ng-icon
           [svg]="heroEyeDropperMini"
@@ -22,22 +22,22 @@
 
     <input
       #colorInput
-      type="color"
-      id="color"
-      class="hidden"
       [value]="hex()"
-      (input)="updateHex(colorInput.value)"
       (change)="updateHex(colorInput.value)"
+      (input)="updateHex(colorInput.value)"
+      class="hidden"
+      id="color"
+      type="color"
     />
 
     <input
       #hexInput
-      type="text"
-      class="w-full min-w-0 px-4 py-2 font-semibold border-none focus:ring-0 focus:outline-none grow bg-neutral-100 dark:bg-neutral-600"
-      [value]="hex()"
       [placeholder]="placeholder()"
       [title]="placeholder()"
+      [value]="hex()"
       (input)="updateHex(hexInput.value)"
+      class="w-full min-w-0 grow border-none bg-neutral-100 px-4 py-2 font-semibold focus:outline-none focus:ring-0 dark:bg-neutral-600"
+      type="text"
     />
   </span>
 </div>

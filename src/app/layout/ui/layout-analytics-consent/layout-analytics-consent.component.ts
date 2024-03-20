@@ -4,7 +4,7 @@ import {
   EventEmitter,
   Output,
   computed,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -14,7 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslateModule, RouterLink],
   templateUrl: './layout-analytics-consent.component.html',
-  styleUrl: './layout-analytics-consent.component.css',
+  styleUrl: './layout-analytics-consent.component.css'
 })
 export class LayoutAnalyticsConsentComponent {
   protected readonly matomo =

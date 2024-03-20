@@ -10,7 +10,7 @@ describe('LayoutAnalyticsConsentComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LayoutAnalyticsConsentComponent, TranslateModule.forRoot()],
-      providers: [{ provide: ActivatedRoute, useValue: {} }],
+      providers: [{ provide: ActivatedRoute, useValue: {} }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutAnalyticsConsentComponent);

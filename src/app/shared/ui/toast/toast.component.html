@@ -1,18 +1,18 @@
 @if (toast(); as toast) {
 <div
-  role="alert"
-  class="flex items-center gap-1 p-4 rounded shadow-md toast border-s-4 dark:shadow-none max-w-96"
   [class]="colors()"
+  class="toast flex max-w-96 items-center gap-1 rounded border-s-4 p-4 shadow-md dark:shadow-none"
+  role="alert"
 >
   <span class="text-sm">
     {{ toast.message | translate : toast.parameters }}
   </span>
 
   <button
-    type="button"
-    class="flex items-center justify-center w-6 h-6 transition-colors duration-200 rounded bg-black/0 shrink-0 focus:outline-none hover:bg-black/10"
     [title]="'common.close' | translate"
     (click)="closeToast()"
+    class="flex size-6 shrink-0 items-center justify-center rounded bg-black/0 transition-colors duration-200 hover:bg-black/10 focus:outline-none"
+    type="button"
   >
     <ng-icon [svg]="heroXMarkMini" />
   </button>

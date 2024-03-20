@@ -1,7 +1,7 @@
 <section
-  class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+  class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
 >
-  <div class="max-w-lg mx-auto text-center">
+  <div class="mx-auto max-w-lg text-center">
     <h2 class="text-3xl font-bold sm:text-4xl">
       {{ "home.manual.title" | translate }}
     </h2>
@@ -12,15 +12,15 @@
   </div>
 
   <div
-    class="grid grid-cols-1 gap-4 mt-8 lg:gap-8 md:grid-cols-2 lg:grid-cols-3"
+    class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
   >
     <article
-      class="block p-6 bg-neutral-100 border border-neutral-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+      class="block rounded-xl border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none lg:p-8"
     >
       <ng-icon
         [svg]="heroSwatch"
-        size="2.5rem"
         class="text-blue-900 dark:text-blue-500"
+        size="2.5rem"
       />
 
       <h3 class="mt-4 text-xl font-bold">
@@ -33,12 +33,12 @@
     </article>
 
     <article
-      class="block p-6 bg-neutral-100 border border-neutral-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+      class="block rounded-xl border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none lg:p-8"
     >
       <ng-icon
         [svg]="heroAdjustmentsHorizontal"
-        size="2.5rem"
         class="text-blue-900 dark:text-blue-500"
+        size="2.5rem"
       />
 
       <h3 class="mt-4 text-xl font-bold">
@@ -51,12 +51,12 @@
     </article>
 
     <article
-      class="block p-6 bg-neutral-100 border border-neutral-200 shadow-xl lg:p-8 rounded-xl dark:bg-neutral-700 dark:border-neutral-600 dark:shadow-none"
+      class="block rounded-xl border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none lg:p-8"
     >
       <ng-icon
         [svg]="heroArchiveBoxArrowDown"
-        size="2.5rem"
         class="text-blue-900 dark:text-blue-500"
+        size="2.5rem"
       />
 
       <h3 class="mt-4 text-xl font-bold">
@@ -70,6 +70,6 @@
   </div>
 
   <div class="mt-12 text-center">
-    <p class="mt-4 text-lg" [innerHTML]="'home.manual.cta' | translate"></p>
+    <p [innerHTML]="'home.manual.cta' | translate" class="mt-4 text-lg"></p>
   </div>
 </section>

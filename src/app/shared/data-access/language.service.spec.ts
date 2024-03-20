@@ -9,7 +9,7 @@ describe('LanguageService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot({ defaultLanguage: 'en' })],
+      imports: [TranslateModule.forRoot({ defaultLanguage: 'en' })]
     });
     service = TestBed.inject(LanguageService);
   });
@@ -42,7 +42,7 @@ describe('LanguageService', () => {
   it('should set language from local storage on initialization', async () => {
     localStorage.setItem(LocalStorageKey.LANGUAGE, 'de');
     TestBed.configureTestingModule({
-      imports: [TranslateModule.forRoot()],
+      imports: [TranslateModule.forRoot()]
     });
 
     const service = TestBed.inject(LanguageService);

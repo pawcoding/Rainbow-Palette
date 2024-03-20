@@ -3,15 +3,15 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   AnalyticsService,
-  AnalyticsServiceMock,
+  AnalyticsServiceMock
 } from '../shared/data-access/analytics.service';
 import {
   ExportService,
-  ExportServiceMock,
+  ExportServiceMock
 } from '../shared/data-access/export.service';
 import {
   ToastService,
-  ToastServiceMock,
+  ToastServiceMock
 } from '../shared/data-access/toast.service';
 import { Color, Palette, Shade } from '../shared/model';
 import { ExportModalComponent } from './export-modal.component';
@@ -28,27 +28,27 @@ describe('ExportModalComponent', () => {
           provide: DIALOG_DATA,
           useValue: {
             palette: new Palette('TestPalette', [
-              new Color([Shade.random()], 'TestColor'),
-            ]),
-          },
+              new Color([Shade.random()], 'TestColor')
+            ])
+          }
         },
         {
           provide: DialogRef,
-          useValue: {},
+          useValue: {}
         },
         {
           provide: ToastService,
-          useClass: ToastServiceMock,
+          useClass: ToastServiceMock
         },
         {
           provide: ExportService,
-          useClass: ExportServiceMock,
+          useClass: ExportServiceMock
         },
         {
           provide: AnalyticsService,
-          useClass: AnalyticsServiceMock,
-        },
-      ],
+          useClass: AnalyticsServiceMock
+        }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ExportModalComponent);

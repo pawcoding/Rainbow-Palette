@@ -4,7 +4,7 @@ export class Color {
   public name: string;
   public shades: Array<Shade>;
 
-  constructor(shades: Array<Shade>, name: string) {
+  public constructor(shades: Array<Shade>, name: string) {
     this.shades = shades;
     this.name = name;
   }
@@ -51,7 +51,7 @@ export class Color {
 
     const name = color.name;
 
-    let shades: Array<Shade> = [];
+    const shades: Array<Shade> = [];
     if (!Array.isArray(color.shades)) {
       throw new Error(
         `Could not parse color (invalid "shades" property): "${color.shades}"`
@@ -72,7 +72,7 @@ export class Color {
   public toJSON(): object {
     return {
       name: this.name,
-      shades: this.shades.map((shade) => shade.toJSON()),
+      shades: this.shades.map((shade) => shade.toJSON())
     };
   }
 

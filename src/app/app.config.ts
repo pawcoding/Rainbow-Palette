@@ -2,12 +2,12 @@ import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import {
   ApplicationConfig,
   importProvidersFrom,
-  isDevMode,
+  isDevMode
 } from '@angular/core';
 import {
   provideRouter,
   withInMemoryScrolling,
-  withRouterConfig,
+  withRouterConfig
 } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
@@ -16,7 +16,7 @@ import {
   MatomoConsentMode,
   provideMatomo,
   withRouter,
-  withRouterInterceptors,
+  withRouterInterceptors
 } from 'ngx-matomo-client';
 import { routes } from './app.routes';
 import { MatomoTitleInterceptor } from './shared/utils/matomo-title-interceptor';
@@ -27,10 +27,10 @@ export const appConfig: ApplicationConfig = {
       routes,
       withInMemoryScrolling({
         anchorScrolling: 'enabled',
-        scrollPositionRestoration: 'top',
+        scrollPositionRestoration: 'top'
       }),
       withRouterConfig({
-        onSameUrlNavigation: 'reload',
+        onSameUrlNavigation: 'reload'
       })
     ),
     provideHttpClient(withFetch()),
@@ -40,8 +40,8 @@ export const appConfig: ApplicationConfig = {
         loader: {
           provide: TranslateLoader,
           useFactory: (http: HttpClient) => new TranslateHttpLoader(http),
-          deps: [HttpClient],
-        },
+          deps: [HttpClient]
+        }
       })
     ),
     provideMatomo(
@@ -52,17 +52,17 @@ export const appConfig: ApplicationConfig = {
         acceptDoNotTrack: true,
         requireConsent: MatomoConsentMode.TRACKING,
         disabled: isDevMode(),
-        runOutsideAngularZone: true,
+        runOutsideAngularZone: true
       },
       withRouter({
         delay: 1000,
-        trackPageTitle: false,
+        trackPageTitle: false
       }),
       withRouterInterceptors([MatomoTitleInterceptor])
     ),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
-      registrationStrategy: 'registerWhenStable:30000',
-    }),
-  ],
+      registrationStrategy: 'registerWhenStable:30000'
+    })
+  ]
 };

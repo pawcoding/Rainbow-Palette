@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroArrowUturnLeft,
-  heroWrenchScrewdriver,
+  heroWrenchScrewdriver
 } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -12,7 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslateModule, NgIconComponent, RouterLink],
   templateUrl: './preview.component.html',
-  styleUrl: './preview.component.css',
+  styleUrl: './preview.component.css'
 })
 export default class PreviewComponent {
   protected readonly heroArrowUturnLeft = heroArrowUturnLeft;
@@ -22,6 +22,6 @@ export default class PreviewComponent {
     github:
       '<a href="https://github.com/pawcoding/Rainbow-Palette" rel="noreferrer" target="_blank">GitHub</a>',
     discord:
-      '<a href="https://discord.gg/GzgTh4hxrx" rel="noreferrer" target="_blank">Discord</a>',
+      '<a href="https://discord.gg/GzgTh4hxrx" rel="noreferrer" target="_blank">Discord</a>'
   };
 }

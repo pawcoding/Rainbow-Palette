@@ -1,6 +1,6 @@
 <div
-  [cdkMenuTriggerFor]="disabled() ? undefined : menu"
   [cdkMenuPosition]="menuPositions"
+  [cdkMenuTriggerFor]="disabled() ? undefined : menu"
   [class]="!disabled() ? 'cursor-pointer' : 'cursor-default'"
 >
   <ng-content />
@@ -8,11 +8,11 @@
 
 <ng-template #menu>
   <div
-    cdkMenu
-    class="p-2 bg-white border divide-y rounded-md shadow-lg divide-neutral-100 dark:divide-neutral-700 border-neutral-100 dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-none"
-    role="menu"
-    [style.minWidth]="minWidth()"
     [style.maxWidth]="maxWidth()"
+    [style.minWidth]="minWidth()"
+    cdkMenu
+    class="divide-y divide-neutral-100 rounded-md border border-neutral-100 bg-white p-2 shadow-lg dark:divide-neutral-700 dark:border-neutral-700 dark:bg-neutral-800 dark:shadow-none"
+    role="menu"
   >
     @if (title()) {
     <section>
@@ -26,23 +26,23 @@
 
     <section
       #menuGroup
-      cdkMenuGroup
-      class="pt-2 overflow-auto"
-      [style.minHeight]="minHeight()"
       [style.maxHeight]="maxHeight()"
+      [style.minHeight]="minHeight()"
+      cdkMenuGroup
+      class="overflow-auto pt-2"
     >
       @for (item of items(); track $index) {
       <button
+        [cdkMenuItemChecked]="item === selectedItem()"
         [class]="
           highlightSelection()
             ? 'aria-checked:font-bold aria-checked:text-blue-600 dark:aria-checked:text-blue-400'
             : ''
         "
-        class="block w-full px-4 py-2 text-sm text-left rounded-lg group text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200"
-        role="menuitem"
-        cdkMenuItemRadio
-        [cdkMenuItemChecked]="item === selectedItem()"
         (cdkMenuItemTriggered)="select(item)"
+        cdkMenuItemRadio
+        class="group block w-full rounded-lg px-4 py-2 text-left text-sm text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200"
+        role="menuitem"
       >
         <ng-container
           [ngTemplateOutlet]="itemTemplate() ?? stringTemplate"

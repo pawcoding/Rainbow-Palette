@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 export class MatomoTitleInterceptor implements MatomoRouterInterceptor {
   private readonly _tracker = inject(MatomoTracker);
 
-  beforePageTrack(
+  public beforePageTrack(
     event: NavigationEnd
   ): void | Observable<void> | Promise<void> {
     switch (event.urlAfterRedirects) {

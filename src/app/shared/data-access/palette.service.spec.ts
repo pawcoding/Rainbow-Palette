@@ -23,9 +23,9 @@ describe('PaletteService', () => {
         { provide: ColorNameService, useValue: colorNameService },
         {
           provide: ToastService,
-          useValue: toastService,
-        },
-      ],
+          useValue: toastService
+        }
+      ]
     });
     service = TestBed.inject(PaletteService);
 

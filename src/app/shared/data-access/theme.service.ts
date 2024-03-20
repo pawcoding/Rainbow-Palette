@@ -3,7 +3,7 @@ import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Theme } from '../types/theme';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ThemeService {
   private readonly _theme = signal<Theme>('light');
@@ -12,7 +12,7 @@ export class ThemeService {
     return this._theme.asReadonly();
   }
 
-  constructor() {
+  public constructor() {
     effect(async () => {
       localStorage.setItem(LocalStorageKey.THEME, this._theme());
       document.documentElement.classList.toggle(

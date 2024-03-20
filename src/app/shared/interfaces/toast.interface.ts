@@ -4,7 +4,7 @@ export const ToastTimeouts = {
   warning: 5000,
   info: 5000,
   default: 5000,
-  test: 10,
+  test: 10
 };
 
 /**
@@ -24,5 +24,5 @@ export interface Toast {
   /**
    * The parameters to be used in the translation.
    */
-  parameters?: Record<string, any>;
+  parameters?: Record<string, unknown>;
 }

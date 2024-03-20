@@ -6,7 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { filter } from 'rxjs';
 import {
   AnalyticsService,
-  AnalyticsStatus,
+  AnalyticsStatus
 } from '../shared/data-access/analytics.service';
 import { LanguageService } from '../shared/data-access/language.service';
 import { AccordionComponent } from '../shared/ui/accordion/accordion.component';
@@ -16,7 +16,7 @@ import { sleep } from '../shared/utils/sleep';
   selector: 'rp-imprint',
   standalone: true,
   imports: [TranslateModule, AccordionComponent, RouterLink],
-  templateUrl: './imprint.component.html',
+  templateUrl: './imprint.component.html'
 })
 export default class ImprintComponent {
   private readonly _router = inject(Router);
@@ -43,7 +43,7 @@ export default class ImprintComponent {
         // Scroll to new position
         this._viewportScroller.scrollToPosition([
           position[0],
-          position[1] - offset - 32,
+          position[1] - offset - 32
         ]);
       }
     });
@@ -59,11 +59,11 @@ export default class ImprintComponent {
     return this._languageService.language() === 'de';
   });
 
-  protected enableAnalytics() {
+  protected enableAnalytics(): void {
     this._analyticsService.acceptAnalytics();
   }
 
-  protected disableAnalytics() {
+  protected disableAnalytics(): void {
     this._analyticsService.declineAnalytics();
   }
 }

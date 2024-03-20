@@ -5,7 +5,7 @@ import { Color } from '../../shared/model';
 import { sleep } from '../../shared/utils/sleep';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ColorEditorService {
   private readonly _dialog = inject(Dialog);
@@ -27,10 +27,10 @@ export class ColorEditorService {
       backdropClass: 'rp-modal-backdrop',
       data: {
         color,
-        shadeIndex,
+        shadeIndex
       },
       disableClose: true,
-      panelClass: 'rp-modal-panel',
+      panelClass: 'rp-modal-panel'
     });
 
     return await firstValueFrom(

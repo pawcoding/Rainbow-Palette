@@ -9,13 +9,13 @@ describe('ViewPaletteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewPaletteComponent],
+      imports: [ViewPaletteComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ViewPaletteComponent);
     component = fixture.componentInstance;
 
-    // @ts-expect-error
+    // @ts-expect-error - Bind required input signal
     component.palette = signal(new Palette());
 
     fixture.detectChanges();

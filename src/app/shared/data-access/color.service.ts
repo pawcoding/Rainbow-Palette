@@ -5,7 +5,7 @@ import { Shade } from '../model/shade.model';
 import { ColorNameService } from './color-name.service';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ColorService {
   private readonly _colorNameService = inject(ColorNameService);
@@ -122,7 +122,7 @@ export class ColorService {
    * @param shades
    * @param indices
    */
-  private _distributeIndices(shades: Array<Shade>, indices: number[]): void {
+  private _distributeIndices(shades: Array<Shade>, indices: Array<number>): void {
     shades.forEach((shade) => {
       const mapBrightness = Math.max(
         Math.min(1250 - 12.5 * shade.perceivedBrightness, 999),
@@ -143,7 +143,7 @@ export class ColorService {
    * Offset indices from lightest to darkest so no index appears multiple times.
    * @param shades
    */
-  private _offsetIndicesFromLightest(shades: Shade[]): void {
+  private _offsetIndicesFromLightest(shades: Array<Shade>): void {
     let minIndex = 0;
     for (let i = 0; i < shades.length; i++) {
       const shade = shades[i];
@@ -166,7 +166,7 @@ export class ColorService {
    * @param shades
    * @param start
    */
-  private _offsetIndicesFromDarkest(shades: Shade[], start: number): void {
+  private _offsetIndicesFromDarkest(shades: Array<Shade>, start: number): void {
     let maxIndex = shades[start].index;
     for (let j = start - 1; j >= 0; j--) {
       const brighter = shades[j];
@@ -183,7 +183,7 @@ export class ColorService {
    * Returns an object including the calculated saturation alongside the brightness of the shade with the lowest saturation.
    * @param shades
    */
-  private _calculateMinSaturation(shades: Shade[]): {
+  private _calculateMinSaturation(shades: Array<Shade>): {
     saturation: number;
     brightness: number;
   } {
@@ -202,7 +202,7 @@ export class ColorService {
       saturation: Math.round(
         (shadeWithLowestSaturation.hsl.S + evenLowerSaturation) / 2
       ),
-      brightness: shadeWithLowestSaturation.perceivedBrightness,
+      brightness: shadeWithLowestSaturation.perceivedBrightness
     };
   }
 
@@ -218,7 +218,7 @@ export class ColorService {
     shade: Shade,
     minimum: { saturation: number; brightness: number },
     white: boolean
-  ) {
+  ): Shade {
     const index = white ? 0 : 1000;
     const hue = this._calculateHue(shade, white);
     const saturation = this._calculateMaxSaturation(minimum, shade, index);
@@ -238,7 +238,7 @@ export class ColorService {
    * @param shade
    * @param white
    */
-  private _calculateHue(shade: Shade, white: boolean) {
+  private _calculateHue(shade: Shade, white: boolean): number {
     const hueAdjustmentDirection =
       shade.hsl.H < 60 ||
       (120 < shade.hsl.H && shade.hsl.H < 180) ||
@@ -301,7 +301,7 @@ export class ColorService {
     minimum: { saturation: number; brightness: number },
     neighbor: Shade,
     index: number
-  ) {
+  ): number {
     if (neighbor.perceivedBrightness === minimum.brightness)
       return Math.round(
         -0.01 * Math.pow(minimum.saturation, 2) + 2 * minimum.saturation
@@ -350,7 +350,7 @@ export class ColorService {
     left: Shade,
     middle: Shade,
     right: Shade
-  ) {
+  ): number {
     const ll2 = left.hsl.L * left.hsl.L;
     const ml2 = middle.hsl.L * middle.hsl.L;
     const rl2 = right.hsl.L * right.hsl.L;

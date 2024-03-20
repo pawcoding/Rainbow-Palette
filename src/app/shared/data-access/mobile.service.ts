@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { fromEvent } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MobileService {
   private readonly _resize: Signal<Event | undefined>;
@@ -17,7 +17,7 @@ export class MobileService {
     return this._isMobile.asReadonly();
   }
 
-  constructor() {
+  public constructor() {
     const resize$ = fromEvent(window, 'resize');
     this._resize = toSignal(resize$);
 
@@ -31,7 +31,7 @@ export class MobileService {
         this._isMobile.set(window.innerWidth < 640);
       },
       {
-        allowSignalWrites: true,
+        allowSignalWrites: true
       }
     );
 

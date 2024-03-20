@@ -2,7 +2,7 @@ import {
   CdkMenu,
   CdkMenuGroup,
   CdkMenuItemRadio,
-  CdkMenuTrigger,
+  CdkMenuTrigger
 } from '@angular/cdk/menu';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
@@ -16,7 +16,7 @@ import {
   input,
   model,
   signal,
-  viewChild,
+  viewChild
 } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
@@ -30,22 +30,22 @@ import { Subscription } from 'rxjs';
     CdkMenuGroup,
     CdkMenuItemRadio,
     TranslateModule,
-    CommonModule,
+    CommonModule
   ],
-  templateUrl: './dropdown-menu.component.html',
+  templateUrl: './dropdown-menu.component.html'
 })
 export class DropdownMenuComponent<T> {
   // Input Signals
   public readonly items = input.required<Array<T>>();
   public readonly title = input<string | undefined>();
   public readonly disabled = input(false, {
-    transform: booleanAttribute,
+    transform: booleanAttribute
   });
   public readonly closeOnScroll = input(true, {
-    transform: booleanAttribute,
+    transform: booleanAttribute
   });
   public readonly highlightSelection = input(false, {
-    transform: booleanAttribute,
+    transform: booleanAttribute
   });
   public readonly minWidth = input('12rem');
   public readonly maxWidth = input('40rem');
@@ -75,32 +75,32 @@ export class DropdownMenuComponent<T> {
       originY: 'bottom',
       overlayX: 'end',
       overlayY: 'top',
-      offsetY: 8,
+      offsetY: 8
     },
     {
       originX: 'start',
       originY: 'bottom',
       overlayX: 'start',
       overlayY: 'top',
-      offsetY: 8,
+      offsetY: 8
     },
     {
       originX: 'end',
       originY: 'top',
       overlayX: 'end',
       overlayY: 'bottom',
-      offsetY: -8,
+      offsetY: -8
     },
     {
       originX: 'start',
       originY: 'top',
       overlayX: 'start',
       overlayY: 'bottom',
-      offsetY: -8,
-    },
+      offsetY: -8
+    }
   ];
 
-  constructor() {
+  public constructor() {
     /**
      * Effect to handle the opened and closed subscriptions of the trigger.
      * These subscriptions are used to update the isOpen signal when the
@@ -150,7 +150,7 @@ export class DropdownMenuComponent<T> {
           },
           {
             capture: true,
-            signal: abortController.signal,
+            signal: abortController.signal
           }
         );
       } else {

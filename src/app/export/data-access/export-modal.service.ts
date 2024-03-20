@@ -4,7 +4,7 @@ import { firstValueFrom, tap } from 'rxjs';
 import { Palette } from '../../shared/model';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class ExportModalService {
   private readonly _dialog = inject(Dialog);
@@ -23,9 +23,9 @@ export class ExportModalService {
     const dialogRef = this._dialog.open<void>(exportModal, {
       backdropClass: 'rp-modal-backdrop',
       data: {
-        palette,
+        palette
       },
-      panelClass: 'rp-modal-panel',
+      panelClass: 'rp-modal-panel'
     });
 
     return await firstValueFrom(

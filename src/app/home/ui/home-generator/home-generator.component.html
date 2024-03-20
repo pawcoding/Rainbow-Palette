@@ -1,7 +1,7 @@
 <section
-  class="px-4 py-8 flex-col sm:px-6 sm:py-12 lg:px-8 lg:py-16 min-h-[60svh] flex items-center justify-center"
+  class="flex min-h-[60svh] flex-col items-center justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
 >
-  <div class="max-w-lg mx-auto text-center">
+  <div class="mx-auto max-w-lg text-center">
     <h2 class="text-2xl font-bold md:text-3xl">
       {{ "home.generator.title" | translate }}
     </h2>
@@ -11,43 +11,43 @@
     </p>
   </div>
 
-  <div class="w-full mx-auto mt-8 max-w-80">
+  <div class="mx-auto mt-8 w-full max-w-80">
     <rp-color-input
-      [(hex)]="hex"
-      [(isValid)]="isValid"
       [placeholder]="'home.generator.hex' | translate"
       [tooltip]="'home.generator.color' | translate"
+      [(hex)]="hex"
+      [(isValid)]="isValid"
     />
 
     <span
-      class="flex mt-2 overflow-hidden font-semibold rounded-md text-neutral-50"
       [class]="
         isValid()
           ? 'bg-blue-500 dark:bg-blue-600'
           : 'bg-neutral-400 dark:bg-neutral-700'
       "
+      class="mt-2 flex overflow-hidden rounded-md font-semibold text-neutral-50"
     >
       <button
-        class="px-4 py-2 cursor-pointer grow disabled:cursor-not-allowed"
         [disabled]="!isValid()"
         [title]="(isValid() ? 'home.generator.start' : '') | translate"
         (click)="generatePalette()"
+        class="grow cursor-pointer px-4 py-2 disabled:cursor-not-allowed"
       >
         {{ "home.generator.generate" | translate }}
       </button>
 
       <rp-dropdown-menu
+        [disabled]="!isValid()"
         [items]="schemeOptions"
         [selectedItem]="selectedScheme()"
         (selectedItemChange)="setScheme($event?.value)"
-        title="home.generator.scheme"
-        minWidth="20rem"
-        [disabled]="!isValid()"
         highlightSelection
+        minWidth="20rem"
+        title="home.generator.scheme"
       >
         <button
-          class="flex items-center justify-center p-2"
           [title]="'home.generator.scheme' | translate"
+          class="flex items-center justify-center p-2"
         >
           <ng-icon [svg]="heroChevronDownMini" size="1.75rem" />
           <span class="sr-only">

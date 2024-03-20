@@ -8,7 +8,7 @@ import { EXPORT_FORMATS, ExportFormat } from '../../../shared/constants/export-f
   standalone: true,
   imports: [TranslateModule, NgIconComponent],
   templateUrl: './export-format.component.html',
-  styles: ':host { display: block; }',
+  styles: ':host { display: block; }'
 })
 export class ExportFormatComponent {
   @Output()

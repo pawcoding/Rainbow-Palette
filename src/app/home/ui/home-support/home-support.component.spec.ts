@@ -8,7 +8,7 @@ describe('HomeSupportComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomeSupportComponent, TranslateModule.forRoot()],
+      imports: [HomeSupportComponent, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomeSupportComponent);

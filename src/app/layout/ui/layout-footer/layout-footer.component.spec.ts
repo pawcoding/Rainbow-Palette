@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   VersionService,
-  VersionServiceMock,
+  VersionServiceMock
 } from '../../../shared/data-access/version.service';
 import { LayoutFooterComponent } from './layout-footer.component';
 
@@ -19,14 +19,14 @@ describe('LayoutFooterComponent', () => {
       imports: [LayoutFooterComponent, TranslateModule.forRoot()],
       providers: [
         { provide: ActivatedRoute, useValue: {} },
-        { provide: VersionService, useClass: VersionServiceMock },
-      ],
+        { provide: VersionService, useClass: VersionServiceMock }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutFooterComponent);
     component = fixture.componentInstance;
 
-    //@ts-expect-error
+    //@ts-expect-error - Bind required signal input
     component.logoAsset = signal(logoAsset);
 
     fixture.detectChanges();

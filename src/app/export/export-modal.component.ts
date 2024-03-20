@@ -9,7 +9,7 @@ import { ExportService } from '../shared/data-access/export.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import {
   TrackingEventAction,
-  TrackingEventCategory,
+  TrackingEventCategory
 } from '../shared/enums/tracking-event';
 import { Palette } from '../shared/model';
 import { ExportOption } from '../shared/types/export-option';
@@ -33,9 +33,9 @@ enum ExportModalState {
     ExportDownloadComponent,
     ExportSuccessComponent,
     RequestFormatComponent,
-    NgIconComponent,
+    NgIconComponent
   ],
-  templateUrl: './export-modal.component.html',
+  templateUrl: './export-modal.component.html'
 })
 export class ExportModalComponent {
   protected readonly ExportModalState = ExportModalState;
@@ -76,7 +76,7 @@ export class ExportModalComponent {
     if (!format) {
       this._toastService.showToast({
         type: 'error',
-        message: 'export.error.format-not-found',
+        message: 'export.error.format-not-found'
       });
       this.close();
       return;

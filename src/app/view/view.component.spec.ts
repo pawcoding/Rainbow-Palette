@@ -3,32 +3,32 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import {
   ColorEditorService,
-  ColorEditorServiceMock,
+  ColorEditorServiceMock
 } from '../editor/data-access/color-editor.service';
 import { ExportModalService } from '../export/data-access/export-modal.service';
 import {
   AnalyticsService,
-  AnalyticsServiceMock,
+  AnalyticsServiceMock
 } from '../shared/data-access/analytics.service';
 import {
   ColorService,
-  ColorServiceMock,
+  ColorServiceMock
 } from '../shared/data-access/color.service';
 import {
   DialogService,
-  DialogServiceMock,
+  DialogServiceMock
 } from '../shared/data-access/dialog.service';
 import {
   PaletteService,
-  PaletteServiceMock,
+  PaletteServiceMock
 } from '../shared/data-access/palette.service';
 import {
   ToastService,
-  ToastServiceMock,
+  ToastServiceMock
 } from '../shared/data-access/toast.service';
 import {
   TrackingEventAction,
-  TrackingEventCategory,
+  TrackingEventCategory
 } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
@@ -38,8 +38,8 @@ describe('ViewComponent', () => {
   let colorEditorService: ColorEditorServiceMock;
   let colorService: ColorServiceMock;
   let dialogService: DialogServiceMock;
-  let exportModalService = jasmine.createSpyObj('ExportModalService', [
-    'openExportModal',
+  const exportModalService = jasmine.createSpyObj('ExportModalService', [
+    'openExportModal'
   ]);
   let paletteService: PaletteServiceMock;
   let toastService: ToastServiceMock;
@@ -67,8 +67,8 @@ describe('ViewComponent', () => {
         { provide: PaletteService, useValue: paletteService },
         { provide: ToastService, useValue: toastService },
         { provide: AnalyticsService, useValue: analyticsService },
-        { provide: IS_RUNNING_TEST, useValue: true },
-      ],
+        { provide: IS_RUNNING_TEST, useValue: true }
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ViewComponent);

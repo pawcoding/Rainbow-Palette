@@ -7,7 +7,7 @@ import { Component, viewChild } from '@angular/core';
     <rp-dropdown-menu>
       <ng-template #itemTemplate let-item="item">{{ item }}</ng-template>
     </rp-dropdown-menu>
-  `,
+  `
 })
 class DropdownWrapperComponent {
   public dropdown = viewChild.required(DropdownMenuComponent);
@@ -20,7 +20,7 @@ describe('DropdownMenuComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DropdownMenuComponent],
-      declarations: [DropdownWrapperComponent],
+      declarations: [DropdownWrapperComponent]
     }).compileComponents();
 
     fixture = TestBed.createComponent(DropdownWrapperComponent);

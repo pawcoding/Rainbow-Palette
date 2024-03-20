@@ -15,9 +15,9 @@ describe('LayoutOptionsComponent', () => {
 
     fixture = TestBed.createComponent(LayoutOptionsComponent);
     component = fixture.componentInstance;
-    //@ts-expect-error
+    //@ts-expect-error - Bind required input signal
     component.language = signal('en');
-    //@ts-expect-error
+    //@ts-expect-error - Bind required input signal
     component.theme = signal('light');
     fixture.detectChanges();
   });
