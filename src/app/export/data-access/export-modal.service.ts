@@ -17,9 +17,7 @@ export class ExportModalService {
     }
     this._isModalOpen.set(true);
 
-    const exportModal = await import('../export-modal.component').then(
-      (c) => c.ExportModalComponent
-    );
+    const exportModal = await import('../export-modal.component').then((c) => c.ExportModalComponent);
     const dialogRef = this._dialog.open<void>(exportModal, {
       backdropClass: 'rp-modal-backdrop',
       data: {
@@ -28,8 +26,6 @@ export class ExportModalService {
       panelClass: 'rp-modal-panel'
     });
 
-    return await firstValueFrom(
-      dialogRef.closed.pipe(tap(() => this._isModalOpen.set(false)))
-    );
+    return await firstValueFrom(dialogRef.closed.pipe(tap(() => this._isModalOpen.set(false))));
   }
 }

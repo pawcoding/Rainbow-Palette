@@ -19,14 +19,7 @@ export class Value {
   }
 
   public set HSL(value: HSLObject) {
-    if (
-      value.H < 0 ||
-      value.H > 360 ||
-      value.S < 0 ||
-      value.S > 100 ||
-      value.L < 0 ||
-      value.L > 100
-    ) {
+    if (value.H < 0 || value.H > 360 || value.S < 0 || value.S > 100 || value.L < 0 || value.L > 100) {
       throw `Color values [${value.H}°, ${value.S}%, ${value.L}%] are not in valid ranges.`;
     }
 
@@ -49,14 +42,7 @@ export class Value {
   }
 
   public set RGB(value: RGBObject) {
-    if (
-      value.R < 0 ||
-      value.R > 255 ||
-      value.G < 0 ||
-      value.G > 255 ||
-      value.B < 0 ||
-      value.B > 255
-    ) {
+    if (value.R < 0 || value.R > 255 || value.G < 0 || value.G > 255 || value.B < 0 || value.B > 255) {
       throw `rgb(${value.R}, ${value.G}, ${value.B}) is not in valid format.`;
     }
 
@@ -110,10 +96,7 @@ export class Value {
     const delta = cMax - cMin;
 
     const lightness = (cMax + cMin) * 50;
-    const saturation =
-      delta === 0
-        ? 0
-        : (100 * delta) / (1 - Math.abs(2 * (lightness / 100) - 1));
+    const saturation = delta === 0 ? 0 : (100 * delta) / (1 - Math.abs(2 * (lightness / 100) - 1));
 
     let hue;
     if (delta === 0) hue = 0;
@@ -130,11 +113,7 @@ export class Value {
     };
   }
 
-  private _HSLtoRGB(
-    hue: number,
-    saturation: number,
-    lightness: number
-  ): RGBObject {
+  private _HSLtoRGB(hue: number, saturation: number, lightness: number): RGBObject {
     const h = hue;
     const s = saturation / 100;
     const l = lightness / 100;

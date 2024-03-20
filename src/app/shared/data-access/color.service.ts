@@ -44,11 +44,7 @@ export class ColorService {
     shades.unshift(white);
 
     // Create "black"
-    const black = this._createBorderShade(
-      shades[shades.length - 1],
-      minimum,
-      false
-    );
+    const black = this._createBorderShade(shades[shades.length - 1], minimum, false);
     shades.push(black);
 
     // Create missing shades
@@ -62,16 +58,12 @@ export class ColorService {
           .slice()
           .reverse()
           .find((shade) => shade.index < index && shade.fixed) || white;
-      const darker =
-        shades.find((shade) => shade.index > index && shade.fixed) || black;
+      const darker = shades.find((shade) => shade.index > index && shade.fixed) || black;
       let third = shades
         .slice()
         .reverse()
         .find((shade) => shade.index < lighter.index && shade.fixed);
-      if (!third)
-        third =
-          shades.find((shade) => shade.index > darker.index && shade.fixed) ||
-          black;
+      if (!third) third = shades.find((shade) => shade.index > darker.index && shade.fixed) || black;
 
       // Interpolate properties
       const hue =
@@ -79,31 +71,14 @@ export class ColorService {
           index,
           lighter.index,
           darker.index,
-          darker.hsl.H - lighter.hsl.H > 180
-            ? lighter.hsl.H + 360
-            : lighter.hsl.H,
+          darker.hsl.H - lighter.hsl.H > 180 ? lighter.hsl.H + 360 : lighter.hsl.H,
           lighter.hsl.H - darker.hsl.H > 180 ? darker.hsl.H + 360 : darker.hsl.H
         ) % 360;
-      const luminosity = this._mapNumbers(
-        index,
-        lighter.index,
-        darker.index,
-        lighter.hsl.L,
-        darker.hsl.L
-      );
-      const saturation = this._calculateSaturation(
-        luminosity,
-        lighter,
-        darker,
-        third
-      );
+      const luminosity = this._mapNumbers(index, lighter.index, darker.index, lighter.hsl.L, darker.hsl.L);
+      const saturation = this._calculateSaturation(luminosity, lighter, darker, third);
 
       // Add shade
-      const shade = new Shade(
-        index,
-        new Value({ H: hue, S: saturation, L: luminosity }),
-        false
-      );
+      const shade = new Shade(index, new Value({ H: hue, S: saturation, L: luminosity }), false);
       shades.push(shade);
     }
 
@@ -124,14 +99,9 @@ export class ColorService {
    */
   private _distributeIndices(shades: Array<Shade>, indices: Array<number>): void {
     shades.forEach((shade) => {
-      const mapBrightness = Math.max(
-        Math.min(1250 - 12.5 * shade.perceivedBrightness, 999),
-        1
-      );
+      const mapBrightness = Math.max(Math.min(1250 - 12.5 * shade.perceivedBrightness, 999), 1);
       const index = indices.reduce((prev, curr) =>
-        Math.abs(mapBrightness - curr) < Math.abs(mapBrightness - prev)
-          ? curr
-          : prev
+        Math.abs(mapBrightness - curr) < Math.abs(mapBrightness - prev) ? curr : prev
       );
       shade.index = index;
     });
@@ -187,21 +157,11 @@ export class ColorService {
     saturation: number;
     brightness: number;
   } {
-    const shadeWithLowestSaturation = shades.reduce((prev, curr) =>
-      curr.hsl.S < prev.hsl.S ? curr : prev
-    );
-    const differenceFromMiddleSquared = Math.pow(
-      50 - shadeWithLowestSaturation.perceivedBrightness,
-      2
-    );
-    const evenLowerSaturation = Math.max(
-      shadeWithLowestSaturation.hsl.S - 0.01 * differenceFromMiddleSquared,
-      0
-    );
+    const shadeWithLowestSaturation = shades.reduce((prev, curr) => (curr.hsl.S < prev.hsl.S ? curr : prev));
+    const differenceFromMiddleSquared = Math.pow(50 - shadeWithLowestSaturation.perceivedBrightness, 2);
+    const evenLowerSaturation = Math.max(shadeWithLowestSaturation.hsl.S - 0.01 * differenceFromMiddleSquared, 0);
     return {
-      saturation: Math.round(
-        (shadeWithLowestSaturation.hsl.S + evenLowerSaturation) / 2
-      ),
+      saturation: Math.round((shadeWithLowestSaturation.hsl.S + evenLowerSaturation) / 2),
       brightness: shadeWithLowestSaturation.perceivedBrightness
     };
   }
@@ -214,21 +174,13 @@ export class ColorService {
    * @param white
    * @private
    */
-  private _createBorderShade(
-    shade: Shade,
-    minimum: { saturation: number; brightness: number },
-    white: boolean
-  ): Shade {
+  private _createBorderShade(shade: Shade, minimum: { saturation: number; brightness: number }, white: boolean): Shade {
     const index = white ? 0 : 1000;
     const hue = this._calculateHue(shade, white);
     const saturation = this._calculateMaxSaturation(minimum, shade, index);
     const luminosity = (1000 - index) / 10;
 
-    return new Shade(
-      white ? 0 : 1200,
-      new Value({ H: hue, S: saturation, L: luminosity }),
-      true
-    );
+    return new Shade(white ? 0 : 1200, new Value({ H: hue, S: saturation, L: luminosity }), true);
   }
 
   /**
@@ -240,50 +192,28 @@ export class ColorService {
    */
   private _calculateHue(shade: Shade, white: boolean): number {
     const hueAdjustmentDirection =
-      shade.hsl.H < 60 ||
-      (120 < shade.hsl.H && shade.hsl.H < 180) ||
-      (240 < shade.hsl.H && shade.hsl.H < 300)
-        ? 1
-        : -1;
+      shade.hsl.H < 60 || (120 < shade.hsl.H && shade.hsl.H < 180) || (240 < shade.hsl.H && shade.hsl.H < 300) ? 1 : -1;
 
     let hue =
-      shade.hsl.H +
-      (hueAdjustmentDirection *
-        (white ? 1 : -1) *
-        (white ? shade.index : 1000 - shade.index)) /
-        60;
+      shade.hsl.H + (hueAdjustmentDirection * (white ? 1 : -1) * (white ? shade.index : 1000 - shade.index)) / 60;
 
     if (white) {
       if ((shade.hsl.H <= 60 && hue > 60) || (shade.hsl.H >= 60 && hue < 60)) {
         hue = 60;
-      } else if (
-        (shade.hsl.H <= 180 && hue > 180) ||
-        (shade.hsl.H >= 180 && hue < 180)
-      ) {
+      } else if ((shade.hsl.H <= 180 && hue > 180) || (shade.hsl.H >= 180 && hue < 180)) {
         hue = 180;
-      } else if (
-        (shade.hsl.H <= 300 && hue > 300) ||
-        (shade.hsl.H >= 300 && hue < 300)
-      ) {
+      } else if ((shade.hsl.H <= 300 && hue > 300) || (shade.hsl.H >= 300 && hue < 300)) {
         hue = 300;
       }
     } else {
       if (
-        (((shade.hsl.H > 340 && shade.hsl.H < 360) || shade.hsl.H === 0) &&
-          hue > 0 &&
-          hue < 20) ||
+        (((shade.hsl.H > 340 && shade.hsl.H < 360) || shade.hsl.H === 0) && hue > 0 && hue < 20) ||
         (shade.hsl.H >= 0 && shade.hsl.H < 20 && hue < 0)
       ) {
         hue = 0;
-      } else if (
-        (shade.hsl.H <= 120 && hue > 120) ||
-        (shade.hsl.H >= 120 && hue < 120)
-      ) {
+      } else if ((shade.hsl.H <= 120 && hue > 120) || (shade.hsl.H >= 120 && hue < 120)) {
         hue = 120;
-      } else if (
-        (shade.hsl.H <= 240 && hue > 240) ||
-        (shade.hsl.H >= 240 && hue < 240)
-      ) {
+      } else if ((shade.hsl.H <= 240 && hue > 240) || (shade.hsl.H >= 240 && hue < 240)) {
         hue = 240;
       }
     }
@@ -303,15 +233,10 @@ export class ColorService {
     index: number
   ): number {
     if (neighbor.perceivedBrightness === minimum.brightness)
-      return Math.round(
-        -0.01 * Math.pow(minimum.saturation, 2) + 2 * minimum.saturation
-      );
+      return Math.round(-0.01 * Math.pow(minimum.saturation, 2) + 2 * minimum.saturation);
 
-    const a =
-      (neighbor.hsl.S - minimum.saturation) /
-      Math.pow(neighbor.perceivedBrightness - minimum.brightness, 2);
-    const maxSaturation =
-      a * Math.pow(index / 10 - minimum.brightness, 2) + minimum.saturation;
+    const a = (neighbor.hsl.S - minimum.saturation) / Math.pow(neighbor.perceivedBrightness - minimum.brightness, 2);
+    const maxSaturation = a * Math.pow(index / 10 - minimum.brightness, 2) + minimum.saturation;
 
     const minAdd = -0.01 * Math.pow(neighbor.hsl.S, 2) + 2 * neighbor.hsl.S;
 
@@ -326,16 +251,8 @@ export class ColorService {
    * @param out_min
    * @param out_max
    */
-  private _mapNumbers(
-    x: number,
-    in_min: number,
-    in_max: number,
-    out_min: number,
-    out_max: number
-  ): number {
-    return Math.round(
-      ((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min
-    );
+  private _mapNumbers(x: number, in_min: number, in_max: number, out_min: number, out_max: number): number {
+    return Math.round(((x - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min);
   }
 
   /**
@@ -345,12 +262,7 @@ export class ColorService {
    * @param middle
    * @param right
    */
-  private _calculateSaturation(
-    luminosity: number,
-    left: Shade,
-    middle: Shade,
-    right: Shade
-  ): number {
+  private _calculateSaturation(luminosity: number, left: Shade, middle: Shade, right: Shade): number {
     const ll2 = left.hsl.L * left.hsl.L;
     const ml2 = middle.hsl.L * middle.hsl.L;
     const rl2 = right.hsl.L * right.hsl.L;

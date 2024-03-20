@@ -26,9 +26,7 @@ describe('ExportModalService', () => {
   });
 
   it('should open export modal', async () => {
-    const palette = new Palette('TestPalette', [
-      new Color([Shade.random()], 'TestColor')
-    ]);
+    const palette = new Palette('TestPalette', [new Color([Shade.random()], 'TestColor')]);
     await service.openExportModal(palette);
 
     expect(dialog.open).toHaveBeenCalledTimes(1);

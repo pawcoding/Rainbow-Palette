@@ -2,22 +2,14 @@ import { Component, computed, model, output, signal } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  PALETTE_SCHEMES,
-  PaletteScheme
-} from '../../../shared/constants/palette-scheme';
+import { PALETTE_SCHEMES, PaletteScheme } from '../../../shared/constants/palette-scheme';
 import { ColorInputComponent } from '../../../shared/ui/color-input/color-input.component';
 import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown-menu.component';
 
 @Component({
   selector: 'rp-home-generator',
   standalone: true,
-  imports: [
-    TranslateModule,
-    DropdownMenuComponent,
-    NgIconComponent,
-    ColorInputComponent
-  ],
+  imports: [TranslateModule, DropdownMenuComponent, NgIconComponent, ColorInputComponent],
   templateUrl: './home-generator.component.html'
 })
 export class HomeGeneratorComponent {

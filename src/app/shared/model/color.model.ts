@@ -38,24 +38,18 @@ export class Color {
     }
 
     if (!('shades' in color)) {
-      throw new Error(
-        `Could not parse color (missing "shades" property): "${color}"`
-      );
+      throw new Error(`Could not parse color (missing "shades" property): "${color}"`);
     }
 
     if (!('name' in color) || typeof color.name !== 'string') {
-      throw new Error(
-        `Could not parse color (missing "name" property): "${color}"`
-      );
+      throw new Error(`Could not parse color (missing "name" property): "${color}"`);
     }
 
     const name = color.name;
 
     const shades: Array<Shade> = [];
     if (!Array.isArray(color.shades)) {
-      throw new Error(
-        `Could not parse color (invalid "shades" property): "${color.shades}"`
-      );
+      throw new Error(`Could not parse color (invalid "shades" property): "${color.shades}"`);
     }
 
     for (const shade of color.shades) {

@@ -1,12 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  MobileService,
-  MobileServiceMock
-} from '../shared/data-access/mobile.service';
-import {
-  ThemeService,
-  ThemeServiceMock
-} from '../shared/data-access/theme.service';
+import { MobileService, MobileServiceMock } from '../shared/data-access/mobile.service';
+import { ThemeService, ThemeServiceMock } from '../shared/data-access/theme.service';
 import { LoadingComponent } from './loading.component';
 
 describe('LoadingComponent', () => {

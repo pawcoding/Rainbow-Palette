@@ -67,10 +67,7 @@ export class PaletteService {
     }
   }
 
-  public async generatePalette(
-    hex: string,
-    scheme: PaletteScheme
-  ): Promise<void> {
+  public async generatePalette(hex: string, scheme: PaletteScheme): Promise<void> {
     const palette = await this._generatePalette(hex, scheme);
 
     for (const color of palette.colors) {
@@ -84,10 +81,7 @@ export class PaletteService {
     this._palette.set(palette);
   }
 
-  private async _generatePalette(
-    hex: string,
-    scheme: PaletteScheme
-  ): Promise<Palette> {
+  private async _generatePalette(hex: string, scheme: PaletteScheme): Promise<Palette> {
     switch (scheme) {
       case PaletteScheme.RAINBOW:
         return this._generateRainbowPalette(hex);
@@ -125,9 +119,7 @@ export class PaletteService {
      */
     const rainbowHues = [4, 26, 55, 95, 149, 200, 253];
     let currentHue = rainbowHues.reduce((best, current) =>
-      Math.abs(current - shade.hsl.H) < Math.abs(best - shade.hsl.H)
-        ? current
-        : best
+      Math.abs(current - shade.hsl.H) < Math.abs(best - shade.hsl.H) ? current : best
     );
     if (currentHue === 253 && shade.hsl.H > 308) {
       currentHue = 4;
@@ -139,19 +131,9 @@ export class PaletteService {
       }
 
       const newHue = (shade.hsl.H + (hue - currentHue) + 360) % 360;
-      const newSaturation = Math.min(
-        100,
-        Math.max(0, shade.hsl.S - 20 + Math.floor(Math.random() * 40))
-      );
-      const newLightness = Math.min(
-        100,
-        Math.max(0, shade.hsl.L - 20 + Math.floor(Math.random() * 40))
-      );
-      const newShade = new Shade(
-        -1,
-        new Value({ H: newHue, S: newSaturation, L: newLightness }),
-        true
-      );
+      const newSaturation = Math.min(100, Math.max(0, shade.hsl.S - 20 + Math.floor(Math.random() * 40)));
+      const newLightness = Math.min(100, Math.max(0, shade.hsl.L - 20 + Math.floor(Math.random() * 40)));
+      const newShade = new Shade(-1, new Value({ H: newHue, S: newSaturation, L: newLightness }), true);
 
       rainbow.addColor(new Color([newShade], `${index++}`));
     }
@@ -165,18 +147,8 @@ export class PaletteService {
     const monochrome = new Palette('Monochrome', []);
 
     monochrome.addColor(new Color([shade], 'Primary'));
-    monochrome.addColor(
-      new Color(
-        [new Shade(-1, new Value({ H: shade.hsl.H, S: 30, L: 50 }), true)],
-        'Muted'
-      )
-    );
-    monochrome.addColor(
-      new Color(
-        [new Shade(-1, new Value({ H: shade.hsl.H, S: 2, L: 50 }), true)],
-        'Gray'
-      )
-    );
+    monochrome.addColor(new Color([new Shade(-1, new Value({ H: shade.hsl.H, S: 30, L: 50 }), true)], 'Muted'));
+    monochrome.addColor(new Color([new Shade(-1, new Value({ H: shade.hsl.H, S: 2, L: 50 }), true)], 'Gray'));
 
     return monochrome;
   }
@@ -368,12 +340,7 @@ export class PaletteService {
 
     triadic.addColor(new Color([shade], 'Primary'));
 
-    triadic.addColor(
-      new Color(
-        [new Shade(-1, new Value({ H: shade.hsl.H, S: 20, L: 30 }), true)],
-        'Primary Muted'
-      )
-    );
+    triadic.addColor(new Color([new Shade(-1, new Value({ H: shade.hsl.H, S: 20, L: 30 }), true)], 'Primary Muted'));
 
     triadic.addColor(
       new Color(
@@ -524,9 +491,7 @@ export class PaletteService {
 }
 
 export class PaletteServiceMock {
-  public palette = signal<Palette | undefined>(
-    new Palette('Mock', [new Color([Shade.random()], 'MockColor')])
-  );
+  public palette = signal<Palette | undefined>(new Palette('Mock', [new Color([Shade.random()], 'MockColor')]));
   public loadPaletteFromLocalStorage(): void {}
   public savePaletteToLocalStorage(): void {}
   public generatePalette(_hex: string, _scheme: PaletteScheme): void {}

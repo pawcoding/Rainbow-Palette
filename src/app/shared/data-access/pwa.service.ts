@@ -2,10 +2,7 @@ import { Injectable, Signal, effect, inject, signal } from '@angular/core';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageKey } from '../enums/local-storage-keys';
-import {
-  TrackingEventAction,
-  TrackingEventCategory
-} from '../enums/tracking-event';
+import { TrackingEventAction, TrackingEventCategory } from '../enums/tracking-event';
 import { IS_RUNNING_TEST } from '../utils/is-running-test';
 import { AnalyticsService } from './analytics.service';
 import { DialogService } from './dialog.service';
@@ -49,10 +46,7 @@ export class PwaService {
     // Listen for the app being installed as a PWA
     window.addEventListener('appinstalled', () => {
       this._isPwa.set(true);
-      this._analyticsService.trackEvent(
-        TrackingEventCategory.PWA,
-        TrackingEventAction.PWA_INSTALL
-      );
+      this._analyticsService.trackEvent(TrackingEventCategory.PWA, TrackingEventAction.PWA_INSTALL);
     });
 
     // Listen for updates to the service worker
@@ -98,10 +92,7 @@ export class PwaService {
     // Update installation failed
     if (event.type === 'VERSION_INSTALLATION_FAILED') {
       console.error('PWA update failed', event.error);
-      this._analyticsService.trackEvent(
-        TrackingEventCategory.PWA,
-        TrackingEventAction.PWA_UPDATE_FAILED
-      );
+      this._analyticsService.trackEvent(TrackingEventCategory.PWA, TrackingEventAction.PWA_UPDATE_FAILED);
       this._toastService.showToast({
         type: 'error',
         message: 'pwa.update-failed',
@@ -118,8 +109,7 @@ export class PwaService {
       this._translateService.instant('pwa.restart', {
         old:
           // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
-          event.currentVersion.appData?.version ??
-          this._versionService.appVersion,
+          event.currentVersion.appData?.version ?? this._versionService.appVersion,
         // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
         new: event.latestVersion.appData?.version
       })
@@ -137,10 +127,7 @@ export class PwaService {
     localStorage.setItem(LocalStorageKey.UPGRADING, 'true');
 
     // Track the update
-    this._analyticsService.trackEvent(
-      TrackingEventCategory.PWA,
-      TrackingEventAction.PWA_UPDATE_COMPLETED
-    );
+    this._analyticsService.trackEvent(TrackingEventCategory.PWA, TrackingEventAction.PWA_UPDATE_COMPLETED);
 
     // Reload the app to apply the update
     if (!this._isRunningTest) {

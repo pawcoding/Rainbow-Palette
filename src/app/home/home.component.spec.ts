@@ -1,14 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  AnalyticsService,
-  AnalyticsServiceMock
-} from '../shared/data-access/analytics.service';
-import {
-  PaletteService,
-  PaletteServiceMock
-} from '../shared/data-access/palette.service';
+import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/analytics.service';
+import { PaletteService, PaletteServiceMock } from '../shared/data-access/palette.service';
 import { HomeService, HomeServiceMock } from './data-access/home.service';
 import HomeComponent from './home.component';
 
@@ -58,10 +52,7 @@ describe('HomeComponent', () => {
 
     component.generatePalette();
 
-    expect(paletteService.generatePalette).toHaveBeenCalledWith(
-      homeService.hex(),
-      homeService.scheme()
-    );
+    expect(paletteService.generatePalette).toHaveBeenCalledWith(homeService.hex(), homeService.scheme());
   });
 
   it('should track palette generation on palette generation', () => {

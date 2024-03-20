@@ -1,13 +1,7 @@
 import { Component, inject, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
-import {
-  simpleDiscord,
-  simpleGithub,
-  simpleInstagram,
-  simpleTwitter,
-  simpleYoutube
-} from '@ng-icons/simple-icons';
+import { simpleDiscord, simpleGithub, simpleInstagram, simpleTwitter, simpleYoutube } from '@ng-icons/simple-icons';
 import { TranslateModule } from '@ngx-translate/core';
 import { VersionService } from '../../../shared/data-access/version.service';
 

@@ -47,19 +47,19 @@
     class="grid grow grid-cols-10 rounded-md border border-neutral-200 text-sm shadow-sm dark:border-none dark:shadow-none"
   >
     @for (shadeInRow of color().shades; track shadeInRow.hex) {
-    <button
-      [class.border-4]="shadeInRow.index === shadeIndex()"
-      [class.rounded-l-md]="$first"
-      [class.rounded-r-md]="$last"
-      [style.backgroundColor]="shadeInRow.hex"
-      [style.color]="textColor(shadeInRow, color())"
-      [title]="getTooltip(shadeInRow, shadeInRow.index === shadeIndex())"
-      (click)="changeShade(shadeInRow.index)"
-      (contextmenu)="unfixShade(shadeInRow, $event)"
-      class="flex h-14 w-full items-center justify-center border-current"
-    >
-      {{ shadeInRow.fixed ? "■" : "" }}
-    </button>
+      <button
+        [class.border-4]="shadeInRow.index === shadeIndex()"
+        [class.rounded-l-md]="$first"
+        [class.rounded-r-md]="$last"
+        [style.backgroundColor]="shadeInRow.hex"
+        [style.color]="textColor(shadeInRow, color())"
+        [title]="getTooltip(shadeInRow, shadeInRow.index === shadeIndex())"
+        (click)="changeShade(shadeInRow.index)"
+        (contextmenu)="unfixShade(shadeInRow, $event)"
+        class="flex h-14 w-full items-center justify-center border-current"
+      >
+        {{ shadeInRow.fixed ? '■' : '' }}
+      </button>
     }
   </section>
 
@@ -69,7 +69,7 @@
       (click)="cancel()"
       class="cursor-pointer rounded bg-neutral-300 px-2 py-1.5 font-semibold dark:bg-neutral-600"
     >
-      {{ "common.cancel" | translate }}
+      {{ 'common.cancel' | translate }}
     </button>
 
     <button
@@ -77,7 +77,7 @@
       (click)="save()"
       class="cursor-pointer rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600"
     >
-      {{ "common.save" | translate }}
+      {{ 'common.save' | translate }}
     </button>
   </section>
 </article>

@@ -25,9 +25,7 @@ export class Palette {
       try {
         palette = JSON.parse(palette);
       } catch (e) {
-        throw new Error(
-          `Could not parse palette (not a valid JSON): "${palette}"`
-        );
+        throw new Error(`Could not parse palette (not a valid JSON): "${palette}"`);
       }
     }
 
@@ -36,9 +34,7 @@ export class Palette {
     }
 
     if (!('colors' in palette)) {
-      throw new Error(
-        `Could not parse palette (missing "colors" property): "${palette}"`
-      );
+      throw new Error(`Could not parse palette (missing "colors" property): "${palette}"`);
     }
 
     let name: string | undefined;
@@ -48,9 +44,7 @@ export class Palette {
 
     const colors: Array<Color> = [];
     if (!Array.isArray(palette.colors)) {
-      throw new Error(
-        `Could not parse palette (invalid "colors" property): "${palette.colors}"`
-      );
+      throw new Error(`Could not parse palette (invalid "colors" property): "${palette.colors}"`);
     }
 
     for (const color of palette.colors) {

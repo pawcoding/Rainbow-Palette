@@ -11,18 +11,13 @@ export class ColorEditorService {
   private readonly _dialog = inject(Dialog);
   private readonly _isModalOpen = signal(false);
 
-  public async openColorEditor(
-    color: Color,
-    shadeIndex?: number
-  ): Promise<Color | undefined> {
+  public async openColorEditor(color: Color, shadeIndex?: number): Promise<Color | undefined> {
     if (this._isModalOpen()) {
       return;
     }
     this._isModalOpen.set(true);
 
-    const editor = await import('../editor.component').then(
-      (c) => c.EditorComponent
-    );
+    const editor = await import('../editor.component').then((c) => c.EditorComponent);
     const dialogRef = this._dialog.open<Color | undefined>(editor, {
       backdropClass: 'rp-modal-backdrop',
       data: {
@@ -33,17 +28,12 @@ export class ColorEditorService {
       panelClass: 'rp-modal-panel'
     });
 
-    return await firstValueFrom(
-      dialogRef.closed.pipe(tap(() => this._isModalOpen.set(false)))
-    );
+    return await firstValueFrom(dialogRef.closed.pipe(tap(() => this._isModalOpen.set(false))));
   }
 }
 
 export class ColorEditorServiceMock {
-  public async openColorEditor(
-    color: Color,
-    _shadeIndex?: number
-  ): Promise<Color | undefined> {
+  public async openColorEditor(color: Color, _shadeIndex?: number): Promise<Color | undefined> {
     await sleep(10);
 
     return color.copy();

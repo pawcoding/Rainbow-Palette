@@ -1,11 +1,14 @@
 <div>
-  <label [for]="key()" class="flex justify-between">
+  <label
+    [for]="key()"
+    class="flex justify-between"
+  >
     <span class="font-semibold">
       {{ label() }}
     </span>
 
     <span>
-      {{ value() | number : "1.0-0" }}
+      {{ value() | number: '1.0-0' }}
     </span>
   </label>
 

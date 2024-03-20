@@ -10,8 +10,7 @@ describe('LayoutOptionsComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [LayoutOptionsComponent, TranslateModule.forRoot()]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LayoutOptionsComponent);
     component = fixture.componentInstance;

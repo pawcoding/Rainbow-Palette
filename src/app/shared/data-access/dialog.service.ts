@@ -4,10 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DialogService {
-  public async prompt(
-    message: string,
-    defaultValue: string
-  ): Promise<string | undefined> {
+  public async prompt(message: string, defaultValue: string): Promise<string | undefined> {
     return window.prompt(message, defaultValue) ?? undefined;
   }
 

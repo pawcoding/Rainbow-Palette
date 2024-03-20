@@ -9,8 +9,7 @@ describe('HomeGeneratorComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HomeGeneratorComponent, TranslateModule.forRoot()]
-    })
-    .compileComponents();
+    }).compileComponents();
 
     fixture = TestBed.createComponent(HomeGeneratorComponent);
     component = fixture.componentInstance;

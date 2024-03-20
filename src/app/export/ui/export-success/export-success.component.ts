@@ -10,7 +10,11 @@ import { ExportOption } from '../../../shared/types/export-option';
   standalone: true,
   imports: [TranslateModule, NgIconComponent],
   templateUrl: './export-success.component.html',
-  styles: `:host { display: block; }`
+  styles: `
+    :host {
+      display: block;
+    }
+  `
 })
 export class ExportSuccessComponent {
   public readonly exportFormat = input.required<ExportFormat>();
@@ -64,10 +68,7 @@ export class ExportSuccessComponent {
           return {
             docs: 'https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties#using_the_root_pseudo-class',
             file: toUnicodeVariant('colors.css', 'm'),
-            link: toUnicodeVariant(
-              '<link rel="stylesheet" href="/colors.css">',
-              'm'
-            ),
+            link: toUnicodeVariant('<link rel="stylesheet" href="/colors.css">', 'm'),
             usage: toUnicodeVariant('color: var(--color-100);', 'm')
           };
         case ExportFormat.SCSS:
@@ -89,10 +90,7 @@ export class ExportSuccessComponent {
             config: toUnicodeVariant('tailwind.config.js', 'm'),
             docs: 'https://tailwindcss.com/docs/customizing-colors#using-the-default-colors',
             file: toUnicodeVariant('tailwind.colors.js', 'm'),
-            import: toUnicodeVariant(
-              "colors: require('./tailwind.colors'),",
-              'm'
-            )
+            import: toUnicodeVariant("colors: require('./tailwind.colors'),", 'm')
           };
         default:
           return { docs: '' };

@@ -3,18 +3,10 @@ import { MatomoTracker } from 'ngx-matomo-client';
 import { ExportFormat } from '../constants/export-format';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { LocalStorageKey } from '../enums/local-storage-keys';
-import {
-  TrackingEventAction,
-  TrackingEventCategory,
-  TrackingEventName
-} from '../enums/tracking-event';
+import { TrackingEventAction, TrackingEventCategory, TrackingEventName } from '../enums/tracking-event';
 import { MatomoTrackerMock } from '../utils/matomo-tracker-mock';
 import { sleep } from '../utils/sleep';
-import {
-  AnalyticsService,
-  AnalyticsStatus,
-  CustomDimension
-} from './analytics.service';
+import { AnalyticsService, AnalyticsStatus, CustomDimension } from './analytics.service';
 import { LanguageService, LanguageServiceMock } from './language.service';
 import { OfflineService, OfflineServiceMock } from './offline.service';
 import { ThemeService, ThemeServiceMock } from './theme.service';
@@ -57,12 +49,7 @@ describe('AnalyticsService', () => {
   it('should track events', () => {
     spyOn(tracker, 'trackEvent');
 
-    service.trackEvent(
-      TrackingEventCategory.TEST,
-      TrackingEventAction.TEST,
-      TrackingEventName.TEST,
-      1
-    );
+    service.trackEvent(TrackingEventCategory.TEST, TrackingEventAction.TEST, TrackingEventName.TEST, 1);
 
     expect(tracker.trackEvent).toHaveBeenCalledWith(
       TrackingEventCategory.TEST,
@@ -129,10 +116,7 @@ describe('AnalyticsService', () => {
 
   it('should setup tracker on creation', async () => {
     expect(tracker.enableHeartBeatTimer).toHaveBeenCalled();
-    expect(tracker.setCustomDimension).toHaveBeenCalledWith(
-      CustomDimension.VERSION,
-      versionService.appVersion
-    );
+    expect(tracker.setCustomDimension).toHaveBeenCalledWith(CustomDimension.VERSION, versionService.appVersion);
 
     await sleep(5);
     expect(tracker.setCustomDimension).toHaveBeenCalledTimes(3);

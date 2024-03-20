@@ -1,6 +1,6 @@
 import { Component, computed, inject } from '@angular/core';
-import { ThemeService } from '../shared/data-access/theme.service';
 import { MobileService } from '../shared/data-access/mobile.service';
+import { ThemeService } from '../shared/data-access/theme.service';
 
 @Component({
   selector: 'rp-loading',

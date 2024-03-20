@@ -17,11 +17,7 @@ export class ExportService {
   private readonly _toastService = inject(ToastService);
   private readonly _analyticsService = inject(AnalyticsService);
 
-  public async exportPalette(
-    palette: Palette,
-    format: ExportFormat,
-    option: ExportOption
-  ): Promise<boolean> {
+  public async exportPalette(palette: Palette, format: ExportFormat, option: ExportOption): Promise<boolean> {
     const formatter = this.getFormatterForFormat(format);
     if (!formatter) {
       this._toastService.showToast({
@@ -41,11 +37,7 @@ export class ExportService {
     return success;
   }
 
-  private async _exportPalette(
-    palette: Palette,
-    formatter: Formatter,
-    option: ExportOption
-  ): Promise<boolean> {
+  private async _exportPalette(palette: Palette, formatter: Formatter, option: ExportOption): Promise<boolean> {
     if (option === 'copy') {
       return await this.copy(palette, formatter);
     } else if (option === 'file') {
@@ -71,10 +63,7 @@ export class ExportService {
     }
   }
 
-  public async download(
-    palette: Palette,
-    formatter: Formatter
-  ): Promise<boolean> {
+  public async download(palette: Palette, formatter: Formatter): Promise<boolean> {
     const content = formatter.formatFile(palette);
     const blob = new Blob([content], { type: formatter.mimeType });
 
@@ -103,25 +92,15 @@ export class ExportService {
 }
 
 export class ExportServiceMock {
-  public async exportPalette(
-    _palette: Palette,
-    _format: ExportFormat,
-    _option: ExportOption
-  ): Promise<boolean> {
+  public async exportPalette(_palette: Palette, _format: ExportFormat, _option: ExportOption): Promise<boolean> {
     return true;
   }
 
-  public async copy(
-    _palette: Palette,
-    _formatter: Formatter
-  ): Promise<boolean> {
+  public async copy(_palette: Palette, _formatter: Formatter): Promise<boolean> {
     return true;
   }
 
-  public async download(
-    _palette: Palette,
-    _formatter: Formatter
-  ): Promise<boolean> {
+  public async download(_palette: Palette, _formatter: Formatter): Promise<boolean> {
     return true;
   }
 }

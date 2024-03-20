@@ -7,17 +7,13 @@ describe('Color', () => {
   });
 
   it('should parse color from string', () => {
-    const color = Color.parse(
-      `{"name": "Test", "shades":[${Shade.random().toString()}]}`
-    );
+    const color = Color.parse(`{"name": "Test", "shades":[${Shade.random().toString()}]}`);
 
     expect(color).toBeInstanceOf(Color);
     expect(color.name).toBe('Test');
     expect(color.shades.length).toBe(1);
 
-    expect(() =>
-      Color.parse(`{"shades":${Shade.random().toString()}}`)
-    ).toThrowError();
+    expect(() => Color.parse(`{"shades":${Shade.random().toString()}}`)).toThrowError();
   });
 
   it('should parse color from object', () => {

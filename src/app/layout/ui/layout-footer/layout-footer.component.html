@@ -3,7 +3,11 @@
 >
   <div class="mx-auto w-full max-w-5xl">
     <div class="flex items-start justify-center gap-2">
-      <img [src]="logoAsset()" alt="Rainbow Palette" width="200" />
+      <img
+        [src]="logoAsset()"
+        alt="Rainbow Palette"
+        width="200"
+      />
       <span
         class="whitespace-nowrap rounded-full border border-neutral-400 bg-neutral-300 px-1.5 py-0.5 text-xs font-semibold text-neutral-800 shadow-sm dark:border-neutral-600 dark:bg-neutral-700 dark:text-neutral-200 dark:shadow-none"
       >
@@ -11,15 +15,11 @@
       </span>
     </div>
 
-    <p
-      class="mx-auto mt-6 max-w-md text-center leading-relaxed text-neutral-500 dark:text-neutral-400"
-    >
-      {{ "layout.footer.description" | translate }}
+    <p class="mx-auto mt-6 max-w-md text-center leading-relaxed text-neutral-500 dark:text-neutral-400">
+      {{ 'layout.footer.description' | translate }}
     </p>
 
-    <ul
-      class="mt-12 flex flex-wrap justify-center gap-6 text-neutral-700 dark:text-neutral-50 md:gap-8 lg:gap-12"
-    >
+    <ul class="mt-12 flex flex-wrap justify-center gap-6 text-neutral-700 dark:text-neutral-50 md:gap-8 lg:gap-12">
       <li>
         <a
           class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
@@ -27,7 +27,7 @@
           rel="noreferrer"
           target="_blank"
         >
-          {{ "layout.footer.github" | translate }}
+          {{ 'layout.footer.github' | translate }}
         </a>
       </li>
 
@@ -37,7 +37,7 @@
           href="https://pawcode.de/?mtm_campaign=OpenSource&mtm_source=RainbowPalette"
           target="_blank"
         >
-          {{ "layout.footer.website" | translate }}
+          {{ 'layout.footer.website' | translate }}
         </a>
       </li>
 
@@ -46,7 +46,7 @@
           class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
           routerLink="/imprint"
         >
-          {{ "layout.footer.imprint" | translate }}
+          {{ 'layout.footer.imprint' | translate }}
         </a>
       </li>
 
@@ -56,14 +56,12 @@
           fragment="analytics"
           routerLink="/imprint"
         >
-          {{ "layout.footer.analytics" | translate }}
+          {{ 'layout.footer.analytics' | translate }}
         </a>
       </li>
     </ul>
 
-    <ul
-      class="mt-12 flex justify-center gap-6 text-neutral-700 dark:text-neutral-50 md:gap-8"
-    >
+    <ul class="mt-12 flex justify-center gap-6 text-neutral-700 dark:text-neutral-50 md:gap-8">
       <li>
         <a
           class="transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
@@ -72,7 +70,10 @@
           target="_blank"
         >
           <span class="sr-only">GitHub</span>
-          <ng-icon [svg]="simpleGithub" size="1.5rem" />
+          <ng-icon
+            [svg]="simpleGithub"
+            size="1.5rem"
+          />
         </a>
       </li>
 
@@ -84,7 +85,10 @@
           target="_blank"
         >
           <span class="sr-only">Instagram</span>
-          <ng-icon [svg]="simpleInstagram" size="1.5rem" />
+          <ng-icon
+            [svg]="simpleInstagram"
+            size="1.5rem"
+          />
         </a>
       </li>
 
@@ -96,7 +100,10 @@
           target="_blank"
         >
           <span class="sr-only">Discord</span>
-          <ng-icon [svg]="simpleDiscord" size="1.5rem" />
+          <ng-icon
+            [svg]="simpleDiscord"
+            size="1.5rem"
+          />
         </a>
       </li>
 
@@ -108,7 +115,10 @@
           target="_blank"
         >
           <span class="sr-only">X</span>
-          <ng-icon [svg]="simpleTwitter" size="1.5rem" />
+          <ng-icon
+            [svg]="simpleTwitter"
+            size="1.5rem"
+          />
         </a>
       </li>
 
@@ -120,7 +130,10 @@
           target="_blank"
         >
           <span class="sr-only">YouTube</span>
-          <ng-icon [svg]="simpleYoutube" size="1.5rem" />
+          <ng-icon
+            [svg]="simpleYoutube"
+            size="1.5rem"
+          />
         </a>
       </li>
     </ul>

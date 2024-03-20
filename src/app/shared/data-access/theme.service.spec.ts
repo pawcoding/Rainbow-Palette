@@ -16,9 +16,7 @@ describe('ThemeService', () => {
   });
 
   it('should set default theme by user preference', () => {
-    const prefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     expect(service.theme()).toBe(prefersDark ? 'dark' : 'light');
   });
 

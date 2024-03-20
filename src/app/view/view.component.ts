@@ -16,10 +16,7 @@ import { ColorService } from '../shared/data-access/color.service';
 import { DialogService } from '../shared/data-access/dialog.service';
 import { PaletteService } from '../shared/data-access/palette.service';
 import { ToastService } from '../shared/data-access/toast.service';
-import {
-  TrackingEventAction,
-  TrackingEventCategory
-} from '../shared/enums/tracking-event';
+import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
@@ -29,12 +26,7 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
 @Component({
   selector: 'rp-view',
   standalone: true,
-  imports: [
-    ViewPaletteComponent,
-    NoPaletteComponent,
-    NgIconComponent,
-    TranslateModule
-  ],
+  imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule],
   templateUrl: './view.component.html'
 })
 export default class ViewComponent {
@@ -124,10 +116,7 @@ export default class ViewComponent {
   }
 
   public async renameColor(color: Color): Promise<void> {
-    const newName = await this._dialogService.prompt(
-      this._translateService.instant('view.color.rename'),
-      color.name
-    );
+    const newName = await this._dialogService.prompt(this._translateService.instant('view.color.rename'), color.name);
 
     if (!newName || newName === color.name) {
       return;
@@ -145,10 +134,7 @@ export default class ViewComponent {
   }
 
   public async editColor(color: Color, shadeIndex?: number): Promise<void> {
-    const updatedColor = await this._colorEditorService.openColorEditor(
-      color,
-      shadeIndex
-    );
+    const updatedColor = await this._colorEditorService.openColorEditor(color, shadeIndex);
 
     if (!updatedColor) {
       return;

@@ -93,16 +93,11 @@ export class Shade {
         return new Shade(index, new Value(shade.hex), fixed);
       }
 
-      throw new Error(
-        `Could not parse shade (missing "value" property): "${shade}"`
-      );
+      throw new Error(`Could not parse shade (missing "value" property): "${shade}"`);
     }
 
     let value: Value | undefined;
-    if (
-      typeof shade.value === 'string' &&
-      shade.value.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
-    ) {
+    if (typeof shade.value === 'string' && shade.value.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
       value = new Value(shade.value);
     } else if (typeof shade.value === 'object') {
       const hsl = shade.value as HSLObject;
@@ -119,9 +114,7 @@ export class Shade {
     }
 
     if (value === undefined) {
-      throw new Error(
-        `Could not parse shade (invalid "value" property): "${shade.value}"`
-      );
+      throw new Error(`Could not parse shade (invalid "value" property): "${shade.value}"`);
     }
 
     return new Shade(index, value, fixed);

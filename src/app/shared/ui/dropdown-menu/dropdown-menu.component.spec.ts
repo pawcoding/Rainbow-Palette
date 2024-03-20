@@ -1,11 +1,15 @@
+import { Component, viewChild } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DropdownMenuComponent } from './dropdown-menu.component';
-import { Component, viewChild } from '@angular/core';
 
 @Component({
   template: `
     <rp-dropdown-menu>
-      <ng-template #itemTemplate let-item="item">{{ item }}</ng-template>
+      <ng-template
+        #itemTemplate
+        let-item="item"
+        >{{ item }}</ng-template
+      >
     </rp-dropdown-menu>
   `
 })

@@ -1,32 +1,30 @@
 <section>
   <h1 class="text-lg font-bold">
-    {{ "export.format.title" | translate }}
+    {{ 'export.format.title' | translate }}
   </h1>
 
   <p class="text-sm">
-    {{ "export.format.description" | translate }}
+    {{ 'export.format.description' | translate }}
   </p>
 
   <div
     class="grid items-center justify-center gap-1 pt-4 font-semibold text-neutral-600 dark:text-neutral-300 xs:grid-cols-3 xs:gap-4"
   >
     @for (format of formats; track format.format) {
-    <button
-      (click)="choseFormat(format.format)"
-      class="flex w-full items-center justify-start gap-4 rounded-md p-2 transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-neutral-800 xs:flex-col xs:justify-center xs:gap-2"
-    >
-      <span
-        class="flex items-center justify-center rounded-full bg-neutral-100 p-1 dark:bg-neutral-200 xs:p-2"
+      <button
+        (click)="choseFormat(format.format)"
+        class="flex w-full items-center justify-start gap-4 rounded-md p-2 transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-neutral-800 xs:flex-col xs:justify-center xs:gap-2"
       >
-        <ng-icon
-          [color]="format.color"
-          [svg]="format.icon"
-          class="scale-75 xs:scale-100"
-          size="2rem"
-        />
-      </span>
-      <span>{{ format.label | translate }}</span>
-    </button>
+        <span class="flex items-center justify-center rounded-full bg-neutral-100 p-1 dark:bg-neutral-200 xs:p-2">
+          <ng-icon
+            [color]="format.color"
+            [svg]="format.icon"
+            class="scale-75 xs:scale-100"
+            size="2rem"
+          />
+        </span>
+        <span>{{ format.label | translate }}</span>
+      </button>
     }
   </div>
 </section>

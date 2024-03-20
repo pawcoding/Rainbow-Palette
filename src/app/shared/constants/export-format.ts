@@ -1,17 +1,12 @@
 import { heroPlusCircle } from '@ng-icons/heroicons/outline';
-import {
-  simpleCss3,
-  simpleLess,
-  simpleSass,
-  simpleTailwindcss
-} from '@ng-icons/simple-icons';
+import { simpleCss3, simpleLess, simpleSass, simpleTailwindcss } from '@ng-icons/simple-icons';
 
 export enum ExportFormat {
   CSS = 'css',
   SCSS = 'scss',
   LESS = 'less',
   TAILWIND = 'tailwind',
-  OTHER = 'other',
+  OTHER = 'other'
 }
 
 export const EXPORT_FORMATS: Array<{

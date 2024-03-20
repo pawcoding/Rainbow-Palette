@@ -2,10 +2,7 @@ import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  VersionService,
-  VersionServiceMock
-} from '../../../shared/data-access/version.service';
+import { VersionService, VersionServiceMock } from '../../../shared/data-access/version.service';
 import { LayoutFooterComponent } from './layout-footer.component';
 
 describe('LayoutFooterComponent', () => {

@@ -1,22 +1,20 @@
 <section>
   <h1 class="text-lg font-bold">
-    {{ "export.success.title" | translate }}
+    {{ 'export.success.title' | translate }}
   </h1>
 
   <p
-    [innerHTML]="description() | translate : descriptionParams()"
+    [innerHTML]="description() | translate: descriptionParams()"
     class="text-sm"
   ></p>
 
-  <div
-    class="flex items-center justify-end gap-1 pt-4 font-semibold text-neutral-600 dark:text-neutral-300 xs:gap-4"
-  >
+  <div class="flex items-center justify-end gap-1 pt-4 font-semibold text-neutral-600 dark:text-neutral-300 xs:gap-4">
     <a
       [href]="descriptionParams().docs"
       class="rounded-md p-2 transition-colors duration-200 hover:bg-neutral-200 dark:hover:bg-neutral-800"
       target="_blank"
     >
-      {{ "export.success.documentation" | translate }}
+      {{ 'export.success.documentation' | translate }}
     </a>
   </div>
 </section>

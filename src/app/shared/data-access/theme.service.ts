@@ -15,10 +15,7 @@ export class ThemeService {
   public constructor() {
     effect(async () => {
       localStorage.setItem(LocalStorageKey.THEME, this._theme());
-      document.documentElement.classList.toggle(
-        'dark',
-        this._theme() === 'dark'
-      );
+      document.documentElement.classList.toggle('dark', this._theme() === 'dark');
     });
 
     const storedTheme = localStorage.getItem(LocalStorageKey.THEME);
@@ -29,9 +26,7 @@ export class ThemeService {
       return;
     }
 
-    const prefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)'
-    ).matches;
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (prefersDark) {
       this._theme.set('dark');
     }

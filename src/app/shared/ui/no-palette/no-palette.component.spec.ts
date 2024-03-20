@@ -1,8 +1,8 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { NoPaletteComponent } from './no-palette.component';
-import { ActivatedRoute } from '@angular/router';
 
 describe('NoPaletteComponent', () => {
   let component: NoPaletteComponent;

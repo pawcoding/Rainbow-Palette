@@ -1,9 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  ToastService,
-  ToastServiceMock
-} from '../../data-access/toast.service';
+import { ToastService, ToastServiceMock } from '../../data-access/toast.service';
 import { ToastComponent } from './toast.component';
 
 describe('ToastComponent', () => {

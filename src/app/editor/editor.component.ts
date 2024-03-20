@@ -1,14 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { DecimalPipe } from '@angular/common';
-import {
-  Component,
-  ElementRef,
-  computed,
-  effect,
-  inject,
-  signal,
-  viewChild
-} from '@angular/core';
+import { Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ColorService } from '../shared/data-access/color.service';
 import { Color, Shade } from '../shared/model';
@@ -20,18 +12,13 @@ export enum UpdateType {
   HEX = 'hex',
   HUE = 'hue',
   SATURATION = 'saturation',
-  LIGHTNESS = 'lightness',
+  LIGHTNESS = 'lightness'
 }
 
 @Component({
   selector: 'rp-editor',
   standalone: true,
-  imports: [
-    ColorInputComponent,
-    TranslateModule,
-    DecimalPipe,
-    EditorRangeComponent
-  ],
+  imports: [ColorInputComponent, TranslateModule, DecimalPipe, EditorRangeComponent],
   templateUrl: './editor.component.html',
   styleUrl: './editor.component.css'
 })
@@ -39,9 +26,7 @@ export class EditorComponent {
   protected readonly UpdateType = UpdateType;
   protected readonly textColor = textColor;
 
-  private readonly _data = inject<{ color: Color; shadeIndex?: number }>(
-    DIALOG_DATA
-  );
+  private readonly _data = inject<{ color: Color; shadeIndex?: number }>(DIALOG_DATA);
   private readonly _dialogRef = inject(DialogRef);
   private readonly _colorService = inject(ColorService);
   private readonly _translateService = inject(TranslateService);
@@ -50,9 +35,7 @@ export class EditorComponent {
   protected readonly shadeIndex = signal(this._data.shadeIndex ?? 0);
 
   protected readonly shade = computed<Shade>(() => {
-    const selectedShade = this.color().shades.find(
-      (shade) => shade.index === this.shadeIndex()
-    );
+    const selectedShade = this.color().shades.find((shade) => shade.index === this.shadeIndex());
     if (selectedShade) {
       return selectedShade;
     }
@@ -65,27 +48,14 @@ export class EditorComponent {
     return this.color().shades[0];
   });
 
-  private readonly _editor =
-    viewChild.required<ElementRef<HTMLElement>>('editor');
+  private readonly _editor = viewChild.required<ElementRef<HTMLElement>>('editor');
 
   public constructor() {
     effect(() => {
-      this._editor().nativeElement.style.setProperty(
-        '--editor-hex',
-        this.shade().hex
-      );
-      this._editor().nativeElement.style.setProperty(
-        '--editor-hue',
-        `${this.shade().hsl.H}`
-      );
-      this._editor().nativeElement.style.setProperty(
-        '--editor-saturation',
-        `${this.shade().hsl.S}%`
-      );
-      this._editor().nativeElement.style.setProperty(
-        '--editor-lightness',
-        `${this.shade().hsl.L}%`
-      );
+      this._editor().nativeElement.style.setProperty('--editor-hex', this.shade().hex);
+      this._editor().nativeElement.style.setProperty('--editor-hue', `${this.shade().hsl.H}`);
+      this._editor().nativeElement.style.setProperty('--editor-saturation', `${this.shade().hsl.S}%`);
+      this._editor().nativeElement.style.setProperty('--editor-lightness', `${this.shade().hsl.L}%`);
     });
   }
 
@@ -103,9 +73,7 @@ export class EditorComponent {
       return;
     }
 
-    const atLeastOneFixedLeft = this.color().shades.some(
-      (s) => s.fixed && s !== shade
-    );
+    const atLeastOneFixedLeft = this.color().shades.some((s) => s.fixed && s !== shade);
 
     if (!atLeastOneFixedLeft) {
       return;

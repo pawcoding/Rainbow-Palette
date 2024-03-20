@@ -6,19 +6,23 @@
     class="mx-auto max-w-md space-y-4 rounded-xl border border-neutral-200 bg-neutral-100 p-6 text-center shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none lg:p-8"
   >
     <h2 class="text-2xl font-bold md:text-3xl">
-      {{ "no-palette.title" | translate }}
+      {{ 'no-palette.title' | translate }}
     </h2>
 
     <p class="text-neutral-700 dark:text-neutral-300">
-      {{ "no-palette.description." + parent() | translate }}
+      {{ 'no-palette.description.' + parent() | translate }}
     </p>
 
     <a
       [routerLink]="'/'"
       class="inline-flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 font-semibold text-neutral-50 dark:bg-blue-600"
     >
-      <ng-icon [svg]="heroArrowUturnLeft" size="1.1rem" strokeWidth="0.15rem" />
-      {{ "no-palette.link" | translate }}
+      <ng-icon
+        [svg]="heroArrowUturnLeft"
+        size="1.1rem"
+        strokeWidth="0.15rem"
+      />
+      {{ 'no-palette.link' | translate }}
     </a>
   </article>
 </section>

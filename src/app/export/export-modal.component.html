@@ -21,7 +21,10 @@
       (click)="close()"
       class="ml-auto flex cursor-pointer items-center justify-center rounded-md p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800"
     >
-      <ng-icon [svg]="heroXMarkMini" class="size-4" />
+      <ng-icon
+        [svg]="heroXMarkMini"
+        class="size-4"
+      />
 
       <span class="sr-only">
         {{ 'common.back' | translate }}
@@ -35,7 +38,7 @@
     }
 
     @case (ExportModalState.DOWNLOAD) {
-      @if(format(); as format) {
+      @if (format(); as format) {
         @if (format === ExportFormat.OTHER) {
           <rp-request-format />
         } @else {
@@ -48,8 +51,8 @@
     }
 
     @case (ExportModalState.SUCCESS) {
-      @if(format(); as format) {
-        @if(downloadOption(); as downloadOption) {
+      @if (format(); as format) {
+        @if (downloadOption(); as downloadOption) {
           <rp-export-success
             [exportFormat]="format"
             [exportOption]="downloadOption"

@@ -1,7 +1,4 @@
-import {
-  HttpClientTestingModule,
-  HttpTestingController
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Value } from '../model';
 import { Shade } from '../model/shade.model';
@@ -41,9 +38,7 @@ describe('ColorNameService', () => {
   });
 
   it('should return color name', async () => {
-    const colorNamePromise = service.getColorName(
-      new Shade(-1, new Value('#FFFFFF'))
-    );
+    const colorNamePromise = service.getColorName(new Shade(-1, new Value('#FFFFFF')));
 
     http.expectOne('/assets/color-dictionary.csv').flush(testColorDictionary);
 
@@ -55,13 +50,9 @@ describe('ColorNameService', () => {
   it('should handle offline', async () => {
     spyOn(toastService, 'showToast');
 
-    const colorNamePromise = service.getColorName(
-      new Shade(-1, new Value('#FFFFFF'))
-    );
+    const colorNamePromise = service.getColorName(new Shade(-1, new Value('#FFFFFF')));
 
-    http
-      .expectOne('/assets/color-dictionary.csv')
-      .error(new ProgressEvent('offline'));
+    http.expectOne('/assets/color-dictionary.csv').error(new ProgressEvent('offline'));
 
     const colorName = await colorNamePromise;
 

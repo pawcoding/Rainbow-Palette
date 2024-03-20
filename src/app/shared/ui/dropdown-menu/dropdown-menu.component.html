@@ -15,13 +15,11 @@
     role="menu"
   >
     @if (title()) {
-    <section>
-      <h2
-        class="block p-2 text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400"
-      >
-        {{ title()! | translate }}
-      </h2>
-    </section>
+      <section>
+        <h2 class="block p-2 text-xs font-semibold uppercase text-neutral-500 dark:text-neutral-400">
+          {{ title()! | translate }}
+        </h2>
+      </section>
     }
 
     <section
@@ -32,28 +30,31 @@
       class="overflow-auto pt-2"
     >
       @for (item of items(); track $index) {
-      <button
-        [cdkMenuItemChecked]="item === selectedItem()"
-        [class]="
-          highlightSelection()
-            ? 'aria-checked:font-bold aria-checked:text-blue-600 dark:aria-checked:text-blue-400'
-            : ''
-        "
-        (cdkMenuItemTriggered)="select(item)"
-        cdkMenuItemRadio
-        class="group block w-full rounded-lg px-4 py-2 text-left text-sm text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200"
-        role="menuitem"
-      >
-        <ng-container
-          [ngTemplateOutlet]="itemTemplate() ?? stringTemplate"
-          [ngTemplateOutletContext]="{ item: item }"
-        />
-      </button>
+        <button
+          [cdkMenuItemChecked]="item === selectedItem()"
+          [class]="
+            highlightSelection()
+              ? 'aria-checked:font-bold aria-checked:text-blue-600 dark:aria-checked:text-blue-400'
+              : ''
+          "
+          (cdkMenuItemTriggered)="select(item)"
+          cdkMenuItemRadio
+          class="group block w-full rounded-lg px-4 py-2 text-left text-sm text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-neutral-400 dark:hover:bg-neutral-700 dark:hover:text-neutral-200"
+          role="menuitem"
+        >
+          <ng-container
+            [ngTemplateOutlet]="itemTemplate() ?? stringTemplate"
+            [ngTemplateOutletContext]="{ item: item }"
+          />
+        </button>
       }
     </section>
   </div>
 </ng-template>
 
-<ng-template #stringTemplate let-item="item">
+<ng-template
+  #stringTemplate
+  let-item="item"
+>
   {{ item | translate }}
 </ng-template>

@@ -4,10 +4,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { filter } from 'rxjs';
-import {
-  AnalyticsService,
-  AnalyticsStatus
-} from '../shared/data-access/analytics.service';
+import { AnalyticsService, AnalyticsStatus } from '../shared/data-access/analytics.service';
 import { LanguageService } from '../shared/data-access/language.service';
 import { AccordionComponent } from '../shared/ui/accordion/accordion.component';
 import { sleep } from '../shared/utils/sleep';
@@ -36,15 +33,11 @@ export default class ImprintComponent {
 
         // Calculate new scroll position to account for header
         const position = this._viewportScroller.getScrollPosition();
-        const headerHeight =
-          document.documentElement.style.getPropertyValue('--header-height');
+        const headerHeight = document.documentElement.style.getPropertyValue('--header-height');
         const offset = headerHeight ? parseInt(headerHeight) : 0;
 
         // Scroll to new position
-        this._viewportScroller.scrollToPosition([
-          position[0],
-          position[1] - offset - 32
-        ]);
+        this._viewportScroller.scrollToPosition([position[0], position[1] - offset - 32]);
       }
     });
 

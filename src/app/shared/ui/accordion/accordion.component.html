@@ -5,7 +5,10 @@
   class="group cursor-pointer rounded-lg border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none [&_summary::-webkit-details-marker]:hidden"
   tabindex="0"
 >
-  <summary #summaryElement class="flex items-center justify-between gap-1.5">
+  <summary
+    #summaryElement
+    class="flex items-center justify-between gap-1.5"
+  >
     <h3 class="text-xl font-semibold">
       {{ summary() | translate }}
     </h3>
@@ -22,11 +25,19 @@
     </span>
   </summary>
 
-  <div #contentElement class="mt-6 text-neutral-700 dark:text-neutral-300">
-    @if (!hidden() || isOpen()) { @if (details()) {
-    <p [innerHTML]="details()" class="text-justify leading-relaxed"></p>
-    } @else {
-    <ng-content />
-    } }
+  <div
+    #contentElement
+    class="mt-6 text-neutral-700 dark:text-neutral-300"
+  >
+    @if (!hidden() || isOpen()) {
+      @if (details()) {
+        <p
+          [innerHTML]="details()"
+          class="text-justify leading-relaxed"
+        ></p>
+      } @else {
+        <ng-content />
+      }
+    }
   </div>
 </details>

@@ -41,5 +41,5 @@ export enum LocalStorageKey {
   /**
    * Store the user's ID used for analytics.
    */
-  USER_ID = 'RP_USER_ID',
+  USER_ID = 'RP_USER_ID'
 }

@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
-import {
-  heroAdjustmentsHorizontal,
-  heroArchiveBoxArrowDown,
-  heroSwatch
-} from '@ng-icons/heroicons/outline';
+import { heroAdjustmentsHorizontal, heroArchiveBoxArrowDown, heroSwatch } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({

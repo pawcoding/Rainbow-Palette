@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
-import {
-  heroArrowUturnLeft,
-  heroWrenchScrewdriver
-} from '@ng-icons/heroicons/outline';
+import { heroArrowUturnLeft, heroWrenchScrewdriver } from '@ng-icons/heroicons/outline';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -19,9 +16,7 @@ export default class PreviewComponent {
   protected readonly heroWrenchScrewdriver = heroWrenchScrewdriver;
 
   protected readonly links = {
-    github:
-      '<a href="https://github.com/pawcoding/Rainbow-Palette" rel="noreferrer" target="_blank">GitHub</a>',
-    discord:
-      '<a href="https://discord.gg/GzgTh4hxrx" rel="noreferrer" target="_blank">Discord</a>'
+    github: '<a href="https://github.com/pawcoding/Rainbow-Palette" rel="noreferrer" target="_blank">GitHub</a>',
+    discord: '<a href="https://discord.gg/GzgTh4hxrx" rel="noreferrer" target="_blank">Discord</a>'
   };
 }

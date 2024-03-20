@@ -1,41 +1,34 @@
-<section
-  class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
->
+<section class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
   <div class="mx-auto max-w-2xl text-center">
     <h2 class="text-3xl font-bold sm:text-4xl">
-      {{ "home.support.title" | translate }}
+      {{ 'home.support.title' | translate }}
     </h2>
   </div>
 
   <div class="mx-auto max-w-2xl space-y-4 p-4">
     <rp-accordion
-      [details]="
-        'home.support.development.description'
-          | translate : { github: githubLink, discord: discordLink }
-      "
+      [details]="'home.support.development.description' | translate: { github: githubLink, discord: discordLink }"
       summary="home.support.development.title"
     />
 
     <rp-accordion summary="home.support.roadmap.title">
       <p class="text-justify leading-relaxed">
-        {{ "home.support.roadmap.description" | translate }}
+        {{ 'home.support.roadmap.description' | translate }}
       </p>
 
       <div class="mt-2 leading-relaxed">
         <ul class="list-outside list-disc pl-5">
           @for (issue of roadmapFeatures; track issue) {
-          <li>
-            {{ "home.support.roadmap.issue." + issue | translate }}
-            (<a
-              [href]="
-                'https://github.com/pawcoding/Rainbow-Palette/issues/' + issue
-              "
-              class="underline transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
-              rel="noreferrer"
-              target="_blank"
-              >#{{ issue }}</a
-            >)
-          </li>
+            <li>
+              {{ 'home.support.roadmap.issue.' + issue | translate }}
+              (<a
+                [href]="'https://github.com/pawcoding/Rainbow-Palette/issues/' + issue"
+                class="underline transition hover:text-neutral-700/75 dark:hover:text-neutral-50/75"
+                rel="noreferrer"
+                target="_blank"
+                >#{{ issue }}</a
+              >)
+            </li>
           }
         </ul>
       </div>

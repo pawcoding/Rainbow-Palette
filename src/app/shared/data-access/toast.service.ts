@@ -1,9 +1,4 @@
-import {
-  GlobalPositionStrategy,
-  Overlay,
-  OverlayRef,
-  PositionStrategy
-} from '@angular/cdk/overlay';
+import { GlobalPositionStrategy, Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Signal, effect, inject, signal } from '@angular/core';
 import { Toast, ToastTimeouts } from '../interfaces/toast.interface';
@@ -48,9 +43,12 @@ export class ToastService {
       }
 
       // Set a new timeout to hide the toast.
-      this._hideToast = setTimeout(() => {
-        this._toast.set(undefined);
-      }, ToastTimeouts[this._toast()!.type ?? 'default']);
+      this._hideToast = setTimeout(
+        () => {
+          this._toast.set(undefined);
+        },
+        ToastTimeouts[this._toast()!.type ?? 'default']
+      );
     });
 
     // Attach the toast component to the overlay.
@@ -67,13 +65,9 @@ export class ToastService {
     // Update the position strategy based on the device type.
     effect(() => {
       if (this._mobileService.isMobile()) {
-        this._positionStrategy = new GlobalPositionStrategy()
-          .top('0.5rem')
-          .centerHorizontally();
+        this._positionStrategy = new GlobalPositionStrategy().top('0.5rem').centerHorizontally();
       } else {
-        this._positionStrategy = new GlobalPositionStrategy()
-          .bottom('0.5rem')
-          .end('0.5rem');
+        this._positionStrategy = new GlobalPositionStrategy().bottom('0.5rem').end('0.5rem');
       }
 
       this._overlayRef?.updatePositionStrategy(this._positionStrategy);

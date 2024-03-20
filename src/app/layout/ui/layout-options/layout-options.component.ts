@@ -25,17 +25,11 @@ export class LayoutOptionsComponent {
   public readonly theme = model.required<Theme>();
 
   protected readonly currentLanguage = computed<LanguageOption>(() => {
-    return (
-      this.languageOptions.find((option) => option.value === this.language()) ??
-      this.languageOptions[0]
-    );
+    return this.languageOptions.find((option) => option.value === this.language()) ?? this.languageOptions[0];
   });
 
   protected readonly currentTheme = computed<ThemeOption>(() => {
-    return (
-      this.themeOptions.find((option) => option.value === this.theme()) ??
-      this.themeOptions[0]
-    );
+    return this.themeOptions.find((option) => option.value === this.theme()) ?? this.themeOptions[0];
   });
 
   protected get languageOptions(): Array<LanguageOption> {

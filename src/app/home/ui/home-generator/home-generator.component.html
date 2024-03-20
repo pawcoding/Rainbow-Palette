@@ -1,13 +1,11 @@
-<section
-  class="flex min-h-[60svh] flex-col items-center justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
->
+<section class="flex min-h-[60svh] flex-col items-center justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
   <div class="mx-auto max-w-lg text-center">
     <h2 class="text-2xl font-bold md:text-3xl">
-      {{ "home.generator.title" | translate }}
+      {{ 'home.generator.title' | translate }}
     </h2>
 
     <p class="mt-4 text-neutral-700 dark:text-neutral-400">
-      {{ "home.generator.description" | translate }}
+      {{ 'home.generator.description' | translate }}
     </p>
   </div>
 
@@ -20,11 +18,7 @@
     />
 
     <span
-      [class]="
-        isValid()
-          ? 'bg-blue-500 dark:bg-blue-600'
-          : 'bg-neutral-400 dark:bg-neutral-700'
-      "
+      [class]="isValid() ? 'bg-blue-500 dark:bg-blue-600' : 'bg-neutral-400 dark:bg-neutral-700'"
       class="mt-2 flex overflow-hidden rounded-md font-semibold text-neutral-50"
     >
       <button
@@ -33,7 +27,7 @@
         (click)="generatePalette()"
         class="grow cursor-pointer px-4 py-2 disabled:cursor-not-allowed"
       >
-        {{ "home.generator.generate" | translate }}
+        {{ 'home.generator.generate' | translate }}
       </button>
 
       <rp-dropdown-menu
@@ -49,13 +43,19 @@
           [title]="'home.generator.scheme' | translate"
           class="flex items-center justify-center p-2"
         >
-          <ng-icon [svg]="heroChevronDownMini" size="1.75rem" />
+          <ng-icon
+            [svg]="heroChevronDownMini"
+            size="1.75rem"
+          />
           <span class="sr-only">
-            {{ "home.generator.scheme" | translate }}
+            {{ 'home.generator.scheme' | translate }}
           </span>
         </button>
 
-        <ng-template #itemTemplate let-scheme="item">
+        <ng-template
+          #itemTemplate
+          let-scheme="item"
+        >
           {{ scheme.label | translate }}
         </ng-template>
       </rp-dropdown-menu>

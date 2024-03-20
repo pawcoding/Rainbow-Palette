@@ -30,7 +30,7 @@ export enum TrackingEventCategory {
    * Test category
    * This is only used for testing purposes.
    */
-  TEST = 'TEST_CATEGORY',
+  TEST = 'TEST_CATEGORY'
 }
 
 /**
@@ -81,7 +81,7 @@ export enum TrackingEventAction {
    * Test action
    * This is only used for testing purposes.
    */
-  TEST = 'TEST_ACTION',
+  TEST = 'TEST_ACTION'
 }
 
 /**
@@ -150,5 +150,5 @@ export enum TrackingEventName {
    * Test name
    * This is only used for testing purposes.
    */
-  TEST = 'TEST_NAME',
+  TEST = 'TEST_NAME'
 }

@@ -1,12 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  computed,
-  effect,
-  input,
-  model,
-  viewChild
-} from '@angular/core';
+import { Component, ElementRef, computed, effect, input, model, viewChild } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroEyeDropperMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
@@ -24,8 +16,7 @@ export class ColorInputComponent {
   public readonly hex = model.required<string>();
   public readonly isValid = model(true);
 
-  private readonly _hexInput =
-    viewChild.required<ElementRef<HTMLInputElement>>('hexInput');
+  private readonly _hexInput = viewChild.required<ElementRef<HTMLInputElement>>('hexInput');
 
   protected readonly heroEyeDropperMini = heroEyeDropperMini;
 

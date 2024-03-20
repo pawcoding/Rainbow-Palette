@@ -21,7 +21,10 @@
       </span>
     </button>
 
-    <ng-template #itemTemplate let-language="item">
+    <ng-template
+      #itemTemplate
+      let-language="item"
+    >
       <div class="flex items-center gap-2">
         <img
           [alt]="language.label"
@@ -48,19 +51,28 @@
       [title]="'layout.options.theme' | translate"
       class="flex size-9 items-center justify-center overflow-hidden rounded-full bg-neutral-200 shadow-sm dark:bg-neutral-700 dark:shadow-none"
     >
-      <ng-icon [size]="'1rem'" [svg]="currentTheme().icon" />
+      <ng-icon
+        [size]="'1rem'"
+        [svg]="currentTheme().icon"
+      />
 
       <span class="sr-only">
         {{ currentTheme().label | translate }}
       </span>
     </button>
 
-    <ng-template #itemTemplate let-theme="item">
+    <ng-template
+      #itemTemplate
+      let-theme="item"
+    >
       <div class="flex items-center gap-2">
         <span
           class="flex items-center justify-center rounded-full bg-neutral-300 p-1 shadow-sm dark:bg-neutral-700 dark:shadow-none dark:group-hover:bg-neutral-800"
         >
-          <ng-icon [size]="'1rem'" [svg]="theme.icon" />
+          <ng-icon
+            [size]="'1rem'"
+            [svg]="theme.icon"
+          />
         </span>
 
         <span>

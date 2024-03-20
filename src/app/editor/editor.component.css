@@ -1,4 +1,4 @@
-rp-editor-range#hue-range ::ng-deep input[type="range"] {
+rp-editor-range#hue-range ::ng-deep input[type='range'] {
   background: linear-gradient(
     90deg,
     hsl(0, var(--editor-saturation), var(--editor-lightness)) 0%,
@@ -9,7 +9,7 @@ rp-editor-range#hue-range ::ng-deep input[type="range"] {
   );
 }
 
-rp-editor-range#saturation-range ::ng-deep input[type="range"] {
+rp-editor-range#saturation-range ::ng-deep input[type='range'] {
   background: linear-gradient(
     90deg,
     hsl(var(--editor-hue), 0%, var(--editor-lightness)) 0%,
@@ -17,7 +17,7 @@ rp-editor-range#saturation-range ::ng-deep input[type="range"] {
   );
 }
 
-rp-editor-range#lightness-range ::ng-deep input[type="range"] {
+rp-editor-range#lightness-range ::ng-deep input[type='range'] {
   background: linear-gradient(
     90deg,
     hsl(var(--editor-hue), var(--editor-saturation), 100%) 0%,

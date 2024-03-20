@@ -1,19 +1,15 @@
-<section
-  class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
->
+<section class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
   <div class="mx-auto max-w-lg text-center">
     <h2 class="text-3xl font-bold sm:text-4xl">
-      {{ "home.manual.title" | translate }}
+      {{ 'home.manual.title' | translate }}
     </h2>
 
     <p class="mt-4 text-neutral-700 dark:text-neutral-400">
-      {{ "home.manual.description" | translate }}
+      {{ 'home.manual.description' | translate }}
     </p>
   </div>
 
-  <div
-    class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8"
-  >
+  <div class="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
     <article
       class="block rounded-xl border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none lg:p-8"
     >
@@ -24,11 +20,11 @@
       />
 
       <h3 class="mt-4 text-xl font-bold">
-        {{ "home.manual.generate.title" | translate }}
+        {{ 'home.manual.generate.title' | translate }}
       </h3>
 
       <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
-        {{ "home.manual.generate.description" | translate }}
+        {{ 'home.manual.generate.description' | translate }}
       </p>
     </article>
 
@@ -42,11 +38,11 @@
       />
 
       <h3 class="mt-4 text-xl font-bold">
-        {{ "home.manual.edit.title" | translate }}
+        {{ 'home.manual.edit.title' | translate }}
       </h3>
 
       <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
-        {{ "home.manual.edit.description" | translate }}
+        {{ 'home.manual.edit.description' | translate }}
       </p>
     </article>
 
@@ -60,16 +56,19 @@
       />
 
       <h3 class="mt-4 text-xl font-bold">
-        {{ "home.manual.download.title" | translate }}
+        {{ 'home.manual.download.title' | translate }}
       </h3>
 
       <p class="mt-1 text-sm text-neutral-700 dark:text-neutral-300">
-        {{ "home.manual.download.description" | translate }}
+        {{ 'home.manual.download.description' | translate }}
       </p>
     </article>
   </div>
 
   <div class="mt-12 text-center">
-    <p [innerHTML]="'home.manual.cta' | translate" class="mt-4 text-lg"></p>
+    <p
+      [innerHTML]="'home.manual.cta' | translate"
+      class="mt-4 text-lg"
+    ></p>
   </div>
 </section>

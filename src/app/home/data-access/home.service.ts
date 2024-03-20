@@ -21,9 +21,7 @@ export class HomeService {
   }
 
   public loadGenerationSettings(): void {
-    const lastGeneration = localStorage.getItem(
-      LocalStorageKey.LAST_GENERATION_SETTINGS
-    );
+    const lastGeneration = localStorage.getItem(LocalStorageKey.LAST_GENERATION_SETTINGS);
 
     if (!lastGeneration) {
       return;

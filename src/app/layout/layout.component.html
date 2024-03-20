@@ -5,11 +5,15 @@
   >
     <h1>
       <span class="sr-only">Rainbow Palette</span>
-      <img [src]="logoAsset()" alt="Rainbow Palette" width="200" />
+      <img
+        [src]="logoAsset()"
+        alt="Rainbow Palette"
+        width="200"
+      />
     </h1>
 
     @if (!isMobile()) {
-    <ng-container *ngTemplateOutlet="navigationTemplate" />
+      <ng-container *ngTemplateOutlet="navigationTemplate" />
     }
 
     <rp-layout-options
@@ -21,24 +25,32 @@
   </header>
 
   @if (initialized()) {
-  <main class="flex w-full flex-col items-center justify-between" id="main">
-    <div class="w-full">
-      <router-outlet />
-    </div>
+    <main
+      class="flex w-full flex-col items-center justify-between"
+      id="main"
+    >
+      <div class="w-full">
+        <router-outlet />
+      </div>
 
-    <footer #footer class="w-full">
-      <rp-layout-footer [logoAsset]="logoAsset()" />
-    </footer>
-  </main>
-  } @if (showAnalyticsConsent()) {
-  <rp-layout-analytics-consent (consent)="analyticsConsent($event)" />
-  } @if (isMobile()) {
-  <div
-    #bottomNavigation
-    class="fixed bottom-0 w-full bg-neutral-50 dark:bg-neutral-900"
-  >
-    <ng-container *ngTemplateOutlet="navigationTemplate" />
-  </div>
+      <footer
+        #footer
+        class="w-full"
+      >
+        <rp-layout-footer [logoAsset]="logoAsset()" />
+      </footer>
+    </main>
+  }
+  @if (showAnalyticsConsent()) {
+    <rp-layout-analytics-consent (consent)="analyticsConsent($event)" />
+  }
+  @if (isMobile()) {
+    <div
+      #bottomNavigation
+      class="fixed bottom-0 w-full bg-neutral-50 dark:bg-neutral-900"
+    >
+      <ng-container *ngTemplateOutlet="navigationTemplate" />
+    </div>
   }
 </div>
 

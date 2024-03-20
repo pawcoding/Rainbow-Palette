@@ -1,7 +1,7 @@
+import { Formatter } from '../interfaces/formatter.interface';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
-import { Formatter } from '../interfaces/formatter.interface';
 
 export class TailwindFormatter implements Formatter {
   public filename = 'tailwind.colors.js';
@@ -19,9 +19,7 @@ export class TailwindFormatter implements Formatter {
 
   public formatColor(color: Color): string {
     const name = color.name.replace(/\s+/g, '-').toLowerCase();
-    const shades = color.shades
-      .map((shade) => this.formatShade(shade))
-      .join(',\n');
+    const shades = color.shades.map((shade) => this.formatShade(shade)).join(',\n');
 
     return `'${name}': {\n${shades}\n}`;
   }

@@ -27,9 +27,5 @@ export function perceivedBrightnessFromHex(hex: string): number {
  * @param b The blue component of the color.
  */
 export function perceivedBrightnessFromRGB(rgb: RGBObject): number {
-  return Math.round(
-    Math.sqrt(
-      0.299 * rgb.R * rgb.R + 0.587 * rgb.G * rgb.G + 0.114 * rgb.B * rgb.B
-    ) / 2.55
-  );
+  return Math.round(Math.sqrt(0.299 * rgb.R * rgb.R + 0.587 * rgb.G * rgb.G + 0.114 * rgb.B * rgb.B) / 2.55);
 }

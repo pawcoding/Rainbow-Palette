@@ -58,10 +58,7 @@ describe('PaletteService', () => {
   });
 
   it('should load palette from local storage', () => {
-    localStorage.setItem(
-      LocalStorageKey.PALETTE,
-      JSON.stringify({ name: 'Test', colors: [] })
-    );
+    localStorage.setItem(LocalStorageKey.PALETTE, JSON.stringify({ name: 'Test', colors: [] }));
     service.loadPaletteFromLocalStorage();
 
     const palette = service.palette();

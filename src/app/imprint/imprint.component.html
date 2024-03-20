@@ -1,36 +1,44 @@
-<section
-  class="mx-auto flex flex-col gap-4 px-4 py-8 sm:max-w-screen-sm md:max-w-screen-md"
->
-  <h1 class="select-none text-3xl font-bold lg:text-2xl" id="imprint">
-    {{ "imprint.title" | translate }}
+<section class="mx-auto flex flex-col gap-4 px-4 py-8 sm:max-w-screen-sm md:max-w-screen-md">
+  <h1
+    class="select-none text-3xl font-bold lg:text-2xl"
+    id="imprint"
+  >
+    {{ 'imprint.title' | translate }}
   </h1>
 
-  <rp-accordion hidden summary="pawcode Development">
+  <rp-accordion
+    hidden
+    summary="pawcode Development"
+  >
     <p>
       Luis Wolf <br />
       Johann-von-Korb-Straße 30a <br />
       97753 Karlstadt <br />
-      {{ "imprint.contact.germany" | translate }}
+      {{ 'imprint.contact.germany' | translate }}
     </p>
 
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">
-      {{ "imprint.contact.title" | translate }}
+      {{ 'imprint.contact.title' | translate }}
     </h3>
 
     <p class="mb-2 text-balance text-sm">
-      {{ "imprint.contact.methods" | translate }}
+      {{ 'imprint.contact.methods' | translate }}
     </p>
 
     <p>
-      {{ "imprint.contact.telephone" | translate }}: 01523 / 4171102 <br />
-      {{ "imprint.contact.email" | translate }}:
-      <a class="underline" href="mailto:contact@pawcode.de" target="_blank">
+      {{ 'imprint.contact.telephone' | translate }}: 01523 / 4171102 <br />
+      {{ 'imprint.contact.email' | translate }}:
+      <a
+        class="underline"
+        href="mailto:contact@pawcode.de"
+        target="_blank"
+      >
         contact&#64;pawcode.de
       </a>
     </p>
 
     <p class="mt-2 text-right font-semibold">
-      {{ "imprint.contact.note" | translate }}
+      {{ 'imprint.contact.note' | translate }}
       <a
         class="underline"
         href="https://www.gesetze-im-internet.de/tmg/__5.html"
@@ -42,24 +50,27 @@
     </p>
 
     <p class="mt-2 text-balance text-right text-sm">
-      {{ "imprint.contact.hidden" | translate }}
+      {{ 'imprint.contact.hidden' | translate }}
     </p>
   </rp-accordion>
 
   <h1 class="select-none text-3xl font-bold lg:text-2xl">
-    {{ "imprint.notes" | translate }}
+    {{ 'imprint.notes' | translate }}
   </h1>
 
   <article
     class="rounded-lg border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
   >
-    <h2 class="mb-6 text-xl font-semibold" id="copyright">
-      {{ "imprint.copyright.title" | translate }}
+    <h2
+      class="mb-6 text-xl font-semibold"
+      id="copyright"
+    >
+      {{ 'imprint.copyright.title' | translate }}
     </h2>
 
     <ul class="list-outside list-disc pl-5">
       <li>
-        {{ "imprint.copyright.idea" | translate }}
+        {{ 'imprint.copyright.idea' | translate }}
         <a
           class="underline"
           href="https://pawcode.de/?mtm_campaign=OpenSource&mtm_source=RainbowPalette"
@@ -69,26 +80,42 @@
         </a>
       </li>
       <li>
-        {{ "imprint.copyright.logo" | translate }}
-        <a class="underline" href="http://sampeniak.com/" target="_blank">
+        {{ 'imprint.copyright.logo' | translate }}
+        <a
+          class="underline"
+          href="http://sampeniak.com/"
+          target="_blank"
+        >
           Sam Peniak
         </a>
       </li>
       <li>
-        {{ "imprint.copyright.design" | translate }}
-        <a class="underline" href="https://www.hyperui.dev/" target="_blank">
+        {{ 'imprint.copyright.design' | translate }}
+        <a
+          class="underline"
+          href="https://www.hyperui.dev/"
+          target="_blank"
+        >
           HyperUI
         </a>
       </li>
       <li>
-        {{ "imprint.copyright.icons" | translate }}
-        <a class="underline" href="https://heroicons.com/" target="_blank">
+        {{ 'imprint.copyright.icons' | translate }}
+        <a
+          class="underline"
+          href="https://heroicons.com/"
+          target="_blank"
+        >
           Heroicons
         </a>
       </li>
       <li>
-        {{ "imprint.copyright.icons-branded" | translate }}
-        <a class="underline" href="https://simpleicons.org/" target="_blank">
+        {{ 'imprint.copyright.icons-branded' | translate }}
+        <a
+          class="underline"
+          href="https://simpleicons.org/"
+          target="_blank"
+        >
           Simple Icons
         </a>
       </li>
@@ -101,14 +128,13 @@
     <h2 class="mb-6 text-xl font-semibold">
       <span class="mr-1">Haftungsausschuss</span>
       @if (!german()) {
-      <span>({{ "imprint.german-only" | translate }})</span>
+        <span>({{ 'imprint.german-only' | translate }})</span>
       }
     </h2>
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">Haftung für Inhalte</h3>
     <p>
-      Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die
-      Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch
-      keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß
+      Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
+      Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß
       <a
         class="underline"
         href="https://www.gesetze-im-internet.de/tmg/__7.html"
@@ -117,8 +143,7 @@
       >
         § 7 Abs. 1 TMG
       </a>
-      für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
-      verantwortlich. Nach
+      für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach
       <a
         class="underline"
         href="https://www.gesetze-im-internet.de/tmg/__8.html"
@@ -127,78 +152,63 @@
       >
         §§ 8 bis 10 TMG
       </a>
-      sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder
-      gespeicherte fremde Informationen zu überwachen oder nach Umständen zu
-      forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen
-      zur Entfernung oder Sperrung der Nutzung von Informationen nach den
-      allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche
-      Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten
-      Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden
-      Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+      sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu
+      überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur
+      Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+      Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung
+      möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
     </p>
 
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">Haftung für Links</h3>
     <p>
-      Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren
-      Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden
-      Inhalte auch keine Gewähr übernehmen. Die verlinkten Seiten wurden zum
-      Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft.
-      Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.
-      Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch
-      ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei
-      Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend
-      entfernen.
+      Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb
+      können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Die verlinkten Seiten wurden zum Zeitpunkt der
+      Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht
+      erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte
+      einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links
+      umgehend entfernen.
     </p>
 
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">Urheberrecht</h3>
     <p>
-      Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen
-      Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung,
-      Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen
-      des Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen
-      Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den
-      privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf
-      dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte
-      Dritter beachtet. Insbesondere werden Inhalte Dritter oben unter
-      <a class="underline" fragment="copyright" routerLink="/imprint"
+      Die durch den Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen
+      Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des
+      Urheberrechts bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien
+      dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf dieser
+      Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte
+      Dritter oben unter
+      <a
+        class="underline"
+        fragment="copyright"
+        routerLink="/imprint"
         >Copyright</a
       >
-      erwähnt. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam
-      werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von
-      Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
+      erwähnt. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen
+      entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.
     </p>
 
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">Datenschutz</h3>
     <p class="mb-2">
-      Die Nutzung unserer Webseite ist in der Regel ohne Angabe
-      personenbezogener Daten möglich. Soweit auf unseren Seiten
-      personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail
-      Adresse) erhoben werden, erfolgt dies, soweit möglich, stets auf
-      freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung
-      nicht an Dritte weitergegeben.
+      Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren
+      Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder E-Mail Adresse) erhoben werden, erfolgt dies,
+      soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an
+      Dritte weitergegeben.
     </p>
     <p class="mb-2">
-      Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der
-      Kommunikation per E-Mail) Sicherheitslücken ausweisen kann. Ein
-      lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht
-      möglich.
+      Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail)
+      Sicherheitslücken ausweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.
     </p>
     <p>
-      Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten
-      Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich
-      angeforderter Werbung und Informationsmaterialien wird hiermit
-      ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich
-      ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von
+      Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von
+      nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die
+      Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von
       Werbeinformationen, etwa durch Spam-Mails, vor.
     </p>
 
-    <h3 class="mt-2 text-lg font-semibold sm:mt-4">
-      Verbraucherstreitbeilegung
-    </h3>
+    <h3 class="mt-2 text-lg font-semibold sm:mt-4"> Verbraucherstreitbeilegung </h3>
     <p>
-      Der Betreiber dieser Website erklärt:<br />Wir sind nicht bereit oder
-      verpflichtet, an Streitbeilegungsverfahren vor einer
-      Verbraucherschlichtungsstelle teilzunehmen.
+      Der Betreiber dieser Website erklärt:<br />Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren
+      vor einer Verbraucherschlichtungsstelle teilzunehmen.
     </p>
     <p class="mt-4 text-right font-semibold">
       Angaben gemäß
@@ -216,65 +226,64 @@
   <article
     class="rounded-lg border border-neutral-200 bg-neutral-100 p-6 shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
   >
-    <h2 class="mb-6 text-xl font-semibold" id="analytics">
-      {{ "imprint.analytics.title" | translate }}
+    <h2
+      class="mb-6 text-xl font-semibold"
+      id="analytics"
+    >
+      {{ 'imprint.analytics.title' | translate }}
     </h2>
 
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">
-      {{ "imprint.analytics.usage.title" | translate }}
+      {{ 'imprint.analytics.usage.title' | translate }}
     </h3>
-    <p
-      [innerHTML]="
-        'imprint.analytics.usage.description' | translate : { matomo }
-      "
-    ></p>
+    <p [innerHTML]="'imprint.analytics.usage.description' | translate: { matomo }"></p>
     <p
       [innerHTML]="'imprint.analytics.usage.note' | translate"
       class="mt-2 text-center font-bold"
     ></p>
 
     <h3 class="mt-2 text-lg font-semibold sm:mt-4">
-      {{ "imprint.analytics.data.title" | translate }}
+      {{ 'imprint.analytics.data.title' | translate }}
     </h3>
     <ul class="mb-2 list-outside list-disc pl-5">
-      <li>{{ "imprint.analytics.data.country" | translate }}</li>
-      <li>{{ "imprint.analytics.data.device" | translate }}</li>
-      <li>{{ "imprint.analytics.data.os" | translate }}</li>
-      <li>{{ "imprint.analytics.data.browser" | translate }}</li>
-      <li>{{ "imprint.analytics.data.time" | translate }}</li>
-      <li>{{ "imprint.analytics.data.events" | translate }}</li>
+      <li>{{ 'imprint.analytics.data.country' | translate }}</li>
+      <li>{{ 'imprint.analytics.data.device' | translate }}</li>
+      <li>{{ 'imprint.analytics.data.os' | translate }}</li>
+      <li>{{ 'imprint.analytics.data.browser' | translate }}</li>
+      <li>{{ 'imprint.analytics.data.time' | translate }}</li>
+      <li>{{ 'imprint.analytics.data.events' | translate }}</li>
     </ul>
 
     @if (analyticsEnabled()) {
-    <h3 class="mt-2 text-lg font-semibold sm:mt-4">
-      {{ "imprint.analytics.disable.title" | translate }}
-    </h3>
-    <p class="mb-2">
-      {{ "imprint.analytics.disable.description" | translate }}
-    </p>
+      <h3 class="mt-2 text-lg font-semibold sm:mt-4">
+        {{ 'imprint.analytics.disable.title' | translate }}
+      </h3>
+      <p class="mb-2">
+        {{ 'imprint.analytics.disable.description' | translate }}
+      </p>
 
-    <button
-      (click)="disableAnalytics()"
-      class="mx-auto block cursor-pointer gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
-      type="button"
-    >
-      {{ "imprint.analytics.disable.button" | translate }}
-    </button>
+      <button
+        (click)="disableAnalytics()"
+        class="mx-auto block cursor-pointer gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+        type="button"
+      >
+        {{ 'imprint.analytics.disable.button' | translate }}
+      </button>
     } @else {
-    <h3 class="mt-2 text-lg font-semibold sm:mt-4">
-      {{ "imprint.analytics.enable.title" | translate }}
-    </h3>
-    <p class="mb-2">
-      {{ "imprint.analytics.enable.description" | translate }}
-    </p>
+      <h3 class="mt-2 text-lg font-semibold sm:mt-4">
+        {{ 'imprint.analytics.enable.title' | translate }}
+      </h3>
+      <p class="mb-2">
+        {{ 'imprint.analytics.enable.description' | translate }}
+      </p>
 
-    <button
-      (click)="enableAnalytics()"
-      class="mx-auto block cursor-pointer gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
-      type="button"
-    >
-      {{ "imprint.analytics.enable.button" | translate }}
-    </button>
+      <button
+        (click)="enableAnalytics()"
+        class="mx-auto block cursor-pointer gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+        type="button"
+      >
+        {{ 'imprint.analytics.enable.button' | translate }}
+      </button>
     }
   </article>
 </section>

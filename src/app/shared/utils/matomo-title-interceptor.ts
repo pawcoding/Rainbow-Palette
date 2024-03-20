@@ -6,9 +6,7 @@ import { Observable } from 'rxjs';
 export class MatomoTitleInterceptor implements MatomoRouterInterceptor {
   private readonly _tracker = inject(MatomoTracker);
 
-  public beforePageTrack(
-    event: NavigationEnd
-  ): void | Observable<void> | Promise<void> {
+  public beforePageTrack(event: NavigationEnd): void | Observable<void> | Promise<void> {
     switch (event.urlAfterRedirects) {
       case '/':
         this._tracker.setDocumentTitle('Home');

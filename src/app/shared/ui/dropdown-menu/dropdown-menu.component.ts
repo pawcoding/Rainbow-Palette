@@ -1,9 +1,4 @@
-import {
-  CdkMenu,
-  CdkMenuGroup,
-  CdkMenuItemRadio,
-  CdkMenuTrigger
-} from '@angular/cdk/menu';
+import { CdkMenu, CdkMenuGroup, CdkMenuItemRadio, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ConnectedPosition } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import {
@@ -24,14 +19,7 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'rp-dropdown-menu',
   standalone: true,
-  imports: [
-    CdkMenuTrigger,
-    CdkMenu,
-    CdkMenuGroup,
-    CdkMenuItemRadio,
-    TranslateModule,
-    CommonModule
-  ],
+  imports: [CdkMenuTrigger, CdkMenu, CdkMenuGroup, CdkMenuItemRadio, TranslateModule, CommonModule],
   templateUrl: './dropdown-menu.component.html'
 })
 export class DropdownMenuComponent<T> {
@@ -56,8 +44,7 @@ export class DropdownMenuComponent<T> {
   public readonly selectedItem = model<T | undefined>(undefined);
 
   // Content Signals
-  public readonly itemTemplate =
-    contentChild<TemplateRef<{ item: T }>>('itemTemplate');
+  public readonly itemTemplate = contentChild<TemplateRef<{ item: T }>>('itemTemplate');
 
   // View Child Signals
   private readonly _trigger = viewChild(CdkMenuTrigger);

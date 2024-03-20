@@ -1,8 +1,9 @@
 <div>
-  <span
-    class="flex overflow-hidden rounded-md border border-neutral-200 shadow-sm dark:border-none dark:shadow-none"
-  >
-    <label [title]="tooltip()" for="color">
+  <span class="flex overflow-hidden rounded-md border border-neutral-200 shadow-sm dark:border-none dark:shadow-none">
+    <label
+      [title]="tooltip()"
+      for="color"
+    >
       <div
         [class]="isColorLight() ? 'text-neutral-900' : 'text-neutral-100'"
         [style.backgroundColor]="hex()"

@@ -1,10 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
-import {
-  heroHomeSolid,
-  heroQuestionMarkCircleSolid
-} from '@ng-icons/heroicons/solid';
+import { heroHomeSolid, heroQuestionMarkCircleSolid } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
 import { NavigationEntry } from '../../types/navigation-entry';
 import { LayoutNavigationComponent } from './layout-navigation.component';
@@ -45,8 +42,7 @@ describe('LayoutNavigationComponent', () => {
   });
 
   it('should have navigation entries', () => {
-    const navigationEntries: NodeList =
-      fixture.nativeElement.querySelectorAll('a');
+    const navigationEntries: NodeList = fixture.nativeElement.querySelectorAll('a');
     expect(navigationEntries).toBeTruthy();
     expect(navigationEntries.length).toBe(2);
   });

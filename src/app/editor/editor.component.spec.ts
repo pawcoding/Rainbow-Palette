@@ -1,10 +1,7 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  ColorService,
-  ColorServiceMock
-} from '../shared/data-access/color.service';
+import { ColorService, ColorServiceMock } from '../shared/data-access/color.service';
 import { Color, Shade } from '../shared/model';
 import { EditorComponent, UpdateType } from './editor.component';
 

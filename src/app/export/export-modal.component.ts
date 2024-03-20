@@ -7,10 +7,7 @@ import { ExportFormat } from '../shared/constants/export-format';
 import { AnalyticsService } from '../shared/data-access/analytics.service';
 import { ExportService } from '../shared/data-access/export.service';
 import { ToastService } from '../shared/data-access/toast.service';
-import {
-  TrackingEventAction,
-  TrackingEventCategory
-} from '../shared/enums/tracking-event';
+import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Palette } from '../shared/model';
 import { ExportOption } from '../shared/types/export-option';
 import { ExportDownloadComponent } from './ui/export-download/export-download.component';
@@ -21,7 +18,7 @@ import { RequestFormatComponent } from './ui/request-format/request-format.compo
 enum ExportModalState {
   FORMAT = 'format',
   DOWNLOAD = 'download',
-  SUCCESS = 'success',
+  SUCCESS = 'success'
 }
 
 @Component({
@@ -50,9 +47,7 @@ export class ExportModalComponent {
   protected readonly palette = signal(this._data.palette);
   protected readonly state = signal(ExportModalState.FORMAT);
   protected readonly format = signal<ExportFormat | undefined>(undefined);
-  protected readonly downloadOption = signal<ExportOption | undefined>(
-    undefined
-  );
+  protected readonly downloadOption = signal<ExportOption | undefined>(undefined);
 
   protected readonly heroXMarkMini = heroXMarkMini;
   protected readonly heroArrowLeftMini = heroArrowLeftMini;
@@ -82,11 +77,7 @@ export class ExportModalComponent {
       return;
     }
 
-    const success = await this._exportService.exportPalette(
-      this.palette(),
-      format,
-      action
-    );
+    const success = await this._exportService.exportPalette(this.palette(), format, action);
 
     if (success) {
       this.state.set(ExportModalState.SUCCESS);

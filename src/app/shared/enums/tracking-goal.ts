@@ -21,5 +21,5 @@ export enum TrackingGoal {
   /**
    * User saves a palette.
    */
-  SAVE_PALETTE = 6,
+  SAVE_PALETTE = 6
 }

@@ -21,9 +21,7 @@ export class VersionService {
     const paddingAngular = ' '.repeat(length - angularVersionLength);
     const paddingApp = ' '.repeat(length - appVersionLength);
 
-    console.info(
-      `    Angular: ${paddingAngular}${this.angularVersion}\n    App:     ${paddingApp}${this.appVersion}`
-    );
+    console.info(`    Angular: ${paddingAngular}${this.angularVersion}\n    App:     ${paddingApp}${this.appVersion}`);
   }
 }
 

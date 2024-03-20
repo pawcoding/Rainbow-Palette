@@ -9,10 +9,7 @@ export class DialogMock<T> {
     this._returnValue = returnValue;
   }
 
-  public open(
-    _component: ComponentType<unknown>,
-    _config: DialogConfig
-  ): { closed: Observable<unknown> } {
+  public open(_component: ComponentType<unknown>, _config: DialogConfig): { closed: Observable<unknown> } {
     const closeSubject = new Subject<T>();
     const dialogRef = {
       closed: closeSubject.asObservable()

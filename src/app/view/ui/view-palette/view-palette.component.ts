@@ -1,10 +1,6 @@
 import { Component, model, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
-import {
-  heroAdjustmentsHorizontalMini,
-  heroPencilSquareMini,
-  heroTrashMini
-} from '@ng-icons/heroicons/mini';
+import { heroAdjustmentsHorizontalMini, heroPencilSquareMini, heroTrashMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import { Color, Palette, Shade } from '../../../shared/model';
 import { textColor } from '../../../shared/utils/text-color';
@@ -19,8 +15,7 @@ export class ViewPaletteComponent {
   protected readonly textColor = textColor;
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
-  protected readonly heroAdjustmentsHorizontalMin =
-    heroAdjustmentsHorizontalMini;
+  protected readonly heroAdjustmentsHorizontalMin = heroAdjustmentsHorizontalMini;
   protected readonly heroTrashMini = heroTrashMini;
 
   public readonly palette = model.required<Palette>();

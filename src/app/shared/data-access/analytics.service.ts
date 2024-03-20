@@ -3,11 +3,7 @@ import { MatomoTracker } from 'ngx-matomo-client';
 import { ExportFormat } from '../constants/export-format';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { LocalStorageKey } from '../enums/local-storage-keys';
-import {
-  TrackingEventAction,
-  TrackingEventCategory,
-  TrackingEventName
-} from '../enums/tracking-event';
+import { TrackingEventAction, TrackingEventCategory, TrackingEventName } from '../enums/tracking-event';
 import { ExportOption } from '../types/export-option';
 import { LanguageService } from './language.service';
 import { OfflineService } from './offline.service';
@@ -19,13 +15,13 @@ export enum CustomDimension {
   LANGUAGE = 1,
   THEME = 2,
   PWA = 3,
-  VERSION = 4,
+  VERSION = 4
 }
 
 export enum AnalyticsStatus {
   UNSET = 'UNSET',
   ACCEPTED = 'ACCEPTED',
-  DECLINED = 'DECLINED',
+  DECLINED = 'DECLINED'
 }
 
 type TrackingEvent = {
@@ -81,25 +77,16 @@ export class AnalyticsService {
 
     // Track current theme
     effect(() => {
-      this._tracker.setCustomDimension(
-        CustomDimension.THEME,
-        this._themeService.theme()
-      );
+      this._tracker.setCustomDimension(CustomDimension.THEME, this._themeService.theme());
     });
 
     // Track current language
     effect(() => {
-      this._tracker.setCustomDimension(
-        CustomDimension.LANGUAGE,
-        this._languageService.language()
-      );
+      this._tracker.setCustomDimension(CustomDimension.LANGUAGE, this._languageService.language());
     });
 
     // Track app version
-    this._tracker.setCustomDimension(
-      CustomDimension.VERSION,
-      this._versionService.appVersion
-    );
+    this._tracker.setCustomDimension(CustomDimension.VERSION, this._versionService.appVersion);
 
     effect(async () => {
       if (!this._offlineService.isOffline()) {
@@ -130,35 +117,22 @@ export class AnalyticsService {
     let userId = localStorage.getItem(LocalStorageKey.USER_ID);
     if (!userId) {
       // Generate random user ID with 16 hex characters
-      userId = Array.from({ length: 16 }, () =>
-        Math.floor(Math.random() * 16).toString(16)
-      ).join('');
+      userId = Array.from({ length: 16 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
       localStorage.setItem(LocalStorageKey.USER_ID, userId);
     }
     this._tracker.setUserId(userId);
   }
 
-  private _queueEvent(
-    event: Omit<TrackingEvent, 'timestamp'>,
-    type: 'disabled' | 'offline'
-  ): void {
-    const key =
-      type === 'disabled'
-        ? LocalStorageKey.EVENTS_DISABLED
-        : LocalStorageKey.EVENTS_OFFLINE;
-    const events = JSON.parse(
-      localStorage.getItem(key) || '[]'
-    ) as Array<TrackingEvent>;
+  private _queueEvent(event: Omit<TrackingEvent, 'timestamp'>, type: 'disabled' | 'offline'): void {
+    const key = type === 'disabled' ? LocalStorageKey.EVENTS_DISABLED : LocalStorageKey.EVENTS_OFFLINE;
+    const events = JSON.parse(localStorage.getItem(key) || '[]') as Array<TrackingEvent>;
 
     events.push({ ...event, timestamp: Date.now() });
     localStorage.setItem(key, JSON.stringify(events));
   }
 
   private _processEvents(type: 'disabled' | 'offline'): void {
-    const key =
-      type === 'disabled'
-        ? LocalStorageKey.EVENTS_DISABLED
-        : LocalStorageKey.EVENTS_OFFLINE;
+    const key = type === 'disabled' ? LocalStorageKey.EVENTS_DISABLED : LocalStorageKey.EVENTS_OFFLINE;
     const cache = localStorage.getItem(key);
     if (!cache) {
       return;
@@ -194,10 +168,7 @@ export class AnalyticsService {
   }
 
   public setIsPwa(isPwa: boolean): void {
-    this._tracker.setCustomDimension(
-      CustomDimension.PWA,
-      isPwa ? 'PWA' : 'Web'
-    );
+    this._tracker.setCustomDimension(CustomDimension.PWA, isPwa ? 'PWA' : 'Web');
   }
 
   public acceptAnalytics(): void {
@@ -252,9 +223,7 @@ export class AnalyticsService {
    */
   public trackPaletteExport(format: ExportFormat, option: ExportOption): void {
     const action =
-      option === 'copy'
-        ? TrackingEventAction.EXPORT_PALETTE_COPY
-        : TrackingEventAction.EXPORT_PALETTE_FILE;
+      option === 'copy' ? TrackingEventAction.EXPORT_PALETTE_COPY : TrackingEventAction.EXPORT_PALETTE_FILE;
 
     let name: TrackingEventName | undefined;
     switch (format) {
@@ -314,18 +283,12 @@ export class AnalyticsService {
         name = TrackingEventName.GENERATE_PALETTE_UNKNOWN;
     }
 
-    this.trackEvent(
-      TrackingEventCategory.GENERATE_PALETTE,
-      TrackingEventAction.GENERATE_PALETTE,
-      name
-    );
+    this.trackEvent(TrackingEventCategory.GENERATE_PALETTE, TrackingEventAction.GENERATE_PALETTE, name);
   }
 }
 
 export class AnalyticsServiceMock {
-  public readonly status = signal<AnalyticsStatus>(
-    AnalyticsStatus.UNSET
-  ).asReadonly();
+  public readonly status = signal<AnalyticsStatus>(AnalyticsStatus.UNSET).asReadonly();
 
   public setIsPwa(_isPwa: boolean): void {}
 
@@ -333,16 +296,9 @@ export class AnalyticsServiceMock {
 
   public declineAnalytics(): void {}
 
-  public trackEvent(
-    _category: TrackingEventCategory,
-    _action: TrackingEventAction,
-    _name?: TrackingEventName
-  ): void {}
+  public trackEvent(_category: TrackingEventCategory, _action: TrackingEventAction, _name?: TrackingEventName): void {}
 
-  public trackPaletteExport(
-    _format: ExportFormat,
-    _option: ExportOption
-  ): void {}
+  public trackPaletteExport(_format: ExportFormat, _option: ExportOption): void {}
 
   public trackPaletteGeneration(_scheme: PaletteScheme): void {}
 }

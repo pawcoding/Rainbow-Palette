@@ -1,10 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { SwUpdate } from '@angular/service-worker';
 import { TranslateModule } from '@ngx-translate/core';
-import {
-  TrackingEventAction,
-  TrackingEventCategory
-} from '../enums/tracking-event';
+import { TrackingEventAction, TrackingEventCategory } from '../enums/tracking-event';
 import { IS_RUNNING_TEST } from '../utils/is-running-test';
 import { SwUpdateMock } from '../utils/sw-update-mock';
 import { AnalyticsService, AnalyticsServiceMock } from './analytics.service';

@@ -6,7 +6,7 @@ export enum PaletteScheme {
   COMPLEMENTARY = 'complementary',
   SPLIT_COMPLEMENTARY = 'split-complementary',
   TRIADIC = 'triadic',
-  COMPOUND = 'compound',
+  COMPOUND = 'compound'
 }
 
 export const PALETTE_SCHEMES = [

@@ -51,17 +51,12 @@ export class ColorNameService {
       return shade.hex.substring(1);
     }
 
-    return name.replace(
-      /(\w)(\w*)/g,
-      (_, first, rest) => first.toUpperCase() + rest.toLowerCase()
-    );
+    return name.replace(/(\w)(\w*)/g, (_, first, rest) => first.toUpperCase() + rest.toLowerCase());
   }
 
   private async loadColorMap(): Promise<void> {
     try {
-      const data = await firstValueFrom(
-        this._http.get('/assets/color-dictionary.csv', { responseType: 'text' })
-      );
+      const data = await firstValueFrom(this._http.get('/assets/color-dictionary.csv', { responseType: 'text' }));
 
       this.colorDictionary = data
         .split('\n')
@@ -83,9 +78,7 @@ export class ColorNameService {
 
   private calculateDistance(hsl: HSLObject, entry: ColorMapEntry): number {
     return (
-      10 * Math.abs(hsl.H - entry.hue) +
-      5 * Math.abs(hsl.S - entry.saturation) +
-      Math.abs(hsl.L - entry.lightness)
+      10 * Math.abs(hsl.H - entry.hue) + 5 * Math.abs(hsl.S - entry.saturation) + Math.abs(hsl.L - entry.lightness)
     );
   }
 }

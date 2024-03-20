@@ -1,11 +1,5 @@
 import { DecimalPipe } from '@angular/common';
-import {
-  Component,
-  computed,
-  input,
-  model,
-  numberAttribute
-} from '@angular/core';
+import { Component, computed, input, model, numberAttribute } from '@angular/core';
 import { hueToWheel, wheelToHue } from '../../utils/color-wheel';
 
 @Component({

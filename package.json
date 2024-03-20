@@ -8,7 +8,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
+    "lint": "ng lint",
+    "prettier": "prettier --write \"src/**/*.{ts,json,html,css}\"",
+    "prettier:check": "prettier --check \"src/**/*.{ts,json,html,css}\""
   },
   "private": true,
   "dependencies": {
@@ -56,6 +59,10 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "postcss": "^8.4.37",
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-packagejson": "^2.4.12",
+    "prettier-plugin-tailwindcss": "^0.5.12",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.3.3"
   }

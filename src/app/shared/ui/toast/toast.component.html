@@ -1,20 +1,20 @@
 @if (toast(); as toast) {
-<div
-  [class]="colors()"
-  class="toast flex max-w-96 items-center gap-1 rounded border-s-4 p-4 shadow-md dark:shadow-none"
-  role="alert"
->
-  <span class="text-sm">
-    {{ toast.message | translate : toast.parameters }}
-  </span>
-
-  <button
-    [title]="'common.close' | translate"
-    (click)="closeToast()"
-    class="flex size-6 shrink-0 items-center justify-center rounded bg-black/0 transition-colors duration-200 hover:bg-black/10 focus:outline-none"
-    type="button"
+  <div
+    [class]="colors()"
+    class="toast flex max-w-96 items-center gap-1 rounded border-s-4 p-4 shadow-md dark:shadow-none"
+    role="alert"
   >
-    <ng-icon [svg]="heroXMarkMini" />
-  </button>
-</div>
+    <span class="text-sm">
+      {{ toast.message | translate: toast.parameters }}
+    </span>
+
+    <button
+      [title]="'common.close' | translate"
+      (click)="closeToast()"
+      class="flex size-6 shrink-0 items-center justify-center rounded bg-black/0 transition-colors duration-200 hover:bg-black/10 focus:outline-none"
+      type="button"
+    >
+      <ng-icon [svg]="heroXMarkMini" />
+    </button>
+  </div>
 }

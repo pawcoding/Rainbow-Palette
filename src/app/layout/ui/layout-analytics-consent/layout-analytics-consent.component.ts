@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  computed,
-  output,
-  viewChild
-} from '@angular/core';
+import { Component, ElementRef, computed, output, viewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -16,13 +10,11 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './layout-analytics-consent.component.css'
 })
 export class LayoutAnalyticsConsentComponent {
-  protected readonly matomo =
-    '<a href="https://matomo.org/" target="_blank" class="underline">Matomo</a>';
+  protected readonly matomo = '<a href="https://matomo.org/" target="_blank" class="underline">Matomo</a>';
 
   public readonly consent = output<boolean>();
 
-  private readonly _container =
-    viewChild.required<ElementRef<HTMLElement>>('container');
+  private readonly _container = viewChild.required<ElementRef<HTMLElement>>('container');
 
   public readonly height = computed(() => {
     return this._container().nativeElement.offsetHeight;

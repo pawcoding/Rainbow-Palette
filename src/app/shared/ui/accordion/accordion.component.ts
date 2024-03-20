@@ -1,11 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  booleanAttribute,
-  input,
-  signal,
-  viewChild
-} from '@angular/core';
+import { Component, ElementRef, booleanAttribute, input, signal, viewChild } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroPlus } from '@ng-icons/heroicons/outline';
@@ -40,12 +33,9 @@ export class AccordionComponent {
 
   protected readonly heroPlus = heroPlus;
 
-  private readonly _details =
-    viewChild.required<ElementRef<HTMLDetailsElement>>('detailsElement');
-  private readonly _summary =
-    viewChild.required<ElementRef<HTMLElement>>('summaryElement');
-  private readonly _content =
-    viewChild.required<ElementRef<HTMLDivElement>>('contentElement');
+  private readonly _details = viewChild.required<ElementRef<HTMLDetailsElement>>('detailsElement');
+  private readonly _summary = viewChild.required<ElementRef<HTMLElement>>('summaryElement');
+  private readonly _content = viewChild.required<ElementRef<HTMLDivElement>>('contentElement');
 
   protected readonly isOpen = signal(false);
 
@@ -74,9 +64,7 @@ export class AccordionComponent {
     this._isClosing = true;
 
     const startHeight = `${this._details().nativeElement.offsetHeight}px`;
-    const endHeight = `calc(${
-      this._summary().nativeElement.offsetHeight
-    }px + 3rem)`;
+    const endHeight = `calc(${this._summary().nativeElement.offsetHeight}px + 3rem)`;
 
     if (this._animation) {
       this._animation.cancel();
@@ -102,9 +90,7 @@ export class AccordionComponent {
   }
 
   public open(): void {
-    this._details().nativeElement.style.height = `${
-      this._details().nativeElement.offsetHeight
-    }px`;
+    this._details().nativeElement.style.height = `${this._details().nativeElement.offsetHeight}px`;
 
     this._details().nativeElement.open = true;
 
@@ -120,8 +106,7 @@ export class AccordionComponent {
 
     const startHeight = `${this._details().nativeElement.offsetHeight}px`;
     const endHeight = `calc(${
-      this._summary().nativeElement.offsetHeight +
-      this._content().nativeElement.offsetHeight
+      this._summary().nativeElement.offsetHeight + this._content().nativeElement.offsetHeight
     }px + 4rem)`;
 
     if (this._animation) {

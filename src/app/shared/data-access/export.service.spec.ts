@@ -12,9 +12,7 @@ describe('ExportService', () => {
   let analyticsService: AnalyticsServiceMock;
   let service: ExportService;
 
-  const palette = new Palette('TestPalette', [
-    new Color([Shade.random()], 'TestColor')
-  ]);
+  const palette = new Palette('TestPalette', [new Color([Shade.random()], 'TestColor')]);
 
   beforeEach(() => {
     analyticsService = new AnalyticsServiceMock();

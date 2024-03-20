@@ -1,93 +1,87 @@
 @if (palette(); as palette) {
-<div class="mx-auto px-4 py-8 sm:max-w-screen-sm lg:max-w-screen-lg">
-  <section
-    class="mb-4 flex flex-col items-center gap-2 lg:flex-row lg:items-end lg:justify-between"
-  >
-    <h1 class="select-none text-3xl font-bold lg:text-2xl">
-      {{ palette.name }}
-    </h1>
+  <div class="mx-auto px-4 py-8 sm:max-w-screen-sm lg:max-w-screen-lg">
+    <section class="mb-4 flex flex-col items-center gap-2 lg:flex-row lg:items-end lg:justify-between">
+      <h1 class="select-none text-3xl font-bold lg:text-2xl">
+        {{ palette.name }}
+      </h1>
 
-    <div class="flex flex-wrap justify-center gap-2">
-      <button
-        [title]="'view.palette.rename' | translate"
-        (click)="renamePalette()"
-        class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
-      >
-        <ng-icon
-          [svg]="heroPencilSquareMini"
-          class="scale-90 sm:scale-100"
-          size="1.25rem"
-        />
-        <span>
-          {{ "common.rename" | translate }}
-        </span>
-      </button>
-
-      <button
-        [title]="'export.title' | translate"
-        (click)="exportPalette()"
-        class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
-      >
-        <ng-icon
-          [svg]="heroArrowDownTrayMini"
-          class="scale-90 sm:scale-100"
-          size="1.25rem"
-        />
-        <span>
-          {{ "common.export" | translate }}
-        </span>
-      </button>
-
-      <button
-        [disabled]="saving()"
-        [title]="
-          (saving() ? 'view.palette.saving' : 'view.palette.save') | translate
-        "
-        (click)="savePalette()"
-        class="group flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-wait disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700 sm:px-3 sm:py-2"
-      >
-        <span
-          class="flex items-center justify-center group-disabled:animate-pulse-spin"
+      <div class="flex flex-wrap justify-center gap-2">
+        <button
+          [title]="'view.palette.rename' | translate"
+          (click)="renamePalette()"
+          class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
         >
           <ng-icon
-            [svg]="saveIcon()"
+            [svg]="heroPencilSquareMini"
             class="scale-90 sm:scale-100"
             size="1.25rem"
           />
-        </span>
+          <span>
+            {{ 'common.rename' | translate }}
+          </span>
+        </button>
 
+        <button
+          [title]="'export.title' | translate"
+          (click)="exportPalette()"
+          class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+        >
+          <ng-icon
+            [svg]="heroArrowDownTrayMini"
+            class="scale-90 sm:scale-100"
+            size="1.25rem"
+          />
+          <span>
+            {{ 'common.export' | translate }}
+          </span>
+        </button>
+
+        <button
+          [disabled]="saving()"
+          [title]="(saving() ? 'view.palette.saving' : 'view.palette.save') | translate"
+          (click)="savePalette()"
+          class="group flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-wait disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700 sm:px-3 sm:py-2"
+        >
+          <span class="flex items-center justify-center group-disabled:animate-pulse-spin">
+            <ng-icon
+              [svg]="saveIcon()"
+              class="scale-90 sm:scale-100"
+              size="1.25rem"
+            />
+          </span>
+
+          <span>
+            {{ (saving() ? 'common.saving' : 'common.save') | translate }}
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <rp-view-palette
+      [palette]="palette"
+      (copyShade)="copyToClipboard($event)"
+      (editColor)="editColor($event.color, $event.shadeIndex)"
+      (removeColor)="removeColor($event)"
+      (renameColor)="renameColor($event)"
+    />
+
+    <section class="mt-8 flex items-center justify-center gap-2">
+      <button
+        [title]="'view.color.add-tooltip' | translate"
+        (click)="addColor()"
+        class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+      >
+        <ng-icon
+          [svg]="heroPlusMini"
+          class="scale-90 sm:scale-100"
+          size="1.25rem"
+        />
         <span>
-          {{ (saving() ? "common.saving" : "common.save") | translate }}
+          {{ 'view.color.add' | translate }}
         </span>
       </button>
-    </div>
-  </section>
-
-  <rp-view-palette
-    [palette]="palette"
-    (copyShade)="copyToClipboard($event)"
-    (editColor)="editColor($event.color, $event.shadeIndex)"
-    (removeColor)="removeColor($event)"
-    (renameColor)="renameColor($event)"
-  />
-
-  <section class="mt-8 flex items-center justify-center gap-2">
-    <button
-      [title]="'view.color.add-tooltip' | translate"
-      (click)="addColor()"
-      class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
-    >
-      <ng-icon
-        [svg]="heroPlusMini"
-        class="scale-90 sm:scale-100"
-        size="1.25rem"
-      />
-      <span>
-        {{ "view.color.add" | translate }}
-      </span>
-    </button>
-  </section>
-</div>
+    </section>
+  </div>
 } @else {
-<rp-no-palette [parent]="'view'" />
+  <rp-no-palette [parent]="'view'" />
 }

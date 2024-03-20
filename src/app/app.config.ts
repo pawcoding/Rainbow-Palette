@@ -1,23 +1,10 @@
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
-import {
-  ApplicationConfig,
-  importProvidersFrom,
-  isDevMode
-} from '@angular/core';
-import {
-  provideRouter,
-  withInMemoryScrolling,
-  withRouterConfig
-} from '@angular/router';
+import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
+import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import {
-  MatomoConsentMode,
-  provideMatomo,
-  withRouter,
-  withRouterInterceptors
-} from 'ngx-matomo-client';
+import { MatomoConsentMode, provideMatomo, withRouter, withRouterInterceptors } from 'ngx-matomo-client';
 import { routes } from './app.routes';
 import { MatomoTitleInterceptor } from './shared/utils/matomo-title-interceptor';
 
