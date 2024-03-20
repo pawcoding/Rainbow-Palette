@@ -1,11 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  computed,
-  model,
-  signal
-} from '@angular/core';
+import { Component, computed, model, output, signal } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
@@ -33,8 +26,7 @@ export class HomeGeneratorComponent {
 
   protected readonly isValid = signal(true);
 
-  @Output()
-  public readonly generate = new EventEmitter<void>();
+  public readonly generate = output<void>();
 
   protected readonly heroChevronDownMini = heroChevronDownMini;
 

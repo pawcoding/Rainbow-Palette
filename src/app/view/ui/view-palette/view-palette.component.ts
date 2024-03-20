@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, model } from '@angular/core';
+import { Component, model, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroAdjustmentsHorizontalMini,
@@ -25,17 +25,13 @@ export class ViewPaletteComponent {
 
   public readonly palette = model.required<Palette>();
 
-  @Output()
-  public readonly renameColor = new EventEmitter<Color>();
-  @Output()
-  public readonly editColor = new EventEmitter<{
+  public readonly renameColor = output<Color>();
+  public readonly editColor = output<{
     color: Color;
     shadeIndex?: number;
   }>();
-  @Output()
-  public readonly removeColor = new EventEmitter<Color>();
-  @Output()
-  public readonly copyShade = new EventEmitter<Shade>();
+  public readonly removeColor = output<Color>();
+  public readonly copyShade = output<Shade>();
 
   protected rename(color: Color): void {
     this.renameColor.emit(color);

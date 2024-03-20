@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  computed,
-  input
-} from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
@@ -22,8 +16,7 @@ export class ExportSuccessComponent {
   public readonly exportFormat = input.required<ExportFormat>();
   public readonly exportOption = input.required<ExportOption>();
 
-  @Output()
-  public readonly openDocumentation = new EventEmitter<void>();
+  public readonly openDocumentation = output<void>();
 
   protected readonly description = computed(() => {
     return `export.success.description.${this.exportFormat()}.${this.exportOption()}`;

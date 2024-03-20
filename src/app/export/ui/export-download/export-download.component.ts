@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroArrowDownTray,
@@ -18,8 +18,7 @@ import { ExportOption } from '../../../shared/types/export-option';
 export class ExportDownloadComponent {
   public readonly exportFormat = input.required<ExportFormat>();
 
-  @Output()
-  public readonly choseDownloadFormat = new EventEmitter<ExportOption>();
+  public readonly choseDownloadFormat = output<ExportOption>();
 
   protected readonly heroArrowDownTray = heroArrowDownTray;
   protected readonly heroDocumentDuplicate = heroDocumentDuplicate;

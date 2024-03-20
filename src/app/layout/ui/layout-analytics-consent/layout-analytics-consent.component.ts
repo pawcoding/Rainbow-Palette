@@ -1,9 +1,8 @@
 import {
   Component,
   ElementRef,
-  EventEmitter,
-  Output,
   computed,
+  output,
   viewChild
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
@@ -20,8 +19,7 @@ export class LayoutAnalyticsConsentComponent {
   protected readonly matomo =
     '<a href="https://matomo.org/" target="_blank" class="underline">Matomo</a>';
 
-  @Output()
-  public readonly consent = new EventEmitter<boolean>();
+  public readonly consent = output<boolean>();
 
   private readonly _container =
     viewChild.required<ElementRef<HTMLElement>>('container');
