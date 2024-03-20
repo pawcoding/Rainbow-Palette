@@ -3,7 +3,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import { ColorTranslator } from 'colortranslator';
+import { Value } from '../model';
 import { Shade } from '../model/shade.model';
 import { ColorNameService } from './color-name.service';
 import { ToastService, ToastServiceMock } from './toast.service';
@@ -42,7 +42,7 @@ describe('ColorNameService', () => {
 
   it('should return color name', async () => {
     const colorNamePromise = service.getColorName(
-      new Shade(-1, new ColorTranslator('#FFFFFF', { decimals: 2 }))
+      new Shade(-1, new Value('#FFFFFF'))
     );
 
     http.expectOne('/assets/color-dictionary.csv').flush(testColorDictionary);
@@ -56,7 +56,7 @@ describe('ColorNameService', () => {
     spyOn(toastService, 'showToast');
 
     const colorNamePromise = service.getColorName(
-      new Shade(-1, new ColorTranslator('#FFFFFF', { decimals: 2 }))
+      new Shade(-1, new Value('#FFFFFF'))
     );
 
     http

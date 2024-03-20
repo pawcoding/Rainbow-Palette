@@ -231,12 +231,11 @@
   "scheme": {
     "analogous": "Analog",
     "complementary": "Komplementär",
+    "compound": "Zusammengesetzt",
     "monochrome": "Monochrom",
     "rainbow": "Regenbogen",
     "split-complementary": "Geteiltes Komplement",
-    "square": "Quadratisch",
     "surprise": "Überrasche mich",
-    "tetradic": "Tetradisch",
     "triadic": "Triadisch"
   },
   "theme": {

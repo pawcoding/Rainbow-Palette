@@ -50,9 +50,6 @@ dependencies:
   '@ngx-translate/http-loader':
     specifier: ^8.0.0
     version: 8.0.0(@angular/common@17.2.4)(@angular/core@17.2.4)(@ngx-translate/core@15.0.0)(rxjs@7.8.1)
-  colortranslator:
-    specifier: ^4.1.0
-    version: 4.1.0
   ngx-matomo-client:
     specifier: ^6.0.2
     version: 6.0.2(@angular/common@17.2.4)(@angular/core@17.2.4)
@@ -3463,10 +3460,6 @@ packages:
   /colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
     dev: true
-
-  /colortranslator@4.1.0:
-    resolution: {integrity: sha512-bwa5awaMnQ6dpm9D3nbsFwUr6x6FrTKmxPdolNtSYfxCNR7ZM93GG1OF5Y3Sy1LvYdalb3riKC9uTn0X5NB36g==}
-    dev: false
 
   /commander@2.20.3:
     resolution: {integrity: sha512-GpVkmM8vF2vQUkj2LvZmD35JxeJOLCwJ9cUkugyk2nuhbv3+mJvpLYYt+0+USMxE+oj+ey/lJEnhZw75x/OMcQ==}

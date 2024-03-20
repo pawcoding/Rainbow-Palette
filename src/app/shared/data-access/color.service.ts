@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { ColorTranslator } from 'colortranslator';
+import { Value } from '../model';
 import { Color } from '../model/color.model';
 import { Shade } from '../model/shade.model';
 import { ColorNameService } from './color-name.service';
@@ -101,7 +101,7 @@ export class ColorService {
       // Add shade
       const shade = new Shade(
         index,
-        new ColorTranslator({ H: hue, S: saturation, L: luminosity }),
+        new Value({ H: hue, S: saturation, L: luminosity }),
         false
       );
       shades.push(shade);
@@ -226,7 +226,7 @@ export class ColorService {
 
     return new Shade(
       white ? 0 : 1200,
-      new ColorTranslator({ H: hue, S: saturation, L: luminosity }),
+      new Value({ H: hue, S: saturation, L: luminosity }),
       true
     );
   }

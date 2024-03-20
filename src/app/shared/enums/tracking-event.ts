@@ -118,6 +118,10 @@ export enum TrackingEventName {
    */
   GENERATE_PALETTE_COMPLEMENTARY = 'GENERATE_PALETTE_COMPLEMENTARY',
   /**
+   * User generates a compound palette.
+   */
+  GENERATE_PALETTE_COMPOUND = 'GENERATE_PALETTE_COMPOUND',
+  /**
    * User generates a monochrome palette.
    */
   GENERATE_PALETTE_MONOCHROME = 'GENERATE_PALETTE_MONOCHROME',
@@ -130,17 +134,9 @@ export enum TrackingEventName {
    */
   GENERATE_PALETTE_SPLIT_COMPLEMENTARY = 'GENERATE_PALETTE_SPLIT_COMPLEMENTARY',
   /**
-   * User generates a palette with square colors.
-   */
-  GENERATE_PALETTE_SQUARE = 'GENERATE_PALETTE_SQUARE',
-  /**
    * User generates a surprise palette.
    */
   GENERATE_PALETTE_SURPRISE = 'GENERATE_PALETTE_SURPRISE',
-  /**
-   * User generates a tetradic palette.
-   */
-  GENERATE_PALETTE_TETRADIC = 'GENERATE_PALETTE_TETRADIC',
   /**
    * User generates a triadic palette.
    */

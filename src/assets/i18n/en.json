@@ -232,12 +232,11 @@
   "scheme": {
     "analogous": "Analogous",
     "complementary": "Complementary",
+    "compound": "Compound",
     "monochrome": "Monochrome",
     "rainbow": "Rainbow",
     "split-complementary": "Split complementary",
-    "square": "Square",
     "surprise": "Surprise me",
-    "tetradic": "Tetradic",
     "triadic": "Triadic"
   },
   "theme": {

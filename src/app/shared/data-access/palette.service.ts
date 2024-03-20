@@ -1,7 +1,7 @@
 import { Injectable, effect, inject, signal } from '@angular/core';
-import { ColorTranslator, Harmony } from 'colortranslator';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { LocalStorageKey } from '../enums/local-storage-keys';
+import { Value } from '../model';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
@@ -73,9 +73,13 @@ export class PaletteService {
   ): Promise<void> {
     const palette = await this._generatePalette(hex, scheme);
 
-    palette.colors.forEach((color) => {
-      this._colorService.regenerateShades(color);
-    });
+    for (const color of palette.colors) {
+      // Get the color name
+      color.name = await this._colorNameService.getColorName(color.shades[0]);
+
+      // Regenerate the shades
+      await this._colorService.regenerateShades(color);
+    }
 
     this._palette.set(palette);
   }
@@ -86,33 +90,19 @@ export class PaletteService {
   ): Promise<Palette> {
     switch (scheme) {
       case PaletteScheme.RAINBOW:
-        return await this._generateRainbowPalette(hex);
+        return this._generateRainbowPalette(hex);
       case PaletteScheme.MONOCHROME:
         return this._generateMonochromePalette(hex);
       case PaletteScheme.ANALOGOUS:
-        return this._generateHarmonyPalette(
-          hex,
-          Harmony.ANALOGOUS,
-          'Analogous'
-        );
+        return this._generateAnalogousPalette(hex);
       case PaletteScheme.COMPLEMENTARY:
-        return this._generateHarmonyPalette(
-          hex,
-          Harmony.COMPLEMENTARY,
-          'Complementary'
-        );
+        return this._generateComplementaryPalette(hex);
       case PaletteScheme.SPLIT_COMPLEMENTARY:
-        return this._generateHarmonyPalette(
-          hex,
-          Harmony.SPLIT_COMPLEMENTARY,
-          'Split Complementary'
-        );
-      case PaletteScheme.SQUARE:
-        return this._generateHarmonyPalette(hex, Harmony.SQUARE, 'Square');
-      case PaletteScheme.TETRADIC:
-        return this._generateHarmonyPalette(hex, Harmony.TETRADIC, 'Tetradic');
+        return this._generateSplitPalette(hex);
       case PaletteScheme.TRIADIC:
-        return this._generateHarmonyPalette(hex, Harmony.TRIADIC, 'Triadic');
+        return this._generateTriadicPalette(hex);
+      case PaletteScheme.COMPOUND:
+        return this._generateCompoundPalette(hex);
       default:
         return this._generatePalette(hex, this._getRandomScheme());
     }
@@ -123,10 +113,10 @@ export class PaletteService {
     return schemes[Math.floor(Math.random() * schemes.length)];
   }
 
-  private async _generateRainbowPalette(hex: string): Promise<Palette> {
-    const shade = new Shade(-1, new ColorTranslator(hex), true);
-    const name = await this._colorNameService.getColorName(shade);
-    const color = new Color([shade], name);
+  private _generateRainbowPalette(hex: string): Palette {
+    const shade = new Shade(-1, new Value(hex), true);
+    let index = 0;
+    const color = new Color([shade], `${index++}`);
     const rainbow = new Palette('Rainbow', [color]);
 
     /*
@@ -159,45 +149,31 @@ export class PaletteService {
       );
       const newShade = new Shade(
         -1,
-        new ColorTranslator({ H: newHue, S: newSaturation, L: newLightness }),
+        new Value({ H: newHue, S: newSaturation, L: newLightness }),
         true
       );
 
-      const newName = await this._colorNameService.getColorName(newShade);
-
-      rainbow.addColor(new Color([newShade], newName));
+      rainbow.addColor(new Color([newShade], `${index++}`));
     }
 
     return rainbow;
   }
 
   private _generateMonochromePalette(hex: string): Palette {
-    const shade = new Shade(-1, new ColorTranslator(hex), true);
+    const shade = new Shade(-1, new Value(hex), true);
 
     const monochrome = new Palette('Monochrome', []);
 
     monochrome.addColor(new Color([shade], 'Primary'));
     monochrome.addColor(
       new Color(
-        [
-          new Shade(
-            -1,
-            new ColorTranslator({ H: shade.hsl.H, S: 30, L: 50 }),
-            true
-          ),
-        ],
+        [new Shade(-1, new Value({ H: shade.hsl.H, S: 30, L: 50 }), true)],
         'Muted'
       )
     );
     monochrome.addColor(
       new Color(
-        [
-          new Shade(
-            -1,
-            new ColorTranslator({ H: shade.hsl.H, S: 2, L: 50 }),
-            true
-          ),
-        ],
+        [new Shade(-1, new Value({ H: shade.hsl.H, S: 2, L: 50 }), true)],
         'Gray'
       )
     );
@@ -205,22 +181,295 @@ export class PaletteService {
     return monochrome;
   }
 
-  private async _generateHarmonyPalette(
-    hex: string,
-    harmony: Harmony,
-    name: string
-  ): Promise<Palette> {
-    const harmonyColors = ColorTranslator.getHarmony(hex, harmony);
+  private _generateAnalogousPalette(hex: string): Palette {
+    const shade = new Shade(-1, new Value(hex), true);
 
-    const colors: Array<Color> = [];
-    for (const hex of harmonyColors) {
-      const shade = new Shade(-1, new ColorTranslator(hex), true);
-      const name = await this._colorNameService.getColorName(shade);
+    const analogous = new Palette('Analogous', []);
 
-      colors.push(new Color([shade], name));
-    }
+    analogous.addColor(new Color([shade], 'Primary'));
 
-    return new Palette(name, colors);
+    analogous.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 315),
+              S: Math.max(shade.hsl.S - 20, 0),
+              L: 40,
+            }),
+            true
+          ),
+        ],
+        'Secondary'
+      )
+    );
+    analogous.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 270),
+              S: 25,
+              L: 20,
+            }),
+            true
+          ),
+        ],
+        'Secondary Muted'
+      )
+    );
+
+    analogous.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 45),
+              S: shade.hsl.S,
+              L: 50,
+            }),
+            true
+          ),
+        ],
+        'Accent'
+      )
+    );
+    analogous.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 90),
+              S: 25,
+              L: 20,
+            }),
+            true
+          ),
+        ],
+        'Accent Muted'
+      )
+    );
+
+    return analogous;
+  }
+
+  private _generateComplementaryPalette(hex: string): Palette {
+    const shade = new Shade(-1, new Value(hex), true);
+
+    const complementary = new Palette('Complementary', []);
+
+    complementary.addColor(new Color([shade], 'Primary'));
+
+    complementary.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: shade.hsl.H,
+              S: 3,
+              L: 50,
+            }),
+            true
+          ),
+        ],
+        'Gray'
+      )
+    );
+
+    complementary.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 180),
+              S: Math.max(shade.hsl.S - 20, 0),
+              L: 40,
+            }),
+            true
+          ),
+        ],
+        'Secondary'
+      )
+    );
+
+    return complementary;
+  }
+
+  private _generateSplitPalette(hex: string): Palette {
+    const shade = new Shade(-1, new Value(hex), true);
+
+    const split = new Palette('Split', []);
+
+    split.addColor(new Color([shade], 'Primary'));
+
+    split.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 20),
+              S: Math.max(shade.hsl.S - 20, 0),
+              L: 40,
+            }),
+            true
+          ),
+        ],
+        'Secondary'
+      )
+    );
+    split.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 20),
+              S: 3,
+              L: 50,
+            }),
+            true
+          ),
+        ],
+        'Gray'
+      )
+    );
+
+    split.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 180),
+              S: shade.hsl.S,
+              L: 80,
+            }),
+            true
+          ),
+        ],
+        'Accent'
+      )
+    );
+
+    return split;
+  }
+
+  private _generateTriadicPalette(hex: string): Palette {
+    const shade = new Shade(-1, new Value(hex), true);
+
+    const triadic = new Palette('Triadic', []);
+
+    triadic.addColor(new Color([shade], 'Primary'));
+
+    triadic.addColor(
+      new Color(
+        [new Shade(-1, new Value({ H: shade.hsl.H, S: 20, L: 30 }), true)],
+        'Primary Muted'
+      )
+    );
+
+    triadic.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 120),
+              S: Math.max(shade.hsl.S - 20, 0),
+              L: 40,
+            }),
+            true
+          ),
+        ],
+        'Secondary'
+      )
+    );
+    triadic.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 120),
+              S: 20,
+              L: 30,
+            }),
+            true
+          ),
+        ],
+        'Secondary Muted'
+      )
+    );
+
+    triadic.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 240),
+              S: shade.hsl.S,
+              L: 80,
+            }),
+            true
+          ),
+        ],
+        'Accent'
+      )
+    );
+
+    return triadic;
+  }
+
+  private _generateCompoundPalette(hex: string): Palette {
+    const shade = new Shade(-1, new Value(hex), true);
+
+    const compound = new Palette('Compound', []);
+
+    compound.addColor(new Color([shade], 'Primary'));
+
+    compound.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 210),
+              S: Math.max(shade.hsl.S - 20, 0),
+              L: 40,
+            }),
+            true
+          ),
+        ],
+        'Secondary'
+      )
+    );
+
+    compound.addColor(
+      new Color(
+        [
+          new Shade(
+            -1,
+            new Value({
+              H: this._changeHueOnWheel(shade.hsl.H, 150),
+              S: shade.hsl.S,
+              L: 50,
+            }),
+            true
+          ),
+        ],
+        'Accent'
+      )
+    );
+
+    return compound;
   }
 
   private _updateVariables(): void {
@@ -252,6 +501,25 @@ export class PaletteService {
         root.style.removeProperty(property);
       }
     }
+  }
+
+  private _changeHueOnWheel(hue: number, change: number) {
+    let wheel;
+    if (hue < 60) wheel = 2 * hue;
+    else if (hue < 120) wheel = hue + 60;
+    else if (hue < 240) wheel = 0.5 * hue + 120;
+    else wheel = hue;
+
+    wheel += change;
+    wheel %= 360;
+
+    let newHue;
+    if (wheel < 120) newHue = 0.5 * wheel;
+    else if (wheel < 180) newHue = wheel + 300;
+    else if (wheel < 240) newHue = 2 * wheel + 120;
+    else newHue = wheel;
+
+    return newHue % 360;
   }
 }
 

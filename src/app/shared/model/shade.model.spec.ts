@@ -1,11 +1,9 @@
-import { ColorTranslator } from 'colortranslator';
 import { Shade } from './shade.model';
+import { Value } from './value.model';
 
 describe('Shade', () => {
   it('should create an instance', () => {
-    expect(
-      new Shade(0, new ColorTranslator('#000000', { decimals: 2 }))
-    ).toBeTruthy();
+    expect(new Shade(0, new Value('#000000'))).toBeTruthy();
   });
 
   it('should generate random shade', () => {
@@ -13,25 +11,25 @@ describe('Shade', () => {
   });
 
   it('should return hex value', () => {
-    const shade = new Shade(0, new ColorTranslator('#000000', { decimals: 2 }));
+    const shade = new Shade(0, new Value('#000000'));
 
     expect(shade.hex).toBe('#000000');
   });
 
   it('should return HSL value', () => {
-    const shade = new Shade(0, new ColorTranslator('#FF0000', { decimals: 2 }));
+    const shade = new Shade(0, new Value('#FF0000'));
 
     expect(shade.hsl).toEqual({ H: 0, S: 100, L: 50 });
   });
 
   it('should return perceived brightness', () => {
-    const shade = new Shade(0, new ColorTranslator('#FF0000', { decimals: 2 }));
+    const shade = new Shade(0, new Value('#FF0000'));
 
     expect(shade.perceivedBrightness).toBe(55);
   });
 
   it('should update hex value', () => {
-    const shade = new Shade(0, new ColorTranslator('#FF0000', { decimals: 2 }));
+    const shade = new Shade(0, new Value('#FF0000'));
     shade.hex = '#000000';
 
     expect(shade.hex).toBe('#000000');
@@ -39,7 +37,7 @@ describe('Shade', () => {
   });
 
   it('should update HSL value', () => {
-    const shade = new Shade(0, new ColorTranslator('#FF0000', { decimals: 2 }));
+    const shade = new Shade(0, new Value('#FF0000'));
     shade.hsl = { H: 0, S: 0, L: 0 };
 
     expect(shade.hsl).toEqual({ H: 0, S: 0, L: 0 });
@@ -47,7 +45,7 @@ describe('Shade', () => {
   });
 
   it('should have value defined', () => {
-    const shade = new Shade(0, new ColorTranslator('#FF0000', { decimals: 2 }));
+    const shade = new Shade(0, new Value('#FF0000'));
 
     if (typeof shade.value === 'string') {
       expect(shade.value).toBe(shade.hex);
@@ -57,11 +55,7 @@ describe('Shade', () => {
   });
 
   it('should copy shade', () => {
-    const shade = new Shade(
-      0,
-      new ColorTranslator('#FF0000', { decimals: 2 }),
-      true
-    );
+    const shade = new Shade(0, new Value('#FF0000'), true);
     const copy = shade.copy();
 
     expect(copy).toBeInstanceOf(Shade);
@@ -88,11 +82,7 @@ describe('Shade', () => {
   });
 
   it('should stringify and re-parse shade', () => {
-    const shade = new Shade(
-      1,
-      new ColorTranslator('#000000', { decimals: 2 }),
-      true
-    );
+    const shade = new Shade(1, new Value('#000000'), true);
     const parsed = Shade.parse(shade.toString());
 
     expect(parsed).toBeInstanceOf(Shade);
@@ -102,11 +92,7 @@ describe('Shade', () => {
   });
 
   it('should JSON and string are equal', () => {
-    const shade = new Shade(
-      1,
-      new ColorTranslator('#000000', { decimals: 2 }),
-      true
-    );
+    const shade = new Shade(1, new Value('#000000'), true);
 
     expect(shade.toString()).toBe(JSON.stringify(shade.toJSON()));
   });

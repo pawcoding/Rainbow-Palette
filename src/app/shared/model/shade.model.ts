@@ -1,34 +1,34 @@
-import { ColorTranslator, HSLObject } from 'colortranslator';
+import { HSLObject } from '../types/color-format';
 import { perceivedBrightnessFromRGB } from '../utils/perceived-brightness';
+import { Value } from './value.model';
 
 export class Shade {
   public index: number;
   public fixed: boolean;
-  private _value: ColorTranslator;
+  private _value: Value;
   private _perceivedBrightness?: number;
 
-  constructor(index: number, value: ColorTranslator, fixed = false) {
+  constructor(index: number, value: Value, fixed = false) {
     this.index = index;
     this._value = value;
     this.fixed = fixed;
   }
 
   public get hslValue(): string {
-    return this._value.HSL;
+    const hsl = this._value.HSL;
+    return `hsl(${hsl.H}, ${hsl.S}%, ${hsl.L}%)`;
   }
 
   public get hsl(): HSLObject {
-    return this._value.HSLObject;
+    return this._value.HSL;
   }
 
   public get value(): HSLObject {
-    return this._value.HSLObject;
+    return this._value.HSL;
   }
 
   public set hsl(hsl: HSLObject) {
-    this._value.setH(hsl.H);
-    this._value.setS(hsl.S);
-    this._value.setL(hsl.L);
+    this._value.HSL = hsl;
 
     this._perceivedBrightness = undefined;
   }
@@ -38,13 +38,7 @@ export class Shade {
   }
 
   public set hex(hex: string) {
-    if (!hex.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
-      throw new Error(`Invalid hex color: "${hex}`);
-    }
-
-    this._value.setR(parseInt(hex.substring(1, 3), 16));
-    this._value.setG(parseInt(hex.substring(3, 5), 16));
-    this._value.setB(parseInt(hex.substring(5, 7), 16));
+    this._value.HEX = hex;
 
     this._perceivedBrightness = undefined;
   }
@@ -54,17 +48,12 @@ export class Shade {
       return this._perceivedBrightness;
     }
 
-    this._perceivedBrightness = perceivedBrightnessFromRGB(
-      this._value.R,
-      this._value.G,
-      this._value.B
-    );
-
+    this._perceivedBrightness = perceivedBrightnessFromRGB(this._value.RGB);
     return this._perceivedBrightness;
   }
 
   public copy(): Shade {
-    return new Shade(this.index, new ColorTranslator(this.hex), this.fixed);
+    return new Shade(this.index, new Value(this.hex), this.fixed);
   }
 
   public static random(): Shade {
@@ -72,7 +61,7 @@ export class Shade {
     const s = 30 + Math.floor(Math.random() * 60);
     const l = 25 + Math.floor(Math.random() * 50);
 
-    const value = new ColorTranslator({ H: h, S: s, L: l });
+    const value = new Value({ H: h, S: s, L: l });
     return new Shade(0, value, true);
   }
 
@@ -101,11 +90,7 @@ export class Shade {
 
     if (!('value' in shade)) {
       if ('hex' in shade && typeof shade.hex === 'string') {
-        return new Shade(
-          index,
-          new ColorTranslator(shade.hex, { decimals: 2 }),
-          fixed
-        );
+        return new Shade(index, new Value(shade.hex), fixed);
       }
 
       throw new Error(
@@ -113,12 +98,12 @@ export class Shade {
       );
     }
 
-    let value: ColorTranslator | undefined;
+    let value: Value | undefined;
     if (
       typeof shade.value === 'string' &&
       shade.value.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)
     ) {
-      value = new ColorTranslator(shade.value, { decimals: 2 });
+      value = new Value(shade.value);
     } else if (typeof shade.value === 'object') {
       const hsl = shade.value as HSLObject;
       if (
@@ -129,7 +114,7 @@ export class Shade {
         (typeof hsl.S === 'number' || typeof hsl.S === 'string') &&
         (typeof hsl.L === 'number' || typeof hsl.L === 'string')
       ) {
-        value = new ColorTranslator(hsl, { decimals: 2 });
+        value = new Value(hsl);
       }
     }
 
@@ -146,7 +131,7 @@ export class Shade {
     return {
       index: this.index,
       fixed: this.fixed,
-      value: this._value.HSLObject,
+      value: this._value.HSL,
     };
   }
 

@@ -5,9 +5,8 @@ export enum PaletteScheme {
   ANALOGOUS = 'analogous',
   COMPLEMENTARY = 'complementary',
   SPLIT_COMPLEMENTARY = 'split-complementary',
-  SQUARE = 'square',
-  TETRADIC = 'tetradic',
   TRIADIC = 'triadic',
+  COMPOUND = 'compound',
 }
 
 export const PALETTE_SCHEMES = [
@@ -20,7 +19,6 @@ export const PALETTE_SCHEMES = [
     value: PaletteScheme.SPLIT_COMPLEMENTARY,
     label: 'scheme.split-complementary',
   },
-  { value: PaletteScheme.SQUARE, label: 'scheme.square' },
-  { value: PaletteScheme.TETRADIC, label: 'scheme.tetradic' },
   { value: PaletteScheme.TRIADIC, label: 'scheme.triadic' },
+  { value: PaletteScheme.COMPOUND, label: 'scheme.compound' },
 ];

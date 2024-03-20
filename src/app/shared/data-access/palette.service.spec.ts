@@ -42,8 +42,8 @@ describe('PaletteService', () => {
     await service.generatePalette('#ffffff', PaletteScheme.ANALOGOUS);
 
     expect(service.palette()).toBeTruthy();
-    expect(colorService.regenerateShades).toHaveBeenCalledTimes(3);
-    expect(colorNameService.getColorName).toHaveBeenCalledTimes(3);
+    expect(colorService.regenerateShades).toHaveBeenCalledTimes(5);
+    expect(colorNameService.getColorName).toHaveBeenCalledTimes(5);
   });
 
   it('should save palette to local storage', async () => {
@@ -53,8 +53,8 @@ describe('PaletteService', () => {
     expect(localStorage.getItem(LocalStorageKey.PALETTE)).toBeTruthy();
     expect(localStorage.getItem(LocalStorageKey.PALETTE)).toContain('name');
     expect(localStorage.getItem(LocalStorageKey.PALETTE)).toContain('colors');
-    expect(colorService.regenerateShades).toHaveBeenCalledTimes(2);
-    expect(colorNameService.getColorName).toHaveBeenCalledTimes(2);
+    expect(colorService.regenerateShades).toHaveBeenCalledTimes(3);
+    expect(colorNameService.getColorName).toHaveBeenCalledTimes(3);
   });
 
   it('should load palette from local storage', () => {

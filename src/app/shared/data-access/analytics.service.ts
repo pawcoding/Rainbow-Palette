@@ -303,14 +303,11 @@ export class AnalyticsService {
       case PaletteScheme.SPLIT_COMPLEMENTARY:
         name = TrackingEventName.GENERATE_PALETTE_SPLIT_COMPLEMENTARY;
         break;
-      case PaletteScheme.SQUARE:
-        name = TrackingEventName.GENERATE_PALETTE_SQUARE;
-        break;
-      case PaletteScheme.TETRADIC:
-        name = TrackingEventName.GENERATE_PALETTE_TETRADIC;
-        break;
       case PaletteScheme.TRIADIC:
         name = TrackingEventName.GENERATE_PALETTE_TRIADIC;
+        break;
+      case PaletteScheme.COMPOUND:
+        name = TrackingEventName.GENERATE_PALETTE_COMPOUND;
         break;
       default:
         console.warn('Unknown palette generation scheme', scheme);
