@@ -23,27 +23,64 @@ import { Subscription } from 'rxjs';
   templateUrl: './dropdown-menu.component.html'
 })
 export class DropdownMenuComponent<T> {
-  // Input Signals
+  /**
+   * The items that are displayed in the dropdown menu.
+   */
   public readonly items = input.required<Array<T>>();
+  /**
+   * Title on top of the dropdown menu.
+   */
   public readonly title = input<string | undefined>();
+  /**
+   * If the dropdown menu is disabled it will not open when the user clicks on the trigger.
+   */
   public readonly disabled = input(false, {
     transform: booleanAttribute
   });
+  /**
+   * Whether the dropdown menu should close when the user scrolls outside of the menu.
+   */
   public readonly closeOnScroll = input(true, {
     transform: booleanAttribute
   });
+  /**
+   * Whether the selected item should be highlighted in the dropdown menu.
+   */
   public readonly highlightSelection = input(false, {
     transform: booleanAttribute
   });
+  /**
+   * Minimum width of the dropdown menu.
+   */
   public readonly minWidth = input('12rem');
+  /**
+   * Maximum width of the dropdown menu.
+   */
   public readonly maxWidth = input('40rem');
+  /**
+   * Minimum height of the dropdown menu.
+   * This does not include the height of the title but only the menu items.
+   */
   public readonly minHeight = input<string | undefined>();
+  /**
+   * Maximum height of the dropdown menu.
+   * This does not include the height of the title but only the menu items.
+   * If the height of the menu items exceeds this value, the menu will be scrollable.
+   */
   public readonly maxHeight = input('16rem');
 
-  // Model Signals
+  /**
+   * The currently selected item in the dropdown menu.
+   * This can be pre-selected by setting this input to the value of the item.
+   * This will also be updated when the user selects an item in the dropdown menu.
+   */
   public readonly selectedItem = model<T | undefined>(undefined);
 
-  // Content Signals
+  /**
+   * The template that is used to render the items in the dropdown menu.
+   * You can use this to customize the appearance of the items.
+   * The template context contains the item that is currently being rendered.
+   */
   public readonly itemTemplate = contentChild<TemplateRef<{ item: T }>>('itemTemplate');
 
   // View Child Signals

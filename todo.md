@@ -1,0 +1,17 @@
+- [x] Add Prettier
+- [x] Add Eslint
+- [ ] Add Storybook
+- [ ] Add GitHub Actions
+- [ ] Add Chromatic
+- [x] Add Matomo
+  - [x] Add custom event tracking
+  - [x] Add custom page name tracking
+  - [x] Add mock service
+  - [x] Add service tests
+  - [x] Add consent management
+- [x] Add PWA
+  - [x] Add service worker
+  - [x] Add mock service
+  - [x] Add service tests
+- [x] Add imprint
+- [x] Add analytics page

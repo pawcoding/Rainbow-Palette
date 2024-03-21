@@ -11,7 +11,9 @@
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "lint": "ng lint",
     "prettier": "prettier --write \"src/**/*.{ts,json,html,css}\"",
-    "prettier:check": "prettier --check \"src/**/*.{ts,json,html,css}\""
+    "prettier:check": "prettier --check \"src/**/*.{ts,json,html,css}\"",
+    "storybook": "ng run rainbow-palette:storybook",
+    "storybook:build": "ng run rainbow-palette:build-storybook"
   },
   "private": true,
   "dependencies": {
@@ -45,12 +47,24 @@
     "@angular-eslint/template-parser": "17.3.0",
     "@angular/cli": "^17.3.0",
     "@angular/compiler-cli": "^17.3.1",
+    "@chromatic-com/storybook": "^1.2.25",
+    "@compodoc/compodoc": "^1.1.23",
+    "@storybook/addon-actions": "^8.0.2",
+    "@storybook/addon-docs": "^8.0.2",
+    "@storybook/addon-essentials": "^8.0.2",
+    "@storybook/addon-interactions": "^8.0.2",
+    "@storybook/addon-links": "^8.0.2",
+    "@storybook/angular": "^8.0.2",
+    "@storybook/blocks": "^8.0.2",
+    "@storybook/test": "^8.0.2",
     "@tailwindcss/forms": "^0.5.7",
     "@types/jasmine": "~5.1.4",
+    "@types/node": "^20.11.30",
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
     "autoprefixer": "^10.4.18",
     "eslint": "^8.57.0",
+    "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-tailwindcss": "^3.15.1",
     "jasmine-core": "~5.1.2",
     "karma": "~6.4.3",
@@ -63,6 +77,7 @@
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-packagejson": "^2.4.12",
     "prettier-plugin-tailwindcss": "^0.5.12",
+    "storybook": "^8.0.2",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.3.3"
   }

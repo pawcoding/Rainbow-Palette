@@ -54,9 +54,18 @@ export class ToastService {
     // Attach the toast component to the overlay.
     effect(() => {
       if (this._toast()) {
-        this._overlayRef?.detach();
+        if (!this._overlayRef) {
+          return;
+        }
+
+        this._overlayRef.detach();
         const toastPortal = new ComponentPortal(ToastComponent);
-        this._overlayRef?.attach(toastPortal);
+        const toastComponent = this._overlayRef.attach(toastPortal);
+        toastComponent.setInput('toast', this._toast());
+        const closeSubscription = toastComponent.instance.close.subscribe(() => {
+          this.hideToast();
+          closeSubscription.unsubscribe();
+        });
       } else {
         this._overlayRef?.detach();
       }

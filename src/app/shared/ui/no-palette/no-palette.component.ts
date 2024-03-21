@@ -12,7 +12,11 @@ import { TranslateModule } from '@ngx-translate/core';
   styleUrl: './no-palette.component.css'
 })
 export class NoPaletteComponent {
-  public readonly parent = input.required<'view' | 'preview'>();
-
   protected readonly heroArrowUturnLeft = heroArrowUturnLeft;
+
+  /**
+   * The parent component of the no-palette component.
+   * This determines the text that is displayed in the no-palette component.
+   */
+  public readonly parent = input.required<'view' | 'preview'>();
 }

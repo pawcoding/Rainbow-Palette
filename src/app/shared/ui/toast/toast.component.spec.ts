@@ -1,24 +1,24 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
-import { ToastService, ToastServiceMock } from '../../data-access/toast.service';
+import { Toast } from '../../interfaces/toast.interface';
 import { ToastComponent } from './toast.component';
 
 describe('ToastComponent', () => {
-  let toastService: ToastServiceMock;
-
   let component: ToastComponent;
   let fixture: ComponentFixture<ToastComponent>;
 
   beforeEach(async () => {
-    toastService = new ToastServiceMock();
-
     await TestBed.configureTestingModule({
-      imports: [ToastComponent, TranslateModule.forRoot()],
-      providers: [{ provide: ToastService, useValue: toastService }]
+      imports: [ToastComponent, TranslateModule.forRoot()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ToastComponent);
     component = fixture.componentInstance;
+
+    // @ts-expect-error - Bind required input signal
+    component.toast = signal<Toast>({ type: 'test', message: 'test message' });
+
     fixture.detectChanges();
   });
 
@@ -27,10 +27,10 @@ describe('ToastComponent', () => {
   });
 
   it('should close toast', () => {
-    spyOn(toastService, 'hideToast');
+    spyOn(component.close, 'emit');
 
     component.closeToast();
 
-    expect(toastService.hideToast).toHaveBeenCalled();
+    expect(component.close.emit).toHaveBeenCalled();
   });
 });

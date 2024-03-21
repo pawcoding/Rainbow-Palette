@@ -1,26 +1,36 @@
-import { OverlayModule } from '@angular/cdk/overlay';
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroXMarkMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
-import { ToastService } from '../../data-access/toast.service';
+import { Toast } from '../../interfaces/toast.interface';
 
 @Component({
   selector: 'rp-toast',
   standalone: true,
-  imports: [OverlayModule, TranslateModule, NgIconComponent],
+  imports: [TranslateModule, NgIconComponent],
   templateUrl: './toast.component.html',
   styleUrl: './toast.component.css'
 })
 export class ToastComponent {
-  private readonly _toastService = inject(ToastService);
-
   protected readonly heroXMarkMini = heroXMarkMini;
 
-  protected readonly toast = this._toastService.toast;
+  /**
+   * The toast to display containing the type of toast,
+   * message to display, and parameters for the message
+   * if it is a translation key.
+   */
+  public readonly toast = input.required<Toast>();
 
+  /**
+   * Output that emits when the toast should be closed.
+   */
+  public readonly close = output();
+
+  /**
+   * Tailwind classes for the toast colors.
+   */
   protected readonly colors = computed(() => {
-    switch (this.toast()?.type) {
+    switch (this.toast().type) {
       case 'success':
         return 'bg-green-50 border-green-500 text-green-800 dark:bg-green-900 dark:border-green-600 dark:text-green-100';
       case 'error':
@@ -34,7 +44,10 @@ export class ToastComponent {
     }
   });
 
+  /**
+   * Emits the close event to close the toast.
+   */
   public closeToast(): void {
-    this._toastService.hideToast();
+    this.close.emit();
   }
 }

@@ -19,8 +19,7 @@ export enum UpdateType {
   selector: 'rp-editor',
   standalone: true,
   imports: [ColorInputComponent, TranslateModule, DecimalPipe, EditorRangeComponent],
-  templateUrl: './editor.component.html',
-  styleUrl: './editor.component.css'
+  templateUrl: './editor.component.html'
 })
 export class EditorComponent {
   protected readonly UpdateType = UpdateType;
@@ -52,7 +51,6 @@ export class EditorComponent {
 
   public constructor() {
     effect(() => {
-      this._editor().nativeElement.style.setProperty('--editor-hex', this.shade().hex);
       this._editor().nativeElement.style.setProperty('--editor-hue', `${this.shade().hsl.H}`);
       this._editor().nativeElement.style.setProperty('--editor-saturation', `${this.shade().hsl.S}%`);
       this._editor().nativeElement.style.setProperty('--editor-lightness', `${this.shade().hsl.L}%`);
@@ -110,6 +108,7 @@ export class EditorComponent {
 
   protected cancel(): void {
     this._dialogRef.close(undefined);
+    this.color.set(this._data.color.copy());
   }
 
   protected save(): void {

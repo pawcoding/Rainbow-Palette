@@ -1,9 +1,13 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*"],
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -34,7 +38,9 @@
             "varsIgnorePattern": "^_"
           }
         ],
-        "comma-dangle": ["error"],
+        "comma-dangle": [
+          "error"
+        ],
         "@typescript-eslint/no-inferrable-types": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/explicit-function-return-type": "error",
@@ -68,7 +74,9 @@
       }
     },
     {
-      "files": ["*.html"],
+      "files": [
+        "*.html"
+      ],
       "extends": [
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility",
@@ -89,7 +97,9 @@
             ]
           }
         ],
-        "@angular-eslint/template/prefer-self-closing-tags": ["error"],
+        "@angular-eslint/template/prefer-self-closing-tags": [
+          "error"
+        ],
         "tailwindcss/classnames-order": [
           "error",
           {
@@ -97,10 +107,19 @@
             "skipClassAttribute": false
           }
         ],
-        "tailwindcss/no-contradicting-classname": ["error"],
-        "tailwindcss/enforces-shorthand": ["error"]
+        "tailwindcss/no-contradicting-classname": [
+          "error"
+        ],
+        "tailwindcss/enforces-shorthand": [
+          "error"
+        ]
       }
     }
   ],
-  "plugins": ["tailwindcss"]
+  "plugins": [
+    "tailwindcss"
+  ],
+  "extends": [
+    "plugin:storybook/recommended"
+  ]
 }

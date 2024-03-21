@@ -13,6 +13,8 @@ import { sleep } from '../../utils/sleep';
   styles: ':host { display: block; }'
 })
 export class AccordionComponent {
+  protected readonly heroPlus = heroPlus;
+
   /**
    * The summary of the accordion.
    * This can be a translation key or a string.
@@ -31,27 +33,46 @@ export class AccordionComponent {
    */
   public readonly hidden = input(false, { transform: booleanAttribute });
 
-  protected readonly heroPlus = heroPlus;
-
+  /**
+   * HTML details element reference.
+   */
   private readonly _details = viewChild.required<ElementRef<HTMLDetailsElement>>('detailsElement');
+  /**
+   * HTML summary element reference.
+   */
   private readonly _summary = viewChild.required<ElementRef<HTMLElement>>('summaryElement');
+  /**
+   * Reference to the content container element.
+   */
   private readonly _content = viewChild.required<ElementRef<HTMLDivElement>>('contentElement');
 
+  /**
+   * Whether the accordion is open.
+   */
   protected readonly isOpen = signal(false);
 
+  /**
+   * Native animation object for the accordion.
+   */
   private _animation?: Animation;
+  /**
+   * Whether the accordion is currently closing.
+   */
   private _isClosing = false;
+  /**
+   * Whether the accordion is currently expanding.
+   */
   private _isExpanding = false;
 
+  /**
+   * Toggles the accordion open and closed.
+   */
   public toggleAccordion($event: Event): void {
     const htmlElement = $event.target as HTMLElement | null;
     if (htmlElement?.tagName === 'A') {
       return;
     }
-
     $event.preventDefault();
-
-    this._details().nativeElement.style.overflow = 'hidden';
 
     if (this._isClosing || !this._details().nativeElement.open) {
       this.open();
@@ -60,9 +81,13 @@ export class AccordionComponent {
     }
   }
 
+  /**
+   * Shrinks the accordion to close it.
+   */
   public async shrink(): Promise<void> {
     this._isClosing = true;
 
+    this._details().nativeElement.style.overflow = 'hidden';
     const startHeight = `${this._details().nativeElement.offsetHeight}px`;
     const endHeight = `calc(${this._summary().nativeElement.offsetHeight}px + 3rem)`;
 
@@ -80,7 +105,7 @@ export class AccordionComponent {
       }
     );
 
-    this._animation.onfinish = (): void => this.onAnimationFinish(false);
+    this._animation.onfinish = (): void => this._onAnimationFinish(false);
     this._animation.oncancel = (): boolean => (this._isClosing = false);
 
     // Wait for animation to finish before hiding the content
@@ -89,15 +114,22 @@ export class AccordionComponent {
     this.isOpen.set(false);
   }
 
+  /**
+   * Opens the accordion.
+   */
   public open(): void {
+    this._details().nativeElement.style.overflow = 'hidden';
     this._details().nativeElement.style.height = `${this._details().nativeElement.offsetHeight}px`;
 
     this._details().nativeElement.open = true;
 
-    window.requestAnimationFrame(() => this.expand());
+    window.requestAnimationFrame(() => this._expand());
   }
 
-  public async expand(): Promise<void> {
+  /**
+   * Expands the accordion to open it.
+   */
+  private async _expand(): Promise<void> {
     this._isExpanding = true;
     this.isOpen.set(true);
 
@@ -123,11 +155,16 @@ export class AccordionComponent {
       }
     );
 
-    this._animation.onfinish = (): void => this.onAnimationFinish(true);
+    this._animation.onfinish = (): void => this._onAnimationFinish(true);
     this._animation.oncancel = (): boolean => (this._isExpanding = false);
   }
 
-  public onAnimationFinish(open: boolean): void {
+  /**
+   * Handles the finish of the animation and updates the state of the accordion.
+   *
+   * @param open Whether the accordion is open.
+   */
+  private _onAnimationFinish(open: boolean): void {
     this._details().nativeElement.open = open;
 
     this._animation = undefined;

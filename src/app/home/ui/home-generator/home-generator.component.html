@@ -14,7 +14,7 @@
       [placeholder]="'home.generator.hex' | translate"
       [tooltip]="'home.generator.color' | translate"
       [(hex)]="hex"
-      [(isValid)]="isValid"
+      (isValid)="isValid.set($event)"
     />
 
     <span
