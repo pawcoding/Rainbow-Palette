@@ -77,8 +77,12 @@ export class LayoutComponent implements AfterViewInit {
       const bottomNavigationHeight = this._bottomNavigation()?.nativeElement.offsetHeight ?? 0;
       document.documentElement.style.setProperty('--bottom-navigation-height', `${bottomNavigationHeight}px`);
 
-      const analyticsHeight = this._analytics()?.height() ?? 0;
-      document.documentElement.style.setProperty('--analytics-consent-height', `${analyticsHeight}px`);
+      if (this.isMobile()) {
+        const analyticsHeight = this._analytics()?.height() ?? 0;
+        document.documentElement.style.setProperty('--analytics-consent-height', `${analyticsHeight}px`);
+      } else {
+        document.documentElement.style.setProperty('--analytics-consent-height', '0px');
+      }
     });
   }
 

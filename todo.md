@@ -1,6 +1,6 @@
 - [x] Add Prettier
 - [x] Add Eslint
-- [ ] Add Storybook
+- [x] Add Storybook
 - [ ] Add GitHub Actions
 - [ ] Add Chromatic
 - [x] Add Matomo
