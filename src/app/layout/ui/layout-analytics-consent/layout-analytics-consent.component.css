@@ -1,4 +1,0 @@
-:host {
-  @apply fixed bottom-0 left-0 block;
-  margin-bottom: var(--bottom-navigation-height);
-}

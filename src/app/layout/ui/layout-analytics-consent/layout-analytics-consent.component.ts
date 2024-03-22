@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
   standalone: true,
   imports: [TranslateModule, RouterLink],
   templateUrl: './layout-analytics-consent.component.html',
-  styleUrl: './layout-analytics-consent.component.css'
+  styles: ':host { display: block; }'
 })
 export class LayoutAnalyticsConsentComponent {
   protected readonly matomo = '<a href="https://matomo.org/" target="_blank" class="underline">Matomo</a>';

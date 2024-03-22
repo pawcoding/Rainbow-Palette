@@ -2,3 +2,7 @@
   padding-top: var(--header-height);
   padding-bottom: calc(var(--bottom-navigation-height) + var(--analytics-consent-height));
 }
+
+#consent {
+  margin-bottom: var(--bottom-navigation-height);
+}

@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { heroAdjustmentsHorizontalSolid, heroRectangleGroupSolid, heroSwatchSolid } from '@ng-icons/heroicons/solid';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnalyticsService, AnalyticsStatus } from '../shared/data-access/analytics.service';
 import { LanguageService } from '../shared/data-access/language.service';
@@ -10,8 +9,8 @@ import { PwaService } from '../shared/data-access/pwa.service';
 import { ThemeService } from '../shared/data-access/theme.service';
 import { Theme } from '../shared/types/theme';
 import { sleep } from '../shared/utils/sleep';
+import { NAVIGATION_ENTRIES } from './constants/navigation-entries';
 import { Language } from './types/language';
-import { NavigationEntry } from './types/navigation-entry';
 import { LayoutAnalyticsConsentComponent } from './ui/layout-analytics-consent/layout-analytics-consent.component';
 import { LayoutFooterComponent } from './ui/layout-footer/layout-footer.component';
 import { LayoutNavigationComponent } from './ui/layout-navigation/layout-navigation.component';
@@ -45,26 +44,7 @@ export class LayoutComponent implements AfterViewInit {
   private readonly _bottomNavigation = viewChild<ElementRef<HTMLElement>>('bottomNavigation');
   private readonly _analytics = viewChild(LayoutAnalyticsConsentComponent);
 
-  protected readonly navigationEntries: Array<NavigationEntry> = [
-    {
-      title: 'layout.navigation.generate.title',
-      path: '/',
-      icon: heroSwatchSolid,
-      description: 'layout.navigation.generate.description'
-    },
-    {
-      title: 'layout.navigation.view.title',
-      path: '/view',
-      icon: heroAdjustmentsHorizontalSolid,
-      description: 'layout.navigation.view.description'
-    },
-    {
-      title: 'layout.navigation.preview.title',
-      path: '/preview',
-      icon: heroRectangleGroupSolid,
-      description: 'layout.navigation.preview.description'
-    }
-  ];
+  protected readonly navigationEntries = NAVIGATION_ENTRIES;
   protected readonly isMobile = this._mobileService.isMobile;
   protected readonly language = this._languageService.language;
   protected readonly theme = this._themeService.theme;

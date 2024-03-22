@@ -42,7 +42,12 @@
     </main>
   }
   @if (showAnalyticsConsent()) {
-    <rp-layout-analytics-consent (consent)="analyticsConsent($event)" />
+    <div
+      class="fixed bottom-0 left-0"
+      id="consent"
+    >
+      <rp-layout-analytics-consent (consent)="analyticsConsent($event)" />
+    </div>
   }
   @if (isMobile()) {
     <div

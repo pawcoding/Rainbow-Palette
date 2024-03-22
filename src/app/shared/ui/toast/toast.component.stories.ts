@@ -1,16 +1,10 @@
-import { action } from '@storybook/addon-actions';
-import { Meta, argsToTemplate } from '@storybook/angular';
+import { Meta } from '@storybook/angular';
 import { createStory } from '../../utils/storybook';
 import { ToastComponent } from './toast.component';
-
-export const actionsData = {
-  close: action('close')
-};
 
 const meta: Meta<ToastComponent> = {
   title: 'Shared/Toast',
   component: ToastComponent,
-  excludeStories: /.*Data$/,
   tags: ['autodocs'],
   argTypes: {
     toast: {
@@ -33,15 +27,7 @@ const meta: Meta<ToastComponent> = {
         }
       }
     }
-  },
-  // @ts-expect-error - Args are missing protected internal properties
-  render: (args: ToastComponent) => ({
-    props: {
-      ...args,
-      close: actionsData.close
-    },
-    template: `<rp-toast ${argsToTemplate(args)} />`
-  })
+  }
 };
 export default meta;
 

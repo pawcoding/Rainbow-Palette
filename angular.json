@@ -89,7 +89,7 @@
             "configDir": ".storybook",
             "browserTarget": "rainbow-palette:build",
             "compodoc": true,
-            "compodocArgs": ["-e", "json", "-d", ".", "--disablePrivate", "--disableProtected", "-w"],
+            "compodocArgs": ["-e", "json", "-d", ".", "--disablePrivate", "--disableProtected", "-w", "-t"],
             "port": 6006
           }
         },
