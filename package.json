@@ -26,6 +26,7 @@
     "start": "ng serve",
     "storybook": "ng run rainbow-palette:storybook",
     "storybook:build": "ng run rainbow-palette:build-storybook",
+    "chromatic": "chromatic --build-script-name storybook:build --exit-zero-on-changes",
     "test": "ng test",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "watch": "ng build --watch --configuration development"
@@ -79,6 +80,7 @@
     "@typescript-eslint/eslint-plugin": "7.2.0",
     "@typescript-eslint/parser": "7.2.0",
     "autoprefixer": "^10.4.18",
+    "chromatic": "^11.2.0",
     "eslint": "^8.57.0",
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-tailwindcss": "^3.15.1",

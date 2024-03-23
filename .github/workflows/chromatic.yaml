@@ -1,0 +1,71 @@
+name: 🎨 Publish Storybook
+# Run this on every push to master and pull request to master or staging
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+      - staging
+permissions:
+  contents: read
+jobs:
+  publish:
+    # Skip this job if triggered by renovate bot
+    if: ${{ !startsWith(github.head_ref, 'renovate/')}}
+
+    # Use the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    steps:
+      # Checkout repository
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Install pnpm
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      # Get pnpm store directory
+      - name: 📦 Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      # Setup pnpm cache
+      - name: 📦 Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # Install dependencies
+      - name: 📦 Install dependencies
+        run: |
+          pnpm install --frozen-lockfile --prefer-frozen-lockfile
+
+      # Upload Storybook to Chromatic
+      - name: 🎨 Upload Storybook to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          buildScriptName: "storybook:build"
+          exitZeroOnChanges: true
+          exitOnceUploaded: true
+        env:
+          CI: true
