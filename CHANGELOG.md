@@ -1,3 +1,10 @@
+## [1.0.2-staging.2](https://github.com/pawcoding/rainbow-palette/compare/v1.0.2-staging.1...v1.0.2-staging.2) (2024-03-23)
+
+
+### Bug Fixes
+
+* **view:** redirect to home on app start without palette ([ae36838](https://github.com/pawcoding/rainbow-palette/commit/ae368382fa4980e95b5059b31b973ee0e78c488c))
+
 ## [1.0.2-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1...v1.0.2-staging.1) (2024-03-23)
 
 
