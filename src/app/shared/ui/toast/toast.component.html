@@ -1,7 +1,7 @@
 @if (toast(); as toast) {
   <div
     [class]="colors()"
-    class="flex items-center justify-between gap-1 p-4 rounded shadow-md toast max-w-96 border-s-4 dark:shadow-none"
+    class="toast flex max-w-96 items-center justify-between gap-1 rounded border-s-4 p-4 shadow-md dark:shadow-none"
     role="alert"
   >
     <span class="text-sm">
@@ -11,7 +11,7 @@
     <button
       [title]="'common.close' | translate"
       (click)="closeToast()"
-      class="flex items-center justify-center transition-colors duration-200 rounded size-6 shrink-0 bg-black/0 hover:bg-black/10 focus:outline-none"
+      class="flex size-6 shrink-0 items-center justify-center rounded bg-black/0 transition-colors duration-200 hover:bg-black/10 focus:outline-none"
       type="button"
     >
       <ng-icon [svg]="heroXMarkMini" />

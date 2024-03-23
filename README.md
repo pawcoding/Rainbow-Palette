@@ -1,27 +1,50 @@
-# RainbowPalette
+# Rainbow Palette
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+[![GitHub](https://img.shields.io/github/license/pawcoding/rainbow-palette?color=brightgreen)](https://github.com/pawcoding/rainbow-palette/blob/main/LICENSE)
+![Version](https://img.shields.io/github/package-json/v/pawcoding/rainbow-palette/master?label=version)
+![Pipeline checks](https://img.shields.io/github/actions/workflow/status/pawcoding/rainbow-palette/test.yaml?branch=main)
+[![Discord](https://badgen.net/discord/members/GzgTh4hxrx)](https://discord.gg/GzgTh4hxrx)
 
-## Development server
+[![View online](https://img.shields.io/badge/view--online-blue)](https://rainbow-palette.app/)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+<!-- [![Storybook](https://img.shields.io/badge/storybook-deeppink)](https://www.chromatic.com/library?appId=6433ad418729acb1feba1f24) -->
 
-## Code scaffolding
+## About
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Rainbow Palette is a versatile tool for generating color palettes from a single color.
+It offers various algorithms for palette generation, allowing users to adjust and fine-tune colors to their liking.
+Palettes can be exported in different formats such as CSS and Tailwind, making them readily usable in web and other projects.
+Rainbow Palette is free to use and open for contributions.
 
-## Build
+![Rainbow Palette](/assets/screenshot.png)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Export formats
 
-## Running unit tests
+- CSS
+- SCSS
+- LESS
+- Tailwind CSS
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Your favorite format is missing? Feel free to [open an issue](https://github.com/pawcoding/Rainbow-Palette/issues?q=is%3Aissue+is%3Aopen+label%3Atype%2Ffeature-export+) and let us know!
 
-## Running end-to-end tests
+### Roadmap
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+![Roadmap](/assets/roadmap.png)
 
-## Further help
+- Implement exemplary web components to preview palettes
+- Create shareable links for palettes
+- Provide prefabricated palettes as starting points
+- Introduce functionality to generate palettes from images
+- Continuously improve algorithms
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Get Involved
+
+Help is always welcome! You can contribute to Rainbow Palette by submitting bug reports, feature requests, or code contributions through GitHub Issues or join the conversation on [Discord](https://discord.gg/GzgTh4hxrx).
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+Luis Wolf &lt;development@pawcode.de&gt;
