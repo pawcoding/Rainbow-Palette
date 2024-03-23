@@ -1,3 +1,10 @@
+## [1.0.1-staging.3](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1-staging.2...v1.0.1-staging.3) (2024-03-23)
+
+
+### Bug Fixes
+
+* **ci:** also update beta version on production release ([5b953b9](https://github.com/pawcoding/rainbow-palette/commit/5b953b943b126134dfa8e978cca0a182e265df4c))
+
 ## [1.0.1-staging.2](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1-staging.1...v1.0.1-staging.2) (2024-03-23)
 
 
