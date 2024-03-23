@@ -1,0 +1,55 @@
+name: Export Format Request
+description: Request a new export format for your palette in Rainbow Palette
+title: '[Export]: '
+labels: ['status/new', 'type/feature-export']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this export format request!
+        We'll do our best to add your requested format to Rainbow Palette.
+  - type: input
+    id: contact
+    attributes:
+      label: Contact Details
+      description: How can we get in touch with you if we need more info?
+      placeholder: ex. email@example.com
+    validations:
+      required: false
+  - type: input
+    id: format-name
+    attributes:
+      label: Format Name
+      description: What is the name of the export format you'd like to request?
+      placeholder: ex. MyFormat
+    validations:
+      required: true
+  - type: textarea
+    id: format-description
+    attributes:
+      label: Format Description
+      description: Describe the format you'd like to request in detail
+      placeholder: Tell us about your format!
+    validations:
+      required: true
+  - type: textarea
+    id: format-example
+    attributes:
+      label: Format Example
+      description: Provide an example of the format you'd like to request
+      placeholder: Show us an example!
+    validations:
+      required: false
+  - type: input
+    id: format-url
+    attributes:
+      label: Format URL
+      description: If there's a URL with more information about the format, please provide it
+      placeholder: ex. https://example.com/format
+    validations:
+      required: false
+  - type: textarea
+    id: format-notes
+    attributes:
+      label: Additional Notes
+      description: Anything else you'd like to add?

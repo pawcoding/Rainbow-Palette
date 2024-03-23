@@ -1,0 +1,70 @@
+name: 🚀 Publish new version
+# Run this on every pre-release tag push
+on:
+  push:
+    tags:
+      - 'v*-staging.*'
+jobs:
+  publish:
+    # Use the latest version of Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout repository
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      # Setup Node
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      # Install pnpm
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+          run_install: false
+
+      # Get pnpm store directory
+      - name: 📦 Get pnpm store directory
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
+      # Setup pnpm cache
+      - name: 📦 Setup pnpm cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      # Install dependencies
+      - name: 📦 Install dependencies
+        run: |
+          pnpm install --frozen-lockfile --prefer-frozen-lockfile
+
+      # Build project
+      - name: 🏗 Build project
+        run: pnpm run build
+
+      # Upload build artifacts
+      - name: 🚀 Upload build artifacts
+        uses: wlixcc/SFTP-Deploy-Actions@v1.2.4
+        with:
+          username: ${{ secrets.FTP_USER }}
+          server: ${{ secrets.FTP_HOST }}
+          port: ${{ secrets.FTP_PORT }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: './dist/rainbow-palette/browser'
+          remote_path: './staging'
+          sftp_only: true
+
+      # Purge unused old Angular files via custom script
+      - name: 🧹 Purge unused files
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.HTTP_PURGE }}
+          method: 'GET'

@@ -22,6 +22,7 @@
     "ng": "ng",
     "prettier": "prettier --write \"src/**/*.{ts,json,html,css}\"",
     "prettier:check": "prettier --check \"src/**/*.{ts,json,html,css}\"",
+    "semantic-release": "semantic-release",
     "start": "ng serve",
     "storybook": "ng run rainbow-palette:storybook",
     "storybook:build": "ng run rainbow-palette:build-storybook",
@@ -62,6 +63,8 @@
     "@angular/compiler-cli": "^17.3.1",
     "@chromatic-com/storybook": "^1.2.25",
     "@compodoc/compodoc": "^1.1.23",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
     "@storybook/addon-actions": "^8.0.2",
     "@storybook/addon-docs": "^8.0.2",
     "@storybook/addon-essentials": "^8.0.2",
@@ -90,9 +93,13 @@
     "prettier-plugin-organize-imports": "^3.2.4",
     "prettier-plugin-packagejson": "^2.4.12",
     "prettier-plugin-tailwindcss": "^0.5.12",
+    "semantic-release": "^23.0.5",
     "storybook": "^8.0.2",
     "tailwindcss": "^3.4.1",
     "typescript": "~5.3.3"
+  },
+  "publishConfig": {
+    "access": "restricted"
   },
   "readme": "https://github.com/pawcoding/rainbow-palette#readme"
 }
