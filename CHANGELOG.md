@@ -1,3 +1,10 @@
+## [1.0.2-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1...v1.0.2-staging.1) (2024-03-23)
+
+
+### Bug Fixes
+
+* **ci:** add back chromatic action ([8436c28](https://github.com/pawcoding/rainbow-palette/commit/8436c2861199cabe154eaa7b69cf97eaf7f50761))
+
 ## [1.0.1](https://github.com/pawcoding/rainbow-palette/compare/v1.0.0...v1.0.1) (2024-03-23)
 
 
