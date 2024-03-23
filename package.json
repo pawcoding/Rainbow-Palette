@@ -15,7 +15,7 @@
     "name": "pawcode Development"
   },
   "scripts": {
-    "prebuild": "node ./scripts/update-ngsw.js",
+    "postversion": "node ./scripts/update-ngsw.js",
     "build": "ng build",
     "preinstall": "npx only-allow pnpm",
     "lint": "ng lint",

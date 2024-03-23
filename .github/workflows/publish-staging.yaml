@@ -66,5 +66,5 @@ jobs:
       - name: 🧹 Purge unused files
         uses: fjogeleit/http-request-action@v1
         with:
-          url: ${{ secrets.HTTP_PURGE }}
+          url: ${{ secrets.HTTP_PURGE_STAGING }}
           method: 'GET'
