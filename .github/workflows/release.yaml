@@ -64,7 +64,7 @@ jobs:
 
       # Upload build artifacts
       - name: 🚀 Upload beta build artifacts
-        uses: wlixcc/SFTP-Deploy-Actions@v1.2.4
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USER }}
           server: ${{ secrets.FTP_HOST }}
