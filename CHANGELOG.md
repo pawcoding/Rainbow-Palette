@@ -1,3 +1,10 @@
+## [1.0.1-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.0.0...v1.0.1-staging.1) (2024-03-23)
+
+
+### Bug Fixes
+
+* **ci:** update ngsw during semver ([04bfe38](https://github.com/pawcoding/rainbow-palette/commit/04bfe380d700a10c34335e386e8c1f51d546b2df))
+
 # 1.0.0 (2024-03-23)
 
 
