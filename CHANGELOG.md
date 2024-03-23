@@ -1,3 +1,25 @@
+## [1.0.1-staging.3](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1-staging.2...v1.0.1-staging.3) (2024-03-23)
+
+
+### Bug Fixes
+
+* **ci:** also update beta version on production release ([5b953b9](https://github.com/pawcoding/rainbow-palette/commit/5b953b943b126134dfa8e978cca0a182e265df4c))
+
+## [1.0.1-staging.2](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1-staging.1...v1.0.1-staging.2) (2024-03-23)
+
+
+### Bug Fixes
+
+* **ci:** run semver and publish in same action ([1f420d4](https://github.com/pawcoding/rainbow-palette/commit/1f420d44b0ba2b5bda9732f67c2d9c65eeb0044c))
+* **ci:** use correct upload action ([ca6c1dd](https://github.com/pawcoding/rainbow-palette/commit/ca6c1ddab83dc9b2dff91de4eab332c25f62507b))
+
+## [1.0.1-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.0.0...v1.0.1-staging.1) (2024-03-23)
+
+
+### Bug Fixes
+
+* **ci:** update ngsw during semver ([04bfe38](https://github.com/pawcoding/rainbow-palette/commit/04bfe380d700a10c34335e386e8c1f51d546b2df))
+
 # 1.0.0 (2024-03-23)
 
 

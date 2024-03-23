@@ -1,13 +1,19 @@
-name: 🚀 Publish new version
-# Run this on every pre-release tag push
+name: 🚀 Publish new beta version
+# Run this on every push to staging
 on:
   push:
-    tags:
-      - 'v*-staging.*'
+    branches:
+      - staging
+permissions:
+  contents: read
 jobs:
   publish:
     # Use the latest version of Ubuntu
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       # Checkout repository
       - name: 📥 Checkout code
@@ -46,13 +52,19 @@ jobs:
         run: |
           pnpm install --frozen-lockfile --prefer-frozen-lockfile
 
+      # Create semantic release
+      - name: 🚀 Create semantic beta release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: pnpm run semantic-release
+
       # Build project
       - name: 🏗 Build project
         run: pnpm run build
 
       # Upload build artifacts
-      - name: 🚀 Upload build artifacts
-        uses: wlixcc/SFTP-Deploy-Actions@v1.2.4
+      - name: 🚀 Upload beta build artifacts
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USER }}
           server: ${{ secrets.FTP_HOST }}
@@ -66,5 +78,5 @@ jobs:
       - name: 🧹 Purge unused files
         uses: fjogeleit/http-request-action@v1
         with:
-          url: ${{ secrets.HTTP_PURGE }}
+          url: ${{ secrets.HTTP_PURGE_STAGING }}
           method: 'GET'

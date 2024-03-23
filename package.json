@@ -1,6 +1,6 @@
 {
   "name": "rainbow-palette",
-  "version": "1.0.0",
+  "version": "1.0.1-staging.3",
   "description": "This app generates your own custom color palette from just a single color. Preview your palette live or export it for usage with CSS or TailwindCSS.",
   "homepage": "https://rainbow-palette.app/",
   "bugs": {
@@ -15,7 +15,7 @@
     "name": "pawcode Development"
   },
   "scripts": {
-    "prebuild": "node ./scripts/update-ngsw.js",
+    "postversion": "node ./scripts/update-ngsw.js",
     "build": "ng build",
     "preinstall": "npx only-allow pnpm",
     "lint": "ng lint",
