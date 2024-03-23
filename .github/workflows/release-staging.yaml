@@ -1,5 +1,5 @@
-name: 🚀 Publish new version
-# Run this on every push to master
+name: 🚀 Publish new beta version
+# Run this on every push to staging
 on:
   push:
     branches:
@@ -53,7 +53,7 @@ jobs:
           pnpm install --frozen-lockfile --prefer-frozen-lockfile
 
       # Create semantic release
-      - name: 🚀 Create semantic release
+      - name: 🚀 Create semantic beta release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: pnpm run semantic-release
@@ -63,7 +63,7 @@ jobs:
         run: pnpm run build
 
       # Upload build artifacts
-      - name: 🚀 Upload build artifacts
+      - name: 🚀 Upload beta build artifacts
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USER }}
