@@ -1,13 +1,19 @@
 name: 🚀 Publish new version
-# Run this on every pre-release tag push
+# Run this on every push to master
 on:
   push:
-    tags:
-      - 'v*-staging.*'
+    branches:
+      - staging
+permissions:
+  contents: read
 jobs:
   publish:
     # Use the latest version of Ubuntu
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
     steps:
       # Checkout repository
       - name: 📥 Checkout code
@@ -45,6 +51,12 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           pnpm install --frozen-lockfile --prefer-frozen-lockfile
+
+      # Create semantic release
+      - name: 🚀 Create semantic release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: pnpm run semantic-release
 
       # Build project
       - name: 🏗 Build project

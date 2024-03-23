@@ -1,10 +1,9 @@
-name: 📑 Create release
-# Run this on every push to master or staging
+name: 🚀 Publish new beta version
+# Run this on every push to staging
 on:
   push:
     branches:
       - master
-      - staging
 permissions:
   contents: read
 jobs:
@@ -54,7 +53,30 @@ jobs:
           pnpm install --frozen-lockfile --prefer-frozen-lockfile
 
       # Create semantic release
-      - name: 🚀 Create semantic release
+      - name: 🚀 Create semantic beta release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: pnpm run semantic-release
+
+      # Build project
+      - name: 🏗 Build project
+        run: pnpm run build
+
+      # Upload build artifacts
+      - name: 🚀 Upload beta build artifacts
+        uses: wlixcc/SFTP-Deploy-Actions@v1.2.4
+        with:
+          username: ${{ secrets.FTP_USER }}
+          server: ${{ secrets.FTP_HOST }}
+          port: ${{ secrets.FTP_PORT }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local_path: './dist/rainbow-palette/browser'
+          remote_path: './master'
+          sftp_only: true
+
+      # Purge unused old Angular files via custom script
+      - name: 🧹 Purge unused files
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.HTTP_PURGE }}
+          method: 'GET'
