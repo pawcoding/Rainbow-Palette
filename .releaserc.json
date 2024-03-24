@@ -1,5 +1,5 @@
 {
-  "branches": ["master", {"name": "staging", "channel": "next", "prerelease": true}],
+  "branches": ["master", { "name": "staging", "channel": "next", "prerelease": true }],
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -37,7 +37,7 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "package.json", "pnpm-lock.yaml", "ngsw-config.json"]
+        "assets": ["CHANGELOG.md", "package.json", "pnpm-lock.yaml", "ngsw-config.json", "src/sitemap.xml"]
       }
     ],
     "@semantic-release/github"

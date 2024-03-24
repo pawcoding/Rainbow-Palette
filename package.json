@@ -15,13 +15,15 @@
     "name": "pawcode Development"
   },
   "scripts": {
-    "postversion": "node ./scripts/update-ngsw.js",
+    "postversion": "pnpm run build:ngsw && pnpm run build:sitemap",
     "build": "ng build",
+    "build:ngsw": "node ./scripts/update-ngsw.js",
+    "build:sitemap": "node ./scripts/update-sitemap.js",
     "preinstall": "npx only-allow pnpm",
     "lint": "ng lint",
     "ng": "ng",
-    "prettier": "prettier --write \"src/**/*.{ts,json,html,css}\"",
-    "prettier:check": "prettier --check \"src/**/*.{ts,json,html,css}\"",
+    "prettier": "prettier --write \"{src,scripts}/**/*.{js,ts,json,html,css}\"",
+    "prettier:check": "prettier --check \"{src,scripts}/**/*.{js,ts,json,html,css}\"",
     "semantic-release": "semantic-release",
     "start": "ng serve",
     "storybook": "ng run rainbow-palette:storybook",
