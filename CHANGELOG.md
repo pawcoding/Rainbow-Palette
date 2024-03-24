@@ -1,3 +1,10 @@
+# [1.1.0-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.0.2-staging.2...v1.1.0-staging.1) (2024-03-24)
+
+
+### Features
+
+* **sitemap:** add sitemap generation ([3389b03](https://github.com/pawcoding/rainbow-palette/commit/3389b03abbcd9bf8eb242b0a837381f27393b136))
+
 ## [1.0.2-staging.2](https://github.com/pawcoding/rainbow-palette/compare/v1.0.2-staging.1...v1.0.2-staging.2) (2024-03-23)
 
 
