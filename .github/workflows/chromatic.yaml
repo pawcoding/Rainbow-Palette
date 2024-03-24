@@ -25,6 +25,8 @@ jobs:
       # Checkout repository
       - name: 📥 Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       # Setup Node
       - name: 📦 Setup Node.js
