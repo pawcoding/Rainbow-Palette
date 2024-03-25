@@ -25,4 +25,14 @@ export interface Toast {
    * The parameters to be used in the translation.
    */
   parameters?: Record<string, unknown>;
+  /**
+   * Unique identifier of the toast.
+   * This can be used to identify the toast when hiding it.
+   * Usually, this value is automatically set to the timestamp when the toast is shown by the toast service.
+   */
+  id?: number;
+  /**
+   * The timeout for the toast.
+   */
+  timeout?: ReturnType<typeof setTimeout>;
 }
