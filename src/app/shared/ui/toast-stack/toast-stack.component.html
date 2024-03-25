@@ -1,5 +1,8 @@
 <div class="space-y-2">
   @for (toast of toastStack(); track toast.id) {
-    <rp-toast [toast]="toast" (close)="closeToast(toast.id!)" />
+    <rp-toast
+      [toast]="toast"
+      (close)="closeToast(toast.id!)"
+    />
   }
 </div>
