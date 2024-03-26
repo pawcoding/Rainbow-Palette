@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { fromEvent } from 'rxjs';
 import { AnalyticsService, AnalyticsStatus } from '../shared/data-access/analytics.service';
@@ -28,7 +28,8 @@ import { LayoutOptionsComponent } from './ui/layout-options/layout-options.compo
     LayoutOptionsComponent,
     LayoutFooterComponent,
     RouterOutlet,
-    LayoutAnalyticsConsentComponent
+    LayoutAnalyticsConsentComponent,
+    RouterLink
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
