@@ -3,14 +3,16 @@
     #header
     class="fixed top-0 z-10 flex w-full items-center justify-between gap-2 border-b border-neutral-200 bg-neutral-50 p-4 dark:border-neutral-700 dark:bg-neutral-900"
   >
-    <h1>
-      <span class="sr-only">Rainbow Palette</span>
-      <img
-        [src]="logoAsset()"
-        alt="Rainbow Palette"
-        width="200"
-      />
-    </h1>
+    <a routerLink="/">
+      <h1>
+        <span class="sr-only">Rainbow Palette</span>
+        <img
+          [src]="logoAsset()"
+          alt="Rainbow Palette"
+          width="200"
+        />
+      </h1>
+    </a>
 
     @if (!isMobile()) {
       <ng-container *ngTemplateOutlet="navigationTemplate" />

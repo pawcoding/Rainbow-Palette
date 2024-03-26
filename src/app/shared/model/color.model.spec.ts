@@ -36,6 +36,17 @@ describe('Color', () => {
     expect(parsed.shades.length).toBe(1);
   });
 
+  it('should copy color', () => {
+    const color = new Color([Shade.random()], 'Test');
+    const copy = color.copy();
+
+    expect(copy).toBeInstanceOf(Color);
+    expect(copy).not.toBe(color);
+    expect(copy.name).toBe(color.name);
+    expect(copy.shades.length).toBe(color.shades.length);
+    expect(copy.toString()).toBe(color.toString());
+  });
+
   it('should JSON and string are equal', () => {
     const color = new Color([Shade.random()], 'Test');
 

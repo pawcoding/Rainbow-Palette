@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { fromEvent } from 'rxjs';
 import { AnalyticsService, AnalyticsStatus } from '../shared/data-access/analytics.service';
 import { LanguageService } from '../shared/data-access/language.service';
 import { MobileService } from '../shared/data-access/mobile.service';
@@ -26,7 +28,8 @@ import { LayoutOptionsComponent } from './ui/layout-options/layout-options.compo
     LayoutOptionsComponent,
     LayoutFooterComponent,
     RouterOutlet,
-    LayoutAnalyticsConsentComponent
+    LayoutAnalyticsConsentComponent,
+    RouterLink
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.css'
@@ -50,7 +53,7 @@ export class LayoutComponent implements AfterViewInit {
   protected readonly theme = this._themeService.theme;
   protected readonly initialized = signal(false);
 
-  private readonly _resize = this._mobileService.resize;
+  private readonly _resize = toSignal(fromEvent(window, 'resize'));
 
   protected readonly logoAsset = computed(() => {
     return this.theme() === 'dark' ? '/assets/rainbow-palette-light.svg' : '/assets/rainbow-palette-dark.svg';

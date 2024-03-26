@@ -1,3 +1,7 @@
-.toast {
-  width: calc(100vw - 1rem);
+:host {
+  display: block;
+
+  .toast {
+    width: calc(100vw - 1rem);
+  }
 }

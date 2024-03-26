@@ -38,7 +38,7 @@ describe('ColorNameService', () => {
   });
 
   it('should return color name', async () => {
-    const colorNamePromise = service.getColorName(new Shade(-1, new Value('#FFFFFF')));
+    const colorNamePromise = service.getColorName(new Shade(-1, Value.fromHEX('#FFFFFF')));
 
     http.expectOne('/assets/color-dictionary.csv').flush(testColorDictionary);
 
@@ -50,7 +50,7 @@ describe('ColorNameService', () => {
   it('should handle offline', async () => {
     spyOn(toastService, 'showToast');
 
-    const colorNamePromise = service.getColorName(new Shade(-1, new Value('#FFFFFF')));
+    const colorNamePromise = service.getColorName(new Shade(-1, Value.fromHEX('#FFFFFF')));
 
     http.expectOne('/assets/color-dictionary.csv').error(new ProgressEvent('offline'));
 
