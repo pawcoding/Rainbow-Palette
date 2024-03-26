@@ -47,6 +47,10 @@ export class EditorComponent {
     return this.color().shades[0];
   });
 
+  protected readonly hasUnsavedChanges = computed<boolean>(
+    () => this._data.color.toString() !== this.color().toString()
+  );
+
   private readonly _editor = viewChild.required<ElementRef<HTMLElement>>('editor');
 
   public constructor() {
@@ -54,6 +58,10 @@ export class EditorComponent {
       this._editor().nativeElement.style.setProperty('--editor-hue', `${this.shade().hsl.H}`);
       this._editor().nativeElement.style.setProperty('--editor-saturation', `${this.shade().hsl.S}%`);
       this._editor().nativeElement.style.setProperty('--editor-lightness', `${this.shade().hsl.L}%`);
+    });
+
+    effect(() => {
+      this._dialogRef.disableClose = this.hasUnsavedChanges();
     });
   }
 

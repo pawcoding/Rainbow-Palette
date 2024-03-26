@@ -108,7 +108,7 @@ export class PaletteService {
   }
 
   private _generateRainbowPalette(hex: string): Palette {
-    const shade = new Shade(-1, new Value(hex), true);
+    const shade = new Shade(-1, Value.fromHEX(hex), true);
     let index = 0;
     const color = new Color([shade], `${index++}`);
     const rainbow = new Palette('Rainbow', [color]);
@@ -133,7 +133,7 @@ export class PaletteService {
       const newHue = (shade.hsl.H + (hue - currentHue) + 360) % 360;
       const newSaturation = Math.min(100, Math.max(0, shade.hsl.S - 20 + Math.floor(Math.random() * 40)));
       const newLightness = Math.min(100, Math.max(0, shade.hsl.L - 20 + Math.floor(Math.random() * 40)));
-      const newShade = new Shade(-1, new Value({ H: newHue, S: newSaturation, L: newLightness }), true);
+      const newShade = new Shade(-1, Value.fromHSL({ H: newHue, S: newSaturation, L: newLightness }), true);
 
       rainbow.addColor(new Color([newShade], `${index++}`));
     }
@@ -142,19 +142,19 @@ export class PaletteService {
   }
 
   private _generateMonochromePalette(hex: string): Palette {
-    const shade = new Shade(-1, new Value(hex), true);
+    const shade = new Shade(-1, Value.fromHEX(hex), true);
 
     const monochrome = new Palette('Monochrome', []);
 
     monochrome.addColor(new Color([shade], 'Primary'));
-    monochrome.addColor(new Color([new Shade(-1, new Value({ H: shade.hsl.H, S: 30, L: 50 }), true)], 'Muted'));
-    monochrome.addColor(new Color([new Shade(-1, new Value({ H: shade.hsl.H, S: 2, L: 50 }), true)], 'Gray'));
+    monochrome.addColor(new Color([new Shade(-1, Value.fromHSL({ H: shade.hsl.H, S: 30, L: 50 }), true)], 'Muted'));
+    monochrome.addColor(new Color([new Shade(-1, Value.fromHSL({ H: shade.hsl.H, S: 2, L: 50 }), true)], 'Gray'));
 
     return monochrome;
   }
 
   private _generateAnalogousPalette(hex: string): Palette {
-    const shade = new Shade(-1, new Value(hex), true);
+    const shade = new Shade(-1, Value.fromHEX(hex), true);
 
     const analogous = new Palette('Analogous', []);
 
@@ -165,7 +165,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 315),
               S: Math.max(shade.hsl.S - 20, 0),
               L: 40
@@ -181,7 +181,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 270),
               S: 25,
               L: 20
@@ -198,7 +198,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 45),
               S: shade.hsl.S,
               L: 50
@@ -214,7 +214,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 90),
               S: 25,
               L: 20
@@ -230,7 +230,7 @@ export class PaletteService {
   }
 
   private _generateComplementaryPalette(hex: string): Palette {
-    const shade = new Shade(-1, new Value(hex), true);
+    const shade = new Shade(-1, Value.fromHEX(hex), true);
 
     const complementary = new Palette('Complementary', []);
 
@@ -241,7 +241,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: shade.hsl.H,
               S: 3,
               L: 50
@@ -258,7 +258,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 180),
               S: Math.max(shade.hsl.S - 20, 0),
               L: 40
@@ -274,7 +274,7 @@ export class PaletteService {
   }
 
   private _generateSplitPalette(hex: string): Palette {
-    const shade = new Shade(-1, new Value(hex), true);
+    const shade = new Shade(-1, Value.fromHEX(hex), true);
 
     const split = new Palette('Split', []);
 
@@ -285,7 +285,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 20),
               S: Math.max(shade.hsl.S - 20, 0),
               L: 40
@@ -301,7 +301,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 20),
               S: 3,
               L: 50
@@ -318,7 +318,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 180),
               S: shade.hsl.S,
               L: 80
@@ -334,20 +334,22 @@ export class PaletteService {
   }
 
   private _generateTriadicPalette(hex: string): Palette {
-    const shade = new Shade(-1, new Value(hex), true);
+    const shade = new Shade(-1, Value.fromHEX(hex), true);
 
     const triadic = new Palette('Triadic', []);
 
     triadic.addColor(new Color([shade], 'Primary'));
 
-    triadic.addColor(new Color([new Shade(-1, new Value({ H: shade.hsl.H, S: 20, L: 30 }), true)], 'Primary Muted'));
+    triadic.addColor(
+      new Color([new Shade(-1, Value.fromHSL({ H: shade.hsl.H, S: 20, L: 30 }), true)], 'Primary Muted')
+    );
 
     triadic.addColor(
       new Color(
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 120),
               S: Math.max(shade.hsl.S - 20, 0),
               L: 40
@@ -363,7 +365,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 120),
               S: 20,
               L: 30
@@ -380,7 +382,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 240),
               S: shade.hsl.S,
               L: 80
@@ -396,7 +398,7 @@ export class PaletteService {
   }
 
   private _generateCompoundPalette(hex: string): Palette {
-    const shade = new Shade(-1, new Value(hex), true);
+    const shade = new Shade(-1, Value.fromHEX(hex), true);
 
     const compound = new Palette('Compound', []);
 
@@ -407,7 +409,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 210),
               S: Math.max(shade.hsl.S - 20, 0),
               L: 40
@@ -424,7 +426,7 @@ export class PaletteService {
         [
           new Shade(
             -1,
-            new Value({
+            Value.fromHSL({
               H: this._changeHueOnWheel(shade.hsl.H, 150),
               S: shade.hsl.S,
               L: 50

@@ -20,6 +20,13 @@ export class Palette {
     }
   }
 
+  public copy(): Palette {
+    return new Palette(
+      this.name,
+      this.colors.map((color) => color.copy())
+    );
+  }
+
   public static parse(palette: string | object): Palette {
     if (typeof palette === 'string') {
       try {

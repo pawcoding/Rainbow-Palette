@@ -1,3 +1,4 @@
+import { Tailwind } from '../constants/tailwind-colors';
 import { Color } from './color.model';
 import { Palette } from './palette.model';
 import { Shade } from './shade.model';
@@ -33,6 +34,17 @@ describe('Palette', () => {
     expect(parsed).toBeInstanceOf(Palette);
     expect(parsed.name).toBe('Test');
     expect(parsed.colors.length).toBe(1);
+  });
+
+  it('should copy palette', () => {
+    const palette = Tailwind;
+    const copy = palette.copy();
+
+    expect(copy).toBeInstanceOf(Palette);
+    expect(copy).not.toBe(palette);
+    expect(copy.name).toBe(palette.name);
+    expect(copy.colors.length).toBe(palette.colors.length);
+    expect(copy.toString()).toBe(palette.toString());
   });
 
   it('should JSON and string are equal', () => {

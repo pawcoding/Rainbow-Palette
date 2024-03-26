@@ -2,7 +2,7 @@ import { GlobalPositionStrategy, Overlay, OverlayRef, PositionStrategy } from '@
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Signal, effect, inject, signal } from '@angular/core';
 import { Toast, ToastTimeouts } from '../interfaces/toast.interface';
-import { ToastComponent } from '../ui/toast/toast.component';
+import { ToastStackComponent } from '../ui/toast-stack/toast-stack.component';
 import { MobileService } from './mobile.service';
 
 @Injectable({
@@ -12,13 +12,12 @@ export class ToastService {
   private readonly _overlay = inject(Overlay);
   private readonly _mobileService = inject(MobileService);
 
-  private readonly _toast = signal<Toast | undefined>(undefined);
+  private readonly _toastStack = signal<Array<Toast>>([]);
 
-  public get toast(): Signal<Toast | undefined> {
-    return this._toast.asReadonly();
+  public get toastStack(): Signal<Array<Toast>> {
+    return this._toastStack.asReadonly();
   }
 
-  private _hideToast: ReturnType<typeof setTimeout> | undefined;
   private _positionStrategy: PositionStrategy | undefined;
   private _overlayRef: OverlayRef | undefined;
 
@@ -26,46 +25,16 @@ export class ToastService {
     // Create an overlay for the toast.
     this._overlayRef = this._overlay.create();
 
+    // Attach the toast stack component to the overlay.
     effect(() => {
-      // If there is no toast, clear the timeout and return.
-      if (!this._toast()) {
-        if (this._hideToast) {
-          clearTimeout(this._hideToast);
-        }
-        this._hideToast = undefined;
-        return;
-      }
-
-      // If there was a previous timeout, clear it.
-      if (this._hideToast) {
-        clearTimeout(this._hideToast);
-        this._hideToast = undefined;
-      }
-
-      // Set a new timeout to hide the toast.
-      this._hideToast = setTimeout(
-        () => {
-          this._toast.set(undefined);
-        },
-        ToastTimeouts[this._toast()!.type ?? 'default']
-      );
-    });
-
-    // Attach the toast component to the overlay.
-    effect(() => {
-      if (this._toast()) {
+      if (this._toastStack().length > 0) {
         if (!this._overlayRef) {
           return;
         }
 
         this._overlayRef.detach();
-        const toastPortal = new ComponentPortal(ToastComponent);
-        const toastComponent = this._overlayRef.attach(toastPortal);
-        toastComponent.setInput('toast', this._toast());
-        const closeSubscription = toastComponent.instance.close.subscribe(() => {
-          this.hideToast();
-          closeSubscription.unsubscribe();
-        });
+        const toastPortal = new ComponentPortal(ToastStackComponent);
+        this._overlayRef.attach(toastPortal);
       } else {
         this._overlayRef?.detach();
       }
@@ -88,33 +57,54 @@ export class ToastService {
    *
    * @param toast The toast to be displayed.
    */
-  public showToast(toast: Toast): void {
-    this._toast.set(toast);
+  public showToast(toast: Toast): number {
+    const timestamp = Date.now();
+    toast.id = timestamp;
+    toast.timeout = setTimeout(
+      () => {
+        this.hideToast(timestamp);
+      },
+      ToastTimeouts[toast.type ?? 'default']
+    );
+
+    this._toastStack.update((stack) => [...stack, toast]);
+    return timestamp;
   }
 
   /**
    * Hides the toast.
    */
-  public hideToast(): void {
-    this._toast.set(undefined);
+  public hideToast(id: number): void {
+    const toast = this._toastStack().find((t) => t.id === id);
+    if (!toast) {
+      return;
+    }
+
+    clearTimeout(toast.timeout);
+    this._toastStack.update((stack) => stack.filter((t) => t.id !== id));
   }
 }
 
 export class ToastServiceMock {
-  private readonly _toast = signal<Toast | undefined>({
-    type: 'test',
-    message: 'test'
-  });
+  private readonly _toastStack = signal<Array<Toast>>([
+    {
+      type: 'test',
+      message: 'test'
+    }
+  ]);
 
-  public get toast(): Signal<Toast | undefined> {
-    return this._toast.asReadonly();
+  public get toastStack(): Signal<Array<Toast>> {
+    return this._toastStack.asReadonly();
   }
 
-  public showToast(toast: Toast): void {
-    this._toast.set(toast);
+  public showToast(toast: Toast): number {
+    const timestamp = Date.now();
+    toast.id = timestamp;
+    this._toastStack.update((stack) => [...stack, toast]);
+    return timestamp;
   }
 
-  public hideToast(): void {
-    this._toast.set(undefined);
+  public hideToast(id: number): void {
+    this._toastStack.update((stack) => stack.filter((t) => t.id !== id));
   }
 }

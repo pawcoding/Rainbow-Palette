@@ -53,7 +53,7 @@ export class Shade {
   }
 
   public copy(): Shade {
-    return new Shade(this.index, new Value(this.hex), this.fixed);
+    return new Shade(this.index, this._value.copy(), this.fixed);
   }
 
   public static random(): Shade {
@@ -61,7 +61,7 @@ export class Shade {
     const s = 30 + Math.floor(Math.random() * 60);
     const l = 25 + Math.floor(Math.random() * 50);
 
-    const value = new Value({ H: h, S: s, L: l });
+    const value = Value.fromHSL({ H: h, S: s, L: l });
     return new Shade(0, value, true);
   }
 
@@ -90,7 +90,7 @@ export class Shade {
 
     if (!('value' in shade)) {
       if ('hex' in shade && typeof shade.hex === 'string') {
-        return new Shade(index, new Value(shade.hex), fixed);
+        return new Shade(index, Value.fromHEX(shade.hex), fixed);
       }
 
       throw new Error(`Could not parse shade (missing "value" property): "${shade}"`);
@@ -98,7 +98,7 @@ export class Shade {
 
     let value: Value | undefined;
     if (typeof shade.value === 'string' && shade.value.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
-      value = new Value(shade.value);
+      value = Value.fromHEX(shade.value);
     } else if (typeof shade.value === 'object') {
       const hsl = shade.value as HSLObject;
       if (
@@ -109,7 +109,7 @@ export class Shade {
         (typeof hsl.S === 'number' || typeof hsl.S === 'string') &&
         (typeof hsl.L === 'number' || typeof hsl.L === 'string')
       ) {
-        value = new Value(hsl);
+        value = Value.fromHSL(hsl);
       }
     }
 

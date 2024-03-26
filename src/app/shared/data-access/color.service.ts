@@ -78,7 +78,7 @@ export class ColorService {
       const saturation = this._calculateSaturation(luminosity, lighter, darker, third);
 
       // Add shade
-      const shade = new Shade(index, new Value({ H: hue, S: saturation, L: luminosity }), false);
+      const shade = new Shade(index, Value.fromHSL({ H: hue, S: saturation, L: luminosity }), false);
       shades.push(shade);
     }
 
@@ -180,7 +180,7 @@ export class ColorService {
     const saturation = this._calculateMaxSaturation(minimum, shade, index);
     const luminosity = (1000 - index) / 10;
 
-    return new Shade(white ? 0 : 1200, new Value({ H: hue, S: saturation, L: luminosity }), true);
+    return new Shade(white ? 0 : 1200, Value.fromHSL({ H: hue, S: saturation, L: luminosity }), true);
   }
 
   /**

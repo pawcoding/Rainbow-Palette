@@ -1,5 +1,7 @@
+import { Overlay } from '@angular/cdk/overlay';
 import { TestBed } from '@angular/core/testing';
 import { ToastTimeouts } from '../interfaces/toast.interface';
+import { OverlayMock } from '../utils/overlay-mock';
 import { sleep } from '../utils/sleep';
 import { MobileService, MobileServiceMock } from './mobile.service';
 import { ToastService } from './toast.service';
@@ -9,47 +11,37 @@ describe('ToastService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: MobileService, useClass: MobileServiceMock }]
+      providers: [
+        { provide: Overlay, useClass: OverlayMock },
+        { provide: MobileService, useClass: MobileServiceMock }
+      ]
     });
     service = TestBed.inject(ToastService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
+    expect(service.toastStack()).toBeDefined();
+    expect(service.toastStack().length).toBe(0);
   });
 
   it('should open and close a toast', () => {
-    service.showToast({ message: 'Test' });
-    expect(service.toast()).toEqual({ message: 'Test' });
+    const toast = { message: 'Test' };
+    const id = service.showToast(toast);
+    expect(service.toastStack()).toContain(toast);
 
-    service.hideToast();
-    expect(service.toast()).toBeUndefined();
+    service.hideToast(id);
+    expect(service.toastStack()).not.toContain(toast);
   });
 
   it(
-    'should close automatically toast after the timeout',
+    'should close toast automatically after the timeout',
     async () => {
       service.showToast({ message: 'Test', type: 'test' });
-      expect(service.toast()).toBeDefined();
+      expect(service.toastStack().length).toBe(1);
       await sleep(ToastTimeouts.test + 10);
-      expect(service.toast()).toBeUndefined();
+      expect(service.toastStack().length).toBe(0);
     },
     ToastTimeouts.test + 20
-  );
-
-  it(
-    'should show only one toast at a time',
-    async () => {
-      service.showToast({ message: 'Test', type: 'test' });
-      expect(service.toast()).toBeDefined();
-      await sleep(ToastTimeouts.test / 2);
-      service.showToast({ message: 'Test2', type: 'test' });
-      expect(service.toast()).toEqual({ message: 'Test2', type: 'test' });
-      await sleep(ToastTimeouts.test / 2);
-      expect(service.toast()).toBeDefined();
-      await sleep(ToastTimeouts.test / 2 + 10);
-      expect(service.toast()).toBeUndefined();
-    },
-    1.5 * ToastTimeouts.test + 20
   );
 });
