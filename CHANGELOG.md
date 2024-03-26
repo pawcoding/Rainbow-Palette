@@ -1,3 +1,17 @@
+# [1.1.0-staging.2](https://github.com/pawcoding/rainbow-palette/compare/v1.1.0-staging.1...v1.1.0-staging.2) (2024-03-26)
+
+
+### Bug Fixes
+
+* **value:** copy value directly instead of by hex ([1e7d88f](https://github.com/pawcoding/rainbow-palette/commit/1e7d88f2e653737de03dd0914a1ea09fb4d74324))
+* **layout:** enable click on RP logo ([bf47791](https://github.com/pawcoding/rainbow-palette/commit/bf477913eee2c6e2c41ed444b8a612a7a3361473))
+
+
+### Features
+
+* **editor:** close editor with esc when no changes made ([42fa17d](https://github.com/pawcoding/rainbow-palette/commit/42fa17d2f1ce428eb3b53378a0c3122f089c0bec))
+* **toast-stack:** upgrade toast service to show multiple toasts ([c5b38fa](https://github.com/pawcoding/rainbow-palette/commit/c5b38fa15289d5619fd9e928c82c7e120465dd8d))
+
 # [1.1.0-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.0.2-staging.2...v1.1.0-staging.1) (2024-03-24)
 
 
