@@ -8,26 +8,41 @@ export class Value {
   private _green!: number;
   private _blue!: number;
 
-  public constructor(value: HSLObject | RGBObject | string) {
-    if (typeof value === 'string') {
-      this.HEX = value;
-    } else if ('R' in value) {
-      this.RGB = value;
-    } else {
-      this.HSL = value;
-    }
+  public static fromHEX(hex: string): Value {
+    const rgb = Value._HEXtoRGB(hex);
+    const hsl = Value._RGBtoHSL(rgb.R, rgb.G, rgb.B);
+    return new Value(hsl.H, hsl.S, hsl.L, rgb.R, rgb.G, rgb.B);
+  }
+
+  public static fromRGB(rgb: RGBObject): Value {
+    const hsl = Value._RGBtoHSL(rgb.R, rgb.G, rgb.B);
+    return new Value(hsl.H, hsl.S, hsl.L, rgb.R, rgb.G, rgb.B);
+  }
+
+  public static fromHSL(hsl: HSLObject): Value {
+    const rgb = Value._HSLtoRGB(hsl.H, hsl.S, hsl.L);
+    return new Value(hsl.H, hsl.S, hsl.L, rgb.R, rgb.G, rgb.B);
+  }
+
+  private constructor(hue: number, saturation: number, lightness: number, red: number, green: number, blue: number) {
+    this._hue = hue;
+    this._saturation = saturation;
+    this._lightness = lightness;
+    this._red = red;
+    this._green = green;
+    this._blue = blue;
+  }
+
+  public copy(): Value {
+    return new Value(this._hue, this._saturation, this._lightness, this._red, this._green, this._blue);
   }
 
   public set HSL(value: HSLObject) {
-    if (value.H < 0 || value.H > 360 || value.S < 0 || value.S > 100 || value.L < 0 || value.L > 100) {
-      throw `Color values [${value.H}°, ${value.S}%, ${value.L}%] are not in valid ranges.`;
-    }
-
     this._hue = value.H;
     this._saturation = value.S;
     this._lightness = value.L;
 
-    const rgb = this._HSLtoRGB(this._hue, this._saturation, this._lightness);
+    const rgb = Value._HSLtoRGB(this._hue, this._saturation, this._lightness);
     this._red = rgb.R;
     this._green = rgb.G;
     this._blue = rgb.B;
@@ -42,15 +57,11 @@ export class Value {
   }
 
   public set RGB(value: RGBObject) {
-    if (value.R < 0 || value.R > 255 || value.G < 0 || value.G > 255 || value.B < 0 || value.B > 255) {
-      throw `rgb(${value.R}, ${value.G}, ${value.B}) is not in valid format.`;
-    }
-
     this._red = value.R;
     this._green = value.G;
     this._blue = value.B;
 
-    const hsl = this._RGBtoHSL(this._red, this._green, this._blue);
+    const hsl = Value._RGBtoHSL(this._red, this._green, this._blue);
     this._hue = hsl.H;
     this._saturation = hsl.S;
     this._lightness = hsl.L;
@@ -65,16 +76,7 @@ export class Value {
   }
 
   public set HEX(hex: string) {
-    if (!hex.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
-      throw new Error(`Invalid hex color: "${hex}`);
-    }
-
-    const rgb = {
-      R: parseInt(hex.substring(1, 3), 16),
-      G: parseInt(hex.substring(3, 5), 16),
-      B: parseInt(hex.substring(5, 7), 16)
-    };
-
+    const rgb = Value._HEXtoRGB(hex);
     this.RGB = rgb;
   }
 
@@ -86,7 +88,23 @@ export class Value {
     return `#${red}${green}${blue}`;
   }
 
-  private _RGBtoHSL(red: number, green: number, blue: number): HSLObject {
+  private static _HEXtoRGB(hex: string): RGBObject {
+    if (!hex.match(/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/)) {
+      throw new Error(`Invalid hex color: "${hex}`);
+    }
+
+    return {
+      R: parseInt(hex.substring(1, 3), 16),
+      G: parseInt(hex.substring(3, 5), 16),
+      B: parseInt(hex.substring(5, 7), 16)
+    };
+  }
+
+  private static _RGBtoHSL(red: number, green: number, blue: number): HSLObject {
+    if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255) {
+      throw `rgb(${red}, ${green}, ${blue}) is not in valid format.`;
+    }
+
     const r = red / 255;
     const g = green / 255;
     const b = blue / 255;
@@ -113,7 +131,11 @@ export class Value {
     };
   }
 
-  private _HSLtoRGB(hue: number, saturation: number, lightness: number): RGBObject {
+  private static _HSLtoRGB(hue: number, saturation: number, lightness: number): RGBObject {
+    if (hue < 0 || hue > 359 || saturation < 0 || saturation > 100 || lightness < 0 || lightness > 100) {
+      throw `Color values [${hue}°, ${saturation}%, ${lightness}%] are not in valid ranges.`;
+    }
+
     const h = hue;
     const s = saturation / 100;
     const l = lightness / 100;
