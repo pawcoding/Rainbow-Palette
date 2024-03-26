@@ -1,3 +1,20 @@
+# [1.1.0](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1...v1.1.0) (2024-03-26)
+
+
+### Bug Fixes
+
+* **ci:** add back chromatic action ([8436c28](https://github.com/pawcoding/rainbow-palette/commit/8436c2861199cabe154eaa7b69cf97eaf7f50761))
+* **value:** copy value directly instead of by hex ([1e7d88f](https://github.com/pawcoding/rainbow-palette/commit/1e7d88f2e653737de03dd0914a1ea09fb4d74324))
+* **layout:** enable click on RP logo ([bf47791](https://github.com/pawcoding/rainbow-palette/commit/bf477913eee2c6e2c41ed444b8a612a7a3361473))
+* **view:** redirect to home on app start without palette ([ae36838](https://github.com/pawcoding/rainbow-palette/commit/ae368382fa4980e95b5059b31b973ee0e78c488c))
+
+
+### Features
+
+* **sitemap:** add sitemap generation ([3389b03](https://github.com/pawcoding/rainbow-palette/commit/3389b03abbcd9bf8eb242b0a837381f27393b136))
+* **editor:** close editor with esc when no changes made ([42fa17d](https://github.com/pawcoding/rainbow-palette/commit/42fa17d2f1ce428eb3b53378a0c3122f089c0bec))
+* **toast-stack:** upgrade toast service to show multiple toasts ([c5b38fa](https://github.com/pawcoding/rainbow-palette/commit/c5b38fa15289d5619fd9e928c82c7e120465dd8d))
+
 # [1.1.0-staging.2](https://github.com/pawcoding/rainbow-palette/compare/v1.1.0-staging.1...v1.1.0-staging.2) (2024-03-26)
 
 
