@@ -18,6 +18,8 @@ jobs:
       # Checkout repository
       - name: 📥 Checkout code
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       # Setup Node
       - name: 📦 Setup Node.js
