@@ -38,7 +38,7 @@ jobs:
       - name: 📦 Install pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 9
           run_install: false
 
       # Get pnpm store directory
