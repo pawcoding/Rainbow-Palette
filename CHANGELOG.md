@@ -1,3 +1,10 @@
+## [1.1.1-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.1.0...v1.1.1-staging.1) (2024-05-30)
+
+
+### Bug Fixes
+
+* **index:** replace self-closing root element ([ebd2e51](https://github.com/pawcoding/rainbow-palette/commit/ebd2e518532e96c226a0e415fac6911f6aad60d2))
+
 # [1.1.0](https://github.com/pawcoding/rainbow-palette/compare/v1.0.1...v1.1.0) (2024-03-26)
 
 
