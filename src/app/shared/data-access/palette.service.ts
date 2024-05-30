@@ -51,7 +51,7 @@ export class PaletteService {
       try {
         const palette = Palette.parse(oldPalette);
         localStorage.setItem(`${LocalStorageKey.PALETTE}_${palette.id}`, palette.toString());
-        this._listService.add(palette.id);
+        this._listService.add(palette);
 
         localStorage.removeItem(LocalStorageKey.PALETTE);
       } catch (e) {
@@ -64,6 +64,10 @@ export class PaletteService {
   }
 
   public loadPaletteFromLocalStorage(id: string): void {
+    if (this.palette()?.id === id) {
+      return;
+    }
+
     // Check if there was a palette stored for an app update
     let palette = localStorage.getItem(LocalStorageKey.PALETTE_TMP);
 
@@ -95,12 +99,12 @@ export class PaletteService {
         localStorage.setItem(LocalStorageKey.PALETTE_TMP, palette.toString());
       } else {
         localStorage.setItem(`${LocalStorageKey.PALETTE}_${palette.id}`, palette.toString());
-        this._listService.add(palette.id);
+        this._listService.add(palette);
       }
     }
   }
 
-  public async generatePalette(hex: string, scheme: PaletteScheme): Promise<void> {
+  public async generatePalette(hex: string, scheme: PaletteScheme): Promise<string> {
     const palette = await this._generatePalette(hex, scheme);
 
     for (const color of palette.colors) {
@@ -112,6 +116,8 @@ export class PaletteService {
     }
 
     this._palette.set(palette);
+
+    return palette.id;
   }
 
   private async _generatePalette(hex: string, scheme: PaletteScheme): Promise<Palette> {
@@ -526,8 +532,12 @@ export class PaletteService {
 }
 
 export class PaletteServiceMock {
-  public palette = signal<Palette | undefined>(new Palette('Mock', [new Color([Shade.random()], 'MockColor')]));
+  public palette = signal<Palette | undefined>(
+    new Palette('Mock', [new Color([Shade.random()], 'MockColor')], 'test-id')
+  );
   public loadPaletteFromLocalStorage(): void {}
   public savePaletteToLocalStorage(): void {}
-  public generatePalette(_hex: string, _scheme: PaletteScheme): void {}
+  public generatePalette(_hex: string, _scheme: PaletteScheme): string {
+    return 'test-id';
+  }
 }

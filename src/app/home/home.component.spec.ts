@@ -39,26 +39,26 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should save generation settings on palette generation', () => {
+  it('should save generation settings on palette generation', async () => {
     spyOn(homeService, 'saveGenerationSettings');
 
-    component.generatePalette();
+    await component.generatePalette();
 
     expect(homeService.saveGenerationSettings).toHaveBeenCalled();
   });
 
-  it('should generate palette on palette generation', () => {
+  it('should generate palette on palette generation', async () => {
     spyOn(paletteService, 'generatePalette');
 
-    component.generatePalette();
+    await component.generatePalette();
 
     expect(paletteService.generatePalette).toHaveBeenCalledWith(homeService.hex(), homeService.scheme());
   });
 
-  it('should track palette generation on palette generation', () => {
+  it('should track palette generation on palette generation', async () => {
     spyOn(analyticsService, 'trackPaletteGeneration');
 
-    component.generatePalette();
+    await component.generatePalette();
 
     expect(analyticsService.trackPaletteGeneration).toHaveBeenCalled();
   });

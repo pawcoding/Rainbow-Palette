@@ -1,13 +1,22 @@
 import { TestBed } from '@angular/core/testing';
 import { firstValueFrom } from 'rxjs';
+import { TailwindGrays } from '../constants/tailwind-colors';
 import { LocalStorageKey } from '../enums/local-storage-keys';
-import { ListService } from './list.service';
+import { Palette } from '../model';
+import { ListService, PaletteListItem } from './list.service';
+
+const predefined: PaletteListItem = {
+  id: 'predefined',
+  name: 'Predefined Palette'
+};
+
+const predefinedPalette = new Palette(predefined.name, [], predefined.id);
 
 describe('ListService', () => {
   let service: ListService;
 
   beforeEach(() => {
-    localStorage.setItem(LocalStorageKey.PALETTE_IDS, '["predefined"]');
+    localStorage.setItem(LocalStorageKey.PALETTE_IDS, JSON.stringify([predefined]));
 
     TestBed.configureTestingModule({});
     service = TestBed.inject(ListService);
@@ -17,21 +26,27 @@ describe('ListService', () => {
     expect(service).toBeTruthy();
 
     const list = await firstValueFrom(service.list$);
-    expect(list).toContain('predefined');
+    expect(list.length).toBe(1);
+    expect(list[0].id).toBe('predefined');
+    expect(list[0].name).toBe('Predefined Palette');
   });
 
   it('should add a palette id to the list', async () => {
-    service.add('test-id');
+    const palette = TailwindGrays;
+    service.add(palette);
 
     const list = await firstValueFrom(service.list$);
-    expect(list).toContain('test-id');
+    expect(list.length).toBe(2);
+
+    const item = list.find((i) => i.id === palette.id);
+    expect(item).toBeTruthy();
   });
 
   it('should not add a palette id to the list if it already exists', async () => {
-    service.add('predefined');
+    service.add(predefinedPalette);
 
     const list = await firstValueFrom(service.list$);
-    expect(list).toEqual(['predefined']);
+    expect(list.length).toBe(1);
   });
 
   it('should remove a palette id from the list', async () => {
@@ -45,7 +60,7 @@ describe('ListService', () => {
     service.remove('test-id');
 
     const list = await firstValueFrom(service.list$);
-    expect(list).toEqual(['predefined']);
+    expect(list.length).toBe(1);
   });
 
   afterEach(() => {

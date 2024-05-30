@@ -25,7 +25,7 @@ export default class HomeComponent {
   public async generatePalette(): Promise<void> {
     this._homeService.saveGenerationSettings();
 
-    this._paletteService.generatePalette(this.hex(), this.scheme());
+    const id = await this._paletteService.generatePalette(this.hex(), this.scheme());
     this._analyticsService.trackPaletteGeneration(this.scheme());
 
     await this._router.navigate(['/view']);

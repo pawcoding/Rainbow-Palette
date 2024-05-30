@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { LocalStorageKey } from '../enums/local-storage-keys';
+import { Palette } from '../model';
+
+export type PaletteListItem = {
+  id: string;
+  name: string;
+};
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +15,7 @@ export class ListService {
   /**
    * List of palette ids stored in local storage
    */
-  private readonly _list$ = new BehaviorSubject<Array<string>>([]);
+  private readonly _list$ = new BehaviorSubject<Array<PaletteListItem>>([]);
 
   /**
    * List of palette ids stored in local storage
@@ -38,17 +44,22 @@ export class ListService {
   /**
    * Add a palette id to the list
    */
-  public add(id: string): void {
-    if (!this._list$.value.includes(id)) {
-      this._list$.next([...this._list$.value, id]);
+  public add(palette: Palette): void {
+    const list = this._list$.value;
+
+    const index = list.findIndex((item) => item.id === palette.id);
+    if (index > -1) {
+      list.splice(index, 1);
     }
+
+    this._list$.next([{ id: palette.id, name: palette.name }, ...list]);
   }
 
   /**
    * Remove a palette id from the list
    */
   public remove(id: string): void {
-    const index = this._list$.value.indexOf(id);
+    const index = this._list$.value.findIndex((item) => item.id === id);
     if (index > -1) {
       const list = this._list$.value;
       list.splice(index, 1);
@@ -58,7 +69,7 @@ export class ListService {
 }
 
 export class ListServiceMock {
-  public add(_id: string): void {}
+  public add(_palette: Palette): void {}
   public remove(_id: string): void {}
-  public list$ = new BehaviorSubject<Array<string>>([]).asObservable();
+  public list$ = new BehaviorSubject<Array<PaletteListItem>>([]).asObservable();
 }
