@@ -86,7 +86,8 @@ describe('AnalyticsService', () => {
   });
 
   afterEach(() => {
-    localStorage.clear();
+    localStorage.removeItem(LocalStorageKey.ANALYTICS);
+    localStorage.removeItem(LocalStorageKey.USER_ID);
   });
 });
 
@@ -120,5 +121,10 @@ describe('AnalyticsService', () => {
 
     await sleep(5);
     expect(tracker.setCustomDimension).toHaveBeenCalledTimes(3);
+  });
+
+  afterEach(() => {
+    localStorage.removeItem(LocalStorageKey.ANALYTICS);
+    localStorage.removeItem(LocalStorageKey.USER_ID);
   });
 });
