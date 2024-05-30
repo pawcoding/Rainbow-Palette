@@ -1,7 +1,9 @@
 import { Component, inject, input } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { filter, map } from 'rxjs';
 import { NavigationEntry } from '../../types/navigation-entry';
 
 @Component({
@@ -16,7 +18,21 @@ export class LayoutNavigationComponent {
 
   public readonly navigationEntries = input.required<Array<NavigationEntry>>();
 
-  protected get currentPath(): string {
-    return this._router.url;
+  protected readonly currentPath = toSignal(
+    this._router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+      map((event) => event.urlAfterRedirects)
+    ),
+    {
+      initialValue: this._router.url
+    }
+  );
+
+  protected isActive(path: string, url: string): boolean {
+    if (path === '/') {
+      return url === path;
+    } else {
+      return url.startsWith(path);
+    }
   }
 }
