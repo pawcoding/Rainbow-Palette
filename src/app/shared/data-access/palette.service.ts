@@ -34,7 +34,7 @@ export class PaletteService {
     this._listService.list$
       .pipe(
         take(1),
-        map((list) => list[0])
+        map((list) => list[0].id)
       )
       .subscribe((id) => {
         this.loadPaletteFromLocalStorage(id);

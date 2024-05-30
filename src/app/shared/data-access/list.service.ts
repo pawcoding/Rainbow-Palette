@@ -71,5 +71,5 @@ export class ListService {
 export class ListServiceMock {
   public add(_palette: Palette): void {}
   public remove(_id: string): void {}
-  public list$ = new BehaviorSubject<Array<PaletteListItem>>([]).asObservable();
+  public list$ = new BehaviorSubject<Array<PaletteListItem>>([{ id: 'test-id', name: 'Test palette' }]).asObservable();
 }
