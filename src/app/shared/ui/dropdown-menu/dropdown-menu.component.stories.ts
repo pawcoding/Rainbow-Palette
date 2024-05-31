@@ -9,7 +9,7 @@ const meta: Meta<DropdownMenuComponent<string>> = {
   argTypes: {
     items: {
       control: {
-        type: 'array'
+        type: 'object'
       }
     },
     disabled: {
