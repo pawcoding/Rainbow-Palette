@@ -208,8 +208,14 @@
       "theme": "Wähle ein Design"
     }
   },
+  "list": {
+    "new": "Neue Palette",
+    "title": "Deine Farbpaletten",
+    "view": "Palette \"{{ name }}\" ansehen"
+  },
   "no-palette": {
     "description": {
+      "palette": "Es wurde keine Palette mit der angegebenen ID gefunden. Vielleicht hast du dich vertippt oder die Palette wurde gelöscht.",
       "preview": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du hier eine Vorschau sehen und die Palette ausprobieren.",
       "view": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du sie hier bearbeiten und anpassen."
     },

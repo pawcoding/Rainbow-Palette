@@ -1,3 +1,4 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -50,6 +51,10 @@ describe('ViewComponent', () => {
 
     fixture = TestBed.createComponent(ViewComponent);
     component = fixture.componentInstance;
+
+    // @ts-expect-error - read-only property
+    component.id = signal('test');
+
     fixture.detectChanges();
   });
 

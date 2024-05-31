@@ -1,6 +1,6 @@
 import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import { ApplicationConfig, importProvidersFrom, isDevMode } from '@angular/core';
-import { provideRouter, withInMemoryScrolling, withRouterConfig } from '@angular/router';
+import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withRouterConfig } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -18,7 +18,8 @@ export const appConfig: ApplicationConfig = {
       }),
       withRouterConfig({
         onSameUrlNavigation: 'reload'
-      })
+      }),
+      withComponentInputBinding()
     ),
     provideHttpClient(withFetch()),
     importProvidersFrom(

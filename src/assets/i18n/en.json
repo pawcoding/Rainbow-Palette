@@ -209,8 +209,14 @@
       "theme": "Pick a theme"
     }
   },
+  "list": {
+    "new": "New palette",
+    "title": "Your palettes",
+    "view": "View palette \"{{ name }}\""
+  },
   "no-palette": {
     "description": {
+      "palette": "There was no palette found with the given ID. Maybe you have entered the wrong URL or the palette has been deleted.",
       "preview": "You don't have a palette yet. You have to generate one first before you can preview it.",
       "view": "You don't have a palette yet. You have to generate one first before you can edit it."
     },

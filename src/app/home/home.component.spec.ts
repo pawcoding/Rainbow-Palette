@@ -66,6 +66,6 @@ describe('HomeComponent', () => {
   it('should navigate to view on palette generation', async () => {
     await component.generatePalette();
 
-    expect(router.navigate).toHaveBeenCalledWith(['/view']);
+    expect(router.navigate).toHaveBeenCalledWith(['/view', 'test-id']);
   });
 });

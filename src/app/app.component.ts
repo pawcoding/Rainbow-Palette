@@ -19,7 +19,7 @@ export class AppComponent {
 
   public constructor() {
     // Check if user has palette
-    const hasPalette = localStorage.getItem(LocalStorageKey.PALETTE);
+    const hasPalette = localStorage.getItem(LocalStorageKey.PALETTE_IDS);
     if (hasPalette) {
       return;
     }

@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, input, signal } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroArrowDownTrayMini,
@@ -29,7 +29,7 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
   imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule],
   templateUrl: './view.component.html'
 })
-export default class ViewComponent {
+export default class ViewComponent implements OnInit {
   private readonly _isRunningTest = inject(IS_RUNNING_TEST);
   private readonly _colorEditorService = inject(ColorEditorService);
   private readonly _toastService = inject(ToastService);
@@ -44,8 +44,14 @@ export default class ViewComponent {
   protected readonly heroPlusMini = heroPlusMini;
   protected readonly heroArrowDownTrayMini = heroArrowDownTrayMini;
 
+  public readonly id = input.required<string>();
+
   protected readonly palette = this._paletteService.palette;
   protected readonly saving = signal(false);
+
+  public ngOnInit(): void {
+    this._paletteService.loadPaletteFromLocalStorage(this.id());
+  }
 
   protected readonly saveIcon = computed(() => {
     if (this.saving()) {

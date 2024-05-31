@@ -1,5 +1,4 @@
 import { Injectable, Signal, effect, inject, signal } from '@angular/core';
-import { map, take } from 'rxjs';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Value } from '../model';
@@ -29,16 +28,6 @@ export class PaletteService {
   public constructor() {
     // Migrate single palette to list
     this._migratePalette();
-
-    // Load the palette from local storage
-    this._listService.list$
-      .pipe(
-        take(1),
-        map((list) => list[0].id)
-      )
-      .subscribe((id) => {
-        this.loadPaletteFromLocalStorage(id);
-      });
 
     effect(() => {
       this._updateVariables();

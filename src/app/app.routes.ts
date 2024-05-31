@@ -8,7 +8,17 @@ export const routes: Routes = [
   },
   {
     path: 'view',
-    loadComponent: () => import('./view/view.component')
+    children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('./list/list.component')
+      },
+      {
+        path: ':id',
+        loadComponent: () => import('./view/view.component')
+      }
+    ]
   },
   {
     path: 'preview',
