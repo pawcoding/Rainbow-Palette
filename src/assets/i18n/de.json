@@ -266,6 +266,7 @@
     }
   },
   "view": {
+    "back": "Zurück zur Übersicht",
     "color": {
       "add": "Farbe hinzufügen",
       "add-tooltip": "Füge deiner Palette eine neue Farbe hinzu",

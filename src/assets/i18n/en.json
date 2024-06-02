@@ -267,6 +267,7 @@
     }
   },
   "view": {
+    "back": "Back to your palettes",
     "color": {
       "add": "Add color",
       "add-tooltip": "Add a new color to your palette",

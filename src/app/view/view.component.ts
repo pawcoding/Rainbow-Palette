@@ -1,7 +1,9 @@
 import { Component, OnInit, computed, inject, input, signal } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroArrowDownTrayMini,
+  heroArrowLeftMini,
   heroArrowPathMini,
   heroBookmarkMini,
   heroPencilSquareMini,
@@ -26,7 +28,7 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
 @Component({
   selector: 'rp-view',
   standalone: true,
-  imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule],
+  imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule, RouterLink],
   templateUrl: './view.component.html'
 })
 export default class ViewComponent implements OnInit {
@@ -43,6 +45,7 @@ export default class ViewComponent implements OnInit {
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
   protected readonly heroArrowDownTrayMini = heroArrowDownTrayMini;
+  protected readonly heroArrowLeftMini = heroArrowLeftMini;
 
   public readonly id = input.required<string>();
 
