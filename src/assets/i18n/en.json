@@ -224,7 +224,10 @@
       "preview": "You don't have a palette yet. You have to generate one first before you can preview it.",
       "view": "You don't have a palette yet. You have to generate one first before you can edit it."
     },
-    "link": "Back to generation",
+    "link": {
+      "generate": "Back to generation",
+      "list": "Back to your palettes"
+    },
     "title": "No palette available"
   },
   "preview": {

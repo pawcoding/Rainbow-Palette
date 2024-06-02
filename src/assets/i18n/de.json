@@ -223,7 +223,10 @@
       "preview": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du hier eine Vorschau sehen und die Palette ausprobieren.",
       "view": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du sie hier bearbeiten und anpassen."
     },
-    "link": "Zurück zum Generator",
+    "link": {
+      "generate": "Zurück zum Generator",
+      "list": "Zurück zur Übersicht"
+    },
     "title": "Keine Farbpalette vorhanden"
   },
   "preview": {
