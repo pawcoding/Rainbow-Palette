@@ -28,6 +28,10 @@ export default class HomeComponent {
     const id = await this._paletteService.generatePalette(this.hex(), this.scheme());
     this._analyticsService.trackPaletteGeneration(this.scheme());
 
-    await this._router.navigate(['/view', id]);
+    await this._router.navigate(['/view', id], {
+      info: {
+        palette: 'new'
+      }
+    });
   }
 }

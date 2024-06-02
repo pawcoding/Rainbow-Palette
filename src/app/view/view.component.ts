@@ -1,5 +1,5 @@
 import { Component, OnInit, computed, inject, input, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroArrowDownTrayMini,
@@ -42,6 +42,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _dialogService = inject(DialogService);
   private readonly _exportService = inject(ExportModalService);
   private readonly _analyticsService = inject(AnalyticsService);
+  private readonly _router = inject(Router);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
@@ -60,7 +61,15 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   }
 
   public ngOnInit(): void {
+    // Load the palette from local storage
     this._paletteService.loadPaletteFromLocalStorage(this.id());
+
+    // Check is the palette is new
+    const navigation = this._router.lastSuccessfulNavigation;
+    const info = navigation?.extras.info as { palette: 'new' } | undefined;
+    if (info?.palette === 'new') {
+      this._hasUnsavedChanges = true;
+    }
   }
 
   protected readonly saveIcon = computed(() => {
