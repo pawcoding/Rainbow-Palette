@@ -63,6 +63,9 @@ export class ListService {
     if (index > -1) {
       const list = this._list$.value;
       list.splice(index, 1);
+
+      localStorage.removeItem(`${LocalStorageKey.PALETTE}_${id}`);
+
       this._list$.next(list);
     }
   }

@@ -210,6 +210,10 @@
     }
   },
   "list": {
+    "delete": {
+      "dialog": "Are you sure you want to delete the palette \"{{ name }}\"?\n\nThis action cannot be undone.",
+      "hover": "Delete palette"
+    },
     "new": "New palette",
     "title": "Your palettes",
     "view": "View palette \"{{ name }}\""
