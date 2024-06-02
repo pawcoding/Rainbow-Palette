@@ -3,7 +3,7 @@
     class="mx-auto px-4 py-8 sm:max-w-screen-sm md:max-w-screen-md"
     id="list"
   >
-    <section class="mb-4 flex flex-col items-center gap-2 lg:flex-row lg:items-end lg:justify-between">
+    <section class="mb-4 flex flex-col items-center gap-2 sm:flex-row sm:items-end sm:justify-between">
       <h1 class="select-none text-3xl font-bold lg:text-2xl">
         {{ 'list.title' | translate }}
       </h1>
@@ -25,49 +25,10 @@
       </div>
     </section>
 
-    <section class="rounded-md border border-neutral-200 dark:border-neutral-700">
-      @for (palette of list(); track palette.id) {
-        <div
-          [class.rounded-b-md]="$last"
-          [class.rounded-t-md]="$first"
-          class="group flex items-center justify-between transition-colors duration-300 ease-in-out odd:bg-neutral-100 hover:bg-neutral-200 dark:odd:bg-neutral-800 dark:hover:bg-neutral-700"
-        >
-          <a
-            [routerLink]="['/view', palette.id]"
-            [title]="'list.view' | translate: { name: palette.name }"
-            class="group/link flex h-12 grow items-center gap-2 px-4 sm:h-14"
-          >
-            <span>
-              {{ palette.name }}
-            </span>
-            <span
-              class="flex -translate-x-full items-center justify-center opacity-0 transition-all duration-300 ease-spring group-hover/link:translate-x-0 group-hover/link:opacity-100"
-            >
-              <ng-icon [svg]="heroArrowRightMini" />
-            </span>
-          </a>
-
-          <div
-            class="inline-flex p-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 can-hover:opacity-0"
-          >
-            <button
-              [title]="'list.delete.hover' | translate"
-              (click)="deletePalette(palette)"
-              class="flex size-8 items-center justify-center rounded border border-transparent text-neutral-700 transition-colors duration-300 ease-in-out hover:border-neutral-300 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:border-neutral-600 dark:hover:bg-neutral-800 sm:size-10"
-            >
-              <span class="sr-only">
-                {{ 'common.delete' | translate }}
-              </span>
-              <ng-icon
-                [svg]="heroTrashMini"
-                class="scale-90 sm:scale-100"
-                size="1.25rem"
-              />
-            </button>
-          </div>
-        </div>
-      }
-    </section>
+    <rp-palette-list
+      [list]="list()"
+      (deletePalette)="deletePalette($event)"
+    />
   </div>
 } @else {
   <rp-no-palette [parent]="'view'" />
