@@ -12,6 +12,9 @@ module.exports = {
       },
       backdropBlur: {
         xs: '2px'
+      },
+      transitionTimingFunction: {
+        spring: 'cubic-bezier(.4,1.75,.6,1)'
       }
     },
     screens: {
