@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { unsavedChangesGuard } from './view/utils/unsaved-changes.guard';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,7 @@ export const routes: Routes = [
       },
       {
         path: ':id',
+        canDeactivate: [unsavedChangesGuard],
         loadComponent: () => import('./view/view.component')
       }
     ]

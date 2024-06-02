@@ -289,6 +289,7 @@
       "save": "Save your palette in your browser",
       "saved": "Your palette has been saved.",
       "saving": "Saving your palette in your browser"
-    }
+    },
+    "unsaved-changes": "You have unsaved changes in your palette. If you leave this page, your changes will be lost.\n\nAre you sure you want to leave?"
   }
 }

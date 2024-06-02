@@ -24,6 +24,7 @@ import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import { sleep } from '../shared/utils/sleep';
 import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
+import { UnsavedChangesComponent } from './utils/unsaved-changes.guard';
 
 @Component({
   selector: 'rp-view',
@@ -31,7 +32,7 @@ import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
   imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule, RouterLink],
   templateUrl: './view.component.html'
 })
-export default class ViewComponent implements OnInit {
+export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _isRunningTest = inject(IS_RUNNING_TEST);
   private readonly _colorEditorService = inject(ColorEditorService);
   private readonly _toastService = inject(ToastService);
@@ -51,6 +52,12 @@ export default class ViewComponent implements OnInit {
 
   protected readonly palette = this._paletteService.palette;
   protected readonly saving = signal(false);
+
+  private _hasUnsavedChanges = false;
+
+  public get hasUnsavedChanges(): boolean {
+    return this._hasUnsavedChanges;
+  }
 
   public ngOnInit(): void {
     this._paletteService.loadPaletteFromLocalStorage(this.id());
@@ -88,6 +95,7 @@ export default class ViewComponent implements OnInit {
       message: 'view.palette.renamed',
       parameters: { name: newName }
     });
+    this._hasUnsavedChanges = true;
   }
 
   public async savePalette(): Promise<void> {
@@ -113,6 +121,7 @@ export default class ViewComponent implements OnInit {
       type: 'success',
       message: 'view.palette.saved'
     });
+    this._hasUnsavedChanges = false;
   }
 
   public async exportPalette(): Promise<void> {
@@ -140,6 +149,7 @@ export default class ViewComponent implements OnInit {
       message: 'view.color.renamed',
       parameters: { name: newName }
     });
+    this._hasUnsavedChanges = true;
   }
 
   public async editColor(color: Color, shadeIndex?: number): Promise<void> {
@@ -150,6 +160,7 @@ export default class ViewComponent implements OnInit {
     }
 
     color.shades = updatedColor.shades;
+    this._hasUnsavedChanges = true;
   }
 
   public async removeColor(color: Color): Promise<void> {
@@ -168,6 +179,7 @@ export default class ViewComponent implements OnInit {
         message: 'view.color.removed',
         parameters: { color: name }
       });
+      this._hasUnsavedChanges = true;
     }
   }
 
@@ -179,6 +191,7 @@ export default class ViewComponent implements OnInit {
 
     const color = await this._colorService.randomColor();
     palette.addColor(color);
+    this._hasUnsavedChanges = true;
   }
 
   public async copyToClipboard(shade: Shade): Promise<void> {

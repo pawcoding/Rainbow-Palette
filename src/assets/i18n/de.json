@@ -288,6 +288,7 @@
       "save": "Speichere die Palette in deinem Browser",
       "saved": "Deine Palette wurde lokal gespeichert.",
       "saving": "Deine Palette wird im Browser gespeichert"
-    }
+    },
+    "unsaved-changes": "Die Änderungen an deiner Palette wurden noch nicht gespeichert. Wenn du die Seite verlässt, gehen alle Änderungen verloren.\n\nBist du sicher, dass du die Seite verlassen möchtest?"
   }
 }
