@@ -24,11 +24,11 @@ export class Palette {
     }
   }
 
-  public copy(copyId: boolean): Palette {
+  public copy(shouldCopyId: boolean): Palette {
     return new Palette(
       this.name,
       this.colors.map((color) => color.copy()),
-      copyId ? this.id : undefined
+      shouldCopyId ? this.id : undefined
     );
   }
 
