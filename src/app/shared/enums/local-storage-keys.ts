@@ -27,6 +27,10 @@ export enum LocalStorageKey {
    */
   PALETTE = 'RP_PALETTE',
   /**
+   * Store a list of all palette ids created by the user.
+   */
+  PALETTE_IDS = 'RP_PALETTE_IDS',
+  /**
    * Temporarily store the user's palette while the app updates itself.
    */
   PALETTE_TMP = 'RP_PALETTE_TMP',

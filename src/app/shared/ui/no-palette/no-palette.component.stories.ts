@@ -16,7 +16,7 @@ const meta: Meta<NoPaletteComponent> = {
     parent: {
       type: {
         name: 'enum',
-        value: ['view', 'preview'],
+        value: ['view', 'palette', 'preview'],
         required: true
       }
     }
@@ -27,6 +27,11 @@ export default meta;
 export const View = createStory<NoPaletteComponent>({
   args: {
     parent: 'view'
+  }
+});
+export const Palette = createStory<NoPaletteComponent>({
+  args: {
+    parent: 'palette'
   }
 });
 export const Preview = createStory<NoPaletteComponent>({

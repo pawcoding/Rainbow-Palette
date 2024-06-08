@@ -1,0 +1,35 @@
+@if (list().length > 0) {
+  <div
+    class="mx-auto px-4 py-8 sm:max-w-screen-sm md:max-w-screen-md"
+    id="list"
+  >
+    <section class="mb-4 flex flex-col items-center gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <h1 class="select-none text-3xl font-bold lg:text-2xl">
+        {{ 'list.title' | translate }}
+      </h1>
+      <div class="flex flex-wrap justify-center gap-2">
+        <a
+          [routerLink]="['/']"
+          [title]="'list.new' | translate"
+          class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+        >
+          <ng-icon
+            [svg]="heroPlusMini"
+            class="scale-90 sm:scale-100"
+            size="1.25rem"
+          />
+          <span>
+            {{ 'list.new' | translate }}
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <rp-palette-list
+      [list]="list()"
+      (deletePalette)="deletePalette($event)"
+    />
+  </div>
+} @else {
+  <rp-no-palette parent="view" />
+}

@@ -1,3 +1,4 @@
+import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -50,6 +51,10 @@ describe('ViewComponent', () => {
 
     fixture = TestBed.createComponent(ViewComponent);
     component = fixture.componentInstance;
+
+    // @ts-expect-error - read-only property
+    component.id = signal('test');
+
     fixture.detectChanges();
   });
 
@@ -65,6 +70,7 @@ describe('ViewComponent', () => {
 
     expect(dialogService.prompt).toHaveBeenCalledTimes(1);
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
+    expect(component.hasUnsavedChanges()).toBeTrue();
   });
 
   it('should save palette', async () => {
@@ -80,6 +86,7 @@ describe('ViewComponent', () => {
       TrackingEventCategory.SAVE_PALETTE,
       TrackingEventAction.SAVE_PALETTE_LOCAL_STORAGE
     );
+    expect(component.hasUnsavedChanges()).toBeFalse();
   });
 
   it('should open color rename dialog', async () => {
@@ -92,6 +99,7 @@ describe('ViewComponent', () => {
     expect(color.name).toBe('Color_test');
     expect(dialogService.prompt).toHaveBeenCalledTimes(1);
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
+    expect(component.hasUnsavedChanges()).toBeTrue();
   });
 
   it('should confirm color delete', async () => {
@@ -103,6 +111,7 @@ describe('ViewComponent', () => {
 
     expect(dialogService.confirm).toHaveBeenCalledTimes(1);
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
+    expect(component.hasUnsavedChanges()).toBeTrue();
   });
 
   it('should open color editor on color edit', async () => {
@@ -113,6 +122,7 @@ describe('ViewComponent', () => {
 
     expect(colorEditorService.openColorEditor).toHaveBeenCalledTimes(1);
     expect(colorEditorService.openColorEditor).toHaveBeenCalledWith(color, 5);
+    expect(component.hasUnsavedChanges()).toBeTrue();
   });
 
   it('should add random color', async () => {
@@ -121,6 +131,7 @@ describe('ViewComponent', () => {
     await component.addColor();
 
     expect(colorService.randomColor).toHaveBeenCalledTimes(1);
+    expect(component.hasUnsavedChanges()).toBeTrue();
   });
 
   it('should open export modal', async () => {

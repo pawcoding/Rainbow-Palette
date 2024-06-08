@@ -14,7 +14,7 @@
     </p>
 
     <a
-      [routerLink]="'/'"
+      [routerLink]="parent() === 'palette' ? ['/view'] : ['/']"
       class="inline-flex items-center gap-2 rounded-md bg-blue-500 px-4 py-2 font-semibold text-neutral-50 dark:bg-blue-600"
     >
       <ng-icon
@@ -22,7 +22,7 @@
         size="1.1rem"
         strokeWidth="0.15rem"
       />
-      {{ 'no-palette.link' | translate }}
+      {{ (parent() === 'palette' ? 'no-palette.link.list' : 'no-palette.link.generate') | translate }}
     </a>
   </article>
 </section>

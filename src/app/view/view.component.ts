@@ -1,7 +1,9 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, HostListener, OnInit, computed, inject, input, signal } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import {
   heroArrowDownTrayMini,
+  heroArrowLeftMini,
   heroArrowPathMini,
   heroBookmarkMini,
   heroPencilSquareMini,
@@ -22,14 +24,15 @@ import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import { sleep } from '../shared/utils/sleep';
 import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
+import { UnsavedChangesComponent } from './utils/unsaved-changes.guard';
 
 @Component({
   selector: 'rp-view',
   standalone: true,
-  imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule],
+  imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule, RouterLink],
   templateUrl: './view.component.html'
 })
-export default class ViewComponent {
+export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _isRunningTest = inject(IS_RUNNING_TEST);
   private readonly _colorEditorService = inject(ColorEditorService);
   private readonly _toastService = inject(ToastService);
@@ -39,19 +42,49 @@ export default class ViewComponent {
   private readonly _dialogService = inject(DialogService);
   private readonly _exportService = inject(ExportModalService);
   private readonly _analyticsService = inject(AnalyticsService);
+  private readonly _router = inject(Router);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
   protected readonly heroArrowDownTrayMini = heroArrowDownTrayMini;
+  protected readonly heroArrowLeftMini = heroArrowLeftMini;
+
+  public readonly id = input.required<string>();
 
   protected readonly palette = this._paletteService.palette;
   protected readonly saving = signal(false);
+
+  private readonly _hasUnsavedChanges = signal(false);
+
+  public ngOnInit(): void {
+    // Load the palette from local storage
+    this._paletteService.loadPaletteFromLocalStorage(this.id());
+
+    // Check is the palette is new
+    const navigation = this._router.lastSuccessfulNavigation;
+    const info = navigation?.extras.info as { palette: 'new' } | undefined;
+    if (info?.palette === 'new') {
+      this._hasUnsavedChanges.set(true);
+    }
+  }
 
   protected readonly saveIcon = computed(() => {
     if (this.saving()) {
       return heroArrowPathMini;
     } else {
       return heroBookmarkMini;
+    }
+  });
+
+  public readonly hasUnsavedChanges = computed(() => this._hasUnsavedChanges());
+
+  public readonly saveTooltip = computed(() => {
+    if (this.saving()) {
+      return 'view.palette.saving';
+    } else if (this.hasUnsavedChanges()) {
+      return 'view.palette.save';
+    } else {
+      return 'view.palette.no-changes';
     }
   });
 
@@ -79,6 +112,7 @@ export default class ViewComponent {
       message: 'view.palette.renamed',
       parameters: { name: newName }
     });
+    this._hasUnsavedChanges.set(true);
   }
 
   public async savePalette(): Promise<void> {
@@ -104,6 +138,7 @@ export default class ViewComponent {
       type: 'success',
       message: 'view.palette.saved'
     });
+    this._hasUnsavedChanges.set(false);
   }
 
   public async exportPalette(): Promise<void> {
@@ -131,6 +166,7 @@ export default class ViewComponent {
       message: 'view.color.renamed',
       parameters: { name: newName }
     });
+    this._hasUnsavedChanges.set(true);
   }
 
   public async editColor(color: Color, shadeIndex?: number): Promise<void> {
@@ -141,6 +177,7 @@ export default class ViewComponent {
     }
 
     color.shades = updatedColor.shades;
+    this._hasUnsavedChanges.set(true);
   }
 
   public async removeColor(color: Color): Promise<void> {
@@ -159,6 +196,7 @@ export default class ViewComponent {
         message: 'view.color.removed',
         parameters: { color: name }
       });
+      this._hasUnsavedChanges.set(true);
     }
   }
 
@@ -170,6 +208,7 @@ export default class ViewComponent {
 
     const color = await this._colorService.randomColor();
     palette.addColor(color);
+    this._hasUnsavedChanges.set(true);
   }
 
   public async copyToClipboard(shade: Shade): Promise<void> {
@@ -187,5 +226,23 @@ export default class ViewComponent {
         message: 'view.color.copy.error'
       });
     }
+  }
+
+  /**
+   * Check if there are unsaved changes before leaving the page.
+   * This method exists in addition to the normal `canDeactivate` guard
+   * and is used to prevent the user from accidentally leaving the page.
+   * The route guard is not enough because it only prevents navigation
+   * inside the app, but not when the user closes the browser tab.
+   */
+  @HostListener('window:beforeunload', ['$event'])
+  public checkUnsavedChanges(_: Event): boolean {
+    // If there are unsaved changes, show a confirmation dialog by returning false
+    if (this.hasUnsavedChanges()) {
+      return false;
+    }
+
+    // There are no unsaved changes, so the user can leave the page
+    return true;
   }
 }
