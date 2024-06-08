@@ -1,14 +1,14 @@
-import { inject } from '@angular/core';
+import { Signal, inject } from '@angular/core';
 import { CanDeactivateFn } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '../../shared/data-access/dialog.service';
 
 export interface UnsavedChangesComponent {
-  hasUnsavedChanges: boolean;
+  hasUnsavedChanges: Signal<boolean>;
 }
 
 export const unsavedChangesGuard: CanDeactivateFn<UnsavedChangesComponent> = async (component) => {
-  if (!component.hasUnsavedChanges) {
+  if (!component.hasUnsavedChanges()) {
     return true;
   }
 

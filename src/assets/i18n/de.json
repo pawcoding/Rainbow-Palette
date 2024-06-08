@@ -283,6 +283,7 @@
       "tune": "Passe die Farbe nach deinem Geschmack an"
     },
     "palette": {
+      "no-changes": "Es wurden noch keine Änderungen an deiner Palette vorgenommen.",
       "rename": "Gebe deiner Palette einen neuen Namen",
       "renamed": "Deine Palette wurde in \"{{ palette }}\" umbenannt.",
       "save": "Speichere die Palette in deinem Browser",

@@ -284,6 +284,7 @@
       "tune": "Tune the color to your liking"
     },
     "palette": {
+      "no-changes": "No changes have been made to your palette yet.",
       "rename": "Give your palette a new name",
       "renamed": "Your palette has been renamed to \"{{ name }}\".",
       "save": "Save your palette in your browser",

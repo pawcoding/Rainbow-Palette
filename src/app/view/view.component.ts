@@ -54,11 +54,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   protected readonly palette = this._paletteService.palette;
   protected readonly saving = signal(false);
 
-  private _hasUnsavedChanges = false;
-
-  public get hasUnsavedChanges(): boolean {
-    return this._hasUnsavedChanges;
-  }
+  private readonly _hasUnsavedChanges = signal(false);
 
   public ngOnInit(): void {
     // Load the palette from local storage
@@ -68,7 +64,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
     const navigation = this._router.lastSuccessfulNavigation;
     const info = navigation?.extras.info as { palette: 'new' } | undefined;
     if (info?.palette === 'new') {
-      this._hasUnsavedChanges = true;
+      this._hasUnsavedChanges.set(true);
     }
   }
 
@@ -77,6 +73,18 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
       return heroArrowPathMini;
     } else {
       return heroBookmarkMini;
+    }
+  });
+
+  public readonly hasUnsavedChanges = computed(() => this._hasUnsavedChanges());
+
+  public readonly saveTooltip = computed(() => {
+    if (this.saving()) {
+      return 'view.palette.saving';
+    } else if (this.hasUnsavedChanges()) {
+      return 'view.palette.save';
+    } else {
+      return 'view.palette.no-changes';
     }
   });
 
@@ -104,7 +112,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
       message: 'view.palette.renamed',
       parameters: { name: newName }
     });
-    this._hasUnsavedChanges = true;
+    this._hasUnsavedChanges.set(true);
   }
 
   public async savePalette(): Promise<void> {
@@ -130,7 +138,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
       type: 'success',
       message: 'view.palette.saved'
     });
-    this._hasUnsavedChanges = false;
+    this._hasUnsavedChanges.set(false);
   }
 
   public async exportPalette(): Promise<void> {
@@ -158,7 +166,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
       message: 'view.color.renamed',
       parameters: { name: newName }
     });
-    this._hasUnsavedChanges = true;
+    this._hasUnsavedChanges.set(true);
   }
 
   public async editColor(color: Color, shadeIndex?: number): Promise<void> {
@@ -169,7 +177,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
     }
 
     color.shades = updatedColor.shades;
-    this._hasUnsavedChanges = true;
+    this._hasUnsavedChanges.set(true);
   }
 
   public async removeColor(color: Color): Promise<void> {
@@ -188,7 +196,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
         message: 'view.color.removed',
         parameters: { color: name }
       });
-      this._hasUnsavedChanges = true;
+      this._hasUnsavedChanges.set(true);
     }
   }
 
@@ -200,7 +208,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
     const color = await this._colorService.randomColor();
     palette.addColor(color);
-    this._hasUnsavedChanges = true;
+    this._hasUnsavedChanges.set(true);
   }
 
   public async copyToClipboard(shade: Shade): Promise<void> {

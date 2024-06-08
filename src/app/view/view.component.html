@@ -50,12 +50,16 @@
         </button>
 
         <button
-          [disabled]="saving()"
-          [title]="(saving() ? 'view.palette.saving' : 'view.palette.save') | translate"
+          [class]="saving() ? 'cursor-wait' : hasUnsavedChanges() ? 'cursor-pointer' : 'cursor-not-allowed'"
+          [disabled]="saving() || !hasUnsavedChanges()"
+          [title]="saveTooltip() | translate"
           (click)="savePalette()"
-          class="group flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-wait disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700 sm:px-3 sm:py-2"
+          class="flex items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700 sm:px-3 sm:py-2"
         >
-          <span class="flex items-center justify-center group-disabled:animate-pulse-spin">
+          <span
+            [class.animate-pulse-spin]="saving()"
+            class="flex items-center justify-center"
+          >
             <ng-icon
               [svg]="saveIcon()"
               class="scale-90 sm:scale-100"
