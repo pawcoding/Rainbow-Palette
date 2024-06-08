@@ -7,6 +7,7 @@ import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
 import { ColorNameService } from './color-name.service';
 import { ColorService } from './color.service';
+import { ListService } from './list.service';
 import { ToastService } from './toast.service';
 
 @Injectable({
@@ -16,6 +17,7 @@ export class PaletteService {
   private readonly _colorService = inject(ColorService);
   private readonly _colorNameService = inject(ColorNameService);
   private readonly _toastService = inject(ToastService);
+  private readonly _listService = inject(ListService);
 
   private readonly _palette = signal<Palette | undefined>(undefined);
 
@@ -24,14 +26,37 @@ export class PaletteService {
   }
 
   public constructor() {
-    this.loadPaletteFromLocalStorage();
+    // Migrate single palette to list
+    this._migratePalette();
 
     effect(() => {
       this._updateVariables();
     });
   }
 
-  public loadPaletteFromLocalStorage(): void {
+  private _migratePalette(): void {
+    const oldPalette = localStorage.getItem(LocalStorageKey.PALETTE);
+    if (oldPalette) {
+      try {
+        const palette = Palette.parse(oldPalette);
+        localStorage.setItem(`${LocalStorageKey.PALETTE}_${palette.id}`, palette.toString());
+        this._listService.add(palette);
+
+        localStorage.removeItem(LocalStorageKey.PALETTE);
+      } catch (e) {
+        this._toastService.showToast({
+          type: 'error',
+          message: 'toast.error.palette-load'
+        });
+      }
+    }
+  }
+
+  public loadPaletteFromLocalStorage(id: string): void {
+    if (this.palette()?.id === id) {
+      return;
+    }
+
     // Check if there was a palette stored for an app update
     let palette = localStorage.getItem(LocalStorageKey.PALETTE_TMP);
 
@@ -40,7 +65,7 @@ export class PaletteService {
       localStorage.removeItem(LocalStorageKey.PALETTE_TMP);
     } else {
       // Load the palette saved by the user
-      palette = localStorage.getItem(LocalStorageKey.PALETTE);
+      palette = localStorage.getItem(`${LocalStorageKey.PALETTE}_${id}`);
     }
 
     if (palette) {
@@ -62,12 +87,13 @@ export class PaletteService {
         // Store the palette in a different key to reload it in the current state after an app update
         localStorage.setItem(LocalStorageKey.PALETTE_TMP, palette.toString());
       } else {
-        localStorage.setItem(LocalStorageKey.PALETTE, palette.toString());
+        localStorage.setItem(`${LocalStorageKey.PALETTE}_${palette.id}`, palette.toString());
+        this._listService.add(palette);
       }
     }
   }
 
-  public async generatePalette(hex: string, scheme: PaletteScheme): Promise<void> {
+  public async generatePalette(hex: string, scheme: PaletteScheme): Promise<string> {
     const palette = await this._generatePalette(hex, scheme);
 
     for (const color of palette.colors) {
@@ -79,6 +105,8 @@ export class PaletteService {
     }
 
     this._palette.set(palette);
+
+    return palette.id;
   }
 
   private async _generatePalette(hex: string, scheme: PaletteScheme): Promise<Palette> {
@@ -493,8 +521,12 @@ export class PaletteService {
 }
 
 export class PaletteServiceMock {
-  public palette = signal<Palette | undefined>(new Palette('Mock', [new Color([Shade.random()], 'MockColor')]));
+  public palette = signal<Palette | undefined>(
+    new Palette('Mock', [new Color([Shade.random()], 'MockColor')], 'test-id')
+  );
   public loadPaletteFromLocalStorage(): void {}
   public savePaletteToLocalStorage(): void {}
-  public generatePalette(_hex: string, _scheme: PaletteScheme): void {}
+  public generatePalette(_hex: string, _scheme: PaletteScheme): string {
+    return 'test-id';
+  }
 }

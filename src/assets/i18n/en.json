@@ -209,12 +209,25 @@
       "theme": "Pick a theme"
     }
   },
+  "list": {
+    "delete": {
+      "dialog": "Are you sure you want to delete the palette \"{{ name }}\"?\n\nThis action cannot be undone.",
+      "hover": "Delete palette"
+    },
+    "new": "New palette",
+    "title": "Your palettes",
+    "view": "View palette \"{{ name }}\""
+  },
   "no-palette": {
     "description": {
+      "palette": "There was no palette found with the given ID. Maybe you have entered the wrong URL or the palette has been deleted.",
       "preview": "You don't have a palette yet. You have to generate one first before you can preview it.",
       "view": "You don't have a palette yet. You have to generate one first before you can edit it."
     },
-    "link": "Back to generation",
+    "link": {
+      "generate": "Back to generation",
+      "list": "Back to your palettes"
+    },
     "title": "No palette available"
   },
   "preview": {
@@ -254,6 +267,7 @@
     }
   },
   "view": {
+    "back": "Back to your palettes",
     "color": {
       "add": "Add color",
       "add-tooltip": "Add a new color to your palette",
@@ -270,11 +284,13 @@
       "tune": "Tune the color to your liking"
     },
     "palette": {
+      "no-changes": "No changes have been made to your palette yet.",
       "rename": "Give your palette a new name",
       "renamed": "Your palette has been renamed to \"{{ name }}\".",
       "save": "Save your palette in your browser",
       "saved": "Your palette has been saved.",
       "saving": "Saving your palette in your browser"
-    }
+    },
+    "unsaved-changes": "You have unsaved changes in your palette. If you leave this page, your changes will be lost.\n\nAre you sure you want to leave?"
   }
 }

@@ -151,7 +151,7 @@ export class AccordionComponent {
       },
       {
         duration: 300,
-        easing: 'ease-in-out'
+        easing: 'ease-in'
       }
     );
 

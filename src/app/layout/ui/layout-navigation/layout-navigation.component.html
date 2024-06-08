@@ -4,7 +4,7 @@
   @for (navEntry of navigationEntries(); track navEntry.path) {
     <a
       [class]="
-        navEntry.path === currentPath
+        isActive(navEntry.path, currentPath())
           ? 'active scale-105 font-semibold text-blue-500 sm:scale-100 sm:bg-blue-200 sm:font-medium sm:text-blue-700 dark:sm:bg-blue-800 dark:sm:text-blue-200'
           : 'sm:hover:bg-neutral-200 sm:hover:text-neutral-900 dark:sm:hover:bg-neutral-700 dark:sm:hover:text-neutral-50'
       "

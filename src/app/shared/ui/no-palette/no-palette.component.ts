@@ -18,5 +18,5 @@ export class NoPaletteComponent {
    * The parent component of the no-palette component.
    * This determines the text that is displayed in the no-palette component.
    */
-  public readonly parent = input.required<'view' | 'preview'>();
+  public readonly parent = input.required<'view' | 'palette' | 'preview'>();
 }

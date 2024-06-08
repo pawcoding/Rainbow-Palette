@@ -208,12 +208,25 @@
       "theme": "Wähle ein Design"
     }
   },
+  "list": {
+    "delete": {
+      "dialog": "Bist du sicher, dass du die Palette \"{{ name }}\" löschen möchtest?\n\nDie Palette kann nicht wiederhergestellt werden.",
+      "hover": "Palette löschen"
+    },
+    "new": "Neue Palette",
+    "title": "Deine Farbpaletten",
+    "view": "Palette \"{{ name }}\" ansehen"
+  },
   "no-palette": {
     "description": {
+      "palette": "Es wurde keine Palette mit der angegebenen ID gefunden. Vielleicht hast du dich vertippt oder die Palette wurde gelöscht.",
       "preview": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du hier eine Vorschau sehen und die Palette ausprobieren.",
       "view": "Du hast noch keine Farbpalette erstellt. Sobald du eine Palette generiert hast, kannst du sie hier bearbeiten und anpassen."
     },
-    "link": "Zurück zum Generator",
+    "link": {
+      "generate": "Zurück zum Generator",
+      "list": "Zurück zur Übersicht"
+    },
     "title": "Keine Farbpalette vorhanden"
   },
   "preview": {
@@ -253,6 +266,7 @@
     }
   },
   "view": {
+    "back": "Zurück zur Übersicht",
     "color": {
       "add": "Farbe hinzufügen",
       "add-tooltip": "Füge deiner Palette eine neue Farbe hinzu",
@@ -269,11 +283,13 @@
       "tune": "Passe die Farbe nach deinem Geschmack an"
     },
     "palette": {
+      "no-changes": "Es wurden noch keine Änderungen an deiner Palette vorgenommen.",
       "rename": "Gebe deiner Palette einen neuen Namen",
       "renamed": "Deine Palette wurde in \"{{ palette }}\" umbenannt.",
       "save": "Speichere die Palette in deinem Browser",
       "saved": "Deine Palette wurde lokal gespeichert.",
       "saving": "Deine Palette wird im Browser gespeichert"
-    }
+    },
+    "unsaved-changes": "Die Änderungen an deiner Palette wurden noch nicht gespeichert. Wenn du die Seite verlässt, gehen alle Änderungen verloren.\n\nBist du sicher, dass du die Seite verlassen möchtest?"
   }
 }

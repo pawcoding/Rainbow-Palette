@@ -1,12 +1,16 @@
+import { generateId } from '../utils/generate-id';
 import { Color } from './color.model';
 
 export class Palette {
+  public readonly id: string;
   public name: string;
   public readonly colors: Array<Color>;
 
-  public constructor(name: string, colors: Array<Color>) {
+  public constructor(name: string, colors: Array<Color>, id?: string) {
     this.colors = colors;
     this.name = name;
+
+    this.id = id || generateId(15);
   }
 
   public addColor(color: Color): void {
@@ -20,10 +24,11 @@ export class Palette {
     }
   }
 
-  public copy(): Palette {
+  public copy(shouldCopyId: boolean): Palette {
     return new Palette(
       this.name,
-      this.colors.map((color) => color.copy())
+      this.colors.map((color) => color.copy()),
+      shouldCopyId ? this.id : undefined
     );
   }
 
@@ -49,6 +54,11 @@ export class Palette {
       name = palette.name;
     }
 
+    let id: string | undefined;
+    if ('id' in palette && typeof palette.id === 'string') {
+      id = palette.id;
+    }
+
     const colors: Array<Color> = [];
     if (!Array.isArray(palette.colors)) {
       throw new Error(`Could not parse palette (invalid "colors" property): "${palette.colors}"`);
@@ -62,13 +72,14 @@ export class Palette {
       }
     }
 
-    return new Palette(name || 'Palette', colors);
+    return new Palette(name || 'Palette', colors, id);
   }
 
   public toJSON(): object {
     return {
       name: this.name,
-      colors: this.colors.map((color) => color.toJSON())
+      colors: this.colors.map((color) => color.toJSON()),
+      id: this.id
     };
   }
 
