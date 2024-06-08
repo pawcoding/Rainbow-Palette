@@ -1,4 +1,4 @@
-import { Component, OnInit, computed, inject, input, signal } from '@angular/core';
+import { Component, HostListener, OnInit, computed, inject, input, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import {
@@ -226,5 +226,23 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
         message: 'view.color.copy.error'
       });
     }
+  }
+
+  /**
+   * Check if there are unsaved changes before leaving the page.
+   * This method exists in addition to the normal `canDeactivate` guard
+   * and is used to prevent the user from accidentally leaving the page.
+   * The route guard is not enough because it only prevents navigation
+   * inside the app, but not when the user closes the browser tab.
+   */
+  @HostListener('window:beforeunload', ['$event'])
+  public checkUnsavedChanges(_: Event): boolean {
+    // If there are unsaved changes, show a confirmation dialog by returning false
+    if (this.hasUnsavedChanges()) {
+      return false;
+    }
+
+    // There are no unsaved changes, so the user can leave the page
+    return true;
   }
 }
