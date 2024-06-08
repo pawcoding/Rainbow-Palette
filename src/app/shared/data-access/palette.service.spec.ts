@@ -1,6 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { PaletteScheme } from '../constants/palette-scheme';
+import { TailwindGrays } from '../constants/tailwind-colors';
 import { LocalStorageKey } from '../enums/local-storage-keys';
+import { Palette } from '../model';
 import { ColorNameService, ColorNameServiceMock } from './color-name.service';
 import { ColorService, ColorServiceMock } from './color.service';
 import { ListService, ListServiceMock } from './list.service';
@@ -89,5 +91,38 @@ describe('PaletteService', () => {
 
   afterEach(() => {
     localStorage.removeItem(`${LocalStorageKey.PALETTE}_test`);
+  });
+});
+
+describe('PaletteService', () => {
+  let listService: ListServiceMock;
+
+  it('should automatically migrate existing palette', () => {
+    listService = new ListServiceMock();
+    spyOn(listService, 'add').and.callThrough();
+
+    // Add existing palette to local storage
+    const palette = new Palette('Test', [...TailwindGrays.colors], 'test-id');
+    localStorage.setItem(LocalStorageKey.PALETTE, palette.toString());
+
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: ListService, useValue: listService },
+        { provide: ColorService, useClass: ColorServiceMock },
+        { provide: ColorNameService, useClass: ColorNameServiceMock },
+        { provide: ToastService, useClass: ToastServiceMock }
+      ]
+    });
+
+    // Create palette service
+    TestBed.inject(PaletteService);
+
+    // Check if palette was migrated
+    expect(localStorage.getItem(`${LocalStorageKey.PALETTE}_${palette.id}`)).toBeTruthy();
+    expect(listService.add).toHaveBeenCalledTimes(1);
+    expect(localStorage.getItem(LocalStorageKey.PALETTE)).toBeFalsy();
+
+    // Clean up
+    localStorage.removeItem(`${LocalStorageKey.PALETTE}_${palette.id}`);
   });
 });
