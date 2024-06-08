@@ -1,3 +1,26 @@
+# [1.2.0](https://github.com/pawcoding/rainbow-palette/compare/v1.1.0...v1.2.0) (2024-06-08)
+
+
+### Bug Fixes
+
+* **navigation:** compare path for similarity not equality ([5d16a9f](https://github.com/pawcoding/rainbow-palette/commit/5d16a9ffbe29caf36feddbeac0e151bcc26d009f))
+* **no-palette:** link back to list when palette not found ([396ab75](https://github.com/pawcoding/rainbow-palette/commit/396ab75ff6b620e47018afe770b4bf24abccec56))
+* **index:** replace self-closing root element ([ebd2e51](https://github.com/pawcoding/rainbow-palette/commit/ebd2e518532e96c226a0e415fac6911f6aad60d2))
+* **view:** treat newly generated palette as unsaved ([ca64f46](https://github.com/pawcoding/rainbow-palette/commit/ca64f46724a685ef635902875ae6eab8c468b279))
+* **storybook:** update control type of `DropdownMenu` ([3caeb66](https://github.com/pawcoding/rainbow-palette/commit/3caeb668afdcf1d6c0e759d60ddbb6f88aea93d8))
+* **view:** warn user about unsaved changes ([6c870ab](https://github.com/pawcoding/rainbow-palette/commit/6c870ab6219ecf0b8b4697232580d1a7de2d4ab4))
+
+
+### Features
+
+* **list:** add ability to save and load multiple palettes ([dc5e13f](https://github.com/pawcoding/rainbow-palette/commit/dc5e13fb5d2ac9af90716a409e1df862d26ea82f))
+* **view:** add link to go back to list of palettes ([1d45e9b](https://github.com/pawcoding/rainbow-palette/commit/1d45e9bf57b7fbd6f5ccf77128a05f6bc73c4564))
+* **list:** add list of palettes ([9f4bcae](https://github.com/pawcoding/rainbow-palette/commit/9f4bcae3abf3d42a9167ba6d6d35c3b5bd8841ce))
+* **list:** add option to delete existing palettes ([9066744](https://github.com/pawcoding/rainbow-palette/commit/9066744e5f5998d277cfe704f87f2183406a2b0d))
+* **view:** confirm closing of tab when palette has unsaved changes ([def986a](https://github.com/pawcoding/rainbow-palette/commit/def986ae8362ef352ecea5f074663a888654eacd))
+* **view:** disable save button when no changes were made yet ([180a94e](https://github.com/pawcoding/rainbow-palette/commit/180a94eecae3f6b5f395eae74567c65b03b32fea))
+* **list:** save name alongside id ([220065b](https://github.com/pawcoding/rainbow-palette/commit/220065bab91f4fcf299d81905842ba35b14d0d1d))
+
 # [1.2.0-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.1.1-staging.1...v1.2.0-staging.1) (2024-06-08)
 
 
