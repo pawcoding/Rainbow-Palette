@@ -21,8 +21,23 @@
       </a>
 
       <div
-        class="inline-flex p-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 can-hover:opacity-0"
+        class="inline-flex gap-2 p-2 transition-opacity duration-300 ease-in-out group-hover:opacity-100 can-hover:opacity-0"
       >
+        <button
+          [title]="'list.duplicate' | translate"
+          (click)="duplicatePalette.emit(palette)"
+          class="flex size-8 items-center justify-center rounded border border-transparent text-neutral-700 transition-colors duration-300 ease-in-out hover:border-neutral-300 hover:bg-neutral-100 dark:text-neutral-200 dark:hover:border-neutral-600 dark:hover:bg-neutral-800 sm:size-10"
+        >
+          <span class="sr-only">
+            {{ 'common.duplicate' | translate }}
+          </span>
+          <ng-icon
+            [svg]="heroDocumentDuplicate"
+            class="scale-90 sm:scale-100"
+            size="1.25rem"
+          />
+        </button>
+
         <button
           [title]="'list.delete.hover' | translate"
           (click)="deletePalette.emit(palette)"

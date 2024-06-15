@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroPlusMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { DialogService } from '../shared/data-access/dialog.service';
 import { ListService, PaletteListItem } from '../shared/data-access/list.service';
+import { PaletteService } from '../shared/data-access/palette.service';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
 import { PaletteListComponent } from './ui/palette-list/palette-list.component';
 
@@ -18,8 +19,10 @@ import { PaletteListComponent } from './ui/palette-list/palette-list.component';
 })
 export default class ListComponent {
   private readonly _listService = inject(ListService);
+  private readonly _paletteService = inject(PaletteService);
   private readonly _dialogService = inject(DialogService);
   private readonly _translateService = inject(TranslateService);
+  private readonly _router = inject(Router);
 
   protected readonly list = toSignal(this._listService.list$, {
     initialValue: []
@@ -35,6 +38,23 @@ export default class ListComponent {
     );
     if (shouldDelete) {
       this._listService.remove(palette.id);
+    }
+  }
+
+  protected async duplicatePalette(palette: PaletteListItem): Promise<void> {
+    // Load the palette to duplicate
+    this._paletteService.loadPaletteFromLocalStorage(palette.id);
+
+    try {
+      // Create a copy of the palette and open it
+      const copyId = this._paletteService.duplicatePalette();
+      await this._router.navigate(['/view', copyId], {
+        info: {
+          palette: 'new'
+        }
+      });
+    } catch (e) {
+      console.error('Could not duplicate palette.', e);
     }
   }
 }

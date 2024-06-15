@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { DialogService, DialogServiceMock } from '../shared/data-access/dialog.service';
 import { ListService, ListServiceMock } from '../shared/data-access/list.service';
+import { PaletteService, PaletteServiceMock } from '../shared/data-access/palette.service';
 import ListComponent from './list.component';
 
 describe('ListComponent', () => {
@@ -15,7 +16,8 @@ describe('ListComponent', () => {
       providers: [
         { provide: ActivatedRoute, useValue: { snapshot: {} } },
         { provide: ListService, useClass: ListServiceMock },
-        { provide: DialogService, useClass: DialogServiceMock }
+        { provide: DialogService, useClass: DialogServiceMock },
+        { provide: PaletteService, useClass: PaletteServiceMock }
       ]
     }).compileComponents();
 

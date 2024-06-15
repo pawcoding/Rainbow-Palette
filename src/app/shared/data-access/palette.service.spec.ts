@@ -89,6 +89,17 @@ describe('PaletteService', () => {
     expect(toastService.showToast).toHaveBeenCalled();
   });
 
+  it('should duplicate palette', async () => {
+    await service.generatePalette('#ffffff', PaletteScheme.ANALOGOUS);
+    const originalPalette = service.palette();
+
+    const id = service.duplicatePalette();
+
+    expect(id).toBeTruthy();
+    expect(id).not.toBe(originalPalette!.id);
+    expect(service.palette()?.id).toBe(id);
+  });
+
   afterEach(() => {
     localStorage.removeItem(`${LocalStorageKey.PALETTE}_test`);
   });
