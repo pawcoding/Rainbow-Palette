@@ -252,6 +252,7 @@
     "triadic": "Triadisch"
   },
   "theme": {
+    "auto": "Automatisch",
     "dark": "Dunkel",
     "light": "Hell"
   },

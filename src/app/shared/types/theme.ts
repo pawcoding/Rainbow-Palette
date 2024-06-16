@@ -3,7 +3,7 @@ import { IconType } from '@ng-icons/core';
 /**
  * A theme type.
  */
-export type Theme = 'light' | 'dark';
+export type Theme = 'auto' | 'light' | 'dark';
 
 /**
  * A theme option for the layout options.

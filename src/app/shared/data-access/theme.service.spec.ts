@@ -15,17 +15,22 @@ describe('ThemeService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should set default theme by user preference', () => {
+  it('should set auto theme by user preference', () => {
+    service.setTheme('auto');
+
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    expect(service.theme()).toBe(prefersDark ? 'dark' : 'light');
+    expect(service.theme()).toBe('auto');
+    expect(service.isDark()).toBe(prefersDark);
   });
 
   it('should change theme', () => {
     service.setTheme('dark');
     expect(service.theme()).toBe('dark');
+    expect(service.isDark()).toBe(true);
 
     service.setTheme('light');
     expect(service.theme()).toBe('light');
+    expect(service.isDark()).toBe(false);
   });
 
   it('should save theme changes to local storage', async () => {
@@ -36,6 +41,10 @@ describe('ThemeService', () => {
     service.setTheme('light');
     await sleep(10);
     expect(localStorage.getItem(LocalStorageKey.THEME)).toBe('light');
+
+    service.setTheme('auto');
+    await sleep(10);
+    expect(localStorage.getItem(LocalStorageKey.THEME)).toBe('auto');
   });
 
   afterEach(() => {
@@ -62,6 +71,20 @@ describe('ThemeService', () => {
     const service = TestBed.inject(ThemeService);
     await sleep(10);
     expect(service.theme()).toBe('light');
+
+    localStorage.removeItem(LocalStorageKey.THEME);
+  });
+
+  it('should set auto theme from local storage on initialization', async () => {
+    localStorage.setItem(LocalStorageKey.THEME, 'auto');
+    TestBed.configureTestingModule({});
+
+    const service = TestBed.inject(ThemeService);
+    await sleep(10);
+    expect(service.theme()).toBe('auto');
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    expect(service.isDark()).toBe(prefersDark);
 
     localStorage.removeItem(LocalStorageKey.THEME);
   });

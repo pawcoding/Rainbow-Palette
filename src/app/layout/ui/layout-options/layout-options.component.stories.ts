@@ -20,7 +20,7 @@ const meta: Meta<LayoutOptionsComponent> = {
       defaultValue: 'light',
       type: {
         name: 'enum',
-        value: ['light', 'dark'],
+        value: ['auto', 'light', 'dark'],
         required: true
       },
       control: 'select'
