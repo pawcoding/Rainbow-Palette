@@ -1,3 +1,10 @@
+# [1.3.0-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.2.0...v1.3.0-staging.1) (2024-06-29)
+
+
+### Features
+
+* **list:** duplicate palettes ([420a77a](https://github.com/pawcoding/rainbow-palette/commit/420a77ae2080e6aba8c43a6f43187a53aeb6ed41))
+
 # [1.2.0](https://github.com/pawcoding/rainbow-palette/compare/v1.1.0...v1.2.0) (2024-06-08)
 
 
