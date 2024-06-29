@@ -1,3 +1,10 @@
+# [1.3.0-staging.2](https://github.com/pawcoding/rainbow-palette/compare/v1.3.0-staging.1...v1.3.0-staging.2) (2024-06-29)
+
+
+### Features
+
+* **theme:** add `auto` theme that always uses a users preferred theme ([df83dae](https://github.com/pawcoding/rainbow-palette/commit/df83daec14da465bc6662edda00e9df8843a1786))
+
 # [1.3.0-staging.1](https://github.com/pawcoding/rainbow-palette/compare/v1.2.0...v1.3.0-staging.1) (2024-06-29)
 
 
