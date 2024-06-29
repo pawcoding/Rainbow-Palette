@@ -255,6 +255,7 @@
     "triadic": "Triadic"
   },
   "theme": {
+    "auto": "Automatic",
     "dark": "Dark",
     "light": "Light"
   },

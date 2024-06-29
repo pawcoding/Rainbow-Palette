@@ -56,7 +56,7 @@ export class LayoutComponent implements AfterViewInit {
   private readonly _resize = toSignal(fromEvent(window, 'resize'));
 
   protected readonly logoAsset = computed(() => {
-    return this.theme() === 'dark' ? '/assets/rainbow-palette-light.svg' : '/assets/rainbow-palette-dark.svg';
+    return this._themeService.isDark() ? '/assets/rainbow-palette-light.svg' : '/assets/rainbow-palette-dark.svg';
   });
 
   protected readonly showAnalyticsConsent = computed(() => {

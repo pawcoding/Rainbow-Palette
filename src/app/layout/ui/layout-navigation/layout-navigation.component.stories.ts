@@ -53,8 +53,7 @@ const meta: Meta<LayoutNavigationComponent> = {
 };
 export default meta;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Navigation = createStory<LayoutNavigationComponent>({
+export const Navigation = createStory<LayoutNavigationComponent>({
   args: {
     navigationEntries: NAVIGATION_ENTRIES
   }
