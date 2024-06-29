@@ -4,6 +4,7 @@
     "cancel": "Abbrechen",
     "close": "Schließen",
     "delete": "Löschen",
+    "duplicate": "Duplizieren",
     "edit": "Bearbeiten",
     "export": "Exportieren",
     "hue": "Farbton",
@@ -213,6 +214,7 @@
       "dialog": "Bist du sicher, dass du die Palette \"{{ name }}\" löschen möchtest?\n\nDie Palette kann nicht wiederhergestellt werden.",
       "hover": "Palette löschen"
     },
+    "duplicate": "Palette duplizieren",
     "new": "Neue Palette",
     "title": "Deine Farbpaletten",
     "view": "Palette \"{{ name }}\" ansehen"

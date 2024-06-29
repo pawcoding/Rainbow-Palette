@@ -93,6 +93,21 @@ export class PaletteService {
     }
   }
 
+  public duplicatePalette(): string {
+    const palette = this._palette();
+    if (!palette) {
+      throw new Error('No palette to duplicate');
+    }
+
+    // Copy palette with new id and name
+    const copy = palette.copy(false);
+    copy.name = `${copy.name} (copy)`;
+
+    // Load the copy
+    this._palette.set(copy);
+    return copy.id;
+  }
+
   public async generatePalette(hex: string, scheme: PaletteScheme): Promise<string> {
     const palette = await this._generatePalette(hex, scheme);
 
