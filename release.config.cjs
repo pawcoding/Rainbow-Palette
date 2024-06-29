@@ -14,6 +14,7 @@ const config = {
         preset: 'angular',
         releaseRules: [
           { type: 'docs', scope: 'README', release: 'patch' },
+          { type: 'build', scope: 'deps', release: 'patch' },
           { type: 'refactor', release: 'patch' },
           { type: 'style', release: 'patch' }
         ],
