@@ -570,6 +570,7 @@ export class PaletteServiceMock {
   public palette = signal<Palette | undefined>(
     new Palette('Mock', [new Color([Shade.random()], 'MockColor')], 'test-id')
   );
+  public isGenerating = signal(false);
   public loadPaletteFromLocalStorage(): void {}
   public savePaletteToLocalStorage(): void {}
   public generatePalette(_hex: string, _scheme: PaletteScheme): string {

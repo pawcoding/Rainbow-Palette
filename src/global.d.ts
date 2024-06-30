@@ -74,6 +74,8 @@ export interface ChromePromptAPI {
 }
 
 declare global {
+  // eslint-disable-next-line no-var
   var ai: ChromePromptAPI | undefined;
+  // eslint-disable-next-line no-var
   var model = ai;
 }

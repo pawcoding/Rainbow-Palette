@@ -180,6 +180,7 @@ export class AiService {
         if (aiPalette.colors.length > 1) {
           return aiPalette;
         }
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         // If the AI took too long to respond, warn and continue, otherwise log the error
         if (error.message === 'AI took too long to respond') {
@@ -194,5 +195,17 @@ export class AiService {
 
     // If the AI failed to generate a palette, throw an error
     throw new Error('AI failed to generate a palette');
+  }
+}
+
+export class AiServiceMock {
+  public readonly isAvailable = false;
+
+  public async prompt(_prompt: string): Promise<string> {
+    return '';
+  }
+
+  public async generatePalette(hex: string): Promise<Palette> {
+    return new Palette('AI (experimental)', [new Color([new Shade(-1, Value.fromHEX(hex), true)], 'Primary')]);
   }
 }
