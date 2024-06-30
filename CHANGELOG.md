@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/pawcoding/rainbow-palette/compare/v1.2.0...v1.3.0) (2024-06-30)
+
+
+### Features
+
+* **theme:** add `auto` theme that always uses a users preferred theme ([df83dae](https://github.com/pawcoding/rainbow-palette/commit/df83daec14da465bc6662edda00e9df8843a1786))
+* **list:** duplicate palettes ([420a77a](https://github.com/pawcoding/rainbow-palette/commit/420a77ae2080e6aba8c43a6f43187a53aeb6ed41))
+
 # [1.2.0](https://github.com/pawcoding/rainbow-palette/compare/v1.1.0...v1.2.0) (2024-06-08)
 
 
