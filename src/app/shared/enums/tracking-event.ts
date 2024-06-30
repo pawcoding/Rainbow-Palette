@@ -110,6 +110,10 @@ export enum TrackingEventName {
    */
   EXPORT_PALETTE_UNKNOWN = 'EXPORT_PALETTE_UNKNOWN',
   /**
+   * User generates a palette with the AI.
+   */
+  GENERATE_PALETTE_AI = 'GENERATE_PALETTE_AI',
+  /**
    * User generates an analogous palette.
    */
   GENERATE_PALETTE_ANALOGOUS = 'GENERATE_PALETTE_ANALOGOUS',

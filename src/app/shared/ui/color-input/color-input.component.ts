@@ -22,6 +22,10 @@ export class ColorInputComponent {
    */
   public readonly tooltip = input.required<string>();
   /**
+   * Flag to make the input field read-only.
+   */
+  public readonly readOnly = input(false);
+  /**
    * Hex color value.
    */
   public readonly hex = model.required<string>();

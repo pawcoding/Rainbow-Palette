@@ -245,6 +245,7 @@
     "update-success": "Rainbow Palette has been updated to version {{ version }}. Enjoy the new features!"
   },
   "scheme": {
+    "ai": "AI generated (experimental)",
     "analogous": "Analogous",
     "complementary": "Complementary",
     "compound": "Compound",
@@ -262,11 +263,13 @@
   "title": "Rainbow Palette | Get your own color palette from just a single color",
   "toast": {
     "error": {
+      "generate-ai-palette": "An error occurred while generating the AI palette.\n\nThis is an experimental feature and may not work as expected. Try again or use another scheme.",
       "load-color-map": "An error occurred while loading the list of color names.",
       "palette-load": "An error occurred while loading your last palette."
     },
     "info": {
-      "analytics-accepted": "Thank you for helping me improve the site."
+      "analytics-accepted": "Thank you for helping me improve the site.",
+      "generate-ai-palette": "Your local AI in the browser was prompted to generate a palette for you. This is experimental and can take a few seconds."
     }
   },
   "view": {

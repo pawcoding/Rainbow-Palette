@@ -244,6 +244,7 @@
     "update-success": "Rainbow Palette wurde erfolgreich auf Version {{ version }} aktualisiert. Viel Spaß mit den neuen Funktionen!"
   },
   "scheme": {
+    "ai": "KI generiert (experimentell)",
     "analogous": "Analog",
     "complementary": "Komplementär",
     "compound": "Zusammengesetzt",
@@ -261,11 +262,13 @@
   "title": "Rainbow Palette | Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe",
   "toast": {
     "error": {
+      "generate-ai-palette": "Beim Generieren der Palette mit KI ist ein Fehler aufgetreten.\n\nDies ist ein experimentelles Feature und funktioniert möglicherweise nicht wie geplant. Versuche es erneut oder verwende ein anderes Schema.",
       "load-color-map": "Die Liste mit Namen für Farben konnte nicht geladen werden.",
       "palette-load": "Deine letzte Farbpalette konnte nicht geladen werden."
     },
     "info": {
-      "analytics-accepted": "Vielen Dank, dass du mir hilfst, die Seite zu verbessern."
+      "analytics-accepted": "Vielen Dank, dass du mir hilfst, die Seite zu verbessern.",
+      "generate-ai-palette": "Deine lokale KI im Browser wurde aufgefordert, eine Palette für dich zu generieren. Dies ist aktuell noch experimentell und kann ein paar Sekunden dauern."
     }
   },
   "view": {

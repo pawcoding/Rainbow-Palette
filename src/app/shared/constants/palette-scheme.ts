@@ -1,6 +1,7 @@
 export enum PaletteScheme {
   RAINBOW = 'rainbow',
   SURPRISE = 'surprise',
+  AI = 'ai',
   MONOCHROME = 'monochrome',
   ANALOGOUS = 'analogous',
   COMPLEMENTARY = 'complementary',
@@ -22,3 +23,18 @@ export const PALETTE_SCHEMES = [
   { value: PaletteScheme.TRIADIC, label: 'scheme.triadic' },
   { value: PaletteScheme.COMPOUND, label: 'scheme.compound' }
 ];
+
+if (window.ai) {
+  PALETTE_SCHEMES.splice(2, 0, { value: PaletteScheme.AI, label: 'scheme.ai' });
+}
+
+/**
+ * Get a random color palette scheme.
+ */
+export function randomScheme(): { value: PaletteScheme; label: string } {
+  // Exclude the surprise and AI schemes as they don't make sense here
+  const excluded = new Set([PaletteScheme.SURPRISE, PaletteScheme.AI]);
+  const schemes = PALETTE_SCHEMES.filter((scheme) => !excluded.has(scheme.value));
+
+  return schemes[Math.floor(Math.random() * schemes.length)];
+}

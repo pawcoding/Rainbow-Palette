@@ -12,17 +12,18 @@
   <div class="mx-auto mt-8 w-full max-w-80">
     <rp-color-input
       [placeholder]="'home.generator.hex' | translate"
+      [readOnly]="isGenerating()"
       [tooltip]="'home.generator.color' | translate"
       [(hex)]="hex"
       (isValid)="isValid.set($event)"
     />
 
     <span
-      [class]="isValid() ? 'bg-blue-500 dark:bg-blue-600' : 'bg-neutral-400 dark:bg-neutral-700'"
+      [class]="isValid() && !isGenerating() ? 'bg-blue-500 dark:bg-blue-600' : 'bg-neutral-400 dark:bg-neutral-700'"
       class="mt-2 flex overflow-hidden rounded-md font-semibold text-neutral-50"
     >
       <button
-        [disabled]="!isValid()"
+        [disabled]="!isValid() || isGenerating()"
         [title]="(isValid() ? 'home.generator.start' : '') | translate"
         (click)="generatePalette()"
         class="grow cursor-pointer px-4 py-2 disabled:cursor-not-allowed"
@@ -31,7 +32,7 @@
       </button>
 
       <rp-dropdown-menu
-        [disabled]="!isValid()"
+        [disabled]="!isValid() || isGenerating()"
         [items]="schemeOptions"
         [selectedItem]="selectedScheme()"
         (selectedItemChange)="setScheme($event?.value)"

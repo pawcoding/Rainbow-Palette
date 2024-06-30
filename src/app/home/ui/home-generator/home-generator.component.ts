@@ -1,4 +1,4 @@
-import { Component, computed, model, output, signal } from '@angular/core';
+import { Component, computed, input, model, output, signal } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroChevronDownMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,6 +15,7 @@ import { DropdownMenuComponent } from '../../../shared/ui/dropdown-menu/dropdown
 export class HomeGeneratorComponent {
   public readonly hex = model('#3B82F6');
   public readonly scheme = model(PaletteScheme.RAINBOW);
+  public readonly isGenerating = input(false);
 
   protected readonly isValid = signal(true);
 

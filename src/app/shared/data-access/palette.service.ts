@@ -1,10 +1,11 @@
-import { Injectable, Signal, effect, inject, signal } from '@angular/core';
-import { PaletteScheme } from '../constants/palette-scheme';
+import { Injectable, effect, inject, signal } from '@angular/core';
+import { PaletteScheme, randomScheme } from '../constants/palette-scheme';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Value } from '../model';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
+import { AiService } from './ai.service';
 import { ColorNameService } from './color-name.service';
 import { ColorService } from './color.service';
 import { ListService } from './list.service';
@@ -18,12 +19,13 @@ export class PaletteService {
   private readonly _colorNameService = inject(ColorNameService);
   private readonly _toastService = inject(ToastService);
   private readonly _listService = inject(ListService);
+  private readonly _aiService = inject(AiService);
 
   private readonly _palette = signal<Palette | undefined>(undefined);
+  private readonly _isGenerating = signal(false);
 
-  public get palette(): Signal<Palette | undefined> {
-    return this._palette.asReadonly();
-  }
+  public readonly palette = this._palette.asReadonly();
+  public readonly isGenerating = this._isGenerating.asReadonly();
 
   public constructor() {
     // Migrate single palette to list
@@ -109,19 +111,27 @@ export class PaletteService {
   }
 
   public async generatePalette(hex: string, scheme: PaletteScheme): Promise<string> {
-    const palette = await this._generatePalette(hex, scheme);
+    this._isGenerating.set(true);
 
-    for (const color of palette.colors) {
-      // Get the color name
-      color.name = await this._colorNameService.getColorName(color.shades[0]);
+    try {
+      const palette = await this._generatePalette(hex, scheme);
 
-      // Regenerate the shades
-      await this._colorService.regenerateShades(color);
+      for (const color of palette.colors) {
+        if (scheme !== PaletteScheme.AI) {
+          // Get the color name
+          color.name = await this._colorNameService.getColorName(color.shades[0]);
+        }
+
+        // Regenerate the shades
+        await this._colorService.regenerateShades(color);
+      }
+
+      this._palette.set(palette);
+
+      return palette.id;
+    } finally {
+      this._isGenerating.set(false);
     }
-
-    this._palette.set(palette);
-
-    return palette.id;
   }
 
   private async _generatePalette(hex: string, scheme: PaletteScheme): Promise<Palette> {
@@ -140,14 +150,11 @@ export class PaletteService {
         return this._generateTriadicPalette(hex);
       case PaletteScheme.COMPOUND:
         return this._generateCompoundPalette(hex);
+      case PaletteScheme.AI:
+        return await this._generateAiPalette(hex);
       default:
-        return this._generatePalette(hex, this._getRandomScheme());
+        return this._generatePalette(hex, randomScheme().value);
     }
-  }
-
-  private _getRandomScheme(): PaletteScheme {
-    const schemes = Object.values(PaletteScheme);
-    return schemes[Math.floor(Math.random() * schemes.length)];
   }
 
   private _generateRainbowPalette(hex: string): Palette {
@@ -482,6 +489,30 @@ export class PaletteService {
     );
 
     return compound;
+  }
+
+  private async _generateAiPalette(hex: string): Promise<Palette> {
+    // Show a toast while generating the palette
+    const toastId = this._toastService.showToast({
+      type: 'info',
+      message: 'toast.info.generate-ai-palette',
+      duration: 0
+    });
+
+    try {
+      // Try to generate the palette using the AI
+      return await this._aiService.generatePalette(hex);
+    } catch (e) {
+      // Show an error toast if the AI fails
+      this._toastService.showToast({
+        type: 'error',
+        message: 'toast.error.generate-ai-palette'
+      });
+      throw e;
+    } finally {
+      // Hide the toast
+      this._toastService.hideToast(toastId);
+    }
   }
 
   private _updateVariables(): void {

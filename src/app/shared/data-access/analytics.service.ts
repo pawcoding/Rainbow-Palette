@@ -260,6 +260,9 @@ export class AnalyticsService {
       case PaletteScheme.SURPRISE:
         name = TrackingEventName.GENERATE_PALETTE_SURPRISE;
         break;
+      case PaletteScheme.AI:
+        name = TrackingEventName.GENERATE_PALETTE_AI;
+        break;
       case PaletteScheme.MONOCHROME:
         name = TrackingEventName.GENERATE_PALETTE_MONOCHROME;
         break;
