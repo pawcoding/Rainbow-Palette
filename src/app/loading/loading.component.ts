@@ -14,9 +14,7 @@ export class LoadingComponent {
   private readonly _mobileService = inject(MobileService);
 
   protected readonly logoAsset = computed(() => {
-    return this._themeService.theme() === 'dark'
-      ? '/assets/rainbow-palette-light.svg'
-      : '/assets/rainbow-palette-dark.svg';
+    return this._themeService.isDark() ? '/assets/rainbow-palette-light.svg' : '/assets/rainbow-palette-dark.svg';
   });
 
   protected readonly isMobile = this._mobileService.isMobile;

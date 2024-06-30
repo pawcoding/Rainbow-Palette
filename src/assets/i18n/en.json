@@ -4,6 +4,7 @@
     "cancel": "Cancel",
     "close": "Close",
     "delete": "Delete",
+    "duplicate": "Duplicate",
     "edit": "Edit",
     "export": "Export",
     "hue": "Hue",
@@ -214,6 +215,7 @@
       "dialog": "Are you sure you want to delete the palette \"{{ name }}\"?\n\nThis action cannot be undone.",
       "hover": "Delete palette"
     },
+    "duplicate": "Duplicate palette",
     "new": "New palette",
     "title": "Your palettes",
     "view": "View palette \"{{ name }}\""
@@ -253,6 +255,7 @@
     "triadic": "Triadic"
   },
   "theme": {
+    "auto": "Automatic",
     "dark": "Dark",
     "light": "Light"
   },
