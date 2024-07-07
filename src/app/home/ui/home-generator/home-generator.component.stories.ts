@@ -29,6 +29,15 @@ export default meta;
 export const Generator = createStory<HomeGeneratorComponent>({
   args: {
     hex: '#3B82F6',
-    scheme: PaletteScheme.RAINBOW
+    scheme: PaletteScheme.RAINBOW,
+    disabled: false
+  }
+});
+
+export const Disabled = createStory<HomeGeneratorComponent>({
+  args: {
+    hex: '#3B82F6',
+    scheme: PaletteScheme.RAINBOW,
+    disabled: true
   }
 });

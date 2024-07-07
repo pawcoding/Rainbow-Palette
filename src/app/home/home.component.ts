@@ -21,8 +21,13 @@ export default class HomeComponent {
 
   protected readonly hex = this._homeService.hex;
   protected readonly scheme = this._homeService.scheme;
+  protected readonly isGenerating = this._paletteService.isGenerating;
 
   public async generatePalette(): Promise<void> {
+    if (this.isGenerating()) {
+      return;
+    }
+
     this._homeService.saveGenerationSettings();
 
     const id = await this._paletteService.generatePalette(this.hex(), this.scheme());

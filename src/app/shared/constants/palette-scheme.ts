@@ -22,3 +22,13 @@ export const PALETTE_SCHEMES = [
   { value: PaletteScheme.TRIADIC, label: 'scheme.triadic' },
   { value: PaletteScheme.COMPOUND, label: 'scheme.compound' }
 ];
+
+/**
+ * Get a random color palette scheme.
+ */
+export function randomScheme(): { value: PaletteScheme; label: string } {
+  // Exclude the surprise scheme as it doesn't make sense here
+  const schemes = PALETTE_SCHEMES.filter((scheme) => scheme.value !== PaletteScheme.SURPRISE);
+
+  return schemes[Math.floor(Math.random() * schemes.length)];
+}
