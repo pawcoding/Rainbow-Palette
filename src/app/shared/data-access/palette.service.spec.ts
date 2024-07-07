@@ -3,6 +3,7 @@ import { PaletteScheme } from '../constants/palette-scheme';
 import { TailwindGrays } from '../constants/tailwind-colors';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Palette, Shade } from '../model';
+import { AiService, AiServiceMock } from './ai.service';
 import { ColorNameService, ColorNameServiceMock } from './color-name.service';
 import { ColorService, ColorServiceMock } from './color.service';
 import { ListService, ListServiceMock } from './list.service';
@@ -33,6 +34,10 @@ describe('PaletteService', () => {
         {
           provide: ListService,
           useValue: listService
+        },
+        {
+          provide: AiService,
+          useClass: AiServiceMock
         }
       ]
     });
