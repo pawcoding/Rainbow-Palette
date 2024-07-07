@@ -57,7 +57,7 @@ export class ExportService {
       console.error(error);
       this._toastService.showToast({
         type: 'error',
-        message: 'export.error.copy-failed'
+        message: 'toast.error.copy-clipboard'
       });
       return false;
     }

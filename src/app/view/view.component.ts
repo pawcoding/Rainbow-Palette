@@ -217,13 +217,13 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
       this._toastService.showToast({
         type: 'success',
-        message: 'view.color.copy.success',
+        message: 'view.color.copy',
         parameters: { color: toUnicodeVariant(shade.hex, 'm') }
       });
     } catch (error) {
       this._toastService.showToast({
         type: 'error',
-        message: 'view.color.copy.error'
+        message: 'toast.error.copy-clipboard'
       });
     }
   }
