@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ColorEditorService, ColorEditorServiceMock } from '../editor/data-access/color-editor.service';
 import { ExportModalService } from '../export/data-access/export-modal.service';
+import { TailwindGrays } from '../shared/constants/tailwind-colors';
 import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/analytics.service';
 import { ColorService, ColorServiceMock } from '../shared/data-access/color.service';
 import { DialogService, DialogServiceMock } from '../shared/data-access/dialog.service';
@@ -13,7 +14,6 @@ import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/trac
 import { Color, Shade } from '../shared/model';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import ViewComponent from './view.component';
-import { TailwindGrays } from '../shared/constants/tailwind-colors';
 
 describe('ViewComponent', () => {
   let colorEditorService: ColorEditorServiceMock;
