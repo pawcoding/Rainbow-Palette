@@ -228,6 +228,16 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
     }
   }
 
+  public reorderColor(fromIndex: number, toIndex: number): void {
+    const palette = this.palette();
+    if (!palette) {
+      return;
+    }
+
+    palette.reorderColor(fromIndex, toIndex);
+    this._hasUnsavedChanges.set(true);
+  }
+
   /**
    * Check if there are unsaved changes before leaving the page.
    * This method exists in addition to the normal `canDeactivate` guard
