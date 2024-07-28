@@ -230,7 +230,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
   public reorderColor(fromIndex: number, toIndex: number): void {
     const palette = this.palette();
-    if (!palette) {
+    if (!palette || fromIndex === toIndex) {
       return;
     }
 

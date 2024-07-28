@@ -13,6 +13,7 @@ import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/trac
 import { Color, Shade } from '../shared/model';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import ViewComponent from './view.component';
+import { TailwindGrays } from '../shared/constants/tailwind-colors';
 
 describe('ViewComponent', () => {
   let colorEditorService: ColorEditorServiceMock;
@@ -146,5 +147,17 @@ describe('ViewComponent', () => {
     await component.copyToClipboard(Shade.random());
 
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reorder colors', async () => {
+    paletteService.palette.set(TailwindGrays);
+    const first = TailwindGrays.colors[0];
+
+    component.reorderColor(2, 2);
+    expect(component.hasUnsavedChanges()).toBeFalse();
+
+    component.reorderColor(0, 1);
+    expect(paletteService.palette()?.colors[1]).toBe(first);
+    expect(component.hasUnsavedChanges()).toBeTrue();
   });
 });
