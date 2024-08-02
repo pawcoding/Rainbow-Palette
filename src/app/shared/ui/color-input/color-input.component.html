@@ -5,11 +5,7 @@
       [title]="tooltip()"
     >
       <div
-        [class]="
-          (isColorLight() ? 'text-neutral-900' : 'text-neutral-100') +
-          ' ' +
-          (readOnly() ? 'cursor-not-allowed' : 'cursor-pointer')
-        "
+        [class]="iconStyle()"
         [style.backgroundColor]="hex()"
         class="flex h-full w-10 items-center justify-center"
       >

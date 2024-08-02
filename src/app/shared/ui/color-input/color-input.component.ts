@@ -46,6 +46,13 @@ export class ColorInputComponent {
     return perceivedBrightnessFromHex(this.hex()) > 51;
   });
 
+  protected readonly iconStyle = computed(() => {
+    const color = this.isColorLight() ? 'text-neutral-900' : 'text-neutral-100';
+    const readonly = this.readOnly() ? 'cursor-not-allowed' : 'cursor-pointer';
+
+    return `${color} ${readonly}`;
+  });
+
   public constructor() {
     effect(() => {
       this._hexInput().nativeElement.value = this.hex();
