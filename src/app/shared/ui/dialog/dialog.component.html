@@ -1,0 +1,56 @@
+@let configuration = config();
+
+<article
+  class="mx-auto flex w-full max-w-lg flex-col gap-4 rounded bg-neutral-100 p-4 shadow-md dark:border dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
+>
+  <section>
+    <h1 class="text-xl font-semibold">
+      {{ title() | translate }}
+    </h1>
+
+    <p>
+      {{ message() | translate }}
+    </p>
+  </section>
+
+  @if (configuration.type === 'prompt') {
+    <section>
+      @if (configuration.label) {
+        <label
+          class="block font-semibold"
+          for="dialog-input"
+        >
+          {{ configuration.label | translate }}
+        </label>
+      }
+
+      <input
+        [formControl]="input"
+        [placeholder]="configuration.placeholder ?? ''"
+        class="w-full min-w-0 grow rounded-md border-transparent bg-neutral-200 px-4 py-2 invalid:border-red-600 focus:outline-none focus:ring-0 dark:bg-neutral-600"
+        id="dialog-input"
+        type="text"
+      />
+    </section>
+  }
+
+  <section class="flex justify-end gap-2">
+    @if (type() !== 'alert') {
+      <button
+        [title]="'editor.cancel' | translate"
+        (click)="dismiss()"
+        class="cursor-pointer rounded bg-neutral-300 px-2 py-1.5 font-semibold dark:bg-neutral-600"
+      >
+        {{ 'common.cancel' | translate }}
+      </button>
+    }
+
+    <button
+      [title]="confirmLabel() | translate"
+      (click)="confirm()"
+      class="cursor-pointer rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-wait disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700"
+    >
+      {{ confirmLabel() | translate }}
+    </button>
+  </section>
+</article>
