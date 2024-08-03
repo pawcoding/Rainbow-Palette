@@ -1,7 +1,7 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { inject, Injectable } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import { AlertConfig } from '../types/dialog-config';
+import { firstValueFrom, map } from 'rxjs';
+import { AlertConfig, ConfirmConfig } from '../types/dialog-config';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,18 @@ export class DialogService {
     return window.prompt(message, defaultValue) ?? undefined;
   }
 
-  public async confirm(message: string): Promise<boolean> {
-    return window.confirm(message);
+  public async confirm(config: Omit<ConfirmConfig, 'type'>): Promise<boolean> {
+    const confirmComponent = await import('../ui/dialog/dialog.component').then((c) => c.DialogComponent);
+    const dialogRef = this._dialog.open<boolean>(confirmComponent, {
+      backdropClass: 'rp-modal-backdrop',
+      data: {
+        ...config,
+        type: 'confirm'
+      },
+      panelClass: 'rp-modal-panel'
+    });
+
+    return await firstValueFrom(dialogRef.closed.pipe(map((result) => !!result)));
   }
 
   public async alert(config: Omit<AlertConfig, 'type'>): Promise<void> {
@@ -37,7 +47,7 @@ export class DialogServiceMock {
     return `${value}_test`;
   }
 
-  public async confirm(_: string): Promise<boolean> {
+  public async confirm(_config: Omit<ConfirmConfig, 'type'>): Promise<boolean> {
     return true;
   }
 

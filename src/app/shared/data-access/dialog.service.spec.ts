@@ -25,7 +25,7 @@ describe('DialogService', () => {
 
   it('should confirm', async () => {
     // Setup dialog for confirm test
-    const dialog = new DialogMock(undefined);
+    const dialog = new DialogMock(true);
 
     TestBed.configureTestingModule({
       providers: [{ provide: Dialog, useValue: dialog }]
@@ -34,12 +34,15 @@ describe('DialogService', () => {
 
     // Test
     spyOn(dialog, 'open').and.callThrough();
-    spyOn(window, 'confirm').and.returnValue(true);
 
-    const result = await service.confirm('message');
+    const result = await service.confirm({
+      title: 'title',
+      message: 'message',
+      confirmLabel: 'confirm'
+    });
 
+    expect(dialog.open).toHaveBeenCalledTimes(1);
     expect(result).toBeTrue();
-    expect(window.confirm).toHaveBeenCalledWith('message');
   });
 
   it('should alert', async () => {

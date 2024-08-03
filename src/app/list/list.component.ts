@@ -31,11 +31,13 @@ export default class ListComponent {
   protected readonly heroPlusMini = heroPlusMini;
 
   protected async deletePalette(palette: PaletteListItem): Promise<void> {
-    const shouldDelete = await this._dialogService.confirm(
-      this._translateService.instant('list.delete.dialog', {
+    const shouldDelete = await this._dialogService.confirm({
+      title: 'list.delete.hover',
+      message: this._translateService.instant('list.delete.dialog', {
         name: palette.name
-      })
-    );
+      }),
+      confirmLabel: 'common.delete'
+    });
     if (shouldDelete) {
       this._listService.remove(palette.id);
     }

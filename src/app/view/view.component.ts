@@ -182,11 +182,13 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
   public async removeColor(color: Color): Promise<void> {
     const name = color.name;
-    const shouldRemove = await this._dialogService.confirm(
-      this._translateService.instant('view.color.remove', {
+    const shouldRemove = await this._dialogService.confirm({
+      title: 'view.color.remove-tooltip',
+      message: this._translateService.instant('view.color.remove', {
         color: name
-      })
-    );
+      }),
+      confirmLabel: 'common.remove'
+    });
 
     if (shouldRemove) {
       this.palette()?.removeColor(color);
