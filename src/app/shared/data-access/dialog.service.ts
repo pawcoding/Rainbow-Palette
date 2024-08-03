@@ -17,7 +17,8 @@ export class DialogService {
         ...config,
         type: 'prompt'
       },
-      panelClass: 'rp-modal-panel'
+      panelClass: 'rp-modal-panel',
+      width: 'inherit'
     });
 
     return await firstValueFrom(dialogRef.closed.pipe(map((result) => result ?? undefined)));
@@ -31,7 +32,8 @@ export class DialogService {
         ...config,
         type: 'confirm'
       },
-      panelClass: 'rp-modal-panel'
+      panelClass: 'rp-modal-panel',
+      width: 'inherit'
     });
 
     return await firstValueFrom(dialogRef.closed.pipe(map((result) => !!result)));
@@ -45,7 +47,8 @@ export class DialogService {
         ...config,
         type: 'alert'
       },
-      panelClass: 'rp-modal-panel'
+      panelClass: 'rp-modal-panel',
+      width: 'inherit'
     });
 
     return await firstValueFrom(dialogRef.closed);

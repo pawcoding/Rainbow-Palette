@@ -3,11 +3,11 @@
 >
   <section>
     <h1 class="text-xl font-semibold">
-      {{ config.title| translate }}
+      {{ config.title | translate }}
     </h1>
 
     <p>
-      {{ config.message| translate }}
+      {{ config.message | translate }}
     </p>
   </section>
 
@@ -24,7 +24,7 @@
 
       <input
         [formControl]="input"
-        [placeholder]="config.placeholder ?? ''"
+        [placeholder]="config.placeholder ?? '' | translate"
         class="w-full min-w-0 grow rounded-md border-transparent bg-neutral-200 px-4 py-2 invalid:border-red-600 focus:outline-none focus:ring-0 dark:bg-neutral-600"
         id="dialog-input"
         type="text"
@@ -35,7 +35,7 @@
   <section class="flex justify-end gap-2">
     @if (config.type !== 'alert') {
       <button
-        [title]="'editor.cancel' | translate"
+        [title]="'common.cancel' | translate"
         (click)="dismiss()"
         class="cursor-pointer rounded bg-neutral-300 px-2 py-1.5 font-semibold dark:bg-neutral-600"
       >
@@ -44,9 +44,10 @@
     }
 
     <button
+      [disabled]="config.type === 'prompt' && input.invalid"
       [title]="confirmLabel | translate"
       (click)="confirm()"
-      class="cursor-pointer rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-wait disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700"
+      class="cursor-pointer rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-not-allowed disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700"
     >
       {{ confirmLabel | translate }}
     </button>
