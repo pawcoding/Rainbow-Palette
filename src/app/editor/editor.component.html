@@ -76,7 +76,7 @@
       [disabled]="!hasUnsavedChanges()"
       [title]="'editor.save' | translate"
       (click)="save()"
-      class="cursor-pointer rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-wait disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700"
+      class="cursor-pointer rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 disabled:cursor-not-allowed disabled:bg-neutral-400 dark:bg-blue-600 dark:disabled:bg-neutral-700"
     >
       {{ 'common.save' | translate }}
     </button>
