@@ -56,7 +56,7 @@ export class PwaService {
 
     // Listen for broken service worker
     this._SwUpdate.unrecoverable.subscribe(() => {
-      this._dialogService.alert(this._translateService.instant('pwa.broken'));
+      this._dialogService.alert({ title: 'common.error', message: 'pwa.broken' });
     });
 
     // Check if the app is currently updating
@@ -105,15 +105,17 @@ export class PwaService {
     }
 
     // Update was downloaded and can be installed through restart
-    const restart = await this._dialogService.confirm(
-      this._translateService.instant('pwa.restart', {
+    const restart = await this._dialogService.confirm({
+      title: 'pwa.update',
+      message: this._translateService.instant('pwa.restart', {
         old:
           // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
           event.currentVersion.appData?.version ?? this._versionService.appVersion,
         // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
         new: event.latestVersion.appData?.version
-      })
-    );
+      }),
+      confirmLabel: 'common.yes'
+    });
 
     // Continue without updating
     if (!restart) {

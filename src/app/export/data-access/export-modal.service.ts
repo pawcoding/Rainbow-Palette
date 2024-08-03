@@ -23,7 +23,8 @@ export class ExportModalService {
       data: {
         palette
       },
-      panelClass: 'rp-modal-panel'
+      panelClass: 'rp-modal-panel',
+      width: 'inherit'
     });
 
     return await firstValueFrom(dialogRef.closed.pipe(tap(() => this._isModalOpen.set(false))));

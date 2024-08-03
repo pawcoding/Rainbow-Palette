@@ -1,6 +1,5 @@
 import { Signal, inject } from '@angular/core';
 import { CanDeactivateFn } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 import { DialogService } from '../../shared/data-access/dialog.service';
 
 export interface UnsavedChangesComponent {
@@ -13,8 +12,11 @@ export const unsavedChangesGuard: CanDeactivateFn<UnsavedChangesComponent> = asy
   }
 
   const dialogService = inject(DialogService);
-  const translateService = inject(TranslateService);
-  const leave = await dialogService.confirm(translateService.instant('view.unsaved-changes'));
+  const leave = await dialogService.confirm({
+    title: 'view.unsaved-changes.title',
+    message: 'view.unsaved-changes.description',
+    confirmLabel: 'common.continue'
+  });
 
   return leave;
 };
