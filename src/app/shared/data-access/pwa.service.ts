@@ -56,7 +56,7 @@ export class PwaService {
 
     // Listen for broken service worker
     this._SwUpdate.unrecoverable.subscribe(() => {
-      this._dialogService.alert(this._translateService.instant('pwa.broken'));
+      this._dialogService.alert({ title: 'common.error', message: 'pwa.broken' });
     });
 
     // Check if the app is currently updating

@@ -1,19 +1,20 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { TestBed } from '@angular/core/testing';
+import { DialogMock } from '../utils/dialog-mock';
 import { DialogService } from './dialog.service';
 
 describe('DialogService', () => {
-  let service: DialogService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DialogService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it('should prompt', async () => {
+    // Setup dialog for prompt test
+    const dialog = new DialogMock(undefined);
+
+    TestBed.configureTestingModule({
+      providers: [{ provide: Dialog, useValue: dialog }]
+    });
+    const service = TestBed.inject(DialogService);
+
+    // Test
+    spyOn(dialog, 'open').and.callThrough();
     spyOn(window, 'prompt').and.returnValue('Test');
 
     const result = await service.prompt('message', 'default');
@@ -23,6 +24,16 @@ describe('DialogService', () => {
   });
 
   it('should confirm', async () => {
+    // Setup dialog for confirm test
+    const dialog = new DialogMock(undefined);
+
+    TestBed.configureTestingModule({
+      providers: [{ provide: Dialog, useValue: dialog }]
+    });
+    const service = TestBed.inject(DialogService);
+
+    // Test
+    spyOn(dialog, 'open').and.callThrough();
     spyOn(window, 'confirm').and.returnValue(true);
 
     const result = await service.confirm('message');
@@ -32,10 +43,23 @@ describe('DialogService', () => {
   });
 
   it('should alert', async () => {
-    spyOn(window, 'alert');
+    // Setup dialog for alert test
+    const dialog = new DialogMock<void>(undefined);
 
-    await service.alert('message');
+    TestBed.configureTestingModule({
+      providers: [{ provide: Dialog, useValue: dialog }]
+    });
+    const service = TestBed.inject(DialogService);
 
-    expect(window.alert).toHaveBeenCalledWith('message');
+    // Test
+    spyOn(dialog, 'open').and.callThrough();
+
+    const result = await service.alert({
+      title: 'title',
+      message: 'message'
+    });
+
+    expect(dialog.open).toHaveBeenCalledTimes(1);
+    expect(result).toBeUndefined();
   });
 });

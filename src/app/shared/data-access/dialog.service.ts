@@ -1,9 +1,14 @@
-import { Injectable } from '@angular/core';
+import { Dialog } from '@angular/cdk/dialog';
+import { inject, Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
+import { AlertConfig } from '../types/dialog-config';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
+  private readonly _dialog = inject(Dialog);
+
   public async prompt(message: string, defaultValue: string): Promise<string | undefined> {
     return window.prompt(message, defaultValue) ?? undefined;
   }
@@ -12,8 +17,18 @@ export class DialogService {
     return window.confirm(message);
   }
 
-  public async alert(message: string): Promise<void> {
-    window.alert(message);
+  public async alert(config: Omit<AlertConfig, 'type'>): Promise<void> {
+    const alertComponent = await import('../ui/dialog/dialog.component').then((c) => c.DialogComponent);
+    const dialogRef = this._dialog.open<void>(alertComponent, {
+      backdropClass: 'rp-modal-backdrop',
+      data: {
+        ...config,
+        type: 'alert'
+      },
+      panelClass: 'rp-modal-panel'
+    });
+
+    return await firstValueFrom(dialogRef.closed);
   }
 }
 
@@ -26,7 +41,7 @@ export class DialogServiceMock {
     return true;
   }
 
-  public async alert(_: string): Promise<void> {
+  public async alert(_config: Omit<AlertConfig, 'type'>): Promise<void> {
     return;
   }
 }

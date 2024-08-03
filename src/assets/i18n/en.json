@@ -6,6 +6,7 @@
     "delete": "Delete",
     "duplicate": "Duplicate",
     "edit": "Edit",
+    "error": "Unexpected error",
     "export": "Export",
     "hue": "Hue",
     "less": "Show less",
