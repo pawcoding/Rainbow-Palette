@@ -94,10 +94,14 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
       return;
     }
 
-    const newName = await this._dialogService.prompt(
-      this._translateService.instant('view.palette.rename'),
-      palette.name
-    );
+    const newName = await this._dialogService.prompt({
+      title: 'common.rename',
+      message: 'view.palette.rename',
+      confirmLabel: 'common.rename',
+      initialValue: palette.name,
+      label: 'common.name',
+      placeholder: 'common.name'
+    });
 
     if (!newName || newName === palette.name) {
       return;
@@ -151,7 +155,14 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   }
 
   public async renameColor(color: Color): Promise<void> {
-    const newName = await this._dialogService.prompt(this._translateService.instant('view.color.rename'), color.name);
+    const newName = await this._dialogService.prompt({
+      title: 'common.rename',
+      message: 'view.color.rename',
+      confirmLabel: 'common.rename',
+      initialValue: color.name,
+      label: 'common.name',
+      placeholder: 'common.name'
+    });
 
     if (!newName || newName === color.name) {
       return;

@@ -1,7 +1,7 @@
 import { Dialog } from '@angular/cdk/dialog';
 import { inject, Injectable } from '@angular/core';
 import { firstValueFrom, map } from 'rxjs';
-import { AlertConfig, ConfirmConfig } from '../types/dialog-config';
+import { AlertConfig, ConfirmConfig, PromptConfig } from '../types/dialog-config';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +9,18 @@ import { AlertConfig, ConfirmConfig } from '../types/dialog-config';
 export class DialogService {
   private readonly _dialog = inject(Dialog);
 
-  public async prompt(message: string, defaultValue: string): Promise<string | undefined> {
-    return window.prompt(message, defaultValue) ?? undefined;
+  public async prompt(config: Omit<PromptConfig, 'type'>): Promise<string | undefined> {
+    const promptComponent = await import('../ui/dialog/dialog.component').then((c) => c.DialogComponent);
+    const dialogRef = this._dialog.open<string | undefined>(promptComponent, {
+      backdropClass: 'rp-modal-backdrop',
+      data: {
+        ...config,
+        type: 'prompt'
+      },
+      panelClass: 'rp-modal-panel'
+    });
+
+    return await firstValueFrom(dialogRef.closed.pipe(map((result) => result ?? undefined)));
   }
 
   public async confirm(config: Omit<ConfirmConfig, 'type'>): Promise<boolean> {
@@ -43,8 +53,8 @@ export class DialogService {
 }
 
 export class DialogServiceMock {
-  public async prompt(_: string, value: string): Promise<string | undefined> {
-    return `${value}_test`;
+  public async prompt(config: Omit<PromptConfig, 'type'>): Promise<string | undefined> {
+    return `${config.initialValue}_test`;
   }
 
   public async confirm(_config: Omit<ConfirmConfig, 'type'>): Promise<boolean> {

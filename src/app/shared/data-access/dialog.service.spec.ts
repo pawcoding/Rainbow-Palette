@@ -6,7 +6,7 @@ import { DialogService } from './dialog.service';
 describe('DialogService', () => {
   it('should prompt', async () => {
     // Setup dialog for prompt test
-    const dialog = new DialogMock(undefined);
+    const dialog = new DialogMock('Test');
 
     TestBed.configureTestingModule({
       providers: [{ provide: Dialog, useValue: dialog }]
@@ -15,12 +15,16 @@ describe('DialogService', () => {
 
     // Test
     spyOn(dialog, 'open').and.callThrough();
-    spyOn(window, 'prompt').and.returnValue('Test');
 
-    const result = await service.prompt('message', 'default');
+    const result = await service.prompt({
+      title: 'title',
+      message: 'message',
+      confirmLabel: 'confirm',
+      initialValue: 'initial'
+    });
 
+    expect(dialog.open).toHaveBeenCalledTimes(1);
     expect(result).toBe('Test');
-    expect(window.prompt).toHaveBeenCalledWith('message', 'default');
   });
 
   it('should confirm', async () => {
