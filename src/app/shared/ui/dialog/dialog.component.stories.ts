@@ -1,7 +1,11 @@
-import { DIALOG_DATA } from '@angular/cdk/dialog';
-import { applicationConfig, Meta } from '@storybook/angular';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { Meta, applicationConfig } from '@storybook/angular';
 import { createStory } from '../../utils/storybook';
 import { DialogComponent } from './dialog.component';
+
+const dialogRef = {
+  close: (): void => {}
+};
 
 const meta: Meta<DialogComponent> = {
   title: 'Shared/Dialog',
@@ -22,6 +26,10 @@ export const Alert = createStory<DialogComponent>({
             title: 'Alert',
             message: 'This is an alert message.'
           }
+        },
+        {
+          provide: DialogRef,
+          useValue: dialogRef
         }
       ]
     })
@@ -40,6 +48,10 @@ export const Confirm = createStory<DialogComponent>({
             message: 'This is a confirm message.',
             confirmLabel: 'Yes'
           }
+        },
+        {
+          provide: DialogRef,
+          useValue: dialogRef
         }
       ]
     })
@@ -61,6 +73,10 @@ export const Prompt = createStory<DialogComponent>({
             placeholder: 'Enter your name',
             initialValue: 'John Doe'
           }
+        },
+        {
+          provide: DialogRef,
+          useValue: dialogRef
         }
       ]
     })
