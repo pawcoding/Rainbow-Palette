@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, computed, effect, input } from '@angular/core';
+import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { DialogConfig } from '../../types/dialog-config';
@@ -11,19 +12,16 @@ import { DialogConfig } from '../../types/dialog-config';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogComponent {
-  public readonly config = input.required<DialogConfig>();
+  protected readonly config = inject<DialogConfig>(DIALOG_DATA);
+  private readonly _dialogRef = inject(DialogRef);
 
-  protected readonly type = computed(() => this.config().type);
-  protected readonly title = computed(() => this.config().title);
-  protected readonly message = computed(() => this.config().message);
-  protected readonly confirmLabel = computed(() => {
-    const config = this.config();
-    if (config.type === 'alert') {
+  protected get confirmLabel(): string {
+    if (this.config.type === 'alert') {
       return 'common.ok';
     }
 
-    return config.confirmLabel;
-  });
+    return this.config.confirmLabel;
+  }
 
   protected readonly input = new FormControl('', {
     nonNullable: true,
@@ -31,14 +29,40 @@ export class DialogComponent {
   });
 
   public constructor() {
-    effect(() => {
-      const config = this.config();
-      if (config.type === 'prompt') {
-        this.input.setValue(config.initialValue ?? '');
-      }
-    });
+    if (this.config.type === 'prompt') {
+      this.input.setValue(this.config.initialValue ?? '');
+    }
   }
 
-  protected dismiss(): void {}
-  protected confirm(): void {}
+  public dismiss(): void {
+    this._dialogRef.close();
+  }
+
+  public confirm(): void {
+    // Close alert without any action
+    if (this.config.type === 'alert') {
+      this._dialogRef.close();
+      return;
+    }
+
+    // Close confirm dialog with true
+    if (this.config.type === 'confirm') {
+      this._dialogRef.close(true);
+      return;
+    }
+
+    // Check if input was not changed in prompt dialog
+    if (this.input.value === this.config.initialValue) {
+      this._dialogRef.close();
+      return;
+    }
+
+    // Check if input is invalid in prompt dialog
+    if (this.input.invalid) {
+      return;
+    }
+
+    // Close prompt dialog with input value
+    this._dialogRef.close(this.input.value);
+  }
 }
