@@ -1,3 +1,4 @@
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { generateId } from '../utils/generate-id';
 import { Color } from './color.model';
 
@@ -22,6 +23,14 @@ export class Palette {
     if (index > -1) {
       this.colors.splice(index, 1);
     }
+  }
+
+  public reorderColor(fromIndex: number, toIndex: number): void {
+    if (fromIndex < 0 || fromIndex >= this.colors.length || toIndex < 0 || toIndex >= this.colors.length) {
+      throw new Error(`Invalid index: ${toIndex}`);
+    }
+
+    moveItemInArray(this.colors, fromIndex, toIndex);
   }
 
   public copy(shouldCopyId: boolean): Palette {

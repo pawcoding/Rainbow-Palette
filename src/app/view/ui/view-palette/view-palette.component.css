@@ -1,0 +1,6 @@
+.cdk-drop-list-dragging {
+  .color:not(.cdk-drag-preview),
+  .cdk-drag-placeholder {
+    @apply transition-transform duration-300 ease-in-out;
+  }
+}

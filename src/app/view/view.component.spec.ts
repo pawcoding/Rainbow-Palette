@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ColorEditorService, ColorEditorServiceMock } from '../editor/data-access/color-editor.service';
 import { ExportModalService } from '../export/data-access/export-modal.service';
+import { TailwindGrays } from '../shared/constants/tailwind-colors';
 import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/analytics.service';
 import { ColorService, ColorServiceMock } from '../shared/data-access/color.service';
 import { DialogService, DialogServiceMock } from '../shared/data-access/dialog.service';
@@ -148,5 +149,17 @@ describe('ViewComponent', () => {
     await component.copyToClipboard(Shade.random());
 
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
+  });
+
+  it('should reorder colors', async () => {
+    paletteService.palette.set(TailwindGrays);
+    const first = TailwindGrays.colors[0];
+
+    component.reorderColor(2, 2);
+    expect(component.hasUnsavedChanges()).toBeFalse();
+
+    component.reorderColor(0, 1);
+    expect(paletteService.palette()?.colors[1]).toBe(first);
+    expect(component.hasUnsavedChanges()).toBeTrue();
   });
 });

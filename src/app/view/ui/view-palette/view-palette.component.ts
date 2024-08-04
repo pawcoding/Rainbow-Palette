@@ -1,3 +1,4 @@
+import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList } from '@angular/cdk/drag-drop';
 import { Component, model, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroAdjustmentsHorizontalMini, heroPencilSquareMini, heroTrashMini } from '@ng-icons/heroicons/mini';
@@ -8,8 +9,9 @@ import { textColor } from '../../../shared/utils/text-color';
 @Component({
   selector: 'rp-view-palette',
   standalone: true,
-  imports: [NgIconComponent, TranslateModule],
-  templateUrl: './view-palette.component.html'
+  imports: [NgIconComponent, TranslateModule, CdkDropList, CdkDrag, CdkDragPlaceholder],
+  templateUrl: './view-palette.component.html',
+  styleUrl: './view-palette.component.css'
 })
 export class ViewPaletteComponent {
   protected readonly textColor = textColor;
@@ -27,6 +29,7 @@ export class ViewPaletteComponent {
   }>();
   public readonly removeColor = output<Color>();
   public readonly copyShade = output<Shade>();
+  public readonly reorderColor = output<{ fromIndex: number; toIndex: number }>();
 
   protected rename(color: Color): void {
     this.renameColor.emit(color);
@@ -47,5 +50,16 @@ export class ViewPaletteComponent {
     }
 
     this.copyShade.emit(shade);
+  }
+
+  protected colorDropped(event: CdkDragDrop<unknown>): void {
+    if (event.previousIndex === event.currentIndex) {
+      return;
+    }
+
+    this.reorderColor.emit({
+      fromIndex: event.previousIndex,
+      toIndex: event.currentIndex
+    });
   }
 }
