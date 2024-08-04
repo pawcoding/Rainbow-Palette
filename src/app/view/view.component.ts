@@ -17,6 +17,7 @@ import { AnalyticsService } from '../shared/data-access/analytics.service';
 import { ColorService } from '../shared/data-access/color.service';
 import { DialogService } from '../shared/data-access/dialog.service';
 import { PaletteService } from '../shared/data-access/palette.service';
+import { PwaService } from '../shared/data-access/pwa.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
@@ -43,6 +44,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _exportService = inject(ExportModalService);
   private readonly _analyticsService = inject(AnalyticsService);
   private readonly _router = inject(Router);
+  private readonly _pwaService = inject(PwaService);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
@@ -237,6 +239,11 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
    */
   @HostListener('window:beforeunload', ['$event'])
   public checkUnsavedChanges(_: Event): boolean {
+    // Don't worry about unsaved changes during an update
+    if (this._pwaService.doingUpdate()) {
+      return true;
+    }
+
     // If there are unsaved changes, show a confirmation dialog by returning false
     if (this.hasUnsavedChanges()) {
       return false;
