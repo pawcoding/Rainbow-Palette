@@ -14,6 +14,16 @@ export const ColorInput = createStory<ColorInputComponent>({
   args: {
     placeholder: 'Color',
     tooltip: 'Select a color',
-    hex: '#3b82f6'
+    hex: '#3b82f6',
+    readOnly: false
+  }
+});
+
+export const ReadOnly = createStory<ColorInputComponent>({
+  args: {
+    placeholder: 'Color',
+    tooltip: 'Select a color',
+    hex: '#3b82f6',
+    readOnly: true
   }
 });

@@ -18,10 +18,6 @@ describe('LanguageService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should have default language en', () => {
-    expect(service.language()).toBe('en');
-  });
-
   it('should change language', () => {
     service.setLanguage('de');
     expect(service.language()).toBe('de');

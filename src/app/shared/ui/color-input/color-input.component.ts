@@ -22,6 +22,10 @@ export class ColorInputComponent {
    */
   public readonly tooltip = input.required<string>();
   /**
+   * Flag to make the input field read-only.
+   */
+  public readonly readOnly = input(false);
+  /**
    * Hex color value.
    */
   public readonly hex = model.required<string>();
@@ -40,6 +44,13 @@ export class ColorInputComponent {
    */
   protected readonly isColorLight = computed(() => {
     return perceivedBrightnessFromHex(this.hex()) > 51;
+  });
+
+  protected readonly iconStyle = computed(() => {
+    const color = this.isColorLight() ? 'text-neutral-900' : 'text-neutral-100';
+    const readonly = this.readOnly() ? 'cursor-not-allowed' : 'cursor-pointer';
+
+    return `${color} ${readonly}`;
   });
 
   public constructor() {

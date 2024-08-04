@@ -60,12 +60,15 @@ export class ToastService {
   public showToast(toast: Toast): number {
     const timestamp = Date.now();
     toast.id = timestamp;
-    toast.timeout = setTimeout(
-      () => {
-        this.hideToast(timestamp);
-      },
-      ToastTimeouts[toast.type ?? 'default']
-    );
+
+    if (toast.duration !== 0) {
+      toast.timeout = setTimeout(
+        () => {
+          this.hideToast(timestamp);
+        },
+        toast.duration ?? ToastTimeouts[toast.type ?? 'default']
+      );
+    }
 
     this._toastStack.update((stack) => [...stack, toast]);
     return timestamp;

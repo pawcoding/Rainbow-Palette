@@ -262,6 +262,7 @@
   "title": "Rainbow Palette | Get your own color palette from just a single color",
   "toast": {
     "error": {
+      "copy-clipboard": "An error occurred while copying to your clipboard. Please make sure you are visiting this site via HTTPS.",
       "load-color-map": "An error occurred while loading the list of color names.",
       "palette-load": "An error occurred while loading your last palette."
     },
@@ -275,10 +276,7 @@
       "add": "Add color",
       "add-tooltip": "Add a new color to your palette",
       "click": "Click to tune this shade\nRight-click to copy hex code to clipboard",
-      "copy": {
-        "error": "An error occurred while copying the hex code to your clipboard.",
-        "success": "\"{{ color }}\" has been copied to your clipboard."
-      },
+      "copy": "\"{{ color }}\" has been copied to your clipboard.",
       "remove": "Are you sure you want to remove the color \"{{ color }}\"?",
       "remove-tooltip": "Remove the color from your palette",
       "removed": "The color \"{{ color }}\" has been removed.",

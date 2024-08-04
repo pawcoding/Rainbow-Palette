@@ -8,6 +8,7 @@ import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/an
 import { ColorService, ColorServiceMock } from '../shared/data-access/color.service';
 import { DialogService, DialogServiceMock } from '../shared/data-access/dialog.service';
 import { PaletteService, PaletteServiceMock } from '../shared/data-access/palette.service';
+import { PwaService, PwaServiceMock } from '../shared/data-access/pwa.service';
 import { ToastService, ToastServiceMock } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
@@ -45,6 +46,7 @@ describe('ViewComponent', () => {
         { provide: PaletteService, useValue: paletteService },
         { provide: ToastService, useValue: toastService },
         { provide: AnalyticsService, useValue: analyticsService },
+        { provide: PwaService, useClass: PwaServiceMock },
         { provide: IS_RUNNING_TEST, useValue: true }
       ]
     }).compileComponents();

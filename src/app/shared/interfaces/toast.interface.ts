@@ -35,4 +35,11 @@ export interface Toast {
    * The timeout for the toast.
    */
   timeout?: ReturnType<typeof setTimeout>;
+  /**
+   * Optional duration for the toast.
+   * If provided, the toast will be displayed for the specified duration.
+   * If not provided, the toast will use the default timeout based on the type.
+   * If the duration is set to 0, the toast will not be automatically hidden.
+   */
+  duration?: number;
 }

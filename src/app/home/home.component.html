@@ -1,4 +1,5 @@
 <rp-home-generator
+  [disabled]="isGenerating()"
   [(hex)]="hex"
   [(scheme)]="scheme"
   (generate)="generatePalette()"

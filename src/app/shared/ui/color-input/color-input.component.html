@@ -1,13 +1,13 @@
 <div>
   <span class="flex overflow-hidden rounded-md border border-neutral-200 shadow-sm dark:border-none dark:shadow-none">
     <label
+      [for]="readOnly() ? null : 'color'"
       [title]="tooltip()"
-      for="color"
     >
       <div
-        [class]="isColorLight() ? 'text-neutral-900' : 'text-neutral-100'"
+        [class]="iconStyle()"
         [style.backgroundColor]="hex()"
-        class="flex h-full w-10 cursor-pointer items-center justify-center"
+        class="flex h-full w-10 items-center justify-center"
       >
         <ng-icon
           [svg]="heroEyeDropperMini"
@@ -33,7 +33,9 @@
 
     <input
       #hexInput
+      [class.cursor-not-allowed]="readOnly()"
       [placeholder]="placeholder()"
+      [readOnly]="readOnly()"
       [title]="placeholder()"
       [value]="hex()"
       (input)="updateHex(hexInput.value)"

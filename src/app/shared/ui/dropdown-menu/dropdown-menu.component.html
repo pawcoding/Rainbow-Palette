@@ -1,7 +1,9 @@
 <div
-  [cdkMenuPosition]="menuPositions"
+  [cdkMenuPosition]="MENU_POSITIONS"
   [cdkMenuTriggerFor]="disabled() ? undefined : menu"
   [class]="!disabled() ? 'cursor-pointer' : 'cursor-default'"
+  (cdkMenuClosed)="isOpen.set(false)"
+  (cdkMenuOpened)="isOpen.set(true)"
 >
   <ng-content />
 </div>

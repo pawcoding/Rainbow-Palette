@@ -261,6 +261,7 @@
   "title": "Rainbow Palette | Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe",
   "toast": {
     "error": {
+      "copy-clipboard": "Beim Kopieren in die Zwischenablage ist ein Fehler aufgetreten. Stelle sicher, dass du diese Webseite über HTTPS aufrufst.",
       "load-color-map": "Die Liste mit Namen für Farben konnte nicht geladen werden.",
       "palette-load": "Deine letzte Farbpalette konnte nicht geladen werden."
     },
@@ -274,10 +275,7 @@
       "add": "Farbe hinzufügen",
       "add-tooltip": "Füge deiner Palette eine neue Farbe hinzu",
       "click": "Click, um die Schattierung anzupassen\nRechtsclick, um den Hex-Code zu kopieren",
-      "copy": {
-        "error": "Beim Kopieren des Hex-Codes in die Zwischenablage ist ein Fehler aufgetreten.",
-        "success": "\"{{ color }}\" wurde in deine Zwischenablage kopiert."
-      },
+      "copy": "\"{{ color }}\" wurde in deine Zwischenablage kopiert.",
       "remove": "Bust du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
       "remove-tooltip": "Entferne diese Farbe aus deiner Palette",
       "removed": "Die Farbe \"{{ color }}\" wurde entfernt.",
