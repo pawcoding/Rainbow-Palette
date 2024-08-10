@@ -37,23 +37,10 @@ export class AiService {
       return this.#session;
     }
 
-    // Create a new generic session if possible
-    const canCreateGenericSession = await window.ai.canCreateGenericSession();
-    if (canCreateGenericSession === 'readily') {
-      const options = await window.ai.defaultGenericSessionOptions();
-      this.#session = await window.ai.createGenericSession({
-        ...options,
-        temperature: 0.6
-      });
-      return this.#session;
-    }
-
     // Create a new text session if possible
     const canCreateTextSession = await window.ai.canCreateTextSession();
     if (canCreateTextSession === 'readily') {
-      const options = await window.ai.defaultTextSessionOptions();
       this.#session = await window.ai.createTextSession({
-        ...options,
         temperature: 0.6
       });
       return this.#session;
