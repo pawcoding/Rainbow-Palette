@@ -1,6 +1,6 @@
 {
   "name": "rainbow-palette",
-  "version": "1.4.0-staging.4",
+  "version": "1.4.0-staging.5",
   "description": "This app generates your own custom color palette from just a single color. Preview your palette live or export it for usage with CSS or TailwindCSS.",
   "homepage": "https://rainbow-palette.app/",
   "bugs": {
