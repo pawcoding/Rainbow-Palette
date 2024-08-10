@@ -51,4 +51,10 @@
   .underline-inline-links a {
     text-decoration-line: underline;
   }
+
+  .color.cdk-drag-preview {
+    .actions {
+      visibility: hidden;
+    }
+  }
 }

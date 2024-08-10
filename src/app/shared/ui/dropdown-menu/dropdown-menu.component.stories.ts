@@ -1,4 +1,5 @@
-import { Meta, argsToTemplate } from '@storybook/angular';
+import { Meta, applicationConfig, argsToTemplate } from '@storybook/angular';
+import { IS_RUNNING_TEST } from '../../utils/is-running-test';
 import { createStory } from '../../utils/storybook';
 import { DropdownMenuComponent } from './dropdown-menu.component';
 
@@ -50,8 +51,20 @@ export const Default = createStory<DropdownMenuComponent<string>>({
     highlightSelection: false,
     selectedItem: 'Item 1'
   },
+  decorators: [
+    applicationConfig({
+      providers: [{ provide: IS_RUNNING_TEST, useValue: true }]
+    })
+  ],
   render: (args) => ({
-    template: `<rp-dropdown-menu ${argsToTemplate(args)}><button class="bg-blue-500 w-full rounded-md px-4 py-2 text-neutral-50 font-semibold cursor-pointer">Open DropDown</button></rp-dropdown-menu>`
+    template: `
+    <div class="max-w-lg mx-auto">
+      <rp-dropdown-menu ${argsToTemplate(args)}>
+        <button class="bg-blue-500 w-full rounded-md px-4 py-2 text-neutral-50 font-semibold cursor-pointer">
+          Open DropDown
+        </button>
+      </rp-dropdown-menu>
+    </div>`
   })
 });
 
@@ -64,15 +77,23 @@ export const Content = createStory<DropdownMenuComponent<string>>({
     highlightSelection: false,
     selectedItem: 'Item 1'
   },
+  decorators: [
+    applicationConfig({
+      providers: [{ provide: IS_RUNNING_TEST, useValue: true }]
+    })
+  ],
   render: (args) => ({
-    template: `<rp-dropdown-menu ${argsToTemplate(args)}>
-      <button class="bg-blue-500 w-full rounded-md px-4 py-2 text-neutral-50 font-semibold cursor-pointer">
-        Open DropDown
-      </button>
+    template: `
+    <div class="max-w-lg mx-auto">
+      <rp-dropdown-menu ${argsToTemplate(args)}>
+        <button class="bg-blue-500 w-full rounded-md px-4 py-2 text-neutral-50 font-semibold cursor-pointer">
+          Open DropDown
+        </button>
 
-      <ng-template #itemTemplate let-item="item">
-        <span class="uppercase block text-right">{{item}}</span>
-      </ng-template>
-    </rp-dropdown-menu>`
+        <ng-template #itemTemplate let-item="item">
+          <span class="uppercase block text-right">{{item}}</span>
+        </ng-template>
+      </rp-dropdown-menu>
+    </div>`
   })
 });

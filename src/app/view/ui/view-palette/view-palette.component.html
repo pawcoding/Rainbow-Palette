@@ -1,13 +1,21 @@
-<div class="w-full space-y-4 sm:space-y-8">
+<div
+  (cdkDropListDropped)="colorDropped($event)"
+  cdkDropList
+  class="palette w-full space-y-4 sm:space-y-8"
+>
   @for (color of palette().colors; track $index) {
-    <section class="space-y-2">
+    <section
+      cdkDrag
+      cdkDragBoundary=".palette"
+      class="color space-y-2 bg-neutral-50 dark:bg-neutral-900"
+    >
       <div class="flex items-end justify-between">
         <h2 class="select-none text-xl font-bold">
           {{ color.name }}
         </h2>
 
         <div
-          class="inline-flex overflow-hidden rounded-md border bg-white shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
+          class="actions inline-flex overflow-hidden rounded-md border bg-white opacity-100 shadow-sm dark:border-neutral-800 dark:bg-neutral-900"
         >
           <button
             [title]="'view.color.rename' | translate"
@@ -80,6 +88,11 @@
           </button>
         }
       </div>
+
+      <div
+        *cdkDragPlaceholder
+        class="h-[7.625rem] rounded border-4 border-dashed dark:border-neutral-800 xs:h-[12.875rem] sm:h-[13.625rem] lg:h-[8.125rem]"
+      ></div>
     </section>
   }
 </div>

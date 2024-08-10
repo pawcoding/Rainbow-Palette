@@ -287,7 +287,7 @@
       "remove-tooltip": "Entferne diese Farbe aus deiner Palette",
       "removed": "Die Farbe \"{{ color }}\" wurde entfernt.",
       "rename": "Gebe deiner Farbe einen neuen Namen",
-      "renamed": "Deine Farbe wurde in \"{{ color }}\" umbenannt.",
+      "renamed": "Deine Farbe wurde in \"{{ name }}\" umbenannt.",
       "tune": "Passe die Farbe nach deinem Geschmack an"
     },
     "palette": {
