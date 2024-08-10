@@ -100,10 +100,11 @@ describe('PaletteService', () => {
     await service.generatePalette('#ffffff', PaletteScheme.ANALOGOUS);
     const originalPalette = service.palette();
 
-    const id = service.duplicatePalette();
+    const id = service.duplicatePalette('duplicate');
 
     expect(id).toBeTruthy();
     expect(id).not.toBe(originalPalette!.id);
+    expect(service.palette()?.name).toBe('duplicate');
     expect(service.palette()?.id).toBe(id);
   });
 
