@@ -1,9 +1,11 @@
 <section
-  class="flex items-center justify-center px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16"
+  #container
+  class="relative px-4 py-8 max-sm:flex max-sm:items-center max-sm:justify-center sm:px-6 sm:py-12 lg:px-8 lg:py-16"
   id="no-palette"
 >
   <article
-    class="mx-auto max-w-md space-y-4 rounded-xl border border-neutral-200 bg-neutral-100 p-6 text-center shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none lg:p-8"
+    #child
+    class="max-w-md space-y-4 rounded-xl border border-neutral-200 bg-neutral-100 p-6 text-center shadow-xl dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none sm:absolute sm:left-1/2 sm:top-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2 lg:p-8"
   >
     <h2 class="text-2xl font-bold md:text-3xl">
       {{ 'no-palette.title' | translate }}
