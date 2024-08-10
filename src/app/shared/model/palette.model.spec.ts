@@ -57,4 +57,34 @@ describe('Palette', () => {
 
     expect(palette.toString()).toBe(JSON.stringify(palette.toJSON()));
   });
+
+  it('should add color', () => {
+    const palette = new Palette('Test', []);
+    const color = new Color([Shade.random()], 'TestColor');
+
+    palette.addColor(color);
+
+    expect(palette.colors.length).toBe(1);
+    expect(palette.colors[0]).toBe(color);
+  });
+
+  it('should remove color', () => {
+    const color = new Color([Shade.random()], 'TestColor');
+    const palette = new Palette('Test', [color]);
+
+    palette.removeColor(color);
+
+    expect(palette.colors.length).toBe(0);
+  });
+
+  it('should reorder color', () => {
+    const color1 = new Color([Shade.random()], 'TestColor1');
+    const color2 = new Color([Shade.random()], 'TestColor2');
+    const palette = new Palette('Test', [color1, color2]);
+
+    palette.reorderColor(0, 1);
+
+    expect(palette.colors[0]).toBe(color2);
+    expect(palette.colors[1]).toBe(color1);
+  });
 });
