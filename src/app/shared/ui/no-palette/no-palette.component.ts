@@ -18,6 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { debounceTime, fromEvent, merge, tap } from 'rxjs';
 import { LanguageService } from '../../data-access/language.service';
 import { MobileService } from '../../data-access/mobile.service';
+import { IS_RUNNING_TEST } from '../../utils/is-running-test';
 import { sleep } from '../../utils/sleep';
 
 @Component({
@@ -30,6 +31,7 @@ import { sleep } from '../../utils/sleep';
 export class NoPaletteComponent implements AfterViewInit, OnDestroy {
   readonly #mobileService = inject(MobileService);
   readonly #languageService = inject(LanguageService);
+  readonly #isRunningTest = inject(IS_RUNNING_TEST);
 
   protected readonly heroArrowUturnLeft = heroArrowUturnLeft;
 
@@ -62,6 +64,11 @@ export class NoPaletteComponent implements AfterViewInit, OnDestroy {
   #animationTimeout: ReturnType<typeof setTimeout> | undefined = undefined;
 
   public constructor() {
+    // Ignore animation inside tests
+    if (this.#isRunningTest) {
+      return;
+    }
+
     // Listen to the "resize" event and language change to restart the animation
     merge(fromEvent(window, 'resize'), this.#language$)
       .pipe(
