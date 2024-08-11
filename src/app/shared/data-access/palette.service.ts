@@ -5,6 +5,7 @@ import { Value } from '../model';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
+import { AiService } from './ai.service';
 import { ColorNameService } from './color-name.service';
 import { ColorService } from './color.service';
 import { ListService } from './list.service';
@@ -18,6 +19,7 @@ export class PaletteService {
   private readonly _colorNameService = inject(ColorNameService);
   private readonly _toastService = inject(ToastService);
   private readonly _listService = inject(ListService);
+  private readonly _aiService = inject(AiService);
 
   private readonly _palette = signal<Palette | undefined>(undefined);
   private readonly _isGenerating = signal(false);
@@ -115,8 +117,10 @@ export class PaletteService {
       const palette = await this._generatePalette(hex, scheme);
 
       for (const color of palette.colors) {
-        // Get the color name
-        color.name = await this._colorNameService.getColorName(color.shades[0]);
+        if (scheme !== PaletteScheme.AI) {
+          // Get the color name
+          color.name = await this._colorNameService.getColorName(color.shades[0]);
+        }
 
         // Regenerate the shades
         await this._colorService.regenerateShades(color);
@@ -146,6 +150,8 @@ export class PaletteService {
         return this._generateTriadicPalette(hex);
       case PaletteScheme.COMPOUND:
         return this._generateCompoundPalette(hex);
+      case PaletteScheme.AI:
+        return await this._generateAiPalette(hex);
       default:
         return this._generatePalette(hex, randomScheme().value);
     }
@@ -483,6 +489,30 @@ export class PaletteService {
     );
 
     return compound;
+  }
+
+  private async _generateAiPalette(hex: string): Promise<Palette> {
+    // Show a toast while generating the palette
+    const toastId = this._toastService.showToast({
+      type: 'info',
+      message: 'toast.info.generate-ai-palette',
+      duration: 0
+    });
+
+    try {
+      // Try to generate the palette using the AI
+      return await this._aiService.generatePalette(hex);
+    } catch (e) {
+      // Show an error toast if the AI fails
+      this._toastService.showToast({
+        type: 'error',
+        message: 'toast.error.generate-ai-palette'
+      });
+      throw e;
+    } finally {
+      // Hide the toast
+      this._toastService.hideToast(toastId);
+    }
   }
 
   private _updateVariables(): void {
