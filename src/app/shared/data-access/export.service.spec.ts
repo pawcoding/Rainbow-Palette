@@ -49,15 +49,21 @@ describe('ExportService', () => {
     expect(analyticsService.trackPaletteExport).toHaveBeenCalledTimes(2);
   });
 
-  it('should copy palette to clipboard', async () => {
-    spyOn(navigator.clipboard, 'writeText').and.resolveTo();
+  /*
+   * Disable clipboard test in non-secure context (not HTTPS), because it will fail.
+   * See: https://stackoverflow.com/a/51823007
+   */
+  if (window.isSecureContext) {
+    it('should copy palette to clipboard', async () => {
+      spyOn(navigator.clipboard, 'writeText').and.resolveTo();
 
-    const format = ExportFormat.CSS;
-    const result = await service.exportPalette(palette, format, 'copy');
+      const format = ExportFormat.CSS;
+      const result = await service.exportPalette(palette, format, 'copy');
 
-    expect(result).toBe(true);
-    expect(navigator.clipboard.writeText).toHaveBeenCalled();
-  });
+      expect(result).toBe(true);
+      expect(navigator.clipboard.writeText).toHaveBeenCalled();
+    });
+  }
 
   it('should download palette as file', async () => {
     const link = document.createElement('a');

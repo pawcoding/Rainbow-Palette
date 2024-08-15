@@ -1,14 +1,25 @@
-import { Injectable, Signal, effect, inject, signal } from '@angular/core';
+import { Injectable, effect, inject, signal } from '@angular/core';
 import { SwUpdate, VersionEvent } from '@angular/service-worker';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 import { TrackingEventAction, TrackingEventCategory } from '../enums/tracking-event';
 import { IS_RUNNING_TEST } from '../utils/is-running-test';
 import { AnalyticsService } from './analytics.service';
+import { ConfettiService } from './confetti.service';
 import { DialogService } from './dialog.service';
 import { PaletteService } from './palette.service';
 import { ToastService } from './toast.service';
 import { VersionService } from './version.service';
+
+interface AppData {
+  version: string;
+}
+
+declare const window: Window & {
+  navigator: Navigator & {
+    standalone: boolean;
+  };
+};
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +33,13 @@ export class PwaService {
   private readonly _dialogService = inject(DialogService);
   private readonly _paletteService = inject(PaletteService);
   private readonly _versionService = inject(VersionService);
+  private readonly _confettiService = inject(ConfettiService);
 
   private readonly _isPwa = signal(false);
+  private readonly _doingUpdate = signal(false);
 
-  public get isPwa(): Signal<boolean> {
-    return this._isPwa.asReadonly();
-  }
+  public readonly isPwa = this._isPwa.asReadonly();
+  public readonly doingUpdate = this._doingUpdate.asReadonly();
 
   public constructor() {
     effect(() => {
@@ -35,11 +47,7 @@ export class PwaService {
     });
 
     // Check if the app is currently running as a PWA
-    if (
-      window.matchMedia('(display-mode: standalone)').matches ||
-      //@ts-expect-error - Navigator standalone is not a standard web api, but we try to use it anyway
-      window.navigator.standalone
-    ) {
+    if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone) {
       this._isPwa.set(true);
     }
 
@@ -56,17 +64,26 @@ export class PwaService {
 
     // Listen for broken service worker
     this._SwUpdate.unrecoverable.subscribe(() => {
-      this._dialogService.alert(this._translateService.instant('pwa.broken'));
+      this._dialogService.alert({ title: 'common.error', message: 'pwa.broken' });
     });
 
     // Check if the app is currently updating
     if (localStorage.getItem(LocalStorageKey.UPGRADING)) {
+      // Remove upgrading flag from local storage
       localStorage.removeItem(LocalStorageKey.UPGRADING);
+
+      // Show toast about successful update
       this._toastService.showToast({
         type: 'info',
         message: 'pwa.update-success',
         parameters: { version: this._versionService.appVersion }
       });
+
+      // Shoot confetti to celebrate the update
+      this._confettiService.confetti([
+        { particleCount: 150, spread: 70, angle: 45, origin: { x: 0 }, startVelocity: 75 },
+        { particleCount: 150, spread: 70, angle: 135, origin: { x: 1 }, startVelocity: 75 }
+      ]);
     }
   }
 
@@ -82,8 +99,7 @@ export class PwaService {
         type: 'info',
         message: 'pwa.update-available',
         parameters: {
-          // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
-          version: event.version.appData?.version
+          version: (event.version.appData as AppData | undefined)?.version
         }
       });
       return;
@@ -97,23 +113,21 @@ export class PwaService {
         type: 'error',
         message: 'pwa.update-failed',
         parameters: {
-          // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
-          version: event.version.appData?.version
+          version: (event.version.appData as AppData | undefined)?.version
         }
       });
       return;
     }
 
     // Update was downloaded and can be installed through restart
-    const restart = await this._dialogService.confirm(
-      this._translateService.instant('pwa.restart', {
-        old:
-          // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
-          event.currentVersion.appData?.version ?? this._versionService.appVersion,
-        // @ts-expect-error - `appData` is filled by the prebuilt script to contain the current app version
-        new: event.latestVersion.appData?.version
-      })
-    );
+    const restart = await this._dialogService.confirm({
+      title: 'pwa.update',
+      message: this._translateService.instant('pwa.restart', {
+        old: (event.currentVersion.appData as AppData | undefined)?.version ?? this._versionService.appVersion,
+        new: (event.latestVersion.appData as AppData | undefined)?.version
+      }),
+      confirmLabel: 'common.yes'
+    });
 
     // Continue without updating
     if (!restart) {
@@ -125,6 +139,7 @@ export class PwaService {
 
     // Set the flag to indicate that the app is currently updating
     localStorage.setItem(LocalStorageKey.UPGRADING, 'true');
+    this._doingUpdate.set(true);
 
     // Track the update
     this._analyticsService.trackEvent(TrackingEventCategory.PWA, TrackingEventAction.PWA_UPDATE_COMPLETED);
@@ -136,4 +151,7 @@ export class PwaService {
   }
 }
 
-export class PwaServiceMock {}
+export class PwaServiceMock {
+  public readonly isPwa = signal(false).asReadonly();
+  public readonly doingUpdate = signal(false).asReadonly();
+}

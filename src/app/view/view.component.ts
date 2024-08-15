@@ -17,6 +17,7 @@ import { AnalyticsService } from '../shared/data-access/analytics.service';
 import { ColorService } from '../shared/data-access/color.service';
 import { DialogService } from '../shared/data-access/dialog.service';
 import { PaletteService } from '../shared/data-access/palette.service';
+import { PwaService } from '../shared/data-access/pwa.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
@@ -43,6 +44,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _exportService = inject(ExportModalService);
   private readonly _analyticsService = inject(AnalyticsService);
   private readonly _router = inject(Router);
+  private readonly _pwaService = inject(PwaService);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
@@ -94,10 +96,14 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
       return;
     }
 
-    const newName = await this._dialogService.prompt(
-      this._translateService.instant('view.palette.rename'),
-      palette.name
-    );
+    const newName = await this._dialogService.prompt({
+      title: 'common.rename',
+      message: 'view.palette.rename',
+      confirmLabel: 'common.rename',
+      initialValue: palette.name,
+      label: 'common.name',
+      placeholder: 'common.name'
+    });
 
     if (!newName || newName === palette.name) {
       return;
@@ -151,7 +157,14 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   }
 
   public async renameColor(color: Color): Promise<void> {
-    const newName = await this._dialogService.prompt(this._translateService.instant('view.color.rename'), color.name);
+    const newName = await this._dialogService.prompt({
+      title: 'common.rename',
+      message: 'view.color.rename',
+      confirmLabel: 'common.rename',
+      initialValue: color.name,
+      label: 'common.name',
+      placeholder: 'common.name'
+    });
 
     if (!newName || newName === color.name) {
       return;
@@ -182,11 +195,13 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
   public async removeColor(color: Color): Promise<void> {
     const name = color.name;
-    const shouldRemove = await this._dialogService.confirm(
-      this._translateService.instant('view.color.remove', {
+    const shouldRemove = await this._dialogService.confirm({
+      title: 'view.color.remove-tooltip',
+      message: this._translateService.instant('view.color.remove', {
         color: name
-      })
-    );
+      }),
+      confirmLabel: 'common.remove'
+    });
 
     if (shouldRemove) {
       this.palette()?.removeColor(color);
@@ -217,15 +232,25 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
       this._toastService.showToast({
         type: 'success',
-        message: 'view.color.copy.success',
+        message: 'view.color.copy',
         parameters: { color: toUnicodeVariant(shade.hex, 'm') }
       });
     } catch (error) {
       this._toastService.showToast({
         type: 'error',
-        message: 'view.color.copy.error'
+        message: 'toast.error.copy-clipboard'
       });
     }
+  }
+
+  public reorderColor(fromIndex: number, toIndex: number): void {
+    const palette = this.palette();
+    if (!palette || fromIndex === toIndex) {
+      return;
+    }
+
+    palette.reorderColor(fromIndex, toIndex);
+    this._hasUnsavedChanges.set(true);
   }
 
   /**
@@ -237,6 +262,11 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
    */
   @HostListener('window:beforeunload', ['$event'])
   public checkUnsavedChanges(_: Event): boolean {
+    // Don't worry about unsaved changes during an update
+    if (this._pwaService.doingUpdate()) {
+      return true;
+    }
+
     // If there are unsaved changes, show a confirmation dialog by returning false
     if (this.hasUnsavedChanges()) {
       return false;

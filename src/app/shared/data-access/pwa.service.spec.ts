@@ -5,6 +5,7 @@ import { TrackingEventAction, TrackingEventCategory } from '../enums/tracking-ev
 import { IS_RUNNING_TEST } from '../utils/is-running-test';
 import { SwUpdateMock } from '../utils/sw-update-mock';
 import { AnalyticsService, AnalyticsServiceMock } from './analytics.service';
+import { ConfettiService, ConfettiServiceMock } from './confetti.service';
 import { DialogService, DialogServiceMock } from './dialog.service';
 import { PaletteService, PaletteServiceMock } from './palette.service';
 import { PwaService } from './pwa.service';
@@ -36,7 +37,8 @@ describe('PwaService', () => {
         { provide: DialogService, useValue: dialogService },
         { provide: ToastService, useValue: toastService },
         { provide: PaletteService, useValue: paletteService },
-        { provide: VersionService, useClass: VersionServiceMock }
+        { provide: VersionService, useClass: VersionServiceMock },
+        { provide: ConfettiService, useClass: ConfettiServiceMock }
       ]
     });
     service = TestBed.inject(PwaService);

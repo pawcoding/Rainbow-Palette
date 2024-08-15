@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { PaletteScheme } from '../constants/palette-scheme';
 import { TailwindGrays } from '../constants/tailwind-colors';
 import { LocalStorageKey } from '../enums/local-storage-keys';
-import { Palette } from '../model';
+import { Palette, Shade } from '../model';
 import { ColorNameService, ColorNameServiceMock } from './color-name.service';
 import { ColorService, ColorServiceMock } from './color.service';
 import { ListService, ListServiceMock } from './list.service';
@@ -39,7 +39,6 @@ describe('PaletteService', () => {
     service = TestBed.inject(PaletteService);
 
     spyOn(colorService, 'regenerateShades').and.callThrough();
-    spyOn(colorNameService, 'getColorName').and.callThrough();
     spyOn(toastService, 'showToast').and.callThrough();
   });
 
@@ -48,6 +47,12 @@ describe('PaletteService', () => {
   });
 
   it('should generate a palette', async () => {
+    spyOn(colorNameService, 'getColorName').and.callFake(async (shade: Shade) => {
+      expect(service.isGenerating()).toBeTrue();
+
+      return shade.hex.substring(1);
+    });
+
     await service.generatePalette('#ffffff', PaletteScheme.ANALOGOUS);
 
     expect(service.palette()).toBeTruthy();
@@ -56,6 +61,8 @@ describe('PaletteService', () => {
   });
 
   it('should save palette to local storage', async () => {
+    spyOn(colorNameService, 'getColorName').and.callThrough();
+
     await service.generatePalette('#ffffff', PaletteScheme.COMPLEMENTARY);
     service.savePaletteToLocalStorage();
 
@@ -93,10 +100,11 @@ describe('PaletteService', () => {
     await service.generatePalette('#ffffff', PaletteScheme.ANALOGOUS);
     const originalPalette = service.palette();
 
-    const id = service.duplicatePalette();
+    const id = service.duplicatePalette('duplicate');
 
     expect(id).toBeTruthy();
     expect(id).not.toBe(originalPalette!.id);
+    expect(service.palette()?.name).toBe('duplicate');
     expect(service.palette()?.id).toBe(id);
   });
 

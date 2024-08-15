@@ -31,11 +31,13 @@ export default class ListComponent {
   protected readonly heroPlusMini = heroPlusMini;
 
   protected async deletePalette(palette: PaletteListItem): Promise<void> {
-    const shouldDelete = await this._dialogService.confirm(
-      this._translateService.instant('list.delete.dialog', {
+    const shouldDelete = await this._dialogService.confirm({
+      title: 'list.delete.hover',
+      message: this._translateService.instant('list.delete.dialog', {
         name: palette.name
-      })
-    );
+      }),
+      confirmLabel: 'common.delete'
+    });
     if (shouldDelete) {
       this._listService.remove(palette.id);
     }
@@ -45,9 +47,23 @@ export default class ListComponent {
     // Load the palette to duplicate
     this._paletteService.loadPaletteFromLocalStorage(palette.id);
 
+    const name = await this._dialogService.prompt({
+      title: 'list.duplicate.hover',
+      message: this._translateService.instant('list.duplicate.dialog', {
+        name: palette.name
+      }),
+      confirmLabel: 'common.duplicate',
+      label: 'common.name',
+      placeholder: 'common.name'
+    });
+
+    if (!name) {
+      return;
+    }
+
     try {
       // Create a copy of the palette and open it
-      const copyId = this._paletteService.duplicatePalette();
+      const copyId = this._paletteService.duplicatePalette(name);
       await this._router.navigate(['/view', copyId], {
         info: {
           palette: 'new'

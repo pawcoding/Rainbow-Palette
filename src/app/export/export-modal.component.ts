@@ -5,6 +5,7 @@ import { heroArrowLeftMini, heroXMarkMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import { ExportFormat } from '../shared/constants/export-format';
 import { AnalyticsService } from '../shared/data-access/analytics.service';
+import { ConfettiService } from '../shared/data-access/confetti.service';
 import { ExportService } from '../shared/data-access/export.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
@@ -43,6 +44,7 @@ export class ExportModalComponent {
   private readonly _toastService = inject(ToastService);
   private readonly _exportService = inject(ExportService);
   private readonly _analyticsService = inject(AnalyticsService);
+  private readonly _confettiService = inject(ConfettiService);
 
   protected readonly palette = signal(this._data.palette);
   protected readonly state = signal(ExportModalState.FORMAT);
@@ -81,6 +83,14 @@ export class ExportModalComponent {
 
     if (success) {
       this.state.set(ExportModalState.SUCCESS);
+
+      // Shoot confetti to celebrate the successful export
+      this._confettiService.confetti([
+        {
+          particleCount: 300,
+          spread: 140
+        }
+      ]);
     } else {
       this.close();
     }

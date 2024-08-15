@@ -3,18 +3,24 @@
     "back": "Zurück",
     "cancel": "Abbrechen",
     "close": "Schließen",
+    "continue": "Fortfahren",
     "delete": "Löschen",
     "duplicate": "Duplizieren",
     "edit": "Bearbeiten",
+    "error": "Unerwarteter Fehler",
     "export": "Exportieren",
     "hue": "Farbton",
     "less": "Weniger anzeigen",
     "lightness": "Helligkeit",
     "more": "Mehr anzeigen",
+    "name": "Name",
+    "ok": "OK",
+    "remove": "Entfernen",
     "rename": "Umbenennen",
     "saturation": "Sättigung",
     "save": "Speichern",
-    "saving": "Speichern..."
+    "saving": "Speichern...",
+    "yes": "Ja"
   },
   "editor": {
     "cancel": "Ohne speichern schließen",
@@ -214,7 +220,10 @@
       "dialog": "Bist du sicher, dass du die Palette \"{{ name }}\" löschen möchtest?\n\nDie Palette kann nicht wiederhergestellt werden.",
       "hover": "Palette löschen"
     },
-    "duplicate": "Palette duplizieren",
+    "duplicate": {
+      "dialog": "Wie möchtest du die Kopie von \"{{ name }}\" nennen?",
+      "hover": "Palette duplizieren"
+    },
     "new": "Neue Palette",
     "title": "Deine Farbpaletten",
     "view": "Palette \"{{ name }}\" ansehen"
@@ -239,6 +248,7 @@
   "pwa": {
     "broken": "Es scheint, als ob deine aktuelle Version von Rainbow Palette nicht richtig funktioniert. Die App wird neu geladen, um das Problem zu beheben.",
     "restart": "Eine neue Version von Rainbow Palette ist verfügbar. Willst du jetzt von Version {{ old }} auf Version {{ new }} upgraden?\n\nDeine aktuelle Palette inklusive Änderungen wird nach dem Upgrade wiederhergestellt.",
+    "update": "Update verfügbar",
     "update-available": "Version {{ version }} ist verfügbar! Wird heruntergeladen...",
     "update-failed": "Update auf Version {{ version }} ist fehlgeschlagen. Bitte versuche es später erneut.",
     "update-success": "Rainbow Palette wurde erfolgreich auf Version {{ version }} aktualisiert. Viel Spaß mit den neuen Funktionen!"
@@ -261,6 +271,7 @@
   "title": "Rainbow Palette | Erstelle deine eigene Farbpalette aus nur einer einzigen Farbe",
   "toast": {
     "error": {
+      "copy-clipboard": "Beim Kopieren in die Zwischenablage ist ein Fehler aufgetreten. Stelle sicher, dass du diese Webseite über HTTPS aufrufst.",
       "load-color-map": "Die Liste mit Namen für Farben konnte nicht geladen werden.",
       "palette-load": "Deine letzte Farbpalette konnte nicht geladen werden."
     },
@@ -274,25 +285,26 @@
       "add": "Farbe hinzufügen",
       "add-tooltip": "Füge deiner Palette eine neue Farbe hinzu",
       "click": "Click, um die Schattierung anzupassen\nRechtsclick, um den Hex-Code zu kopieren",
-      "copy": {
-        "error": "Beim Kopieren des Hex-Codes in die Zwischenablage ist ein Fehler aufgetreten.",
-        "success": "\"{{ color }}\" wurde in deine Zwischenablage kopiert."
-      },
-      "remove": "Bust du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
+      "copy": "\"{{ color }}\" wurde in deine Zwischenablage kopiert.",
+      "remove": "Bist du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
       "remove-tooltip": "Entferne diese Farbe aus deiner Palette",
       "removed": "Die Farbe \"{{ color }}\" wurde entfernt.",
       "rename": "Gebe deiner Farbe einen neuen Namen",
-      "renamed": "Deine Farbe wurde in \"{{ color }}\" umbenannt.",
+      "renamed": "Deine Farbe wurde in \"{{ name }}\" umbenannt.",
       "tune": "Passe die Farbe nach deinem Geschmack an"
     },
     "palette": {
       "no-changes": "Es wurden noch keine Änderungen an deiner Palette vorgenommen.",
+      "no-export": "Deine Palette kann nicht exportiert werden, da sie noch keine Farben enthält.",
       "rename": "Gebe deiner Palette einen neuen Namen",
       "renamed": "Deine Palette wurde in \"{{ palette }}\" umbenannt.",
       "save": "Speichere die Palette in deinem Browser",
       "saved": "Deine Palette wurde lokal gespeichert.",
       "saving": "Deine Palette wird im Browser gespeichert"
     },
-    "unsaved-changes": "Die Änderungen an deiner Palette wurden noch nicht gespeichert. Wenn du die Seite verlässt, gehen alle Änderungen verloren.\n\nBist du sicher, dass du die Seite verlassen möchtest?"
+    "unsaved-changes": {
+      "description": "Die Änderungen an deiner Palette wurden noch nicht gespeichert. Wenn du die Seite verlässt, gehen alle Änderungen verloren.\n\nBist du sicher, dass du die Seite verlassen möchtest?",
+      "title": "Ungespeicherte Änderungen"
+    }
   }
 }

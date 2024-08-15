@@ -3,18 +3,24 @@
     "back": "Back",
     "cancel": "Cancel",
     "close": "Close",
+    "continue": "Continue",
     "delete": "Delete",
     "duplicate": "Duplicate",
     "edit": "Edit",
+    "error": "Unexpected error",
     "export": "Export",
     "hue": "Hue",
     "less": "Show less",
     "lightness": "Lightness",
     "more": "Show more",
+    "name": "Name",
+    "ok": "OK",
+    "remove": "Remove",
     "rename": "Rename",
     "saturation": "Saturation",
     "save": "Save",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "yes": "Yes"
   },
   "editor": {
     "cancel": "Close editor without saving",
@@ -215,7 +221,10 @@
       "dialog": "Are you sure you want to delete the palette \"{{ name }}\"?\n\nThis action cannot be undone.",
       "hover": "Delete palette"
     },
-    "duplicate": "Duplicate palette",
+    "duplicate": {
+      "dialog": "What should the duplicate of the palette \"{{ name }}\" be called?",
+      "hover": "Duplicate palette"
+    },
     "new": "New palette",
     "title": "Your palettes",
     "view": "View palette \"{{ name }}\""
@@ -240,6 +249,7 @@
   "pwa": {
     "broken": "Unfortunately your current version of Rainbow Palette is not working properly. The app will be reloaded to fix this issue.",
     "restart": "A new version of Rainbow Palette is available. Do you want to reload the app now to upgrade from version {{ old }} to version {{ new }}?\n\nYour current palette and changes will be restored after the update.",
+    "update": "Update available",
     "update-available": "Version {{ version }} is available. Downloading...",
     "update-failed": "Update to version {{ version }} failed. Please try again later.",
     "update-success": "Rainbow Palette has been updated to version {{ version }}. Enjoy the new features!"
@@ -262,6 +272,7 @@
   "title": "Rainbow Palette | Get your own color palette from just a single color",
   "toast": {
     "error": {
+      "copy-clipboard": "An error occurred while copying to your clipboard. Please make sure you are visiting this site via HTTPS.",
       "load-color-map": "An error occurred while loading the list of color names.",
       "palette-load": "An error occurred while loading your last palette."
     },
@@ -275,10 +286,7 @@
       "add": "Add color",
       "add-tooltip": "Add a new color to your palette",
       "click": "Click to tune this shade\nRight-click to copy hex code to clipboard",
-      "copy": {
-        "error": "An error occurred while copying the hex code to your clipboard.",
-        "success": "\"{{ color }}\" has been copied to your clipboard."
-      },
+      "copy": "\"{{ color }}\" has been copied to your clipboard.",
       "remove": "Are you sure you want to remove the color \"{{ color }}\"?",
       "remove-tooltip": "Remove the color from your palette",
       "removed": "The color \"{{ color }}\" has been removed.",
@@ -288,12 +296,16 @@
     },
     "palette": {
       "no-changes": "No changes have been made to your palette yet.",
+      "no-export": "Your palette needs at least one color to be exported.",
       "rename": "Give your palette a new name",
       "renamed": "Your palette has been renamed to \"{{ name }}\".",
       "save": "Save your palette in your browser",
       "saved": "Your palette has been saved.",
       "saving": "Saving your palette in your browser"
     },
-    "unsaved-changes": "You have unsaved changes in your palette. If you leave this page, your changes will be lost.\n\nAre you sure you want to leave?"
+    "unsaved-changes": {
+      "description": "You have unsaved changes in your palette. If you leave this page, your changes will be lost.\n\nAre you sure you want to leave?",
+      "title": "Unsaved changes"
+    }
   }
 }
