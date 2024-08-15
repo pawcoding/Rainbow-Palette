@@ -2,6 +2,7 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/analytics.service';
+import { ConfettiService, ConfettiServiceMock } from '../shared/data-access/confetti.service';
 import { ExportService, ExportServiceMock } from '../shared/data-access/export.service';
 import { ToastService, ToastServiceMock } from '../shared/data-access/toast.service';
 import { Color, Palette, Shade } from '../shared/model';
@@ -36,6 +37,10 @@ describe('ExportModalComponent', () => {
         {
           provide: AnalyticsService,
           useClass: AnalyticsServiceMock
+        },
+        {
+          provide: ConfettiService,
+          useClass: ConfettiServiceMock
         }
       ]
     }).compileComponents();
