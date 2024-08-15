@@ -4,9 +4,9 @@ import { provideRouter, withComponentInputBinding, withInMemoryScrolling, withRo
 import { provideServiceWorker } from '@angular/service-worker';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MatomoConsentMode, provideMatomo, withRouter, withRouterInterceptors } from 'ngx-matomo-client';
+import { provideMatomo, withRouter, withRouterInterceptors } from 'ngx-matomo-client';
 import { routes } from './app.routes';
-import { MatomoTitleInterceptor } from './shared/utils/matomo-title-interceptor';
+import { titleInterceptor } from './shared/utils/matomo-title-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -38,7 +38,7 @@ export const appConfig: ApplicationConfig = {
         trackerUrl: 'https://analytics.apps.pawcode.de/',
         enableJSErrorTracking: true,
         acceptDoNotTrack: true,
-        requireConsent: MatomoConsentMode.TRACKING,
+        requireConsent: 'tracking',
         disabled: isDevMode(),
         runOutsideAngularZone: true
       },
@@ -46,7 +46,7 @@ export const appConfig: ApplicationConfig = {
         delay: 1000,
         trackPageTitle: false
       }),
-      withRouterInterceptors([MatomoTitleInterceptor])
+      withRouterInterceptors([titleInterceptor])
     ),
     provideServiceWorker('ngsw-worker.js', {
       enabled: !isDevMode(),
