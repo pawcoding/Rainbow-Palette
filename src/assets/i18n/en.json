@@ -221,7 +221,10 @@
       "dialog": "Are you sure you want to delete the palette \"{{ name }}\"?\n\nThis action cannot be undone.",
       "hover": "Delete palette"
     },
-    "duplicate": "Duplicate palette",
+    "duplicate": {
+      "dialog": "What should the duplicate of the palette \"{{ name }}\" be called?",
+      "hover": "Duplicate palette"
+    },
     "new": "New palette",
     "title": "Your palettes",
     "view": "View palette \"{{ name }}\""

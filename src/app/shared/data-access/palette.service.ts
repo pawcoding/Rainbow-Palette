@@ -93,7 +93,7 @@ export class PaletteService {
     }
   }
 
-  public duplicatePalette(): string {
+  public duplicatePalette(name?: string): string {
     const palette = this._palette();
     if (!palette) {
       throw new Error('No palette to duplicate');
@@ -101,7 +101,11 @@ export class PaletteService {
 
     // Copy palette with new id and name
     const copy = palette.copy(false);
-    copy.name = `${copy.name} (copy)`;
+    if (name) {
+      copy.name = name;
+    } else {
+      copy.name = `${copy.name} (copy)`;
+    }
 
     // Load the copy
     this._palette.set(copy);
