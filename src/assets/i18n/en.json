@@ -3,18 +3,24 @@
     "back": "Back",
     "cancel": "Cancel",
     "close": "Close",
+    "continue": "Continue",
     "delete": "Delete",
     "duplicate": "Duplicate",
     "edit": "Edit",
+    "error": "Unexpected error",
     "export": "Export",
     "hue": "Hue",
     "less": "Show less",
     "lightness": "Lightness",
     "more": "Show more",
+    "name": "Name",
+    "ok": "OK",
+    "remove": "Remove",
     "rename": "Rename",
     "saturation": "Saturation",
     "save": "Save",
-    "saving": "Saving..."
+    "saving": "Saving...",
+    "yes": "Yes"
   },
   "editor": {
     "cancel": "Close editor without saving",
@@ -240,6 +246,7 @@
   "pwa": {
     "broken": "Unfortunately your current version of Rainbow Palette is not working properly. The app will be reloaded to fix this issue.",
     "restart": "A new version of Rainbow Palette is available. Do you want to reload the app now to upgrade from version {{ old }} to version {{ new }}?\n\nYour current palette and changes will be restored after the update.",
+    "update": "Update available",
     "update-available": "Version {{ version }} is available. Downloading...",
     "update-failed": "Update to version {{ version }} failed. Please try again later.",
     "update-success": "Rainbow Palette has been updated to version {{ version }}. Enjoy the new features!"
@@ -292,6 +299,9 @@
       "saved": "Your palette has been saved.",
       "saving": "Saving your palette in your browser"
     },
-    "unsaved-changes": "You have unsaved changes in your palette. If you leave this page, your changes will be lost.\n\nAre you sure you want to leave?"
+    "unsaved-changes": {
+      "description": "You have unsaved changes in your palette. If you leave this page, your changes will be lost.\n\nAre you sure you want to leave?",
+      "title": "Unsaved changes"
+    }
   }
 }

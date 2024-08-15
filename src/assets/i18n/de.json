@@ -3,18 +3,24 @@
     "back": "Zurück",
     "cancel": "Abbrechen",
     "close": "Schließen",
+    "continue": "Fortfahren",
     "delete": "Löschen",
     "duplicate": "Duplizieren",
     "edit": "Bearbeiten",
+    "error": "Unerwarteter Fehler",
     "export": "Exportieren",
     "hue": "Farbton",
     "less": "Weniger anzeigen",
     "lightness": "Helligkeit",
     "more": "Mehr anzeigen",
+    "name": "Name",
+    "ok": "OK",
+    "remove": "Entfernen",
     "rename": "Umbenennen",
     "saturation": "Sättigung",
     "save": "Speichern",
-    "saving": "Speichern..."
+    "saving": "Speichern...",
+    "yes": "Ja"
   },
   "editor": {
     "cancel": "Ohne speichern schließen",
@@ -239,6 +245,7 @@
   "pwa": {
     "broken": "Es scheint, als ob deine aktuelle Version von Rainbow Palette nicht richtig funktioniert. Die App wird neu geladen, um das Problem zu beheben.",
     "restart": "Eine neue Version von Rainbow Palette ist verfügbar. Willst du jetzt von Version {{ old }} auf Version {{ new }} upgraden?\n\nDeine aktuelle Palette inklusive Änderungen wird nach dem Upgrade wiederhergestellt.",
+    "update": "Update verfügbar",
     "update-available": "Version {{ version }} ist verfügbar! Wird heruntergeladen...",
     "update-failed": "Update auf Version {{ version }} ist fehlgeschlagen. Bitte versuche es später erneut.",
     "update-success": "Rainbow Palette wurde erfolgreich auf Version {{ version }} aktualisiert. Viel Spaß mit den neuen Funktionen!"
@@ -276,7 +283,7 @@
       "add-tooltip": "Füge deiner Palette eine neue Farbe hinzu",
       "click": "Click, um die Schattierung anzupassen\nRechtsclick, um den Hex-Code zu kopieren",
       "copy": "\"{{ color }}\" wurde in deine Zwischenablage kopiert.",
-      "remove": "Bust du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
+      "remove": "Bist du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
       "remove-tooltip": "Entferne diese Farbe aus deiner Palette",
       "removed": "Die Farbe \"{{ color }}\" wurde entfernt.",
       "rename": "Gebe deiner Farbe einen neuen Namen",
@@ -291,6 +298,9 @@
       "saved": "Deine Palette wurde lokal gespeichert.",
       "saving": "Deine Palette wird im Browser gespeichert"
     },
-    "unsaved-changes": "Die Änderungen an deiner Palette wurden noch nicht gespeichert. Wenn du die Seite verlässt, gehen alle Änderungen verloren.\n\nBist du sicher, dass du die Seite verlassen möchtest?"
+    "unsaved-changes": {
+      "description": "Die Änderungen an deiner Palette wurden noch nicht gespeichert. Wenn du die Seite verlässt, gehen alle Änderungen verloren.\n\nBist du sicher, dass du die Seite verlassen möchtest?",
+      "title": "Ungespeicherte Änderungen"
+    }
   }
 }

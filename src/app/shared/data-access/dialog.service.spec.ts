@@ -1,41 +1,72 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { TestBed } from '@angular/core/testing';
+import { DialogMock } from '../utils/dialog-mock';
 import { DialogService } from './dialog.service';
 
 describe('DialogService', () => {
-  let service: DialogService;
-
-  beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(DialogService);
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
   it('should prompt', async () => {
-    spyOn(window, 'prompt').and.returnValue('Test');
+    // Setup dialog for prompt test
+    const dialog = new DialogMock('Test');
 
-    const result = await service.prompt('message', 'default');
+    TestBed.configureTestingModule({
+      providers: [{ provide: Dialog, useValue: dialog }]
+    });
+    const service = TestBed.inject(DialogService);
 
+    // Test
+    spyOn(dialog, 'open').and.callThrough();
+
+    const result = await service.prompt({
+      title: 'title',
+      message: 'message',
+      confirmLabel: 'confirm',
+      initialValue: 'initial'
+    });
+
+    expect(dialog.open).toHaveBeenCalledTimes(1);
     expect(result).toBe('Test');
-    expect(window.prompt).toHaveBeenCalledWith('message', 'default');
   });
 
   it('should confirm', async () => {
-    spyOn(window, 'confirm').and.returnValue(true);
+    // Setup dialog for confirm test
+    const dialog = new DialogMock(true);
 
-    const result = await service.confirm('message');
+    TestBed.configureTestingModule({
+      providers: [{ provide: Dialog, useValue: dialog }]
+    });
+    const service = TestBed.inject(DialogService);
 
+    // Test
+    spyOn(dialog, 'open').and.callThrough();
+
+    const result = await service.confirm({
+      title: 'title',
+      message: 'message',
+      confirmLabel: 'confirm'
+    });
+
+    expect(dialog.open).toHaveBeenCalledTimes(1);
     expect(result).toBeTrue();
-    expect(window.confirm).toHaveBeenCalledWith('message');
   });
 
   it('should alert', async () => {
-    spyOn(window, 'alert');
+    // Setup dialog for alert test
+    const dialog = new DialogMock<void>(undefined);
 
-    await service.alert('message');
+    TestBed.configureTestingModule({
+      providers: [{ provide: Dialog, useValue: dialog }]
+    });
+    const service = TestBed.inject(DialogService);
 
-    expect(window.alert).toHaveBeenCalledWith('message');
+    // Test
+    spyOn(dialog, 'open').and.callThrough();
+
+    const result = await service.alert({
+      title: 'title',
+      message: 'message'
+    });
+
+    expect(dialog.open).toHaveBeenCalledTimes(1);
+    expect(result).toBeUndefined();
   });
 });
