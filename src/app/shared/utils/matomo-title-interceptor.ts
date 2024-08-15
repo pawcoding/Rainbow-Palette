@@ -7,20 +7,20 @@ export class MatomoTitleInterceptor implements MatomoRouterInterceptor {
   private readonly _tracker = inject(MatomoTracker);
 
   public beforePageTrack(event: NavigationEnd): void | Observable<void> | Promise<void> {
-    switch (event.urlAfterRedirects) {
-      case '/':
-        this._tracker.setDocumentTitle('Home');
-        break;
-      case '/view':
-        this._tracker.setDocumentTitle('View');
-        break;
-      case '/preview':
-        this._tracker.setDocumentTitle('Preview');
-        break;
-      default:
-        this._tracker.setDocumentTitle('Unknown');
-        console.warn('Unknown page: ', event.urlAfterRedirects);
-        break;
+    const url = event.urlAfterRedirects;
+    if (url === '/') {
+      this._tracker.setDocumentTitle('Home');
+    } else if (url === '/preview') {
+      this._tracker.setDocumentTitle('Preview');
+    } else if (url === '/imprint') {
+      this._tracker.setDocumentTitle('Imprint');
+    } else if (url === '/view') {
+      this._tracker.setDocumentTitle('List');
+    } else if (url.startsWith('/view/')) {
+      this._tracker.setDocumentTitle('Palette');
+    } else {
+      this._tracker.setDocumentTitle('Unknown');
+      console.warn('Unknown page: ', url);
     }
   }
 }
