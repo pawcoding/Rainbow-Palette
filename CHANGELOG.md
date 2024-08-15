@@ -1,3 +1,34 @@
+# [1.4.0](https://github.com/pawcoding/Rainbow-Palette/compare/v1.3.0...v1.4.0) (2024-08-15)
+
+
+### Bug Fixes
+
+* **clipboard:** better handling for errors when clipboard is not available ([416709b](https://github.com/pawcoding/Rainbow-Palette/commit/416709b07a769820a33b6f067d8da80396494e0e))
+* **view:** disable export without colors ([232f19d](https://github.com/pawcoding/Rainbow-Palette/commit/232f19d3a2517392a2be4dd689f3e53608a7cf0f))
+* **view:** don't warn about unsaved changes during update ([fa6bc1a](https://github.com/pawcoding/Rainbow-Palette/commit/fa6bc1aa2d089cb3bdaf3d82a18591d499f2f1ee))
+* **editor:** open editor with correct width ([8208512](https://github.com/pawcoding/Rainbow-Palette/commit/8208512a9304abdb89beb288a55d83876fd6ea17))
+* **export:** open editor with correct width ([a8757b1](https://github.com/pawcoding/Rainbow-Palette/commit/a8757b19ee74a09bccfcc2ec7347dad3e985cbdf))
+* **matomo:** update route configuration in tracker ([d4e9784](https://github.com/pawcoding/Rainbow-Palette/commit/d4e97841f61d6c2a1c375f2da4b76e316346d394))
+* **editor:** use correct cursor when save is disabled ([9cb46c2](https://github.com/pawcoding/Rainbow-Palette/commit/9cb46c2eb0a4ad7bdf29bb5861f7df4a34ad87aa))
+* **export-modal:** use correct translation for close button ([e2a818b](https://github.com/pawcoding/Rainbow-Palette/commit/e2a818b542c8c1bbb5f4bb120d18530ac25ef70b))
+
+
+### Features
+
+* **no-palette:** add animation ([05e3c2a](https://github.com/pawcoding/Rainbow-Palette/commit/05e3c2a66b9d7758dad1293f73f3d6cc8e770c86))
+* **confetti:** add confetti service ([62bbaec](https://github.com/pawcoding/Rainbow-Palette/commit/62bbaec706e132a8c296414188cac5613e0b0a62))
+* **dialog:** add dialog component ([3e92ada](https://github.com/pawcoding/Rainbow-Palette/commit/3e92adab83ea9260b6ab5fb8bd58ec61534a7889))
+* **generator:** add support for async palette generation ([74dab03](https://github.com/pawcoding/Rainbow-Palette/commit/74dab03d407e0cce6548da6e8fc7ac3213dd32f7))
+* **toast:** add support for custom toast durations ([48d69e2](https://github.com/pawcoding/Rainbow-Palette/commit/48d69e262655e16d44928eb0bbfda9d0ae794431))
+* **dialog:** handle I/O for dialog ([441462d](https://github.com/pawcoding/Rainbow-Palette/commit/441462d2c32428e563c957a0092698b54d2a3754))
+* **dialog:** migrate `alert` to use custom dialog ([1ccc60a](https://github.com/pawcoding/Rainbow-Palette/commit/1ccc60adc93b24f3b31011086aedda3aca002851))
+* **dialog:** migrate `confirm` to use custom dialog ([60a58dd](https://github.com/pawcoding/Rainbow-Palette/commit/60a58dd9bc4615b4c47a9f813cb658c64bdd4e28))
+* **dialog:** migrate `prompt` to use custom dialog ([c86e785](https://github.com/pawcoding/Rainbow-Palette/commit/c86e785f476b24ea6070f4789a98f004c7aad9b2))
+* **list:** prompt user to give duplicate palette a new name ([3727dc0](https://github.com/pawcoding/Rainbow-Palette/commit/3727dc05a329ab21daa76418f2ab539acacf1380))
+* **view:** reorder colors with drag and drop ([7afb7cf](https://github.com/pawcoding/Rainbow-Palette/commit/7afb7cf9fcf7f2d1ca712cae075d31fc5ddba4f4))
+* **export:** shoot confetti after successful export ([d94f2ee](https://github.com/pawcoding/Rainbow-Palette/commit/d94f2ee933a29e191c0faf5214a27608c6697316))
+* **pwa:** shoot confetti after successful update ([b11871a](https://github.com/pawcoding/Rainbow-Palette/commit/b11871ab550f96c3095067eec32cc54c273675e7))
+
 # [1.3.0](https://github.com/pawcoding/rainbow-palette/compare/v1.2.0...v1.3.0) (2024-06-30)
 
 
