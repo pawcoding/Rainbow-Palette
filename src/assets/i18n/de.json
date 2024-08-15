@@ -295,6 +295,7 @@
     },
     "palette": {
       "no-changes": "Es wurden noch keine Änderungen an deiner Palette vorgenommen.",
+      "no-export": "Deine Palette kann nicht exportiert werden, da sie noch keine Farben enthält.",
       "rename": "Gebe deiner Palette einen neuen Namen",
       "renamed": "Deine Palette wurde in \"{{ palette }}\" umbenannt.",
       "save": "Speichere die Palette in deinem Browser",
