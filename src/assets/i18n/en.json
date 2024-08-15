@@ -296,6 +296,7 @@
     },
     "palette": {
       "no-changes": "No changes have been made to your palette yet.",
+      "no-export": "Your palette needs at least one color to be exported.",
       "rename": "Give your palette a new name",
       "renamed": "Your palette has been renamed to \"{{ name }}\".",
       "save": "Save your palette in your browser",

@@ -5,6 +5,7 @@ import { LocalStorageKey } from '../enums/local-storage-keys';
 import { TrackingEventAction, TrackingEventCategory } from '../enums/tracking-event';
 import { IS_RUNNING_TEST } from '../utils/is-running-test';
 import { AnalyticsService } from './analytics.service';
+import { ConfettiService } from './confetti.service';
 import { DialogService } from './dialog.service';
 import { PaletteService } from './palette.service';
 import { ToastService } from './toast.service';
@@ -32,6 +33,7 @@ export class PwaService {
   private readonly _dialogService = inject(DialogService);
   private readonly _paletteService = inject(PaletteService);
   private readonly _versionService = inject(VersionService);
+  private readonly _confettiService = inject(ConfettiService);
 
   private readonly _isPwa = signal(false);
   private readonly _doingUpdate = signal(false);
@@ -67,12 +69,21 @@ export class PwaService {
 
     // Check if the app is currently updating
     if (localStorage.getItem(LocalStorageKey.UPGRADING)) {
+      // Remove upgrading flag from local storage
       localStorage.removeItem(LocalStorageKey.UPGRADING);
+
+      // Show toast about successful update
       this._toastService.showToast({
         type: 'info',
         message: 'pwa.update-success',
         parameters: { version: this._versionService.appVersion }
       });
+
+      // Shoot confetti to celebrate the update
+      this._confettiService.confetti([
+        { particleCount: 150, spread: 70, angle: 45, origin: { x: 0 }, startVelocity: 75 },
+        { particleCount: 150, spread: 70, angle: 135, origin: { x: 1 }, startVelocity: 75 }
+      ]);
     }
   }
 

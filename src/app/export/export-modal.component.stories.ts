@@ -2,6 +2,7 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { Meta, applicationConfig } from '@storybook/angular';
 import { Tailwind } from '../shared/constants/tailwind-colors';
 import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/analytics.service';
+import { ConfettiService, ConfettiServiceMock } from '../shared/data-access/confetti.service';
 import { ExportService, ExportServiceMock } from '../shared/data-access/export.service';
 import { ToastService, ToastServiceMock } from '../shared/data-access/toast.service';
 import { createStory } from '../shared/utils/storybook';
@@ -23,7 +24,8 @@ const meta: Meta<ExportModalComponent> = {
         },
         { provide: ToastService, useClass: ToastServiceMock },
         { provide: ExportService, useClass: ExportServiceMock },
-        { provide: AnalyticsService, useClass: AnalyticsServiceMock }
+        { provide: AnalyticsService, useClass: AnalyticsServiceMock },
+        { provide: ConfettiService, useClass: ConfettiServiceMock }
       ]
     })
   ]
