@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit, computed, inject, input, signal } from '@angular/core';
+import { Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import {
@@ -25,6 +26,7 @@ import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import { sleep } from '../shared/utils/sleep';
 import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
+import { duplicateValidator } from './utils/duplicate.validator';
 import { UnsavedChangesComponent } from './utils/unsaved-changes.guard';
 
 @Component({
@@ -157,13 +159,26 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   }
 
   public async renameColor(color: Color): Promise<void> {
+    // Get all color names except the current one
+    const colorNames =
+      this.palette()
+        ?.colors.filter((c) => c !== color)
+        .map((c) => c.name) ?? [];
+
     const newName = await this._dialogService.prompt({
       title: 'common.rename',
       message: 'view.color.rename',
       confirmLabel: 'common.rename',
       initialValue: color.name,
       label: 'common.name',
-      placeholder: 'common.name'
+      placeholder: 'common.name',
+      validation: {
+        validators: [Validators.required, duplicateValidator(colorNames)],
+        errorMessageKeys: {
+          required: 'common.required',
+          duplicate: 'view.color.duplicate-name'
+        }
+      }
     });
 
     if (!newName || newName === color.name) {
