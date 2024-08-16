@@ -23,6 +23,7 @@ import { ToastService } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
+import { deduplicateName } from '../shared/utils/deduplicate-name';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import { sleep } from '../shared/utils/sleep';
 import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
@@ -242,18 +243,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
     // Check if color name already exists
     const colorNames = palette.colors.map((c) => c.name);
-    while (colorNames.includes(color.name)) {
-      // Check if the color name already has a number
-      const lastNumber = color.name.match(/\d+$/);
-      if (lastNumber) {
-        // Increment the number
-        const number = parseInt(lastNumber[0], 10);
-        color.name = color.name.replace(/\d+$/, '') + (number + 1);
-      } else {
-        // Add a number to the color name
-        color.name += ' 2';
-      }
-    }
+    color.name = deduplicateName(color.name, colorNames);
 
     // Add the color to the palette
     palette.addColor(color);
