@@ -1,14 +1,15 @@
 import { ValidatorFn } from '@angular/forms';
+import { normalizeName } from '../../shared/utils/normalize-name';
 
 /**
  * Validator that checks if the value is already in the array.
  */
 export function duplicateValidator(values: Array<string>): ValidatorFn {
   // Normalize the values
-  const normalizedValues = values.map((value) => normalize(value));
+  const normalizedValues = values.map((value) => normalizeName(value));
 
   return (control) => {
-    const normalizedValue = normalize(control.value);
+    const normalizedValue = normalizeName(control.value);
 
     // Check if the value is already in the array
     const duplicate = normalizedValues.findIndex((value) => value === normalizedValue);
@@ -20,11 +21,4 @@ export function duplicateValidator(values: Array<string>): ValidatorFn {
     // Return duplicate
     return { duplicate: { value: values.at(duplicate) } };
   };
-}
-
-/**
- * Normalize a string by removing whitespace and converting to lowercase.
- */
-function normalize(value: string): string {
-  return value.trim().replace(/\s+/g, '').toLowerCase();
 }
