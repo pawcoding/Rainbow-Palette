@@ -231,13 +231,34 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   }
 
   public async addColor(): Promise<void> {
+    // Check if a palette exists
     const palette = this.palette();
     if (!palette) {
       return;
     }
 
+    // Create a new random color
     const color = await this._colorService.randomColor();
+
+    // Check if color name already exists
+    const colorNames = palette.colors.map((c) => c.name);
+    while (colorNames.includes(color.name)) {
+      // Check if the color name already has a number
+      const lastNumber = color.name.match(/\d+$/);
+      if (lastNumber) {
+        // Increment the number
+        const number = parseInt(lastNumber[0], 10);
+        color.name = color.name.replace(/\d+$/, '') + (number + 1);
+      } else {
+        // Add a number to the color name
+        color.name += ' 2';
+      }
+    }
+
+    // Add the color to the palette
     palette.addColor(color);
+
+    // Set unsaved changes
     this._hasUnsavedChanges.set(true);
   }
 
