@@ -17,6 +17,7 @@
     "ok": "OK",
     "remove": "Entfernen",
     "rename": "Umbenennen",
+    "required": "Dieses Feld kann nicht leer sein.",
     "saturation": "Sättigung",
     "save": "Speichern",
     "saving": "Speichern...",
