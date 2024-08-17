@@ -2,6 +2,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Injectable, inject, signal } from '@angular/core';
 import { firstValueFrom, tap } from 'rxjs';
 import { Palette } from '../../shared/model';
+import { ExportModalData } from '../export-modal.component';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class ExportModalService {
     this._isModalOpen.set(true);
 
     const exportModal = await import('../export-modal.component').then((c) => c.ExportModalComponent);
-    const dialogRef = this._dialog.open<void>(exportModal, {
+    const dialogRef = this._dialog.open<void, ExportModalData>(exportModal, {
       backdropClass: 'rp-modal-backdrop',
       data: {
         palette
