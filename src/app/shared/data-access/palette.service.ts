@@ -52,25 +52,41 @@ export class PaletteService {
     }
   }
 
-  public loadPaletteFromLocalStorage(id: string): void {
-    if (this.palette()?.id === id) {
-      return;
+  /**
+   * Load a palette from local storage.
+   *
+   * If `onlyReturn` is true, the palette will not be set as the current palette.
+   */
+  public loadPaletteFromLocalStorage(id: string, onlyReturn = false): Palette | undefined {
+    // Check if the palette is already loaded
+    const currentPalette = this._palette();
+    if (currentPalette && currentPalette.id === id) {
+      return currentPalette;
     }
 
     // Check if there was a palette stored for an app update
-    let palette = localStorage.getItem(LocalStorageKey.PALETTE_TMP);
+    let paletteString = localStorage.getItem(LocalStorageKey.PALETTE_TMP);
 
-    if (palette) {
+    if (paletteString) {
       // Palette was stored for an update, remove it now
       localStorage.removeItem(LocalStorageKey.PALETTE_TMP);
     } else {
       // Load the palette saved by the user
-      palette = localStorage.getItem(`${LocalStorageKey.PALETTE}_${id}`);
+      paletteString = localStorage.getItem(`${LocalStorageKey.PALETTE}_${id}`);
     }
 
-    if (palette) {
+    if (paletteString) {
       try {
-        this._palette.set(Palette.parse(palette));
+        // Parse the palette
+        const palette = Palette.parse(paletteString);
+
+        // Set the palette if it should not only be returned
+        if (!onlyReturn) {
+          this._palette.set(palette);
+        }
+
+        // Return the palette
+        return palette;
       } catch (e) {
         this._toastService.showToast({
           type: 'error',
@@ -78,6 +94,9 @@ export class PaletteService {
         });
       }
     }
+
+    // No valid palette found
+    return undefined;
   }
 
   public savePaletteToLocalStorage(upgrade = false): void {
