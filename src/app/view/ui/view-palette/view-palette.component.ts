@@ -3,9 +3,9 @@ import { Component, inject, model, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroAdjustmentsHorizontalMini, heroPencilSquareMini, heroTrashMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
+import { MobileService } from '../../../shared/data-access/mobile.service';
 import { Color, Palette, Shade } from '../../../shared/model';
 import { textColor } from '../../../shared/utils/text-color';
-import { MobileService } from '../../../shared/data-access/mobile.service';
 
 @Component({
   selector: 'rp-view-palette',
