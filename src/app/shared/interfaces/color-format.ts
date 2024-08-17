@@ -1,11 +1,11 @@
-export type HSLObject = {
+export interface HSLObject {
   H: number;
   S: number;
   L: number;
-};
+}
 
-export type RGBObject = {
+export interface RGBObject {
   R: number;
   G: number;
   B: number;
-};
+}

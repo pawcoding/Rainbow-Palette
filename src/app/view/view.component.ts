@@ -236,6 +236,7 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
         parameters: { color: toUnicodeVariant(shade.hex, 'm') }
       });
     } catch (error) {
+      console.error('Failed to copy color to clipboard', error);
       this._toastService.showToast({
         type: 'error',
         message: 'toast.error.copy-clipboard'

@@ -1,4 +1,4 @@
-import { RGBObject } from '../types/color-format';
+import { RGBObject } from '../interfaces/color-format';
 
 /**
  * Returns the perceived brightness of a color in the range 0-100.

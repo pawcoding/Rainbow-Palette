@@ -3,10 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 import { LocalStorageKey } from '../enums/local-storage-keys';
 import { Palette } from '../model';
 
-export type PaletteListItem = {
+export interface PaletteListItem {
   id: string;
   name: string;
-};
+}
 
 @Injectable({
   providedIn: 'root'

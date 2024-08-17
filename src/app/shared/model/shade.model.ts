@@ -1,4 +1,4 @@
-import { HSLObject } from '../types/color-format';
+import { HSLObject } from '../interfaces/color-format';
 import { perceivedBrightnessFromRGB } from '../utils/perceived-brightness';
 import { Value } from './value.model';
 
@@ -23,14 +23,14 @@ export class Shade {
     return this._value.HSL;
   }
 
-  public get value(): HSLObject {
-    return this._value.HSL;
-  }
-
   public set hsl(hsl: HSLObject) {
     this._value.HSL = hsl;
 
     this._perceivedBrightness = undefined;
+  }
+
+  public get value(): HSLObject {
+    return this._value.HSL;
   }
 
   public get hex(): string {
@@ -70,6 +70,7 @@ export class Shade {
       try {
         shade = JSON.parse(shade);
       } catch (e) {
+        console.error(e);
         throw new Error(`Could not parse shade (not a valid JSON): "${shade}"`);
       }
     }
