@@ -8,6 +8,20 @@ import { ColorInputComponent } from '../shared/ui/color-input/color-input.compon
 import { textColor } from '../shared/utils/text-color';
 import { EditorRangeComponent } from './ui/editor-range/editor-range.component';
 
+/**
+ * Data for the editor dialog.
+ */
+export type EditorData = {
+  /**
+   * Color to edit.
+   */
+  color: Color;
+  /**
+   * Shade to open the editor with.
+   */
+  shadeIndex?: number;
+};
+
 export enum UpdateType {
   HEX = 'hex',
   HUE = 'hue',
@@ -25,7 +39,7 @@ export class EditorComponent {
   protected readonly UpdateType = UpdateType;
   protected readonly textColor = textColor;
 
-  private readonly _data = inject<{ color: Color; shadeIndex?: number }>(DIALOG_DATA);
+  private readonly _data = inject<EditorData>(DIALOG_DATA);
   private readonly _dialogRef = inject(DialogRef);
   private readonly _colorService = inject(ColorService);
   private readonly _translateService = inject(TranslateService);
