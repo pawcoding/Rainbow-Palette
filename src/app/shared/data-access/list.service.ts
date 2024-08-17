@@ -72,7 +72,12 @@ export class ListService {
 }
 
 export class ListServiceMock {
-  public add(_palette: Palette): void {}
-  public remove(_id: string): void {}
-  public list$ = new BehaviorSubject<Array<PaletteListItem>>([{ id: 'test-id', name: 'Test palette' }]).asObservable();
+  readonly #list$ = new BehaviorSubject<Array<PaletteListItem>>([{ id: 'test-id', name: 'Test palette' }]);
+  public add(palette: Palette): void {
+    this.#list$.next([...this.#list$.value, palette]);
+  }
+  public remove(_id: string): void {
+    this.#list$.next(this.#list$.value.filter((palette) => palette.id !== _id));
+  }
+  public list$ = this.#list$.asObservable();
 }

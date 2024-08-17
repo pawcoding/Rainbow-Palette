@@ -1,0 +1,106 @@
+<article
+  class="mx-auto flex w-full max-w-lg flex-col rounded bg-neutral-100 p-4 shadow-md dark:border dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
+>
+  <section class="mb-4">
+    <div class="flex items-start justify-between gap-4">
+      <h1 class="text-lg font-bold">
+        {{ 'view.import.title' | translate }}
+      </h1>
+
+      <button
+        [title]="'common.close' | translate"
+        (click)="close()"
+        class="ml-auto flex cursor-pointer items-center justify-center rounded-md p-2 hover:bg-neutral-200 dark:hover:bg-neutral-800"
+      >
+        <ng-icon
+          [svg]="ICONS.close"
+          class="size-4"
+        />
+
+        <span class="sr-only">
+          {{ 'common.close' | translate }}
+        </span>
+      </button>
+    </div>
+
+    <p>
+      {{ 'view.import.description' | translate }}
+    </p>
+  </section>
+
+  <section>
+    <input
+      [formControl]="searchControl"
+      [placeholder]="'view.import.search' | translate"
+      class="w-full rounded-md bg-neutral-200 px-4 py-2 placeholder:text-neutral-600 focus:outline-none focus:ring-0 dark:bg-neutral-600 dark:placeholder:text-neutral-300"
+      type="search"
+    />
+  </section>
+
+  <section class="h-96">
+    @let palettes = filteredPalettes();
+    @if (initialized() && palettes) {
+      @if (palettes.length > 0) {
+        <cdk-virtual-scroll-viewport
+          class="h-96"
+          itemSize="56"
+        >
+          <div
+            *cdkVirtualFor="let item of palettes; let first = first"
+            class="flex h-14 items-center"
+          >
+            @if (item.type === 'palette') {
+              <span class="p-2 font-semibold">
+                {{ item.name }}
+              </span>
+            } @else {
+              <button
+                [title]="'view.import.select' | translate"
+                (click)="colorClicked(item.paletteId, item.colorIndex)"
+                class="flex w-full items-center justify-between gap-2 rounded-lg p-2 pl-4 text-neutral-600 transition-colors duration-100 hover:bg-neutral-200 hover:text-neutral-800 dark:text-neutral-300 dark:hover:bg-neutral-800 dark:hover:text-neutral-200"
+              >
+                <span>
+                  {{ item.name }}
+                </span>
+
+                <span class="flex h-10">
+                  <span
+                    [style.background]="item.light"
+                    class="w-10 rounded-l"
+                  ></span>
+                  <span
+                    [style.background]="item.mid"
+                    class="w-10"
+                  ></span>
+                  <span
+                    [style.background]="item.dark"
+                    class="w-10 rounded-r"
+                  ></span>
+                </span>
+              </button>
+            }
+          </div>
+        </cdk-virtual-scroll-viewport>
+      } @else if (searchTerm()) {
+        <div class="flex h-full flex-col items-center justify-center gap-4">
+          <p class="text-neutral-600 dark:text-neutral-300">
+            {{ 'view.import.not-found' | translate }}
+          </p>
+
+          <button
+            (click)="resetSearch()"
+            class="cursor-pointer rounded-md p-2 font-semibold hover:bg-neutral-200 dark:hover:bg-neutral-800"
+          >
+            {{ 'common.reset-search' | translate }}
+          </button>
+        </div>
+      } @else {
+        <div class="flex h-full flex-col items-center justify-center gap-4">
+          <p class="text-neutral-600 dark:text-neutral-300">
+            {{ 'view.import.no-colors' | translate }}
+          </p>
+        </div>
+      }
+    }
+  </section>
+</article>

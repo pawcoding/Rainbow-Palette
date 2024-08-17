@@ -99,6 +99,23 @@
           {{ 'view.color.add' | translate }}
         </span>
       </button>
+
+      @if (hasOtherPalettes()) {
+        <button
+          [title]="'view.import.tooltip' | translate"
+          (click)="importColor()"
+          class="flex cursor-pointer items-center gap-2 overflow-hidden rounded bg-blue-500 px-2 py-1.5 font-semibold text-neutral-50 dark:bg-blue-600 sm:px-3 sm:py-2"
+        >
+          <ng-icon
+            [svg]="heroPlusMini"
+            class="scale-90 sm:scale-100"
+            size="1.25rem"
+          />
+          <span>
+            {{ 'view.import.title' | translate }}
+          </span>
+        </button>
+      }
     </section>
   </div>
 } @else {
