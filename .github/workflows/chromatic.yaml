@@ -10,6 +10,8 @@ on:
       - staging
 permissions:
   contents: read
+env:
+  HUSKY: 0
 jobs:
   publish:
     # Skip this job if triggered by renovate bot

@@ -2,6 +2,8 @@ name: 🧪 Unit tests
 # Run this on every push
 on:
   - push
+env:
+  HUSKY: 0
 jobs:
   unit-test:
     # Use the latest version of Ubuntu
