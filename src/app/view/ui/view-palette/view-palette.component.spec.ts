@@ -1,5 +1,6 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MobileService, MobileServiceMock } from '../../../shared/data-access/mobile.service';
 import { Palette } from '../../../shared/model';
 import { ViewPaletteComponent } from './view-palette.component';
 
@@ -9,7 +10,8 @@ describe('ViewPaletteComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ViewPaletteComponent]
+      imports: [ViewPaletteComponent],
+      providers: [{ provide: MobileService, useClass: MobileServiceMock }]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ViewPaletteComponent);
