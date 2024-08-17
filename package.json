@@ -22,6 +22,7 @@
     "preinstall": "npx only-allow pnpm",
     "lint": "ng lint",
     "ng": "ng",
+    "prepare": "husky",
     "prettier": "prettier --write \"{src,scripts}/**/*.{js,ts,json,html,css}\"",
     "prettier:check": "prettier --check \"{src,scripts}/**/*.{js,ts,json,html,css}\"",
     "semantic-release": "semantic-release",
@@ -32,6 +33,14 @@
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
     "postversion": "pnpm run build:ngsw && pnpm run build:sitemap",
     "watch": "ng build --watch --configuration development"
+  },
+  "lint-staged": {
+    "*.{js,ts,html,css,json}": [
+      "pnpm exec -- prettier --check"
+    ],
+    "*.{js,ts,html}": [
+      "pnpm exec -- eslint"
+    ]
   },
   "dependencies": {
     "@angular/animations": "^18.2.0",
@@ -82,12 +91,14 @@
     "chromatic": "^11.7.1",
     "eslint": "^9.9.0",
     "eslint-plugin-tailwindcss": "^3.17.4",
+    "husky": "^9.1.4",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.4",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.1",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^15.2.9",
     "postcss": "^8.4.41",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.0.0",
