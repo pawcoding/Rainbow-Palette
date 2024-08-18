@@ -24,13 +24,13 @@ export enum AnalyticsStatus {
   DECLINED = 'DECLINED'
 }
 
-type TrackingEvent = {
+interface TrackingEvent {
   category: TrackingEventCategory;
   action: TrackingEventAction;
   name?: TrackingEventName;
   value?: number;
   timestamp: number;
-};
+}
 
 @Injectable({
   providedIn: 'root'

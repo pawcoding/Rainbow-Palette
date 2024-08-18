@@ -44,6 +44,7 @@ export class PaletteService {
 
         localStorage.removeItem(LocalStorageKey.PALETTE);
       } catch (e) {
+        console.error('Error while migrating palette', e);
         this._toastService.showToast({
           type: 'error',
           message: 'toast.error.palette-load'
@@ -72,6 +73,7 @@ export class PaletteService {
       try {
         this._palette.set(Palette.parse(palette));
       } catch (e) {
+        console.error('Error while loading palette', e);
         this._toastService.showToast({
           type: 'error',
           message: 'toast.error.palette-load'

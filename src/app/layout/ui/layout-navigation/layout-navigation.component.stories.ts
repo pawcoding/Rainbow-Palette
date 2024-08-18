@@ -1,4 +1,3 @@
-/* eslint-disable storybook/story-exports */
 import { Component } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { Meta, applicationConfig } from '@storybook/angular';

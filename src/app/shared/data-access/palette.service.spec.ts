@@ -90,6 +90,9 @@ describe('PaletteService', () => {
   });
 
   it('should show error toast when loading invalid palette', () => {
+    // Prevent error from being logged to the console
+    spyOn(console, 'error');
+
     localStorage.setItem(`${LocalStorageKey.PALETTE}_test`, 'invalid');
     service.loadPaletteFromLocalStorage('test');
 

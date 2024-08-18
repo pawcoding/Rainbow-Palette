@@ -1,4 +1,4 @@
-import { HSLObject, RGBObject } from '../types/color-format';
+import { HSLObject, RGBObject } from '../interfaces/color-format';
 
 export class Value {
   private _hue!: number;

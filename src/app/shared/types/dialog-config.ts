@@ -1,17 +1,17 @@
-export type AlertConfig = {
+export interface AlertConfig {
   type: 'alert';
   title: string;
   message: string;
-};
+}
 
-export type ConfirmConfig = {
+export interface ConfirmConfig {
   type: 'confirm';
   title: string;
   message: string;
   confirmLabel: string;
-};
+}
 
-export type PromptConfig = {
+export interface PromptConfig {
   type: 'prompt';
   title: string;
   message: string;
@@ -19,6 +19,6 @@ export type PromptConfig = {
   label?: string;
   placeholder?: string;
   initialValue?: string;
-};
+}
 
 export type DialogConfig = AlertConfig | ConfirmConfig | PromptConfig;

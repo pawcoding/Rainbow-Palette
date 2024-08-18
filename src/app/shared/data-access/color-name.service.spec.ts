@@ -51,6 +51,8 @@ describe('ColorNameService', () => {
 
   it('should handle offline', async () => {
     spyOn(toastService, 'showToast');
+    // Prevent error from being logged to the console
+    spyOn(console, 'error');
 
     const colorNamePromise = service.getColorName(new Shade(-1, Value.fromHEX('#FFFFFF')));
 

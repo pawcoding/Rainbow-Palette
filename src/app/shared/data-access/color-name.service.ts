@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
+import { HSLObject } from '../interfaces/color-format';
 import { Shade } from '../model/shade.model';
-import { HSLObject } from '../types/color-format';
 import { ToastService } from './toast.service';
 
 interface ColorMapEntry {
@@ -69,6 +69,7 @@ export class ColorNameService {
           lightness: parseInt(entry[3], 10)
         }));
     } catch (error) {
+      console.error('Failed to load color map', error);
       this._toastService.showToast({
         type: 'error',
         message: 'toast.error.load-color-map'
