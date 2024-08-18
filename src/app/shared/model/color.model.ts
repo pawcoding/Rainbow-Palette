@@ -29,8 +29,9 @@ export class Color {
       try {
         color = JSON.parse(color);
       } catch (e) {
-        console.error(e);
-        throw new Error(`Could not parse color (not a valid JSON): "${color}"`);
+        throw new Error(`Could not parse color (not a valid JSON): "${color}"`, {
+          cause: e
+        });
       }
     }
 
@@ -57,8 +58,9 @@ export class Color {
       try {
         shades.push(Shade.parse(shade));
       } catch (e) {
-        console.error(e);
-        throw new Error(`Could not parse color (invalid shade): "${shade}"`);
+        throw new Error(`Could not parse color (invalid shade): "${shade}"`, {
+          cause: e
+        });
       }
     }
 

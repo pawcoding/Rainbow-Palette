@@ -70,8 +70,9 @@ export class Shade {
       try {
         shade = JSON.parse(shade);
       } catch (e) {
-        console.error(e);
-        throw new Error(`Could not parse shade (not a valid JSON): "${shade}"`);
+        throw new Error(`Could not parse shade (not a valid JSON): "${shade}"`, {
+          cause: e
+        });
       }
     }
 

@@ -146,6 +146,9 @@ describe('ViewComponent', () => {
   it('should show toast on clipboard copy', async () => {
     spyOn(toastService, 'showToast').and.callThrough();
 
+    // Simulate clipboard write
+    spyOn(navigator.clipboard, 'writeText').and.callFake(() => Promise.resolve());
+
     await component.copyToClipboard(Shade.random());
 
     expect(toastService.showToast).toHaveBeenCalledTimes(1);
