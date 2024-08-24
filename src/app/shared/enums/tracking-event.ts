@@ -19,6 +19,10 @@ export enum TrackingEventCategory {
    */
   GENERATE_PALETTE = 'GENERATE_PALETTE',
   /**
+   * Import color.
+   */
+  IMPORT_COLOR = 'IMPORT_COLOR',
+  /**
    * PWA events
    */
   PWA = 'PWA',
@@ -61,6 +65,10 @@ export enum TrackingEventAction {
    * User generates a palette.
    */
   GENERATE_PALETTE = 'GENERATE_PALETTE',
+  /**
+   * User imports a color.
+   */
+  IMPORT_COLOR = 'IMPORT_COLOR',
   /**
    * User installs the website as a PWA.
    */

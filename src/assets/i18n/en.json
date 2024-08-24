@@ -18,6 +18,7 @@
     "remove": "Remove",
     "rename": "Rename",
     "required": "This field is cannot be empty.",
+    "reset-search": "Reset search",
     "saturation": "Saturation",
     "save": "Save",
     "saving": "Saving...",
@@ -295,6 +296,19 @@
       "rename": "Give your color a new name",
       "renamed": "Your color has been renamed to \"{{ name }}\".",
       "tune": "Tune the color to your liking"
+    },
+    "import": {
+      "description": "Select a color from the list below to import it into your palette.",
+      "no-colors": "You have no other palettes to import a color from",
+      "not-found": "No palette / color matches your search",
+      "search": {
+        "hue": "Search by hue",
+        "name": "Search by name",
+        "placeholder": "Search for a palette / color"
+      },
+      "select": "Import this color",
+      "title": "Import color",
+      "tooltip": "Import a color from another palette."
     },
     "palette": {
       "no-changes": "No changes have been made to your palette yet.",

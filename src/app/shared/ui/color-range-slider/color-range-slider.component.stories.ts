@@ -1,10 +1,10 @@
 import { Meta, argsToTemplate } from '@storybook/angular';
-import { createStory } from '../../../shared/utils/storybook';
-import { EditorRangeComponent } from './editor-range.component';
+import { createStory } from '../../utils/storybook';
+import { ColorRangeSliderComponent } from './color-range-slider.component';
 
-const meta: Meta<EditorRangeComponent> = {
-  title: 'Editor/Range',
-  component: EditorRangeComponent,
+const meta: Meta<ColorRangeSliderComponent> = {
+  title: 'Shared/Color Range Slider',
+  component: ColorRangeSliderComponent,
   tags: ['autodocs'],
   argTypes: {
     key: {
@@ -24,7 +24,7 @@ const meta: Meta<EditorRangeComponent> = {
 };
 export default meta;
 
-export const Hue = createStory<EditorRangeComponent>({
+export const Hue = createStory<ColorRangeSliderComponent>({
   args: {
     label: 'Hue',
     tooltip: 'Adjust the hue',
@@ -35,11 +35,11 @@ export const Hue = createStory<EditorRangeComponent>({
   render: (args) => ({
     template: `
         <div #parent style="--editor-hue: ${args.value}; --editor-saturation: 100%; --editor-lightness: 50%">
-            <rp-editor-range ${argsToTemplate(args)} (valueChange)="parent.style.setProperty('--editor-hue', $event)" />
+            <rp-color-range-slider ${argsToTemplate(args)} (valueChange)="parent.style.setProperty('--editor-hue', $event)" />
         </div>`
   })
 });
-export const Saturation = createStory<EditorRangeComponent>({
+export const Saturation = createStory<ColorRangeSliderComponent>({
   args: {
     label: 'Saturation',
     tooltip: 'Adjust the saturation',
@@ -49,11 +49,11 @@ export const Saturation = createStory<EditorRangeComponent>({
   render: (args) => ({
     template: `
         <div #parent style="--editor-hue: 180; --editor-saturation: ${args.value}%; --editor-lightness: 50%">
-            <rp-editor-range ${argsToTemplate(args)} (valueChange)="parent.style.setProperty('--editor-saturation', $event + '%')" />
+            <rp-color-range-slider ${argsToTemplate(args)} (valueChange)="parent.style.setProperty('--editor-saturation', $event + '%')" />
         </div>`
   })
 });
-export const Lightness = createStory<EditorRangeComponent>({
+export const Lightness = createStory<ColorRangeSliderComponent>({
   args: {
     label: 'Lightness',
     tooltip: 'Adjust the lightness',
@@ -63,7 +63,7 @@ export const Lightness = createStory<EditorRangeComponent>({
   render: (args) => ({
     template: `
         <div #parent style="--editor-hue: 180; --editor-saturation: 100%; --editor-lightness: ${args.value}%">
-            <rp-editor-range ${argsToTemplate(args)} (valueChange)="parent.style.setProperty('--editor-lightness', $event + '%')" />
+            <rp-color-range-slider ${argsToTemplate(args)} (valueChange)="parent.style.setProperty('--editor-lightness', $event + '%')" />
         </div>`
   })
 });

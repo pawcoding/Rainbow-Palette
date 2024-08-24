@@ -1,5 +1,4 @@
 <article
-  #editor
   class="mx-auto flex w-full max-w-md flex-col gap-4 rounded bg-neutral-100 p-4 shadow-md dark:border dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
 >
   <h2 class="font-semibold">{{ color().name }}</h2>
@@ -13,7 +12,7 @@
   />
 
   <section class="flex flex-col gap-2">
-    <rp-editor-range
+    <rp-color-range-slider
       [label]="'common.hue' | translate"
       [tooltip]="'editor.properties.hue' | translate"
       [value]="shade().hsl.H"
@@ -24,7 +23,7 @@
       min="0"
     />
 
-    <rp-editor-range
+    <rp-color-range-slider
       [label]="'common.saturation' | translate"
       [tooltip]="'editor.properties.saturation' | translate"
       [value]="shade().hsl.S"
@@ -33,7 +32,7 @@
       key="saturation"
     />
 
-    <rp-editor-range
+    <rp-color-range-slider
       [label]="'common.lightness' | translate"
       [tooltip]="'editor.properties.lightness' | translate"
       [value]="shade().hsl.L"

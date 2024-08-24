@@ -18,6 +18,7 @@
     "remove": "Entfernen",
     "rename": "Umbenennen",
     "required": "Dieses Feld kann nicht leer sein.",
+    "reset-search": "Suche zurücksetzen",
     "saturation": "Sättigung",
     "save": "Speichern",
     "saving": "Speichern...",
@@ -294,6 +295,19 @@
       "rename": "Gebe deiner Farbe einen neuen Namen",
       "renamed": "Deine Farbe wurde in \"{{ name }}\" umbenannt.",
       "tune": "Passe die Farbe nach deinem Geschmack an"
+    },
+    "import": {
+      "description": "Wähle eine Farbe aus der Liste, um sie in deine aktuelle Palette zu importieren.",
+      "no-colors": "Du hast keine anderen Paletten, aus denen Farben importiert werden können",
+      "not-found": "Es wurde keine Palette / Farbe zu deiner Suche gefunden",
+      "search": {
+        "hue": "Suche nach einem Farbton",
+        "name": "Suche nach dem Namen einer Palette / Farbe",
+        "placeholder": "Suche nach einer Palette / Farbe"
+      },
+      "select": "Importiere diese Farbe",
+      "title": "Farbe importieren",
+      "tooltip": "Importiere eine Farbe aus einer anderen Palette"
     },
     "palette": {
       "no-changes": "Es wurden noch keine Änderungen an deiner Palette vorgenommen.",
