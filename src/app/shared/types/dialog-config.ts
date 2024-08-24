@@ -1,3 +1,5 @@
+import { ValidatorFn } from '@angular/forms';
+
 export type AlertConfig = {
   type: 'alert';
   title: string;
@@ -19,6 +21,10 @@ export type PromptConfig = {
   label?: string;
   placeholder?: string;
   initialValue?: string;
+  validation?: {
+    validators: Array<ValidatorFn>;
+    errorMessageKeys: Record<string, string>;
+  };
 };
 
 export type DialogConfig = AlertConfig | ConfirmConfig | PromptConfig;

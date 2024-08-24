@@ -5,6 +5,7 @@ import { Value } from '../model';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
+import { deduplicateName } from '../utils/deduplicate-name';
 import { ColorNameService } from './color-name.service';
 import { ColorService } from './color.service';
 import { ListService } from './list.service';
@@ -139,7 +140,11 @@ export class PaletteService {
 
       for (const color of palette.colors) {
         // Get the color name
-        color.name = await this._colorNameService.getColorName(color.shades[0]);
+        const generatedName = await this._colorNameService.getColorName(color.shades[0]);
+
+        // Deduplicate the name
+        const existingNames = palette.colors.map((c) => c.name);
+        color.name = deduplicateName(generatedName, existingNames);
 
         // Regenerate the shades
         await this._colorService.regenerateShades(color);
