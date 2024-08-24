@@ -301,7 +301,11 @@
       "description": "Select a color from the list below to import it into your palette.",
       "no-colors": "You have no other palettes to import a color from",
       "not-found": "No palette / color matches your search",
-      "search": "Search for a palette / color",
+      "search": {
+        "hue": "Search by hue",
+        "name": "Search by name",
+        "placeholder": "Search for a palette / color"
+      },
       "select": "Import this color",
       "title": "Import color",
       "tooltip": "Import a color from another palette."

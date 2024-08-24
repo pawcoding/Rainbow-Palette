@@ -1,7 +1,7 @@
 <article
-  class="mx-auto flex w-full max-w-lg flex-col rounded bg-neutral-100 p-4 shadow-md dark:border dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
+  class="mx-auto flex w-full max-w-lg flex-col gap-4 rounded bg-neutral-100 p-4 shadow-md dark:border dark:border-neutral-600 dark:bg-neutral-700 dark:shadow-none"
 >
-  <section class="mb-4">
+  <section>
     <div class="flex items-start justify-between gap-4">
       <h1 class="text-lg font-bold">
         {{ 'view.import.title' | translate }}
@@ -29,15 +29,46 @@
   </section>
 
   <section>
-    <input
-      [formControl]="searchControl"
-      [placeholder]="'view.import.search' | translate"
-      class="w-full rounded-md bg-neutral-200 px-4 py-2 placeholder:text-neutral-600 focus:outline-none focus:ring-0 dark:bg-neutral-600 dark:placeholder:text-neutral-300"
-      type="search"
-    />
+    <div class="flex h-14 items-center gap-4">
+      @if (mode() === 'text') {
+        <input
+          [formControl]="searchControl"
+          [placeholder]="'view.import.search.placeholder' | translate"
+          class="w-full rounded-md border-none bg-neutral-200 px-4 py-2 placeholder:text-neutral-600 hover:bg-neutral-300 focus:bg-neutral-300 focus:outline-none focus:ring-0 dark:bg-neutral-600 dark:placeholder:text-neutral-300 dark:hover:bg-neutral-500 dark:focus:bg-neutral-500"
+          type="search"
+        />
+      } @else {
+        <rp-editor-range
+          [label]="'common.hue' | translate"
+          [tooltip]="'view.import.search.hue' | translate"
+          [value]="hueControl.value"
+          (valueChange)="hueControl.setValue($event)"
+          class="grow"
+          id="hue-range"
+          key="hue"
+          max="359"
+          min="0"
+        />
+      }
+
+      <button
+        [title]="modeSwitchText() | translate"
+        (click)="toggleMode()"
+        class="flex size-10 shrink-0 items-center justify-center rounded-md bg-neutral-200 text-neutral-600 shadow-sm hover:bg-neutral-300 dark:bg-neutral-600 dark:text-neutral-300 dark:hover:bg-neutral-500"
+      >
+        <span class="sr-only">
+          {{ modeSwitchText() | translate }}
+        </span>
+        <ng-icon
+          [svg]="mode() === 'text' ? ICONS.color : ICONS.search"
+          class="scale-100"
+          size="1.25rem"
+        />
+      </button>
+    </div>
   </section>
 
-  <section class="h-96">
+  <section class="h-96 border-t">
     @let palettes = filteredPalettes();
     @if (initialized() && palettes) {
       @if (palettes.length > 0) {
@@ -81,18 +112,20 @@
             }
           </div>
         </cdk-virtual-scroll-viewport>
-      } @else if (searchTerm()) {
+      } @else if (searchTerm() || mode() === 'hue') {
         <div class="flex h-full flex-col items-center justify-center gap-4">
           <p class="text-neutral-600 dark:text-neutral-300">
             {{ 'view.import.not-found' | translate }}
           </p>
 
-          <button
-            (click)="resetSearch()"
-            class="cursor-pointer rounded-md p-2 font-semibold hover:bg-neutral-200 dark:hover:bg-neutral-800"
-          >
-            {{ 'common.reset-search' | translate }}
-          </button>
+          @if (mode() === 'text') {
+            <button
+              (click)="resetSearch()"
+              class="cursor-pointer rounded-md p-2 font-semibold hover:bg-neutral-200 dark:hover:bg-neutral-800"
+            >
+              {{ 'common.reset-search' | translate }}
+            </button>
+          }
         </div>
       } @else {
         <div class="flex h-full flex-col items-center justify-center gap-4">

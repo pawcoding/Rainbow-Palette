@@ -4,12 +4,18 @@ import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { NgIconComponent } from '@ng-icons/core';
-import { heroArrowLeftMini, heroXMarkMini } from '@ng-icons/heroicons/mini';
+import {
+  heroArrowLeftMini,
+  heroEyeDropperMini,
+  heroMagnifyingGlassMini,
+  heroXMarkMini
+} from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
-import { debounce, of, timer } from 'rxjs';
+import { debounce, debounceTime, of, timer } from 'rxjs';
+import { EditorRangeComponent } from '../../../editor/ui/editor-range/editor-range.component';
 import { ListService } from '../../../shared/data-access/list.service';
 import { PaletteService } from '../../../shared/data-access/palette.service';
-import { Color } from '../../../shared/model';
+import { Color, Palette } from '../../../shared/model';
 import { filterArray } from '../../../shared/utils/filter-array';
 import { mapArray } from '../../../shared/utils/map-array';
 
@@ -23,11 +29,21 @@ export type ImportColorData = {
   paletteId: string;
 };
 
+/**
+ * Palette with only the necessary properties for the import color dialog.
+ */
+type FilteredPalette = Pick<Palette, 'id' | 'name' | 'colors'>;
+
 @Component({
   selector: 'rp-import-color',
   standalone: true,
-  imports: [TranslateModule, NgIconComponent, ReactiveFormsModule, ScrollingModule],
-  templateUrl: './import-color.component.html'
+  imports: [TranslateModule, NgIconComponent, ReactiveFormsModule, ScrollingModule, EditorRangeComponent],
+  templateUrl: './import-color.component.html',
+  host: {
+    '[style.--editor-saturation]': '"75%"',
+    '[style.--editor-lightness]': '"50%"',
+    '[style.--editor-hue]': 'hueControl.value'
+  }
 })
 export class ImportColorComponent implements OnInit {
   readonly #data = inject<ImportColorData>(DIALOG_DATA);
@@ -37,13 +53,20 @@ export class ImportColorComponent implements OnInit {
 
   protected readonly ICONS = {
     back: heroArrowLeftMini,
-    close: heroXMarkMini
+    close: heroXMarkMini,
+    color: heroEyeDropperMini,
+    search: heroMagnifyingGlassMini
   } as const;
 
   /**
    * Search term form control.
    */
   protected readonly searchControl = new FormControl('', { nonNullable: true });
+
+  /**
+   * Hue form control.
+   */
+  protected readonly hueControl = new FormControl(0, { nonNullable: true });
 
   /**
    * List of all palettes except the current palette.
@@ -65,13 +88,31 @@ export class ImportColorComponent implements OnInit {
     this.searchControl.valueChanges.pipe(
       // Only debounce when a value is present, now when resetting to the empty search
       debounce((value) => (value ? timer(300) : of({})))
-    )
+    ),
+    {
+      initialValue: this.searchControl.value
+    }
   );
+
+  /**
+   * Current hue value.
+   */
+  protected readonly hue = toSignal(this.hueControl.valueChanges.pipe(debounceTime(300)), {
+    initialValue: this.hueControl.value
+  });
 
   /**
    * Flag indicating if the component is initialized.
    */
   protected readonly initialized = signal(false);
+
+  /**
+   * Mode determining the search algorithm.
+   *
+   * If 'text', the search term is matched against the palette and color names.
+   * If 'hue', the search term is matched against the hue values of the colors.
+   */
+  protected readonly mode = signal<'text' | 'hue'>('text');
 
   /**
    * Filtered palettes based on the current search term.
@@ -83,41 +124,12 @@ export class ImportColorComponent implements OnInit {
       return undefined;
     }
 
-    // Check if the search term is empty and palettes are loaded
-    const searchTerm = this.searchTerm();
-    if (!searchTerm) {
-      return palettes;
+    // Filter the palettes based on the mode
+    if (this.mode() === 'text') {
+      return this.filterByName(palettes);
+    } else {
+      return this.filterByHue(palettes);
     }
-
-    // Normalize the search term
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-
-    // Filter the palettes
-    return palettes
-      .map((palette) => {
-        // Check if the palette name matches the search term
-        if (palette.name.toLowerCase().includes(lowerCaseSearchTerm)) {
-          return {
-            id: palette.id,
-            name: palette.name,
-            colors: palette.colors
-          };
-        }
-
-        // Check if any color name matches the search term and return only the matching colors
-        const colors = palette.colors.filter((color) => color.name.toLowerCase().includes(lowerCaseSearchTerm));
-        if (colors.length > 0) {
-          return {
-            id: palette.id,
-            name: palette.name,
-            colors
-          };
-        }
-
-        // No match
-        return undefined;
-      })
-      .filter((palette) => palette !== undefined);
   });
 
   /**
@@ -155,6 +167,17 @@ export class ImportColorComponent implements OnInit {
       .flat();
   });
 
+  /**
+   * Text for the mode switch button.
+   */
+  protected readonly modeSwitchText = computed(() => {
+    if (this.mode() === 'text') {
+      return 'view.import.search.hue';
+    } else {
+      return 'view.import.search.name';
+    }
+  });
+
   public ngOnInit(): void {
     // Set the initialized signal
     this.initialized.set(true);
@@ -165,7 +188,7 @@ export class ImportColorComponent implements OnInit {
    */
   protected colorClicked(paletteId: string, colorIndex: number): void {
     // Check if the palettes are loaded
-    const palettes = this.#palettes();
+    const palettes = this.#filteredPalettes();
     if (!palettes) {
       return;
     }
@@ -198,5 +221,84 @@ export class ImportColorComponent implements OnInit {
    */
   protected resetSearch(): void {
     this.searchControl.setValue('');
+  }
+
+  /**
+   * Toggle the search mode.
+   */
+  protected toggleMode(): void {
+    this.mode.update((mode) => (mode === 'text' ? 'hue' : 'text'));
+  }
+
+  /**
+   * Filter the palettes by their name / color names.
+   */
+  private filterByName(palettes: Array<Palette>): Array<FilteredPalette> {
+    const searchTerm = this.searchTerm().toLowerCase();
+    // Check if the search term is empty
+    if (!searchTerm) {
+      return palettes;
+    }
+
+    // Filter the palettes
+    return (
+      palettes
+        .map((palette) => {
+          // Check if the palette name matches the search term
+          if (palette.name.toLowerCase().includes(searchTerm)) {
+            return {
+              id: palette.id,
+              name: palette.name,
+              colors: palette.colors
+            };
+          }
+
+          // Check if any color name matches the search term and return only the matching colors
+          const colors = palette.colors.filter((color) => color.name.toLowerCase().includes(searchTerm));
+          if (colors.length > 0) {
+            return {
+              id: palette.id,
+              name: palette.name,
+              colors
+            };
+          }
+
+          // No match
+          return undefined;
+        })
+        // Remove empty palettes
+        .filter((palette) => palette !== undefined)
+    );
+  }
+
+  /**
+   * Filter the palettes by their color hues.
+   */
+  private filterByHue(palettes: Array<Palette>): Array<FilteredPalette> {
+    return palettes
+      .map((palette) => {
+        // Check if any color has a shade with a similar hue and return only the matching colors
+        const colors = palette.colors.filter((color) =>
+          // Check the shades of the color
+          color.shades.some((shade) => {
+            // Calculate the hue difference
+            const hueDiff = Math.abs(shade.hsl.H - this.hue());
+            const hueDiffWrapped = Math.min(hueDiff, 360 - hueDiff);
+            // Check if the hue difference is below the threshold
+            return Math.min(hueDiff, hueDiffWrapped) < 30;
+          })
+        );
+        if (colors.length > 0) {
+          return {
+            id: palette.id,
+            name: palette.name,
+            colors
+          };
+        }
+
+        // No match
+        return undefined;
+      })
+      .filter((palette) => palette !== undefined);
   }
 }

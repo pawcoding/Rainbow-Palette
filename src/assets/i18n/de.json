@@ -300,7 +300,11 @@
       "description": "Wähle eine Farbe aus der Liste, um sie in deine aktuelle Palette zu importieren.",
       "no-colors": "Du hast keine anderen Paletten, aus denen Farben importiert werden können",
       "not-found": "Es wurde keine Palette / Farbe zu deiner Suche gefunden",
-      "search": "Suche nach einer Palette / Farbe",
+      "search": {
+        "hue": "Suche nach einem Farbton",
+        "name": "Suche nach dem Namen einer Palette / Farbe",
+        "placeholder": "Suche nach einer Palette / Farbe"
+      },
       "select": "Importiere diese Farbe",
       "title": "Farbe importieren",
       "tooltip": "Importiere eine Farbe aus einer anderen Palette"
