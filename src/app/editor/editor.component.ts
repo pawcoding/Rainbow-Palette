@@ -1,6 +1,6 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { DecimalPipe } from '@angular/common';
-import { Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ColorService } from '../shared/data-access/color.service';
 import { Color, Shade } from '../shared/model';
@@ -33,19 +33,24 @@ export enum UpdateType {
   selector: 'rp-editor',
   standalone: true,
   imports: [ColorInputComponent, TranslateModule, DecimalPipe, ColorRangeSliderComponent],
-  templateUrl: './editor.component.html'
+  templateUrl: './editor.component.html',
+  host: {
+    '[style.--editor-saturation]': 'shade().hsl.S + "%"',
+    '[style.--editor-lightness]': 'shade().hsl.L + "%"',
+    '[style.--editor-hue]': 'shade().hsl.H'
+  }
 })
 export class EditorComponent {
   protected readonly UpdateType = UpdateType;
   protected readonly textColor = textColor;
 
-  private readonly _data = inject<EditorData>(DIALOG_DATA);
-  private readonly _dialogRef = inject(DialogRef);
-  private readonly _colorService = inject(ColorService);
-  private readonly _translateService = inject(TranslateService);
+  readonly #data = inject<EditorData>(DIALOG_DATA);
+  readonly #dialogRef = inject(DialogRef);
+  readonly #colorService = inject(ColorService);
+  readonly #translateService = inject(TranslateService);
 
-  protected readonly color = signal(this._data.color.copy());
-  protected readonly shadeIndex = signal(this._data.shadeIndex ?? 0);
+  protected readonly color = signal(this.#data.color.copy());
+  protected readonly shadeIndex = signal(this.#data.shadeIndex ?? 0);
 
   protected readonly shade = computed<Shade>(() => {
     const selectedShade = this.color().shades.find((shade) => shade.index === this.shadeIndex());
@@ -62,20 +67,12 @@ export class EditorComponent {
   });
 
   protected readonly hasUnsavedChanges = computed<boolean>(
-    () => this._data.color.toString() !== this.color().toString()
+    () => this.#data.color.toString() !== this.color().toString()
   );
-
-  private readonly _editor = viewChild.required<ElementRef<HTMLElement>>('editor');
 
   public constructor() {
     effect(() => {
-      this._editor().nativeElement.style.setProperty('--editor-hue', `${this.shade().hsl.H}`);
-      this._editor().nativeElement.style.setProperty('--editor-saturation', `${this.shade().hsl.S}%`);
-      this._editor().nativeElement.style.setProperty('--editor-lightness', `${this.shade().hsl.L}%`);
-    });
-
-    effect(() => {
-      this._dialogRef.disableClose = this.hasUnsavedChanges();
+      this.#dialogRef.disableClose = this.hasUnsavedChanges();
     });
   }
 
@@ -100,7 +97,7 @@ export class EditorComponent {
     }
 
     shade.fixed = false;
-    this._updateColor();
+    this.updateColor();
   }
 
   public update(type: UpdateType, value: string | number): void {
@@ -122,24 +119,24 @@ export class EditorComponent {
         break;
     }
 
-    this._updateColor();
+    this.updateColor();
 
     const editedShade = this.color().shades.find((s) => s.hex === shade.hex);
     this.shadeIndex.set(editedShade?.index ?? -1);
   }
 
   protected cancel(): void {
-    this._dialogRef.close(undefined);
-    this.color.set(this._data.color.copy());
+    this.#dialogRef.close(undefined);
+    this.color.set(this.#data.color.copy());
   }
 
   protected save(): void {
-    this._dialogRef.close(this.color());
+    this.#dialogRef.close(this.color());
   }
 
-  private _updateColor(): void {
+  private updateColor(): void {
     const updatedColor = this.color().copy();
-    this._colorService.regenerateShades(updatedColor);
+    this.#colorService.regenerateShades(updatedColor);
     this.color.set(updatedColor);
   }
 
@@ -147,11 +144,11 @@ export class EditorComponent {
     const tooltips: Array<string> = [];
 
     if (!selected) {
-      tooltips.push(this._translateService.instant('editor.shades'));
+      tooltips.push(this.#translateService.instant('editor.shades'));
     }
 
     if (shade.fixed) {
-      tooltips.push(this._translateService.instant('editor.unfix'));
+      tooltips.push(this.#translateService.instant('editor.unfix'));
     }
 
     return tooltips.join('\n');
