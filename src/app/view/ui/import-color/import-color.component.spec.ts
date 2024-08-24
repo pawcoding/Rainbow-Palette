@@ -2,7 +2,8 @@ import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { ListService, ListServiceMock } from '../../../shared/data-access/list.service';
-import { PaletteService, PaletteServiceMock } from '../../../shared/data-access/palette.service';
+import { PaletteService } from '../../../shared/data-access/palette.service';
+import { PaletteServiceMock } from '../../../shared/data-access/palette.service-mock';
 import { ImportColorComponent } from './import-color.component';
 
 describe('ImportColorComponent', () => {

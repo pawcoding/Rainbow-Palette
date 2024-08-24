@@ -564,14 +564,8 @@ export class PaletteService {
   }
 }
 
-export class PaletteServiceMock {
-  public palette = signal<Palette | undefined>(
-    new Palette('Mock', [new Color([Shade.random()], 'MockColor')], 'test-id')
-  );
-  public isGenerating = signal(false);
-  public loadPaletteFromLocalStorage(): void {}
-  public savePaletteToLocalStorage(): void {}
-  public generatePalette(_hex: string, _scheme: PaletteScheme): string {
-    return 'test-id';
-  }
-}
+/**
+ * The corresponding mock for this service is located in ./palette.service-mock.ts
+ * This is because the mock uses the Tailwind example palettes under the hood.
+ * We don't want to include these in the production bundle, but only in the testing environment keeping the bundle size smaller.
+ */

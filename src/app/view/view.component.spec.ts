@@ -10,7 +10,8 @@ import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/an
 import { ColorService, ColorServiceMock } from '../shared/data-access/color.service';
 import { DialogService, DialogServiceMock } from '../shared/data-access/dialog.service';
 import { ListService, ListServiceMock } from '../shared/data-access/list.service';
-import { PaletteService, PaletteServiceMock } from '../shared/data-access/palette.service';
+import { PaletteService } from '../shared/data-access/palette.service';
+import { PaletteServiceMock } from '../shared/data-access/palette.service-mock';
 import { PwaService, PwaServiceMock } from '../shared/data-access/pwa.service';
 import { ToastService, ToastServiceMock } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
