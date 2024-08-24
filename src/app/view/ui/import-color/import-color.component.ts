@@ -12,10 +12,10 @@ import {
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
 import { debounce, debounceTime, of, timer } from 'rxjs';
-import { EditorRangeComponent } from '../../../editor/ui/editor-range/editor-range.component';
 import { ListService } from '../../../shared/data-access/list.service';
 import { PaletteService } from '../../../shared/data-access/palette.service';
 import { Color, Palette } from '../../../shared/model';
+import { ColorRangeSliderComponent } from '../../../shared/ui/color-range-slider/color-range-slider.component';
 import { filterArray } from '../../../shared/utils/filter-array';
 import { mapArray } from '../../../shared/utils/map-array';
 
@@ -37,7 +37,7 @@ type FilteredPalette = Pick<Palette, 'id' | 'name' | 'colors'>;
 @Component({
   selector: 'rp-import-color',
   standalone: true,
-  imports: [TranslateModule, NgIconComponent, ReactiveFormsModule, ScrollingModule, EditorRangeComponent],
+  imports: [TranslateModule, NgIconComponent, ReactiveFormsModule, ScrollingModule, ColorRangeSliderComponent],
   templateUrl: './import-color.component.html',
   host: {
     '[style.--editor-saturation]': '"75%"',

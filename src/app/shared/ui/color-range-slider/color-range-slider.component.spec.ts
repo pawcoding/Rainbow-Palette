@@ -1,17 +1,17 @@
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { EditorRangeComponent } from './editor-range.component';
+import { ColorRangeSliderComponent } from './color-range-slider.component';
 
-describe('EditorRangeComponent', () => {
-  let component: EditorRangeComponent;
-  let fixture: ComponentFixture<EditorRangeComponent>;
+describe('ColorRangeSliderComponent', () => {
+  let component: ColorRangeSliderComponent;
+  let fixture: ComponentFixture<ColorRangeSliderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EditorRangeComponent]
+      imports: [ColorRangeSliderComponent]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(EditorRangeComponent);
+    fixture = TestBed.createComponent(ColorRangeSliderComponent);
     component = fixture.componentInstance;
 
     // @ts-expect-error - Bind required input signal

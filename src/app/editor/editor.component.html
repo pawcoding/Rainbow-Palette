@@ -13,7 +13,7 @@
   />
 
   <section class="flex flex-col gap-2">
-    <rp-editor-range
+    <rp-color-range-slider
       [label]="'common.hue' | translate"
       [tooltip]="'editor.properties.hue' | translate"
       [value]="shade().hsl.H"
@@ -24,7 +24,7 @@
       min="0"
     />
 
-    <rp-editor-range
+    <rp-color-range-slider
       [label]="'common.saturation' | translate"
       [tooltip]="'editor.properties.saturation' | translate"
       [value]="shade().hsl.S"
@@ -33,7 +33,7 @@
       key="saturation"
     />
 
-    <rp-editor-range
+    <rp-color-range-slider
       [label]="'common.lightness' | translate"
       [tooltip]="'editor.properties.lightness' | translate"
       [value]="shade().hsl.L"

@@ -5,8 +5,8 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { ColorService } from '../shared/data-access/color.service';
 import { Color, Shade } from '../shared/model';
 import { ColorInputComponent } from '../shared/ui/color-input/color-input.component';
+import { ColorRangeSliderComponent } from '../shared/ui/color-range-slider/color-range-slider.component';
 import { textColor } from '../shared/utils/text-color';
-import { EditorRangeComponent } from './ui/editor-range/editor-range.component';
 
 /**
  * Data for the editor dialog.
@@ -32,7 +32,7 @@ export enum UpdateType {
 @Component({
   selector: 'rp-editor',
   standalone: true,
-  imports: [ColorInputComponent, TranslateModule, DecimalPipe, EditorRangeComponent],
+  imports: [ColorInputComponent, TranslateModule, DecimalPipe, ColorRangeSliderComponent],
   templateUrl: './editor.component.html'
 })
 export class EditorComponent {
