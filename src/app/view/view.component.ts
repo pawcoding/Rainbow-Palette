@@ -308,12 +308,14 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
     // Track import event
     this._analyticsService.trackEvent(TrackingEventCategory.IMPORT_COLOR, TrackingEventAction.IMPORT_COLOR);
 
-    // TODO: Check for duplicate name
-    // This can easily be done with the utility function implemented in:
-    // https://github.com/pawcoding/Rainbow-Palette/pull/78
+    // Check if color name already exists
+    const colorNames = palette.colors.map((c) => c.name);
+    color.name = deduplicateName(color.name, colorNames);
 
     // Import color to current palette
     palette.addColor(color);
+
+    // Set unsaved changes
     this._hasUnsavedChanges.set(true);
   }
 
