@@ -48,7 +48,13 @@ const config = {
         assets: assetsToUpdate
       }
     ],
-    '@semantic-release/github'
+    '@semantic-release/github',
+    [
+      '@semantic-release/exec',
+      {
+        prepareCmd: 'pnpm run build'
+      }
+    ]
   ]
 };
 
