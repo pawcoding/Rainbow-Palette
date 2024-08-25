@@ -56,12 +56,14 @@ jobs:
 
       # Create semantic release
       - name: 🚀 Create semantic release
+        id: release
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         run: pnpm run semantic-release
 
       # Upload build artifacts
       - name: 🚀 Upload build artifacts
+        if: steps.release.outputs.new_release_published == 'true'
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USER }}
@@ -74,6 +76,7 @@ jobs:
 
       # Purge unused old Angular files via custom script
       - name: 🧹 Purge unused files
+        if: steps.release.outputs.new_release_published == 'true'
         uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.HTTP_PURGE }}
@@ -81,6 +84,7 @@ jobs:
 
       # Upload beta build artifacts
       - name: 🚀 Upload build artifacts to beta
+        if: steps.release.outputs.new_release_published == 'true'
         uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           username: ${{ secrets.FTP_USER }}
@@ -93,6 +97,7 @@ jobs:
 
       # Purge unused old Angular files via custom script
       - name: 🧹 Purge unused files
+        if: steps.release.outputs.new_release_published == 'true'
         uses: fjogeleit/http-request-action@v1
         with:
           url: ${{ secrets.HTTP_PURGE_STAGING }}
