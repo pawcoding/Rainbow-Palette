@@ -89,6 +89,16 @@ describe('PaletteService', () => {
     expect(palette!.id).toBe('test');
   });
 
+  it('should load palette from local storage (onlyReturn)', () => {
+    localStorage.setItem(`${LocalStorageKey.PALETTE}_test`, JSON.stringify({ name: 'Test', id: 'test', colors: [] }));
+    const palette = service.loadPaletteFromLocalStorage('test', true);
+
+    expect(palette).toBeTruthy();
+    expect(palette!.name).toBe('Test');
+    expect(palette!.id).toBe('test');
+    expect(service.palette()).toBeFalsy();
+  });
+
   it('should show error toast when loading invalid palette', () => {
     localStorage.setItem(`${LocalStorageKey.PALETTE}_test`, 'invalid');
     service.loadPaletteFromLocalStorage('test');

@@ -17,6 +17,8 @@
     "ok": "OK",
     "remove": "Remove",
     "rename": "Rename",
+    "required": "This field is cannot be empty.",
+    "reset-search": "Reset search",
     "saturation": "Saturation",
     "save": "Save",
     "saving": "Saving...",
@@ -287,12 +289,26 @@
       "add-tooltip": "Add a new color to your palette",
       "click": "Click to tune this shade\nRight-click to copy hex code to clipboard",
       "copy": "\"{{ color }}\" has been copied to your clipboard.",
+      "duplicate-name": "A color with the name \"{{ value }}\" already exists in your palette. Please choose a different name.",
       "remove": "Are you sure you want to remove the color \"{{ color }}\"?",
       "remove-tooltip": "Remove the color from your palette",
       "removed": "The color \"{{ color }}\" has been removed.",
       "rename": "Give your color a new name",
       "renamed": "Your color has been renamed to \"{{ name }}\".",
       "tune": "Tune the color to your liking"
+    },
+    "import": {
+      "description": "Select a color from the list below to import it into your palette.",
+      "no-colors": "You have no other palettes to import a color from",
+      "not-found": "No palette / color matches your search",
+      "search": {
+        "hue": "Search by hue",
+        "name": "Search by name",
+        "placeholder": "Search for a palette / color"
+      },
+      "select": "Import this color",
+      "title": "Import color",
+      "tooltip": "Import a color from another palette."
     },
     "palette": {
       "no-changes": "No changes have been made to your palette yet.",

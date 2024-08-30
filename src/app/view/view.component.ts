@@ -1,4 +1,7 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { Component, HostListener, OnInit, computed, inject, input, signal } from '@angular/core';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 import {
@@ -10,28 +13,34 @@ import {
   heroPlusMini
 } from '@ng-icons/heroicons/mini';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { combineLatestWith, firstValueFrom, map } from 'rxjs';
 import { string_to_unicode_variant as toUnicodeVariant } from 'string-to-unicode-variant';
 import { ColorEditorService } from '../editor/data-access/color-editor.service';
 import { ExportModalService } from '../export/data-access/export-modal.service';
 import { AnalyticsService } from '../shared/data-access/analytics.service';
 import { ColorService } from '../shared/data-access/color.service';
 import { DialogService } from '../shared/data-access/dialog.service';
+import { ListService } from '../shared/data-access/list.service';
 import { PaletteService } from '../shared/data-access/palette.service';
 import { PwaService } from '../shared/data-access/pwa.service';
 import { ToastService } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
 import { NoPaletteComponent } from '../shared/ui/no-palette/no-palette.component';
+import { deduplicateName } from '../shared/utils/deduplicate-name';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import { sleep } from '../shared/utils/sleep';
+import { ImportColorData } from './ui/import-color/import-color.component';
 import { ViewPaletteComponent } from './ui/view-palette/view-palette.component';
+import { duplicateValidator } from './utils/duplicate.validator';
 import { UnsavedChangesComponent } from './utils/unsaved-changes.guard';
 
 @Component({
   selector: 'rp-view',
   standalone: true,
   imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule, RouterLink],
-  templateUrl: './view.component.html'
+  templateUrl: './view.component.html',
+  styleUrl: './view.component.css'
 })
 export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _isRunningTest = inject(IS_RUNNING_TEST);
@@ -45,6 +54,8 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _analyticsService = inject(AnalyticsService);
   private readonly _router = inject(Router);
   private readonly _pwaService = inject(PwaService);
+  private readonly _dialog = inject(Dialog);
+  private readonly _listService = inject(ListService);
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;
   protected readonly heroPlusMini = heroPlusMini;
@@ -55,6 +66,25 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
 
   protected readonly palette = this._paletteService.palette;
   protected readonly saving = signal(false);
+
+  /**
+   * Flag indicating if there are other palettes to import colors from
+   */
+  protected readonly hasOtherPalettes = toSignal(
+    toObservable(this.palette).pipe(
+      combineLatestWith(this._listService.list$),
+      map(([palette, list]) => {
+        // Check if palette and list is loaded
+        if (!palette || list.length === 0) {
+          return false;
+        }
+
+        // Filter out current palette
+        return list.some((p) => p.id !== palette.id);
+      })
+    ),
+    { initialValue: false }
+  );
 
   private readonly _hasUnsavedChanges = signal(false);
 
@@ -157,13 +187,26 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   }
 
   public async renameColor(color: Color): Promise<void> {
+    // Get all color names except the current one
+    const colorNames =
+      this.palette()
+        ?.colors.filter((c) => c !== color)
+        .map((c) => c.name) ?? [];
+
     const newName = await this._dialogService.prompt({
       title: 'common.rename',
       message: 'view.color.rename',
       confirmLabel: 'common.rename',
       initialValue: color.name,
       label: 'common.name',
-      placeholder: 'common.name'
+      placeholder: 'common.name',
+      validation: {
+        validators: [Validators.required, duplicateValidator(colorNames)],
+        errorMessageKeys: {
+          required: 'common.required',
+          duplicate: 'view.color.duplicate-name'
+        }
+      }
     });
 
     if (!newName || newName === color.name) {
@@ -216,13 +259,64 @@ export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   }
 
   public async addColor(): Promise<void> {
+    // Check if a palette exists
     const palette = this.palette();
     if (!palette) {
       return;
     }
 
+    // Create a new random color
     const color = await this._colorService.randomColor();
+
+    // Check if color name already exists
+    const colorNames = palette.colors.map((c) => c.name);
+    color.name = deduplicateName(color.name, colorNames);
+
+    // Add the color to the palette
     palette.addColor(color);
+
+    // Set unsaved changes
+    this._hasUnsavedChanges.set(true);
+  }
+
+  /**
+   * Import a color from another palette
+   */
+  public async importColor(): Promise<void> {
+    // Check if palette is loaded
+    const palette = this.palette();
+    if (!palette) {
+      return;
+    }
+
+    // Open the import selector
+    const importer = await import('./ui/import-color/import-color.component').then((c) => c.ImportColorComponent);
+    const dialogRef = this._dialog.open<Color | undefined, ImportColorData>(importer, {
+      backdropClass: 'rp-modal-backdrop',
+      data: {
+        paletteId: palette.id
+      },
+      panelClass: 'rp-modal-panel',
+      width: 'inherit'
+    });
+
+    // Check if color was selected
+    const color = await firstValueFrom(dialogRef.closed);
+    if (!color) {
+      return;
+    }
+
+    // Track import event
+    this._analyticsService.trackEvent(TrackingEventCategory.IMPORT_COLOR, TrackingEventAction.IMPORT_COLOR);
+
+    // Check if color name already exists
+    const colorNames = palette.colors.map((c) => c.name);
+    color.name = deduplicateName(color.name, colorNames);
+
+    // Import color to current palette
+    palette.addColor(color);
+
+    // Set unsaved changes
     this._hasUnsavedChanges.set(true);
   }
 

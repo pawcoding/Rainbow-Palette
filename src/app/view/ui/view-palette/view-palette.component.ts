@@ -1,8 +1,9 @@
 import { CdkDrag, CdkDragDrop, CdkDragPlaceholder, CdkDropList } from '@angular/cdk/drag-drop';
-import { Component, model, output } from '@angular/core';
+import { Component, inject, model, output } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 import { heroAdjustmentsHorizontalMini, heroPencilSquareMini, heroTrashMini } from '@ng-icons/heroicons/mini';
 import { TranslateModule } from '@ngx-translate/core';
+import { MobileService } from '../../../shared/data-access/mobile.service';
 import { Color, Palette, Shade } from '../../../shared/model';
 import { textColor } from '../../../shared/utils/text-color';
 
@@ -14,6 +15,10 @@ import { textColor } from '../../../shared/utils/text-color';
   styleUrl: './view-palette.component.css'
 })
 export class ViewPaletteComponent {
+  readonly #mobileService = inject(MobileService);
+
+  protected readonly isMobile = this.#mobileService.isMobile;
+
   protected readonly textColor = textColor;
 
   protected readonly heroPencilSquareMini = heroPencilSquareMini;

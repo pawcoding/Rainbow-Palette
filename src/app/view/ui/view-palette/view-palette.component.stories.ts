@@ -1,5 +1,6 @@
-import { Meta } from '@storybook/angular';
+import { Meta, moduleMetadata } from '@storybook/angular';
 import { TailwindGrays, TailwindRainbow } from '../../../shared/constants/tailwind-colors';
+import { MobileService, MobileServiceMock } from '../../../shared/data-access/mobile.service';
 import { createStory } from '../../../shared/utils/storybook';
 import { ViewPaletteComponent } from './view-palette.component';
 
@@ -40,7 +41,12 @@ const meta: Meta<ViewPaletteComponent> = {
         disable: true
       }
     }
-  }
+  },
+  decorators: [
+    moduleMetadata({
+      providers: [{ provide: MobileService, useClass: MobileServiceMock }]
+    })
+  ]
 };
 export default meta;
 

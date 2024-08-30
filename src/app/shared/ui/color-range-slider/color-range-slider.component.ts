@@ -3,13 +3,13 @@ import { Component, computed, input, model, numberAttribute } from '@angular/cor
 import { hueToWheel, wheelToHue } from '../../utils/color-wheel';
 
 @Component({
-  selector: 'rp-editor-range',
+  selector: 'rp-color-range-slider',
   standalone: true,
   imports: [DecimalPipe],
-  templateUrl: './editor-range.component.html',
-  styleUrl: './editor-range.component.css'
+  templateUrl: './color-range-slider.component.html',
+  styleUrl: './color-range-slider.component.css'
 })
-export class EditorRangeComponent {
+export class ColorRangeSliderComponent {
   /**
    * Label to display above the range input
    */

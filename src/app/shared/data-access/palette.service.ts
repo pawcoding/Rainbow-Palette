@@ -5,6 +5,7 @@ import { Value } from '../model';
 import { Color } from '../model/color.model';
 import { Palette } from '../model/palette.model';
 import { Shade } from '../model/shade.model';
+import { deduplicateName } from '../utils/deduplicate-name';
 import { ColorNameService } from './color-name.service';
 import { ColorService } from './color.service';
 import { ListService } from './list.service';
@@ -52,25 +53,41 @@ export class PaletteService {
     }
   }
 
-  public loadPaletteFromLocalStorage(id: string): void {
-    if (this.palette()?.id === id) {
-      return;
+  /**
+   * Load a palette from local storage.
+   *
+   * If `onlyReturn` is true, the palette will not be set as the current palette.
+   */
+  public loadPaletteFromLocalStorage(id: string, onlyReturn = false): Palette | undefined {
+    // Check if the palette is already loaded
+    const currentPalette = this._palette();
+    if (currentPalette && currentPalette.id === id) {
+      return currentPalette;
     }
 
     // Check if there was a palette stored for an app update
-    let palette = localStorage.getItem(LocalStorageKey.PALETTE_TMP);
+    let paletteString = localStorage.getItem(LocalStorageKey.PALETTE_TMP);
 
-    if (palette) {
+    if (paletteString) {
       // Palette was stored for an update, remove it now
       localStorage.removeItem(LocalStorageKey.PALETTE_TMP);
     } else {
       // Load the palette saved by the user
-      palette = localStorage.getItem(`${LocalStorageKey.PALETTE}_${id}`);
+      paletteString = localStorage.getItem(`${LocalStorageKey.PALETTE}_${id}`);
     }
 
-    if (palette) {
+    if (paletteString) {
       try {
-        this._palette.set(Palette.parse(palette));
+        // Parse the palette
+        const palette = Palette.parse(paletteString);
+
+        // Set the palette if it should not only be returned
+        if (!onlyReturn) {
+          this._palette.set(palette);
+        }
+
+        // Return the palette
+        return palette;
       } catch (e) {
         this._toastService.showToast({
           type: 'error',
@@ -78,6 +95,9 @@ export class PaletteService {
         });
       }
     }
+
+    // No valid palette found
+    return undefined;
   }
 
   public savePaletteToLocalStorage(upgrade = false): void {
@@ -120,7 +140,11 @@ export class PaletteService {
 
       for (const color of palette.colors) {
         // Get the color name
-        color.name = await this._colorNameService.getColorName(color.shades[0]);
+        const generatedName = await this._colorNameService.getColorName(color.shades[0]);
+
+        // Deduplicate the name
+        const existingNames = palette.colors.map((c) => c.name);
+        color.name = deduplicateName(generatedName, existingNames);
 
         // Regenerate the shades
         await this._colorService.regenerateShades(color);
@@ -540,14 +564,8 @@ export class PaletteService {
   }
 }
 
-export class PaletteServiceMock {
-  public palette = signal<Palette | undefined>(
-    new Palette('Mock', [new Color([Shade.random()], 'MockColor')], 'test-id')
-  );
-  public isGenerating = signal(false);
-  public loadPaletteFromLocalStorage(): void {}
-  public savePaletteToLocalStorage(): void {}
-  public generatePalette(_hex: string, _scheme: PaletteScheme): string {
-    return 'test-id';
-  }
-}
+/**
+ * The corresponding mock for this service is located in ./palette.service-mock.ts
+ * This is because the mock uses the Tailwind example palettes under the hood.
+ * We don't want to include these in the production bundle, but only in the testing environment keeping the bundle size smaller.
+ */

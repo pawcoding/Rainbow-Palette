@@ -1,7 +1,6 @@
 {
-    "i18n-ally.localesPaths": [
-        "src/assets/i18n"
-    ],
-    "i18n-ally.keystyle": "nested",
-    "cSpell.language": "en,de-DE"
+  "i18n-ally.localesPaths": ["src/assets/i18n"],
+  "i18n-ally.keystyle": "nested",
+  "cSpell.language": "en,de-DE",
+  "css.customData": [".vscode/tailwind.json"]
 }

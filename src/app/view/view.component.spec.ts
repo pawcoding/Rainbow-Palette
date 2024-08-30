@@ -1,3 +1,4 @@
+import { Dialog } from '@angular/cdk/dialog';
 import { signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
@@ -8,11 +9,14 @@ import { TailwindGrays } from '../shared/constants/tailwind-colors';
 import { AnalyticsService, AnalyticsServiceMock } from '../shared/data-access/analytics.service';
 import { ColorService, ColorServiceMock } from '../shared/data-access/color.service';
 import { DialogService, DialogServiceMock } from '../shared/data-access/dialog.service';
-import { PaletteService, PaletteServiceMock } from '../shared/data-access/palette.service';
+import { ListService, ListServiceMock } from '../shared/data-access/list.service';
+import { PaletteService } from '../shared/data-access/palette.service';
+import { PaletteServiceMock } from '../shared/data-access/palette.service-mock';
 import { PwaService, PwaServiceMock } from '../shared/data-access/pwa.service';
 import { ToastService, ToastServiceMock } from '../shared/data-access/toast.service';
 import { TrackingEventAction, TrackingEventCategory } from '../shared/enums/tracking-event';
 import { Color, Shade } from '../shared/model';
+import { DialogMock } from '../shared/utils/dialog-mock';
 import { IS_RUNNING_TEST } from '../shared/utils/is-running-test';
 import ViewComponent from './view.component';
 
@@ -24,6 +28,7 @@ describe('ViewComponent', () => {
   let paletteService: PaletteServiceMock;
   let toastService: ToastServiceMock;
   let analyticsService: AnalyticsServiceMock;
+  let dialog: DialogMock<Color>;
 
   let component: ViewComponent;
   let fixture: ComponentFixture<ViewComponent>;
@@ -35,6 +40,7 @@ describe('ViewComponent', () => {
     paletteService = new PaletteServiceMock();
     toastService = new ToastServiceMock();
     analyticsService = new AnalyticsServiceMock();
+    dialog = new DialogMock(new Color([], 'Imported'));
 
     await TestBed.configureTestingModule({
       imports: [ViewComponent, TranslateModule.forRoot()],
@@ -48,7 +54,9 @@ describe('ViewComponent', () => {
         { provide: ToastService, useValue: toastService },
         { provide: AnalyticsService, useValue: analyticsService },
         { provide: PwaService, useClass: PwaServiceMock },
-        { provide: IS_RUNNING_TEST, useValue: true }
+        { provide: IS_RUNNING_TEST, useValue: true },
+        { provide: Dialog, useValue: dialog },
+        { provide: ListService, useClass: ListServiceMock }
       ]
     }).compileComponents();
 
@@ -134,6 +142,19 @@ describe('ViewComponent', () => {
     await component.addColor();
 
     expect(colorService.randomColor).toHaveBeenCalledTimes(1);
+    expect(component.hasUnsavedChanges()).toBeTrue();
+  });
+
+  it('should import color', async () => {
+    spyOn(dialog, 'open').and.callThrough();
+
+    await component.importColor();
+
+    const colors = paletteService.palette()?.colors;
+
+    expect(dialog.open).toHaveBeenCalledTimes(1);
+    expect(colors).toBeTruthy();
+    expect(colors![colors!.length - 1].name).toBe('Imported');
     expect(component.hasUnsavedChanges()).toBeTrue();
   });
 

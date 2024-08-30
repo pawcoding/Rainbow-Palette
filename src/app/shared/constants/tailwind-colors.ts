@@ -331,24 +331,28 @@ export const rose = new Color(
   'Rose'
 );
 
-export const TailwindRainbow = new Palette('Tailwind Rainbow', [
-  red,
-  orange,
-  amber,
-  yellow,
-  lime,
-  green,
-  emerald,
-  teal,
-  cyan,
-  sky,
-  blue,
-  indigo,
-  violet,
-  purple,
-  fuchsia,
-  pink,
-  rose
-]);
-export const TailwindGrays = new Palette('Tailwind Grays', [slate, gray, zinc, neutral, stone]);
-export const Tailwind = new Palette('Tailwind', [...TailwindRainbow.colors, ...TailwindGrays.colors]);
+export const TailwindRainbow = new Palette(
+  'Tailwind Rainbow',
+  [
+    red,
+    orange,
+    amber,
+    yellow,
+    lime,
+    green,
+    emerald,
+    teal,
+    cyan,
+    sky,
+    blue,
+    indigo,
+    violet,
+    purple,
+    fuchsia,
+    pink,
+    rose
+  ],
+  'tailwind-rainbow'
+);
+export const TailwindGrays = new Palette('Tailwind Grays', [slate, gray, zinc, neutral, stone], 'tailwind-grays');
+export const Tailwind = new Palette('Tailwind', [...TailwindRainbow.colors, ...TailwindGrays.colors], 'tailwind');

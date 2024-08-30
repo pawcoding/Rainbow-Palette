@@ -17,6 +17,8 @@
     "ok": "OK",
     "remove": "Entfernen",
     "rename": "Umbenennen",
+    "required": "Dieses Feld kann nicht leer sein.",
+    "reset-search": "Suche zurücksetzen",
     "saturation": "Sättigung",
     "save": "Speichern",
     "saving": "Speichern...",
@@ -286,12 +288,26 @@
       "add-tooltip": "Füge deiner Palette eine neue Farbe hinzu",
       "click": "Click, um die Schattierung anzupassen\nRechtsclick, um den Hex-Code zu kopieren",
       "copy": "\"{{ color }}\" wurde in deine Zwischenablage kopiert.",
+      "duplicate-name": "Deine Palette enthält bereits eine Farbe mit dem Namen \"{{ value }}\". Bitte wähle einen anderen Namen.",
       "remove": "Bist du sicher, dass du die Farbe \"{{ color }}\" entfernen möchtest?",
       "remove-tooltip": "Entferne diese Farbe aus deiner Palette",
       "removed": "Die Farbe \"{{ color }}\" wurde entfernt.",
       "rename": "Gebe deiner Farbe einen neuen Namen",
       "renamed": "Deine Farbe wurde in \"{{ name }}\" umbenannt.",
       "tune": "Passe die Farbe nach deinem Geschmack an"
+    },
+    "import": {
+      "description": "Wähle eine Farbe aus der Liste, um sie in deine aktuelle Palette zu importieren.",
+      "no-colors": "Du hast keine anderen Paletten, aus denen Farben importiert werden können",
+      "not-found": "Es wurde keine Palette / Farbe zu deiner Suche gefunden",
+      "search": {
+        "hue": "Suche nach einem Farbton",
+        "name": "Suche nach dem Namen einer Palette / Farbe",
+        "placeholder": "Suche nach einer Palette / Farbe"
+      },
+      "select": "Importiere diese Farbe",
+      "title": "Farbe importieren",
+      "tooltip": "Importiere eine Farbe aus einer anderen Palette"
     },
     "palette": {
       "no-changes": "Es wurden noch keine Änderungen an deiner Palette vorgenommen.",

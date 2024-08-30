@@ -16,6 +16,16 @@ import { ExportFormatComponent } from './ui/export-format/export-format.componen
 import { ExportSuccessComponent } from './ui/export-success/export-success.component';
 import { RequestFormatComponent } from './ui/request-format/request-format.component';
 
+/**
+ * Data for the export modal.
+ */
+export type ExportModalData = {
+  /**
+   * Palette to export.
+   */
+  palette: Palette;
+};
+
 enum ExportModalState {
   FORMAT = 'format',
   DOWNLOAD = 'download',
@@ -39,7 +49,7 @@ export class ExportModalComponent {
   protected readonly ExportModalState = ExportModalState;
   protected readonly ExportFormat = ExportFormat;
 
-  private readonly _data = inject<{ palette: Palette }>(DIALOG_DATA);
+  private readonly _data = inject<ExportModalData>(DIALOG_DATA);
   private readonly _dialogRef = inject(DialogRef);
   private readonly _toastService = inject(ToastService);
   private readonly _exportService = inject(ExportService);

@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { DialogService, DialogServiceMock } from '../shared/data-access/dialog.service';
 import { ListService, ListServiceMock } from '../shared/data-access/list.service';
-import { PaletteService, PaletteServiceMock } from '../shared/data-access/palette.service';
+import { PaletteService } from '../shared/data-access/palette.service';
+import { PaletteServiceMock } from '../shared/data-access/palette.service-mock';
 import ListComponent from './list.component';
 
 describe('ListComponent', () => {

@@ -7,7 +7,8 @@ import { SwUpdateMock } from '../utils/sw-update-mock';
 import { AnalyticsService, AnalyticsServiceMock } from './analytics.service';
 import { ConfettiService, ConfettiServiceMock } from './confetti.service';
 import { DialogService, DialogServiceMock } from './dialog.service';
-import { PaletteService, PaletteServiceMock } from './palette.service';
+import { PaletteService } from './palette.service';
+import { PaletteServiceMock } from './palette.service-mock';
 import { PwaService } from './pwa.service';
 import { ToastService, ToastServiceMock } from './toast.service';
 import { VersionService, VersionServiceMock } from './version.service';
@@ -106,7 +107,6 @@ describe('PwaService', () => {
 
     expect(dialogService.confirm).toHaveBeenCalledTimes(1);
     expect(paletteService.savePaletteToLocalStorage).toHaveBeenCalledTimes(1);
-    // @ts-expect-error Function has an optional parameter which does not get detected here
     expect(paletteService.savePaletteToLocalStorage).toHaveBeenCalledWith(true);
     expect(analyticsService.trackEvent).toHaveBeenCalledWith(
       TrackingEventCategory.PWA,
