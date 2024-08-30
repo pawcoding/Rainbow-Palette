@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/pawcoding/Rainbow-Palette/compare/v1.5.0...v1.5.1) (2024-08-30)
+
+
+### Bug Fixes
+
+* **ci:** use semantic-release github action ([d0f9990](https://github.com/pawcoding/Rainbow-Palette/commit/d0f9990a7f2c0c513eee12e5cc845c6489c43ab2))
+
 # [1.5.0](https://github.com/pawcoding/Rainbow-Palette/compare/v1.4.0...v1.5.0) (2024-08-30)
 
 
