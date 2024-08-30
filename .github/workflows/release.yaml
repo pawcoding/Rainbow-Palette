@@ -54,12 +54,12 @@ jobs:
         run: |
           pnpm install --frozen-lockfile --prefer-frozen-lockfile
 
-      # Create semantic release
-      - name: 🚀 Create semantic release
+      # Create release
+      - name: 🚀 Create release
         id: release
+        uses: cycjimmy/semantic-release-action@v4
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: pnpm run semantic-release
 
       # Upload build artifacts
       - name: 🚀 Upload build artifacts
