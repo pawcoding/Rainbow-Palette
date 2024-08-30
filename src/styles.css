@@ -52,9 +52,7 @@
     text-decoration-line: underline;
   }
 
-  .color.cdk-drag-preview {
-    .actions {
-      visibility: hidden;
-    }
+  .color.cdk-drag-preview .actions {
+    visibility: hidden;
   }
 }
