@@ -15,10 +15,11 @@
     "name": "pawcode Development"
   },
   "scripts": {
-    "postversion": "pnpm run build:ngsw && pnpm run build:sitemap",
     "build": "ng build",
+    "postbuild": "node ./scripts/minify-i18n.js",
     "build:ngsw": "node ./scripts/update-ngsw.js",
     "build:sitemap": "node ./scripts/update-sitemap.js",
+    "chromatic": "chromatic --build-script-name storybook:build --exit-zero-on-changes",
     "preinstall": "npx only-allow pnpm",
     "lint": "ng lint",
     "ng": "ng",
@@ -28,9 +29,9 @@
     "start": "ng serve",
     "storybook": "ng run rainbow-palette:storybook",
     "storybook:build": "ng run rainbow-palette:build-storybook",
-    "chromatic": "chromatic --build-script-name storybook:build --exit-zero-on-changes",
     "test": "ng test",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadless",
+    "postversion": "pnpm run build:ngsw && pnpm run build:sitemap",
     "watch": "ng build --watch --configuration development"
   },
   "dependencies": {
