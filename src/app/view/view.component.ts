@@ -39,7 +39,8 @@ import { UnsavedChangesComponent } from './utils/unsaved-changes.guard';
   selector: 'rp-view',
   standalone: true,
   imports: [ViewPaletteComponent, NoPaletteComponent, NgIconComponent, TranslateModule, RouterLink],
-  templateUrl: './view.component.html'
+  templateUrl: './view.component.html',
+  styleUrl: './view.component.css'
 })
 export default class ViewComponent implements OnInit, UnsavedChangesComponent {
   private readonly _isRunningTest = inject(IS_RUNNING_TEST);
