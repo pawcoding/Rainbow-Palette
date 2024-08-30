@@ -1,3 +1,23 @@
+# [1.5.0](https://github.com/pawcoding/Rainbow-Palette/compare/v1.4.0...v1.5.0) (2024-08-30)
+
+
+### Bug Fixes
+
+* **view:** delay drag start event on mobile to allow scrolling ([9ece515](https://github.com/pawcoding/Rainbow-Palette/commit/9ece5157ebd0da4e3b7ddb35ebfd0c489a91240c))
+* **generator:** prevent generated palette from having duplicate color names ([4272690](https://github.com/pawcoding/Rainbow-Palette/commit/4272690682e9f89344c1d512f770466939c1a52c))
+* **view:** prevent random color from having duplicate name ([0eaf7fd](https://github.com/pawcoding/Rainbow-Palette/commit/0eaf7fd4d4eec669d1e9ca03e519b194842da20c))
+* **view:** prevent user from using duplicate color names ([7653316](https://github.com/pawcoding/Rainbow-Palette/commit/76533169b735315894c9832f75cf600a0e23e6eb))
+* **view:** use correct min-height when display has more space then the ([e05a0e7](https://github.com/pawcoding/Rainbow-Palette/commit/e05a0e79d7c315ea3ae0b415a890df7daa3a2ca6))
+
+
+### Features
+
+* **util:** add utilities to filter and map arrays inside observables ([29e3d52](https://github.com/pawcoding/Rainbow-Palette/commit/29e3d52bfd41f433c9492a2f9449d3816734f798))
+* **dialog:** allow custom validators in prompt dialog ([7753a10](https://github.com/pawcoding/Rainbow-Palette/commit/7753a10318c7d89fc6af32d2263d054d8bb51290))
+* **palette-service:** allow reading of palette without updating internal state ([0160cd5](https://github.com/pawcoding/Rainbow-Palette/commit/0160cd5ffd9e65c2f5603981ea739b98ff6e388a))
+* **view:** import colors from other palettes into current palette ([bba3afc](https://github.com/pawcoding/Rainbow-Palette/commit/bba3afc881e8f504e0d98556bd026b1a2faffbbc))
+* **view:** search colors to import by hue ([a0b447f](https://github.com/pawcoding/Rainbow-Palette/commit/a0b447f984b2c0fdf29a5e9e975c2b3c88667990))
+
 # [1.4.0](https://github.com/pawcoding/Rainbow-Palette/compare/v1.3.0...v1.4.0) (2024-08-15)
 
 
